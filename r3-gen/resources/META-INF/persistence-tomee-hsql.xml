@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Persistence deployment descriptor for tomee profile
+     persistence-dev.xml was used for  ant/maven build, but at package time got updated with either default 
+     tomee specific or wildfly specific persistence.xml  -->
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+   <persistence-unit name="genappcdi" transaction-type="JTA">
+      <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+      <jta-data-source>RaaspiSQLDS</jta-data-source>
+      <!-- classes are explicitly put in here if they do not have @named tag ?? try removing these --> 
+      <class>com.rcomputer.genapp.model.Yxxxuq1r1xwwqqhxxxxxresource</class>
+      <class>com.rcomputer.genapp.model.Yxxxuq1l1xwwqqhxxxxxresource_bundle</class>
+
+      <!-- classes are explicitly put in here if they do not have @named tag ?? try removing these --> 
+
+    <properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+         <property name="hibernate.default_schema" value="genapp"/>
+         <property name="hibernate.show_sql" value="false" />
+         <!-- in production change none to validate. none is needed to allow app to come up and create and populate schema and tables -->
+         <property name="hibernate.hbm2ddl.auto" value="none"/>
+        <property name="tomee.jpa.factory.lazy" value="true" />
+         <!-- following avoids org.hibernate.LazyInitializationException: could not initialize proxy - no Session
+          but anti-pattern and slows down app -->
+         <property name="hibernate.enable_lazy_load_no_trans" value="true" />
+        
+    </properties>
+   </persistence-unit>
+    
+</persistence>

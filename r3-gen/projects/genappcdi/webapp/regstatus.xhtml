@@ -1,0 +1,188 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<ui:define name="body">
+    <h:messages globalOnly="true" styleClass="message"/>
+   
+    <h:form id="regstatus">
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+        <h:button id="lbdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:outputText value="Business Date Rolled" rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+         <h:outputText value="#{identity.username}"/> 
+         <h:outputText value="#{authenticator.currcaldates}"/> 
+         <h:outputText id="QueryLabel" value="#{messages.searchTerm}" />
+         <h:inputText id="Query" value="put search here" size="15" />
+         <h:commandButton id="r3Search" action="/home.xhtml"  image="/img/Findblue16.png"
+            value="#{messages.searchButton}" />
+         <h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none"  rendered="#{identity.loggedIn and !identity.product=='S'}"  >
+          <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+         </h:link>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+             <h:commandButton id="About" value="Help" alt="Help" action="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsList.print}" image="/img/About16.gif" >
+             <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="Put Help Info here"/></span> </p:tooltip> 
+             </h:commandButton>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+    
+        <p:panel>
+            <f:facet name="header">#{messages.status}</f:facet>
+    
+              <h:outputText value="#{messages.Status_tip}"/>
+              <h:outputText value="#{messages.demoStatus_tip}" rendered ="#{request.serverName.startsWith('myorg') or request.serverName.startsWith('mybuss')}"/>
+        
+            <div class="dialog">
+                <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
+                    <h:outputLabel for="username">Username</h:outputLabel>
+                    <h:inputText id="username" 
+                              required="true"
+                              value="#{identity.username}"/>
+                    <h:outputLabel for="password">Password</h:outputLabel>
+                    <h:inputSecret id="password" 
+                              required="true"
+                                value="#{identity.password}"/>
+                    <h:outputLabel for="rememberMe">Remember me</h:outputLabel>
+                    <h:selectBooleanCheckbox id="rememberMe" 
+                                          value="#{identity.rememberMe}"/>
+                </h:panelGrid>
+            </div>
+                
+        </p:panel>
+
+            
+        <div class="actionButtons">
+        <h:commandButton id="loginb" value="Login" action="#{identity.login}"/>
+        <h:button id="ltdone"  value="Cancel" propagation="end" outcome="/home.xhtml" />
+        <h:commandButton id="resendAct" value="Resend Activation " action="#{yxxxuh566xwwqqwxxxxxuserHome.doResendActivationEmail}"
+          rendered = "#{yxxxuh566xwwqqwxxxxxuserHome}.activationPending}" />
+
+        <h:outputLink value="#" id="registerLink" styleClass="hdrLink" rendered ="#{request.serverName.contains('example.com')}" onclick="PF('registerPanel').show()">
+         <h:outputText value="#{messages.tb_sep}" escape="false"/>
+         <h:outputText value="#{messages.register}"/>
+        </h:outputLink>
+
+        </div>
+<p:hotkey id="keyReturn" bind="return" handler="PF('login:loginb').click()" />
+<p:hotkey id="keyESC" bind="ctrl+r" handler="PF('login:registerLink').click()" />
+    <p:panel rendered="#{request.serverName.contains('example.com')}">
+    <p>Use DEMO1USER and demo (Case sensitive) for Username and Password.
+    </p>
+    <p>Use DEMO2USER and demo (Case sensitive) for Username and Password, if first one is logged in
+    </p>
+    </p:panel>
+      <br/><br/>
+      <h:outputLink value="#" id="forgotLink" rendered ="#{!request.serverName.contains('example.com')}" onclick="PF('forgotPanel').show()">
+        <h:outputText value="#{messages.login_forgot_password}"/>
+      </h:outputLink>
+</h:form>
+
+
+
+<h:form  >
+
+ <p:dialog id="forgotPanel" widgetVar="forgotPanel" modal="true" width="360" height="240" show="#{yxxxuh566xwwqqwxxxxxuserHome.forgotPasswordError}" rendered="#{not identity.loggedIn}"
+                    domElementAttachment="parent">
+  <f:facet name="header"><h:outputText value="#{messages.login_forgot_password}"/></f:facet>
+  <f:facet name="controls">
+   <h:form>
+    <p:commandButton onclick="PF('forgotPanel')}.hide()" type="image" image="/img/Cancel16.png"/>
+   </h:form>
+  </f:facet>
+    <h:panelGrid >
+      <f:facet name="header"><h:outputText value="#{messages.forgot_form_desc}"/></f:facet>
+      <ui:decorate id="lostPasswordUserIdField" template="layout/edit.xhtml">
+      <ui:define name="label">#{messages.login_username}</ui:define>
+       <h:inputText id="lostPasswordUserId" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.lostPasswordUserId}"/>
+      </ui:decorate>
+        <p:commandButton type="button" id="resetLostPassword" action="#{yxxxuh566xwwqqwxxxxxuserHome.doRecoverLostPassword}"
+        value="#{messages.reset_password}" render="pswdRecovered,jj,jj2,forgotPanel"  execute="forgotPanel"
+        oncomplete="#{facesContext.maximumSeverity.ordinal != 0}?#{PF('forgotPanel')}.show():PF('forgotPanel')}.show()"
+         />
+        <p:commandButton type="button" id="doneButtonr" value="#{messages.done}" 
+         render="forgotPanel" execute="forgotPanel"
+         oncomplete=" PF('forgotPanel').hide();"/>
+    </h:panelGrid>
+       <h:messages globalOnly="false" styleClass="message" id="globalMessages"/>
+    <p:message for="resetLostPassword">
+      <f:facet name="errorMarker"><h:graphicImage value="/img/error.gif"/></f:facet>
+    </p:message>
+
+
+ </p:dialog>
+</h:form>
+
+
+<h:form  >
+       <h:messages globalOnly="false" styleClass="message" id="globalMessages"/>
+
+ <p:dialog id="pswdRecovered" widgetVar="pswdRecovered" modal="true" width="360" height="260" rendered="#{not identity.loggedIn}" show="#{yxxxuh566xwwqqwxxxxxuserHome.recoveredPasswordEmail != null}"
+                       domElementAttachment="parent">
+  <f:facet name="header"><h:outputText value="#{messages.password_recovered}"/></f:facet>
+  <f:facet name="controls">
+   <h:form>
+    <p:commandButton onclick="PF('pswdRecovered').hide()" type="image" image="/img/Cancel16.png"/>
+   </h:form>
+  </f:facet>
+  <h:outputFormat value="#{messages.password_recovered_sent}" escape="false">
+    <f:param value="#{guest.recoveredPasswordEmail}"/>
+  </h:outputFormat>
+  <h:panelGroup style="width: 320px; text-align: center;">
+      <p:commandButton value="#{messages.ok}" onclick="PF('pswdRecovered').hide()"/>
+  </h:panelGroup>
+ </p:dialog>
+</h:form>
+
+<h:form  >
+ <p:dialog id="termsOfUse" widgetVar="termsOfUse" width="640" height="480" rendered="#{not identity.loggedIn}">
+  <f:facet name="header"><h:outputText value="#{messages.terms_of_use}"/></f:facet>
+  <f:facet name="controls">
+   <h:form>
+    <p:commandButton onclick="PF('termsOfUse').hide()" type="image" image="/img/Cancel16.png"/>
+   </h:form>
+  </f:facet>
+  <ui:include src="legal.xhtml"/>
+  <h:panelGroup style="width: 600px; text-align: center;">
+    <h:form>
+      <p:commandButton value="#{messages.ok}" onclick="PF('termsOfUse').hide()"/>
+    </h:form>
+  </h:panelGroup>
+ </p:dialog>
+</h:form>
+
+<h:form  >
+<p:dialog id="regPending" widgetVar="regPending" width="360" height="260" show="#{inactiveNewUser.userName != null}" rendered="#{not identity.loggedIn}">
+  <f:facet name="header"><h:outputText value="#{messages.reg_pending_title}"/></f:facet>
+  <f:facet name="controls">
+    <h:form><p:commandButton onclick="PF('regPending').hide()" type="image" image="/img/close.gif"/></h:form>
+  </f:facet>
+  <h:outputFormat value="#{messages.reg_pending}" escape="false">
+    <f:param value="#{yxxxuh566xwwqqwxxxxxuserHome.clientName}"/>
+    <f:param value="#{yxxxuh566xwwqqwxxxxxuserHome.clientEmail}"/>
+  </h:outputFormat>
+  <h:panelGroup style="width: 320px; text-align: center;">
+    <h:form>
+      <br/>
+      <p:commandButton value="#{messages.ok}" onclick="PF('regPending').hide()"/>
+    </h:form>
+  </h:panelGroup>
+</p:dialog>
+</h:form>
+
+
+
+ </ui:define> 
+</ui:composition>
+
+
+

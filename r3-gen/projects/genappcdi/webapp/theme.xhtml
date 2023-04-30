@@ -1,0 +1,200 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="key" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="themeName" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode}"/>
+    <f:viewParam name="themeVendor" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.y2xxuxxrbvxxxxxxxxxxmisccode1}"/>
+
+</f:metadata>
+<!-- Not Generated   -->
+<ui:remove>
+always show blog content ie clobdata (itemtable,A+item docmnt,TXT,0)
+If logged In then show edit blog item(CI-D) and its blobdata image (itemtable,item docmnt,1,1) and
+ edit blog content clobdata text (itemtable,item docmnt,TXT,0) 
+use f:param useSeq to set seq # to 0 or 1 as needed and view:param in the called .xhtml to set the initial seq #
+use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM since default value will be clobdata or blobdata
+
+</ui:remove>
+                       
+<ui:define name="body">
+    <h:form id="fpxxfq1a5xwwqqhxxxxxitemSearch" styleClass="edit">
+<h:outputStylesheet>
+
+.rf-edt-c {
+    height: 40px !important;
+}
+.rf-tb {
+    background-color:#{richSkin.tableSubHeaderBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+
+}
+.rf-cp-hdr {
+    background-color:#{richSkin.additionalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.rf-edt-hdr {
+    background-color:#{richSkin.generalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+
+
+</h:outputStylesheet>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone"  value="Cancel"   rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" value="Home"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ItemHelp']!='ItemHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+    
+     <div>
+    <h:panelGrid columns="2">
+     <p:panel>
+      <h:panelGrid columns="4">
+
+            <h:graphicImage value="/img/Edit_256.png" width="50">
+            </h:graphicImage>
+            <h:graphicImage value="/img/Designview_256.png" width="100">
+            </h:graphicImage>
+            <h:graphicImage value="/img/Popout_256.png" height="50">
+            </h:graphicImage>
+            <h:graphicImage value="/img/Popout_256.png" height="25">
+            </h:graphicImage>
+      </h:panelGrid>
+     </p:panel>
+
+     <p:panel rendered="#{customIdentity.hasRole('PH')}">
+              <h:outputText value=" #{messages['To']} #{messages['create']} #{messages['or']} #{messages['update']} #{messages['theme']} #{messages['pages']}, #{messages['click']} #{messages['template']} #{messages['pages']} #{messages['button']}" rendered="#{identity.loggedIn and customIdentity.hasRole('PH')}"/> 
+              &nbsp;<h:button value="#{messages['theme']} #{messages['template']} #{messages['pages']}"  outcome="/homePageEditor.xhtml" styleClass="buttonMain" rendered="#{identity.loggedIn and customIdentity.hasRole('PH')}"/>
+              <h:button value="#{messages['template']} #{messages['pages']}"  outcome="/homePageEditor.xhtml" styleClass="buttonMain" rendered="#{identity.loggedIn and !customIdentity.hasRole('PH')}"/>
+              <br></br><br></br>
+
+              <h:link id="Prevw" outcome="/homeThemePreview.wflow" value="#{messages['Preview']} #{messages['theme']} #{messages['pages']}" >
+               <f:param name="themeName" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode}"/>
+               <f:param name="themeVendor" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.y2xxuxxrbvxxxxxxxxxxmisccode1}"/>
+              </h:link>
+     </p:panel>
+
+     <p:panel rendered="!#{customIdentity.hasRole('PH')}">
+              <h:link id="PrevwV" outcome="/homeThemePreview.V.wflow" value="#{messages['Preview']} #{messages['theme']} #{messages['pages']}" >
+               <f:param name="themeName" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode}"/>
+               <f:param name="themeVendor" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.y2xxuxxrbvxxxxxxxxxxmisccode1}"/>
+              </h:link>
+              <br></br>
+             <h:outputText value=" #{messages['A']} #{messages['site']} #{messages['manager']} #{messages['can']} #{messages['install']} #{messages['these']} #{messages['theme']} #{messages['pages']} #{messages['for']} #{messages['own']} #{messages['site']}, #{messages['as']} #{messages['needed']}"
+               rendered="#{!customIdentity.hasRole('PH')}"/> 
+
+     </p:panel>
+
+
+    </h:panelGrid>
+
+
+     <hr></hr>
+
+    <h:panelGrid columns="2" rendered="#{identity.loggedIn}">
+
+     <p:panel>
+     <h:outputText style="font-size: medium;color:#{a4jSkin.hoverLinkColor};" value="#{messages['Area']} #{messages['below']} #{messages['is']} #{messages['for']} #{messages['Theme']} #{messages['info']}, #{messages['above']} #{messages['area']} #{messages['is']} #{messages['for']} #{messages['actual']} #{messages['home']} #{messages['and']} #{messages['other']} #{messages['page']} #{messages['contents']}" />
+     <br></br> <br></br>
+
+      <panelGroup>
+        <ui:remove> try using sid as param </ui:remove>
+
+        <h:button outcome="/itemEditEasy.xhtml" rendered="#{identity.loggedIn}" styleClass="buttonMain"
+                    id="iedit"
+                 value="#{messages['Edit']} ( #{messages['theme']} #{messages['Title']} )">
+                <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+                <f:param name="useSeq"
+                        value="1"/>
+        </h:button><br></br>
+        <h:button outcome="/clobdataEdit.xhtml" rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length()>3}"
+                    id="cedit" styleClass="buttonMain"
+                 value="#{messages['Edit']} ( #{messages['theme']} #{messages['Image']} / #{messages['Information']} )">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" disable="#{empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000)}"
+                        value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).a0xxuobxbxxxxxxxxxxxsid}"/>
+ 
+                <f:param name="fromTable" disable="#{not empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) or not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata()}"
+                        value="FPXXFQ1A5XWWQQHXXXXXITEM"/>
+                <f:param name="fromKey" disable="#{not empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) or not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata()}"
+                        value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))}"/>
+                <f:param name="qualifier" disable="#{not empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) or not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata()}"
+                        value="TXT"/>
+                <f:param name="useSeq" disable="#{not empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) or not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata()}"
+                        value="0"/>
+
+        </h:button>
+
+      </panelGroup>
+     </p:panel>
+     </h:panelGrid>
+      <br></br>
+
+     <p:panel>
+     <ui:remove>
+      <br></br>
+       <h:outputText  value="#{messages['No']} #{messages['short']} #{messages['Description']}/#{messages['Image']} #{messages['found']} #{messages['in']} #{messages['binarydata']} #{messages['for']} #{messages['key']} #{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))} #{messages['Qualifier 1']} #{messages['Seq 1']}" 
+        rendered="#{customIdentity.hasRole('PH') and fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null}"/>
+       <h:outputText  value="#{messages['Short']} #{messages['Description']}/#{messages['Image']} #{messages['found']}  #{messages['in']}  #{messages['binarydata']} #{messages['for']} #{messages['key']} #{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))} #{messages['Qualifier 1']} #{messages['Seq 1']}" 
+        rendered="#{customIdentity.hasRole('PH') and fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"/>
+       <br></br>
+       <h:graphicImage alt="no picture"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+         value="/ImageServletCdi/?seq=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=300" >
+       </h:graphicImage> 
+
+      <br></br><br></br>
+      </ui:remove>
+      <h:outputText  value="#{messages['No']} #{messages['theme']} #{messages['Info']}/#{messages['Image']} #{messages['found']}  #{messages['in']}  #{messages['textdata']} #{messages['for']} #{messages['key']} #{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))} #{messages['Qualifier TXT']} #{messages['Seq 0']}" 
+      rendered="#{customIdentity.hasRole('PH') and empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000)}"/>
+
+      <h:outputText  value="#{messages['Detailed']} #{messages['theme']} #{messages['Info']}/#{messages['Image']} #{messages['found']}  #{messages['in']}  #{messages['textdata']} #{messages['for']} #{messages['key']} #{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))} #{messages['Qualifier TXT']} #{messages['Seq 0']}" 
+      rendered="#{customIdentity.hasRole('PH') and not empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000)}"/>
+
+      <h:outputText escape="false"  value="#{fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000)}" 
+      rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 1}"/>
+     </p:panel>
+
+     </div>
+    
+    <div class="actionButtons">    
+        <h:button outcome="/ThemesBrowse.xhtml"
+                    id="done"
+                 value="#{messages['Done']}"/>
+
+    </div>
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

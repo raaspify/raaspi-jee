@@ -1,0 +1,370 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.maxResultsVal}"/>
+    <f:viewAction action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Clobdata']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="yxxxuq1m1xwwqqqxxxxxclobdataSearch" styleClass="edit">
+<h:outputStylesheet>
+
+
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']}" propagation="end"  outcome="/home.xhtml" />
+             <p:ajaxStatus name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ClobdataListHelp']!='ClobdataListHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ClobdataListHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+
+ <p:panel style="width: 50%;" header="#{messages['Clobdata']}- #{messages['List']} #{messages['Search']} #{messages['Result']}, #{messages['click']} #{messages['to']} #{messages['change']} #{messages['search']}  #{messages['criteria']}" switchType="ajax" collapsed="true"
+     toggleable="true" toggleableHeader="true">
+
+<h:panelGrid columns="10">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.searchVal}"/>
+ </ui:decorate>
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText ph:type="date" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label"> #{messages['status']}  </ui:define>
+  <h:panelGrid columns="2" >
+         <h:selectOneMenu value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.searchStatus}"> 
+          <f:selectItem itemLabel="open" itemValue="0"/>
+          <f:selectItem itemLabel="active/ordered" itemValue="1"/>
+          <f:selectItem itemLabel="return" itemValue="4"/>
+          <f:selectItem itemLabel="closed" itemValue="8"/>
+          <f:selectItem itemLabel="paid" itemValue="16"/>
+          <f:selectItem itemLabel="partial/shipped" itemValue="32"/>
+          <f:selectItem itemLabel="invoiced" itemValue="64"/>
+          <f:selectItem itemLabel="unsubscribed" itemValue="64"/>
+          <f:selectItem itemLabel="marked" itemValue="128"/>
+          <f:selectItem itemLabel="deleted" itemValue="256"/>
+          <f:selectItem itemLabel="printed/final approved" itemValue="512"/>
+         </h:selectOneMenu>
+  </h:panelGrid>
+ </ui:decorate>
+</h:panelGrid>
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.suggest(yxxxuq1m1xwwqqqxxxxxclobdataHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.suggest(yxxxuq1m1xwwqqqxxxxxclobdataHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="yxxxuq1m1xwwqqqxxxxxclobdataList,globalMessages" status="buttonStatus" value="#{messages['Search']}" actionListener="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getFirstResult()}"/>
+            <h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</p:panel>
+
+    <p:panel>
+
+        <div class="actionButtons">
+             <h:commandButton id="copyallt" value="Copy All Flagged"  action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.copyAllMarked()}" status="buttonStatus"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+             <h:commandButton id="deleteallt" value="Delete All Flagged"  action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.deleteAllFlagged()}"
+              onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " />
+             <h:commandButton id="updateallt" value="Update All Flagged"  rendered="false" action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.updateAllFlagged()}"/>
+             <h:commandButton id="emailIcal" value="#{messages['email']} #{messages['as']} #{messages['iCalendar']}"  rendered="false" action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.writeAsIcalText()}"/>
+
+            <h:button outcome="/#{empty yxxxuq1m1xwwqqqxxxxxclobdataFrom ? 'home' : yxxxuq1m1xwwqqqxxxxxclobdataFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{yxxxuq1m1xwwqqqxxxxxclobdataList.setMaxResultsVal(6)}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{yxxxuq1m1xwwqqqxxxxxclobdataList.setMaxResultsVal(50)}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{yxxxuq1m1xwwqqqxxxxxclobdataList.setMaxResultsVal(100)}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{yxxxuq1m1xwwqqqxxxxxclobdataList.setskipColumns(true)}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{yxxxuq1m1xwwqqqxxxxxclobdataList.setskipColumns(false)}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Clobdata Search Results showing #{empty yxxxuq1m1xwwqqqxxxxxclobdataList.systemResultList ? 0 : (yxxxuq1m1xwwqqqxxxxxclobdataList.paginated ? yxxxuq1m1xwwqqqxxxxxclobdataList.systemResultList.size() : yxxxuq1m1xwwqqqxxxxxclobdataList.systemResultCount)} of #{yxxxuq1m1xwwqqqxxxxxclobdataList.systemResultCount}"/>
+        </f:facet>
+    <div class="results" id="yxxxuq1m1xwwqqqxxxxxclobdataList" style="overflow-x:auto">
+
+    <h:outputText value="The Clobdata search returned no results."
+               rendered="#{empty yxxxuq1m1xwwqqqxxxxxclobdataList.systemResultList}"/>
+
+
+
+    <p:dataTable id="yxxxuq1m1xwwqqqxxxxxclobdataList"  frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" rows="6" scrollRows="6"
+                var="_yxxxuq1m1xwwqqqxxxxxclobdata" selection="#{yxxxuq1m1xwwqqqxxxxxclobdataList.yxxxuq1m1xwwqqqxxxxxclobdata}" rowKey="#{_yxxxuq1m1xwwqqqxxxxxclobdata.a0xxuobxbxxxxxxxxxxxsid}"
+              value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.systemResultList}"
+           rendered="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.systemResultList}">
+        <p:column headerText="Action">
+            <h:selectBooleanCheckbox id="MarkItCheckbox" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.checked[_yxxxuq1m1xwwqqqxxxxxclobdata.a0xxuobxbxxxxxxxxxxxsid]}"/>
+
+            <h:link outcome="/#{empty from ? 'clobdata' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+                   propagation="#{empty from ? 'none' : 'default'}"
+                      id="yxxxuq1m1xwwqqqxxxxxclobdataViewId">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+            <h:link outcome="/clobdataEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="yxxxuq1m1xwwqqqxxxxxclobdataEdit1"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.a0xxuobxbxxxxxxxxxxxsid}"/>
+
+            </h:link>
+
+            <h:commandButton id="Download1" image="/img/arrow_down16.png" rendered="#{empty from and _yxxxuq1m1xwwqqqxxxxxclobdata.b1xxuzaxbvxxxxxxxxxxdata !=null}" action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.downloadThis(_yxxxuq1m1xwwqqqxxxxxclobdata.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </p:column>
+        <p:column rendered="#{!yxxxuq1m1xwwqqqxxxxxclobdataList.skipColumns}"
+                     headerText="#{messages['Fromtable']}">
+               <h:inputText readonly="true"  value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.a0xxukcdlvxxxxxxxxxxfromtable}"  id="a0xxukcdlvxxxxxxxxxxfromtable" />
+        </p:column>
+        <p:column rendered="#{!yxxxuq1m1xwwqqqxxxxxclobdataList.skipColumns}"
+            headerText="#{messages['Fromkey']}">
+               <h:inputText readonly="true"  value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.a1xxuxxxbv49xxxxxxxxfromkey}"  id="a1xxuxxxbv49xxxxxxxxfromkey" />
+        </p:column>
+         <p:column rendered="#{!yxxxuq1m1xwwqqqxxxxxclobdataList.skipColumns}"
+           headerText="#{messages['Qualifier']}">
+               <h:inputText readonly="true"  value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.a2xxuxxxbv50xxxxxxxxqualifier}"  id="a2xxuxxxbv50xxxxxxxxqualifier" />
+        </p:column>
+         <p:column rendered="#{!yxxxuq1m1xwwqqqxxxxxclobdataList.skipColumns}"
+          headerText="#{messages['Sequence']}">
+               <h:inputText readonly="true"  value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.a3xxexnsbvxxxxxxxxxxsequence}"  id="a3xxexnsbvxxxxxxxxxxsequence" />
+        </p:column>
+         <p:column rendered="#{!yxxxuq1m1xwwqqqxxxxxclobdataList.skipColumns}"
+          headerText="#{messages['Type']}">
+               <h:inputText readonly="true"  value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.a4xxexxxbvxxxxxxxxxxtype}"  id="a4xxexxxbvxxxxxxxxxxtype" />
+        </p:column>
+         <p:column rendered="#{!yxxxuq1m1xwwqqqxxxxxclobdataList.skipColumns}" width="25" 
+              headerText="#{messages['Data']}">
+              <h:outputText value="#{fn:substring(_yxxxuq1m1xwwqqqxxxxxclobdata.b1xxuzaxbvxxxxxxxxxxdata,0,50)}"  />
+        </p:column>
+
+     <!-- all y3xxuxznbvxxxxxxxxxxnotes  N  1m-->
+         <p:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Notes']}"/>
+
+                    <ui:param name="propertyPath" value="yxxxuq1m1xwwqqqxxxxxclobdata.y3xxuxznbvxxxxxxxxxxnotes"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(y3xxuxznbvxxxxxxxxxxnotes) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.y3xxuxznbvxxxxxxxxxxnotes}"  id="y3xxuxznbvxxxxxxxxxxnotes" rendered="true"/>
+        </p:column>
+     <!-- all z1xxzzfxhhxxxxxxxxxxstatusfl  N  1m-->
+         <p:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Statusfl']}"/>
+
+                    <ui:param name="propertyPath" value="yxxxuq1m1xwwqqqxxxxxclobdata.z1xxzzfxhhxxxxxxxxxxstatusfl"/>
+                </ui:include>
+            </f:facet>
+              <h:outputText value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.z1xxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(_yxxxuq1m1xwwqqqxxxxxclobdata.z1xxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(_yxxxuq1m1xwwqqqxxxxxclobdata.z1xxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid/waiting approval':( _yxxxuq1m1xwwqqqxxxxxclobdata.z1xxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped/approved': (_yxxxuq1m1xwwqqqxxxxxclobdata.z1xxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced/final approved':'new/other'))))}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl" />
+        </p:column>
+     <!-- all z2xxcztxlxxxxxxxxxxxstatusfldt  N  1m-->
+         <p:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Statusfldt']}"/>
+
+                    <ui:param name="propertyPath" value="yxxxuq1m1xwwqqqxxxxxclobdata.z2xxcztxlxxxxxxxxxxxstatusfldt"/>
+                </ui:include>
+            </f:facet>
+              <h:outputText value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.z2xxcztxlxxxxxxxxxxxstatusfldt}"  id="statusfldt" >
+               <f:convertDateTime pattern="dd/MM/yy h:mm:s z"/>
+              </h:outputText>
+        </p:column>
+     <!-- all z3xxutoxlhxxxxxxxxxxowner  N  1m-->
+         <p:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Owner']}"/>
+
+                    <ui:param name="propertyPath" value="yxxxuq1m1xwwqqqxxxxxclobdata.z3xxutoxlhxxxxxxxxxxowner"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(z3xxutoxlhxxxxxxxxxxowner) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.z3xxutoxlhxxxxxxxxxxowner}"  id="z3xxutoxlhxxxxxxxxxxowner" rendered="true"/>
+        </p:column>
+     <!-- all zzxxu2oxxhxxxxxxxxxxowner2  N  1m-->
+         <p:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Owner2']}"/>
+
+                    <ui:param name="propertyPath" value="yxxxuq1m1xwwqqqxxxxxclobdata.zzxxu2oxxhxxxxxxxxxxowner2"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+        </p:column>
+        <p:column styleClass="action">
+            <f:facet name="header">Action</f:facet>
+            #{' '}
+            <h:link outcome="/clobdataEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="yxxxuq1m1xwwqqqxxxxxclobdataEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_yxxxuq1m1xwwqqqxxxxxclobdata.a0xxuobxbxxxxxxxxxxxsid}"/>
+
+            </h:link>
+            #{' '}
+            <h:commandButton id="Download" image="/img/arrow_down16.png" rendered="#{empty from and _yxxxuq1m1xwwqqqxxxxxclobdata.b1xxuzaxbvxxxxxxxxxxdata !=null}" action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.downloadThis(_yxxxuq1m1xwwqqqxxxxxclobdata.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </p:column>
+    </p:dataTable>
+
+    </div>
+    </p:panel>
+
+    <div class="tableControl">
+        <h:link outcome="/clobdataSystemList.xhtml"
+            rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+            <f:param name="maxResultsVal"
+                    value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/clobdataSystemList.xhtml"
+            rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/clobdataSystemList.xhtml"
+            rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.systemNextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/clobdataSystemList.xhtml"
+            rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.systemNextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.systemLastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+        <h:button outcome="/clobdataEdit.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+           rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Clobdata']}">
+
+        </h:button>
+
+
+
+         <h:button outcome="/#{empty yxxxuq1m1xwwqqqxxxxxclobdataFrom ? 'home' : yxxxuq1m1xwwqqqxxxxxclobdataFrom}.xhtml"
+          id="donefy"
+         value="Done"/>
+         <h:button   value="#{messages['List']}  #{messages['clobdata']}"  outcome="/clobdataList.xhtml" 
+          rendered="#{customIdentity.masterSite}" >
+         </h:button> 
+
+        <h:messages globalOnly="true" styleClass="message" id="globalMessagesb"/>
+
+<br/>
+    </div>
+            <p:hotkey  actionListener="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getFirstResult()}" preventDefault="true" enabledInInput="true" bind="return">
+            </p:hotkey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

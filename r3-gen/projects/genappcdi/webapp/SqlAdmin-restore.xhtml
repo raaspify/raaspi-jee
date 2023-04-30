@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+     xmlns:a="http://richfaces.org/a4j"
+      template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewAction action="#{yxxxch601xwwqqhxxxxxaccountHome.restrict()}" />
+</f:metadata>
+ 
+<ui:define name="body">
+    <h:form id="qflow" styleClass="edit">
+
+	<rich:toolbar height="26" itemSeparator="grid" rendered="#{identity.loggedIn }">
+         <!-- Not Generated but copied  
+           SqlAdmin Page
+            For initial app deployment manually create genapp schema (seam needs it) and create empty resource_bundle and resource (databaseResourceLoader
+            needs them)
+            parameters passed: none
+            popupPanels: 0
+            create tables are used standalone but backup/restore used through logged in menue. create MockUp etc are used standalone to load system
+            stock images and text and after create tables.
+            todo:add page.xml to enforce login and add to menue
+         -->
+	<rich:toolbarGroup>
+         <h:button id="lbdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml" />
+	  </rich:toolbarGroup>
+	</rich:toolbar>
+     <br></br>
+     <rich:panel>
+              <h:commandButton styleClass="buttonMain" id="Restore"  value="Restore Data"  action="#{sqlAdminSupport.restoreTenant()}" 
+                onclick="if (! confirm('Continue with Restore ?') ) { return false;}; return true;">
+              </h:commandButton>
+              <h:outputText  value="#{messages['last']} #{messages['backup']} #{messages['date']} #{sqlAdminSupport.lastBupDate}" 
+                rendered="#{sqlAdminSupport.lastBupDate ne null}"/>
+              <h:outputText  value=" (#{messages['gmt']} #{messages['time']} #{messages['yy-mm-ddhhmm']})" rendered="#{sqlAdminSupport.lastBupDate ne null}"/>
+ 
+     </rich:panel>
+     <br></br><br></br>
+
+     <rich:collapsiblePanel header="#{messages['More']} " style="width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'100%':'80%'};"  switchType="client" expanded="false" rendered="#{identity.loggedIn }"
+       leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+     <rich:panel>
+              <h:commandButton id="RestoreC"  styleClass="buttonMain" value="Restore Data from daily backUp"  action="#{sqlSupport.restoreTenantC()}" 
+                onclick="if (! confirm('Continue with Restore ?') ) { return false;}; return true;">
+              </h:commandButton>
+
+              <h:outputText  value="#{messages['last']} #{messages['backup']} #{messages['date']} #{sqlAdminSupport.systemLastBupDate}" 
+                rendered="#{sqlAdminSupport.systemLastBupDate ne null}"/>
+              <h:outputText  value=" (#{messages['gmt']} #{messages['time']} #{messages['yy-mm-ddhhmm']})" rendered="#{sqlAdminSupport.systemLastBupDate ne null}"/>
+
+     </rich:panel>
+
+     </rich:collapsiblePanel>
+              <br></br><br></br><br></br>
+              &nbsp;<h:outputText  value="#{messages['if']} #{messages['any']} #{messages['error']} #{messages['including']} #{messages['constrain']} #{messages['violation']}, #{messages['may']} #{messages['need']} #{messages['to']} #{messages['delete']} / #{messages['correct']} #{messages['some']} #{messages['records']} #{messages['and']} #{messages['try']} #{messages['again']} " 
+               rendered="#{sqlAdminSupport.systemLastBupDate ne null}"/>
+
+	    	
+    <h:messages globalOnly="false" styleClass="message" id="globalMessages"/>
+
+
+
+
+
+  </h:form>
+
+
+</ui:define>
+
+</ui:composition>

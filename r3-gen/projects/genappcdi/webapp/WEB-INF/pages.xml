@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages xmlns="http://jboss.org/schema/seam/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://jboss.org/schema/seam/pages http://jboss.org/schema/seam/pages-2.3.xsd"
+
+       no-conversation-view-id="/home.xhtml"
+       login-view-id="/login.xhtml">
+
+
+    <page view-id="*">
+     <navigation from-action="#{identity.logout}">
+      <redirect view-id="/home.xhtml"/>
+     </navigation>
+     <navigation>
+      <rule if-outcome="home">
+        <redirect view-id="/home.xhtml"/>
+      </rule>
+     </navigation>
+    </page>
+ <page view-id="/home.xhtml">
+    <action  execute="#{authenticator.setClientChosenSkin()}" 
+      />
+</page>
+
+
+ <page view-id="/imail.xhtml">
+    <action if="#{request.getParameter('imail') != null}" execute="#{yxxxuh566xwwqqwxxxxxuserHome.doImail(request.getParameter('imail'))}" 
+      />
+</page>
+
+ <page view-id="/checkout.xhtml">
+    <action if="#{request.getParameter('PayerID') != null}" execute="#{r3Cart.makePayPalPayment(request.getParameter('PayerID'),request.getParameter('guid'))}" 
+      />
+</page>
+
+ <page view-id="/unsc.xhtml">
+    <action if="#{request.getParameter('unsc') != null}" execute="#{yxxxuh566xwwqqwxxxxxuserHome.doUnsc(request.getParameter('keyCode'),request.getParameter('unsc'),request.getParameter('type'))}" 
+      />
+</page>
+
+ <page view-id="/shoauthverify.xhtml">
+    <action if="#{request.getParameter('hmac') != null}" execute="#{r3RestClient.shoauthverify(request.getParameter('code'),request.getParameter('hmac'),request.getParameter('shop'),request.getParameter('state'),request.getParameter('timestamp'))}" 
+      />
+</page>
+
+ <page view-id="/shwebhook.xhtml">
+    <action if="#{request.getParameter('hmac') != null}" execute="#{r3RestClient.shoauthverify(request.getParameter('code'),request.getParameter('hmac'),request.getParameter('shop'),request.getParameter('state'),request.getParameter('timestamp'))}" 
+      />
+</page>
+
+
+    <exception class="org.jboss.seam.framework.EntityNotFoundException">
+        <redirect view-id="/error.xhtml">
+            <message severity="warn">Record not found</message>
+        </redirect>
+    </exception>
+    
+    <exception class="javax.persistence.EntityNotFoundException">
+        <redirect view-id="/error.xhtml">
+            <message severity="warn">Record not found</message>
+        </redirect>
+    </exception>
+    
+    <exception class="javax.persistence.EntityExistsException">
+        <redirect view-id="/error.xhtml">
+            <message severity="warn">Duplicate record</message>
+        </redirect>
+    </exception>
+    
+    <exception class="javax.persistence.OptimisticLockException">
+        <end-conversation/>
+        <redirect view-id="/error.xhtml">
+            <message severity="warn">Another user changed the same data, please try again</message>
+        </redirect>
+    </exception>
+    
+    <exception class="org.jboss.seam.security.AuthorizationException">
+        <redirect view-id="/error.xhtml">
+            <message severity="error">You don't have permission to access this resource</message>
+        </redirect>
+    </exception>
+    
+    <exception class="org.jboss.seam.security.NotLoggedInException">
+        <redirect view-id="/login.xhtml">
+            <message severity="warn">#{messages['org.jboss.seam.NotLoggedIn']}</message>
+        </redirect>
+    </exception>
+    
+    <exception class="javax.faces.application.ViewExpiredException">
+        <redirect view-id="/error.xhtml">
+            <message severity="warn">Your session has timed out, please try again</message>
+        </redirect>
+    </exception>
+    
+    <exception class="org.jboss.seam.ConcurrentRequestTimeoutException" log-level="trace">
+      <http-error error-code="503" />
+    </exception>
+     
+    <exception>
+        <redirect view-id="/error.xhtml">
+            <message severity="error">Unexpected error, please try again</message>
+        </redirect>
+    </exception>
+
+    
+</pages>
+
+

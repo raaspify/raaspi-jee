@@ -1,0 +1,314 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewAction action="#{xlrxeh685xwwqqhxxxxxjournalHome.restrict()}" />
+</f:metadata>
+<ui:define name="body">
+    <h:form id="xlrxeh685xwwqqhxxxxxjournalReport" styleClass="edit">
+     <h:outputStylesheet>
+
+     </h:outputStylesheet>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:commandButton id="printb" value="Print"  action="#{xlrxeh685xwwqqhxxxxxjournalList.print}" image="/img/Print16.gif" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end" view="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="!#{messages['reportjournalbyaccountHelp']}=null">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['reportjournalbyaccountHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+         <p:panel style="width: 20%;" header="#{messages['Journal']} Reports using default parameters          (Use the Browser back button after viewing or have multiple browser windows open)  " switchType="ajax" expanded="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+           <h:panelGrid columns="1">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.reportName']}</ui:define>
+                <h:selectOneMenu id="reportName" value="#{xlrxeh685xwwqqhxxxxxjournalList.reportName}">
+                 <f:selectItem id="ritem1" itemLabel="Journal By Account" itemValue="fiJournalbyaccountreport" />
+                </h:selectOneMenu> 
+
+            </ui:decorate>
+          </h:panelGrid>
+
+        </p:panel>
+         <p:panel style="width: 30%;" header="Click to show Report details parameters" switchType="ajax" expanded="false"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.displayAs']}</ui:define>
+                <h:selectOneMenu id="displayAs" value="#{xlrxeh685xwwqqhxxxxxjournalList.displayAs}">
+                 <f:selectItem id="ditem1" itemLabel="PDF" itemValue="PDF" />
+                 <f:selectItem id="ditem2" itemLabel="HTML" itemValue="HTML" />
+                 <f:selectItem id="ditem3" itemLabel="CSV" itemValue="CSV" />
+                 <f:selectItem id="ditem4" itemLabel="EXCEL" itemValue="EXCEL" />
+                </h:selectOneMenu> 
+            </ui:decorate>
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.markedOnes']}</ui:define>
+                <h:inputText id="markedOnes" value="#{xlrxeh685xwwqqhxxxxxjournalList.markedOnes}"/>
+            </ui:decorate>
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.targetId']}</ui:define>
+                <h:selectOneMenu id="targetId" value="#{xlrxeh685xwwqqhxxxxxjournalList.targetId}">
+                 <f:selectItem id="titem1" itemLabel="None" itemValue="None" />
+                 <f:selectItem id="titem2" itemLabel="DownLoad" itemValue="DownLoad" />
+                 <f:selectItem id="titem3" itemLabel="Archive" itemValue="Archive" />
+                </h:selectOneMenu> 
+
+            </ui:decorate>
+        </h:panelGrid>
+       </p:panel>
+        <div class="actionButtons">
+         <h:panelGrid columns="8">      
+            <h:commandButton id="report" value="Generate Report" styleClass="buttonMain"  onclick="this.form.target='_blank'"  action="#{xlrxeh685xwwqqhxxxxxjournalList.print}"/>
+
+        <h:button outcome="/#{empty xlrxeh685xwwqqhxxxxxjournalFrom ? 'home' : xlrxeh685xwwqqhxxxxxjournalFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+            <f:param name="reportName" value="#{xlrxeh685xwwqqhxxxxxjournalList.reportName}"/>
+            <f:param name="displayAs" value="#{xlrxeh685xwwqqhxxxxxjournalList.displayAs}" /> 
+            #{messages['Start']}&nbsp;<h:graphicImage value="/img/report_start16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{xlrxeh685xwwqqhxxxxxjournalList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                   <ui:remove>gets whole entities via resultlist, so a limit of 2000 is put in, control via start/end 
+                              order by seq(s), start/end by keyfields ie seq(s) we need to use integer value ie seq
+                              so that 152 (15-2) comes after 2-1 (21)    
+                   </ui:remove>
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                  <f:selectItems value="#{xlrxeh685xwwqqhxxxxxjournalList.getSuggestList(xlrxeh685xwwqqhxxxxxjournalHome.prefix)}" var="result"
+                   itemValue="#{result.b5cczjsibvxxxxxxxxxxjnlseq}" itemLabel="#{result.b6xxzkjsbvxxxxxxxxxxjnlseqs}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            #{messages['End']}&nbsp;<h:graphicImage value="/img/report_stop16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{xlrxeh685xwwqqhxxxxxjournalList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                  <f:selectItems value="#{xlrxeh685xwwqqhxxxxxjournalList.getSuggestList(xlrxeh685xwwqqhxxxxxjournalHome.prefix)}" var="result"
+                   itemValue="#{result.b5cczjsibvxxxxxxxxxxjnlseq}" itemLabel="#{result.b6xxzkjsbvxxxxxxxxxxjnlseqs}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+         </h:panelGrid>      
+        </div>
+        
+    
+    <p:panel>
+        <f:facet name="header">Journal search results</f:facet>
+    <div class="results" id="xlrxeh685xwwqqhxxxxxjournalList">
+
+    <h:outputText value="No xlrxeh685xwwqqhxxxxxjournal exists" 
+               rendered="#{empty xlrxeh685xwwqqhxxxxxjournalList.resultList}"/>
+               
+    <p:dataTable id="xlrxeh685xwwqqhxxxxxjournalList" frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" 
+                var="xlrxeh685xwwqqhxxxxxjournal"
+              value="#{xlrxeh685xwwqqhxxxxxjournalList.resultList}" 
+           rendered="#{not empty xlrxeh685xwwqqhxxxxxjournalList.resultList}">
+
+        <p:column>
+          <f:facet name="header">Select</f:facet>
+          <h:commandButton id="SelectStart" value="Start"  action="#{xlrxeh685xwwqqhxxxxxjournalList.setStart(xlrxeh685xwwqqhxxxxxjournal.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </p:column>
+
+        <p:column>
+          <f:facet name="header">Select</f:facet>
+          <h:commandButton id="SelectEnd" value="End"  action="#{xlrxeh685xwwqqhxxxxxjournalList.setEnd(xlrxeh685xwwqqhxxxxxjournal.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </p:column>
+
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="spostdate #{xlrxeh685xwwqqhxxxxxjournalList.order=='a0xxujpshvxxxxxxxxxxspostdate asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='a0xxujpshvxxxxxxxxxxspostdate desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='a0xxujpshvxxxxxxxxxxspostdate asc' ? 'a0xxujpshvxxxxxxxxxxspostdate desc' : 'a0xxujpshvxxxxxxxxxxspostdate asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.a0xxujpshvxxxxxxxxxxspostdate}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="postdate #{xlrxeh685xwwqqhxxxxxjournalList.order=='b1xxcjpdhvxxxxxxxxxxpostdate asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='b1xxcjpdhvxxxxxxxxxxpostdate desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='b1xxcjpdhvxxxxxxxxxxpostdate asc' ? 'b1xxcjpdhvxxxxxxxxxxpostdate desc' : 'b1xxcjpdhvxxxxxxxxxxpostdate asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.b1xxcjpdhvxxxxxxxxxxpostdate}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="calendardt #{xlrxeh685xwwqqhxxxxxjournalList.order=='b2xxcwcdhvxxxxxxxxxxcalendardt asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='b2xxcwcdhvxxxxxxxxxxcalendardt desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='b2xxcwcdhvxxxxxxxxxxcalendardt asc' ? 'b2xxcwcdhvxxxxxxxxxxcalendardt desc' : 'b2xxcwcdhvxxxxxxxxxxcalendardt asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.b2xxcwcdhvxxxxxxxxxxcalendardt}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="jrnltype #{xlrxeh685xwwqqhxxxxxjournalList.order=='b3xxujjtbvxxxxxxxxxxjrnltype asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='b3xxujjtbvxxxxxxxxxxjrnltype desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='b3xxujjtbvxxxxxxxxxxjrnltype asc' ? 'b3xxujjtbvxxxxxxxxxxjrnltype desc' : 'b3xxujjtbvxxxxxxxxxxjrnltype asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.b3xxujjtbvxxxxxxxxxxjrnltype}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="jnlseqb #{xlrxeh685xwwqqhxxxxxjournalList.order=='b4xxzjbxbvxxxxxxxxxxjnlseqb asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='b4xxzjbxbvxxxxxxxxxxjnlseqb desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='b4xxzjbxbvxxxxxxxxxxjnlseqb asc' ? 'b4xxzjbxbvxxxxxxxxxxjnlseqb desc' : 'b4xxzjbxbvxxxxxxxxxxjnlseqb asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.b4xxzjbxbvxxxxxxxxxxjnlseqb}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="jnlseq #{xlrxeh685xwwqqhxxxxxjournalList.order=='b5cczjsibvxxxxxxxxxxjnlseq asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='b5cczjsibvxxxxxxxxxxjnlseq desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='b5cczjsibvxxxxxxxxxxjnlseq asc' ? 'b5cczjsibvxxxxxxxxxxjnlseq desc' : 'b5cczjsibvxxxxxxxxxxjnlseq asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.b5cczjsibvxxxxxxxxxxjnlseq}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="jnlseqs #{xlrxeh685xwwqqhxxxxxjournalList.order=='b6xxzkjsbvxxxxxxxxxxjnlseqs asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='b6xxzkjsbvxxxxxxxxxxjnlseqs desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='b6xxzkjsbvxxxxxxxxxxjnlseqs asc' ? 'b6xxzkjsbvxxxxxxxxxxjnlseqs desc' : 'b6xxzkjsbvxxxxxxxxxxjnlseqs asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.b6xxzkjsbvxxxxxxxxxxjnlseqs}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="period #{xlrxeh685xwwqqhxxxxxjournalList.order=='c1xxzwppbvpxxxxxxxxxperiod asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='c1xxzwppbvpxxxxxxxxxperiod desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='c1xxzwppbvpxxxxxxxxxperiod asc' ? 'c1xxzwppbvpxxxxxxxxxperiod desc' : 'c1xxzwppbvpxxxxxxxxxperiod asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.c1xxzwppbvpxxxxxxxxxperiod}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="account #{xlrxeh685xwwqqhxxxxxjournalList.order=='c4xxuwkxbvxxxxxxxxxxaccount asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='c4xxuwkxbvxxxxxxxxxxaccount desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='c4xxuwkxbvxxxxxxxxxxaccount asc' ? 'c4xxuwkxbvxxxxxxxxxxaccount desc' : 'c4xxuwkxbvxxxxxxxxxxaccount asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.c4xxuwkxbvxxxxxxxxxxaccount}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="debit #{xlrxeh685xwwqqhxxxxxjournalList.order=='c5xxzwdxlvxxxxxxxxxxdebit asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='c5xxzwdxlvxxxxxxxxxxdebit desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='c5xxzwdxlvxxxxxxxxxxdebit asc' ? 'c5xxzwdxlvxxxxxxxxxxdebit desc' : 'c5xxzwdxlvxxxxxxxxxxdebit asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.c5xxzwdxlvxxxxxxxxxxdebit}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="credit #{xlrxeh685xwwqqhxxxxxjournalList.order=='c6xxzwrxlvxxxxxxxxxxcredit asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='c6xxzwrxlvxxxxxxxxxxcredit desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='c6xxzwrxlvxxxxxxxxxxcredit asc' ? 'c6xxzwrxlvxxxxxxxxxxcredit desc' : 'c6xxzwrxlvxxxxxxxxxxcredit asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.c6xxzwrxlvxxxxxxxxxxcredit}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="xreference #{xlrxeh685xwwqqhxxxxxjournalList.order=='c7xxuwfxrbvxxxxxxxxxxreference asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='c7xxuwfxrbvxxxxxxxxxxreference desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='c7xxuwfxrbvxxxxxxxxxxreference asc' ? 'c7xxuwfxrbvxxxxxxxxxxreference desc' : 'c7xxuwfxrbvxxxxxxxxxxreference asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.c7xxuwfxrbvxxxxxxxxxxreference}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="descript #{xlrxeh685xwwqqhxxxxxjournalList.order=='c8xxuzsxbvxxxxxxxxxxdescript asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='c8xxuzsxbvxxxxxxxxxxdescript desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='c8xxuzsxbvxxxxxxxxxxdescript asc' ? 'c8xxuzsxbvxxxxxxxxxxdescript desc' : 'c8xxuzsxbvxxxxxxxxxxdescript asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.c8xxuzsxbvxxxxxxxxxxdescript}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="statusfl #{xlrxeh685xwwqqhxxxxxjournalList.order=='z1xxzzfxhhxxxxxxxxxxstatusfl asc' ? messages.down : ( xlrxeh685xwwqqhxxxxxjournalList.order=='z1xxzzfxhhxxxxxxxxxxstatusfl desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{xlrxeh685xwwqqhxxxxxjournalList.order=='z1xxzzfxhhxxxxxxxxxxstatusfl asc' ? 'z1xxzzfxhhxxxxxxxxxxstatusfl desc' : 'z1xxzzfxhhxxxxxxxxxxstatusfl asc'}"/>
+                </h:link>
+            </f:facet>
+            #{xlrxeh685xwwqqhxxxxxjournal.z1xxzzfxhhxxxxxxxxxxstatusfl}
+        </p:column>
+        <p:column>
+            <f:facet name="header">action</f:facet>
+            <h:link view="/#{empty from ? 'Xlrxeh685xwwqqhxxxxxjournal' : from}.xhtml" 
+                   value="Select" 
+                      id="xlrxeh685xwwqqhxxxxxjournal">
+                <f:param name="xlrxeh685xwwqqhxxxxxjournalA0xxuobxbxxxxxxxxxxxsid" 
+                        value="#{xlrxeh685xwwqqhxxxxxjournal.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+        </p:column>
+    </p:dataTable>
+
+    </div>
+    </p:panel>
+    
+    <div class="tableControl">
+      
+        <h:link view="/Reportjournalbyaccount.xhtml" 
+            rendered="#{xlrxeh685xwwqqhxxxxxjournalList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </h:link>
+        
+        <h:link view="/Reportjournalbyaccount.xhtml" 
+            rendered="#{xlrxeh685xwwqqhxxxxxjournalList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult" 
+                    value="#{xlrxeh685xwwqqhxxxxxjournalList.previousFirstResult}"/>
+        </h:link>
+        
+        <h:link view="/Reportjournalbyaccount.xhtml" 
+            rendered="#{xlrxeh685xwwqqhxxxxxjournalList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult" 
+                    value="#{xlrxeh685xwwqqhxxxxxjournalList.nextFirstResult}"/>
+        </h:link>
+        
+        <h:link view="/Reportjournalbyaccount.xhtml" 
+            rendered="#{xlrxeh685xwwqqhxxxxxjournalList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult" 
+                    value="#{xlrxeh685xwwqqhxxxxxjournalList.lastFirstResult}"/>
+        </h:link>
+        
+    </div>
+    
+    </h:form>
+    
+</ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,189 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="categoryJay" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1}"/>
+
+</f:metadata>
+<!-- Not Generated   -->
+<ui:remove>
+Like shopping cart, allows to enter invoice number, amount and make online payment
+use f:param useSeq to set seq # to 0 or 1 as needed and view:param in the called .xhtml to set the initial seq #
+use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM since default value will be clobdata or blobdata
+
+</ui:remove>
+                       
+<ui:define name="body">
+    <h:form id="fpxxfq1a5xwwqqhxxxxxitemSearch" styleClass="edit">
+<h:outputStylesheet>
+
+.rf-edt-c {
+    height: 40px !important;
+}
+.rf-tb {
+    background-color:#{richSkin.tableSubHeaderBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+
+}
+.rf-cp-hdr {
+    background-color:#{richSkin.additionalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.rf-edt-hdr {
+    background-color:#{richSkin.generalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+
+
+</h:outputStylesheet>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+               <h:commandButton id="AddToCartPay1" styleClass="buttonMain"  rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getCartInvoiceFor(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1).size() != null}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.renderPaymentout(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1)}" 
+                                 value="#{messages['Pay']}">
+                              <f:param name="categoryJay" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1}" />
+               </h:commandButton>
+              <p:panel id="jcount">
+              <h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getInvoicedCartedList(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1).size()}]" rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartInvoiceFor(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1).size() gt 0}">
+              </h:outputText>
+              <h:outputText value="[Empty]" rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartInvoiceFor(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1).size() == null}"/>
+              </p:panel>
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ItemHelp']!='ItemHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+	</p:toolbar>
+       <h:messages globalOnly="true" styleClass="messageM" id="globalMessages"/>
+
+    
+     <p:panel style="width: 700px ;margin-left: auto ;margin-right: auto ;">
+      <panelGroup>
+
+             <ui:decorate id="matcodeDescriptDecoration" template="layout/edit.xhtml" >
+             <ui:define name="label">#{messages['Invoice']} #{messages['number']}
+             </ui:define>
+        	 <h:inputText  id="invN"  value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1}"  
+                 disabled="false" >
+             </h:inputText>
+             </ui:decorate>
+             <ui:decorate id="amtinlabel" template="layout/edit.xhtml" >
+             <ui:define name="label">#{messages['Amount']} 
+             </ui:define>
+        	 <h:inputText style="font-weight:bold;color:blue;" id="amtIn" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.tempQuantity}"  
+                 onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xoxxuq284xwwqqhxxxxxcupdetailsHome.instance.z6xxzxxxavxxxxxxxxxxamountin}}:this.value;"
+                 disabled="false" >
+                 <p:ajax listener = "#{trexuq277xwwqqhxxxxxcpaymentHome.showtemprunt}"  event="keyup" render="matcodeDescriptDecoration,matcodePriceLabelT,matcodeTDecoration,matcodeDecorationmis,matcodeDecorationdelT,matcodeDecorationtax1T,matcodeDecorationtax2T" bypassUpdates="false"/>
+                 </h:inputText>
+             </ui:decorate>
+             <br></br> 
+
+                            <ui:decorate id="ydxxuznybvxxxxxxxxxxnotesDecoration" template="layout/edit.xhtml" rendered="true">
+                             <ui:define name="label">#{messages['Optional']} #{messages['notes']}/#{messages['comments']} #{messages['below']} (#{messages['if']} #{messages['needed']})
+                             </ui:define>
+                             <h:panelGrid>
+                              <h:inputTextarea id="tEdit" 
+                               cols="80"
+                               rows="3"
+                               pt:placeholder="#{messages['Please']} #{messages['note']} #{messages['that']} .... "
+                              value="#{fpxxfq1a5xwwqqhxxxxxitemHome.notesToPass}"/>
+                             </h:panelGrid>
+                            </ui:decorate>
+
+                            <h:commandButton id="AddToCart" styleClass="buttonMain"  rendered= "true"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToPayment(fpxxfq1a5xwwqqhxxxxxitemHome.instance,fpxxfq1a5xwwqqhxxxxxitemHome.instance.tempQuantity,'invoicecart')}" 
+                                 value="#{messages['Add']} #{messages['Invoice']} #{messages['to']} #{messages['pay']}">
+                            </h:commandButton>
+                           <ui:remove> send stmt to email     
+                            <h:commandButton id="AddToCartN" styleClass="buttonMain"  rendered= "true"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToPayment(fpxxfq1a5xwwqqhxxxxxitemHome.instance,fpxxfq1a5xwwqqhxxxxxitemHome.instance.tempQuantity,'invoicestmt')}" 
+                                 value="#{messages['send']} #{messages['invoice']} #{messages['statement']}">
+                              <f:param name="categoryJay" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1}" />
+                            </h:commandButton>
+                           </ui:remove>
+
+      </panelGroup>
+                <br></br><p:messages ajaxRendered="true"  />
+      <br></br>
+             <ui:fragment id="custemail2" template="layout/edit.xhtml" rendered="#{!identity.loggedIn }">
+             <h:outputText value="#{messages['email']} #{messages['address']}" style="font-weight:bold;color:blue;"/>
+        	 <h:inputText  label="email" id="em1b" value="#{customIdentity.imailaddr}" rendered="#{!identity.loggedIn }"
+                  pt:placeholder="email@xyz.com" />
+             </ui:fragment>
+
+     </p:panel>
+                            <p:popupPanel id="ipopup" modal="false" autosized="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="#{p:component('ipopup')}.hide(); return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=200" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdataTypeMime('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="#{p:component('ipopup')}.hide()"/>
+                            </p:popupPanel>
+    
+    <div class="actionButtons">    
+        <h:button outcome="/home.xhtml"
+                    id="done"
+                 value="#{messages['Done']}"/>
+        <h:button outcome="/invoicecart.xhtml"
+                    id="more"
+                 value="#{messages['More']}"/>
+        <h:panelGrid columns="3" >
+
+               <h:commandButton id="AddToCartPay" styleClass="buttonMain"  rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getCartInvoiceFor(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1).size() != null}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.renderPaymentout(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1)}" 
+                                 value="#{messages['Pay']}">
+                              <f:param name="categoryJay" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1}" />
+               </h:commandButton>
+<ui:remove>  
+              <h:link id="Cartb" outcome="/paymentout.xhtml" value="#{messages['Pay']} " propagation="none"   >
+               <h:graphicImage value="/img/Cpayment16.png" styleClass="pic"/>
+               <ui:remove> send invoice key not sid plus use a method to post and hide invoice info</ui:remove>
+               <f:param name="prefix" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartInvoiceFor(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1).size()==0?0:fpxxfq1a5xwwqqhxxxxxitemList.getCartInvoiceFor(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1).get(0).a0xxuobxbxxxxxxxxxxxsid}" />
+              </h:link>
+</ui:remove>
+              <p:panel id="jcountb">
+               <h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartInvoiceFor(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1).size()}]" rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartInvoiceFor(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1).size() gt 0}">
+               </h:outputText>
+               <h:outputText value="[Empty]" rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartInvoiceFor(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1).size() == null}"/>
+              </p:panel>
+        </h:panelGrid>
+
+    </div>
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

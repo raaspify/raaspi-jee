@@ -1,0 +1,72 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:c="http://java.sun.com/jsp/jstl/core"
+                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                 template="layout/rtemplateTh.xhtml">
+
+<ui:define name="title">#{messages['ContactUs-1_page_title']}</ui:define>
+
+<ui:define name="body">
+<!--                          toolbar                                     -->
+
+<h:form>    
+  <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-TOOLBA-M','TXT',0,1200) !=null}">
+   <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-TOOLBA-M','TXT',0,48000)}" 
+          >
+   </h:outputText>       
+  </ui:fragment>
+  <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-TOOLBA-M','TXT',0,1200) ==null}">
+      <div class = "btn-toolbar justify-content-between" role = "toolbar">
+         <div class = "btn-group ">
+              <h:outputText value="#{messages.common_notify}" style="font-size: medium;color: red"  /> 
+              <h:outputText value="#{messages.site_notify}" style="font-size: medium;color: red"/> 
+              <h:outputText value="#{messages.backOffice_notify}" rendered="#{identity.loggedIn}" style="font-size: medium;color: red"/> 
+
+         </div>
+         <div class = "btn-group ">
+              <h:outputText value="#{customIdentity.username}" rendered="#{identity.loggedIn }"/> 
+              <h:outputText value="&#160;&#160;"/>
+              <!-- Button to Open the Modal -->
+              <ui:fragment rendered="#{identity.loggedIn}">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                #{messages.prefs_change_password}
+              </button>
+              </ui:fragment>
+              <h:outputText value="&#160;&#160;"/>
+              <ui:remove> show fb only logout for situations where only fb login happened but not identiy login 
+              </ui:remove>
+              <h:link id="logoutfb" onclick="if (! confirm('Logout ?') ) { return false;}; Logout();return true;" value="Logout(FB)" rendered="#{!identity.loggedIn and customIdentity.smUid != null }"/>
+              <h:commandButton class="btn btn-primary" id="logout" onclick="Logout();" action="#{customIdentity.logout()}" value="Logout" rendered="#{identity.loggedIn}"/>
+
+              <h:outputText value="#{messages.Today} "/> 
+              &#160;<h:outputText value="#{authenticator.currcaldates}"/> 
+              &nbsp;<h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  outcome="/home.xhtml" />
+
+              &#160;<h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none"  rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0 }"  >
+               <h:graphicImage value="/img/Cart32.png" />
+              </h:link>
+              &#160;<h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()}]" rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0}">
+              </h:outputText>
+              <h:outputText value="[#{messages['empty']}]" rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() == 0}"/>
+         </div>
+      </div>
+ </ui:fragment>
+      <br></br>
+      <h:messages globalOnly="false" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+
+
+
+
+     <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','TXT',0,4096000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','TXT',0,12000) !=null)}"/>
+
+
+</h:form>
+
+</ui:define> 
+</ui:composition>
+

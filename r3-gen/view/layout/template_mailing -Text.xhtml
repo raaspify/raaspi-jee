@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:s="http://jboss.org/schema/seam/taglib"
+                xmlns:m="http://jboss.org/schema/seam/mail"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+      
+    <m:message>
+          <ui:repeat value="#{allRecipients} var="recipient">
+
+        <m:from name="#{yxxxuh56userHome.firstName} #{yxxxuh56userHome.lastName}" address="#{yxxxuh56userHome.eMailAddress}" />
+        <m:to name="#{recipient.firstName}">#{recipient.eMailAddress}</m:to>
+        <m:subject>#{subject}</m:subject>
+        <m:body>
+                    <ui:insert name="body">
+                        This is the default body, specified by the template.
+                    </ui:insert>
+        </m:body>
+           </ui:repeat>
+    </m:message>
+     
+
+</ui:composition>

@@ -1,0 +1,155 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="yxxxuq1r1xwwqqhxxxxxresourceA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1r1xwwqqhxxxxxresourceHome.yxxxuq1r1xwwqqhxxxxxresourceA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewAction action="#{yxxxuq1r1xwwqqhxxxxxresourceHome.restrict()}" />
+
+</f:metadata>
+                       
+<ui:define name="body">
+    <h:form id="yxxxuq1r1xwwqqhxxxxxresourceSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!yxxxuq1r1xwwqqhxxxxxresourceHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{yxxxuq1r1xwwqqhxxxxxresourceHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ResourceHelp']!='ResourceHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ResourceHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+         <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+    
+    <p:panel>
+        <h:panelGrid columns="10">
+        <f:facet name="header">resource</f:facet>
+            <ui:decorate id="a1xxuxxxbvxxxxxxxxxxvalue" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Value']}</ui:define>
+
+             #{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a1xxuxxxbvxxxxxxxxxxvalue}
+        </ui:decorate>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" switchType="client" collapsede="true"
+     toggleable="true" toggleableHeader="true">
+    <h:panelGrid columns="10">
+            <ui:decorate id="z3xxutoxlhxxxxxxxxxxownerDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner']}</ui:define>
+
+             <h:outputText value="#{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.z3xxutoxlhxxxxxxxxxxowner}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zixxzzfxhhxxxxxxxxxxstatusflDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Statusfl']}</ui:define>
+
+              <h:outputText value="#{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.zixxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(yxxxuq1r1xwwqqhxxxxxresourceHome.instance.zixxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(yxxxuq1r1xwwqqhxxxxxresourceHome.instance.zixxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid/waiting approval':( yxxxuq1r1xwwqqhxxxxxresourceHome.instance.zixxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped/approved': (yxxxuq1r1xwwqqhxxxxxresourceHome.instance.zixxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced/final approved':'new/other'))))}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl" />
+
+        </ui:decorate>
+            <ui:decorate id="zjxxcztxlxxxxxxxxxxxstatusfldtDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Statusfldt']}</ui:define>
+
+            <h:outputText value="#{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.zjxxcztxlxxxxxxxxxxxstatusfldt}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="zzxxu2oxxhxxxxxxxxxxowner2Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner2']}</ui:define>
+
+        </ui:decorate>
+   </h:panelGrid>
+   </p:panel>
+        <div style="clear:both"/>
+    </p:panel>
+    <div class="actionButtons">      
+
+        <h:button outcome="/resourceEdit.xhtml" 
+                    id="edit" 
+                    rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('SH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('IH')||customIdentity.hasRole('IQ') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}"
+                 value="Edit" styleClass="buttonMain"> 
+          <f:param name="from" value="Yxxxuq1r1xwwqqhxxxxxresourceList"/>
+          <f:param name="yxxxuq1r1xwwqqhxxxxxresourceA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1r1xwwqqhxxxxxresourceHome.yxxxuq1r1xwwqqhxxxxxresourceA0xxuobxbxxxxxxxxxxxsid}"/>
+        </h:button>
+    </div>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="false" rendered="#{yxxxuq1r1xwwqqhxxxxxresourceHome.managed}"
+     toggleable="true" toggleableHeader="true">
+ <div  style="overflow: auto;width: 850px;height: auto; ">
+
+  <p:tabView switchType="ajax">
+
+    <p:tab title="Parent #{messages['Resource_bundle']}">
+    <div class="association" id="yxxxuq1l1xwwqqhxxxxxresource_bundleParent">
+        
+        <h:outputText value="No resource_bundle" 
+                   rendered="#{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.yxxxuq1l1xwwqqhxxxxxresource_bundle == null}"/>
+        
+        <p:dataTable var="yxxxuq1l1xwwqqhxxxxxresource_bundle"  tableStyle="table-layout:auto;"
+                   value="#{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.yxxxuq1l1xwwqqhxxxxxresource_bundle}" 
+                rendered="#{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.yxxxuq1l1xwwqqhxxxxxresource_bundle != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="yxxxuq1l1xwwqqhxxxxxresource_bundleTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewyxxxuq1l1xwwqqhxxxxxresource_bundle" 
+                     value="View" 
+                      outcome="/resource_bundle.xhtml">
+                       <f:param disable="#{empty yxxxuq1l1xwwqqhxxxxxresource_bundle.a0xxuobxbxxxxxxxxxxxsid}" name="yxxxuq1l1xwwqqhxxxxxresource_bundleA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{yxxxuq1l1xwwqqhxxxxxresource_bundle.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">name</f:facet>
+                #{yxxxuq1l1xwwqqhxxxxxresource_bundle.a0xxukrdbvxxxxxxxxxxname}
+            </p:column>
+            <p:column>
+                <f:facet name="header">country</f:facet>
+                #{yxxxuq1l1xwwqqhxxxxxresource_bundle.a1xxuxxxbvxxxxxxxxxxcountry}
+            </p:column>
+            <p:column>
+                <f:facet name="header">language</f:facet>
+                #{yxxxuq1l1xwwqqhxxxxxresource_bundle.a1xxuxxxbvxxxxxxxxxxlanguage}
+            </p:column>
+            <p:column>
+                <f:facet name="header">variant</f:facet>
+                #{yxxxuq1l1xwwqqhxxxxxresource_bundle.a1xxuxxxbvxxxxxxxxxxvariant}
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                #{yxxxuq1l1xwwqqhxxxxxresource_bundle.z3xxutoxlhxxxxxxxxxxowner}
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                #{yxxxuq1l1xwwqqhxxxxxresource_bundle.zixxzzfxhhxxxxxxxxxxstatusfl}
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                #{yxxxuq1l1xwwqqhxxxxxresource_bundle.zjxxcztxlxxxxxxxxxxxstatusfldt}
+            </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+    </p:tabView>
+</div>        
+</p:panel>
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

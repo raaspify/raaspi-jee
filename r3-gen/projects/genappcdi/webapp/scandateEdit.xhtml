@@ -1,0 +1,306 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="xlrxuq1iixwwqqhexxxxscandateA0xxuobxbxxxxxxxxxxxsid" value="#{xlrxuq1iixwwqqhexxxxscandateHome.xlrxuq1iixwwqqhexxxxscandateA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="xlrxuq1iixwwqqhexxxxscandateFrom" value="#{xlrxuq1iixwwqqhexxxxscandateHome.xlrxuq1iixwwqqhexxxxscandateFrom}"/>
+    <f:viewAction action="#{xlrxuq1iixwwqqhexxxxscandateHome.restrict()}" />
+    <f:viewAction action="#{xlrxuq1iixwwqqhexxxxscandateHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Scandate']}</ui:define>
+
+<ui:define name="body">
+<h:form id="xlrxuq1iixwwqqhexxxxscandate" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("xlrxuq1iixwwqqhexxxxscandate:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!xlrxuq1iixwwqqhexxxxscandateHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{xlrxuq1iixwwqqhexxxxscandateHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ScandateEditHelp']!='ScandateEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ScandateEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{xlrxuq1iixwwqqhexxxxscandateHome.managed ? 'Edit' : 'Add'} #{messages['Scandate']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="a0xxukxrlvxxxxxxxxxxsdsatetimeofscanDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="a0xxukxrlvxxxxxxxxxxsdsatetimeofscan" value="#{messages['Sdsatetimeofscan']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxukxrlvxxxxxxxxxxsdsatetimeofscan" 
+                       label="sdsatetimeofscan"
+                        required="true"
+                        rendered="false"
+                           size="20"
+                      maxlength="25"
+                          value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.a0xxukxrlvxxxxxxxxxxsdsatetimeofscan}">
+
+         </h:inputText>
+            <p:tooltip for="a0xxukxrlvxxxxxxxxxxsdsatetimeofscan"> <span style="white-space: nowrap"> <h:outputText value="Value generated from Sub Key Fields.."/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+             <h:panelGroup id="b1xxcsxraxxxxxxxxxxxdatetimeofscanDecoration"    >
+        <h:outputLabel  for="b1xxcsxraxxxxxxxxxxxdatetimeofscan" value="#{messages['Datetimeofscan']}">
+      </h:outputLabel>
+     <p:datePicker id="b1xxcsxraxxxxxxxxxxxdatetimeofscan" 
+
+                          showTime="true" value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.b1xxcsxraxxxxxxxxxxxdatetimeofscan}" >
+                </p:datePicker>
+            </h:panelGroup>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z1xxcxxrlvxxxxxxxxxxlastdateDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z1xxcxxrlvxxxxxxxxxxlastdate" value="#{messages['Lastdate']}">
+      </h:outputLabel>
+     <p:datePicker id="z1xxcxxrlvxxxxxxxxxxlastdate" 
+
+                          showTime="true" value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.z1xxcxxrlvxxxxxxxxxxlastdate}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z1xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z1xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="z1xxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.z1xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z2xxcxxrlvxxxxxxxxxxbkupdateDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxcxxrlvxxxxxxxxxxbkupdate" value="#{messages['Bkupdate']}">
+      </h:outputLabel>
+     <p:datePicker id="z2xxcxxrlvxxxxxxxxxxbkupdate" 
+
+                          showTime="true" value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.z2xxcxxrlvxxxxxxxxxxbkupdate}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{xlrxuq1iixwwqqhexxxxscandateHome.instance.a0xxukxrlvxxxxxxxxxxsdsatetimeofscan} #{messages['sid']} #{xlrxuq1iixwwqqhexxxxscandateHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.a0xxukxrlvxxxxxxxxxxsdsatetimeofscan !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{xlrxuq1iixwwqqhexxxxscandateHome.persist()}"
+                       disabled="#{!xlrxuq1iixwwqqhexxxxscandateHome.wired}"
+                       rendered="#{!xlrxuq1iixwwqqhexxxxscandateHome.managed  and !xlrxuq1iixwwqqhexxxxscandateHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{xlrxuq1iixwwqqhexxxxscandateHome.update()}"
+                       rendered="#{xlrxuq1iixwwqqhexxxxscandateHome.managed  and !xlrxuq1iixwwqqhexxxxscandateHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{xlrxuq1iixwwqqhexxxxscandateHome.update()}"
+                       rendered="#{xlrxuq1iixwwqqhexxxxscandateHome.managed and xlrxuq1iixwwqqhexxxxscandateHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{xlrxuq1iixwwqqhexxxxscandateHome.remove()}"
+                       rendered="#{xlrxuq1iixwwqqhexxxxscandateHome.managed and !xlrxuq1iixwwqqhexxxxscandateHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/scandateEdit.xhtml"
+                       rendered="#{xlrxuq1iixwwqqhexxxxscandateHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{xlrxuq1iixwwqqhexxxxscandateHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{xlrxuq1iixwwqqhexxxxscandateHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{xlrxuq1iixwwqqhexxxxscandateList.reportName}"/>
+            <f:param name="displayAs" value="#{xlrxuq1iixwwqqhexxxxscandateList.displayAs}" /> 
+            <h:button outcome="/scandateList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Scandate']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty xlrxuq1iixwwqqhexxxxscandateHome.xlrxuq1iixwwqqhexxxxscandateFrom ? 'home' : xlrxuq1iixwwqqhexxxxscandateHome.xlrxuq1iixwwqqhexxxxscandateFrom}.xhtml"
+                rendered="#{xlrxuq1iixwwqqhexxxxscandateHome.managed or xlrxuq1iixwwqqhexxxxscandateHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty xlrxuq1iixwwqqhexxxxscandateHome.xlrxuq1iixwwqqhexxxxscandateFrom ? 'home' : xlrxuq1iixwwqqhexxxxscandateHome.xlrxuq1iixwwqqhexxxxscandateFrom}.xhtml"
+                rendered="#{!xlrxuq1iixwwqqhexxxxscandateHome.managed and !xlrxuq1iixwwqqhexxxxscandateHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

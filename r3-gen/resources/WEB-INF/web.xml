@@ -1,0 +1,164 @@
+<?xml version="1.0" ?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+   <!-- PrimeFaces  -->
+
+   <!-- Mime  -->
+    <mime-mapping>
+        <extension>csv</extension>
+        <mime-type>text/csv</mime-type>
+    </mime-mapping>
+
+
+<!-- session time out in mts, 10 increased to 40mts if loogedIn via customIdentity and userHome.loginFacebookUser -->
+
+  <session-config>
+    <session-timeout>10</session-timeout>
+  </session-config>
+ 
+
+<!-- Jasper servlet needed to render px image which is fixed size transparent used for spacing -->
+     <servlet>  
+        <servlet-name>ImageServlet</servlet-name>  
+        <servlet-class>net.sf.jasperreports.j2ee.servlets.ImageServlet</servlet-class>  
+     </servlet>  
+        <servlet-mapping>  
+        <servlet-name>ImageServlet</servlet-name>  
+        <url-pattern>/servlets/image</url-pattern>  
+        </servlet-mapping>   
+    <servlet>  
+        <servlet-name>ImageServletCdi</servlet-name>  
+        <servlet-class>com.rcomputer.genapp.action.ImageServletCdi</servlet-class>  
+    </servlet>  
+        <servlet-mapping>  
+        <servlet-name>ImageServletCdi</servlet-name>  
+        <url-pattern>/ImageServletCdi/*</url-pattern>  
+        </servlet-mapping>     
+    <servlet>  
+        <servlet-name>SitemapServletCdi</servlet-name>  
+        <servlet-class>com.rcomputer.genapp.action.SitemapServletCdi</servlet-class>  
+    </servlet>  
+        <servlet-mapping>  
+        <servlet-name>SitemapServletCdi</servlet-name>  
+        <url-pattern>/sitemap.xml</url-pattern>  
+        </servlet-mapping>     
+  
+
+<!-- Change to "Production" when you are ready to deploy -->
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Production</param-value>
+    </context-param>
+
+   <!-- JSF -->
+   <context-param>
+      <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+      <param-value>.xhtml</param-value>
+   </context-param>
+
+    <context-param>
+     <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+     <param-value>client</param-value>
+    </context-param>
+
+   <!-- HOSTING ENV default lo for local op openshift,aw for amazon aws, he for heroku-->
+   <context-param>
+      <param-name>hostingAt</param-name>
+      <param-value>lo</param-value>
+   </context-param>
+   <context-param>
+      <param-name>loggedTimeOut</param-name>
+      <param-value>40</param-value>
+   </context-param>
+
+
+   <servlet>
+      <servlet-name>Faces Servlet</servlet-name>
+      <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+      <load-on-startup>1</load-on-startup>
+   </servlet>
+
+   <servlet-mapping>
+      <servlet-name>Faces Servlet</servlet-name>
+      <url-pattern>*.wflow</url-pattern>
+   </servlet-mapping>
+
+   <security-constraint>
+      <display-name>Restrict raw XHTML Documents</display-name>
+      <web-resource-collection>
+         <web-resource-name>XHTML</web-resource-name>
+         <url-pattern>*.xhtml</url-pattern>
+      </web-resource-collection>
+      <auth-constraint/>
+   </security-constraint>
+
+   <!-- apr 25 2014 removed ejb-local-ref and persistenr-unit-ref which were commented out in any case -->
+
+
+   <!-- uncomment <ejb-local-ref> entries when deploying to GlassFish and (optionally) JBoss AS 5 -->
+   <!--
+   <ejb-local-ref>
+      <ejb-ref-name>genapp/AuthenticatorBean/local</ejb-ref-name>
+      <ejb-ref-type>Session</ejb-ref-type>
+      <local-home/>
+      <local>com.rcomputer.genapp.action.Authenticator</local>
+   </ejb-local-ref>
+   -->
+
+
+   <!-- Add entries for each EJB session bean which is also a r3 component (not required on JBoss AS)
+    mar26 2021 changed persistence-unit-name to genappcdi to match persistence.xml. Tomee uses this tag
+    -->
+
+   <persistence-unit-ref>
+      <persistence-unit-ref-name>genappcdi/pu</persistence-unit-ref-name>
+      <!-- The relative reference doesn't work on GlassFish. Instead, set the <persistence-unit-name> to "genapp",
+           package persistence.xml in the WAR, and add a <jar-file> element in persistence.xml with value "../../genapp.jar". -->
+      <persistence-unit-name>genappcdi</persistence-unit-name>
+   </persistence-unit-ref>
+
+
+
+    <!-- Redirect any 500 Error Code to /error.jsf   javax.el.ELException
+      use .html not xhtml to avoid message bundle not found.
+      entry here for ViewExpiredException does not stop trace entries so
+      CustomExceptionHandler bean was added via faces-config.xml and it also renders error-expired.html 
+      or error-exception.html
+
+   -->
+<error-page>
+    <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+    <location>/error-expired.html</location>
+</error-page>
+<error-page>
+    <exception-type>javax.el.ELException</exception-type>
+    <location>/error-exception.html</location>
+</error-page>
+<error-page>
+    <exception-type>javax.servlet.ServletException</exception-type>
+    <location>/error-exception.html</location>
+</error-page>
+<error-page>
+    <exception-type>java.lang.IllegalStateException</exception-type>
+    <location>/error-exception.html</location>
+</error-page>
+<error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/error-exception.html</location>
+</error-page>
+<!--500 server error, 404 page not found -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error-server.html</location>
+    </error-page>
+<error-page>
+    <error-code>404</error-code>
+    <location>/error-client.html</location>
+</error-page>
+
+
+
+
+</web-app>

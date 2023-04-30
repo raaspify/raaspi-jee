@@ -1,0 +1,462 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="xlrxeh675xwwqqhxxxxxcjournalA0xxuobxbxxxxxxxxxxxsid" value="#{xlrxeh675xwwqqhxxxxxcjournalHome.xlrxeh675xwwqqhxxxxxcjournalA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="xlrxeh675xwwqqhxxxxxcjournalFrom" value="#{xlrxeh675xwwqqhxxxxxcjournalHome.xlrxeh675xwwqqhxxxxxcjournalFrom}"/>
+    <f:viewAction action="#{xlrxeh675xwwqqhxxxxxcjournalHome.restrict()}" />
+    <f:viewAction action="#{xlrxeh675xwwqqhxxxxxcjournalHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Cjournal']}</ui:define>
+
+<ui:define name="body">
+<h:form id="xlrxeh675xwwqqhxxxxxcjournal" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("xlrxeh675xwwqqhxxxxxcjournal:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!xlrxeh675xwwqqhxxxxxcjournalHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{xlrxeh675xwwqqhxxxxxcjournalHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['CjournalEditHelp']!='CjournalEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['CjournalEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{xlrxeh675xwwqqhxxxxxcjournalHome.managed ? 'Edit' : 'Add'} #{messages['Cjournal']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="a0xxujpshvxxsxxxxxxxxpostdateDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="a0xxujpshvxxsxxxxxxxxpostdate" value="#{messages['Xpostdate']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxujpshvxxsxxxxxxxxpostdate" 
+                       label="xpostdate"
+                        required="true"
+                           size="20"
+                      maxlength="25"
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.a0xxujpshvxxsxxxxxxxxpostdate}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="b1xxcjpdhvxxxxxxxxxxpostdateDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="b1xxcjpdhvxxxxxxxxxxpostdate" value="#{messages['Postdate']}">
+      </h:outputLabel>
+     <p:datePicker id="b1xxcjpdhvxxxxxxxxxxpostdate" 
+
+                          showTime="true" value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.b1xxcjpdhvxxxxxxxxxxpostdate}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="b2xxcwcdhvxxxxxxxxxxcalendardtDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="b2xxcwcdhvxxxxxxxxxxcalendardt" value="#{messages['Calendardt']}">
+      </h:outputLabel>
+     <p:datePicker id="b2xxcwcdhvxxxxxxxxxxcalendardt" 
+
+                          showTime="true" value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.b2xxcwcdhvxxxxxxxxxxcalendardt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="2">
+
+             <h:panelGroup id="b3xxujjtbvxxxxxxxxxxjrnltypeDecoration"    >
+        <h:outputLabel  for="b3xxujjtbvxxxxxxxxxxjrnltype" value="#{messages['Jrnltype']}">
+      </h:outputLabel>
+
+         <h:inputText id="b3xxujjtbvxxxxxxxxxxjrnltype" 
+                           size="20"
+                      maxlength="12"
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.b3xxujjtbvxxxxxxxxxxjrnltype}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b4xxzjbxbvxxxxxxxxxxjnlseqbDecoration"    >
+        <h:outputLabel  for="b4xxzjbxbvxxxxxxxxxxjnlseqb" value="#{messages['Jnlseqb']}">
+      </h:outputLabel>
+
+         <h:inputText id="b4xxzjbxbvxxxxxxxxxxjnlseqb" 
+                           size="20"
+                      maxlength="15"
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.b4xxzjbxbvxxxxxxxxxxjnlseqb}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b5cczjsibvxxxxxxxxxxjnlseqDecoration"    >
+        <h:outputLabel  for="b5cczjsibvxxxxxxxxxxjnlseq" value="#{messages['Jnlseq']}">
+      </h:outputLabel>
+                <h:inputText id="b5cczjsibvxxxxxxxxxxjnlseq" 
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.b5cczjsibvxxxxxxxxxxjnlseq}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b6xxzjjsbvxxxxxxxxxxjnlseqsDecoration"    >
+        <h:outputLabel  for="b6xxzjjsbvxxxxxxxxxxjnlseqs" value="#{messages['Jnlseqs']}">
+      </h:outputLabel>
+
+         <h:inputText id="b6xxzjjsbvxxxxxxxxxxjnlseqs" 
+                           size="20"
+                      maxlength="15"
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.b6xxzjjsbvxxxxxxxxxxjnlseqs}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c1xxzwppbvpxxxxxxxxxperiodDecoration"    >
+        <h:outputLabel  for="c1xxzwppbvpxxxxxxxxxperiod" value="#{messages['Period']}">
+      </h:outputLabel>
+                <h:inputText id="c1xxzwppbvpxxxxxxxxxperiod" 
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.c1xxzwppbvpxxxxxxxxxperiod}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c4xxuxexbvxxxxxxxxxxcontrolDecoration"    >
+        <h:outputLabel  for="c4xxuxexbvxxxxxxxxxxcontrol" value="#{messages['Control']}">
+      </h:outputLabel>
+
+         <h:inputText id="c4xxuxexbvxxxxxxxxxxcontrol" 
+                           size="20"
+                      maxlength="20"
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.c4xxuxexbvxxxxxxxxxxcontrol}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="c5xxzwdxlvxxxxxxxxxxdebitDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="c5xxzwdxlvxxxxxxxxxxdebit" value="#{messages['Debit']}">
+      </h:outputLabel>
+      <h:inputText id="c5xxzwdxlvxxxxxxxxxxdebit"  
+         value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.c5xxzwdxlvxxxxxxxxxxdebit}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.c5xxzwdxlvxxxxxxxxxxdebit}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="c6xxzwrxlvxxxxxxxxxxcreditDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="c6xxzwrxlvxxxxxxxxxxcredit" value="#{messages['Credit']}">
+      </h:outputLabel>
+      <h:inputText id="c6xxzwrxlvxxxxxxxxxxcredit"  
+         value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.c6xxzwrxlvxxxxxxxxxxcredit}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.c6xxzwrxlvxxxxxxxxxxcredit}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c7xxuwfxrbvxxxxxxxxxxreferenceDecoration"    >
+        <h:outputLabel  for="c7xxuwfxrbvxxxxxxxxxxreference" value="#{messages['Xreference']}">
+      </h:outputLabel>
+
+         <h:inputText id="c7xxuwfxrbvxxxxxxxxxxreference" 
+                           size="20"
+                      maxlength="20"
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.c7xxuwfxrbvxxxxxxxxxxreference}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c8xxuzsxbvxxxxxxxxxxdescriptDecoration"    >
+        <h:outputLabel  for="c8xxuzsxbvxxxxxxxxxxdescript" value="#{messages['Descript']}">
+      </h:outputLabel>
+
+         <h:inputText id="c8xxuzsxbvxxxxxxxxxxdescript" 
+                           size="32"
+                      maxlength="120"
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.c8xxuzsxbvxxxxxxxxxxdescript}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z1xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z1xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="z1xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z2xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="z2xxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.z2xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{xlrxeh675xwwqqhxxxxxcjournalHome.instance.} #{messages['sid']} #{xlrxeh675xwwqqhxxxxxcjournalHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{xlrxeh675xwwqqhxxxxxcjournalHome.instance. !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{xlrxeh675xwwqqhxxxxxcjournalHome.persist()}"
+                       disabled="#{!xlrxeh675xwwqqhxxxxxcjournalHome.wired}"
+                       rendered="#{!xlrxeh675xwwqqhxxxxxcjournalHome.managed  and !xlrxeh675xwwqqhxxxxxcjournalHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{xlrxeh675xwwqqhxxxxxcjournalHome.update()}"
+                       rendered="#{xlrxeh675xwwqqhxxxxxcjournalHome.managed  and !xlrxeh675xwwqqhxxxxxcjournalHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{xlrxeh675xwwqqhxxxxxcjournalHome.update()}"
+                       rendered="#{xlrxeh675xwwqqhxxxxxcjournalHome.managed and xlrxeh675xwwqqhxxxxxcjournalHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{xlrxeh675xwwqqhxxxxxcjournalHome.remove()}"
+                       rendered="#{xlrxeh675xwwqqhxxxxxcjournalHome.managed and !xlrxeh675xwwqqhxxxxxcjournalHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/cjournalEdit.xhtml"
+                       rendered="#{xlrxeh675xwwqqhxxxxxcjournalHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{xlrxeh675xwwqqhxxxxxcjournalHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{xlrxeh675xwwqqhxxxxxcjournalHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{xlrxeh675xwwqqhxxxxxcjournalList.reportName}"/>
+            <f:param name="displayAs" value="#{xlrxeh675xwwqqhxxxxxcjournalList.displayAs}" /> 
+            <h:button outcome="/cjournalList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Cjournal']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty xlrxeh675xwwqqhxxxxxcjournalHome.xlrxeh675xwwqqhxxxxxcjournalFrom ? 'home' : xlrxeh675xwwqqhxxxxxcjournalHome.xlrxeh675xwwqqhxxxxxcjournalFrom}.xhtml"
+                rendered="#{xlrxeh675xwwqqhxxxxxcjournalHome.managed or xlrxeh675xwwqqhxxxxxcjournalHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty xlrxeh675xwwqqhxxxxxcjournalHome.xlrxeh675xwwqqhxxxxxcjournalFrom ? 'home' : xlrxeh675xwwqqhxxxxxcjournalHome.xlrxeh675xwwqqhxxxxxcjournalFrom}.xhtml"
+                rendered="#{!xlrxeh675xwwqqhxxxxxcjournalHome.managed and !xlrxeh675xwwqqhxxxxxcjournalHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

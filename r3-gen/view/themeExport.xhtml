@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:c="http://java.sun.com/jsp/jstl/core"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="layout/rtemplateUi.xhtml">
+<f:metadata>
+    <f:viewParam name="imail" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.imailaddr}"/>
+    <f:viewParam name="imailAlt" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.imailaddrAlt}"/>
+    <f:viewParam name="poSid" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.valueOverRide}"/>
+    <f:viewParam name="themeFrom" value="#{skinBean.holdValue3}"/>
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemList.setCategory(0)}"/>
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemHome.restrict()}" />
+</f:metadata>
+
+<ui:define name="title">#{messages['ThemesBrowse_page_title']}</ui:define>
+<ui:define name="body">
+<h:form id="uploadForm" enctype="multipart/form-data"> 
+
+    <ui:remove>
+     Not Generated. Allows exporting to csv file containing one theme or a group of themes for a theme gallery.
+     Export allows csv text data to be sql inserted into the following tables.
+     item record with type SI-D contains theme description and subcodesn has TH and subcodesn3 has theme 
+     category/name
+     clob records with keys corresponding the html page or sections, conrain html images url and css styles and 
+     sample text.
+     blob records with keys corresponding to the image urls.
+     binary data is in base64 text and needs to be converted back to binary by Import logic.
+ 
+     called by  menu Tools>Import theme to theme gallery .
+     There is a corresponding export which is used by the theme creator or vendor to export a theme gallery content as
+     csv file which can be downloaded for use for a new master site using RAASPI frame work.
+     we have a few options to replace richfaces fileUpload.
+     1. Without jsf, then we will use html5 input tag type file and a servlet defined in web.xml for fileupload. But this 
+      will also mean using js and rest api endponts to update html pages from server data.
+     2. Continue to use jsf and use use h:inputFile which renders html5 and use existing jsf sevlet cdi beans methods.
+     We are opting for option 2 using jsf. There is a separate initiative to migrate Raaspi to node.js.
+     3. With jsf, we can also use omnifaces o:inputFile which uses option 2 but adds more functions
+   
+    </ui:remove>
+    <h:panelGrid columns="2">
+     <p:panel>
+      <h:panelGrid columns="4">
+            <h:panelGrid columns="1">
+             <h:graphicImage value="/img/Designview_256.png" height="50">
+             </h:graphicImage>
+             <h:graphicImage value="/img/Designview_256.png" height="50">
+             </h:graphicImage>
+            </h:panelGrid>&nbsp;
+            <h:graphicImage value="/img/Search_256.png" height="50">
+            </h:graphicImage>
+            <h:graphicImage value="/img/Photos_256.png" height="100">
+            </h:graphicImage>
+      </h:panelGrid>
+     </p:panel>
+        <h:outputText value="#{messages.theme} #{messages.Gallery} - #{messages['for']} #{messages.visitor} #{messages.pages}"/>
+        <h:panelGrid columns="6">
+         <h:outputLabel  for="contentThememd" value="#{messages['Theme']} #{messages['Gallery']} #{messages['Name']}" rendered="true">
+         </h:outputLabel>
+                <h:panelGroup>
+                 <h:selectOneMenu  id="contentThememd" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.contentTheme}" 
+                  rendered="true">
+                    <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{fpxxfq1a5xwwqqhxxxxxitemList.getThemeCatAndSubBrowseList()}" var="result"
+                     itemValue="#{result.a0xxukixbxxxxxxxxxxxmatcode}" itemLabel="#{result.b1xxuszsbvxxxxxxxxxxdescript}" />
+                 </h:selectOneMenu>
+                 &nbsp;<h:commandButton id="setTheme" 
+                   value="#{messages['Validate']} #{messages['theme']} #{messages['gallery']} #{messages['selection']}" 
+                   action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.setContentThemeAndVendor(yxxxuq1m1xwwqqqxxxxxclobdataHome.contentTheme)}"/>
+                </h:panelGroup>
+      </h:panelGrid>
+    </h:panelGrid>
+
+    <h:messages globalOnly="true" styleClass="message"/>
+<div class="item-wrapper one">
+    <div class="item">
+    <!-- exportCsvData(,, SI=L1,TH  )  > exportItemClobCsvData > exportClobBlobCsvData   -->
+         <h:commandButton id="exportcsv"  value="#{messages['export']}"  action="#{fpxxfq1a5xwwqqhxxxxxitemHome.exportCsvData(yxxxuq1m1xwwqqqxxxxxclobdataHome.contentTheme,'csv','SI-L1','TH',customIdentity.owner,'')}" 
+             update="exportcsv,globalMessages" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.maxResultsVal lt 49}">
+         </h:commandButton>
+         &nbsp;&nbsp;&nbsp;<h:button outcome="/home.xhtml"
+                    id="done"
+                 value="Done"/>
+
+
+    </div>
+    <!-- tbd input for themeCategory SI=L1 item-->
+</div>
+
+</h:form>
+
+</ui:define> 
+
+</ui:composition>
+

@@ -1,0 +1,896 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="nxxxiha4rxwwqqhxxxxxgenfieldsA0xxuobxbxxxxxxxxxxxsid" value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.nxxxiha4rxwwqqhxxxxxgenfieldsA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="nxxxiha4rxwwqqhxxxxxgenfieldsFrom" value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.nxxxiha4rxwwqqhxxxxxgenfieldsFrom}"/>
+    <f:viewAction action="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.restrict()}" />
+    <f:viewAction action="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Genfields']}</ui:define>
+
+<ui:define name="body">
+<h:form id="nxxxiha4rxwwqqhxxxxxgenfields" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("nxxxiha4rxwwqqhxxxxxgenfields:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!nxxxiha4rxwwqqhxxxxxgenfieldsHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['GenfieldsEditHelp']!='GenfieldsEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['GenfieldsEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.managed ? 'Edit' : 'Add'} #{messages['Genfields']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <p:tabView switchType="client" >
+           <p:tab title="#{messages['Gendb']}"
+             rendered="true">
+           <ui:decorate id="nxxxiha2rxwwqqhxxxxxgendbDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Gendb']} 
+            </ui:define>
+                <p:remoteCommand name="nxxxiha2rxwwqqhxxxxxgendbFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="nxxxiha2rxwwqqhxxxxxgendbsm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.validateAndSelectXxxxxxxxdbname}" 
+                   value="#{nxxxiha2rxwwqqhxxxxxgendbHome.lastnxxxiha2rxwwqqhxxxxxgendbP}" onchange="nxxxiha2rxwwqqhxxxxxgendbFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{nxxxiha2rxwwqqhxxxxxgendbList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+           <p:tab title="#{messages['Gentable']}"
+             rendered="true">
+           <ui:decorate id="nxxxiha3rxwwqqhxxxxxgentableDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Gentable']} 
+            </ui:define>
+                <p:remoteCommand name="nxxxiha3rxwwqqhxxxxxgentableFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="nxxxiha3rxwwqqhxxxxxgentablesm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.validateAndSelectXxxxxxxxtablename}" 
+                   value="#{nxxxiha3rxwwqqhxxxxxgentableHome.lastnxxxiha3rxwwqqhxxxxxgentableP}" onchange="nxxxiha3rxwwqqhxxxxxgentableFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{nxxxiha3rxwwqqhxxxxxgentableList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+
+
+
+
+
+   </p:tabView>
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a0xxukxxbxxxxxxxxxxxfieldnameDecoration"    >
+        <h:outputLabel  for="a0xxukxxbxxxxxxxxxxxfieldname" value="#{messages['Fieldname']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxukxxbxxxxxxxxxxxfieldname" 
+           validator="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.validateKeyDuplicateFieldname}" 
+                       label="fieldname"
+                        required="true"
+                           size="20"
+                      maxlength="60"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.a0xxukxxbxxxxxxxxxxxfieldname}">
+
+         </h:inputText>
+            <p:tooltip  target="a0xxukxxbxxxxxxxxxxxfieldname"> <span style="white-space: nowrap"> <h:outputText value="Enter Value here"/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b2xxgxxxbv08xxxxxxxxingroupDecoration"    >
+        <h:outputLabel  for="b2xxgxxxbv08xxxxxxxxingroup" value="#{messages['Ingroup']}">
+      </h:outputLabel>
+                  <h:selectOneMenu style="width:250px;"  value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.b2xxgxxxbv08xxxxxxxxingroup}" required="false" id="b2xxgxxxbv08xxxxxxxxingroup">
+                        <f:ajax  render="b2xxgxxxbv08xxxxxxxxingroupI" bypassUpdates="false"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="" />
+                       <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('a4',08)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+                  </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b2xxgxxxbv10xxxxxxxxfieldlengthDecoration"    >
+        <h:outputLabel  for="b2xxgxxxbv10xxxxxxxxfieldlength" value="#{messages['Fieldlength']}">
+      </h:outputLabel>
+                  <h:selectOneMenu style="width:250px;"  value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.b2xxgxxxbv10xxxxxxxxfieldlength}" required="false" id="b2xxgxxxbv10xxxxxxxxfieldlength">
+                        <f:ajax  render="b2xxgxxxbv10xxxxxxxxfieldlengthI" bypassUpdates="false"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="" />
+                       <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('a4',10)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+                  </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b2xxgxxxbvxxxxxxxxxxfieldtypeDecoration"    >
+        <h:outputLabel  for="b2xxgxxxbvxxxxxxxxxxfieldtype" value="#{messages['Fieldtype']}">
+      </h:outputLabel>
+
+         <h:inputText id="b2xxgxxxbvxxxxxxxxxxfieldtype" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.b2xxgxxxbvxxxxxxxxxxfieldtype}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b3xxgxxxbv09xxxxxxxxseqwithingroupDecoration"    >
+        <h:outputLabel  for="b3xxgxxxbv09xxxxxxxxseqwithingroup" value="#{messages['Seqwithingroup']}">
+      </h:outputLabel>
+                <h:inputText id="b3xxgxxxbv09xxxxxxxxseqwithingroup" 
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.b3xxgxxxbv09xxxxxxxxseqwithingroup}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b4xxgxxxbv10xxxxxxxxfocusseqDecoration"    >
+        <h:outputLabel  for="b4xxgxxxbv10xxxxxxxxfocusseq" value="#{messages['Focusseq']}">
+      </h:outputLabel>
+                <h:inputText id="b4xxgxxxbv10xxxxxxxxfocusseq" 
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.b4xxgxxxbv10xxxxxxxxfocusseq}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c1xxuxxxbvxxxxxxxxxxfuture1Decoration"    >
+        <h:outputLabel  for="c1xxuxxxbvxxxxxxxxxxfuture1" value="#{messages['Future1']}">
+      </h:outputLabel>
+
+         <h:inputText id="c1xxuxxxbvxxxxxxxxxxfuture1" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.c1xxuxxxbvxxxxxxxxxxfuture1}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c2xxgxxxbv12xxxxxxxxinitialvalueDecoration"    >
+        <h:outputLabel  for="c2xxgxxxbv12xxxxxxxxinitialvalue" value="#{messages['Initialvalue']}">
+      </h:outputLabel>
+                  <h:selectOneMenu style="width:250px;"  value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.c2xxgxxxbv12xxxxxxxxinitialvalue}" required="false" id="c2xxgxxxbv12xxxxxxxxinitialvalue">
+                        <f:ajax  render="c2xxgxxxbv12xxxxxxxxinitialvalueI" bypassUpdates="false"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="" />
+                       <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('a4',12)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+                  </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="d1xxgxxxbv13xxxxxxxxkeyoradditionalDecoration"    >
+        <h:outputLabel  for="d1xxgxxxbv13xxxxxxxxkeyoradditional" value="#{messages['Keyoradditional']}">
+      </h:outputLabel>
+                  <h:selectOneMenu style="width:250px;"  value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.d1xxgxxxbv13xxxxxxxxkeyoradditional}" required="false" id="d1xxgxxxbv13xxxxxxxxkeyoradditional">
+                        <f:ajax  render="d1xxgxxxbv13xxxxxxxxkeyoradditionalI" bypassUpdates="false"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="" />
+                       <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('a4',13)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+                  </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="d2xxgxxxbv14xxxxxxxxkeyoradditional2Decoration"    >
+        <h:outputLabel  for="d2xxgxxxbv14xxxxxxxxkeyoradditional2" value="#{messages['Keyoradditional2']}">
+      </h:outputLabel>
+                  <h:selectOneMenu style="width:250px;"  value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.d2xxgxxxbv14xxxxxxxxkeyoradditional2}" required="false" id="d2xxgxxxbv14xxxxxxxxkeyoradditional2">
+                        <f:ajax  render="d2xxgxxxbv14xxxxxxxxkeyoradditional2I" bypassUpdates="false"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="" />
+                       <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('a4',14)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+                  </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="d3xxgxxxbv15xxxxxxxxkeyoradditional3Decoration"    >
+        <h:outputLabel  for="d3xxgxxxbv15xxxxxxxxkeyoradditional3" value="#{messages['Keyoradditional3']}">
+      </h:outputLabel>
+                  <h:selectOneMenu style="width:250px;"  value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.d3xxgxxxbv15xxxxxxxxkeyoradditional3}" required="false" id="d3xxgxxxbv15xxxxxxxxkeyoradditional3">
+                        <f:ajax  render="d3xxgxxxbv15xxxxxxxxkeyoradditional3I" bypassUpdates="false"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="" />
+                       <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('a4',15)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+                  </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="e1xxgxxxbv16xxxxxxxxshowinmenuDecoration"    >
+        <h:outputLabel  for="e1xxgxxxbv16xxxxxxxxshowinmenu" value="#{messages['Showinmenu']}">
+      </h:outputLabel>
+                  <h:selectOneMenu style="width:250px;"  value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.e1xxgxxxbv16xxxxxxxxshowinmenu}" required="false" id="e1xxgxxxbv16xxxxxxxxshowinmenu">
+                        <f:ajax  render="e1xxgxxxbv16xxxxxxxxshowinmenuI" bypassUpdates="false"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="" />
+                       <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('a4',16)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+                  </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="e2xxgxxxbv17xxxxxxxxshowinreportDecoration"    >
+        <h:outputLabel  for="e2xxgxxxbv17xxxxxxxxshowinreport" value="#{messages['Showinreport']}">
+      </h:outputLabel>
+                  <h:selectOneMenu style="width:250px;"  value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.e2xxgxxxbv17xxxxxxxxshowinreport}" required="false" id="e2xxgxxxbv17xxxxxxxxshowinreport">
+                        <f:ajax  render="e2xxgxxxbv17xxxxxxxxshowinreportI" bypassUpdates="false"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="" />
+                       <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('a4',17)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+                  </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f1xxgxxxbv18xxxxxxxxprocessoption1Decoration"    >
+        <h:outputLabel  for="f1xxgxxxbv18xxxxxxxxprocessoption1" value="#{messages['Processoption1']}">
+      </h:outputLabel>
+                  <h:selectOneMenu style="width:250px;"  value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.f1xxgxxxbv18xxxxxxxxprocessoption1}" required="false" id="f1xxgxxxbv18xxxxxxxxprocessoption1">
+                        <f:ajax  render="f1xxgxxxbv18xxxxxxxxprocessoption1I" bypassUpdates="false"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="" />
+                       <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('a4',18)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+                  </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f2xxuxxxbvxxxxxxxxxxprocessoption2Decoration"    >
+        <h:outputLabel  for="f2xxuxxxbvxxxxxxxxxxprocessoption2" value="#{messages['Processoption2']}">
+      </h:outputLabel>
+
+         <h:inputText id="f2xxuxxxbvxxxxxxxxxxprocessoption2" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.f2xxuxxxbvxxxxxxxxxxprocessoption2}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f3xxuhxxbvxxxxxxxxxxfdbcodeDecoration"    >
+        <h:outputLabel  for="f3xxuhxxbvxxxxxxxxxxfdbcode" value="#{messages['Fdbcode']}">
+      </h:outputLabel>
+
+         <h:inputText id="f3xxuhxxbvxxxxxxxxxxfdbcode" 
+                           size="20"
+                      maxlength="40"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.f3xxuhxxbvxxxxxxxxxxfdbcode}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f4xxuhxxbvxxxxxxxxxxftablenameDecoration"    >
+        <h:outputLabel  for="f4xxuhxxbvxxxxxxxxxxftablename" value="#{messages['Ftablename']}">
+      </h:outputLabel>
+
+         <h:inputText id="f4xxuhxxbvxxxxxxxxxxftablename" 
+                           size="20"
+                      maxlength="60"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.f4xxuhxxbvxxxxxxxxxxftablename}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f6xxuxxxbvxxxxxxxxxxffieldkeyname1Decoration"    >
+        <h:outputLabel  for="f6xxuxxxbvxxxxxxxxxxffieldkeyname1" value="#{messages['Ffieldkeyname1']}">
+      </h:outputLabel>
+
+         <h:inputText id="f6xxuxxxbvxxxxxxxxxxffieldkeyname1" 
+                           size="20"
+                      maxlength="60"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.f6xxuxxxbvxxxxxxxxxxffieldkeyname1}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f6xxuxxxbvxxxxxxxxxxffieldkeyname2Decoration"    >
+        <h:outputLabel  for="f6xxuxxxbvxxxxxxxxxxffieldkeyname2" value="#{messages['Ffieldkeyname2']}">
+      </h:outputLabel>
+
+         <h:inputText id="f6xxuxxxbvxxxxxxxxxxffieldkeyname2" 
+                           size="20"
+                      maxlength="60"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.f6xxuxxxbvxxxxxxxxxxffieldkeyname2}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f6xxuxxxbvxxxxxxxxxxffieldkeyname3Decoration"    >
+        <h:outputLabel  for="f6xxuxxxbvxxxxxxxxxxffieldkeyname3" value="#{messages['Ffieldkeyname3']}">
+      </h:outputLabel>
+
+         <h:inputText id="f6xxuxxxbvxxxxxxxxxxffieldkeyname3" 
+                           size="20"
+                      maxlength="60"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.f6xxuxxxbvxxxxxxxxxxffieldkeyname3}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zexxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="zexxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="zexxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.zexxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="zfxxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zfxxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="zfxxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.zfxxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="zgxxuxznbvxxxxxxxxxxnotesDecoration"  rendered="true">
+        <h:outputLabel  for="zgxxuxznbvxxxxxxxxxxnotes" value="#{messages['Notes']}">
+      </h:outputLabel>
+
+         <h:inputText id="zgxxuxznbvxxxxxxxxxxnotes" 
+                           size="20"
+                      maxlength="60"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.zgxxuxznbvxxxxxxxxxxnotes}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zhxxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zhxxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="zhxxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.zhxxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.a0xxukxxbxxxxxxxxxxxfieldname} #{messages['sid']} #{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.a0xxukxxbxxxxxxxxxxxfieldname !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.persist()}"
+                       disabled="#{!nxxxiha4rxwwqqhxxxxxgenfieldsHome.wired}"
+                       rendered="#{!nxxxiha4rxwwqqhxxxxxgenfieldsHome.managed  and !nxxxiha4rxwwqqhxxxxxgenfieldsHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.update()}"
+                       rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.managed  and !nxxxiha4rxwwqqhxxxxxgenfieldsHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.update()}"
+                       rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.managed and nxxxiha4rxwwqqhxxxxxgenfieldsHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.remove()}"
+                       rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.managed and !nxxxiha4rxwwqqhxxxxxgenfieldsHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/genfieldsEdit.xhtml"
+                       rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{nxxxiha4rxwwqqhxxxxxgenfieldsList.reportName}"/>
+            <f:param name="displayAs" value="#{nxxxiha4rxwwqqhxxxxxgenfieldsList.displayAs}" /> 
+            <h:button outcome="/genfieldsList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Genfields']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty nxxxiha4rxwwqqhxxxxxgenfieldsHome.nxxxiha4rxwwqqhxxxxxgenfieldsFrom ? 'home' : nxxxiha4rxwwqqhxxxxxgenfieldsHome.nxxxiha4rxwwqqhxxxxxgenfieldsFrom}.xhtml"
+                rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.managed or nxxxiha4rxwwqqhxxxxxgenfieldsHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty nxxxiha4rxwwqqhxxxxxgenfieldsHome.nxxxiha4rxwwqqhxxxxxgenfieldsFrom ? 'home' : nxxxiha4rxwwqqhxxxxxgenfieldsHome.nxxxiha4rxwwqqhxxxxxgenfieldsFrom}.xhtml"
+                rendered="#{!nxxxiha4rxwwqqhxxxxxgenfieldsHome.managed and !nxxxiha4rxwwqqhxxxxxgenfieldsHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="true" rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" toggleable="true" toggleableHeader="true">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+  <p:tabView switchType="ajax">
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Gendb']}">
+    <div class="association" id="nxxxiha2rxwwqqhxxxxxgendbParent">
+        
+        <h:outputText value="No gendb" 
+                   rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.nxxxiha2rxwwqqhxxxxxgendb == null}"/>
+        
+        <p:dataTable var="nxxxiha2rxwwqqhxxxxxgendb" tableStyle="table-layout:auto;"
+                   value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.nxxxiha2rxwwqqhxxxxxgendb}" 
+                rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.nxxxiha2rxwwqqhxxxxxgendb != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="nxxxiha2rxwwqqhxxxxxgendbTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewgendb" 
+                     value="View" 
+                      outcome="/gendb.xhtml">
+                       <f:param disable="#{empty nxxxiha2rxwwqqhxxxxxgendb.a0xxuobxbxxxxxxxxxxxsid}" name="nxxxiha2rxwwqqhxxxxxgendbA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{nxxxiha2rxwwqqhxxxxxgendb.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">dbname</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.a0xxukxxbvxxxxxxxxxxdbname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">dbtype</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.a1xxfxxxbvxxxxxxxxxxdbtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.a1xxfxxxbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">dbxxxxxxxxvendor</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.a2xxfxxxbvxxxxxxxxxxdbxxxxxxxxvendor}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">dbplatform</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.a3xxfxxxbvxxxxxxxxxxdbplatform}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">dbversion</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.a3xxfxxxbvxxxxxxxxxxdbversion}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sqldriver</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.a6xxfxxxbvxxxxxxxxxxsqldriver}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sqlurl</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.a7xxfxxxbvxxxxxxxxxxsqlurl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sqluser</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.a8xxfxxxbvxxxxxxxxxxsqluser}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sqlpassword</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.a9xxfxxxbvxxxxxxxxxxsqlpassword}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sqlclasspath</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.b0xxfxxxbvxxxxxxxxxxsqlclasspath}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sqlcreatedbscript</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.b1xxfxxxbvxxxxxxxxxxsqlcreatedbscript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sqldropdbscript</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.b2xxfxxxbvxxxxxxxxxxsqldropdbscript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sqlcreatetblsscript</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.b3xxfxxxbvxxxxxxxxxxsqlcreatetblsscript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sqlloadtblsscript</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.b4xxfxxxbvxxxxxxxxxxsqlloadtblsscript}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">genapp sid</f:facet>
+		    	  #{nxxxiha2rxwwqqhxxxxxgendb.nxxxiha1rxwwqqhxxxxxgenapp.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.zexxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.zfxxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{nxxxiha2rxwwqqhxxxxxgendb.zhxxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Gentable']}">
+    <div class="association" id="nxxxiha3rxwwqqhxxxxxgentableParent">
+        
+        <h:outputText value="No gentable" 
+                   rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.nxxxiha3rxwwqqhxxxxxgentable == null}"/>
+        
+        <p:dataTable var="nxxxiha3rxwwqqhxxxxxgentable" tableStyle="table-layout:auto;"
+                   value="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.nxxxiha3rxwwqqhxxxxxgentable}" 
+                rendered="#{nxxxiha4rxwwqqhxxxxxgenfieldsHome.instance.nxxxiha3rxwwqqhxxxxxgentable != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="nxxxiha3rxwwqqhxxxxxgentableTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewgentable" 
+                     value="View" 
+                      outcome="/gentable.xhtml">
+                       <f:param disable="#{empty nxxxiha3rxwwqqhxxxxxgentable.a0xxuobxbxxxxxxxxxxxsid}" name="nxxxiha3rxwwqqhxxxxxgentableA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{nxxxiha3rxwwqqhxxxxxgentable.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">tablename</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.a0xxukxxbvxxxxxxxxxxtablename}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inaddmenu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.a2xxfxxxbvxxxxxxxxxxinaddmenu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inlistmenu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.a3xxfxxxbvxxxxxxxxxxinlistmenu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">intransactionmenu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.a4xxfxxxbvxxxxxxxxxxintransactionmenu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inreportmenu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.a5xxfxxrbvxxxxxxxxxxinreportmenu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">ingraphsmenu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.a6xxfxxrbvxxxxxxxxxxingraphsmenu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inmailingmenu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.a7xxfxxrbvxxxxxxxxxxinmailingmenu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">ingeneratemenu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.a8xxfxxrbvxxxxxxxxxxingeneratemenu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inadminmenu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.a9xxfxxrbvxxxxxxxxxxinadminmenu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inmaintenancemenu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.aaxxfxxrbvxxxxxxxxxxinmaintenancemenu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inlabelsmenu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.abxxfxxrbvxxxxxxxxxxinlabelsmenu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inskipmenu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.acxxfxxrbvxxxxxxxxxxinskipmenu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">incustom1menu</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.adxxfxxrbvxxxxxxxxxxincustom1menu}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">menulevel</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.b1xxgxxxbv01xxxxxxxxmenulevel}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">menurole</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.c1xxgxxxbv02xxxxxxxxmenurole}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">menulabelgroup</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.d1xxgxxxbv03xxxxxxxxmenulabelgroup}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">submenusequence</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.d2xxgxxxbv04xxxxxxxxsubmenusequence}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">usagescope</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.d4xxgxxxbv04xxxxxxxxusagescope}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">gendb sid</f:facet>
+		    	  #{nxxxiha3rxwwqqhxxxxxgentable.nxxxiha2rxwwqqhxxxxxgendb.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.zexxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.zfxxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{nxxxiha3rxwwqqhxxxxxgentable.zhxxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

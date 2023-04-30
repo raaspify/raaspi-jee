@@ -1,0 +1,347 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="yxxxch621xwwqqhxxxxxacperiodA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxch621xwwqqhxxxxxacperiodHome.yxxxch621xwwqqhxxxxxacperiodA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{yxxxch621xwwqqhxxxxxacperiodList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal}"/>
+    <f:viewAction action="#{yxxxch621xwwqqhxxxxxacperiodHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Acperiod']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="yxxxch621xwwqqhxxxxxacperiodSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']}" propagation="end"  outcome="/home.xhtml" />
+             <p:ajaxStatus name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['AcperiodListHelp']!='AcperiodListHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['AcperiodListHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+
+ <p:panel style="width: 50%;" header="#{messages['Acperiod']}- #{messages['List']} #{messages['Search']} #{messages['Result']}, #{messages['click']} #{messages['to']} #{messages['change']} #{messages['search']}  #{messages['criteria']}" switchType="ajax" collapsed="true"
+     toggleable="true" toggleableHeader="true">
+
+<h:panelGrid columns="20">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{yxxxch621xwwqqhxxxxxacperiodList.searchVal}"/>
+ </ui:decorate>
+  <h:outputText id="searchVJ" value="#{yxxxch621xwwqqhxxxxxacperiodList.searchValJ}" rendered="#{yxxxch621xwwqqhxxxxxacperiodList.searchVal.isEmpty()}"/>
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText id="toDay" ph:type="date" value="#{yxxxch621xwwqqhxxxxxacperiodList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <h:commandButton id="setToday" render="toDay" value="#{messages['set']} #{messages['Today']}"   action="#{yxxxch621xwwqqhxxxxxacperiodList.setSearchDate(yxxxch621xwwqqhxxxxxacperiodHome.currentTime)}" />
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label"> #{messages['status']}  </ui:define>
+  <h:panelGrid columns="2" >
+         <h:selectOneMenu value="#{yxxxch621xwwqqhxxxxxacperiodList.searchStatus}"> 
+          <f:selectItem itemLabel="all" itemValue="#{null}"/>
+          <f:selectItem itemLabel="open" itemValue="0"/>
+          <f:selectItem itemLabel="active/ordered" itemValue="1"/>
+           <f:selectItem itemLabel="return" itemValue="4"/>
+          <f:selectItem itemLabel="closed" itemValue="8"/>
+           <f:selectItem itemLabel="paid" itemValue="16"/>
+           <f:selectItem itemLabel="partial/shipped" itemValue="32"/>
+           <f:selectItem itemLabel="printed/final approved" itemValue="512"/>
+          <f:selectItem itemLabel="marked" itemValue="128"/>
+          <f:selectItem itemLabel="deleted" itemValue="256"/>
+         </h:selectOneMenu>
+  </h:panelGrid>
+ </ui:decorate>
+</h:panelGrid>
+
+
+
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{yxxxch621xwwqqhxxxxxacperiodList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{yxxxch621xwwqqhxxxxxacperiodList.suggest(yxxxch621xwwqqhxxxxxacperiodHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{yxxxch621xwwqqhxxxxxacperiodList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{yxxxch621xwwqqhxxxxxacperiodList.suggest(yxxxch621xwwqqhxxxxxacperiodHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="yxxxch621xwwqqhxxxxxacperiodList,globalMessages" status="buttonStatus" value="#{messages['Search']}" 
+              actionListener="#{yxxxch621xwwqqhxxxxxacperiodList.getFirstResult()}" rendered="#{yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal lt 49}"/>
+            &nbsp;<h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</p:panel>
+
+    <p:panel>
+
+        <div class="actionButtons">
+             <h:commandButton id="copyallt" value="Copy All Flagged"  action="#{yxxxch621xwwqqhxxxxxacperiodHome.copyAllMarked()}" 
+                rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal lt 49}" status="buttonStatus"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+             <h:commandButton id="deleteallt" value="#{messages['Delete']} #{messages['All']} #{messages['Flagged']}"  action="#{yxxxch621xwwqqhxxxxxacperiodHome.deleteAllFlagged()}"
+              onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal lt 49}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Deletes']} #{messages['detail']} #{messages['records']} #{messages['as-well']},#{messages['but']} #{messages['not']} #{messages['all']} #{messages['constraints']}"/></span> </p:tooltip> 
+             </h:commandButton>
+             <h:commandButton id="updateallt" value="Update All Flagged"  rendered="false" action="#{yxxxch621xwwqqhxxxxxacperiodHome.updateAllFlagged()}" />
+             <h:commandButton id="emailIcal" value="#{messages['email']} #{messages['as']} #{messages['iCalendar']}"  rendered="false" action="#{yxxxch621xwwqqhxxxxxacperiodHome.writeAsIcalText()}"/>
+
+            <h:button outcome="/#{empty yxxxch621xwwqqhxxxxxacperiodFrom ? 'home' : yxxxch621xwwqqhxxxxxacperiodFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <ui:remove>  do not render list page once > 50 rows  to avoid excedding max http params </ui:remove>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{yxxxch621xwwqqhxxxxxacperiodList.setMaxResultsVal(6)}" rendered="#{yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{yxxxch621xwwqqhxxxxxacperiodList.setMaxResultsVal(50)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{yxxxch621xwwqqhxxxxxacperiodList.setMaxResultsVal(100)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal lt 49}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{yxxxch621xwwqqhxxxxxacperiodList.setskipColumns(true)}" rendered="#{yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal lt 49}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{yxxxch621xwwqqhxxxxxacperiodList.setskipColumns(false)}" rendered="#{yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal lt 49}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(ity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Acperiod Search Results showing #{empty yxxxch621xwwqqhxxxxxacperiodList.resultList ? 0 : (yxxxch621xwwqqhxxxxxacperiodList.paginated ? yxxxch621xwwqqhxxxxxacperiodList.resultList.size() : yxxxch621xwwqqhxxxxxacperiodList.resultCount)} of #{yxxxch621xwwqqhxxxxxacperiodList.resultCount}"/>
+        </f:facet>
+    <div class="results" id="yxxxch621xwwqqhxxxxxacperiodList" style="overflow-x:auto">
+
+    <h:outputText value="The Acperiod search returned no results."
+               rendered="#{empty yxxxch621xwwqqhxxxxxacperiodList.resultList}"/>
+
+
+
+
+    <p:dataTable id="yxxxch621xwwqqhxxxxxacperiodList"  frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" rows="#{yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal}" scrollRows="6"
+           var="_yxxxch621xwwqqhxxxxxacperiod" selection="#{yxxxch621xwwqqhxxxxxacperiodHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}" rowKey="#{_yxxxch621xwwqqhxxxxxacperiod.a0xxuobxbxxxxxxxxxxxsid}"
+           value="#{yxxxch621xwwqqhxxxxxacperiodList.resultList}"
+           rendered="#{not empty yxxxch621xwwqqhxxxxxacperiodList.resultList}">
+         <p:column headerText="Action">
+            <h:selectBooleanCheckbox id="MarkItCheckbox" value="#{yxxxch621xwwqqhxxxxxacperiodHome.checked[_yxxxch621xwwqqhxxxxxacperiod.a0xxuobxbxxxxxxxxxxxsid]}"/>
+            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+            <h:link outcome="/#{empty from ? 'acperiod' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+                   propagation="#{empty from ? 'none' : 'default'}"
+                      id="yxxxch621xwwqqhxxxxxacperiodViewId">
+                <f:param name="yxxxch621xwwqqhxxxxxacperiodA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_yxxxch621xwwqqhxxxxxacperiod.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+             <h:link outcome="/acperiodEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="yxxxch621xwwqqhxxxxxacperiodEdit1"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') ||customIdentity.hasRole('SH') ||customIdentity.hasRole('EH') 
+                  || (customIdentity.hasRole('VH') ||customIdentity.hasRole('VQ')
+                  and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="yxxxch621xwwqqhxxxxxacperiodA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_yxxxch621xwwqqhxxxxxacperiod.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+        </p:column>
+        <p:column rendered = "#{!yxxxch621xwwqqhxxxxxacperiodList.skipColumns}"
+                    headerText="Sid">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch621xwwqqhxxxxxacperiod.a0xxuobxbxxxxxxxxxxxsid}"  id="a0xxuobxbxxxxxxxxxxxsid" />
+        </p:column>
+        <p:column rendered = "#{!yxxxch621xwwqqhxxxxxacperiodList.skipColumns}"
+                    headerText="Rowid">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxukwpbv47xxxxxxxxrowid) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch621xwwqqhxxxxxacperiod.a0xxukwpbv47xxxxxxxxrowid}"  id="a0xxukwpbv47xxxxxxxxrowid" />
+        </p:column>
+        <p:column rendered = "#{!yxxxch621xwwqqhxxxxxacperiodList.skipColumns}"
+                    headerText="Currperiod">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a1xxuxwpbv47xxxxxxxxcurrperiod) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch621xwwqqhxxxxxacperiod.a1xxuxwpbv47xxxxxxxxcurrperiod}"  id="a1xxuxwpbv47xxxxxxxxcurrperiod" />
+        </p:column>
+        <p:column rendered = "#{!yxxxch621xwwqqhxxxxxacperiodList.skipColumns}"
+                    headerText="Descript">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b1xxuxzsbvxxxxxxxxxxdescript) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch621xwwqqhxxxxxacperiod.b1xxuxzsbvxxxxxxxxxxdescript}"  id="b1xxuxzsbvxxxxxxxxxxdescript" />
+        </p:column>
+        <p:column rendered = "#{!yxxxch621xwwqqhxxxxxacperiodList.skipColumns}"
+                    headerText="Currbusdate">
+          <h:inputText readonly="true"  value="#{_yxxxch621xwwqqhxxxxxacperiod.b2xxdwerbvxxxxxxxxxxcurrbusdate}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column rendered = "#{!yxxxch621xwwqqhxxxxxacperiodList.skipColumns}"
+                    headerText="Currcaldate">
+          <h:inputText readonly="true"  value="#{_yxxxch621xwwqqhxxxxxacperiod.b3xxdwerbvxxxxxxxxxxcurrcaldate}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column rendered = "#{!yxxxch621xwwqqhxxxxxacperiodList.skipColumns}"
+                    headerText="Currlocaldate">
+          <h:inputText readonly="true"  value="#{_yxxxch621xwwqqhxxxxxacperiod.b4xxdwerbvxxxxxxxxxxcurrlocaldate}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Notes">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y3xxuznxbvxxxxxxxxxxnotes) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch621xwwqqhxxxxxacperiod.y3xxuznxbvxxxxxxxxxxnotes}"  id="y3xxuznxbvxxxxxxxxxxnotes" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Statusfldt">
+          <h:inputText readonly="true"  value="#{_yxxxch621xwwqqhxxxxxacperiod.z2xxcztxlxxxxxxxxxxxstatusfldt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Owner2">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch621xwwqqhxxxxxacperiod.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+        </p:column>
+        <p:column 
+            headerText="Action">
+            #{' '}
+             <h:link outcome="/acperiodEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="yxxxch621xwwqqhxxxxxacperiodEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="yxxxch621xwwqqhxxxxxacperiodA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_yxxxch621xwwqqhxxxxxacperiod.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+        </p:column>
+    </p:dataTable>
+    </div>
+    </p:panel>
+    <div class="tableControl">
+        <h:link outcome="/acperiodList.more.xhtml"
+            rendered="#{yxxxch621xwwqqhxxxxxacperiodList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+            <f:param name="maxResultsVal"
+                    value="#{yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/acperiodList.more.xhtml"
+            rendered="#{yxxxch621xwwqqhxxxxxacperiodList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{yxxxch621xwwqqhxxxxxacperiodList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/acperiodList.more.xhtml"
+            rendered="#{yxxxch621xwwqqhxxxxxacperiodList.nextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{yxxxch621xwwqqhxxxxxacperiodList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/acperiodList.more.xhtml"
+            rendered="#{yxxxch621xwwqqhxxxxxacperiodList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{yxxxch621xwwqqhxxxxxacperiodList.lastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{yxxxch621xwwqqhxxxxxacperiodList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+         <h:button outcome="/acperiodEdit.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+            rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Acperiod']}">
+        </h:button>
+
+
+         <h:commandButton id="holdbusdate" value="#{messages['Hold']} #{messages['Currbusdate']}" 
+            disabled="#{authenticator.isBitSet(yxxxch621xwwqqhxxxxxacperiodList.getKeyToEntity('01').getZ1xxzzfxhhxxxxxxxxxxstatusfl(),6)}"  action="#{yxxxch621xwwqqhxxxxxacperiodHome.holdCurrBusDate()}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="Stop rollover to next Business Date"/></span> </p:tooltip> 
+         </h:commandButton>
+
+         <h:commandButton id="rholdbusdate" value="#{messages['Remove']} #{messages['Currbusdate']} #{messages['Hold']}" 
+            disabled="#{!authenticator.isBitSet(yxxxch621xwwqqhxxxxxacperiodList.getKeyToEntity('01').getZ1xxzzfxhhxxxxxxxxxxstatusfl(),6)}" action="#{yxxxch621xwwqqhxxxxxacperiodHome.removeHoldCurrBusDate()}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="Resume rollover after adjustmens are done"/></span> </p:tooltip> 
+         </h:commandButton>
+
+         <h:button outcome="/#{empty yxxxch621xwwqqhxxxxxacperiodFrom ? 'home' : yxxxch621xwwqqhxxxxxacperiodFrom}.xhtml"
+          id="donefy"
+         value="Done"/>&nbsp;
+
+
+       <ui:remove>
+       </ui:remove>
+
+
+
+
+        <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessagesb"/>
+
+<br/>
+    </div>
+            <p:hotkey  actionListener="#{yxxxch621xwwqqhxxxxxacperiodList.getFirstResult()}" bind="return">
+            </p:hotkey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

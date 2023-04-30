@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Trexuq266xwwqqhxxxxxcuinvoice" pageWidth="140" pageHeight="930" whenNoDataType="NoPages" columnWidth="132" leftMargin="5" rightMargin="3" topMargin="20" bottomMargin="20" resourceBundle="messages" whenResourceMissingType="Key" uuid="4966b344-2c73-460c-89eb-0312b5e7e265">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="genapp"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="DisplayAs" class="java.lang.String">
+		<parameterDescription><![CDATA[Report Output as HTML or as PDF]]></parameterDescription>
+		<defaultValueExpression><![CDATA["PDF"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Start" class="java.lang.String">
+		<parameterDescription><![CDATA[Start Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="End" class="java.lang.String">
+		<parameterDescription><![CDATA[End Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Status" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Status flag value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA[16]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MarkedOnes" class="java.lang.Boolean">
+		<parameterDescription><![CDATA[Select Marked Records Only]]></parameterDescription>
+	</parameter>
+	<parameter name="INVOICEETC_ID" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Detail]]></parameterDescription>
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ForTargetId" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Customer,Vendor etc]]></parameterDescription>
+		<defaultValueExpression><![CDATA[9999]]></defaultValueExpression>
+	</parameter>
+	<parameter name="owner2Code" class="java.lang.String">
+		<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+		<defaultValueExpression><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subreportPath" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA[SubReport class absolute path]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["."]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+      cuinvoice."sid" AS CUINVOICE_sid,
+
+      cuinvoice."invoice" AS CUINVOICE_invoice,
+
+      cuinvoice."invodate" AS CUINVOICE_invodate,
+
+      cuinvoice."shipdatet" AS CUINVOICE_shipdatet,
+
+      cuinvoice."shiptype" AS CUINVOICE_shiptype,
+
+      cuinvoice."terms" AS CUINVOICE_terms,
+
+      cuinvoice."termsdat" AS CUINVOICE_termsdat,
+
+      cuinvoice."discounp" AS CUINVOICE_discounp,
+
+      cuinvoice."discoudt" AS CUINVOICE_discoudt,
+
+      cuinvoice."discouds" AS CUINVOICE_discouds,
+
+      cuinvoice."netddat" AS CUINVOICE_netddat,
+
+      cuinvoice."netddys" AS CUINVOICE_netddys,
+
+
+      cuinvoice."matcode" AS cuinvoice_MATCODE,
+
+      cuinvoice."agent" AS cuinvoice_AGENT,
+
+      cuinvoice."customer" AS cuinvoice_CUSTOMER,
+
+      cuinvoice."pono" AS cuinvoice_PONO,
+
+
+
+
+
+
+
+
+      cuinvoice."ref1typ" AS CUINVOICE_ref1typ,
+
+      cuinvoice."ref1code" AS CUINVOICE_ref1code,
+
+      cuinvoice."shipcode" AS CUINVOICE_shipcode,
+
+      cuinvoice."fob" AS CUINVOICE_fob,
+
+      cuinvoice."type" AS CUINVOICE_type,
+
+      cuinvoice."integrset" AS CUINVOICE_integrset,
+
+      cuinvoice."attach" AS CUINVOICE_attach,
+
+      cuinvoice."notes" AS CUINVOICE_notes,
+
+      cuinvoice."docmnt" AS CUINVOICE_docmnt,
+
+      cuinvoice."amounttotal" AS CUINVOICE_amounttotal,
+
+      cuinvoice."amountostndt" AS CUINVOICE_amountostndt,
+
+      cuinvoice."qtytotal" AS CUINVOICE_qtytotal,
+
+      cuinvoice."qtyostndt" AS CUINVOICE_qtyostndt,
+
+      cuinvoice."statusfl" AS CUINVOICE_statusfl,
+
+      cuinvoice."statusfldt" AS CUINVOICE_statusfldt,
+
+      cuinvoice."baseamountt" AS CUINVOICE_baseamountt,
+
+      cuinvoice."delivchrgt" AS CUINVOICE_delivchrgt,
+
+      cuinvoice."miscchrgt" AS CUINVOICE_miscchrgt,
+
+      cuinvoice."tax1amtt" AS CUINVOICE_tax1amtt,
+
+      cuinvoice."tax2amtt" AS CUINVOICE_tax2amtt,
+
+      cuinvoice."tax3amtt" AS CUINVOICE_tax3amtt,
+
+      cuinvoice."printmstat" AS CUINVOICE_printmstat,
+
+      cuinvoice."prinmtfldt" AS CUINVOICE_prinmtfldt,
+
+      cuinvoice."owner" AS CUINVOICE_owner,
+
+      cuinvoice."barinvoice" AS CUINVOICE_barinvoice,
+
+      cuinvoice."owner2" AS cuinvoice_owner2
+
+
+FROM
+       "genapp"."cuinvoice" cuinvoice WHERE 
+         (cuinvoice."invoice") >=  $P{Start} AND   (cuinvoice."invoice") <= $P{End} AND (cuinvoice."statusfl" = $P{Status} or $P{Status} is null) AND cuinvoice."owner2" = $P{owner2Code}]]>
+	</queryString>
+	<field name="CUINVOICE_SID" class="java.lang.Integer"/>
+	<field name="CUINVOICE_INVOICE" class="java.lang.String"/>
+	<field name="CUINVOICE_INVODATE" class="java.sql.Timestamp"/>
+	<field name="CUINVOICE_SHIPDATET" class="java.sql.Timestamp"/>
+	<field name="CUINVOICE_SHIPTYPE" class="java.lang.String"/>
+	<field name="CUINVOICE_TERMS" class="java.lang.String"/>
+	<field name="CUINVOICE_TERMSDAT" class="java.sql.Timestamp"/>
+	<field name="CUINVOICE_DISCOUNP" class="java.lang.String"/>
+	<field name="CUINVOICE_DISCOUDT" class="java.sql.Timestamp"/>
+	<field name="CUINVOICE_DISCOUDS" class="java.lang.String"/>
+	<field name="CUINVOICE_NETDDAT" class="java.sql.Timestamp"/>
+	<field name="CUINVOICE_NETDDYS" class="java.lang.String"/>
+	<field name="CUINVOICE_MATCODE" class="java.lang.Integer"/>
+	<field name="CUINVOICE_AGENT" class="java.lang.Integer"/>
+	<field name="CUINVOICE_CUSTOMER" class="java.lang.Integer"/>
+	<field name="CUINVOICE_PONO" class="java.lang.Integer"/>
+	<field name="CUINVOICE_REF1TYP" class="java.lang.String"/>
+	<field name="CUINVOICE_REF1CODE" class="java.lang.String"/>
+	<field name="CUINVOICE_SHIPCODE" class="java.lang.String"/>
+	<field name="CUINVOICE_FOB" class="java.lang.String"/>
+	<field name="CUINVOICE_TYPE" class="java.lang.String"/>
+	<field name="CUINVOICE_INTEGRSET" class="java.lang.String"/>
+	<field name="CUINVOICE_ATTACH" class="java.lang.String"/>
+	<field name="CUINVOICE_NOTES" class="java.lang.String"/>
+	<field name="CUINVOICE_DOCMNT" class="java.lang.String"/>
+	<field name="CUINVOICE_AMOUNTTOTAL" class="java.lang.String"/>
+	<field name="CUINVOICE_AMOUNTOSTNDT" class="java.lang.String"/>
+	<field name="CUINVOICE_QTYTOTAL" class="java.lang.String"/>
+	<field name="CUINVOICE_QTYOSTNDT" class="java.lang.String"/>
+	<field name="CUINVOICE_STATUSFL" class="java.lang.Integer"/>
+	<field name="CUINVOICE_STATUSFLDT" class="java.sql.Timestamp"/>
+	<field name="CUINVOICE_BASEAMOUNTT" class="java.lang.String"/>
+	<field name="CUINVOICE_DELIVCHRGT" class="java.lang.String"/>
+	<field name="CUINVOICE_MISCCHRGT" class="java.lang.String"/>
+	<field name="CUINVOICE_TAX1AMTT" class="java.lang.String"/>
+	<field name="CUINVOICE_TAX2AMTT" class="java.lang.String"/>
+	<field name="CUINVOICE_TAX3AMTT" class="java.lang.String"/>
+	<field name="CUINVOICE_PRINTMSTAT" class="java.lang.Integer"/>
+	<field name="CUINVOICE_PRINMTFLDT" class="java.sql.Timestamp"/>
+	<field name="CUINVOICE_OWNER" class="java.lang.String"/>
+	<field name="CUINVOICE_BARINVOICE" class="java.lang.String"/>
+	<field name="CUINVOICE_OWNER2" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="250">
+			<textField pattern="yyyyMMMdd">
+				<reportElement x="1" y="110" width="97" height="20" uuid="57445379-9418-48f1-828a-272a81dd6c90"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CUINVOICE_INVODATE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="0" y="130" width="90" height="22" uuid="e00167c9-3e77-4f49-b7e0-5e36fbb9bc40"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$R{Cuinvoice}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="152" width="100" height="23" uuid="32cdb94e-28e6-43c6-a896-6986386181ff"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CUINVOICE_INVOICE}]]></textFieldExpression>
+			</textField>
+			<line direction="BottomUp">
+				<reportElement key="line" mode="Opaque" x="0" y="9" width="120" height="1" forecolor="#000000" backcolor="#FFFFFF" uuid="aad95a22-1351-41c7-810d-e0f4924c4518"/>
+			</line>
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-2" x="0" y="9" width="120" height="30" uuid="d669381d-b514-4871-8a79-93a8661ce451"/>
+				<subreportParameter name="owner2Code">
+					<subreportParameterExpression><![CDATA[$P{owner2Code}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subreportPath}+"/clientReceipt57Master_SubReport1.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="110" width="120" height="1" uuid="fcb687ee-85ed-4368-bfd2-757bb2e00403"/>
+			</line>
+			<componentElement>
+				<reportElement x="3" y="176" width="132" height="29" uuid="3c4c96b6-4a22-4c0a-a158-3f205510ddab"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Codabar" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{CUINVOICE_INVOICE}.trim().replaceAll("\\D+","");]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="205" width="109" height="20" uuid="ded0c157-31f4-47df-b552-55e055a94ee0"/>
+				<textFieldExpression><![CDATA[$R{cuorders}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="226" width="120" height="20" uuid="cdfafc84-9aa1-4cab-ae82-fc3ddaed2c01"/>
+				<textFieldExpression><![CDATA[($F{CUINVOICE_NOTES}.length() > 7 && $F{CUINVOICE_NOTES}.contains("<p>"))?$F{CUINVOICE_NOTES}.substring(3,$F{CUINVOICE_NOTES}.length()-4):$F{CUINVOICE_NOTES}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="200" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-1" x="2" y="50" width="120" height="50" uuid="ec070ff4-63e5-4127-9071-a26a953aa5fe"/>
+				<subreportParameter name="INVOICEETC_ID">
+					<subreportParameterExpression><![CDATA[$F{CUINVOICE_SID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="owner2Code">
+					<subreportParameterExpression><![CDATA[$P{owner2Code}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subreportPath}+"/cuinvoiceReceipt57Master_SubReport0.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-3" x="0" y="10" width="132" height="31" uuid="83d4bd8c-0c06-452e-a5fc-ef475ef6c217"/>
+				<subreportParameter name="ForTargetId">
+					<subreportParameterExpression><![CDATA[$F{CUINVOICE_CUSTOMER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="owner2Code">
+					<subreportParameterExpression><![CDATA[$P{owner2Code}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subreportPath}+"/Jxxxuq201xwwqqhxxxxxcustomerMaster_SubReport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="0" width="100" height="20" uuid="528e7d1c-b4fb-429e-8ca9-f0cf3e0a5f13"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totals]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="20" width="120" height="20" uuid="1b9258e1-aec1-4b1e-b366-2f20e9d14c82"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CUINVOICE_AMOUNTTOTAL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line" mode="Opaque" x="0" y="45" width="130" height="1" forecolor="#000000" backcolor="#FFFFFF" uuid="012835a0-1178-4e37-8a57-b224f2fcee4f"/>
+			</line>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement key="textField" x="0" y="50" width="122" height="14" forecolor="#000000" backcolor="#FFFFFF" uuid="498c2f06-4550-40b1-90cc-4de758e31f14"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

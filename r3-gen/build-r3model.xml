@@ -1,0 +1,1789 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="r3-gen" default="help" basedir="." xmlns:artifact="urn:maven-artifact-ant">
+<!--may06 2021 updated version ready for usage from maven pom.xml as antrun. Contains only needed targets -->
+<!-- build-r3model.xml for r3-gen functions and also deploy functions by calling sub build-r3ui.xml from the project dir -->
+    <!-- Allow the location of r3-gen and the r3 distribution to be overridden -->
+
+    <dirname property="r3-gen.dir" file="${ant.file.r3-gen}"/>
+    <dirname property="r3.dir" file="${r3-gen.dir}"/>
+    <echo> r3-gen.dir = "${r3-gen.dir}"</echo>
+    <echo> r3.dir = "${r3.dir}"</echo>
+    <echo> working.dir = "${working.dir}"</echo>
+    <echo> workspace.home = "${workspace.home}"</echo>
+    <echo> project.homes = "${project.home.maven}"</echo>
+    <echo> pom parameter target value, passed to ant as target.ant = "${target}"</echo>
+    <echo> parameter as via as.ant= "${as}"</echo>
+    <echo> parameter product as product.ant= "${product}"</echo>
+  <!-- value set in properties.file will override it and value set in command line will override both -->
+    <condition property="target" value="${target.ant}" else="tomee-hsql">
+        <isset property="${target.ant}"/>
+    </condition>
+    <condition property="as" value="${as.ant}" else="war">
+        <isset property="${as.ant}"/>
+    </condition>
+    <condition property="product" value="${product.ant}" else="">
+        <isset property="${product.ant}"/>
+    </condition>
+    <property name="revengFile" value="r3-gen.reveng${product}.xml"/>
+    <echo> project.name came from maven( ant has r3-gen in project.name.ant) = "${project.name}"</echo>
+    <echo> r3-gen.dir = "${r3-gen.dir}"</echo>
+    <!-- Determine where the project properties are located -->
+
+    <condition property="r3-gen.properties" value="${working.dir}/r3-gen.properties"
+        else="${r3-gen.dir}/build-r3gen.properties">
+        <and>
+            <available file="${working.dir}/r3-gen.properties"/>
+            <available file="${working.dir}/build-r3model.xml"/>
+        </and>
+    </condition>
+    <condition property="cmd.prefix" value="./" else="">
+        <or>
+            <os family="unix"/>
+            <os family="mac"/>
+        </or>
+    </condition>
+    <condition property="r3.cmd" value="${cmd.prefix}r3" else="ant">
+        <equals arg1="${r3-gen.properties}" arg2="${r3-gen.dir}/build-r3gen.properties"/>
+    </condition>
+
+    <property file="${r3-gen.properties}"/>
+    <echo> prop file = "${r3-gen.properties}"</echo>
+
+
+    <property environment="env"/>
+    <!-- set property defaults (also maintains backwards compatibility)  sets property if issetvalue true else default-->
+    <condition property="jboss.home" value="${env.JBOSS_HOME}" else="C:/Program Files/jboss-4.2.3.GA">
+        <isset property="env.JBOSS_HOME"/>
+    </condition>
+    <property name="jboss.domain" value="default"/>
+    <condition property="glassfish.home" value="${env.GLASSFISH_HOME}" else="C:/Program Files/glassfish-v2.1">
+        <isset property="env.GLASSFISH_HOME"/>
+    </condition>
+    <property name="glassfish.domain" value="domain1"/>
+    <condition property="workspace.home" value="C:/Projects" else="${user.home}/projects">
+        <os family="windows"/> 
+    </condition>
+
+
+<!--
+    <import file="${r3.dir}/build/common.build.xml"/>
+-->
+    <target name="init">
+    <echo> r3model jboss.home = "${jboss.home}"</echo>
+<!-- may042021 following needed if init-properties or setup was used, see if init can be removed
+     jun01 2021 can be removed if src dirs are hardcoded as hot/com/r3gen/genapp/action or main/com/r3gen/genapp/model  
+     otherwise eclipse will say not matching 
+     tbd use r3gen-build. properties and use similar to seam-gen.tools to create package.dir structure automatically
+        <path id="r3-gen.lib.path" path="${r3.dir}/lib/gen/jboss-seam-gen.jar"/>
+
+        <taskdef name="normalizeProjectName"
+            classname="org.jboss.seam.tool.NormalizeProjectNameTask"
+            classpathref="r3-gen.lib.path"/>
+-->
+        <path id="r3-gen.lib.path" path="${r3.dir}/lib/gen/jboss-seam-gen.jar"/>
+        <taskdef name="packageDirectory"
+            classname="org.jboss.seam.tool.PackageDirectoryTask"
+            classpathref="r3-gen.lib.path"/>
+<!--
+
+        <taskdef name="pathFilename"
+            classname="org.jboss.seam.tool.PathFilenameTask"
+            classpathref="r3-gen.lib.path"/>
+
+        <taskdef name="uppercaseProperty"
+            classname="org.jboss.seam.tool.UppercasePropertyTask"
+            classpathref="r3-gen.lib.path"/>
+
+        <taskdef name="uncapitalizeProperty"
+            classname="org.jboss.seam.tool.UncapitalizePropertyTask"
+            classpathref="r3-gen.lib.path"/>
+
+        <taskdef name="capitalizeProperty"
+            classname="org.jboss.seam.tool.CapitalizePropertyTask"
+            classpathref="r3-gen.lib.path"/>
+
+        <taskdef name="print"
+            classname="org.jboss.seam.tool.PrintTask"
+            classpathref="r3-gen.lib.path"/>
+
+        <taskdef name="pathFixer"
+            classname="org.jboss.seam.tool.FixPathTask"
+            classpathref="r3-gen.lib.path"/>
+
+        <taskdef name="encodePassword"
+            classname="org.jboss.seam.tool.EncodePasswordTask"
+            classpathref="r3-gen.lib.path"/>
+
+        <taskdef name="randomUUID"
+            classname="org.jboss.seam.tool.RandomUUIDTask"
+            classpathref="r3-gen.lib.path"/>
+-->
+    </target>
+
+    <target name="init-properties" depends="init">
+
+        <!-- replaced seam <packageDirectory  entries to create dirs 
+        <echo>project.home ${project.home} action.dir hot/${action.package}</echo>
+        <property name="action.dir" value = "hot/${action.package}"/>
+        <property name="model.dir" value="main/${model.package}"/>
+        <property name="test.dir" value="test/${test.package}"/>
+        <property name="addon.dir" value="addon/${addon.package}"/>
+
+        <mkdir dir="${action.dir}"/>
+        <mkdir dir="${model.dir}"/>
+        <mkdir dir="${test.dir}"/>
+        -->
+        <packageDirectory property="action.dir" package="hot/${action.package}"/>
+        <packageDirectory property="model.dir" package="main/${model.package}"/>
+        <packageDirectory property="test.dir" package="test/${test.package}"/>
+        <packageDirectory property="addon.dir" package="addon/${addon.package}"/>
+        <echo>project.home ${project.home} action.dir hot/${action.package}</echo>
+
+
+        <!-- we don't want create because that will destroy their database on the next deploy -->
+        <condition property="hibernate.hbm2ddl.auto" value="update">
+            <and>
+                <equals arg1="${database.exists}" arg2="n"/>
+                <equals arg1="${database.drop}" arg2="n"/>
+            </and>
+        </condition>
+        <!-- note that update causes duplicate foreign keys to be created because of a Hibernate bug -->
+        <condition property="hibernate.hbm2ddl.auto" value="update">
+            <and>
+                <equals arg1="${database.exists}" arg2="y"/>
+                <equals arg1="${database.drop}" arg2="n"/>
+            </and>
+        </condition>
+        <condition property="hibernate.hbm2ddl.auto" value="create-drop">
+            <equals arg1="${database.drop}" arg2="y"/>
+        </condition>
+        <condition property="project.war" value="true">
+            <equals arg1="${project.type}" arg2="war"/>
+        </condition>
+        <condition property="project.ear" value="true">
+            <equals arg1="${project.type}" arg2="ear"/>
+        </condition>
+        <property name="project.home.ant" value="${workspace.home}/${project.name}"/>
+
+        <condition property="schema.property" value="&#xa;         &lt;property name=&quot;hibernate.default_schema&quot; value=&quot;${hibernate.default_schema}&quot;/&gt;">
+            <isset property="hibernate.default_schema"/>
+        </condition>
+        <condition property="schema.property" value="">
+            <not><isset property="hibernate.default_schema"/></not>
+        </condition>
+
+        <condition property="catalog.property" value="&#xa;         &lt;property name=&quot;hibernate.default_catalog&quot; value=&quot;${hibernate.default_catalog}&quot;/&gt;">
+            <isset property="hibernate.default_catalog"/>
+        </condition>
+        <condition property="catalog.property" value="">
+            <not><isset property="hibernate.default_catalog"/></not>
+        </condition>
+
+        <condition property="templates.dir" value="${r3-gen.dir}/icefaces-staging" else="${r3-gen.dir}">
+            <equals arg1="${icefaces}" arg2="y"/>
+        </condition>
+    <echo> templates.dir = "${templates.dir}"</echo>
+
+        <condition property="icefaces.lib" value="${icefaces.home}/lib" else="${r3.dir}/lib">
+            <and>
+                <equals arg1="${icefaces}" arg2="y"/>
+                <not>
+                    <equals arg1="${icefaces.home}" arg2=""/>
+                </not>
+            </and>
+        </condition>
+
+        <condition property="icefaces.property">
+            <equals arg1="${icefaces}" arg2="y"/>
+        </condition>
+
+        <condition property="icefaces.lib.property">
+            <and>
+                <equals arg1="${icefaces}" arg2="y"/>
+                <not>
+                    <equals arg1="${icefaces.home}" arg2=""/>
+                </not>
+            </and>
+        </condition>
+    <echo> project.home.ant after init-properties= "${project.home.ant}"</echo>
+
+    <echo> project.homes before set = "${project.home.maven} ${project.home.ant} ${project.home}"</echo>
+        <condition property="project.home" value="${project.home.maven}" else ="${project.home.ant}">
+         <isset property="project.home.maven"/>
+        </condition>
+    <echo> project.home after init-properties= "${project.home.maven} ${project.home.ant} ${project.home}"</echo>
+        <condition property="project.name" value="${project.name.maven}" else ="${project.name.ant}">
+         <isset property="project.name.maven"/>
+        </condition>
+    <echo> project.name after init-properties= "${project.name.maven} ${project.name.ant} ${project.name}"</echo>
+
+
+
+
+        <filterset id="jdbc">
+            <filter token="jdbcUrl" value="${hibernate.connection.url}"/>
+            <filter token="driverClass" value="${hibernate.connection.driver_class}"/>
+            <filter token="dataSourceClass" value="${hibernate.connection.dataSource_class}"/>
+            <filter token="username" value="${hibernate.connection.username}"/>
+            <filter token="password" value="${hibernate.connection.password}"/>
+            <filter token="encodedPassword" value="${hibernate.connection.password.encoded}"/>
+            <filter token="connectionUUID" value="${hibernate.connection.uuid}"/>
+            <filter token="catalogProperty" value="${catalog.property}"/>
+            <filter token="schemaProperty" value="${schema.property}"/>
+            <filter token="hibernate.dialect" value="${hibernate.dialect}"/>
+        </filterset>
+
+        <echo message="${jboss.home}"/>
+
+        <filterset id="project">
+            <filter token="projectName" value="${project.name}"/>
+            <filter token="modelPackage" value="${model.package}"/>
+            <filter token="actionPackage" value="${action.package}"/>
+            <filter token="testPackage" value="${test.package}"/>
+            <filter token="addonPackage" value="${addon.package}"/>
+            <filter token="deploymentType" value="${project.type}"/>
+            <filter token="jbossHome" value="${jboss.home}"/>
+            <filter token="jbossDomain" value="${jboss.domain}"/>
+            <filter token="glassfishHome" value="${glassfish.home}"/>
+            <filter token="glassfishDomain" value="${glassfish.domain}"/>
+            <filter token="iceHome" value="${icefaces.home}"/>
+            <filter token="hbm2ddl" value="${hibernate.hbm2ddl.auto}"/>
+            <filter token="driverJar" value="${driver.file}"/>
+            <filter token="skin" value="${richfaces.skin}"/>
+            <filter token="schemaVersion" value="${version}"/>
+            <filter token="default_schema" value="${hibernate.default_schema}"/>
+       </filterset>
+
+    </target>
+
+    <target name="setup-filters">
+ 
+        <filterset id="filters">
+            <filter token="interfaceName" value="${interface.name}"/>
+            <filter token="beanName" value="${bean.name}"/>
+            <filter token="entityName" value="${entity.name}"/>
+            <filter token="methodName" value="${method.name}"/>
+            <filter token="componentName" value="${component.name}"/>
+            <filter token="pageName" value="${page.name}"/>
+            <filter token="masterPageName" value="${masterPage.name}"/>
+            <filter token="actionPackage" value="${action.package}"/>
+            <filter token="modelPackage" value="${model.package}"/>
+            <filter token="testPackage" value="${test.package}"/>
+            <filter token="addonPackage" value="${addon.package}"/>
+            <filter token="listName" value="${component.name}List"/>
+            <filter token="homeName" value="${component.name}Home"/>
+            <filter token="query" value="${query.text}"/>
+        </filterset>
+  <echo> setup-filters done  </echo>
+    </target>
+
+
+    <target name="copy-lib" >
+        <echo message="Copying r3 and dependencies to the ${project.home}/lib directory..."/>
+
+        <copy todir="${project.home}/lib" overwrite="true">
+            <fileset dir="${r3.dir}/lib">
+                <exclude name="jsf-facelets.jar" if="icefaces.property"/>
+                <exclude name="ajax4jsf*.jar" if="icefaces.property"/>
+                <exclude name="richfaces*.jar" if="icefaces.property"/>
+                <exclude name="jboss-container.jar"/>
+                <exclude name="test/jboss-deplyers.jar"/>
+                <exclude name="test/jboss-embedded-api.jar"/>
+                <exclude name="interop/**/*"/>
+                <exclude name="gen/**/*"/>
+            </fileset>
+            <fileset dir="${r3.dir}/lib/gen">
+                <include name="darkX.jar" unless="icefaces.property"/>
+                <include name="glassX.jar" unless="icefaces.property"/>
+                <include name="laguna.jar" unless="icefaces.property"/>
+            </fileset>
+            <fileset file="${driver.jar}"/>
+        </copy>
+<!--
+        <echo message="Copying JBoss Embedded configuration to the ${project.home}/bootstrap directory..."/>
+        <copy todir="${project.home}/bootstrap" overwrite="true">
+            <fileset dir="${r3.dir}/bootstrap"/>
+        </copy>
+-->
+
+    </target>
+
+
+    <target name="file-copy-ear" unless="project.war">
+
+        <echo message="Copying build scripts for fat-jar (EAR) deployment to the ${project.home} directory..."/>
+        <mkdir dir="${project.home}/resources/WEB-INF/classes"/>
+        <mkdir dir="${project.home}/report-templates"/>
+        <mkdir dir="${project.home}/resources/WEB-INF/lib"/>
+        <copy todir="${project.home}">
+            <fileset dir="${templates.dir}/build-scripts">
+                <include name="build-r3ui.xml"/>
+                <include name="glassfish-build.xml"/>
+            </fileset>
+            <filterset refid="project"/>
+            <filterset refid="jdbc"/>
+        </copy>
+        <copy tofile="${project.home}/deployed-jars-ear.list"
+                file="${templates.dir}/build-scripts/deployed-jars-ear.list"/>
+        <copy tofile="${project.home}/deployed-jars-war.list"
+                file="${templates.dir}/build-scripts/deployed-jars-ear-war.list"/>
+        <copy file="${r3.dir}/build/validate.xml" todir="${project.home}" overwrite="true"/>
+
+        <echo message="Copying resources needed for fat-jar(EAR) deployment to the ${project.home}/resources directory..."/>
+        <copy todir="${project.home}/resources">
+            <fileset dir="${templates.dir}/resources">
+                <include name="META-INF/application.xml"/>
+                <include name="META-INF/beans.xml"/>
+                <include name="META-INF/ejb-jar.xml"/>
+                <include name="META-INF/jboss-app.xml"/>
+                <include name="META-INF/persistence-*.xml"/>
+                <exclude name="META-INF/persistence-*-war.xml"/>
+
+            </fileset>
+            <filterset refid="project"/>
+            <filterset refid="jdbc"/>
+        </copy>
+        <!-- for hibernate generate <provider needs to be org.hibernate.ejb.HibernatePersistence  
+         actual appserver say tomee may use some other version of provider  
+         generator uses  persistence-dev.xml. 
+         generated source will use persistence.xml which uses hsqldb
+         overide the content as needed for say using postgres
+         persistence.xml content is done in build-r3ui.xml and uses ${target.ant} from target parameter passed
+         via maven which calls this ANT task. Default is tomee-hsql ie file based hsqldb to allow quick
+         setup and demo without a db server 
+        -->    
+        <replace file="${project.home}/resources/META-INF/persistence-dev.xml">
+            <replacefilter token="org.hibernate.transaction.JBossTransactionManagerLookup" value="@transactionManagerLookupClass@"/>
+            <replacefilter token="&lt;jta-data-source&gt;java:/" value="&lt;jta-data-source&gt;"/>
+        </replace>
+    </target>
+
+    <target name="file-copy" depends="file-copy-ear,setup-filters">
+        <echo message="Copying properties,fmt to the project/resource  directory for fat-jar ... and ${revengFile}"/>
+
+        <copy tofile="${project.home}/r3-gen.properties"
+                file="${r3-gen.properties}"/>
+
+        <copy todir="${project.home}/resources/">
+            <fileset dir="${r3-gen.dir}/resources/">
+               <include name="components-*.properties"/>
+            </fileset>
+            <filterset>
+               <filter token="projectName" value="${project.name}"/>
+            </filterset>
+        </copy>
+
+        <copy todir="${project.home}/resources">
+            <fileset dir="${templates.dir}/resources/">
+                <include name="WEB-INF/*.*"/>
+                <include name="META-INF/MANIFEST.MF"/>
+                <include name="${revengFile}"/>
+            <!--
+                <exclude name="glassfish-resources.xml"/>
+                <exclude name="WEB-INF/components*.xml"/>
+                <exclude name="META-INF/persistence*.xml"/>
+                <exclude name="META-INF/application.xml"/>
+                <exclude name="META-INF/jboss-app.xml"/>
+                <exclude name="META-INF/ejb-jar.xml"/>
+                <exclude name="*identity-management*"/>
+             -->
+            </fileset>
+            <filterset refid="project"/>
+            <filterset refid="jdbc"/>
+        </copy>
+
+
+
+        <!-- Eclipse project files -->
+
+        <copy todir="${project.home}">
+            <fileset dir="${templates.dir}/ide-project-files/eclipse">
+                <include name=".classpath"/>
+                <include name=".project"/>
+                <include name=".settings/*"/>
+                <include name="explode.launch"/>
+            </fileset>
+            <filterset refid="project"/>
+        </copy>
+
+
+
+        <copy todir="${project.home}/webapp">
+            <fileset id="view" dir="${templates.dir}/view">
+                <include name="calculatorBasic.xhtml"/>
+                <include name="error.xhtml"/>
+                <include name="error-client.html"/>
+                <include name="error-server.html"/>
+                <include name="error-exception.html"/>
+                <include name="error-expired.html"/>
+                <include name="error-expired.xhtml"/>
+                <include name="login.xhtml"/>
+                <include name="legal.xhtml"/>
+                <include name="privacy.xhtml"/>
+                <include name="signupTerms.xhtml"/>
+                <include name="returns.xhtml"/>
+                <include name="captcha.xhtml"/>
+<!-- not needed in prod, copy manually in dev
+                <include name="SqlAdminBase.xhtml"/>
+-->
+                <include name="SqlAdmin.xhtml"/>
+                <include name="SqlAdmin-backUp.xhtml"/>
+                <include name="SqlAdmin-restore.xhtml"/>
+                <include name="ImageTouchUp.xhtml"/>
+                <include name="index.html"/>
+                <include name="News-1.xhtml"/>
+                <include name="News-s.xhtml"/>
+                <include name="News-th.xhtml"/>
+                <include name="Product-1.xhtml"/>
+                <include name="Product-s.xhtml"/>
+                <include name="Product-th.xhtml"/>
+                <include name="Resellers-1.xhtml"/>
+                <include name="ContactUs-1.xhtml"/>
+                <include name="ContactUs-s.xhtml"/>
+                <include name="ContactUs-th.xhtml"/>
+                <include name="About-1.xhtml"/>
+                <include name="About-s.xhtml"/>
+                <include name="About-th.xhtml"/>
+                <include name="News-2.xhtml"/>
+                <include name="Product-2.xhtml"/>
+                <include name="Resellers-2.xhtml"/>
+                <include name="ContactUs-2.xhtml"/>
+                <include name="About-2.xhtml"/>
+                <include name="News-3.xhtml"/>
+                <include name="Product-3.xhtml"/>
+                <include name="Resellers-3.xhtml"/>
+                <include name="ContactUs-3.xhtml"/>
+                <include name="About-3.xhtml"/>
+
+                <include name="News-1PT.xhtml"/>
+                <include name="Product-1PT.xhtml"/>
+                <include name="Resellers-1PT.xhtml"/>
+                <include name="ContactUs-1PT.xhtml"/>
+                <include name="About-1PT.xhtml"/>
+
+                <include name="News-2PT.xhtml"/>
+                <include name="Product-2PT.xhtml"/>
+                <include name="Resellers-2PT.xhtml"/>
+                <include name="ContactUs-2PT.xhtml"/>
+                <include name="About-2PT.xhtml"/>
+
+                <include name="News-3PT.xhtml"/>
+                <include name="Product-3PT.xhtml"/>
+                <include name="Resellers-3PT.xhtml"/>
+                <include name="ContactUs-3PT.xhtml"/>
+                <include name="About-3PT.xhtml"/>
+
+
+
+                <include name="checkout.xhtml"/>
+                <include name="checkoutPOS.xhtml"/>
+                <include name="checkoutInvoiced.xhtml"/>
+                <include name="userself.xhtml"/>
+                <include name="userselfList.xhtml"/>
+                <include name="userselfEdit.xhtml"/>
+                <include name="basketout.xhtml"/>
+                <include name="basketoutCs.xhtml"/>
+                <include name="basketoutCsAll.xhtml"/>
+                <include name="basketin.xhtml"/>
+                <include name="cbasketin.xhtml"/>
+                <include name="cbasketinCase.xhtml"/>
+                <include name="vbasketin.xhtml"/>
+                <include name="ebasketin.xhtml"/>
+                <include name="mbasketin.xhtml"/>
+                <include name="HelpReference.xhtml"/>
+                <include name="ResellerReference.xhtml"/>
+                <include name="ItemDetailsBrowse.xhtml"/>
+                <include name="ItemDetailsBrow-1.xhtml"/>
+                <include name="ItemDetailsBrowse-th.xhtml"/>
+                <include name="ItemDetailsPOS.xhtml"/>
+                <include name="ItemSITree.xhtml"/>
+                <include name="ItemSystemTree.xhtml"/>
+                <include name="itemSystemList.xhtml"/>
+                <include name="itemsGetQuote.xhtml"/>
+                <include name="ItemsPaidSelect.xhtml"/>
+                <include name="ItemsReviewSelect.xhtml"/>
+                <include name="IssuesBrowse.xhtml"/>
+                <include name="ImagesBrowse.xhtml"/>
+                <include name="home-s.xhtml"/>
+                <include name="homeMockUp.xhtml"/>
+                <include name="homeMockUpPreview.xhtml"/>
+                <include name="migrateTools.xhtml"/>
+                <include name="MyDashboard.xhtml"/>
+                <include name="activationSetup.xhtml"/>
+                <include name="unsc.xhtml"/>
+                <include name="shwebhooks.xhtml"/>
+                <include name="BlogDetailsBrowse.xhtml"/>
+                <include name="BlogDetailsSBrowse.xhtml"/>
+                <include name="BlogSITree.xhtml"/>
+                <include name="blog.xhtml"/>
+                <include name="blogS.xhtml"/>
+                <include name="cartPOS.xhtml"/>
+                <include name="resourcelabel.xhtml"/>
+                <include name="resourcelabelEdtr.xhtml"/>
+                <include name="theme.xhtml"/>
+                <include name="image.xhtml"/>
+                <include name="shopItem.xhtml"/>
+                <include name="blogTree.xhtml"/>
+                <include name="Translate.xhtml"/>
+                <include name="installApp.xhtml"/>
+                <include name="installAppSquare.xhtml"/>
+                <include name="installAppGmail.xhtml"/>
+                <include name="syncData.xhtml"/>
+                <include name="homePageEditor.xhtml"/>
+                <include name="homeOtherPagesEdtr.xhtml"/>
+                <include name="imageEditEasy.xhtml"/>
+                <include name="textEditEasy.xhtml"/>
+                <include name="videoEditEasy.xhtml"/>
+                <include name="caseCatEditEasy.xhtml"/>
+                <include name="themeCEditEasy.xhtml"/>
+                <include name="themeContent.xhtml"/>
+                <include name="blobdataEditEasy.xhtml"/>
+                <include name="blobdataSystemList.xhtml"/>
+                <include name="clobdataSystemList.xhtml"/>
+                <include name="resourceSystemList.xhtml"/>
+                <include name="resource_bSList.xhtml"/>
+                <include name="customerStatements.xhtml"/>
+                <include name="clientEditEasy.xhtml"/>
+                <include name="paymentout.xhtml"/>
+                <include name="invoicecart.xhtml"/>
+                <include name="scan.xhtml"/>
+                <include name="countAlias.xhtml"/>
+                <include name="countItem.xhtml"/>
+                <include name="installAppStatus.xhtml"/>
+                <include name="importMappingEdit.xhtml"/>
+                <include name="importUsingMapping.xhtml"/>
+                <include name="columnMappingEdit.xhtml"/>
+                <include name="Click-e.xhtml"/>
+                <include name="Click-f.xhtml"/>
+                <include name="Click-g.xhtml"/>
+                <include name="Click-b.xhtml"/>
+                <include name="Click-m.xhtml"/>
+                <include name="socialLogin.xhtml"/>
+                <include name="vensignup.xhtml"/>
+                <include name="Click-bu.xhtml"/>
+                <include name="Click-er.xhtml"/>
+                <include name="Click-la.xhtml"/>
+                <include name="Click-or.xhtml"/>
+                <include name="Click-ag.xhtml"/>
+                <include name="Click-fo.xhtml"/>
+                <include name="siteEditEasy.xhtml"/>
+                <include name="SqlAdmin-archive.xhtml"/>
+                <include name="itemShTree.xhtml"/>
+                <include name="itemShPOSTree.xhtml"/>
+                <include name="home-th.xhtml"/>
+                <include name="home-ui.xhtml"/>
+                <include name="homeThemePreview.xhtml"/>
+                <include name="ThemesBrowse.xhtml"/>
+                <include name="ThemesBrowseClient.xhtml"/>
+                <include name="trial.xhtml"/>
+                <include name="redeem.xhtml"/>
+                <include name="cartItem.xhtml"/>
+                <include name="createmastersite.xhtml"/>
+                <include name="themeImport.xhtml"/>
+                <include name="themeExport.xhtml"/>
+                <include name="pickList.xhtml"/>
+                <include name="robots.txt"/>
+                <include name="layout/*"/>
+                <include name="stylesheet/*"/>
+                <exclude name="**/*.ftl"/>
+            </fileset>
+            <filterset refid="project"/>
+        </copy>
+        <!-- Images have to be copied without filter -->
+        <copy todir="${project.home}/webapp">
+            <fileset id="view" dir="${templates.dir}/view">
+                <include name="favicon.ico"/>
+                <include name="img/*"/>
+            </fileset>
+        </copy>
+        <!-- Some prebuilt Jrxml have to be copied without filter -->
+        <copy todir="${project.home}/report-templates">
+            <fileset id="view" dir="${templates.dir}/view">
+                <include name="CustomerTxns.jrxml"/>
+                <include name="cpaymentReceipt80Master.jrxml"/>
+                <include name="cpaymentReceipt57Master.jrxml"/>
+                <include name="cuinvoiceReceipt57Master.jrxml"/>
+            </fileset>
+        </copy>
+        <copy todir="${project.home}/report-templates">
+            <fileset id="view" dir="${templates.dir}/view">
+                <include name="customertxns_SubReport0.jrxml"/>
+                <include name="cpaymentReceipt80Master_SubReport0.jrxml"/>
+                <include name="clientReceipt80Master_SubReport1.jrxml"/>
+                <include name="customerReceipt80Master_SubReport2.jrxml"/>
+                <include name="cpaymentReceipt57Master_SubReport0.jrxml"/>
+                <include name="clientReceipt57Master_SubReport1.jrxml"/>
+                <include name="customerReceipt57Master_SubReport2.jrxml"/>
+                <include name="cuinvoiceReceipt57Master_SubReport0.jrxml"/>
+                <include name="ItemlabelsDymo30299Report1019UPC.jrxml"/>
+                <include name="ItemlabelsDymo30334Report3257128a.jrxml"/>
+            </fileset>
+        </copy>
+
+
+        <!-- JavaScripts have to be copied without filter -->
+        <copy todir="${project.home}/webapp">
+            <fileset id="view" dir="${templates.dir}/view">
+                <include name="js/**"/>
+            </fileset>
+        </copy>
+
+        <!-- addons have to be copied without filter -->
+        <copy todir="${project.home}/webapp">
+            <fileset id="view" dir="${templates.dir}/view">
+                <include name="addon/*"/>
+            </fileset>
+        </copy>
+
+<!-- do not generate/copy File.java,AuthenticatorAction,Bean,FlaggedEmails,ScheduleControllerAction now, since it will need other beans to be generated -->
+<!-- MailListenerMDB needs mail-ra.jar in project lib to compile but needs mail-ra.rar in C:\jboss-5.1.0.GA\server\default\deploy to run in appserver -->
+
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="TestWs.java" if="project.ear"/>
+                <include name="Timer*.java" if="icefaces.property"/>
+                <include name="PasswordSupport.java" if="project.ear"/>
+                <include name="BinTools.java" if="project.ear"/>
+                <include name="MacBasedPRF.java" if="project.ear"/>
+                <include name="PBKDF2.java" if="project.ear"/>
+                <include name="PBKDF2Engine.java" if="project.ear"/>
+                <include name="PBKDF2Formatter.java" if="project.ear"/>
+                <include name="PBKDF2HexFormatter.java" if="project.ear"/>
+                <include name="PBKDF2Parameters.java" if="project.ear"/>
+                <include name="PRF.java" if="project.ear"/>
+                <include name="TestMailConfigs.java" if="project.ear"/>
+                <include name="MailMessageImpl.java" if="project.ear"/>
+                <include name="MailTransporterImpl.java" if="project.ear"/>
+                <include name="MailUtility.java" if="project.ear"/>
+                <include name="SimpleMailConfig.java" if="project.ear"/>
+                <include name="SessionConfig.java" if="project.ear"/>
+<!--   
+                <include name="RegistrationMailer.java" if="project.ear"/>
+-->
+                <include name="InactiveNewUser.java" if="project.ear"/>
+                <include name="CustomStrategy.java" if="project.ear"/>
+                <include name="CustomStrategyOrder.java" if="project.ear"/>
+                <include name="CustomStrategyCustomer.java" if="project.ear"/>
+                <include name="CustomStrategyAddress.java" if="project.ear"/>
+                <include name="CustomStrategyTransaction.java" if="project.ear"/>
+                <include name="DatabaseResourceLoader.java" if="project.ear"/>
+                <include name="Yxxxch522xhhxxhxxxxxclientCalendarServiceP.java" if="project.ear"/>
+                <include name="PickListCustomerConverter.java" if="project.ear"/>
+                <include name="PickListVendorConverter.java" if="project.ear"/>
+                <include name="PickListEmployeeConverter.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${addon.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="*Addon.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${test.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="*Test.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+
+
+        <copy todir="${project.home}">
+            <fileset dir="${templates.dir}/build-scripts">
+                <include name="build*.properties"/>
+            </fileset>
+            <filterset refid="project"/>
+        </copy>
+
+
+        <mkdir dir="${project.home}/java/${model.dir}"/>
+        <mkdir dir="${project.home}/java/${action.dir}"/>
+        <mkdir dir="${project.home}/java/${test.dir}"/>
+        <mkdir dir="${project.home}/java/${addon.dir}"/>
+
+
+    </target>
+
+    <target name="validate-project" depends="init-properties,validate-workspace">
+        <fail message="No project name specified (run 'r3 setup' first)">
+            <condition>
+                <or>
+                    <not><isset property="project.name"/></not>
+                    <equals arg1="${project.name}" arg2=""/>
+                </or>
+            </condition>
+        </fail>
+        <fail message="Invalid package combination. If the default package is used, then all classes (action, model, test and addon) must be in the default package">
+            <condition>
+                <and>
+                    <or>
+                        <equals arg1="${action.package}" arg2=""/>
+                        <equals arg1="${model.package}" arg2=""/>
+                        <equals arg1="${test.package}" arg2=""/>
+                        <equals arg1="${addon.package}" arg2=""/>
+                    </or>
+                    <or>
+                        <not><equals arg1="${action.package}" arg2=""/></not>
+                        <not><equals arg1="${model.package}" arg2=""/></not>
+                        <not><equals arg1="${test.package}" arg2=""/></not>
+                        <not><equals arg1="${addon.package}" arg2=""/></not>
+                    </or>
+                </and>
+            </condition>
+        </fail>
+        <condition property="project.exists">
+            <available file="${project.home}/build-r3ui.xml"/>
+        </condition>
+    </target>
+
+    <target name="validate-workspace">
+        <fail message="No project workspace specified (run 'r3 setup' first)">
+            <condition>
+                <or>
+                    <not><isset property="workspace.home"/></not>
+                    <equals arg1="${workspace.home}" arg2=""/>
+                </or>
+            </condition>
+        </fail>
+    </target>
+
+    <!-- Do not remove new-project, netbeans depends on it -->
+    <target name="new-project" depends="create-project"/>
+    <target name="create-project" depends="validate-project,copy-lib,file-copy"
+            description="Create a new project">
+        <echo message="A new r3 project named '${project.name}' was created in the ${workspace.home} directory"/>
+        <echo message="Type '${r3.cmd} explode' and go to http://localhost:8080/${project.name}"/>
+        <echo message="Eclipse Users: Import the project using File > Import... > General..Existing Projects into Workspace, set the root directory to ${workspace.home}, then select the project named ${project.name}. Build path include jre system lib"/>
+        <echo message="NetBeans Users: Open the project using File > Open project... and select the project folder ${project.home} "/>
+        <echo message="IDEA Users: Open the project using File > Open project... and select the file ${project.home}/${project.name}.ipr"/>
+    </target>
+
+
+    <target name="update-project" depends="validate-project,copy-lib" if="project.exists"
+        description="Update project dependencies">
+        <echo message="Updated project '${project.name}' with the latest r3 libraries and dependencies"/>
+        <echo message="Type '${r3.cmd} restart' to update the exploded deployment"/>
+    </target>
+
+    <target name="delete-project" depends="validate-project,undeploy" if="project.exists"
+        description="Delete the project">
+        <echo message="Deleting the entire project in ${project.home}"/>
+        <delete dir="${project.home}"/>
+    </target>
+
+
+    <!-- Do not remove generate-entities, netbeans depends on it may05 2021 setup-filters added to handle generate
+         being called from maven. target copy-file calls this if in Ant-->
+    <target name="generate-entities" depends="generate"/>
+    <target name="generate" depends="delete-project,create-project,setup-filters,generate-model,generate-ui,removeprefix"
+        description="Reverse engineer entities from the database">
+    </target>
+
+    <target name="init-generate">
+        <path id="htools.classpath">
+            <pathelement path="${r3.dir}/lib/ant.jar"/>
+            <pathelement path="${r3.dir}/lib/gen/hibernate-tools.jar"/>
+            <pathelement path="${r3.dir}/lib/gen/freemarker.jar"/>
+            <pathelement path="${r3.dir}/lib/gen/runtime.jar"/>
+            <pathelement path="${r3.dir}/lib/gen/common.jar"/>
+            <pathelement path="${r3.dir}/lib/gen/text.jar"/>
+            <pathelement path="${r3.dir}/lib/dom4j.jar"/>
+            <pathelement path="${r3.dir}/lib/persistence-api.jar"/>
+            <pathelement path="${r3.dir}/lib/gen//hibernate-core.jar"/>
+            <pathelement path="${r3.dir}/lib/gen/hibernate-commons-annotations.jar"/>
+            <pathelement path="${r3.dir}/lib/hibernate-annotations.jar"/>
+            <pathelement path="${r3.dir}/lib/gen/hibernate-entitymanager.jar"/>
+            <pathelement path="${r3.dir}/lib/hibernate-validator.jar"/>
+            <pathelement path="${r3.dir}/lib/jboss-logging.jar"/>
+            <pathelement path="${r3.dir}/lib/gen/jboss-transaction-api_1.1_spec.jar"/>
+            <pathelement path="${r3.dir}/lib/gen/hibernate-jpa-2.0-api.jar"/>
+            <pathelement path="${r3.dir}/lib/gen/core.jar"/>            
+            <pathelement path="${r3.dir}/build/lib/commons-collections.jar"/>
+            <pathelement path="${r3.dir}/lib/slf4j-api.jar"/> 
+            <pathelement path="${r3.dir}/lib/slf4j-log4j12.jar"/> 
+            <pathelement path="${r3.dir}/lib/log4j.jar"/> 
+            <pathelement path="${r3.dir}/lib/commons-logging.jar"/>
+            <pathelement path="${r3.dir}/lib/javassist.jar"/>
+            <pathelement path="${r3.dir}/lib/cglib.jar"/>
+            <pathelement path="${r3.dir}/lib/asm.jar"/>
+            <pathelement path="${r3.dir}/lib/jboss-common-core.jar"/>
+            <pathelement path="${r3.dir}/lib/concurrent.jar"/>
+            <pathelement path="${driver.jar}"/>
+            <pathelement path="${driver.license.jar}"/>
+            <pathelement path="${r3.dir}/lib/gen/jboss-seam-gen.jar"/>
+        </path>
+        <taskdef name="hibernate" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="htools.classpath"/>
+    </target>
+
+    <target name="generate-model" depends="validate-project,init-generate">
+        <echo message="Reverse engineering database using JDBC driver ${driver.jar}"/>
+        <echo>project=${project.home}</echo>
+        <echo>model=${model.package}</echo>
+        <echo>template path 0 ${templates.dir} </echo>
+        <echo>reveng file name ${revengFile} path ${project.home}/... </echo>
+        <hibernate templatepath="${templates.dir}">
+            <jdbcconfiguration propertyfile="${r3-gen.properties}"
+             packagename="${model.package}"
+             revengfile="${project.home}/resources/${revengFile}"
+             detectmanytomany="false"/>
+
+            <property key="hibernatetool.util.toolclass"
+                    value="org.jboss.seam.tool.Util"/>
+
+
+            <hbm2java jdk5="true" ejb3="true" destdir="${project.home}/java/main"/>
+        </hibernate>
+        <taskdef name="javaformatter"
+             classname="org.hibernate.tool.ant.JavaFormatterTask" classpathref="htools.classpath"/>
+
+        <javaformatter>
+          <fileset dir="${project.home}/java/main">
+                  <include name="**/*.java"/>
+          </fileset>
+        </javaformatter>
+
+    </target>
+
+    <target name="generate-ui" depends="validate-project,init-generate" description="Build the ui based on existing entities">
+
+            <echo message="Empty old assigns  in r3-gen/view/assigns to handle pojo being long and short  "/>
+           <delete>
+           <fileset dir="${templates.dir}/./view/assigns" includes="*.assigns"/>
+          </delete>
+        <echo message="Building project '${project.name}' to generate views and controllers"/>
+        <condition property="project.jar.target" value="jar">
+            <equals arg1="${project.type}" arg2="ear"/>
+        </condition>
+        <condition property="project.jar.target" value="war">
+            <equals arg1="${project.type}" arg2="war"/>
+        </condition>
+        <echo message=" invoke build-r3ui target '${project.jar.target}'"/> 
+        <ant antfile="${project.home}/build-r3ui.xml" target="${project.jar.target}" inheritall="false">
+         <property name="project.name" value="${project.name}"/>
+        </ant>
+
+        <echo message=" creating  *.assigns from ${templates.dir}/view/gen-assigns.ftl   in ${templates.dir}/view/assigns"></echo>
+        <hibernate templatepath="${templates.dir}">
+            <jpaconfiguration persistenceunit="genappcdi"/>
+            <classpath>
+                <dirset dir="${project.home}/exploded-archives">
+                    <!-- eek! in one case we are nested...is this okay to use this pattern? how about throw in project name? -->
+                    <include name="**/*.war/WEB-INF/classes" if="project.war"/>
+                    <include name="**/*.war/WEB-INF/reprts" if="project.war"/>
+                    <include name="**/*.war/WEB-INF/reports" if="project.war"/>
+                    <include name="**/*.war/WEB-INF/dev" if="project.war"/>
+                    <include name="**/*.jar" if="project.ear"/>
+                    <include name="**/*_jar" if="project.ear"/>
+                </dirset>
+            </classpath>
+
+            <property key="hibernatetool.util.toolclass" value="org.jboss.seam.tool.Util"/>
+        	<hbmtemplate filepattern="{class-name}.assigns"
+        	                template="view/gen-assigns.ftl" 
+        		             destdir="${templates.dir}/view/assigns"
+                             foreach="entity"/>
+        </hibernate>
+
+       <echo message=" will concat *.assigns from ${templates.dir}/view/assigns  into mergedassigns.properties  in ${templates.dir}/view/assigns"></echo>
+       <concat destfile="${templates.dir}/view/assigns/mergedassigns.properties">
+        <path>
+         <fileset dir="${templates.dir}/view/assigns" includes="*.assigns"/>
+        </path>
+       </concat>
+
+
+        <hibernate templatepath="${templates.dir}">
+
+            <jpaconfiguration persistenceunit="genappcdi"/>
+            <classpath>
+                <dirset dir="${project.home}/exploded-archives">
+                    <!-- eek! in one case we are nested...is this okay to use this pattern? how about throw in project name? -->
+                    <include name="**/*.war/WEB-INF/classes" if="project.war"/>
+                    <include name="**/*.war/WEB-INF/reprts" if="project.war"/>
+                    <include name="**/*.war/WEB-INF/reports" if="project.war"/>
+                    <include name="**/*.war/WEB-INF/dev" if="project.war"/>
+                    <include name="**/*.jar" if="project.ear"/>
+                    <include name="**/*_jar" if="project.ear"/>
+                </dirset>
+            </classpath>
+            <property key="hibernatetool.util.toolclass" value="org.jboss.seam.tool.Util"/>
+        	<hbmtemplate filepattern="{class-name}Tree.xhtml"
+        	                template="view/gentree.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="{class-name}PieChart.xhtml"
+        	                template="view/jqplot-pie.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="{class-name}BarChart.xhtml"
+        	                template="view/jqplot-bar.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="{class-name}FcalOrd.xhtml"
+        	                template="view/fcalOrd.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="{class-name}Fcal.xhtml"
+        	                template="view/fcal.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+        	<hbmtemplate filepattern="{class-name}MailingSend.xhtml"
+        	                template="view/mailingSend.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity"/>
+
+        	<hbmtemplate filepattern="{class-name}MailingContent.fmt"
+        	                template="view/mailingContent.fmt.ftl" 
+        		             destdir="${project.home}/resources"
+                             foreach="entity"/>
+        	<hbmtemplate filepattern="{class-name}eMailingContent.fmt"
+        	                template="view/eMailingContent.fmt.ftl" 
+        		             destdir="${project.home}/resources"
+                             foreach="entity"/>
+
+
+
+            <hbmtemplate filepattern="{class-name}List.xhtml"
+                            template="view/list.xhtml.ftl"
+                             destdir="${project.home}/webapp"
+                             foreach="entity">
+               <property key="variation" value=" "/>
+            </hbmtemplate>
+
+            <hbmtemplate filepattern="{class-name}List.more.xhtml"
+                            template="view/list.xhtml.ftl"
+                             destdir="${project.home}/webapp"
+                             foreach="entity">
+               <property key="variation" value="more"/>
+            </hbmtemplate>
+
+            <hbmtemplate filepattern="{class-name}.xhtml"
+                            template="view/view.xhtml.ftl"
+                             destdir="${project.home}/webapp"
+                             foreach="entity"/>
+
+            <hbmtemplate filepattern="{class-name}Edit.xhtml"
+                            template="view/edit.xhtml.ftl"
+                             destdir="${project.home}/webapp"
+                             foreach="entity">
+               <property key="variation" value=" "/>
+            </hbmtemplate>
+
+            <hbmtemplate filepattern="{class-name}Edit.address.xhtml"
+                            template="view/edit.xhtml.ftl"
+                             destdir="${project.home}/webapp"
+                             foreach="entity">
+               <property key="variation" value="includeaddress"/>
+            </hbmtemplate>
+
+
+            <hbmtemplate filepattern="{class-name}Edit.quoteorderexists.xhtml"
+                            template="view/edit.xhtml.ftl"
+                             destdir="${project.home}/webapp"
+                             foreach="entity">
+               <property key="variation" value="quoteorderexists"/>
+            </hbmtemplate>
+
+            <hbmtemplate filepattern="seatAllocateEdit.xhtml"
+                            template="view/seatAllocateEdit.ftl"
+                             destdir="${project.home}/webapp"
+                             foreach="entity">
+            </hbmtemplate>
+
+
+
+
+        	<hbmtemplate filepattern="{class-name}.jrxml"
+        	                template="view/gentitletablelistreports.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+        	<hbmtemplate filepattern="{class-name}Master_SubReport0.jrxml"
+        	                template="view/genjaspermaser_subreport0s.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="{class-name}Master_SubReport1.jrxml"
+        	                template="view/genjaspermaser_subreport1s.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+        	<hbmtemplate filepattern="{class-name}Master_SubReport2.jrxml"
+        	                template="view/genjaspermaser_subreport2s.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+        	<hbmtemplate filepattern="{class-name}Master.jrxml"
+        	                template="view/genjaspermaserdetailreports.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Vendorcheques.jrxml"
+        	                template="view/genvendorcheques.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Trialbalancereport.jrxml"
+        	                template="view/gentrialbalancereport.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Balancesheetreport.jrxml"
+        	                template="view/genbalancesheetreport.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Incomestatementreport.jrxml"
+        	                template="view/genincomestatementreport.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Journalbyaccountreport.jrxml"
+        	                template="view/genjournalbyaccountreport.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Journalbydatereport.jrxml"
+        	                template="view/genjournalbydatereport.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="{class-name}labelsReport.jrxml"
+        	                template="view/genjasperlabellreports.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+                <property key="variation" value=" "/>
+
+           </hbmtemplate>
+        	<hbmtemplate filepattern="{class-name}labelsReport.more.jrxml"
+        	                template="view/genjasperlabellreports.ftl" 
+        		             destdir="${project.home}/report-templates"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+                <property key="variation" value="more"/>
+
+           </hbmtemplate>
+
+
+
+        	<hbmtemplate filepattern="{class-name}Report.xhtml"
+        	                template="view/report.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Reporttrialbalance.xhtml"
+        	                template="view/reporttrialbalance.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Reportbalancesheet.xhtml"
+        	                template="view/reportbalancesheet.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Reportincomestmnt.xhtml"
+        	                template="view/reportincomestatement.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Reportjrnlbyaccoun.xhtml"
+        	                template="view/reportjournalbyaccount.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Reportjrnlbydate.xhtml"
+        	                template="view/reportjournalbydate.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="Vendorcheques.xhtml"
+        	                template="view/vendorcheques.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="{class-name}LabelsPrint.xhtml"
+        	                template="view/reportlabelsprint.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+                <property key="default_schema" value="${hibernate.default_schema}"/>
+           </hbmtemplate>
+
+
+
+            <hbmtemplate filepattern="${action.dir}/{class-name}List.java"
+                            template="src/EntityList.java.ftl"
+                             destdir="${project.home}/java"
+                             foreach="entity">
+                <property key="actionPackage" value="${action.package}"/>
+                <property key="projectName" value="${project.name}"/>
+            </hbmtemplate>
+
+            <hbmtemplate filepattern="${action.dir}/{class-name}EntityService.java"
+                            template="src/EntityService.java.ftl"
+                             destdir="${project.home}/java"
+                             foreach="entity">
+                <property key="actionPackage" value="${action.package}"/>
+                <property key="projectName" value="${project.name}"/>
+            </hbmtemplate>
+            <hbmtemplate filepattern="${action.dir}/{class-name}CalendarService.java"
+                            template="src/EntityCalendarService.java.ftl"
+                             destdir="${project.home}/java"
+                             foreach="entity">
+                <property key="actionPackage" value="${action.package}"/>
+                <property key="projectName" value="${project.name}"/>
+            </hbmtemplate>
+
+            <hbmtemplate filepattern="${action.dir}/{class-name}CalendarOrderService.java"
+                            template="src/EntityCalendarOrderService.java.ftl"
+                             destdir="${project.home}/java"
+                             foreach="entity">
+                <property key="actionPackage" value="${action.package}"/>
+                <property key="projectName" value="${project.name}"/>
+            </hbmtemplate>
+
+            <hbmtemplate filepattern="${action.dir}/Authenticator.java"
+                            template="src/Authenticator.java.ftl"
+                             destdir="${project.home}/java"
+                             foreach="entity">
+                <property key="actionPackage" value="${action.package}"/>
+                <property key="appaccounting" value="${app.accounting}"/>
+            </hbmtemplate>
+<!--
+            <hbmtemplate filepattern="${action.dir}/FlaggedEmails.java"
+                            template="src/FlaggedEmails.java.ftl"
+                             destdir="${project.home}/java"
+                             foreach="entity">
+                <property key="actionPackage" value="${action.package}"/>
+                <property key="appaccounting" value="${app.accounting}"/>
+            </hbmtemplate>
+-->
+
+            <hbmtemplate filepattern="${action.dir}/{class-name}Home.java"
+                            template="src/EntityHome.java.ftl"
+                             destdir="${project.home}/java"
+                             foreach="entity">
+                <property key="actionPackage" value="${action.package}"/>
+                <property key="modelPackage" value="${model.package}"/>
+            </hbmtemplate>
+
+            <hbmtemplate filepattern="menu.xhtml"
+                            template="view/layout/menu.xhtml.ftl"
+                             destdir="${project.home}/webapp/layout"
+                             foreach="entity">
+                <property key="appaccounting" value="${app.accounting}"/>
+            </hbmtemplate>
+
+
+
+
+        	<hbmtemplate filepattern="home.xhtml"
+        	                template="view/gen-home.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+        	<hbmtemplate filepattern="login.xhtml"
+        	                template="view/gen-login.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+
+<!-- not used there is vensignup
+        	<hbmtemplate filepattern="vlogin.xhtml"
+        	                template="view/gen-vlogin.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+-->
+        	<hbmtemplate filepattern="register.xhtml"
+        	                template="view/gen-register.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="signup.xhtml"
+        	                template="view/gen-signup.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+        	<hbmtemplate filepattern="fbsignup.xhtml"
+        	                template="view/gen-fbsignup.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+
+
+
+        	<hbmtemplate filepattern="regstatus.xhtml"
+        	                template="view/gen-regstatus.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+
+        	<hbmtemplate filepattern="password_reset.xhtml"
+        	                template="view/gen-password_reset.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+<!--
+        	<hbmtemplate filepattern="activation.xhtml"
+        	                template="view/gen-activation.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+-->
+
+
+        	<hbmtemplate filepattern="activationSignUp.xhtml"
+        	                template="view/gen-activationSignUp.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+<!--
+
+        	<hbmtemplate filepattern="activationDemo.xhtml"
+        	                template="view/gen-activationDemoSignUp.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+-->
+
+          <hbmtemplate filepattern="Quick.xhtml"
+        	                template="view/quick.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+
+       	   <hbmtemplate filepattern="QuickFinancial.xhtml"
+        	                template="view/quickFinancial.xhtml.ftl" 
+        		             destdir="${project.home}/webapp"
+                             foreach="entity">
+           </hbmtemplate>
+
+           <hbmtemplate filepattern="itemEditEasy.xhtml"
+              template="view/itemEditEasy.xhtml.ftl" 
+              destdir="${project.home}/webapp"
+             foreach="entity">
+           </hbmtemplate>
+
+        </hibernate>
+
+        <echo message="Copying File bean to model"/>
+        <copy todir="${project.home}/java/${model.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="File.java" if="project.ear"/>
+
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+
+        <echo message="Copying ShoppingCart(r3Cart) bean to model"/>
+        <copy todir="${project.home}/java/${model.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="ShoppingCartBean.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${model.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="NonceForm.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+
+        <echo message="Copying SqlAdminSupport before ImageServLetCDI"/>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="SqlAdminSupport.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <echo message="Copying SqlSupport before ImageServLetCDI"/>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="SqlSupport.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+
+        <echo message="Copying ImageservletCDI servlet to action"/>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="ImageServletCdi.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="SitemapServletCdi.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="ShopifyBeanPrivate.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <echo message="Copying CustomIdentity bean to action"/>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="CustomIdentity.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <echo message="Copying CustomExceptionHandler bean to action"/>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="CustomExceptionHandler.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <echo message="Copying CustomExceptionHandlerFactory bean to action"/>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="CustomExceptionHandlerFactory.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="R3RestClient.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="webhookSGService.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="TaskAgent.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+
+
+
+
+        <echo message="Copying skinBean bean to action"/>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="SkinBean.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+
+<!--
+        <taskdef name="javaformatter"
+             classname="org.hibernate.tool.ant.JavaFormatterTask" classpathref="htools.classpath"/>
+
+        <javaformatter>
+          <fileset dir="${project.home}/java/hot">
+                  <include name="**/*.java"/>
+          </fileset>
+        </javaformatter>
+        below for better seo
+-->
+    </target>
+<!--
+Both to and from are required and define regular expressions. If the source file name (as a whole or in part) matches 
+the from pattern, the target file name will be constructed from the to pattern,
+using \0 to \9 as back-references for the full match (\0) or the matches of the subexpressions in parentheses.
+back-refences refer to parenrhese ie () to group , we have ised just one back-reference
+^ means start, dot matches any single ch {20} 20 times first back-reference dot ie any single ch followed by any but ending
+with xhtml, to will take anything matching after first 20 and before xhtml
+The to pattern determines the whole file name, so if you wanted to replace the extension of a file you should not use
+from="\.old$" to=".new" but rather from="(.*)\.old$" to="\1.new" (or rather use a glob mapper in this case).
+
+Source files not matching the from pattern will be ignored.-->
+    <target name="removeprefix" depends="validate-project" if="project.exists" >
+        <echo message="removeprefix to get rid of 20 ch prefixes using ant move view and resources with regex mapper"/>
+        <move todir="${project.home}/webapp" >
+            <fileset dir="${project.home}/webapp">
+             <include name="/*.xhtml"/>
+            </fileset>
+            <mapper type="regexp"
+                from="^.{20}(.*)xhtml" to="\1xhtml" />
+
+        </move>
+        <move todir="${project.home}/webapp" >
+            <fileset dir="${project.home}/webapp">
+             <include name="/*.*"/>
+            </fileset>
+            <mapper type="regexp"
+                from="^.{20}(.*)xml" to="\1xml" />
+
+        </move>
+        <!-- non generated .fmt copy not move -->
+        <copy todir="${project.home}/resources" >
+            <fileset dir="${r3-gen.dir}/resources">
+             <include name="/*.fmt"/>
+            </fileset>
+        </copy>
+        <move todir="${project.home}/resources" >
+            <fileset dir="${project.home}/resources">
+             <include name="/*.fmt"/>
+            </fileset>
+            <mapper type="regexp"
+                from="^.{20}(.*)fmt" to="\1fmt" />
+        </move>
+
+
+
+
+       <!-- later maven build by default moves anything under /resource to WEB-INF/classes 
+       -->
+       
+        <copy todir="${project.home}/webapp/WEB-INF/classes" >
+            <fileset dir="${r3-gen.dir}/resources">
+             <include name="/*dk_config.properties"/>
+             <include name="/*skin.properties"/>
+            </fileset>
+        </copy>
+        <move todir="${project.home}/webapp/WEB-INF" >
+            <fileset dir="${project.home}/resources/WEB-INF">
+            </fileset>
+        </move>
+
+      <!-- already done in generate-ui
+       <concat destfile="view/assigns/mergedassigns.properties">
+        <path>
+         <fileset dir="view/assigns" includes="*.assigns"/>
+        </path>
+       </concat>
+      -->
+
+        <move todir="${project.home}/webapp/WEB-INF/classes" >
+            <fileset dir="${project.home}/exploded-archives/${project.name}.ear/${project.name}_jar">
+            </fileset>
+        </move>
+
+
+        <move todir="${project.home}/webapp/META-INF" >
+            <fileset dir="${project.home}/resources/META-INF">
+             <include name="MANIFEST.MF"/>
+             <exclude name="beans.xml"/>
+             <exclude name="ejb-jar.xml"/>
+            </fileset>
+        </move>
+        <!-- use pom passed parameter for persistence.xml, must match server config -->
+        <echo message="overwrite ${project.home}/webapp/META-INF/persistence.xml by ${r3-gen.dir}/resources/META-INF/persistence-${target}.xml to "/>
+        <copy tofile="${project.home}/webapp/WEB-INF/classes/META-INF/persistence.xml"
+            file="${r3-gen.dir}/resources/META-INF/persistence-${target}.xml" overwrite="true">
+        </copy>
+
+
+
+        <delete dir="${project.home}/exploded-archives"/>
+        <delete dir="${project.home}/.settings"/>
+        <delete dir="${project.home}/resources/META-INF"/>
+        <delete dir="${project.home}/resources/WEB-INF"/>
+
+        <copy todir="${project.home}/webapp/WEB-INF/lib">
+            <fileset dir="${project.home}/lib">
+                <includesfile name="${templates.dir}/build-scripts/deployed-jars-ear.list"/>
+            </fileset>
+        </copy>
+        <delete dir="${project.home}/lib"/>
+
+        <copy todir="${project.home}/webapp/WEB-INF/resources">
+            <fileset dir="${templates.dir}/resources/">
+                <include name="*.csv"/>
+            </fileset>
+            <fileset dir="${templates.dir}/resources/META-INF/">
+                <include name="persistence-*-*.xml"/>
+            </fileset>
+            <fileset dir="${templates.dir}/resources/">
+                <include name="tomee/**"/>
+            </fileset>
+
+            <fileset dir="${templates.dir}/resources/">
+                <include name="wildfly/**"/>
+            </fileset>
+
+        </copy>
+        <mkdir dir="${project.home}/webapp/WEB-INF/plugins"/>
+        <copy todir="${project.home}/webapp/WEB-INF/plugins">
+            <fileset dir="${templates.dir}/resources/">
+                <include name="plugins-*.*"/>
+            </fileset>
+        </copy>
+
+
+
+
+
+    </target>
+
+
+
+    
+
+    <target name="archive" depends="validate-project" if="project.exists"
+        description="Create the EAR or WAR archive">
+        <echo message="Building ${project.type} archive for '${project.name}'"/>
+        <ant antfile="${project.home}/build-r3ui.xml" target="archive" inheritall="false">
+         <property name="project.name" value="${project.name}"/>
+
+        </ant>
+    </target>
+    <!-- may16 2021setup-filters added  -->
+    <target name="deploy" depends="setup-filters,explode,validate-project" if="project.exists"
+        description="Deploy the EAR or WAR">
+        <echo message="Deploying project '${project.name}' to JBoss AS"/>
+        <ant antfile="${project.home}/build-r3ui.xml" target="deploy" inheritall="false">
+         <property name="project.name" value="${project.name}"/>
+
+        </ant>
+
+    </target>
+
+    <target name="undeploy" depends="validate-project" if="project.exists"
+        description="Undeploy the EAR or WAR archive">
+        <echo message="Undeploying project '${project.name}'"/>
+        <ant antfile="${project.home}/build-r3ui.xml" target="undeploy" inheritall="false">
+         <property name="project.name" value="${project.name}"/>
+
+        </ant>
+
+    </target>
+
+    <target name="redeploy" depends="validate-project" if="project.exists"
+        description="Clean, undeploy and deploy the project as a packaged archive">
+        <echo message="Cleaning, undeploying and deploying project '${project.name}' to JBoss AS as a packaged archive"/>
+        <ant antfile="${project.home}/build-r3ui.xml" target="redeploy" inheritall="false">
+         <property name="project.name" value="${project.name}"/>
+
+        </ant>
+
+    </target>
+
+    <target name="explode" depends="validate-project,removeprefix" if="project.exists"
+        description="Deploy the project as an exploded directory">
+
+        <echo message="Concatinating assigns for next run"/>
+        <echo message="copying nongenerated beans but commented out Copying ShoppingCartBean(r3Cart) and r3restclient to model because it has import action beans"/>
+        <echo message="Copying ImageservletCDI servlet to action"/>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="ImageServletCdi.java" if="project.ear"/>
+
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="ShopifyBeanPrivate.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+
+
+       <concat destfile="view/assigns/mergedassigns.properties">
+        <path>
+         <fileset dir="view/assigns" includes="*.assigns"/>
+        </path>
+       </concat>
+
+
+        <echo message="Deploying project '${project.name}' to JBoss AS as an exploded directory"/>
+<!--uncomment to compile reports, will take an hour
+ 
+
+
+        <ant antfile="${project.home}/build-r3ui.xml" target="compiler" inheritall="false">
+        </ant>
+-->
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+<!--                <include name="MailListenerMDB.java" if="project.ear"/>
+                <include name="MydashboardList.java" if="project.ear"/>
+-->
+                <include name="SqlAdminSupport.java" if="project.ear"/>
+                <include name="SqlSupport.java" if="project.ear"/>
+
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${model.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="ShoppingCartBean.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="R3RestClient.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="webhookSGService.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+        <copy todir="${project.home}/java/${action.dir}">
+            <fileset dir="${templates.dir}/src/">
+                <include name="TaskAgent.java" if="project.ear"/>
+            </fileset>
+            <filterset refid="filters"/>
+        </copy>
+
+        <ant antfile="${project.home}/build-r3ui.xml" target="explode" inheritall="false">
+         <property name="project.name" value="${project.name}"/>
+
+        </ant>
+
+
+    </target>
+
+
+    <target name="test" depends="validate-project" if="project.exists"
+        description="Run the automated tests">
+        <fail message="Cannot run tests because path to project contains spaces">
+            <condition>
+                <or>
+                    <contains string="${workspace.home}" substring=" "/>
+                    <contains string="${project.name}" substring=" "/>
+                </or>
+            </condition>
+        </fail>
+        <echo message="Running tests for project '${project.name}'"/>
+        <ant antfile="${project.home}/build-r3ui.xml" target="test" inheritall="false">
+         <property name="project.name" value="${project.name}"/>
+
+        </ant>
+
+    </target>
+
+    <target name="clean" depends="validate-project" if="project.exists"
+        description="Clean the project directory">
+        <echo message="Cleaning project '${project.name}'"/>
+        <ant antfile="${project.home}/build-r3ui.xml" target="clean" inheritall="false">
+         <property name="project.name" value="${project.name}"/>
+
+        </ant>
+
+    </target>
+
+    <target name="reset" description="Delete the settings">
+        <delete file="${r3-gen.properties}"/>
+    </target>
+
+    <target name="settings" depends="validate-project"
+        description="Print the settings">
+        <echo message="JBoss AS home: ${jboss.home}"/>
+        <echo message="GlassFish home: ${glassfish.home}"/>
+        <echo message="Project name: ${project.name}"/>
+        <echo message="Project location: ${workspace.home}/${project.name}"/>
+        <echo message="Project type: ${project.type}"/>
+        <echo message="IceFaces: ${icefaces}"/>
+        <echo message="Action package: ${action.package}"/>
+        <echo message="Model package: ${model.package}"/>
+        <echo message="Test package: ${test.package}"/>
+        <echo message="Addon package: ${addon.package}"/>
+        <echo message="JDBC driver class: ${hibernate.connection.driver_class}"/>
+        <echo message="JDBC DataSource class: ${hibernate.connection.dataSource_class}"/>
+        <echo message="Hibernate dialect: ${hibernate.dialect}"/>
+        <echo message="JDBC URL: ${hibernate.connection.url}"/>
+        <echo message="Database username: ${hibernate.connection.username}"/>
+        <echo message="Database password: ${hibernate.connection.password}"/>
+    </target>
+
+    <target name="version" depends="init">
+        <echo>r3 version: ${complete.version}</echo>
+    </target>
+
+    <target name="help" depends="init">
+        <print file="${r3-gen.dir}/README"/>
+    </target>
+
+
+    <target name="compiler" depends="validate-project" if="project.exists"
+        description="Compile Reports in batch mode">
+        <echo message="Compileing Jasper reports in exploded archives"/>
+        <ant antfile="${project.home}/build-r3ui.xml" target="compiler" inheritall="false">
+         <property name="project.name" value="${project.name}"/>
+
+        </ant>
+
+    </target>
+
+<target name="dbbuild">	
+  <sql driver="org.hsqldb.jdbcDriver"
+       url="jdbc:hsqldb:hsql://localhost:1701"
+       userid="sa" password=""  >
+       <classpath> <pathelement path="${r3.dir}/lib/hsqldb.jar"/> </classpath>
+    <transaction  src="${r3-gen.dir}/resources/jmstest-hsql-createfi.sql"/>
+  </sql>
+</target>	    
+<target name="dbfill">	
+  <sql driver="org.hsqldb.jdbcDriver"
+       url="jdbc:hsqldb:hsql://localhost:1701"
+       userid="sa" password=""  >
+       <classpath> <pathelement path="${r3.dir}/lib/hsqldb.jar"/> </classpath>
+    <transaction  src="${r3-gen.dir}/resources/jmstest-hsql-createfi.sql"/>
+  </sql>
+</target>	    
+<target name="dbbuildfill">	
+  <sql driver="org.hsqldb.jdbcDriver"
+       url="jdbc:hsqldb:hsql://localhost:1701"
+       userid="sa" password=""  >
+       <classpath> <pathelement path="${r3.dir}/lib/hsqldb.jar"/> </classpath>
+    <transaction  src="${r3-gen.dir}/resources/jmstest-hsql-createfi.sql"/>
+    <transaction  src="${r3-gen.dir}/resources/jmstest-hsql-createfi.sql"/>
+  </sql>
+</target>	    
+
+
+</project>
+
+
+
+

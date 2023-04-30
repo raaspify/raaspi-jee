@@ -1,0 +1,313 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplateUiBare.xhtml">
+
+<f:metadata>
+    <f:viewAction action="#{yxxxuh566xwwqqwxxxxxuserHome.setClientFullUrlName('')}" />
+</f:metadata>
+<ui:define name="body">
+
+   <!-- step1  fillup coupon redeem form  -->
+   <ui:fragment rendered="#{empty customIdentity.getHoldArray(2)}">
+   <h4 id="step1">Step 1: Redeem Coupon.</h4>
+
+
+    <h:form id="Input" class="w3-light-gray ">
+     <h3>Fill this information</h3>
+
+
+    <div class="card" style="width:#{yxxxuh566xwwqqwxxxxxuserHome.mobile?100:80}%;text-align:center" id="registerx">
+
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="last" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.firstName}</ui:define>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="lastI" template="layout/edit.xhtml">
+            <h:inputText id="firstName" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientName}" size="35"
+              pt:placeholder="Your name or Company name" maxlength="35" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input w3-light-gray">
+            </h:inputText>
+          </ui:decorate>
+      </h:panelGrid>
+                <h:message for="firstName" errorStyle="color:red; display:block"/>
+
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="last" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.lastName}</ui:define>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="lastI" template="layout/edit.xhtml">
+            <h:inputText id="lastName" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientSerialNum}" size="35"
+              pt:placeholder="Your last name" maxlength="35" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray">
+            </h:inputText>
+          </ui:decorate>
+      </h:panelGrid>
+                <h:message for="lastName" errorStyle="color:red; display:block"/>
+
+            <br/>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+       <ui:decorate id="rclientEmailField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.your_email}</ui:define>
+       </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+       <ui:decorate id="rclientEmailFieldb" template="layout/edit.xhtml">
+            <h:inputText id="email" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid}"
+             pt:placeholder="email@xyz.com" size="30" maxlength="50" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray">
+            </h:inputText>
+       </ui:decorate>
+      </h:panelGrid>
+                <h:message for="email" errorStyle="color:red; display:block"/>
+
+
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="password" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.Password}</ui:define>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate  template="layout/edit.xhtml">
+            <h:inputSecret id="password" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.newUserLink}" size="35"
+              pt:placeholder="Enter your own Password" maxlength="35" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray" >
+            </h:inputSecret>
+          </ui:decorate>
+      </h:panelGrid>
+                <h:message for="password" errorStyle="color:red; display:block"/>
+
+      <br></br>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="coupon" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.Coupon}</ui:define>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate  template="layout/edit.xhtml">
+            <h:inputText id="coupon" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientApplicationSubFunction}" size="35"
+              pt:placeholder="CouponCode" maxlength="35" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray" >
+            </h:inputText>
+          </ui:decorate>
+      </h:panelGrid>
+                <h:message for="coupon" errorStyle="color:red; display:block"/>
+
+      <hr></hr>
+
+          <h:panelGroup>
+           <ui:remove>
+            <h:selectBooleanCheckbox id="agreedToTermsd" value="#yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"/>
+           </ui:remove>
+            <h:outputText value="#{messages.agree_to_terms}" />
+               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#termsOfUse">
+                <h:outputText value=" #{messages['read']}"/>
+               </button>
+
+            <h:commandButton id="redeemS" class="w3-btn w3-blue" value ="#{messages.Submit}" 
+                onclick="let spinner = document.getElementById('redeem');spinner.style.visibility = 'visible';"  
+                action="#{yxxxuh566xwwqqwxxxxxuserHome.reDeem()}" >
+             <span id="redeem" class="spinner-border spinner-border-sm text-muted" style="visibility: hidden"></span>
+            </h:commandButton>
+       <h:messages globalOnly="true" styleClass="messageL" id="redeemmsg"/>
+
+            <h:button id="ltdone"  value="Cancel" propagation="end" outcome="/home.xhtml" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"
+                 class="w3-btn w3-light-gray"          />
+            <h:button id="ltdone2"  value="Done" propagation="end" outcome="/home.xhtml" rendered="#{yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"
+                 class="w3-btn w3-light-gray" />
+          </h:panelGroup>
+
+    </div>
+  </h:form>
+   </ui:fragment>
+
+   <!-- show create site button in step2a, once coupon redeemed and session holds the entered information #{not empty customIdentity.getHoldArray(2)}-->
+   <ui:fragment rendered="#{not empty customIdentity.getHoldArray(2)}">
+   <h4 id="step2">Step 2a: Install Cloud App/Create Website.</h4>
+
+    <div style="text-align:center" id="crdiv">
+
+    <h:form id="create" >
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+            <h6 class="text-primary">RAASPI/BUSS App offers customer facing cloud based dynamic web site content with e-commerce along with full Back Office functions.</h6>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+            <h6 class="text-secondary">If you already have a web site, you may use this new site for many useful backoffce functions to run your business or organization.   </h6>
+      </h:panelGrid>
+      <br></br>
+      <hr></hr>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate template="layout/edit.xhtml">
+            <h:inputText id="siteName" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName}" size="35"
+              pt:placeholder="Enter website name like mysite" maxlength="35" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray">
+            </h:inputText>
+          </ui:decorate>
+      </h:panelGrid>
+
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+     <h:commandButton id="createButton" class="w3-btn w3-blue" value ="#{messages.Install} #{messages.cloudApp} / #{messages.create} #{messages.website}"     
+                onclick="let spinner = document.getElementById('createB');spinner.style.visibility = 'visible';"  
+                action="#{r3RestClient.doSiteCreate(customIdentity.getHoldArray(0),customIdentity.getHoldArray(4),customIdentity.getHoldArray(3),customIdentity.getHoldArray(1),customIdentity.getHoldArray(2),yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName,customIdentity.getHoldArray(5))}">
+      <ui:remove>7 params String fname,String lname,String userId,String password, String email,String siteName,String couponName</ui:remove>
+             <span id="createB" class="spinner-border spinner-border-sm text-muted" style="visibility: hidden"></span>
+     </h:commandButton>
+      </h:panelGrid>
+
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+     <h:button id="ltdone"  value="Cancel" propagation="end" outcome="/home.xhtml" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"
+       class="w3-btn w3-light-gray"          />
+     <h:button id="ltdone2"  value="Done" propagation="end" outcome="/home.xhtml" rendered="#{yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"
+       class="w3-btn w3-light-gray" />
+
+      </h:panelGrid>
+                <h:message for="siteName" errorStyle="color:red; display:block"/>
+
+
+     <ui:remove>
+     <h:commandButton id="createButtonT" class="w3-btn w3-blue " value ="#{messages.registerTest}"  
+                onclick="let spinner = document.getElementById('createBT');spinner.style.visibility = 'visible';"  
+                action="#{r3RestClient.doSiteCreate('kai', 'mitra','mail@raaspi.com','raaspi','mail@raaspi.com','kaikai25','AS5Y7JP2')}">
+             <span id="createBT" class="spinner-border spinner-border-sm text-muted" style="visibility: hidden" ></span>
+     </h:commandButton>
+     </ui:remove>
+    </h:form>
+
+    </div>
+       <h:messages globalOnly="true" styleClass="messageL" id="redeemmsg2"/>
+
+   </ui:fragment>
+
+
+ <div class="modal" id="termsOfUse">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">#{messages.terms_of_use}</h4>
+        <button type="button" class="close" data-dismiss="modal">&#215;</button>
+      </div>
+
+      <!-- Modal body -->
+
+      <div class="modal-body">
+       <ui:include src="signupTerms.xhtml"/>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+   </div>
+  </div>
+
+ </div>
+ <br></br>
+ <br></br>
+ <br></br>
+ <br></br>
+ <br></br>
+ <br></br>
+ <br></br>
+ <br></br>
+ <br></br>
+ <br></br>
+ <br></br>
+ <br></br>
+
+   <!-- part2  -->
+
+ <hr></hr>
+
+ <h4 id="step2b">Step 2b:(optional) Follow if step2a, which appears after successful coupon redeem, was skipped </h4>
+ <div>
+   <ui:fragment rendered="true">
+    <div style="text-align:center" id="crdiv2">
+
+    <h:form id="create2" >
+
+      <br></br>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate  template="layout/edit.xhtml">
+            <ui:define name="label">Enter web site name     </ui:define>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate template="layout/edit.xhtml">
+            <h:inputText id="siteName2" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName}" size="35"
+              pt:placeholder="Enter website name like mysite" maxlength="35" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray">
+            </h:inputText>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+       <ui:decorate id="eclientEmailField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.your_email}</ui:define>
+       </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+       <ui:decorate id="rclientEmailFieldb" template="layout/edit.xhtml">
+            <h:inputText id="eemail" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid}"
+             pt:placeholder="email@xyz.com" size="30" maxlength="50" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray">
+            </h:inputText>
+       </ui:decorate>
+      </h:panelGrid>
+      <br></br>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="coupon" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.Coupon}</ui:define>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate  template="layout/edit.xhtml">
+            <h:inputText id="coupon" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientApplicationSubFunction}" size="35"
+              pt:placeholder="CouponCode" maxlength="35" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray" >
+            </h:inputText>
+          </ui:decorate>
+      </h:panelGrid>
+      <hr></hr>
+
+     <h:commandButton id="createButton2" class="w3-btn w3-blue" value ="#{messages.Install} #{messages.cloudApp} / #{messages.create} #{messages.website}"  
+                onclick="let spinner = document.getElementById('createB');spinner.style.visibility = 'visible';"  
+                action="#{r3RestClient.callDoSiteCreate(yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid,yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName,yxxxuh566xwwqqwxxxxxuserHome.clientApplicationSubFunction)}">
+      <ui:remove>3 params String email,String siteName,String couponName</ui:remove>
+             <span id="createB2" class="spinner-border spinner-border-sm text-muted" style="visibility: hidden"></span>
+     </h:commandButton>
+     <h:button id="ltdone2"  value="Cancel" propagation="end" outcome="/home.xhtml" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"
+       class="w3-btn w3-light-gray"          />
+     <h:button id="ltdone22"  value="Done" propagation="end" outcome="/home.xhtml" rendered="#{yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"
+       class="w3-btn w3-light-gray" />
+
+     <ui:remove>
+     <h:commandButton id="createButtonT2" class="w3-btn w3-blue " value ="#{messages.registerTest}"  
+                onclick="let spinner = document.getElementById('createBT');spinner.style.visibility = 'visible';"  
+                action="#{r3RestClient.doSiteCreate('kai', 'mitra','mail@raaspi.com','raaspi','mail@raaspi.com','kaikai25','AS5Y7JP2')}">
+             <span id="createBT2" class="spinner-border spinner-border-sm text-muted" style="visibility: hidden"></span>
+     </h:commandButton>
+     </ui:remove>
+    </h:form>
+
+    </div>
+       <h:messages globalOnly="true" styleClass="messageL" id="redeemmsg2b"/>
+
+   </ui:fragment>
+  </div>
+
+ </ui:define> 
+</ui:composition>
+
+
+

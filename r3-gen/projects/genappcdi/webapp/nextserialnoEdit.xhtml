@@ -1,0 +1,326 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="mlrbuq1qxxwwqqhexxxxnextserialnoA0xxuobxbxxxxxxxxxxxsid" value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.mlrbuq1qxxwwqqhexxxxnextserialnoA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="mlrbuq1qxxwwqqhexxxxnextserialnoFrom" value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.mlrbuq1qxxwwqqhexxxxnextserialnoFrom}"/>
+    <f:viewAction action="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.restrict()}" />
+    <f:viewAction action="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Nextserialno']}</ui:define>
+
+<ui:define name="body">
+<h:form id="mlrbuq1qxxwwqqhexxxxnextserialno" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("mlrbuq1qxxwwqqhexxxxnextserialno:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['NextserialnoEditHelp']!='NextserialnoEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['NextserialnoEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed ? 'Edit' : 'Add'} #{messages['Nextserialno']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a0xxukxxbvxxxxxxxxxxnxtsernoDecoration"    >
+        <h:outputLabel  for="a0xxukxxbvxxxxxxxxxxnxtserno" value="#{messages['Nxtserno']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxukxxbvxxxxxxxxxxnxtserno" 
+           validator="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.validateKeyDuplicateNxtserno}" 
+                       label="nxtserno"
+                        required="true"
+                           size="20"
+                      maxlength="4"
+                          value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.a0xxukxxbvxxxxxxxxxxnxtserno}">
+
+         </h:inputText>
+            <p:tooltip  target="a0xxukxxbvxxxxxxxxxxnxtserno"> <span style="white-space: nowrap"> <h:outputText value="Enter Value here"/></span> </p:tooltip> 
+            </h:panelGroup>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z1xxuxxrbvxxxxxxxxxxcursernoDecoration"  rendered="true">
+        <h:outputLabel  for="z1xxuxxrbvxxxxxxxxxxcurserno" value="#{messages['Curserno']}">
+      </h:outputLabel>
+
+         <h:inputText id="z1xxuxxrbvxxxxxxxxxxcurserno" 
+                           size="20"
+                      maxlength="4"
+                          value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.z1xxuxxrbvxxxxxxxxxxcurserno}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z2xxuxxrbvxxxxxxxxxxprevsernDecoration"  rendered="true">
+        <h:outputLabel  for="z2xxuxxrbvxxxxxxxxxxprevsern" value="#{messages['Prevsern']}">
+      </h:outputLabel>
+
+         <h:inputText id="z2xxuxxrbvxxxxxxxxxxprevsern" 
+                           size="20"
+                      maxlength="4"
+                          value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.z2xxuxxrbvxxxxxxxxxxprevsern}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z3xxfxxxbvxxxxxxxxxxis9999Decoration"  rendered="true">
+        <h:outputLabel  for="z3xxfxxxbvxxxxxxxxxxis9999" value="#{messages['Is9999']}">
+      </h:outputLabel>
+                <h:selectBooleanCheckbox id="z3xxfxxxbvxxxxxxxxxxis9999"
+                                      value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.z3xxfxxxbvxxxxxxxxxxis9999}">
+                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value</ui:remove>
+                   <f:ajax  render="z3xxfxxxbvxxxxxxxxxxis9999" bypassUpdates="false"/>
+                 </h:selectBooleanCheckbox>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z4xxuxxrbvxxxxxxxxxxrefnoDecoration"  rendered="true">
+        <h:outputLabel  for="z4xxuxxrbvxxxxxxxxxxrefno" value="#{messages['Refno']}">
+      </h:outputLabel>
+
+         <h:inputText id="z4xxuxxrbvxxxxxxxxxxrefno" 
+                           size="20"
+                      maxlength="14"
+                          value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.z4xxuxxrbvxxxxxxxxxxrefno}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zaxxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zaxxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="zaxxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.zaxxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.a0xxukxxbvxxxxxxxxxxnxtserno} #{messages['sid']} #{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.a0xxukxxbvxxxxxxxxxxnxtserno !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.persist()}"
+                       disabled="#{!mlrbuq1qxxwwqqhexxxxnextserialnoHome.wired}"
+                       rendered="#{!mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed  and !mlrbuq1qxxwwqqhexxxxnextserialnoHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.update()}"
+                       rendered="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed  and !mlrbuq1qxxwwqqhexxxxnextserialnoHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.update()}"
+                       rendered="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed and mlrbuq1qxxwwqqhexxxxnextserialnoHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.remove()}"
+                       rendered="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed and !mlrbuq1qxxwwqqhexxxxnextserialnoHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/nextserialnoEdit.xhtml"
+                       rendered="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{mlrbuq1qxxwwqqhexxxxnextserialnoList.reportName}"/>
+            <f:param name="displayAs" value="#{mlrbuq1qxxwwqqhexxxxnextserialnoList.displayAs}" /> 
+            <h:button outcome="/nextserialnoList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Nextserialno']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty mlrbuq1qxxwwqqhexxxxnextserialnoHome.mlrbuq1qxxwwqqhexxxxnextserialnoFrom ? 'home' : mlrbuq1qxxwwqqhexxxxnextserialnoHome.mlrbuq1qxxwwqqhexxxxnextserialnoFrom}.xhtml"
+                rendered="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed or mlrbuq1qxxwwqqhexxxxnextserialnoHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty mlrbuq1qxxwwqqhexxxxnextserialnoHome.mlrbuq1qxxwwqqhexxxxnextserialnoFrom ? 'home' : mlrbuq1qxxwwqqhexxxxnextserialnoHome.mlrbuq1qxxwwqqhexxxxnextserialnoFrom}.xhtml"
+                rendered="#{!mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed and !mlrbuq1qxxwwqqhexxxxnextserialnoHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

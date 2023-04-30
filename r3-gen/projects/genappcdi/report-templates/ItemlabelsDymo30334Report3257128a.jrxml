@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ItemlabelsDymo30334Report3257128a " pageWidth="132" pageHeight="74" whenNoDataType="NoPages" columnWidth="132" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" resourceBundle="messages" whenResourceMissingType="Key" uuid="7f44f777-0ec7-4d96-bb0e-387de29e98c4">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="genapp"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="DisplayAs" class="java.lang.String">
+		<parameterDescription><![CDATA[Report Output as HTML or as PDF]]></parameterDescription>
+		<defaultValueExpression><![CDATA["PDF"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Start" class="java.lang.String">
+		<parameterDescription><![CDATA[Start Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="End" class="java.lang.String">
+		<parameterDescription><![CDATA[End Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MarkedOnes" class="java.lang.Boolean">
+		<parameterDescription><![CDATA[Select Marked Records Only]]></parameterDescription>
+	</parameter>
+	<parameter name="INVOICEETC_ID" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Detail]]></parameterDescription>
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ForTargetId" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Customer,Vendor etc]]></parameterDescription>
+		<defaultValueExpression><![CDATA[9999]]></defaultValueExpression>
+	</parameter>
+	<parameter name="owner2Code" class="java.lang.String">
+		<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+		<defaultValueExpression><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+      item."sid" AS ITEM_sid,
+      item."matcode" AS ITEM_matcode,
+      item."quantity" AS ITEM_quantity,
+      item."descript" AS ITEM_descript,
+      item."source1" AS ITEM_source1,
+      item."upccode" AS ITEM_upccode,
+      item."cost" AS ITEM_cost,
+      item."replcost" AS ITEM_replcost,
+      item."selprice" AS ITEM_selprice,
+      item."spricold" AS ITEM_spricold,
+      item."spricnew" AS ITEM_spricnew,
+      item."spriceffdt" AS ITEM_spriceffdt,
+      item."shipcode" AS ITEM_shipcode,
+      item."qtylevel1" AS ITEM_qtylevel1,
+      item."unit" AS ITEM_unit,
+      item."type" AS ITEM_type,
+      item."tax1" AS ITEM_tax1,
+      item."tax2" AS ITEM_tax2,
+      item."aliascode" AS ITEM_aliascode,
+      item."avgprice" AS ITEM_avgprice,
+      item."parentcode" AS item_PARENTCODE,
+      item."location" AS item_LOCATION,
+      item."subcodesn" AS ITEM_subcodesn,
+      item."subcodesn2" AS ITEM_subcodesn2,
+      item."subcodesn3" AS ITEM_subcodesn3,
+      item."effdate" AS ITEM_effdate,
+      item."integrset" AS ITEM_integrset,
+      item."notes" AS ITEM_notes,
+      item."docmnt" AS ITEM_docmnt,
+      item."source2" AS ITEM_source2,
+      item."misccode1" AS ITEM_misccode1,
+      item."misccode2" AS ITEM_misccode2,
+      item."caseqty" AS ITEM_caseqty,
+      item."datetorenew" AS ITEM_datetorenew,
+      item."tax3" AS ITEM_tax3,
+      item."dateadded" AS ITEM_dateadded,
+      item."dateexpiry" AS ITEM_dateexpiry,
+      item."printmstat" AS ITEM_printmstat,
+      item."prinmtfldt" AS ITEM_prinmtfldt,
+      item."avgcost" AS ITEM_avgcost,
+      item."statusfl" AS ITEM_statusfl,
+      item."statusfldt" AS ITEM_statusfldt,
+      item."cuordqty" AS ITEM_cuordqty,
+      item."venorqty" AS ITEM_venorqty,
+      item."cupicqty" AS ITEM_cupicqty,
+      item."venpiqty" AS ITEM_venpiqty,
+      item."cuinvqty" AS ITEM_cuinvqty,
+      item."cushiqty" AS ITEM_cushiqty,
+      item."venshqty" AS ITEM_venshqty,
+      item."owner" AS ITEM_owner,
+      item."barupc" AS ITEM_barupc,
+      item."owner2" AS item_owner2
+FROM
+       "genapp"."item" item WHERE 
+         (item."matcode") >=  $P{Start} AND   (item."matcode") <= $P{End} AND
+       item."owner2" = $P{owner2Code}]]>
+	</queryString>
+	<field name="ITEM_SID" class="java.lang.Integer"/>
+	<field name="ITEM_MATCODE" class="java.lang.String"/>
+	<field name="ITEM_QUANTITY" class="java.lang.String"/>
+	<field name="ITEM_DESCRIPT" class="java.lang.String"/>
+	<field name="ITEM_SOURCE1" class="java.lang.String"/>
+	<field name="ITEM_UPCCODE" class="java.lang.String"/>
+	<field name="ITEM_COST" class="java.lang.String"/>
+	<field name="ITEM_REPLCOST" class="java.lang.String"/>
+	<field name="ITEM_SELPRICE" class="java.lang.String"/>
+	<field name="ITEM_SPRICOLD" class="java.lang.String"/>
+	<field name="ITEM_SPRICNEW" class="java.lang.String"/>
+	<field name="ITEM_SPRICEFFDT" class="java.sql.Timestamp"/>
+	<field name="ITEM_SHIPCODE" class="java.lang.String"/>
+	<field name="ITEM_QTYLEVEL1" class="java.lang.String"/>
+	<field name="ITEM_UNIT" class="java.lang.String"/>
+	<field name="ITEM_TYPE" class="java.lang.String"/>
+	<field name="ITEM_TAX1" class="java.lang.String"/>
+	<field name="ITEM_TAX2" class="java.lang.String"/>
+	<field name="ITEM_ALIASCODE" class="java.lang.String"/>
+	<field name="ITEM_AVGPRICE" class="java.lang.String"/>
+	<field name="ITEM_PARENTCODE" class="java.lang.Integer"/>
+	<field name="ITEM_LOCATION" class="java.lang.Integer"/>
+	<field name="ITEM_SUBCODESN" class="java.lang.String"/>
+	<field name="ITEM_SUBCODESN2" class="java.lang.String"/>
+	<field name="ITEM_SUBCODESN3" class="java.lang.String"/>
+	<field name="ITEM_EFFDATE" class="java.sql.Timestamp"/>
+	<field name="ITEM_INTEGRSET" class="java.lang.String"/>
+	<field name="ITEM_NOTES" class="java.lang.String"/>
+	<field name="ITEM_DOCMNT" class="java.lang.String"/>
+	<field name="ITEM_SOURCE2" class="java.lang.String"/>
+	<field name="ITEM_MISCCODE1" class="java.lang.String"/>
+	<field name="ITEM_MISCCODE2" class="java.lang.String"/>
+	<field name="ITEM_CASEQTY" class="java.lang.String"/>
+	<field name="ITEM_DATETORENEW" class="java.sql.Timestamp"/>
+	<field name="ITEM_TAX3" class="java.lang.String"/>
+	<field name="ITEM_DATEADDED" class="java.sql.Timestamp"/>
+	<field name="ITEM_DATEEXPIRY" class="java.sql.Timestamp"/>
+	<field name="ITEM_PRINTMSTAT" class="java.lang.Integer"/>
+	<field name="ITEM_PRINMTFLDT" class="java.sql.Timestamp"/>
+	<field name="ITEM_AVGCOST" class="java.lang.String"/>
+	<field name="ITEM_STATUSFL" class="java.lang.Integer"/>
+	<field name="ITEM_STATUSFLDT" class="java.sql.Timestamp"/>
+	<field name="ITEM_CUORDQTY" class="java.lang.String"/>
+	<field name="ITEM_VENORQTY" class="java.lang.String"/>
+	<field name="ITEM_CUPICQTY" class="java.lang.String"/>
+	<field name="ITEM_VENPIQTY" class="java.lang.String"/>
+	<field name="ITEM_CUINVQTY" class="java.lang.String"/>
+	<field name="ITEM_CUSHIQTY" class="java.lang.String"/>
+	<field name="ITEM_VENSHQTY" class="java.lang.String"/>
+	<field name="ITEM_OWNER" class="java.lang.String"/>
+	<field name="ITEM_BARUPC" class="java.lang.String"/>
+	<field name="ITEM_OWNER2" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="74" splitType="Stretch">
+			<componentElement>
+				<reportElement positionType="Float" x="8" y="10" width="117" height="20" uuid="1b5a46c4-0d3d-44c3-b7e1-ea88df71d0d2"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128A" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{ITEM_SID}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="8" y="30" width="116" height="20" uuid="00b25f7e-6bb6-4464-ae09-84d4ec544218"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph lineSpacing="AtLeast"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEM_ALIASCODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="50" width="72" height="24" uuid="c4b358d1-e192-4b6d-ba8a-1fd1b53a0dbb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ITEM_MATCODE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="50" width="44" height="24" uuid="5c7bb220-6a04-4652-8149-78592fb21f81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ITEM_MISCCODE1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Persistence deployment descriptor for dev profile used for gen only, not for deploy part
+     persistence-dev.xml becomes persistence.xml via ant/maven build
+ -->
+<!-- generate sources need provider as org.hibernate.ejb.HibernatePersistence, but deploy may need other settings
+      so in ant build-r3model starts with target value as dev. and changes to tomee or wildfly 
+  
+-->
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+   <persistence-unit name="genappcdi">
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      <jta-data-source>java:/RaaspiSQLDS</jta-data-source>
+      <!-- classes are explicitly put in here why ?? --> 
+      <class>com.rcomputer.genapp.model.Yxxxuq1r1xwwqqhxxxxxresource</class>
+      <class>com.rcomputer.genapp.model.Yxxxuq1l1xwwqqhxxxxxresource_bundle</class>
+      <properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+         <!-- in production change none to validate. none is needed to allow app to come up and create and populate schema and tables -->
+         <property name="hibernate.hbm2ddl.auto" value="none"/>
+         <property name="hibernate.show_sql" value="false"/>
+         <property name="hibernate.format_sql" value="true"/>
+         <property name="hibernate.default_schema" value="GENAPP"/>
+         <!-- not needed in wildfly default uses infinispan and entityManager handled by CDI
+          <property name="jboss.entity.manager.factory.jndi.name" value="java:/genappEntityManagerFactory"/>
+          <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
+         -->
+         <property name="hibernate.cache.use_second_level_cache"
+          value="false" />
+         <property name="hibernate.cache.use_query_cache"
+         value="false" /> 
+         <property name="hibernate.transaction.jta.platform" 
+         value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
+         <property name="hibernate.enable_lazy_load_no_trans" value="true" />
+      </properties>
+   </persistence-unit>
+    
+</persistence>

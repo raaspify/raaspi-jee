@@ -1,0 +1,537 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplateBare.xhtml">
+
+<f:metadata>
+    <f:viewParam name="categoryJay" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+
+</f:metadata>
+<!-- Not Generated   -->
+<ui:remove>
+ copied-not generated
+ comes from backOffice main menu item POS to add items by scanning barcodes or via Next Item button to navigate and selecting.
+ each cart item is an order item and linked to a dummy customer as user logon id > customer but order type is pos as opposed to type cart if online cart.
+ This allows a back office user to process POS (but same user can also order online as a customer). POS orders can also be tracked by logon ids.
+ Add to cart button will add a scanned item to the POS cart while confirm to cart button will add a selected item to POS cart.
+ Either scan the next item or use next item button to add next item. 
+ scan item qty is allways 1, so scan as many times or select an item and change qty before confirm
+ checkout button allows further edit ie change qty or remove an item and then final payment processing.
+ 
+ Besides handling on premises customer POS cart and POS checkout, the cartPOS also handles customers coming to premises
+ to pickUp prePaid items or to pay and pickup items via 'Process PickUp items' or to handle shipment for any active or 
+  prePaid orders via 'Process Shipment' button . The third button is to take payment for order in shipped status.
+ (1)Process PickUp items button calls convertCartToPos method to change status to invoiced to indicate the items are seggregated
+ and ready for pickup by customer. type is not changed. pos cart type uses virtual customer and web online cart uses real customer.
+  rendered by getSuggestList('COP') and parameters are order selected and current pos cart Order entity (should be null?)
+
+ (2) Process Shipment button links to shipmentEdit.quoteorderexists page to allow shipment for shipment ready orders 
+   getSuggestList('OP') shows shipment ready orders. tbd show 3 drop down list?? and pass the order to shipmentEdit.quoteorderexists page
+
+ (3) Process Payment button links to cpaymentEdit.quoteorderexists page to allow invoiced/shipped orders for payment.
+  payment can be via POS terminal at backoffice premises or at customer premise via portable pos terminal at delivery time  
+   getSuggestList('NC') shows payment ready orders ie not closed and shipped.
+   tbd show 3 drop down list?? and pass the order to cpaymentEdit.quoteorderexists page
+
+(4) last button shows non customer entered txns ie those entered by backofffice staff on behalf of customers like phone orders, 
+      orders against quotations etc.
+
+
+Just like regular backoffice created orders, cart type pickUp orders will follow (1) to get invoiced and then (2) for pseudo 
+ shipment when picked up or real shipment if prePaid and delivery or toPay and delivery.
+ Once shipped payment capture (release hold and xfer money) or portable pos terminal payment at delivery.
+Of course same steps can be done using backOffice Transaction menue options. 
+  
+
+ handled here but done 
+ see checkoutPOS for backoffice POS payment
+ see cartItem for online cart used by customers
+ see checkout for online checkout used by customer for card payment
+ see itemDetailsPOS to either scan or browse/search and select an item to POS cart
+
+</ui:remove>
+                       
+<ui:define name="body">
+    <h:form id="fpxxfq1a5xwwqqhxxxxxitemSearch" styleClass="edit">
+<h:outputStylesheet>
+
+
+
+</h:outputStylesheet>
+<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"/> 
+              <h:outputText value="#{authenticator.currcaldates}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"/> 
+	  </p:toolbarGroup>
+
+	  <p:toolbarGroup location="right">
+         <h:commandLink  id="newtb" styleClass="hdrLink" outcome="/home.xhtml" target="_blank"  iconClass="pic" value="#{messages['New']} #{messages['Tab']}"
+          rendered ="true" >
+         </h:commandLink>
+         &nbsp;&nbsp;&nbsp;
+          <ui:fragment rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+              <h:link id="CartPos" outcome="/checkoutPOS.xhtml" value="#{messages['Checkout']}" 
+                rendered="#{identity.loggedIn}"  >
+               <h:graphicImage value="/img/cash-register-48.png" styleClass="pic"/>
+                <f:param name="pos" value="pos"/>
+                <f:param name="amt" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0]==null?0:fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z1xxztprlxxxxxxxxxxxamounttotal}"/>
+              </h:link>
+              <h:link id="Cart" outcome="/ItemDetailsPOS.xhtml" value="#{messages['Cart']}" rendered="#{identity.loggedIn}"  >
+               <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+              </h:link>
+              <p:panel id="jcount">
+              <h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()}]" rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() gt 0}">
+              </h:outputText>
+              <h:outputText value="[Empty]" rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() == null}"/>
+              </p:panel>
+
+              <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ItemHelp']!='ItemHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+          </ui:fragment>
+  	  </p:toolbarGroup>
+
+          <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+              <h:link id="CartPosm" outcome="/checkoutPOS.xhtml" value="#{messages['Checkout']}" propagation="none"
+               rendered="#{identity.loggedIn}"  >
+               <h:graphicImage value="/img/cash-register-48.png" styleClass="pic"/>
+                <f:param name="pos" value="pos"/>
+                <f:param name="amt" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0]==null?0:fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z1xxztprlxxxxxxxxxxxamounttotal}"/>
+              </h:link>
+              <br></br>
+              <h:link id="Cartm" outcome="/ItemDetailsPOS.xhtml" value="#{messages['Cart']}" propagation="none" rendered="#{identity.loggedIn}"  >
+               <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+              </h:link>
+              <h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()}]" rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() gt 0}">
+              </h:outputText>
+              &nbsp;<h:outputText value="[Empty]" rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() == null}"/>
+
+              <h:graphicImage id="Helptm" value="/img/help.gif" styleClass="pic" rendered="#{messages['ItemHelp']!='ItemHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+          </ui:fragment>
+
+	</p:toolbar>
+
+          <p:panel toggleable="true" toggleableHeader="true" style="color:red;width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'100%':'60%'};"  switchType="client" collapsed="true" 
+           rendered="#{not empty facesContext.maximumSeverity or fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() gt 0}" header="#{messages['Notification']} #{empty facesContext.maximumSeverity?' [none]':' [yes]'}"
+            leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/wdot.png">
+             <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+          </p:panel>
+       <c:set var = "dpc" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:3}">
+       </c:set>
+
+            <h4 class="heading">#{messages['POS']} #{messages['Cart']}
+              <h:graphicImage value="/img/Cart32.png" />
+              &#160;<h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() gt 0}">
+              </h:outputText>
+              <h:outputText class="small" value=" #{messages['Ordernumber']}" rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')}"/>
+              &nbsp;&nbsp;<h:outputText class="small" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].a0xxuncobvxxxxxxxxxxpurchsno}" rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')}"/>
+              &nbsp;&nbsp;<h:outputText class="small" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].a0xxuncobvxxxxxxxxxxpurchsno} completed" rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getConfirmedCartedList('pos')}"/>
+            </h4>
+
+            <br></br>
+    
+     <h:panelGrid columns="#{dpc}">
+
+            <p:panel id="cartdetails"  
+                 style="background-color:lightgrey;float:left;">
+
+           <ui:decorate template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Scan']} #{messages['Item']} 
+            </ui:define>
+             <h:inputText id="itemA" required="false" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.notesToPass}" 
+               validator="#{fpxxfq1a5xwwqqhxxxxxitemHome.validateAndSelectXxxxxxxxmatsid}" 
+               pt:autofocus="true" onclick="this.value='';" onfocus="this.select()"
+             >
+             </h:inputText>
+           </ui:decorate> 
+           <ui:remove> addScanToCart needed, since we do not know item sid yet and cannot put link here.</ui:remove>
+           <h:commandButton id="AddToCartj" class="w3-button w3-blue"  rendered= "true"
+             action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addScanToCart(fpxxfq1a5xwwqqhxxxxxitemHome.notesToPass,1,'cart')}" 
+              value="#{messages['Add']} #{messages['To']} #{messages['Cart']}">
+           </h:commandButton>
+           <p:hotkey id="keyReturn" key="return" onkeydown="PF(''AddToCartj').click()" enabledInInput="true"/>
+
+           <br></br><br></br>
+
+
+                    <h:outputText id="CartTotalTextj" value="#{messages.Total}"  style="font-size:x-large;"/>
+                            &nbsp;<h:outputText id="CartTotalValuej" style="font-size:x-large;" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z1xxztprlxxxxxxxxxxxamounttotal}">
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+
+
+
+                    <p:dataTable id="CartItemsTable" 
+                       value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')}" var="item"
+                        rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')}">
+                        <p:column id="columncuodl" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"
+                            headerText="#{messages.line}">
+                            #{item.b1xxzo11bvlxxxxxxxxxline} 
+                        </p:column>     
+                       <ui:remove> 
+                        <p:column id="column2" headerText="#{messages.code}">
+                            <h:outputText value="#{item.fpxxfq1a5xwwqqhxxxxxitem.a0xxukixbxxxxxxxxxxxmatcode}" />  
+                        </p:column>     
+                       </ui:remove> 
+
+                        <p:column id="column3"  >
+                            <f:facet id="ActorFacet" name="header">
+                                <h:outputText id="ActorText" value="#{messages.description}" />
+                            </f:facet>
+                            <h:outputText value="#{fn:substring(item.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript,0,25)}"  /> 
+                            <p class="mob-text" data-toggle="tooltip" title="One row at a time!">
+                            <h:selectBooleanCheckbox  id="CartRemoveCheckbox" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                            &nbsp;<h:commandButton id="UpdateCartButtonr" class="btn" 
+                             action="#{fpxxfq1a5xwwqqhxxxxxitemHome.updateProductsToOrder(item)}" 
+                             value="#{messages['remove']} " >
+                            </h:commandButton>                 
+                            </p>
+                        </p:column>                        
+                        <p:column id="column4" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+                            <f:facet id="PriceFacet" name="header">
+                                <h:outputText id="PriceText" value="#{messages.price}" />
+                            </f:facet>
+                            <h:outputText id="PriceValueText" value="#{item.z5xxzpxravxxxxxxxxxxordprice}" rendered= "#{!item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" >
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+                            <h:outputText id="PriceValueQuote" value="Request Quotation" rendered= "#{item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                        </p:column>   
+                  
+                        <p:column id="column5">
+                            <f:facet id="QuantityFacet" name="header">
+                                <h:outputText id="QuantityText" value="#{messages.Qty}" style="width:50px;"/>
+                            </f:facet> 
+                             <h:inputText id="QuantityValueText" value="#{item.z3xxeqxxbvnxxxxxxxxxqtyordrd}" size="3" readonly="true" style="width:50px;" />
+                        </p:column> 
+  
+                        <p:column id="columnlt">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages.Linetotal}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.zgxxzlpxxvxxxxxxxxxxlinetotl}" size="6" readonly="true" >
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                             </h:inputText>
+                        </p:column>  
+
+                    </p:dataTable>
+
+
+
+             </p:panel>
+
+     <p:panel style="float:left;">      
+
+
+                            <h:panelGroup>
+                             <p:panel style="max-height;90px;">
+                              <h:graphicImage alt="no picture"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+                               value="/ImageServletCdi/?seq=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=90" 
+                               style=";max-height:150px;max-width:200px;">
+                              </h:graphicImage> 
+                             </p:panel>
+                             <h:commandButton value="+" onclick="PF('ipopup').show()" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}">
+                             </h:commandButton>
+                            </h:panelGroup>
+                            <br></br><h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b1xxuszsbvxxxxxxxxxxdescript}"   style="font-size: 120%;font-weight: bold;;text-align:left;"  maxlength="30" disabled="true" />
+                            <p:panel toggleable="true" toggleableHeader="true" style="width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'100%':'100%'};font-size: 60%;"  switchType="client" collapsed="false" 
+                             rendered="#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w7xxuznxbvxxxxxxxxxxnotes) or not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}" header="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w7xxuznxbvxxxxxxxxxxnotes,0,70)}..."
+                             leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+                             <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode}"   style="font-size: 110%;font-weight: bold;text-align:left;"  maxlength="30" disabled="true" /><br></br>
+                             <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w7xxuznxbvxxxxxxxxxxnotes}"  style="text-align: left;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w7xxuznxbvxxxxxxxxxxnotes)}"  >
+                             </h:outputText><br></br>
+
+         <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.equals('SI-D')}"> 
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantSizeText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),0,9)}"  style="text-align: left;font-weight: bold;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantSizeText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),9,18)}"  style="text-align: left;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantColourText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),0,9)}"  style="text-align: left;font-weight: bold;color:tomato;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantColourText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),9,18)}"  style="text-align: left;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+        
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantMaterialText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),0,9)}"  style="text-align: left;font-weight: bold;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantMaterialText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),9,18)}"  style="text-align: left;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantBrandText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),0,9)}"  style="text-align: left;font-weight: bold;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantBrandText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),9,18)}"  style="text-align: left;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+         </ui:fragment>
+                            </p:panel>
+
+                           <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c2fbcxxrehxxsxxxxxxxspriceffdt.time le session.lastAccessedTime and fpxxfq1a5xwwqqhxxxxxitemHome.instance.h1xxcxxrbxxxxxxxxxxxeffdate.time gt session.lastAccessedTime}">
+                           <h:panelGrid columns="4"> 
+                            <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c1xxzxxxbhxxsxxxxxxxspricnew}"  style="text-align: left;" rendered= "#{!fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                            <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b8fbzpxxbvxxxxxxxxxxselprice}"  style="text-align: left;text-decoration: line-through" rendered= "#{!fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                           </h:panelGrid> 
+                           </ui:fragment>
+
+                           <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.h1xxcxxrbxxxxxxxxxxxeffdate.time le session.lastAccessedTime}" >
+                           <h:panelGrid columns="4"> 
+                            <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b8fbzpxxbvxxxxxxxxxxselprice}"  style="text-align: left;" rendered= "#{!fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                           </h:panelGrid> 
+                           </ui:fragment>
+                           <ui:fragment rendered="#{yxxxuq591xwwqqhxxxxxrate1fList.getSuggestList('DC').size() > 0
+                                        and !fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+                                        and yxxxuq591xwwqqhxxxxxrate1fList.getCouponCodeExists(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid)}">                           
+                           <h:panelGrid columns="4"> 
+                            <h:outputText value="#{messages['Coupon']} #{messages['code']}"  style="text-align: left;"  />
+                            <h:inputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.couponCode}"  style="text-align: left;"  >
+                            </h:inputText>
+                           </h:panelGrid> 
+                           </ui:fragment>
+
+                           <h:panelGrid columns="4"> 
+                            <h:outputText value="Request Quotation" rendered= "#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                            <h:outputText value=", #{messages['In']} #{messages['Stock']}, " style="text-align: left;"  rendered= "#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)') and fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity gt 0}" />
+                            <h:outputText value=", #{messages['Out']} #{messages['Of']} #{messages['Stock']}, " rendered= "#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)') and fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity le 0}" />
+                            <h:outputText value="#{messages['Qty']}"  rendered= "#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('SI-') and !fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('SI-L')}" />
+                            <h:inputText  
+                             value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.tempQuantity}" minValue="1" maxValue="999"
+                             rendered= "#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('SI-') and !fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('SI-L') }"
+                              pt:type="number" class="form-control"
+                             step="1">
+                            </h:inputText>
+                           </h:panelGrid> 
+
+                            <h:outputText  style="color:red;" rendered= "#{!identity.loggedIn and empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() }"
+                                 value="#{messages['Guest']} #{messages['mode']}, #{messages['please']} #{messages['enter']} #{messages['your']} #{messages['email']} #{messages['address']} #{messages['before']} #{messages['confirm']}">
+                            </h:outputText>
+                            <ui:fragment rendered= "#{!identity.loggedIn and empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() }">
+                             <br></br>
+                            </ui:fragment>
+
+                            <h:commandButton id="AddToCart" class="w3-button w3-blue"  rendered= "#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity gt 0 and (fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()==null or fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()>=0)}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrder(fpxxfq1a5xwwqqhxxxxxitemHome.instance,fpxxfq1a5xwwqqhxxxxxitemHome.instance.tempQuantity,'pos')}" 
+                                 value="#{messages['Confirm']} #{messages['To']} #{messages['Cart']}">
+                              <f:param name="categoryJay" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid}" />
+                            </h:commandButton>
+
+                            <ui:fragment rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()>0}">
+                             <br></br>
+                            </ui:fragment>
+
+                            <h:outputText  style="color:red;" rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()>0}"
+                                 value="#{messages['Last']} #{messages['item']} #{messages['Confirmed']}: #{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript}">
+                            </h:outputText>
+                            <br></br><h:button outcome="/ItemDetailsPOS.xhtml" rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()>0}"
+                             id="more1" class="w3-button w3-light-blue"
+                             value="#{messages['Next']} #{messages['item']}"/>
+              <br></br>
+
+
+      </p:panel> 
+     
+     </h:panelGrid>
+
+
+
+                            <p:dialog id="ipopup" modal="false" autosized="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF('ipopup').hide()">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=200" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdataTypeMime('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="PF('ipopup').hide()"/>
+                            </p:dialog>
+    
+    <div class="actionButtons">    
+        <h:button outcome="/home.xhtml" class="w3-button w3-light-grey"
+                    id="done"
+                 value="#{messages['Done']}"/>
+        &nbsp;<h:button outcome="/ItemDetailsPOS.xhtml" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"
+                    id="more" class="w3-button w3-light-blue"
+                 value="#{messages['Next']} #{messages['item']}"/>
+              <ui:remove> clone cuinvoice extended_persist(true) to updates sids to pos order and terms of details for a cart order and update order term to codcoppos </ui:remove>
+
+              
+              &nbsp;<h:button id="Cartb3" class="w3-button w3-blue" outcome="/checkoutPOS.xhtml" value="#{messages['Checkout']}" propagation="none"   
+                 rendered= "#{identity.loggedIn  and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()>0}">
+                <f:param name="pos" value="pos"/>
+                <f:param name="amt" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0]==null?0:fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z1xxztprlxxxxxxxxxxxamounttotal}"/>
+              </h:button>
+          <br></br><br></br>
+           <ui:remove> above area handles on-premises purchase and in-peson payments. Can be cash or Square POS card payment app or terminal.
+           below area  handles
+           (a) cash or Square POS payments for toPay online purchases which are pickUp/shipment and invoice done.
+           (b) Payment and Capture for prePay online purchases which are pickUp/shipment and invoice done.
+           (c) pickUp/shipment and invoice  for prePay online purchases to ready them for payment and capture of funds.
+           (d) pickUp/shipment and invoice for toPay online purchases to ready them for cash or Square POS card payment.
+           (e) and handling backoffice purchases on behalf of customers ie pickUp/shipment, invoice and payment via draft/chq or 
+                manual credit card entry in Square POS app/terminal
+           </ui:remove>
+          #{messages['Select']} #{messages['ToPay']} #{messages['Online']} #{messages['Invoice']}/#{messages['Order']} 
+          <br></br>
+                <h:selectOneMenu onchange="submit()"
+                   var ="result"   
+                   value="#{trexuq244xwwqqhxxxxxcuordersHome.valueOverRide}">
+                 <f:selectItem itemValue="#{null}" itemLabel="" />
+                  <f:selectItems value="#{trexuq266xwwqqhxxxxxcuinvoiceList.getSuggestList('IPDTP')}" var="result"
+                  itemValue="#{result.a0xxuncibvxxxxxxxxxxinvoice}"
+                 itemLabel="#{result.a0xxuncibvxxxxxxxxxxinvoice.concat('/').concat(result.trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno).concat('/').concat(result.z1xxztprlxxxxxxxxxxxamounttotal).concat('/').concat(result.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript).concat('/').concat(
+                  result.c3xxuxxrbv09xxxxxxxxterms).concat('/').concat(result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid':( result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped': (result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced':(result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 1 ?'ordered':'other'))))))}"
+                  />
+                </h:selectOneMenu>
+            &nbsp;<p:commandButton id="refreshj" update="@form" 
+                         value="#{messages.Refresh} #{messages.data}" 
+                         action="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')}"
+                       rendered="#{identity.loggedIn}">
+                         </p:commandButton>
+          <br/><br></br>
+        <ui:remove>COP > ToPay and PickUp </ui:remove>
+        <h:link outcome="/checkoutInvoiced.xhtml" rendered="#{identity.loggedIn}" 
+                    id="ordtoinv" class="w3-button w3-light-blue" 
+                 value="#{messages['Accept']} #{messages['Payment']} - #{messages['after']} #{messages['selecting']} #{messages['above']} ">
+                     <f:param name="inv" value="#{trexuq244xwwqqhxxxxxcuordersHome.valueOverRide == null?'':trexuq244xwwqqhxxxxxcuordersHome.valueOverRide}" />
+                          <p:tooltip   for="ordtoinv" value="#{messages.Refresh} #{messages.data} #{messages.rebuilds} #{messages.select} #{messages.list} "/>  
+        </h:link>
+        [#{trexuq266xwwqqhxxxxxcuinvoiceList.getSuggestList('IPDTP').size()}]
+        <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+         <br></br><br></br>
+        </ui:fragment>
+        <ui:fragment rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+         &nbsp;&nbsp;
+        </ui:fragment>
+
+          <br/><br></br>
+          #{messages['Select']} #{messages['PrePaid']} #{messages['Online']} #{messages['Invoice']}/#{messages['Order']}  
+          <br></br>
+                <h:selectOneMenu onchange="submit()"
+                   var ="result"   
+                   value="#{trexuq266xwwqqhxxxxxcuinvoiceHome.valueOverRide}">
+                 <f:selectItem itemValue="#{null}" itemLabel="" />
+                  <f:selectItems value="#{trexuq266xwwqqhxxxxxcuinvoiceList.getSuggestList('IPDPP')}" var="result"
+                  itemValue="#{result.a0xxuncibvxxxxxxxxxxinvoice}"
+                 itemLabel="#{result.a0xxuncibvxxxxxxxxxxinvoice.concat('/').concat(result.trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno).concat('/').concat(result.z1xxztprlxxxxxxxxxxxamounttotal).concat('/').concat(result.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript).concat('/').concat(
+                  result.c3xxuxxrbv09xxxxxxxxterms).concat('/').concat(result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid':( result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped': (result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced':(result.z5xxzzfxhhxxxxxxxxxxstatusfl eq 1 ?'ordered':'other'))))))}"
+                  />
+                </h:selectOneMenu>
+          <br/><br></br>
+        <ui:remove>COP > PrePay payment/capture </ui:remove>
+        <h:link outcome="/cpaymentEdit.quoteorderexists.xhtml" rendered="#{identity.loggedIn}" 
+                    id="ordtoinvp2" class="w3-button w3-light-blue" 
+                 value="#{messages['Create']} #{messages['Payment']}/#{messages['Capture']} - #{messages['after']} #{messages['selecting']} #{messages['above']} ">
+         <f:param name="inv" value="#{trexuq266xwwqqhxxxxxcuinvoiceHome.valueOverRide == null?'':trexuq266xwwqqhxxxxxcuinvoiceHome.valueOverRide}" />
+                          <p:tooltip   for="ordtoinvp2" value="#{messages.Refresh} #{messages.data} #{messages.rebuilds} #{messages.select} #{messages.list} "/>  
+        </h:link>
+        [#{trexuq266xwwqqhxxxxxcuinvoiceList.getSuggestList('IPDPP').size()}]
+        <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+         <br></br><br></br>
+        </ui:fragment>
+        <ui:fragment rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+         &nbsp;&nbsp;
+        </ui:fragment>
+
+          <br/><br></br>
+        <ui:remove>OP > order status Ordered/active(1) or paid(16)  PM PickUp Medium CM Cash(payment) Medium SM Standard Medium </ui:remove>
+       <h:link outcome="/shipmentEdit.quoteorderexists.xhtml" rendered="#{identity.loggedIn}"
+                    id="shpp" class="w3-button w3-light-grey" target="_blank"
+                 value="#{messages['Arrange']} #{messages['Delivery']}/#{messages['Invoice']} #{messages['for']} #{messages['Pay on PickUp']} ">
+           <f:param name="shipType" value="PM"/>
+           <f:param name="prefix" value="COP"/>
+       </h:link>[#{trexuq244xwwqqhxxxxxcuordersList.getSuggestList('COP').size()}]
+        <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+         <br></br><br></br>
+        </ui:fragment>
+        &nbsp;&nbsp;
+
+       <h:link outcome="/shipmentEdit.quoteorderexists.xhtml" rendered="#{identity.loggedIn}"
+                    id="shppd" class="w3-button w3-light-grey" target="_blank"
+                 value="#{messages['Arrange']} #{messages['Shipment']}/#{messages['Invoice']}  #{messages['for']}  #{messages['Pay on Delivery']} ">
+           <f:param name="shipType" value="CM"/>
+           <f:param name="prefix" value="POD"/>
+       </h:link>[#{trexuq244xwwqqhxxxxxcuordersList.getSuggestList('POD').size()}]
+        <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+         <br></br><br></br>
+        </ui:fragment>
+        &nbsp;&nbsp;
+
+
+        <h:link outcome="/shipmentEdit.quoteorderexists.xhtml" rendered="#{identity.loggedIn}"
+                    id="shp" class="w3-button w3-light-grey" target="_blank"
+                 value="#{messages['Arrange']} #{messages['PickUp']} #{messages['for']}  #{messages['Prepaid']} #{messages['orders']}">
+           <f:param name="shipType" value="PM"/>
+           <f:param name="prefix" value="PP"/>
+           </h:link>[#{trexuq244xwwqqhxxxxxcuordersList.getSuggestList('PP').size()}]
+        <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+         <br></br><br></br>
+        </ui:fragment>
+        &nbsp;&nbsp;
+        <h:link outcome="/shipmentEdit.quoteorderexists.xhtml" rendered="#{identity.loggedIn}"
+                    id="shpd" class="w3-button w3-light-grey" target="_blank"
+                 value="#{messages['Arrange']} #{messages['Delivery']} #{messages['for']}  #{messages['Prepaid']} #{messages['orders']}">
+           <f:param name="shipType" value="SM"/>
+           <f:param name="prefix" value="PD"/>
+           </h:link>[#{trexuq244xwwqqhxxxxxcuordersList.getSuggestList('PD').size()}]
+        <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+         <br></br><br></br>
+        </ui:fragment>
+        &nbsp;&nbsp;
+
+       <h:link outcome="/shipmentEdit.quoteorderexists.xhtml" rendered="#{identity.loggedIn}"
+                    id="shppm" class="w3-button w3-light-grey" target="_blank"
+                 value="#{messages['My']} #{messages['backoffice']} #{messages['order']} #{messages['entries']}">
+           <f:param name="shipType" value="SM"/>
+           <f:param name="prefix" value="MY"/>
+       </h:link>[#{trexuq244xwwqqhxxxxxcuordersList.getSuggestList('MY').size()}]
+        <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+         <br></br><br></br>
+        </ui:fragment>
+        &nbsp;&nbsp;
+        <br></br>  <h:outputText value="#{messages['Cart']} [Empty]" rendered= "#{identity.loggedIn  and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()==null}"/>
+
+    </div>
+      <br></br>
+             <ui:fragment id="custemail2" template="layout/edit.xhtml" rendered="#{!identity.loggedIn }">
+             <h:outputText value="#{messages['email']} #{messages['address']}" style="font-weight:bold;color:blue;"/>
+        	 <h:inputText  label="email" id="em1b" value="#{customIdentity.imailaddr}" rendered="#{!identity.loggedIn }"
+                  pt:placeholder="email@xyz.com" />
+             </ui:fragment>
+
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with genJasperlabelsreports - A generator for JasperReports Labels -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+		 name="Jxxxuq201xwwqqhxxxxxcustomerAvery5960"
+		 columnCount="3"
+		 printOrder="Horizontal"
+		 orientation="Portrait"
+		 pageWidth="612"
+		 pageHeight="792"
+		 columnWidth="192"
+		 columnSpacing="8"
+		 leftMargin="13"
+		 rightMargin="7"
+		 topMargin="36"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 resourceBundle="messages"
+           whenResourceMissingType="Key">
+	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+
+	<parameter name="DisplayAs" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Report Output as HTML or as PDF]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["PDF"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Start" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Start Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="End" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[End Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MarkedOnes" isForPrompting="true" class="java.lang.Boolean">
+ 		<parameterDescription><![CDATA[Select Marked Records Only]]></parameterDescription>
+      </parameter>
+	<parameter name="INVOICEETC_ID" isForPrompting="false" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Detail]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ForTargetId" isForPrompting="false" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Customer,Vendor etc]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[9999]]></defaultValueExpression>
+	</parameter>
+	<parameter name="owner2Code" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reference" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Reference used in the report as notes or Pono etc]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+
+
+
+
+
+     	<queryString><![CDATA[SELECT
+      customer.sid AS CUSTOMER_sid,
+      customer.customer AS CUSTOMER_customer,
+      customer.title AS CUSTOMER_title,
+      customer.jobtitle AS CUSTOMER_jobtitle,
+      customer.lastname AS CUSTOMER_lastname,
+      customer.firstname AS CUSTOMER_firstname,
+      customer.middlenam AS CUSTOMER_middlenam,
+      customer.customerascompanyname AS CUSTOMER_customerascompanyname,
+      customer.companycode AS customer_COMPANYCODE,
+      customer.type AS CUSTOMER_type,
+      customer.integrset AS CUSTOMER_integrset,
+      customer.location AS customer_LOCATION,
+      customer.mailtocode AS customer_MAILTOCODE,
+      customer.shiptocode AS customer_SHIPTOCODE,
+      customer.phoneo AS CUSTOMER_phoneo,
+      customer.phoneh AS CUSTOMER_phoneh,
+      customer.phonec AS CUSTOMER_phonec,
+      customer.phonex AS CUSTOMER_phonex,
+      customer.lanaddr AS CUSTOMER_lanaddr,
+      customer.wanaddr AS CUSTOMER_wanaddr,
+      customer.lmailaddr AS CUSTOMER_lmailaddr,
+      customer.imailaddr AS CUSTOMER_imailaddr,
+      customer.rmailaddr AS CUSTOMER_rmailaddr,
+      customer.intaddr AS CUSTOMER_intaddr,
+      customer.dob AS CUSTOMER_dob,
+      customer.placeofbirth AS CUSTOMER_placeofbirth,
+      customer.inraddr AS CUSTOMER_inraddr,
+      customer.age AS CUSTOMER_age,
+      customer.sex AS CUSTOMER_sex,
+      customer.shiplabel AS CUSTOMER_shiplabel,
+      customer.descript AS CUSTOMER_descript,
+      customer.tax1 AS CUSTOMER_tax1,
+      customer.tax2 AS CUSTOMER_tax2,
+      customer.tax3 AS CUSTOMER_tax3,
+      customer.custtax1 AS CUSTOMER_custtax1,
+      customer.custtax2 AS CUSTOMER_custtax2,
+      customer.custtax3 AS CUSTOMER_custtax3,
+      customer.docmnt AS CUSTOMER_docmnt,
+      customer.contacted AS CUSTOMER_contacted,
+      customer.bywho AS CUSTOMER_bywho,
+      customer.nxtcontact AS CUSTOMER_nxtcontact,
+      customer.via AS CUSTOMER_via,
+      customer.keywords AS CUSTOMER_keywords,
+      customer.notes AS CUSTOMER_notes,
+      customer.defaultglac AS customer_DEFAULTGLAC,
+      customer.custtotl AS CUSTOMER_custtotl,
+      customer.cusrtotl AS CUSTOMER_cusrtotl,
+      customer.custtqty AS CUSTOMER_custtqty,
+      customer.cusrtqty AS CUSTOMER_cusrtqty,
+      customer.cusmtotl AS CUSTOMER_cusmtotl,
+      customer.cusdtotl AS CUSTOMER_cusdtotl,
+      customer.lastorder AS CUSTOMER_lastorder,
+      customer.lastinvoic AS CUSTOMER_lastinvoic,
+      customer.lastpaymnq AS CUSTOMER_lastpaymnq,
+      customer.printmstat AS CUSTOMER_printmstat,
+      customer.prinmtfldt AS CUSTOMER_prinmtfldt,
+      customer.statusfl AS CUSTOMER_statusfl,
+      customer.statusfldt AS CUSTOMER_statusfldt,
+      customer.totlpaid AS CUSTOMER_totlpaid,
+      customer.owner AS CUSTOMER_owner,
+      customer.owner2 AS customer_owner2,
+      address.addrl1 AS address_addrl1,
+      address.addrl2 AS address_addrl2,
+      address.city AS address_city,
+      address.provnstate AS address_provnstate,
+      address.country AS address_country,
+      address.pzcode AS address_pzcode
+FROM
+       genapp.customer customer left join genapp.address address on 
+        customer.mailtocode=address.sid WHERE 
+         (customer.customer) >=  $P{Start} AND   (customer.customer) <= $P{End} AND
+       customer.owner2 = $P{owner2Code}]]></queryString>
+      <field name="CUSTOMER_SID" class="java.lang.Integer"/>
+
+      <field name="CUSTOMER_CUSTOMER" class="java.lang.String"/>
+
+      <field name="CUSTOMER_TITLE" class="java.lang.String"/>
+
+      <field name="CUSTOMER_JOBTITLE" class="java.lang.String"/>
+
+      <field name="CUSTOMER_LASTNAME" class="java.lang.String"/>
+
+      <field name="CUSTOMER_FIRSTNAME" class="java.lang.String"/>
+
+      <field name="CUSTOMER_MIDDLENAM" class="java.lang.String"/>
+
+      <field name="CUSTOMER_CUSTOMERASCOMPANYNAME" class="java.lang.String"/>
+
+
+      <field name="CUSTOMER_COMPANYCODE" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="CUSTOMER_TYPE" class="java.lang.String"/>
+
+      <field name="CUSTOMER_INTEGRSET" class="java.lang.String"/>
+
+
+      <field name="CUSTOMER_LOCATION" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="CUSTOMER_MAILTOCODE" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="CUSTOMER_SHIPTOCODE" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+
+
+      <field name="CUSTOMER_PHONEO" class="java.lang.String"/>
+
+      <field name="CUSTOMER_PHONEH" class="java.lang.String"/>
+
+      <field name="CUSTOMER_PHONEC" class="java.lang.String"/>
+
+      <field name="CUSTOMER_PHONEX" class="java.lang.String"/>
+
+      <field name="CUSTOMER_LANADDR" class="java.lang.String"/>
+
+      <field name="CUSTOMER_WANADDR" class="java.lang.String"/>
+
+      <field name="CUSTOMER_LMAILADDR" class="java.lang.String"/>
+
+      <field name="CUSTOMER_IMAILADDR" class="java.lang.String"/>
+
+      <field name="CUSTOMER_RMAILADDR" class="java.lang.String"/>
+
+      <field name="CUSTOMER_INTADDR" class="java.lang.String"/>
+
+      <field name="CUSTOMER_DOB" class="java.sql.Timestamp"/>
+
+      <field name="CUSTOMER_PLACEOFBIRTH" class="java.lang.String"/>
+
+      <field name="CUSTOMER_INRADDR" class="java.lang.String"/>
+
+      <field name="CUSTOMER_AGE" class="java.lang.Integer"/>
+
+      <field name="CUSTOMER_SEX" class="java.lang.String"/>
+
+      <field name="CUSTOMER_SHIPLABEL" class="java.lang.String"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <field name="CUSTOMER_DESCRIPT" class="java.lang.String"/>
+
+      <field name="CUSTOMER_TAX1" class="java.lang.String"/>
+
+      <field name="CUSTOMER_TAX2" class="java.lang.String"/>
+
+      <field name="CUSTOMER_TAX3" class="java.lang.String"/>
+
+      <field name="CUSTOMER_CUSTTAX1" class="java.lang.String"/>
+
+      <field name="CUSTOMER_CUSTTAX2" class="java.lang.String"/>
+
+      <field name="CUSTOMER_CUSTTAX3" class="java.lang.String"/>
+
+      <field name="CUSTOMER_DOCMNT" class="java.lang.String"/>
+
+      <field name="CUSTOMER_CONTACTED" class="java.sql.Timestamp"/>
+
+      <field name="CUSTOMER_BYWHO" class="java.lang.String"/>
+
+      <field name="CUSTOMER_NXTCONTACT" class="java.sql.Timestamp"/>
+
+      <field name="CUSTOMER_VIA" class="java.lang.String"/>
+
+      <field name="CUSTOMER_KEYWORDS" class="java.lang.String"/>
+
+      <field name="CUSTOMER_NOTES" class="java.lang.String"/>
+
+
+      <field name="CUSTOMER_DEFAULTGLAC" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="CUSTOMER_CUSTTOTL" class="java.lang.String"/>
+
+      <field name="CUSTOMER_CUSRTOTL" class="java.lang.String"/>
+
+      <field name="CUSTOMER_CUSTTQTY" class="java.lang.String"/>
+
+      <field name="CUSTOMER_CUSRTQTY" class="java.lang.String"/>
+
+      <field name="CUSTOMER_CUSMTOTL" class="java.lang.String"/>
+
+      <field name="CUSTOMER_CUSDTOTL" class="java.lang.String"/>
+
+      <field name="CUSTOMER_LASTORDER" class="java.lang.String"/>
+
+      <field name="CUSTOMER_LASTINVOIC" class="java.lang.String"/>
+
+      <field name="CUSTOMER_LASTPAYMNQ" class="java.lang.String"/>
+
+      <field name="CUSTOMER_PRINTMSTAT" class="java.lang.Integer"/>
+
+      <field name="CUSTOMER_PRINMTFLDT" class="java.sql.Timestamp"/>
+
+      <field name="CUSTOMER_STATUSFL" class="java.lang.Integer"/>
+
+      <field name="CUSTOMER_STATUSFLDT" class="java.sql.Timestamp"/>
+
+      <field name="CUSTOMER_TOTLPAID" class="java.lang.String"/>
+
+      <field name="CUSTOMER_OWNER" class="java.lang.String"/>
+
+      <field name="CUSTOMER_OWNER2" class="java.lang.String"/>
+
+	<field name="address_addrl1" class="java.lang.String"/>
+	<field name="address_addrl2" class="java.lang.String"/>
+	<field name="address_city" class="java.lang.String"/>
+	<field name="address_provnstate" class="java.lang.String"/>
+	<field name="address_country" class="java.lang.String"/>
+	<field name="address_pzcode" class="java.lang.String"/>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="72"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="9"
+						y="2"
+						width="138"
+						height="13"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($F{CUSTOMER_FIRSTNAME}==null?" ":$F{CUSTOMER_FIRSTNAME})+"," + ($F{CUSTOMER_LASTNAME}==null?"":$F{CUSTOMER_LASTNAME}) + " "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="9"
+						y="15"
+						width="182"
+						height="26"
+						key="textField-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="DejaVu Serif"  size="8" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($F{address_addrl1}==null?" ":$F{address_addrl1}) + "\n" +
+($F{address_addrl2}==null?" ":$F{address_addrl2})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="9"
+						y="47"
+						width="66"
+						height="11"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($F{address_city}.equals(null)?" ":$F{address_city})+" "+($F{address_provnstate}.equals(null)?" ":$F{address_provnstate})+" "+($F{address_country}.equals(null)?" ":$F{address_country})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="90"
+						y="57"
+						width="77"
+						height="12"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{address_pzcode}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="10"
+						y="53"
+						width="100"
+						height="16"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{reference}]]></textFieldExpression>
+				</textField>
+
+			</band>
+
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>
+
+
+
+
+
+
+
+

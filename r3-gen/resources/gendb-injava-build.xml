@@ -1,0 +1,40 @@
+<!-- Create DB  script -->
+
+<project name="Database creation" default="createDB_HdbSQL" basedir=".">
+   <property name="sql.driver" value="org.hsqldb.jdbcDriver"/>
+   <property name="sql.url" value="jdbc:hsqldb:hsql://localhost:1701"/>
+   <property name="sql.user" value="jaysa overridden by calling program"/>
+   <property name="sql.pass" value=""/>
+   <property name="sql.dbname" value="dbname"/>
+
+   <target name="createDB_HdbSQL">
+      <sql driver="${sql.driver}" 
+           url="${sql.url}" 
+           userid="${sql.user}" 
+           password="${sql.pass}"
+           classpath="C:\jboss-5.1.0.GA\common\lib\hsqldb.jar" >
+
+           CREATE SCHEMA ${sql.dbname} AUTHORIZATION DBA;
+           SET SCHEMA ${sql.dbname};
+
+
+           </sql>
+   </target>
+
+   <target name="dropDB_HdbSQL">
+      <sql driver="${sql.driver}" 
+           url="${sql.url}" 
+           userid="${sql.user}" 
+           password="${sql.pass}"
+           classpath="C:\jboss-5.1.0.GA\common\lib\hsqldb.jar" >
+
+           drop schema ${sql.dbname} cascade;
+
+           </sql>
+   </target>
+
+</project>
+
+
+
+

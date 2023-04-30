@@ -1,0 +1,197 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/rtemplateThemePreview.xhtml">
+<ui:define name="title">CONTACTUS #{customIdentity.owner2}</ui:define>
+
+<ui:define name="body">
+    <h:form id="ProductForm">
+<h:outputStylesheet>
+
+.rf-edt-c {
+    height: 40px !important;
+}
+.rf-tb {
+    background-color:#{richSkin.tableSubHeaderBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+
+}
+.rf-cp-hdr {
+    background-color:#{richSkin.additionalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.rf-edt-hdr {
+    background-color:#{richSkin.generalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+
+
+</h:outputStylesheet>
+
+    <rich:toolbar height="26" itemSeparator="grid">
+	  <rich:toolbarGroup location="right">
+              <h:outputText value="Last Signed As " rendered="#{identity.loggedIn}"/> 
+              <h:outputText value="#{customIdentity.username}" /> 
+              <h:outputLink value="#" id="settings" rendered ="#{identity.loggedIn}">
+              <h:outputText value="#{messages.prefs_change_password}"/>
+              <rich:componentControl target="changePWPanel"  operation="show" event="click"/>
+              </h:outputLink>
+              <h:link id="logout" action="#{identity.logout()}" value="Logout" rendered="#{identity.loggedIn}"/>
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+              <h:button id="tdoneb"   value="Back"  outcome="/homeThemePreview.V.xhtml" />&nbsp;
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home"  outcome="/home.xhtml" />
+              <h:outputText id="QueryLabel" value="#{messages.searchTerm}" />
+              <h:inputText id="Query" value="#{fpxxfq1a5xwwqqhxxxxxitemList.searchPattern}" size="15" >
+              </h:inputText>
+              <h:commandButton id="r3Search" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('s')}"  image="/img/Findblue16.png"
+               value="#{messages.searchButton}" rendered="#{!(customIdentity.product=='f' and customIdentity.subProduct=='b')}"/>
+              <h:commandButton id="r3Search2" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('b')}"  image="/img/Findblue16.png"
+               value="#{messages.searchButton}" rendered="#{(customIdentity.product=='f' and customIdentity.subProduct=='b')}" />
+              <h:link id="Cart" view="/checkout.xhtml" value="Cart" propagation="none"  rendered="#{identity.loggedIn and !customIdentity.product=='S'}"  >
+               <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+              </h:link>
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="!#{messages['ContactUs-1Help']}=null">
+             <rich:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  style="font-size: large;"  cols="70" rows="10" readonly="true"  value="#{messages['ContactUs-1Help']}"/></span> </rich:tooltip> 
+             </h:graphicImage>
+
+	  </rich:toolbarGroup>
+
+    </rich:toolbar>
+    <h:messages globalOnly="true" styleClass="message"/>
+    <rich:panel>
+     <f:facet name="header"><h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','HDR',0,120000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','HDR',0,120000) != null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','HDR',0,12000) ==null)}"/>
+     </f:facet>
+     <f:facet name="header"><h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','HDR',0,120000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','HDR',0,12000) !=null)}"/>
+     </f:facet>
+     <!--
+     -->
+     <div>
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=0&amp;id=A3R-CONTACTUS-1-C&amp;width=0"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-C','PIC',0) !=null and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',0) ==null) and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-C','PIC',0).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=0&amp;id=A3R-CONTACTUS-1-C&amp;width=200"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-C','PIC',0) !=null  and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',0) ==null) and !yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-C','PIC',0).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=0&amp;id=A3R-CONTACTUS-1-M&amp;width=0"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',0) !=null) and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-M','PIC',0).contains('asis')}">
+      </h:graphicImage> 
+
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=0&amp;id=A3R-CONTACTUS-1-M&amp;width=200"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',0) !=null) and !yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-M','PIC',0).contains('asis')}">
+      </h:graphicImage> 
+     <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','skinBean.previewTh',0,12000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','skinBean.previewTh',0,12000) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',0,12000) ==null)}"/>
+     <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',0,12000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',0,12000) !=null)}"/>
+     </div>
+     <div>
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=1&amp;id=A3R-CONTACTUS-1-C&amp;width=0"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-C','PIC',1) !=null and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',1) ==null) and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-C','PIC',1).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=1&amp;id=A3R-CONTACTUS-1-C&amp;width=200"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-C','PIC',1) !=null  and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',1) ==null) and !yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-C','PIC',1).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=1&amp;id=A3R-CONTACTUS-1-M&amp;width=0"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',1) !=null) and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-M','PIC',1).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=1&amp;id=A3R-CONTACTUS-1-M&amp;width=200"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',1) !=null) and !yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-M','PIC',1).contains('asis')}">
+      </h:graphicImage> 
+
+     <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','skinBean.previewTh',1,12000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','skinBean.previewTh',1,12000) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',1,12000) ==null)}"/>
+     <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',1,12000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',1,12000) !=null)}"/>
+     </div>
+     <div>
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=2&amp;id=A3R-CONTACTUS-1-C&amp;width=0"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-C','PIC',2) !=null and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',2) ==null) and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-C','PIC',2).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=2&amp;id=A3R-CONTACTUS-1-C&amp;width=200"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-C','PIC',2) !=null  and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',2) ==null) and !yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-C','PIC',2).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=2&amp;id=A3R-CONTACTUS-1-M&amp;width=0"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',2) !=null) and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-M','PIC',2).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=2&amp;id=A3R-CONTACTUS-1-M&amp;width=200"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',2) !=null) and !yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-M','PIC',2).contains('asis')}">
+      </h:graphicImage> 
+     <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','skinBean.previewTh',2,12000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','skinBean.previewTh',2,12000) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',2,12000) ==null)}"/>
+     <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',2,12000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',2,12000) !=null)}"/>
+     </div>
+     <div>
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=3&amp;id=A3R-CONTACTUS-1-C&amp;width=0"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-C','PIC',3) !=null and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',3) ==null) and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-C','PIC',3).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=3&amp;id=A3R-CONTACTUS-1-C&amp;width=200"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-C','PIC',3) !=null and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',3) ==null) and !yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-C','PIC',3).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=3&amp;id=A3R-CONTACTUS-1-C&amp;width=0"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',3) !=null) and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-M','PIC',3).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/ImageServletCdi/?seq=3&amp;id=A3R-CONTACTUS-1-C&amp;width=200"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',3) !=null) and !yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-M','PIC',3).contains('asis')}">
+      </h:graphicImage> 
+     <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','skinBean.previewTh',3,12000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','skinBean.previewTh',3,12000) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',3,12000) ==null)}"/>
+     <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',3,12000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',3,12000) !=null)}"/>
+     </div>
+     <div>
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;"
+         value="/ImageServletCdi/?seq=4&amp;id=A3R-CONTACTUS-1-C&amp;width=0"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-C','PIC',4) !=null and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',4) ==null) and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-C','PIC',4).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+         value="/ImageServletCdi/?seq=4&amp;id=A3R-CONTACTUS-1-C&amp;width=200"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-C','PIC',4) !=null and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',4) ==null) and !yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-C','PIC',4).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;"
+          value="/ImageServletCdi/?seq=4&amp;id=A3R-CONTACTUS-1-M&amp;width=0"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',4) !=null) and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-M','PIC',4).contains('asis')}">
+      </h:graphicImage> 
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+         value="/ImageServletCdi/?seq=4&amp;id=A3R-CONTACTUS-1-M&amp;width=200"
+         rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'blobdata','A3R-CONTACTUS-1-M','PIC',4) !=null) and !yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','A3R-CONTACTUS-1-M','PIC',4).contains('asis')}">
+      </h:graphicImage> 
+     <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','skinBean.previewTh',4,12000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-C','skinBean.previewTh',4,12000) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',4,12000) ==null)}"/>
+     <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',4,12000)}" 
+      rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata(skinBean.previewTh,yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor,'clobdata','A3R-CONTACTUS-1-M','skinBean.previewTh',4,12000) !=null)}"/>
+     </div>
+    </rich:panel>
+
+   </h:form>
+</ui:define> 
+</ui:composition>
+

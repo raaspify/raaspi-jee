@@ -1,0 +1,1611 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid" value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="jxxxuq54exwwqqhxxxxxgroupmembersFrom" value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.jxxxuq54exwwqqhxxxxxgroupmembersFrom}"/>
+    <f:viewAction action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.restrict()}" />
+    <f:viewAction action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Groupmembers']}</ui:define>
+
+<ui:define name="body">
+<h:form id="jxxxuq54exwwqqhxxxxxgroupmembers" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("jxxxuq54exwwqqhxxxxxgroupmembers:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!jxxxuq54exwwqqhxxxxxgroupmembersHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['GroupmembersEditHelp']!='GroupmembersEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['GroupmembersEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{jxxxuq54exwwqqhxxxxxgroupmembersHome.managed ? 'Edit' : 'Add'} #{messages['Groupmembers']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+       <p:tabView switchType="client" >
+        <h3>#{messages['Select']} #{messages['Group']}/#{messages['Team']} #{messages['first']}, #{messages['then']} #{messages['select']} #{messages['one']} #{messages['or']} #{messages['more']} #{messages['from']} #{messages['others']}</h3>
+           <p:tab title="#{messages['Item']}"
+             rendered="true">
+           <ui:decorate id="fpxxfq1a5xwwqqhxxxxxitemDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Item']} 
+            </ui:define>
+                <p:remoteCommand name="fpxxfq1a5xwwqqhxxxxxitemFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="fpxxfq1a5xwwqqhxxxxxitemsm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.validateAndSelectXxxxxxxxmatcode}" 
+                   value="#{fpxxfq1a5xwwqqhxxxxxitemHome.lastfpxxfq1a5xwwqqhxxxxxitemP}" onchange="fpxxfq1a5xwwqqhxxxxxitemFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{fpxxfq1a5xwwqqhxxxxxitemList.getSuggestList(' ')}" var ="result" itemValue="#{result.a0xxukixbxxxxxxxxxxxmatcode}" 
+                      itemLabel="#{result.a0xxukixbxxxxxxxxxxxmatcode} (#{result.b8fbzpxxbvxxxxxxxxxxselprice}) /#{result.b1xxuszsbvxxxxxxxxxxdescript}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+           <p:tab title="#{messages['Machine']}"
+             rendered="true">
+           <ui:decorate id="fpxxuq9eexwwqqhefxxxmachineDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Machine']} 
+            </ui:define>
+                <p:remoteCommand name="fpxxuq9eexwwqqhefxxxmachineFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="fpxxuq9eexwwqqhefxxxmachinesm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.validateAndSelectXxxxxxxxmachinecode}" 
+                   value="#{fpxxuq9eexwwqqhefxxxmachineHome.lastfpxxuq9eexwwqqhefxxxmachineP}" onchange="fpxxuq9eexwwqqhefxxxmachineFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{fpxxuq9eexwwqqhefxxxmachineList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+           <p:tab title="#{messages['Activity']}"
+             rendered="true">
+           <ui:decorate id="fxxxuq188xwwqqhxxxxxactivityDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Activity']} 
+            </ui:define>
+                <p:remoteCommand name="fxxxuq188xwwqqhxxxxxactivityFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="fxxxuq188xwwqqhxxxxxactivitysm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.validateAndSelectXxxxxxxxactivitycode}" 
+                   value="#{fxxxuq188xwwqqhxxxxxactivityHome.lastfxxxuq188xwwqqhxxxxxactivityP}" onchange="fxxxuq188xwwqqhxxxxxactivityFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{fxxxuq188xwwqqhxxxxxactivityList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+           <p:tab title="#{messages['Membersgroup']}"
+             rendered="true">
+           <ui:decorate id="fxxxuq1ggxwwqqhxxxxxmembersgroupDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Membersgroup']} 
+            </ui:define>
+                <p:remoteCommand name="fxxxuq1ggxwwqqhxxxxxmembersgroupFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="fxxxuq1ggxwwqqhxxxxxmembersgroupsm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="true" 
+                       label="membersgroup"
+                    validator="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.validateAndSelectXxxxxxxxgroupid}" 
+                   value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.lastfxxxuq1ggxwwqqhxxxxxmembersgroupP}" onchange="fxxxuq1ggxwwqqhxxxxxmembersgroupFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+
+           <p:tab title="#{messages['Employee']}"
+             rendered="true">
+           <ui:decorate id="jxxxbh400xwwqqhxxxxxemployeeDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Employee']} 
+            </ui:define>
+                <p:remoteCommand name="jxxxbh400xwwqqhxxxxxemployeeFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="jxxxbh400xwwqqhxxxxxemployeesm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.validateAndSelectXxxxxxxxemployee}" 
+                   value="#{jxxxbh400xwwqqhxxxxxemployeeHome.lastjxxxbh400xwwqqhxxxxxemployeeP}" onchange="jxxxbh400xwwqqhxxxxxemployeeFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{jxxxbh400xwwqqhxxxxxemployeeList.getSuggestList(' ')}" var ="result" itemValue="#{result.a0xxuktxbvxxxxxxxxxxemployee}" 
+                     itemLabel="#{(result.b3xxuslnbvixxxxxxxxxlastname).concat(' ').concat(result.b4xxu2fnbvxxxxxxxxxxfirstname)}"/>
+
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+           <p:tab title="#{messages['Customer']}"
+             rendered="true">
+           <ui:decorate id="jxxxuq201xwwqqhxxxxxcustomerDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Customer']} 
+            </ui:define>
+                <p:remoteCommand name="jxxxuq201xwwqqhxxxxxcustomerFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="jxxxuq201xwwqqhxxxxxcustomersm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.validateAndSelectXxxxxxxxcustomer}" 
+                   value="#{jxxxuq201xwwqqhxxxxxcustomerHome.lastjxxxuq201xwwqqhxxxxxcustomerP}" onchange="jxxxuq201xwwqqhxxxxxcustomerFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{jxxxuq201xwwqqhxxxxxcustomerList.getSuggestList(' ')}" var ="result" itemValue="#{result.a0xxukxxbvxxxxxxxxxxcustomer}" 
+                     itemLabel="#{(empty result.d1xxu3cnbvixxxxxxxxxcustomerascompanyname?'':result.d1xxu3cnbvixxxxxxxxxcustomerascompanyname).concat(' ').concat(result.c1xxuslnbvixxxxxxxxxlastname).concat(' ').concat(result.c2xxu2fnbvixxxxxxxxxfirstname).concat(' ').concat(fn:substring(result.a0xxukxxbvxxxxxxxxxxcustomer,fn:length(result.a0xxukxxbvxxxxxxxxxxcustomer)-4,fn:length(result.a0xxukxxbvxxxxxxxxxxcustomer)))}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+           <p:tab title="#{messages['Vendor']}"
+             rendered="true">
+           <ui:decorate id="jxxxuq300xwwqqhxxxxxvendorDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Vendor']} 
+            </ui:define>
+                <p:remoteCommand name="jxxxuq300xwwqqhxxxxxvendorFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="jxxxuq300xwwqqhxxxxxvendorsm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.validateAndSelectXxxxxxxxvendor}" 
+                   value="#{jxxxuq300xwwqqhxxxxxvendorHome.lastjxxxuq300xwwqqhxxxxxvendorP}" onchange="jxxxuq300xwwqqhxxxxxvendorFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{jxxxuq300xwwqqhxxxxxvendorList.getSuggestList(' ')}" var ="result" itemValue="#{result.a0xxukxxbvxxxxxxxxxxvendor}" 
+                     itemLabel="#{(empty result.d1xxu3cnbvxxxxxxxxxxvendorascompanyname?'':result.d1xxu3cnbvxxxxxxxxxxvendorascompanyname).concat(' ').concat(result.b3xxuslnbvxxxxxxxxxxlastname).concat(' ').concat(result.b4xxu2fnbvxxxxxxxxxxfirstname)}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+
+
+
+
+
+
+
+   </p:tabView>
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b1xxukgmbvxxxxxxxxxxmemberidDecoration"    >
+        <h:outputLabel  for="b1xxukgmbvxxxxxxxxxxmemberid" value="#{messages['Memberid']}">
+      </h:outputLabel>
+
+         <h:inputText id="b1xxukgmbvxxxxxxxxxxmemberid" 
+           validator="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.validateKeyDuplicateMemberid}" 
+                       label="memberid"
+                        required="true"
+                           size="20"
+                      maxlength="32"
+                          value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.b1xxukgmbvxxxxxxxxxxmemberid}">
+
+         </h:inputText>
+            <p:tooltip  target="b1xxukgmbvxxxxxxxxxxmemberid"> <span style="white-space: nowrap"> <h:outputText value="Enter Value here"/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b2xxuxzsbvxxxxxxxxxxdescriptDecoration"    >
+        <h:outputLabel  for="b2xxuxzsbvxxxxxxxxxxdescript" value="#{messages['Descript']}">
+      </h:outputLabel>
+
+         <h:inputText id="b2xxuxzsbvxxxxxxxxxxdescript" 
+                           size="32"
+                      maxlength="120"
+                          value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.b2xxuxzsbvxxxxxxxxxxdescript}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b3xxuzyxbv46xxxxxxxxsourcetypeDecoration"    >
+        <h:outputLabel  for="b3xxuzyxbv46xxxxxxxxsourcetype" value="#{messages['Sourcetype']}">
+      </h:outputLabel>
+ 
+               <h:selectOneMenu style="width:250px;"  value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.b3xxuzyxbv46xxxxxxxxsourcetype}" required="false" id="b3xxuzyxbv46xxxxxxxxsourcetype">
+               <f:ajax  render="b3xxuzyxbv46xxxxxxxxsourcetypeI" bypassUpdates="false"/>
+                                <f:selectItem itemValue="#{null}" itemLabel="" />
+                                <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('54',46)}"  var="babu"  
+                                 itemLabel="#{babu.key}"
+                                 itemValue="#{babu.value}" /> 
+                               </h:selectOneMenu>
+            </h:panelGroup>
+
+
+
+
+
+
+
+
+
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y5xxuzyxbv46xxxxxxxxtypeDecoration"  rendered="true">
+        <h:outputLabel  for="y5xxuzyxbv46xxxxxxxxtype" value="#{messages['Type']}">
+      </h:outputLabel>
+ 
+               <h:selectOneMenu style="width:250px;"  value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.y5xxuzyxbv46xxxxxxxxtype}" required="false" id="y5xxuzyxbv46xxxxxxxxtype">
+               <f:ajax  render="y5xxuzyxbv46xxxxxxxxtypeI" bypassUpdates="false"/>
+                                <f:selectItem itemValue="#{null}" itemLabel="" />
+                                <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('54',46)}"  var="babu"  
+                                 itemLabel="#{babu.key}"
+                                 itemValue="#{babu.value}" /> 
+                               </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y6xxuxxxbvxxxxxxxxxxcurrpwDecoration"  rendered="true">
+        <h:outputLabel  for="y6xxuxxxbvxxxxxxxxxxcurrpw" value="#{messages['Currpw']}">
+      </h:outputLabel>
+
+         <h:inputText id="y6xxuxxxbvxxxxxxxxxxcurrpw" 
+                           size="20"
+                      maxlength="32"
+                          value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.y6xxuxxxbvxxxxxxxxxxcurrpw}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="y7xxcxxrlxxxxxxxxxxxexpiryDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="y7xxcxxrlxxxxxxxxxxxexpiry" value="#{messages['Expiry']}">
+      </h:outputLabel>
+     <p:datePicker id="y7xxcxxrlxxxxxxxxxxxexpiry" 
+
+                          showTime="true" value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.y7xxcxxrlxxxxxxxxxxxexpiry}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z1xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z1xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="z1xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z2xxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="z2xxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.z2xxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z3xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z3xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="z3xxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.z3xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.b1xxukgmbvxxxxxxxxxxmemberid} #{messages['sid']} #{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.b1xxukgmbvxxxxxxxxxxmemberid !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.persist()}"
+                       disabled="#{!jxxxuq54exwwqqhxxxxxgroupmembersHome.wired}"
+                       rendered="#{!jxxxuq54exwwqqhxxxxxgroupmembersHome.managed  and !jxxxuq54exwwqqhxxxxxgroupmembersHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.update()}"
+                       rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.managed  and !jxxxuq54exwwqqhxxxxxgroupmembersHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.update()}"
+                       rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.managed and jxxxuq54exwwqqhxxxxxgroupmembersHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.remove()}"
+                       rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.managed and !jxxxuq54exwwqqhxxxxxgroupmembersHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/groupmembersEdit.xhtml"
+                       rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.reportName}"/>
+            <f:param name="displayAs" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.displayAs}" /> 
+            <h:button outcome="/groupmembersList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Groupmembers']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty jxxxuq54exwwqqhxxxxxgroupmembersHome.jxxxuq54exwwqqhxxxxxgroupmembersFrom ? 'home' : jxxxuq54exwwqqhxxxxxgroupmembersHome.jxxxuq54exwwqqhxxxxxgroupmembersFrom}.xhtml"
+                rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.managed or jxxxuq54exwwqqhxxxxxgroupmembersHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty jxxxuq54exwwqqhxxxxxgroupmembersHome.jxxxuq54exwwqqhxxxxxgroupmembersFrom ? 'home' : jxxxuq54exwwqqhxxxxxgroupmembersHome.jxxxuq54exwwqqhxxxxxgroupmembersFrom}.xhtml"
+                rendered="#{!jxxxuq54exwwqqhxxxxxgroupmembersHome.managed and !jxxxuq54exwwqqhxxxxxgroupmembersHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="true" rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" toggleable="true" toggleableHeader="true">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+  <p:tabView switchType="ajax">
+     <p:tab title="#{messages['Resourcedetails']}">
+        <div class="association" id="dxxxuq2drxwwqqhfxxxxresourcedetailsesChildren">
+         <ui:remove></ui:remove>
+            <h:outputText value="No resourcedetailses" 
+                       rendered="#{empty jxxxuq54exwwqqhxxxxxgroupmembersHome or empty jxxxuq54exwwqqhxxxxxgroupmembersHome.dxxxuq2drxwwqqhfxxxxresourcedetailses}"/>
+        
+            <p:dataTable value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.dxxxuq2drxwwqqhfxxxxresourcedetailses}" tableStyle="table-layout:auto;"
+                           var="dxxxuq2drxwwqqhfxxxxresourcedetails" 
+                      rendered="#{not empty jxxxuq54exwwqqhxxxxxgroupmembersHome.dxxxuq2drxwwqqhfxxxxresourcedetailses}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="dxxxuq2drxwwqqhfxxxxresourcedetailsesTable">
+                <p:column>
+                    <f:facet name="header">action</f:facet>
+                    <h:link outcome="/resourcedetails.xhtml" 
+                              id="selectdxxxuq2drxwwqqhfxxxxresourcedetails" 
+                           value="Select"
+                     propagation="none">
+                        <f:param disable="#{empty dxxxuq2drxwwqqhfxxxxresourcedetails.a0xxuobxbxxxxxxxxxxxsid}" name="dxxxuq2drxwwqqhfxxxxresourcedetailsA0xxuobxbxxxxxxxxxxxsid" 
+                                value="#{dxxxuq2drxwwqqhfxxxxresourcedetails.a0xxuobxbxxxxxxxxxxxsid}"/>
+                        <f:param name="dxxxuq2drxwwqqhfxxxxresourcedetailsFrom" value="Jxxxuq54exwwqqhxxxxxgroupmembers"/>
+                    </h:link>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">resourcenumber</f:facet>
+                    <h:outputText value="#{dxxxuq2drxwwqqhfxxxxresourcedetails.b1xxzk11bvlxxxxxxxxxresourcenumber}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfl</f:facet>
+                    <h:outputText value="#{dxxxuq2drxwwqqhfxxxxresourcedetails.zaxxzzfxhhxxxxxxxxxxstatusfl}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfldt</f:facet>
+                    <h:outputText value="#{dxxxuq2drxwwqqhfxxxxresourcedetails.zbxxcztxlxxxxxxxxxxxstatusfldt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">owner</f:facet>
+                    <h:outputText value="#{dxxxuq2drxwwqqhfxxxxresourcedetails.zcxxutoxlhxxxxxxxxxxowner}"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+        <f:subview rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.managed}" id="dxxxuq2drxwwqqhfxxxxresourcedetailses">
+        <div class="actionButtons">
+            <h:button id="adddxxxuq2drxwwqqhfxxxxresourcedetails" 
+                   value="Add resourcedetails"
+                    outcome="/resourcedetailsEdit.xhtml"
+                    propagation="none">
+                 <f:param disable="#{empty jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.a0xxuobxbxxxxxxxxxxxsid}"  name="jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid" 
+                         value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+                   <f:param name="dxxxuq2drxwwqqhfxxxxresourcedetailsFrom" value="groupmembersEdit" />
+            </h:button>
+        </div>
+        </f:subview>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Item']}">
+    <div class="association" id="fpxxfq1a5xwwqqhxxxxxitemParent">
+        
+        <h:outputText value="No item" 
+                   rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fpxxfq1a5xwwqqhxxxxxitem == null}"/>
+        
+        <p:dataTable var="fpxxfq1a5xwwqqhxxxxxitem" tableStyle="table-layout:auto;"
+                   value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fpxxfq1a5xwwqqhxxxxxitem}" 
+                rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fpxxfq1a5xwwqqhxxxxxitem != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fpxxfq1a5xwwqqhxxxxxitemTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewitem" 
+                     value="View" 
+                      outcome="/item.xhtml">
+                       <f:param disable="#{empty fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}" name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">matcode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.a0xxukixbxxxxxxxxxxxmatcode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">quantity</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b0xxziqxlvxxsaxxxxxxquantity}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">source1</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b3xxuxxrbvxxxxxxxxxxsource1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">upccode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b5fbuxxrbvxxxxxxxxxxupccode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">cost</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b6fbzicxbvxxxxxxxxxxcost}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">replcost</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b7fbzxxxbvxxxxxxxxxxreplcost}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">selprice</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spricold</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b9xxzxxxlvxxxxxxxxxxspricold}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spricnew</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c1xxzxxxbhxxsxxxxxxxspricnew}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spriceffdt</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c2fbcxxrehxxsxxxxxxxspriceffdt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">shipcode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c3fbuxscbvxxxxxxxxxxshipcode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">qtylevel1</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c4fbzxxxbvxxxxxxxxxxqtylevel1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">unit</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c5fbuuxrbv18xxxxxxxxunit}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax1</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c7fbfxz1bvxxxxxxxxxxtax1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax2</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c8fbfxz2bvxxxxxxxxxxtax2}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">aliascode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.f1xxuxxrbvxxxxxxxxxxaliascode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">avgprice</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.f3xxzxxxlvxxxxxxxxxxavgprice}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">item sid</f:facet>
+		    	  #{fpxxfq1a5xwwqqhxxxxxitem.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">location sid</f:facet>
+		    	  #{fpxxfq1a5xwwqqhxxxxxitem.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn2</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn2bvxxxxxxxxxxsubcodesn2}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn3</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn3bvxxxxxxxxxxsubcodesn3}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">effdate</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.h1xxcxxrbxxxxxxxxxxxeffdate}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">integrset</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.h2xxuwmrbv40xxxxxxxxintegrset}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">notes</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.w7xxuznxbvxxxxxxxxxxnotes}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.w8xxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.z5xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.z6xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.zexxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Machine']}">
+    <div class="association" id="fpxxuq9eexwwqqhefxxxmachineParent">
+        
+        <h:outputText value="No machine" 
+                   rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fpxxuq9eexwwqqhefxxxmachine == null}"/>
+        
+        <p:dataTable var="fpxxuq9eexwwqqhefxxxmachine" tableStyle="table-layout:auto;"
+                   value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fpxxuq9eexwwqqhefxxxmachine}" 
+                rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fpxxuq9eexwwqqhefxxxmachine != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fpxxuq9eexwwqqhefxxxmachineTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewmachine" 
+                     value="View" 
+                      outcome="/machine.xhtml">
+                       <f:param disable="#{empty fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}" name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">machinecode</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.a0xxukmxbvxxxxxxxxxxmachinecode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.b1xxuszsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">source1</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.b3xxuxxrbvxxxxxxxxxxsource1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">upccode</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.b5xxuxxrbvxxxxxxxxxxupccode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">cost</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.b6xxzicxbvxxxxxxxxxxcost}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">replcost</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.b7xxzxxxbvxxxxxxxxxxreplcost}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">selprice</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.b8xxzpxxbvxxxxxxxxxxselprice}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spricold</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.b9xxzxxxlvxxsxxxxxxxspricold}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spricnew</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.c1xxzxxxhhxxsxxxxxxxspricnew}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spriceffdt</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.c2xxcxxrhhxxsxxxxxxxspriceffdt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">shipcode</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.c3xxuxxrbvxxxxxxxxxxshipcode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">qtylevel1</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.c4xxzxxxbvxxxxxxxxxxqtylevel1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">unit</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.c5xxuuxrbv18xxxxxxxxunit}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.c6xxuxxrbv16xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax1</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.c7xxfxz1bvxxxxxxxxxxtax1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax2</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.c8xxfxz2bvxxxxxxxxxxtax2}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">aliascode</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.f1xxuxxrbvxxxxxxxxxxaliascode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">avgprice</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.f3xxzxxxlvxxxxxxxxxxavgprice}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">machine sid</f:facet>
+		    	  #{fpxxuq9eexwwqqhefxxxmachine.fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.g2xxuxn1lvxxxxxxxxxxsubcodesn}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn2</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.g2xxuxn2lvxxxxxxxxxxsubcodesn2}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn3</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.g2xxuxn3lvxxxxxxxxxxsubcodesn3}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">effdate</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.h1xxcxxrlxxxxxxxxxxxeffdate}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">integrset</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.h2xxuwmrbv40xxxxxxxxintegrset}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.y8xxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.z5xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.z6xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{fpxxuq9eexwwqqhefxxxmachine.zexxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Activity']}">
+    <div class="association" id="fxxxuq188xwwqqhxxxxxactivityParent">
+        
+        <h:outputText value="No activity" 
+                   rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fxxxuq188xwwqqhxxxxxactivity == null}"/>
+        
+        <p:dataTable var="fxxxuq188xwwqqhxxxxxactivity" tableStyle="table-layout:auto;"
+                   value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fxxxuq188xwwqqhxxxxxactivity}" 
+                rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fxxxuq188xwwqqhxxxxxactivity != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fxxxuq188xwwqqhxxxxxactivityTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewactivity" 
+                     value="View" 
+                      outcome="/activity.xhtml">
+                       <f:param disable="#{empty fxxxuq188xwwqqhxxxxxactivity.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq188xwwqqhxxxxxactivityA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{fxxxuq188xwwqqhxxxxxactivity.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">activitycode</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.a0xxukaxbvxxxxxxxxxxactivitycode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.b1xxuszsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">date</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.b2xxcxxrlxxxxxxxxxxxdate}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">source1</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.b3xxuxxrbvxxxxxxxxxxsource1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">upccode</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.b4xxuxxrbvxxxxxxxxxxupccode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">cost</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.b5xxzxxrlvxxxxxxxxxxcost}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">replcost</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.b6xxzcxrlvxxxxxxxxxxreplcost}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">selprice</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.b7xxzpxrlvxxxxxxxxxxselprice}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spricnew</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.b8xxzxxrhhxxsxxxxxxxspricnew}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spriceffdt</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.b9xxcxxrhhxxsxxxxxxxspriceffdt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">shipcode</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.c1xxuxxrbvxxxxxxxxxxshipcode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">qtylevel1</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.c2xxzxxrlvxxxxxxxxxxqtylevel1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">unit</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.c3xxuuxrbv18xxxxxxxxunit}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">caseqty</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.c4xxzxxrlvxxxxxxxxxxcaseqty}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.c5xxuxxrbv37xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax1</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.c6xxfxz1bvxxxxxxxxxxtax1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax2</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.c7xxfxz2bvxxxxxxxxxxtax2}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">effdate</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.c8xxcxxrlxxxxxxxxxxxeffdate}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">integrset</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.c9xxuwmrbv40xxxxxxxxintegrset}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">activity sid</f:facet>
+		    	  #{fxxxuq188xwwqqhxxxxxactivity.fxxxuq188xwwqqhxxxxxactivity.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.g2xxuxn1lvxxxxxxxxxxsubcodesn}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn2</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.g2xxuxn2lvxxxxxxxxxxsubcodesn2}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn3</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.g2xxuxn3lvxxxxxxxxxxsubcodesn3}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.y8xxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.z7xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.z8xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{fxxxuq188xwwqqhxxxxxactivity.zixxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Membersgroup']}">
+    <div class="association" id="fxxxuq1ggxwwqqhxxxxxmembersgroupParent">
+        
+        <h:outputText value="No membersgroup" 
+                   rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fxxxuq1ggxwwqqhxxxxxmembersgroup == null}"/>
+        
+        <p:dataTable var="fxxxuq1ggxwwqqhxxxxxmembersgroup" tableStyle="table-layout:auto;"
+                   value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fxxxuq1ggxwwqqhxxxxxmembersgroup}" 
+                rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.fxxxuq1ggxwwqqhxxxxxmembersgroup != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fxxxuq1ggxwwqqhxxxxxmembersgroupTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewmembersgroup" 
+                     value="View" 
+                      outcome="/membersgroup.xhtml">
+                       <f:param disable="#{empty fxxxuq1ggxwwqqhxxxxxmembersgroup.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq1ggxwwqqhxxxxxmembersgroupA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{fxxxuq1ggxwwqqhxxxxxmembersgroup.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">groupid</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.a0xxukxxbvxxxxxxxxxxgroupid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.b1xxuszsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">mode</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.b2xxfxxxbvxxxxxxxxxxmode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.z1xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.z2xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.z3xxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+     <p:tab title="#{messages['Task']}">
+        <div class="association" id="fxxxuq1kkxwwqqhfxxxxtasksChildren">
+         <ui:remove></ui:remove>
+            <h:outputText value="No tasks" 
+                       rendered="#{empty jxxxuq54exwwqqhxxxxxgroupmembersHome or empty jxxxuq54exwwqqhxxxxxgroupmembersHome.fxxxuq1kkxwwqqhfxxxxtasks}"/>
+        
+            <p:dataTable value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.fxxxuq1kkxwwqqhfxxxxtasks}" tableStyle="table-layout:auto;"
+                           var="fxxxuq1kkxwwqqhfxxxxtask" 
+                      rendered="#{not empty jxxxuq54exwwqqhxxxxxgroupmembersHome.fxxxuq1kkxwwqqhfxxxxtasks}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="fxxxuq1kkxwwqqhfxxxxtasksTable">
+                <p:column>
+                    <f:facet name="header">action</f:facet>
+                    <h:link outcome="/task.xhtml" 
+                              id="selectfxxxuq1kkxwwqqhfxxxxtask" 
+                           value="Select"
+                     propagation="none">
+                        <f:param disable="#{empty fxxxuq1kkxwwqqhfxxxxtask.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq1kkxwwqqhfxxxxtaskA0xxuobxbxxxxxxxxxxxsid" 
+                                value="#{fxxxuq1kkxwwqqhfxxxxtask.a0xxuobxbxxxxxxxxxxxsid}"/>
+                        <f:param name="fxxxuq1kkxwwqqhfxxxxtaskFrom" value="Jxxxuq54exwwqqhxxxxxgroupmembers"/>
+                    </h:link>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">taskid</f:facet>
+                    <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.a0xxuktpbvxxxxxxxxxxtaskid}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">descript</f:facet>
+                    <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.a1xxuszsbvxxxxxxxxxxdescript}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">eststart</f:facet>
+                    <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.b1xxcxxrbxxxxxxxxxxxeststart}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">calcstart</f:facet>
+                    <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.b1xxcxxrlxxxxxxxxxxxcalcstart}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">estend</f:facet>
+                    <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.b2xxcxxrbxxxxxxxxxxxestend}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">subqty</f:facet>
+                    <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.b3xxzqxxavxxxxxxxxxxsubqty}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfl</f:facet>
+                    <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.zaxxzzfxhhxxxxxxxxxxstatusfl}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfldt</f:facet>
+                    <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.zbxxcztxlxxxxxxxxxxxstatusfldt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">owner</f:facet>
+                    <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.zcxxutoxlhxxxxxxxxxxowner}"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+        <f:subview rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.managed}" id="fxxxuq1kkxwwqqhfxxxxtasks">
+        <div class="actionButtons">
+            <h:button id="addfxxxuq1kkxwwqqhfxxxxtask" 
+                   value="Add task"
+                    outcome="/taskEdit.xhtml"
+                    propagation="none">
+                 <f:param disable="#{empty jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.a0xxuobxbxxxxxxxxxxxsid}"  name="jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid" 
+                         value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+                   <f:param name="fxxxuq1kkxwwqqhfxxxxtaskFrom" value="groupmembersEdit" />
+            </h:button>
+        </div>
+        </f:subview>
+    </p:tab>
+    </p:tabView>
+  <p:tabView switchType="ajax">
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Employee']}">
+    <div class="association" id="jxxxbh400xwwqqhxxxxxemployeeParent">
+        
+        <h:outputText value="No employee" 
+                   rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.jxxxbh400xwwqqhxxxxxemployee == null}"/>
+        
+        <p:dataTable var="jxxxbh400xwwqqhxxxxxemployee" tableStyle="table-layout:auto;"
+                   value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.jxxxbh400xwwqqhxxxxxemployee}" 
+                rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.jxxxbh400xwwqqhxxxxxemployee != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="jxxxbh400xwwqqhxxxxxemployeeTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewemployee" 
+                     value="View" 
+                      outcome="/employee.xhtml">
+                       <f:param disable="#{empty jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid}" name="jxxxbh400xwwqqhxxxxxemployeeA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">employee</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.a0xxuktxbvxxxxxxxxxxemployee}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">title</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.b1xxuxxxbv21xxxxxxxxtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">jobtitle</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.b2xxuxxrbx22xxxxxxxxjobtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lastname</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.b3xxuslnbvixxxxxxxxxlastname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">firstname</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.b4xxu2fnbvxxxxxxxxxxfirstname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">middlenam</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.b5xxuxxrbvxxxxxxxxxxmiddlenam}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax1</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.c1xxfxz1bxxxxxxxxxxxtax1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">custtax1</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.c4xxuz1xbv04xxxxxxxxcusttax1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">custtax2</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.c5xxuz2xbv05xxxxxxxxcusttax2}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">company sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">residency sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.dxxxiq155xwwqqhxxxxxresidency.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">department sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.fxxxch122xhhxqhxxlxxdepartment.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">division sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.fxxxch133xhhxqhxxlxxdivision.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">location sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByMailtocode sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.fxxxuq111xwwqqhxxxxxaddressByMailtocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByShiptocode sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.fxxxuq111xwwqqhxxxxxaddressByShiptocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneo</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.m1xxh3pobv27xxxxxxxxphoneo}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneh</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.m2xxh4phbv27xxxxxxxxphoneh}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonec</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.m3xxh5pcbv27xxxxxxxxphonec}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonex</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.m4xxhxxrbx27xxxxxxxxphonex}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lanaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n1xxhxxrbx19xxxxxxxxlanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">wanaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n2xxhxxrbx25xxxxxxxxwanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lmailaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n3xxhxxrbx44xxxxxxxxlmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">imailaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n4xxhxxrbv24xxxxxxxximailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">rmailaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n5xxuxxrbxxxxxxxxxxxrmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">intaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n6xxhxxrbx23xxxxxxxxintaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inraddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n7xxuxxrbxxxxxxxxxxxinraddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.o1xxuxxrbv45xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">integrset</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.o2xxuwmrbv40xxxxxxxxintegrset}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.ycxxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.zexxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.zexxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.zfxxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Customer']}">
+    <div class="association" id="jxxxuq201xwwqqhxxxxxcustomerParent">
+        
+        <h:outputText value="No customer" 
+                   rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.jxxxuq201xwwqqhxxxxxcustomer == null}"/>
+        
+        <p:dataTable var="jxxxuq201xwwqqhxxxxxcustomer" tableStyle="table-layout:auto;"
+                   value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.jxxxuq201xwwqqhxxxxxcustomer}" 
+                rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.jxxxuq201xwwqqhxxxxxcustomer != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="jxxxuq201xwwqqhxxxxxcustomerTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewcustomer" 
+                     value="View" 
+                      outcome="/customer.xhtml">
+                       <f:param disable="#{empty jxxxuq201xwwqqhxxxxxcustomer.a0xxuobxbxxxxxxxxxxxsid}" name="jxxxuq201xwwqqhxxxxxcustomerA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{jxxxuq201xwwqqhxxxxxcustomer.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">customer</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.a0xxukxxbvxxxxxxxxxxcustomer}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">title</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.b1xxuxxxbv21xxxxxxxxtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">jobtitle</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.b2xxuxxxbx22xxxxxxxxjobtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lastname</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.c1xxuslnbvixxxxxxxxxlastname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">firstname</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.c2xxu2fnbvixxxxxxxxxfirstname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">middlenam</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.c3xxuxxxbxxxxxxxxxxxmiddlenam}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">customerascompanyname</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.d1xxu3cnbvixxxxxxxxxcustomerascompanyname}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">company sid</f:facet>
+		    	  #{jxxxuq201xwwqqhxxxxxcustomer.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.f1xxuxxxav28xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">integrset</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.f2xxuwmxbv40xxxxxxxxintegrset}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">location sid</f:facet>
+		    	  #{jxxxuq201xwwqqhxxxxxcustomer.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByMailtocode sid</f:facet>
+		    	  #{jxxxuq201xwwqqhxxxxxcustomer.fxxxuq111xwwqqhxxxxxaddressByMailtocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByShiptocode sid</f:facet>
+		    	  #{jxxxuq201xwwqqhxxxxxcustomer.fxxxuq111xwwqqhxxxxxaddressByShiptocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneo</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.p1xxh4pobv27xxxxxxxxphoneo}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneh</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.p2xxh5phbv27xxxxxxxxphoneh}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonec</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.p3xxhxxxbv27xxxxxxxxphonec}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonex</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.p4xxhxxxbx27xxxxxxxxphonex}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lanaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q1xxhxxxbx19xxxxxxxxlanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">wanaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q2xxhxxxbx25xxxxxxxxwanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lmailaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q3xxhxxxbv44xxxxxxxxlmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">imailaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q4xxhxxxbv24xxxxxxxximailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">rmailaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q5xxuxxxbxxxxxxxxxxxrmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">intaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q6xxhxxxbx23xxxxxxxxintaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">dob</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q7xxdxtdbvxxxxxxxxxxdob}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">placeofbirth</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q7xxhxxxbvxxxxxxxxxxplaceofbirth}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inraddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q7xxhxxxbxxxxxxxxxxxinraddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">age</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q7xxhxxxlvxxxxxxxxxxage}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sex</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q7xxtxsebvxxxxxxxxxxsex}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">shiplabel</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.r1xxfxxxbexxxxxxxxxxshiplabel}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.ycxxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.zaxxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.zbxxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.zdxxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Vendor']}">
+    <div class="association" id="jxxxuq300xwwqqhxxxxxvendorParent">
+        
+        <h:outputText value="No vendor" 
+                   rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.jxxxuq300xwwqqhxxxxxvendor == null}"/>
+        
+        <p:dataTable var="jxxxuq300xwwqqhxxxxxvendor" tableStyle="table-layout:auto;"
+                   value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.jxxxuq300xwwqqhxxxxxvendor}" 
+                rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.instance.jxxxuq300xwwqqhxxxxxvendor != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="jxxxuq300xwwqqhxxxxxvendorTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewvendor" 
+                     value="View" 
+                      outcome="/vendor.xhtml">
+                       <f:param disable="#{empty jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid}" name="jxxxuq300xwwqqhxxxxxvendorA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">vendor</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.a0xxukxxbvxxxxxxxxxxvendor}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">title</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.b1xxuxxrbv21xxxxxxxxtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">jobtitle</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.b2xxuxxrbv22xxxxxxxxjobtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lastname</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.b3xxuslnbvxxxxxxxxxxlastname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">firstname</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.b4xxu2fnbvxxxxxxxxxxfirstname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">middlenam</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.b5xxuxxrbvxxxxxxxxxxmiddlenam}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">vendorascompanyname</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.d1xxu3cnbvxxxxxxxxxxvendorascompanyname}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">company sid</f:facet>
+		    	  #{jxxxuq300xwwqqhxxxxxvendor.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">location sid</f:facet>
+		    	  #{jxxxuq300xwwqqhxxxxxvendor.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByMailtocode sid</f:facet>
+		    	  #{jxxxuq300xwwqqhxxxxxvendor.fxxxuq111xwwqqhxxxxxaddressByMailtocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByShiptocode sid</f:facet>
+		    	  #{jxxxuq300xwwqqhxxxxxvendor.fxxxuq111xwwqqhxxxxxaddressByShiptocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneo</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.m1xxh4pobv27xxxxxxxxphoneo}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneh</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.m2xxh5phbv27xxxxxxxxphoneh}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonec</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.m3xxhxxrbv27xxxxxxxxphonec}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonex</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.m4xxhxxrbv27xxxxxxxxphonex}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lanaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n1xxhxxrbv19xxxxxxxxlanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">wanaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n2xxhxxrbv25xxxxxxxxwanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lmailaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n3xxhxxrbv44xxxxxxxxlmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">imailaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n4xxhxxrbv24xxxxxxxximailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">rmailaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n5xxuxxrbvxxxxxxxxxxrmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">intaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n6xxuxxrbvxxxxxxxxxxintaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inraddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n7xxuxxrbvxxxxxxxxxxinraddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">integrset</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.o1xxuwmrbv40xxxxxxxxintegrset}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">contacted</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.o3xxuxxrbvxxxxxxxxxxcontacted}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">bywho</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.o4xxuxxrbvxxxxxxxxxxbywho}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">keywords</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.o5xxuzkybvxxxxxxxxxxkeywords}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.ycxxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.zdxxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.zexxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.zhxxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

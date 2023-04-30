@@ -1,0 +1,1136 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsA0xxuobxbxxxxxxxxxxxsid" value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsFrom" value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsFrom}"/>
+    <f:viewAction action="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.restrict()}" />
+    <f:viewAction action="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Controlusagebyperiods']}</ui:define>
+
+<ui:define name="body">
+<h:form id="lxxxeh177xwwqqhxxxxxcontrolusagebyperiods" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("lxxxeh177xwwqqhxxxxxcontrolusagebyperiods:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ControlusagebyperiodsEditHelp']!='ControlusagebyperiodsEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ControlusagebyperiodsEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed ? 'Edit' : 'Add'} #{messages['Controlusagebyperiods']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <p:tabView switchType="client" >
+           <p:tab title="#{messages['Control']}"
+             rendered="true">
+           <ui:decorate id="xxxxiq1c3xwwqqhxxxxxcontrolDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Control']} 
+            </ui:define>
+                <p:remoteCommand name="xxxxiq1c3xwwqqhxxxxxcontrolFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="xxxxiq1c3xwwqqhxxxxxcontrolsm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.validateAndSelectXxxxxxxxcontrolcode}" 
+                   value="#{xxxxiq1c3xwwqqhxxxxxcontrolHome.lastxxxxiq1c3xwwqqhxxxxxcontrolP}" onchange="xxxxiq1c3xwwqqhxxxxxcontrolFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{xxxxiq1c3xwwqqhxxxxxcontrolList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   </p:tabView>
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="a0xxukupbvxxxxxxxxxxctlusagetrackeridDecoration"  rendered="false">
+        <h:outputLabel  for="a0xxukupbvxxxxxxxxxxctlusagetrackerid" value="#{messages['Ctlusagetrackerid']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxukupbvxxxxxxxxxxctlusagetrackerid" 
+                       label="ctlusagetrackerid"
+                        required="true"
+                        rendered="false"
+                           size="20"
+                      maxlength="32"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.a0xxukupbvxxxxxxxxxxctlusagetrackerid}">
+
+         </h:inputText>
+            <p:tooltip for="a0xxukupbvxxxxxxxxxxctlusagetrackerid"> <span style="white-space: nowrap"> <h:outputText value="Value generated from Sub Key Fields.."/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b1xxuszsbvxxxxxxxxxxdescriptDecoration"    >
+        <h:outputLabel  for="b1xxuszsbvxxxxxxxxxxdescript" value="#{messages['Descript']}">
+      </h:outputLabel>
+
+         <h:inputText id="b1xxuszsbvxxxxxxxxxxdescript" 
+                       label="descript"
+                        required="true"
+                           size="32"
+                      maxlength="120"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b1xxuszsbvxxxxxxxxxxdescript}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b2xxuxxrbvxxxxxxxxxxcurrencyDecoration"    >
+        <h:outputLabel  for="b2xxuxxrbvxxxxxxxxxxcurrency" value="#{messages['Currency']}">
+      </h:outputLabel>
+
+         <h:inputText id="b2xxuxxrbvxxxxxxxxxxcurrency" 
+                           size="20"
+                      maxlength="3"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b2xxuxxrbvxxxxxxxxxxcurrency}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b3xxul0rbvxxxxxxxxxxperiod0labelDecoration"    >
+        <h:outputLabel  for="b3xxul0rbvxxxxxxxxxxperiod0label" value="#{messages['Period0label']}">
+      </h:outputLabel>
+
+         <h:inputText id="b3xxul0rbvxxxxxxxxxxperiod0label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b3xxul0rbvxxxxxxxxxxperiod0label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="b3xxzxxrlvxxxxxxxxxxperiod0bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b3xxzxxrlvxxxxxxxxxxperiod0b" value="#{messages['Period0b']}">
+      </h:outputLabel>
+      <h:inputText id="b3xxzxxrlvxxxxxxxxxxperiod0b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b3xxzxxrlvxxxxxxxxxxperiod0b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b3xxzxxrlvxxxxxxxxxxperiod0b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b4xxul0rbvxxxxxxxxxxperiodtotalslabelDecoration"    >
+        <h:outputLabel  for="b4xxul0rbvxxxxxxxxxxperiodtotalslabel" value="#{messages['Periodtotalslabel']}">
+      </h:outputLabel>
+
+         <h:inputText id="b4xxul0rbvxxxxxxxxxxperiodtotalslabel" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b4xxul0rbvxxxxxxxxxxperiodtotalslabel}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="b4xxzxxrlvxxxxxxxxxxperiodtotalsbDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b4xxzxxrlvxxxxxxxxxxperiodtotalsb" value="#{messages['Periodtotalsb']}">
+      </h:outputLabel>
+      <h:inputText id="b4xxzxxrlvxxxxxxxxxxperiodtotalsb"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b4xxzxxrlvxxxxxxxxxxperiodtotalsb}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b4xxzxxrlvxxxxxxxxxxperiodtotalsb}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b5xxul0rbvxxxxxxxxxxperiod1labelDecoration"    >
+        <h:outputLabel  for="b5xxul0rbvxxxxxxxxxxperiod1label" value="#{messages['Period1label']}">
+      </h:outputLabel>
+
+         <h:inputText id="b5xxul0rbvxxxxxxxxxxperiod1label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b5xxul0rbvxxxxxxxxxxperiod1label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="b5xxzxxrlvxxxxxxxxxxperiod1budgetDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b5xxzxxrlvxxxxxxxxxxperiod1budget" value="#{messages['Period1budget']}">
+      </h:outputLabel>
+      <h:inputText id="b5xxzxxrlvxxxxxxxxxxperiod1budget"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b5xxzxxrlvxxxxxxxxxxperiod1budget}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b5xxzxxrlvxxxxxxxxxxperiod1budget}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b6xxul0rbvxxxxxxxxxxperiod2labelDecoration"    >
+        <h:outputLabel  for="b6xxul0rbvxxxxxxxxxxperiod2label" value="#{messages['Period2label']}">
+      </h:outputLabel>
+
+         <h:inputText id="b6xxul0rbvxxxxxxxxxxperiod2label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b6xxul0rbvxxxxxxxxxxperiod2label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="b6xxzxxrlvxxxxxxxxxxperiod2bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b6xxzxxrlvxxxxxxxxxxperiod2b" value="#{messages['Period2b']}">
+      </h:outputLabel>
+      <h:inputText id="b6xxzxxrlvxxxxxxxxxxperiod2b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b6xxzxxrlvxxxxxxxxxxperiod2b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b6xxzxxrlvxxxxxxxxxxperiod2b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b7xxul0rbvxxxxxxxxxxperiod3labelDecoration"    >
+        <h:outputLabel  for="b7xxul0rbvxxxxxxxxxxperiod3label" value="#{messages['Period3label']}">
+      </h:outputLabel>
+
+         <h:inputText id="b7xxul0rbvxxxxxxxxxxperiod3label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b7xxul0rbvxxxxxxxxxxperiod3label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="b7xxzxxrlvxxxxxxxxxxperiod3bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b7xxzxxrlvxxxxxxxxxxperiod3b" value="#{messages['Period3b']}">
+      </h:outputLabel>
+      <h:inputText id="b7xxzxxrlvxxxxxxxxxxperiod3b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b7xxzxxrlvxxxxxxxxxxperiod3b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b7xxzxxrlvxxxxxxxxxxperiod3b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b8xxul0rbvxxxxxxxxxxperiod4labelDecoration"    >
+        <h:outputLabel  for="b8xxul0rbvxxxxxxxxxxperiod4label" value="#{messages['Period4label']}">
+      </h:outputLabel>
+
+         <h:inputText id="b8xxul0rbvxxxxxxxxxxperiod4label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b8xxul0rbvxxxxxxxxxxperiod4label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="b8xxzxxrlvxxxxxxxxxxperiod4bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b8xxzxxrlvxxxxxxxxxxperiod4b" value="#{messages['Period4b']}">
+      </h:outputLabel>
+      <h:inputText id="b8xxzxxrlvxxxxxxxxxxperiod4b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b8xxzxxrlvxxxxxxxxxxperiod4b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b8xxzxxrlvxxxxxxxxxxperiod4b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b9xxul0rbvxxxxxxxxxxperiod5labelDecoration"    >
+        <h:outputLabel  for="b9xxul0rbvxxxxxxxxxxperiod5label" value="#{messages['Period5label']}">
+      </h:outputLabel>
+
+         <h:inputText id="b9xxul0rbvxxxxxxxxxxperiod5label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b9xxul0rbvxxxxxxxxxxperiod5label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="b9xxzxxrlvxxxxxxxxxxperiod5bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b9xxzxxrlvxxxxxxxxxxperiod5b" value="#{messages['Period5b']}">
+      </h:outputLabel>
+      <h:inputText id="b9xxzxxrlvxxxxxxxxxxperiod5b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b9xxzxxrlvxxxxxxxxxxperiod5b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.b9xxzxxrlvxxxxxxxxxxperiod5b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="baxxul0rbvxxxxxxxxxxperiod6labelDecoration"    >
+        <h:outputLabel  for="baxxul0rbvxxxxxxxxxxperiod6label" value="#{messages['Period6label']}">
+      </h:outputLabel>
+
+         <h:inputText id="baxxul0rbvxxxxxxxxxxperiod6label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.baxxul0rbvxxxxxxxxxxperiod6label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="baxxzxxrlvxxxxxxxxxxperiod6bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="baxxzxxrlvxxxxxxxxxxperiod6b" value="#{messages['Period6b']}">
+      </h:outputLabel>
+      <h:inputText id="baxxzxxrlvxxxxxxxxxxperiod6b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.baxxzxxrlvxxxxxxxxxxperiod6b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.baxxzxxrlvxxxxxxxxxxperiod6b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="bbxxul0rbvxxxxxxxxxxperiod7labelDecoration"    >
+        <h:outputLabel  for="bbxxul0rbvxxxxxxxxxxperiod7label" value="#{messages['Period7label']}">
+      </h:outputLabel>
+
+         <h:inputText id="bbxxul0rbvxxxxxxxxxxperiod7label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bbxxul0rbvxxxxxxxxxxperiod7label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="bbxxzxxrlvxxxxxxxxxxperiod7bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="bbxxzxxrlvxxxxxxxxxxperiod7b" value="#{messages['Period7b']}">
+      </h:outputLabel>
+      <h:inputText id="bbxxzxxrlvxxxxxxxxxxperiod7b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bbxxzxxrlvxxxxxxxxxxperiod7b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bbxxzxxrlvxxxxxxxxxxperiod7b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="bcxxul0rbvxxxxxxxxxxperiod8labelDecoration"    >
+        <h:outputLabel  for="bcxxul0rbvxxxxxxxxxxperiod8label" value="#{messages['Period8label']}">
+      </h:outputLabel>
+
+         <h:inputText id="bcxxul0rbvxxxxxxxxxxperiod8label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bcxxul0rbvxxxxxxxxxxperiod8label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="bcxxzxxrlvxxxxxxxxxxperiod8bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="bcxxzxxrlvxxxxxxxxxxperiod8b" value="#{messages['Period8b']}">
+      </h:outputLabel>
+      <h:inputText id="bcxxzxxrlvxxxxxxxxxxperiod8b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bcxxzxxrlvxxxxxxxxxxperiod8b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bcxxzxxrlvxxxxxxxxxxperiod8b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="bdxxul0rbvxxxxxxxxxxperiod9labelDecoration"    >
+        <h:outputLabel  for="bdxxul0rbvxxxxxxxxxxperiod9label" value="#{messages['Period9label']}">
+      </h:outputLabel>
+
+         <h:inputText id="bdxxul0rbvxxxxxxxxxxperiod9label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bdxxul0rbvxxxxxxxxxxperiod9label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="bdxxzxxrlvxxxxxxxxxxperiod9bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="bdxxzxxrlvxxxxxxxxxxperiod9b" value="#{messages['Period9b']}">
+      </h:outputLabel>
+      <h:inputText id="bdxxzxxrlvxxxxxxxxxxperiod9b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bdxxzxxrlvxxxxxxxxxxperiod9b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bdxxzxxrlvxxxxxxxxxxperiod9b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="bexxul0rbvxxxxxxxxxxperiod10labelDecoration"    >
+        <h:outputLabel  for="bexxul0rbvxxxxxxxxxxperiod10label" value="#{messages['Period10label']}">
+      </h:outputLabel>
+
+         <h:inputText id="bexxul0rbvxxxxxxxxxxperiod10label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bexxul0rbvxxxxxxxxxxperiod10label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="bexxzxxrlvxxxxxxxxxxperiod10bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="bexxzxxrlvxxxxxxxxxxperiod10b" value="#{messages['Period10b']}">
+      </h:outputLabel>
+      <h:inputText id="bexxzxxrlvxxxxxxxxxxperiod10b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bexxzxxrlvxxxxxxxxxxperiod10b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bexxzxxrlvxxxxxxxxxxperiod10b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="bfxxzxxrlvxxxxxxxxxxperiod11bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="bfxxzxxrlvxxxxxxxxxxperiod11b" value="#{messages['Period11b']}">
+      </h:outputLabel>
+      <h:inputText id="bfxxzxxrlvxxxxxxxxxxperiod11b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bfxxzxxrlvxxxxxxxxxxperiod11b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bfxxzxxrlvxxxxxxxxxxperiod11b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="bgxxul0rbvxxxxxxxxxxperiod12labelDecoration"    >
+        <h:outputLabel  for="bgxxul0rbvxxxxxxxxxxperiod12label" value="#{messages['Period12label']}">
+      </h:outputLabel>
+
+         <h:inputText id="bgxxul0rbvxxxxxxxxxxperiod12label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bgxxul0rbvxxxxxxxxxxperiod12label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="bgxxzxxrlvxxxxxxxxxxperiod12bDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="bgxxzxxrlvxxxxxxxxxxperiod12b" value="#{messages['Period12b']}">
+      </h:outputLabel>
+      <h:inputText id="bgxxzxxrlvxxxxxxxxxxperiod12b"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bgxxzxxrlvxxxxxxxxxxperiod12b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bgxxzxxrlvxxxxxxxxxxperiod12b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="bhxxzxxrlvxxxxxxxxxxperiodnbDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="bhxxzxxrlvxxxxxxxxxxperiodnb" value="#{messages['Periodnb']}">
+      </h:outputLabel>
+      <h:inputText id="bhxxzxxrlvxxxxxxxxxxperiodnb"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bhxxzxxrlvxxxxxxxxxxperiodnb}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bhxxzxxrlvxxxxxxxxxxperiodnb}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="bnxxul0rbvxxxxxxxxxxperiodnlabelDecoration"    >
+        <h:outputLabel  for="bnxxul0rbvxxxxxxxxxxperiodnlabel" value="#{messages['Periodnlabel']}">
+      </h:outputLabel>
+
+         <h:inputText id="bnxxul0rbvxxxxxxxxxxperiodnlabel" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.bnxxul0rbvxxxxxxxxxxperiodnlabel}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="vfxxul0rbvxxxxxxxxxxperiod11labelDecoration"    >
+        <h:outputLabel  for="vfxxul0rbvxxxxxxxxxxperiod11label" value="#{messages['Period11label']}">
+      </h:outputLabel>
+
+         <h:inputText id="vfxxul0rbvxxxxxxxxxxperiod11label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.vfxxul0rbvxxxxxxxxxxperiod11label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y1xxuxznbvxxxxxxxxxxnotesDecoration"  rendered="true">
+        <h:outputLabel  for="y1xxuxznbvxxxxxxxxxxnotes" value="#{messages['Notes']}">
+      </h:outputLabel>
+
+         <h:inputText id="y1xxuxznbvxxxxxxxxxxnotes" 
+                           size="20"
+                      maxlength="60"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.y1xxuxznbvxxxxxxxxxxnotes}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z1xxzxxrlvxxxxxxxxxxperiod0Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z1xxzxxrlvxxxxxxxxxxperiod0" value="#{messages['Period0']}">
+      </h:outputLabel>
+      <h:inputText id="z1xxzxxrlvxxxxxxxxxxperiod0"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z1xxzxxrlvxxxxxxxxxxperiod0}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z1xxzxxrlvxxxxxxxxxxperiod0}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z2xxzxxrlvxxxxxxxxxxperiodtotalsDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxzxxrlvxxxxxxxxxxperiodtotals" value="#{messages['Periodtotals']}">
+      </h:outputLabel>
+      <h:inputText id="z2xxzxxrlvxxxxxxxxxxperiodtotals"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z2xxzxxrlvxxxxxxxxxxperiodtotals}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z2xxzxxrlvxxxxxxxxxxperiodtotals}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z5xxzxxrlvxxxxxxxxxxperiod1actualDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z5xxzxxrlvxxxxxxxxxxperiod1actual" value="#{messages['Period1actual']}">
+      </h:outputLabel>
+      <h:inputText id="z5xxzxxrlvxxxxxxxxxxperiod1actual"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z5xxzxxrlvxxxxxxxxxxperiod1actual}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z5xxzxxrlvxxxxxxxxxxperiod1actual}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z6xxzxxrlvxxxxxxxxxxperiod2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z6xxzxxrlvxxxxxxxxxxperiod2" value="#{messages['Period2']}">
+      </h:outputLabel>
+      <h:inputText id="z6xxzxxrlvxxxxxxxxxxperiod2"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z6xxzxxrlvxxxxxxxxxxperiod2}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z6xxzxxrlvxxxxxxxxxxperiod2}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z7xxzxxrlvxxxxxxxxxxperiod3Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z7xxzxxrlvxxxxxxxxxxperiod3" value="#{messages['Period3']}">
+      </h:outputLabel>
+      <h:inputText id="z7xxzxxrlvxxxxxxxxxxperiod3"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z7xxzxxrlvxxxxxxxxxxperiod3}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z7xxzxxrlvxxxxxxxxxxperiod3}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z8xxzxxrlvxxxxxxxxxxperiod4Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z8xxzxxrlvxxxxxxxxxxperiod4" value="#{messages['Period4']}">
+      </h:outputLabel>
+      <h:inputText id="z8xxzxxrlvxxxxxxxxxxperiod4"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z8xxzxxrlvxxxxxxxxxxperiod4}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z8xxzxxrlvxxxxxxxxxxperiod4}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z9xxzxxrlvxxxxxxxxxxperiod5Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z9xxzxxrlvxxxxxxxxxxperiod5" value="#{messages['Period5']}">
+      </h:outputLabel>
+      <h:inputText id="z9xxzxxrlvxxxxxxxxxxperiod5"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z9xxzxxrlvxxxxxxxxxxperiod5}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.z9xxzxxrlvxxxxxxxxxxperiod5}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zbxxzxxrlvxxxxxxxxxxperiod6Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zbxxzxxrlvxxxxxxxxxxperiod6" value="#{messages['Period6']}">
+      </h:outputLabel>
+      <h:inputText id="zbxxzxxrlvxxxxxxxxxxperiod6"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zbxxzxxrlvxxxxxxxxxxperiod6}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zbxxzxxrlvxxxxxxxxxxperiod6}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zbxxzxxrlvxxxxxxxxxxperiod7Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zbxxzxxrlvxxxxxxxxxxperiod7" value="#{messages['Period7']}">
+      </h:outputLabel>
+      <h:inputText id="zbxxzxxrlvxxxxxxxxxxperiod7"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zbxxzxxrlvxxxxxxxxxxperiod7}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zbxxzxxrlvxxxxxxxxxxperiod7}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zcxxzxxrlvxxxxxxxxxxperiod8Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zcxxzxxrlvxxxxxxxxxxperiod8" value="#{messages['Period8']}">
+      </h:outputLabel>
+      <h:inputText id="zcxxzxxrlvxxxxxxxxxxperiod8"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zcxxzxxrlvxxxxxxxxxxperiod8}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zcxxzxxrlvxxxxxxxxxxperiod8}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zdxxzxxrlvxxxxxxxxxxperiod9Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zdxxzxxrlvxxxxxxxxxxperiod9" value="#{messages['Period9']}">
+      </h:outputLabel>
+      <h:inputText id="zdxxzxxrlvxxxxxxxxxxperiod9"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zdxxzxxrlvxxxxxxxxxxperiod9}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zdxxzxxrlvxxxxxxxxxxperiod9}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zexxzxxrlvxxxxxxxxxxperiod10Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zexxzxxrlvxxxxxxxxxxperiod10" value="#{messages['Period10']}">
+      </h:outputLabel>
+      <h:inputText id="zexxzxxrlvxxxxxxxxxxperiod10"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zexxzxxrlvxxxxxxxxxxperiod10}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zexxzxxrlvxxxxxxxxxxperiod10}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zfxxzxxrlvxxxxxxxxxxperiod11Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zfxxzxxrlvxxxxxxxxxxperiod11" value="#{messages['Period11']}">
+      </h:outputLabel>
+      <h:inputText id="zfxxzxxrlvxxxxxxxxxxperiod11"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zfxxzxxrlvxxxxxxxxxxperiod11}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zfxxzxxrlvxxxxxxxxxxperiod11}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zgxxzxxrlvxxxxxxxxxxperiod12Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zgxxzxxrlvxxxxxxxxxxperiod12" value="#{messages['Period12']}">
+      </h:outputLabel>
+      <h:inputText id="zgxxzxxrlvxxxxxxxxxxperiod12"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zgxxzxxrlvxxxxxxxxxxperiod12}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zgxxzxxrlvxxxxxxxxxxperiod12}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zhxxuxxrbvxxxxxxxxxxperiodnDecoration"  rendered="true">
+        <h:outputLabel  for="zhxxuxxrbvxxxxxxxxxxperiodn" value="#{messages['Periodn']}">
+      </h:outputLabel>
+      <h:inputText id="zhxxuxxrbvxxxxxxxxxxperiodn"  
+         value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zhxxuxxrbvxxxxxxxxxxperiodn}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zhxxuxxrbvxxxxxxxxxxperiodn}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zixxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="zixxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="zixxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zixxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="zjxxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zjxxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="zjxxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zjxxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="zjxxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zjxxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="zjxxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zjxxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.a0xxukupbvxxxxxxxxxxctlusagetrackerid} #{messages['sid']} #{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.a0xxukupbvxxxxxxxxxxctlusagetrackerid !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.persist()}"
+                       disabled="#{!lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.wired}"
+                       rendered="#{!lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed  and !lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.update()}"
+                       rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed  and !lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.update()}"
+                       rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed and lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.remove()}"
+                       rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed and !lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/controlusagebyperiodsEdit.xhtml"
+                       rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsList.reportName}"/>
+            <f:param name="displayAs" value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsList.displayAs}" /> 
+            <h:button outcome="/controlusagebyperiodsList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Controlusagebyperiods']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsFrom ? 'home' : lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsFrom}.xhtml"
+                rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed or lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsFrom ? 'home' : lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsFrom}.xhtml"
+                rendered="#{!lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed and !lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="true" rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" toggleable="true" toggleableHeader="true">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+  <p:tabView switchType="ajax">
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Control']}">
+    <div class="association" id="xxxxiq1c3xwwqqhxxxxxcontrolParent">
+        
+        <h:outputText value="No control" 
+                   rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.xxxxiq1c3xwwqqhxxxxxcontrol == null}"/>
+        
+        <p:dataTable var="xxxxiq1c3xwwqqhxxxxxcontrol" tableStyle="table-layout:auto;"
+                   value="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.xxxxiq1c3xwwqqhxxxxxcontrol}" 
+                rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.instance.xxxxiq1c3xwwqqhxxxxxcontrol != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="xxxxiq1c3xwwqqhxxxxxcontrolTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewcontrol" 
+                     value="View" 
+                      outcome="/control.xhtml">
+                       <f:param disable="#{empty xxxxiq1c3xwwqqhxxxxxcontrol.a0xxuobxbxxxxxxxxxxxsid}" name="xxxxiq1c3xwwqqhxxxxxcontrolA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{xxxxiq1c3xwwqqhxxxxxcontrol.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">controlcode</f:facet>
+                   #{xxxxiq1c3xwwqqhxxxxxcontrol.a0xxukoxbvxxxxxxxxxxcontrolcode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{xxxxiq1c3xwwqqhxxxxxcontrol.b1xxuszsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">typeofcontrol</f:facet>
+                   #{xxxxiq1c3xwwqqhxxxxxcontrol.b2xxuzsxbvxxxxxxxxxxtypeofcontrol}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{xxxxiq1c3xwwqqhxxxxxcontrol.b3xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{xxxxiq1c3xwwqqhxxxxxcontrol.b4xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">notes</f:facet>
+                   #{xxxxiq1c3xwwqqhxxxxxcontrol.b5xxuxznbvxxxxxxxxxxnotes}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{xxxxiq1c3xwwqqhxxxxxcontrol.b6xxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

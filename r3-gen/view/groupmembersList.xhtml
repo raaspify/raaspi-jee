@@ -1,0 +1,1664 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid" value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal==null ? 6:jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal}"/>
+    <f:viewAction action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Groupmembers']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="jxxxuq54exwwqqhxxxxxgroupmembersSearch" styleClass="edit">
+<h:outputStylesheet>
+
+.rf-edt-c {
+    height: 40px !important;
+}
+.rf-tb {
+    background-color:#{a4jSkin.tableSubHeaderBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+
+}
+.rf-cp-hdr {
+    background-color:#{a4jSkin.additionalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.rf-edt-hdr {
+    background-color:#{a4jSkin.generalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.rf-insp-dec {
+ background-color:white
+}
+.rf-insp-inc {
+ background-color:white
+}
+
+
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<rich:toolbar height="26" itemSeparator="grid">
+	  <rich:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']} " propagation="end"  outcome="/home.xhtml" />
+             <a4j:status name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </a4j:status>
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['GroupmembersListHelp']!='GroupmembersListHelp'}">
+             <rich:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['GroupmembersListHelp']}"/></span> </rich:tooltip> 
+             </h:graphicImage>
+	  </rich:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</rich:toolbar>
+
+
+
+
+ <rich:collapsiblePanel style="width: 50%;" header="#{messages['Groupmembers']}- #{messages['List']} #{messages['Search']}" switchType="ajax" expanded="false"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+
+<h:panelGrid columns="10">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.searchVal}"/>
+ </ui:decorate>
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText ph:type="date" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <ui:remove>
+ <h:panelGrid columns="2" rendered="menuAttributesFunction?contains('1m')">
+         <h:selectOneMenu value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.searchVal}"  
+          onchange="submit()">
+          <f:selectItem itemLabel="Mail Content" itemValue="MAIL-CONTENT"/>
+          <f:selectItem itemLabel="Price: Low to High" itemValue="lh"/>
+          <f:selectItem itemLabel="Price: High to Low" itemValue="hl"/>
+          <f:selectItem itemLabel="Title: Sale Items" itemValue="si"/>
+          <f:selectItem itemLabel="Title: A to Z" itemValue="az"/>
+          <f:selectItem itemLabel="Title: Z to A" itemValue="za"/>
+          <f:selectItem itemLabel="Title: Highest Rated" itemValue="hr"/>
+          <f:selectItem itemLabel="Title: Newest" itemValue="ne"/>
+         </h:selectOneMenu>
+ </h:panelGrid>
+ </ui:remove>
+</h:panelGrid>
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <rich:autocomplete mode="client"  autocompleteMethod="#{jxxxuq54exwwqqhxxxxxgroupmembersList.suggest}" 
+                  value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.start}"  inputClass="autoCompleteWidth50" popupClass="autoCompletePopupHieght" onclick="this.select()" type="text" 
+                   tokens="," minChars="0" autoFill="false" selectFirst="false" showButton="true"
+                   var ="result" fetchValue="#{result}" layout="table"
+                   rendered="#{fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   >
+                 <rich:column>
+                  <b>#{result}</b>
+                 </rich:column>
+            </rich:autocomplete>
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.suggest(jxxxuq54exwwqqhxxxxxgroupmembersHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <rich:autocomplete mode="client"  autocompleteMethod="#{jxxxuq54exwwqqhxxxxxgroupmembersList.suggest}" 
+                  value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.end}"   inputClass="autoCompleteWidth50" popupClass="autoCompletePopupHieght" onclick="this.select()" type="text" 
+                   tokens="," minChars="0" autoFill="false" selectFirst="false" showButton="true"
+                   var ="result" fetchValue="#{result}" layout="table"
+                   rendered="#{fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   >
+                 <rich:column>
+                  <b>#{result}</b>
+                 </rich:column>
+            </rich:autocomplete>
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.suggest(jxxxuq54exwwqqhxxxxxgroupmembersHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="jxxxuq54exwwqqhxxxxxgroupmembersList,globalMessages" status="buttonStatus" value="#{messages['Search']}" 
+              actionListener="#{jxxxuq54exwwqqhxxxxxgroupmembersList.getFirstResult()}" rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal lt 49}"/>
+            <h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</rich:collapsiblePanel>
+
+    <rich:panel>
+
+        <div class="actionButtons">
+             <h:commandButton id="copyallt" value="Copy All Flagged"  action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.copyAllMarked()}" 
+                rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal lt 49}" status="buttonStatus"/>
+             <a4j:status name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </a4j:status>
+             <h:commandButton id="deleteallt" value="Delete All Flagged"  action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.deleteAllFlagged()}"
+              onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal lt 49}"/>
+             <h:commandButton id="updateallt" value="Update All Flagged"  rendered="false" action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.updateAllFlagged()}" />
+             <h:commandButton id="emailIcal" value="#{messages['email']} #{messages['as']} #{messages['iCalendar']}"  rendered="false" action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.writeAsIcalText()}"/>
+
+            <h:button outcome="/#{empty jxxxuq54exwwqqhxxxxxgroupmembersFrom ? 'home' : jxxxuq54exwwqqhxxxxxgroupmembersFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <ui:remove> oct12 2018 do not render list page once > 50 rows  to avoid excedding max http params </ui:remove>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{jxxxuq54exwwqqhxxxxxgroupmembersList.setMaxResultsVal(6)}" rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{jxxxuq54exwwqqhxxxxxgroupmembersList.setMaxResultsVal(50)}" rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{jxxxuq54exwwqqhxxxxxgroupmembersList.setMaxResultsVal(100)}" rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal lt 49}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{jxxxuq54exwwqqhxxxxxgroupmembersList.setskipColumns(true)}" rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal lt 49}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{jxxxuq54exwwqqhxxxxxgroupmembersList.setskipColumns(false)}" rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal lt 49}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Groupmembers Search Results showing #{empty jxxxuq54exwwqqhxxxxxgroupmembersList.resultList ? 0 : (jxxxuq54exwwqqhxxxxxgroupmembersList.paginated ? jxxxuq54exwwqqhxxxxxgroupmembersList.resultList.size() : jxxxuq54exwwqqhxxxxxgroupmembersList.resultCount)} of #{jxxxuq54exwwqqhxxxxxgroupmembersList.resultCount}"/>
+        </f:facet>
+    <div class="results" id="jxxxuq54exwwqqhxxxxxgroupmembersList" style="overflow-x:auto">
+
+    <h:outputText value="The Groupmembers search returned no results."
+               rendered="#{empty jxxxuq54exwwqqhxxxxxgroupmembersList.resultList}"/>
+
+
+
+    <rich:extendedDataTable id="jxxxuq54exwwqqhxxxxxgroupmembersList"  frozenColumns="2"
+                var="_jxxxuq54exwwqqhxxxxxgroupmembers" rowKeyVar="rv"
+              value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.resultList}"
+           rendered="#{not empty jxxxuq54exwwqqhxxxxxgroupmembersList.resultList}">
+        <h:column width="105px">
+            <f:facet id="MarkerFacet" name="header">
+             <h:outputText id="markit" value="Action" />
+            </f:facet>
+            <h:selectBooleanCheckbox id="MarkItCheckbox" value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.checked[rv]}"/>
+
+            <h:link outcome="/#{empty from ? 'groupmembers' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+                   propagation="#{empty from ? 'none' : 'default'}"
+                      id="jxxxuq54exwwqqhxxxxxgroupmembersViewId">
+                <f:param name="jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_jxxxuq54exwwqqhxxxxxgroupmembers.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+            <h:link outcome="/groupmembersEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="jxxxuq54exwwqqhxxxxxgroupmembersEdit1"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') ||customIdentity.hasRole('SH') ||customIdentity.hasRole('EH') 
+                  || (customIdentity.hasRole('VH') ||customIdentity.hasRole('VQ')
+                  and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_jxxxuq54exwwqqhxxxxxgroupmembers.a0xxuobxbxxxxxxxxxxxsid}"/>
+
+            </h:link>
+
+        </h:column>
+     <!-- all a0xxuobxbxxxxxxxxxxxsid  N  54-->
+     <!-- hide a0xxuobxbxxxxxxxxxxxsid  N  54-->
+
+     <!-- all b1xxukgmbvxxxxxxxxxxmemberid  N  54-->
+         <h:column rendered="#{!jxxxuq54exwwqqhxxxxxgroupmembersList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Memberid']}"/>
+
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.b1xxukgmbvxxxxxxxxxxmemberid"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(b1xxukgmbvxxxxxxxxxxmemberid) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_jxxxuq54exwwqqhxxxxxgroupmembers.b1xxukgmbvxxxxxxxxxxmemberid}"  id="b1xxukgmbvxxxxxxxxxxmemberid" />
+        </h:column>
+     <!-- all b2xxuxzsbvxxxxxxxxxxdescript  N  54-->
+         <h:column rendered="#{!jxxxuq54exwwqqhxxxxxgroupmembersList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Descript']}"/>
+
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.b2xxuxzsbvxxxxxxxxxxdescript"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(b2xxuxzsbvxxxxxxxxxxdescript) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_jxxxuq54exwwqqhxxxxxgroupmembers.b2xxuxzsbvxxxxxxxxxxdescript}"  id="b2xxuxzsbvxxxxxxxxxxdescript" />
+        </h:column>
+     <!-- all b3xxuzyxbv46xxxxxxxxsourcetype  N  54-->
+         <h:column rendered="#{!jxxxuq54exwwqqhxxxxxgroupmembersList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Sourcetype']}"/>
+
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.b3xxuzyxbv46xxxxxxxxsourcetype"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(b3xxuzyxbv46xxxxxxxxsourcetype) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_jxxxuq54exwwqqhxxxxxgroupmembers.b3xxuzyxbv46xxxxxxxxsourcetype}"  id="b3xxuzyxbv46xxxxxxxxsourcetype" />
+        </h:column>
+
+         <!-- jay notcomposite ppn   a0xxuobxbxxxxxxxxxxxsid ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxukixbxxxxxxxxxxxmatcode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+        <h:column rendered = "#{!jxxxuq54exwwqqhxxxxxgroupmembersList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                    <ui:param name="propertyLabel" value="Item Key"/>
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.fpxxfq1a5xwwqqhxxxxxitem.a0xxukixbxxxxxxxxxxxmatcode"/>
+                </ui:include>
+            </f:facet>
+             <!-- 54 -->
+ <!-- jay org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fpxxfq1a5xwwqqhxxxxxitem  -->
+           <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemList.getKeyValue(_jxxxuq54exwwqqhxxxxxgroupmembers.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </h:column>
+
+         <!-- jay notcomposite ppn   b0xxziqxlvxxsaxxxxxxquantity ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b1xxuszsbvxxxxxxxxxxdescript ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b3xxuxxrbvxxxxxxxxxxsource1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b5fbuxxrbvxxxxxxxxxxupccode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b6fbzicxbvxxxxxxxxxxcost ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b7fbzxxxbvxxxxxxxxxxreplcost ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b8fbzpxxbvxxxxxxxxxxselprice ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b9xxzxxxlvxxxxxxxxxxspricold ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c1xxzxxxhhxxsxxxxxxxspricnew ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c2fbcxxrhhxxsxxxxxxxspriceffdt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c3fbuxscbvxxxxxxxxxxshipcode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c4fbzxxxbvxxxxxxxxxxqtylevel1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c5fbuuxrbv18xxxxxxxxunit ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c6xxusxrbv16xxxxxxxxtype ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c7fbfxz1bvxxxxxxxxxxtax1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c8fbfxz2bvxxxxxxxxxxtax2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   dxxxuq92bxwwqqhefxxxitemjobs ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   dxxxuq92bxwwqqhefxxxitemjobs_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   f1xxuxxrbvxxxxxxxxxxaliascode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   f3xxzxxxlvxxxxxxxxxxavgprice ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fpxxfq1a5xwwqqhxxxxxitem ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fpxxfq1a5xwwqqhxxxxxitems ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fpxxfq1a5xwwqqhxxxxxitems_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxcq144xwwqqhxxxxxlocation ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq1bhxwwqqhxxxxxusagebyperiodses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq1bhxwwqqhxxxxxusagebyperiodses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq1hhxwwqqhefxxxitembomdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq1hhxwwqqhefxxxitembomdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   g2xxuxn1bvxxxxxxxxxxsubcodesn ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   g2xxuxn2bvxxxxxxxxxxsubcodesn2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   g2xxuxn3bvxxxxxxxxxxsubcodesn3 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   h1xxcxxrlxxxxxxxxxxxeffdate ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   h2xxuwmrbv40xxxxxxxxintegrset ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq233xwwqqhxxxxxcuquotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq233xwwqqhxxxxxcuquotes_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq244xwwqqhxxxxxcuorderses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq244xwwqqhxxxxxcuorderses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq255xwwqqhxxxxxshipments ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq255xwwqqhxxxxxshipments_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq266xwwqqhxxxxxcuinvoices ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq266xwwqqhxxxxxcuinvoices_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq333xwwqqhxxxxxvenquotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq333xwwqqhxxxxxvenquotes_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq344xwwqqhxxxxxvendorderses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq344xwwqqhxxxxxvendorderses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq377xwwqqhxxxxxvshipmens ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq377xwwqqhxxxxxvshipmens_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq3a6xwwqqhxxxxxvinvoices ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq3a6xwwqqhxxxxxvinvoices_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq444xwwqqhxxxxxemplorderses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq444xwwqqhxxxxxemplorderses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq9ccxwwqqhexxxxprocessdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq9ccxwwqqhexxxxprocessdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trxxuq9aaxwwqqhefxxxjobassignments ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trxxuq9aaxwwqqhefxxxjobassignments_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   w7xxuznxbvxxxxxxxxxxnotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   w8xxuzdrbvxxxxxxxxxxdocmnt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq295xwwqqhxxxxxshipmentdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq295xwwqqhxxxxxshipmentdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2a4xwwqqhxxxxxcuidetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2a4xwwqqhxxxxxcuidetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2b4xwwqqhxxxxxcuodetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2b4xwwqqhxxxxxcuodetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2c4xwwqqhxxxxxcuqdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2c4xwwqqhxxxxxcuqdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq399xvwwqqhxxxxvshipmendetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq399xvwwqqhxxxxvshipmendetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3c4xwwqqhxxxxxvendidetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3c4xwwqqhxxxxxvendidetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3d4xwwqqhxxxxxvendodetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3d4xwwqqhxxxxxvendodetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3e4xwwqqhxxxxxvendqdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3e4xwwqqhxxxxxvendqdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq454xwwqqhxxxxxemplodetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq454xwwqqhxxxxxemplodetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq9bfxwwqqhexxxxjobassignmentdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y1xxuxxrbvxxxxxxxxxxsource2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y2xxuxxrbvxxxxxxxxxxmisccode1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y3xxuxxrbvxxxxxxxxxxmisccode2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y4xxuxxrbvxxxxxxxxxxcaseqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y5xxcxxrlxxxxxxxxxxxdatetorenew ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y6fbfxz3bvxxxxxxxxxxtax3 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxcsxrlxxxxxxxxxxxdateadded ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxcxxrlxxxxxxxxxxxdateexpiry ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxzzprhvxxxxxxxxxxprintmstat ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z3xxczqxlhxxxxxxxxxxprinmtfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z4xxzxxxlvxxxxxxxxxxavgcost ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z5xxzzfxhhxxxxxxxxxxstatusfl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z6xxcztxlxxxxxxxxxxxstatusfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z7xxzxxxlvxxxxxxxxxxcuordqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z8xxzxxxlvxxxxxxxxxxvenorqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z9xxzxxxlvxxxxxxxxxxcupicqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zaxxzxxxlvxxxxxxxxxxvenpiqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zbxxzxxxlvxxxxxxxxxxcuinvqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zcxxzxxxlvxxxxxxxxxxcushiqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zdxxzxxxlvxxxxxxxxxxvenshqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zexxutoxlhxxxxxxxxxxowner ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zxxrbvxxxvxxxxxxxxxxbarupc ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zzxxu2oxxhxxxxxxxxxxowner2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxuobxbxxxxxxxxxxxsid ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxukmxbvxxxxxxxxxxmachinecode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+        <h:column rendered = "#{!jxxxuq54exwwqqhxxxxxgroupmembersList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                    <ui:param name="propertyLabel" value="Machine Key"/>
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.fpxxuq9eexwwqqhefxxxmachine.a0xxukmxbvxxxxxxxxxxmachinecode"/>
+                </ui:include>
+            </f:facet>
+             <!-- 54 -->
+ <!-- jay org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fpxxuq9eexwwqqhefxxxmachine  -->
+           <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineList.getKeyValue(_jxxxuq54exwwqqhxxxxxgroupmembers.fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </h:column>
+
+         <!-- jay notcomposite ppn   b1xxuszsbvxxxxxxxxxxdescript ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b3xxuxxrbvxxxxxxxxxxsource1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b5xxuxxrbvxxxxxxxxxxupccode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b6xxzicxbvxxxxxxxxxxcost ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b7xxzxxxbvxxxxxxxxxxreplcost ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b8xxzpxxbvxxxxxxxxxxselprice ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b9xxzxxxlvxxsxxxxxxxspricold ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c1xxzxxxhhxxsxxxxxxxspricnew ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c2xxcxxrhhxxsxxxxxxxspriceffdt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c3xxuxxrbvxxxxxxxxxxshipcode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c4xxzxxxbvxxxxxxxxxxqtylevel1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c5xxuuxrbv18xxxxxxxxunit ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c6xxuxxrbv16xxxxxxxxtype ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c7xxfxz1bvxxxxxxxxxxtax1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c8xxfxz2bvxxxxxxxxxxtax2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   f1xxuxxrbvxxxxxxxxxxaliascode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   f3xxzxxxlvxxxxxxxxxxavgprice ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fpxxuq9eexwwqqhefxxxmachine ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fpxxuq9eexwwqqhefxxxmachines ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fpxxuq9eexwwqqhefxxxmachines_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   g2xxuxn1lvxxxxxxxxxxsubcodesn ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   g2xxuxn2lvxxxxxxxxxxsubcodesn2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   g2xxuxn3lvxxxxxxxxxxsubcodesn3 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   h1xxcxxrlxxxxxxxxxxxeffdate ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   h2xxuwmrbv40xxxxxxxxintegrset ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trxxuq9aaxwwqqhefxxxjobassignments ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trxxuq9aaxwwqqhefxxxjobassignments_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq9bfxwwqqhexxxxjobassignmentdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y1xxuxxrbvxxxxxxxxxxsource2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y2xxuxxrbvxxxxxxxxxxmisccode1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y3xxuxxrbvxxxxxxxxxxmisccode2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y4xxuxxrbvxxxxxxxxxxcaseqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y6xxfxz3bvxxxxxxxxxxtax3 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y7xxuxznbvxxxxxxxxxxnotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y8xxuzdrbvxxxxxxxxxxdocmnt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z1xxziqxlvxxxxxxxxxxquantity ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxcxxrlxxxxxxxxxxxdateadded ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxzzprhvxxxxxxxxxxprintmstat ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z3xxczqxlhxxxxxxxxxxprinmtfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z4xxzxxxlvxxxxxxxxxxavgcost ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z5xxzzfxhhxxxxxxxxxxstatusfl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z6xxcztxlxxxxxxxxxxxstatusfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z7xxzxxxlvxxxxxxxxxxcuordqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z8xxzxxxlvxxxxxxxxxxvenorqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z9xxzxxxlvxxxxxxxxxxcupicqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zaxxzxxxlvxxxxxxxxxxvenpiqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zbxxzxxxlvxxxxxxxxxxcuinvqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zcxxzxxxlvxxxxxxxxxxcushiqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zdxxzxxxlvxxxxxxxxxxvenshqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zexxutoxlhxxxxxxxxxxowner ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zxxrbvxxxvxxxxxxxxxxbarupc ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zzxxu2oxxhxxxxxxxxxxowner2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxuobxbxxxxxxxxxxxsid ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxukaxbvxxxxxxxxxxactivitycode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+        <h:column rendered = "#{!jxxxuq54exwwqqhxxxxxgroupmembersList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                    <ui:param name="propertyLabel" value="Activity Key"/>
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.fxxxuq188xwwqqhxxxxxactivity.a0xxukaxbvxxxxxxxxxxactivitycode"/>
+                </ui:include>
+            </f:facet>
+             <!-- 54 -->
+ <!-- jay org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fxxxuq188xwwqqhxxxxxactivity  -->
+           <h:outputText value="#{fxxxuq188xwwqqhxxxxxactivityList.getKeyValue(_jxxxuq54exwwqqhxxxxxgroupmembers.fxxxuq188xwwqqhxxxxxactivity.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </h:column>
+
+         <!-- jay notcomposite ppn   b1xxuszsbvxxxxxxxxxxdescript ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b2xxcxxrlxxxxxxxxxxxdate ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b3xxuxxrbvxxxxxxxxxxsource1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b4xxuxxrbvxxxxxxxxxxupccode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b5xxzxxrlvxxxxxxxxxxcost ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b6xxzcxrlvxxxxxxxxxxreplcost ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b7xxzpxrlvxxxxxxxxxxselprice ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b8xxzxxrhhxxsxxxxxxxspricnew ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b9xxcxxrhhxxsxxxxxxxspriceffdt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c1xxuxxrbvxxxxxxxxxxshipcode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c2xxzxxrlvxxxxxxxxxxqtylevel1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c3xxuuxrbv18xxxxxxxxunit ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c4xxzxxrlvxxxxxxxxxxcaseqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c5xxuxxrbv37xxxxxxxxtype ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c6xxfxz1bvxxxxxxxxxxtax1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c7xxfxz2bvxxxxxxxxxxtax2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c8xxcxxrlxxxxxxxxxxxeffdate ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c9xxuwmrbv40xxxxxxxxintegrset ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq188xwwqqhxxxxxactivities ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq188xwwqqhxxxxxactivities_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq188xwwqqhxxxxxactivity ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq1kkxwwqqhfxxxxtasks ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq1kkxwwqqhfxxxxtasks_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq89bxwwqqhxxxxxschedules ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq89bxwwqqhxxxxxschedules_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   g2xxuxn1lvxxxxxxxxxxsubcodesn ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   g2xxuxn2lvxxxxxxxxxxsubcodesn2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   g2xxuxn3lvxxxxxxxxxxsubcodesn3 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   txxxuq932xwwqqhspxxxactivityjobs ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   txxxuq932xwwqqhspxxxactivityjobs_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq943xwwqqhxxxxxactivityjobdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq943xwwqqhxxxxxactivityjobdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y1xxuxxrbvxxxxxxxxxxsource2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y2xxuxxrbvxxxxxxxxxxmisccode1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y3xxuxxrbvxxxxxxxxxxmisccode2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y4xxfxz3xxxvxxxxxxxxxxtax3 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y5xxuxxrbvxxxxxxxxxxaliascode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y7xxuznxbvxxxxxxxxxxnotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y8xxuzdrbvxxxxxxxxxxdocmnt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z1xxzxxrlvxxxxxxxxxxquantity ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxzxxrlvxxsxxxxxxxspricold ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z3xxzzprhvxxxxxxxxxxprintmstat ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z4xxczqxlhxxxxxxxxxxprinmtfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z5xxzxxrlvxxxxxxxxxxavgprice ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z6xxzxxrlvxxxxxxxxxxavgcost ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z7xxzzfxhhxxxxxxxxxxstatusfl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z8xxcztxlxxxxxxxxxxxstatusfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zbxxzxxrlvxxxxxxxxxxcuordqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zcxxzxxrlvxxxxxxxxxxvenorqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zdxxzxxrlvxxxxxxxxxxcupicqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zexxzxxrlvxxxxxxxxxxvenpiqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zfxxzxxrlvxxxxxxxxxxcuinvqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zgxxzxxrlvxxxxxxxxxxcushiqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zhxxzxxrlvxxxxxxxxxxvenshqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zixxutoxlhxxxxxxxxxxowner ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zjxxuxxrbvxxxxxxxxxxbarupc ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zzxxu2oxxhxxxxxxxxxxowner2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxuobxbxxxxxxxxxxxsid ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxukxxbvxxxxxxxxxxgroupid ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+        <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                    <ui:param name="propertyLabel" value="Membersgroup Key"/>
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.fxxxuq1ggxwwqqhxxxxxmembersgroup.a0xxukxxbvxxxxxxxxxxgroupid"/>
+                </ui:include>
+            </f:facet>
+             <!-- 54 -->
+ <!-- jay org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fxxxuq1ggxwwqqhxxxxxmembersgroup  -->
+           <h:outputText value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupList.getKeyValue(_jxxxuq54exwwqqhxxxxxgroupmembers.fxxxuq1ggxwwqqhxxxxxmembersgroup.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </h:column>
+
+         <!-- jay notcomposite ppn   b1xxuszsbvxxxxxxxxxxdescript ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b2xxfxxxbvxxxxxxxxxxmode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   dxxxuq2drxwwqqhfxxxxresourcedetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   dxxxuq2drxwwqqhfxxxxresourcedetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq1kkxwwqqhfxxxxtasks ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq1kkxwwqqhfxxxxtasks_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq89bxwwqqhxxxxxschedules ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq89bxwwqqhxxxxxschedules_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z1xxziqxlvxxxxxxxxxxquantity ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z1xxzzfxhhxxxxxxxxxxstatusfl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxcztxlxxxxxxxxxxxstatusfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z3xxutoxlhxxxxxxxxxxowner ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zzxxu2oxxhxxxxxxxxxxowner2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxuobxbxxxxxxxxxxxsid ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxuktxbvxxxxxxxxxxemployee ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+        <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                    <ui:param name="propertyLabel" value="Employee Key"/>
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.jxxxbh400xwwqqhxxxxxemployee.a0xxuktxbvxxxxxxxxxxemployee"/>
+                </ui:include>
+            </f:facet>
+             <!-- 54 -->
+ <!-- jay org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  jxxxbh400xwwqqhxxxxxemployee  -->
+           <h:outputText value="#{jxxxbh400xwwqqhxxxxxemployeeList.getKeyValue(_jxxxuq54exwwqqhxxxxxgroupmembers.jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </h:column>
+
+         <!-- jay notcomposite ppn   b1xxuxxxbv21xxxxxxxxtitle ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b2xxuxxrbx22xxxxxxxxjobtitle ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b3xxuslnbvixxxxxxxxxlastname ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b4xxu2fnbvxxxxxxxxxxfirstname ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b5xxuxxrbvxxxxxxxxxxmiddlenam ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c1xxfxz1bxxxxxxxxxxxtax1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c4xxuz1xbv04xxxxxxxxcusttax1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c5xxuz2xbv05xxxxxxxxcusttax2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   dxxxch1d3xwwqqhxxlxxcompany ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   dxxxiq155xwwqqhxxxxxresidency ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxch122xhhxqhxxlxxdepartment ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxch133xhhxqhxxlxxdivision ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxcq144xwwqqhxxxxxlocation ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq111xwwqqhxxxxxaddressByMailtocode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq111xwwqqhxxxxxaddressByShiptocode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq89bxwwqqhxxxxxschedules ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq89bxwwqqhxxxxxschedules_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   m1xxh3pobv27xxxxxxxxphoneo ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   m2xxh4phbv27xxxxxxxxphoneh ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   m3xxh5pcbv27xxxxxxxxphonec ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   m4xxhxxrbx27xxxxxxxxphonex ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n1xxhxxrbx19xxxxxxxxlanaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n2xxhxxrbx25xxxxxxxxwanaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n3xxhxxrbx44xxxxxxxxlmailaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n4xxhxxrbv24xxxxxxxximailaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n5xxuxxrbxxxxxxxxxxxrmailaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n6xxhxxrbx23xxxxxxxxintaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n7xxuxxrbxxxxxxxxxxxinraddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   o1xxuxxrbv45xxxxxxxxtype ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   o2xxuwmrbv40xxxxxxxxintegrset ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq233xwwqqhxxxxxcuquotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq233xwwqqhxxxxxcuquotes_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq244xwwqqhxxxxxcuorderses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq244xwwqqhxxxxxcuorderses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq266xwwqqhxxxxxcuinvoices ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq266xwwqqhxxxxxcuinvoices_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq333xwwqqhxxxxxvenquotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq333xwwqqhxxxxxvenquotes_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq344xwwqqhxxxxxvendorderses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq344xwwqqhxxxxxvendorderses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq3a6xwwqqhxxxxxvinvoices ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq3a6xwwqqhxxxxxvinvoices_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq444xwwqqhxxxxxemplordersesForAgent ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq444xwwqqhxxxxxemplordersesForAgent_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq444xwwqqhxxxxxemplordersesForEmployee ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq444xwwqqhxxxxxemplordersesForEmployee_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xorxeh8cexwwqqhxxxxxscheduledetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xorxeh8cexwwqqhxxxxxscheduledetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xxxxiq711xwwqqhxxxxxwageearners ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xxxxiq711xwwqqhxxxxxwageearners_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y0xxuzsxbvxxxxxxxxxxdescript ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+          <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                    <ui:param name="propertyLabel" value="Employee Details"/>
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.jxxxbh400xwwqqhxxxxxemployee.y0xxuzsxbvxxxxxxxxxxdescript"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer O  jxxxbh400xwwqqhxxxxxemployee  -->
+            <h:outputText value="#{jxxxbh400xwwqqhxxxxxemployeeList.getKeyValue(_jxxxuq54exwwqqhxxxxxgroupmembers.jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </h:column>
+
+         <!-- jay notcomposite ppn   y6xxfxxrbvxxxxxxxxxxshiplabel ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y6xxuz3xxvxxxxxxxxxxcusttax3 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y8xxcxxrbvxxxxxxxxxxcontacted ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y9xxuxxrbvxxxxxxxxxxbywho ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yaxxuzkybvxxxxxxxxxxkeywords ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   ybxxuznybvxxxxxxxxxxnotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   ycxxuzdrbvxxxxxxxxxxdocmnt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yxxxch601xwwqqhxxxxxaccount ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yxxxiq555xwwqqhxxxxxholidaies ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yxxxiq555xwwqqhxxxxxholidaies_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yxxxuh566xwwqqwxxxxxusers ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yxxxuh566xwwqqwxxxxxusers_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z1xxztpxlvxxxxxxxxxxempltotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxfxz2bxxxxxxxxxxxtax2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxztqxlvxxxxxxxxxxempltqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z3xxfxz3bxxxxxxxxxxxtax3 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z5xxztrplvxxxxxxxxxxemprtotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z6xxztrqlvxxxxxxxxxxemprtqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z7xxztmplvxxxxxxxxxxempmtotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z8xxztdplvxxxxxxxxxxempdtotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z9xxutlolvxxxxxxxxxxlastorder ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z9xxutlqlvxxxxxxxxxxlastquote ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zaxxutlilvxxxxxxxxxxlastinvoic ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zbxxztlplvxxxxxxxxxxlastpaymq ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zcxxzzprhvxxxxxxxxxxprintmstat ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zdxxczqxlhxxxxxxxxxxprinmtfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zexxutoxlhxxxxxxxxxxowner ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zexxzzfxhhxxxxxxxxxxstatusfl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zfxxcztxlxxxxxxxxxxxstatusfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zzxxu2oxxhxxxxxxxxxxowner2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxuobxbxxxxxxxxxxxsid ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxukxxbvxxxxxxxxxxcustomer ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+        <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                    <ui:param name="propertyLabel" value="Customer Key"/>
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.jxxxuq201xwwqqhxxxxxcustomer.a0xxukxxbvxxxxxxxxxxcustomer"/>
+                </ui:include>
+            </f:facet>
+             <!-- 54 -->
+ <!-- jay org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  jxxxuq201xwwqqhxxxxxcustomer  -->
+           <h:outputText value="#{jxxxuq201xwwqqhxxxxxcustomerList.getKeyValue(_jxxxuq54exwwqqhxxxxxgroupmembers.jxxxuq201xwwqqhxxxxxcustomer.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </h:column>
+
+         <!-- jay notcomposite ppn   b1xxuxxxbv21xxxxxxxxtitle ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b2xxuxxxbx22xxxxxxxxjobtitle ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c1xxuslnbvixxxxxxxxxlastname ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c2xxu2fnbvixxxxxxxxxfirstname ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   c3xxuxxxbxxxxxxxxxxxmiddlenam ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   d1xxu3cnbvixxxxxxxxxcustomerascompanyname ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   dxxxch1d3xwwqqhxxlxxcompany ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   dxxxuq92bxwwqqhefxxxitemjobs ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   dxxxuq92bxwwqqhefxxxitemjobs_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   f1xxuxxxav28xxxxxxxxtype ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   f2xxuwmxbv40xxxxxxxxintegrset ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxcq144xwwqqhxxxxxlocation ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq111xwwqqhxxxxxaddressByMailtocode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq111xwwqqhxxxxxaddressByShiptocode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq89bxwwqqhxxxxxschedules ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq89bxwwqqhxxxxxschedules_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq21bxwwqqhxxxxxccontacts ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq21bxwwqqhxxxxxccontacts_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   p1xxh4pobv27xxxxxxxxphoneo ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   p2xxh5phbv27xxxxxxxxphoneh ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   p3xxhxxxbv27xxxxxxxxphonec ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   p4xxhxxxbx27xxxxxxxxphonex ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   q1xxhxxxbx19xxxxxxxxlanaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   q2xxhxxxbx25xxxxxxxxwanaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   q3xxhxxxbv44xxxxxxxxlmailaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   q4xxhxxxbv24xxxxxxxximailaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   q5xxuxxxbxxxxxxxxxxxrmailaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   q6xxhxxxbx23xxxxxxxxintaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   q7xxdxtdbvxxxxxxxxxxdob ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   q7xxhxxxbvxxxxxxxxxxplaceofbirth ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   q7xxhxxxbxxxxxxxxxxxinraddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   q7xxhxxxlvxxxxxxxxxxage ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   q7xxtxsebvxxxxxxxxxxsex ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   r1xxfxxxbexxxxxxxxxxshiplabel ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq233xwwqqhxxxxxcuquotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq233xwwqqhxxxxxcuquotes_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq244xwwqqhxxxxxcuorderses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq244xwwqqhxxxxxcuorderses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq255xwwqqhxxxxxshipments ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq255xwwqqhxxxxxshipments_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq266xwwqqhxxxxxcuinvoices ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq266xwwqqhxxxxxcuinvoices_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq277xwwqqhxxxxxcpayments ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq277xwwqqhxxxxxcpayments_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq377xwwqqhxxxxxvshipmens ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq377xwwqqhxxxxxvshipmens_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq9ccxwwqqhexxxxprocessdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq9ccxwwqqhexxxxprocessdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trxxuq9aaxwwqqhefxxxjobassignments ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trxxuq9aaxwwqqhefxxxjobassignments_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   txxxuq932xwwqqhspxxxactivityjobs ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   txxxuq932xwwqqhspxxxactivityjobs_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xorxeh8cexwwqqhxxxxxscheduledetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xorxeh8cexwwqqhxxxxxscheduledetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3c4xwwqqhxxxxxvendidetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3c4xwwqqhxxxxxvendidetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3d4xwwqqhxxxxxvendodetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3d4xwwqqhxxxxxvendodetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3e4xwwqqhxxxxxvendqdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3e4xwwqqhxxxxxvendqdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq9bfxwwqqhexxxxjobassignmentdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y0xxuzsxbvxxxxxxxxxxdescript ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+          <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                    <ui:param name="propertyLabel" value="Customer Details"/>
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.jxxxuq201xwwqqhxxxxxcustomer.y0xxuzsxbvxxxxxxxxxxdescript"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer O  jxxxuq201xwwqqhxxxxxcustomer  -->
+            <h:outputText value="#{jxxxuq201xwwqqhxxxxxcustomerList.getKeyDemographValue(_jxxxuq54exwwqqhxxxxxgroupmembers.jxxxuq201xwwqqhxxxxxcustomer.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </h:column>
+
+         <!-- jay notcomposite ppn   y6xxfxz1bvxxxxxxxxxxtax1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y7xxfxz2bvxxxxxxxxxxtax2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y8xxfxz3bvxxxxxxxxxxtax3 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y9xxuxz1bv04xxxxxxxxcusttax1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yaxxuxz2bv05xxxxxxxxcusttax2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   ybxxuxz3xv06xxxxxxxxcusttax3 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   ycxxuzdrbvxxxxxxxxxxdocmnt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   ydxxuxxybvxxxxxxxxxxcontacted ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yexxuxxybvxxxxxxxxxxbywho ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yfxxcxxybvxxxxxxxxxxnxtcontact ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   ygxxuxxybv30xxxxxxxxvia ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yhxxuzkybvxxxxxxxxxxkeywords ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yixxuznybvxxxxxxxxxxnotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yxxxch601xwwqqhxxxxxaccount ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yxxxuh566xwwqqwxxxxxusers ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yxxxuh566xwwqqwxxxxxusers_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z1xxzrpxlexxxxxxxxxxcusttotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z1xxzrrplexxxxxxxxxxcusrtotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxzrqxlexxxxxxxxxxcusttqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxzrrqlexxxxxxxxxxcusrtqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z3xxzrmplexxxxxxxxxxcusmtotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z4xxzrdplexxxxxxxxxxcusdtotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z5xxutlolexxxxxxxxxxlastorder ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z6xxuxxxbexxxxxxxxxxlastinvoic ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z7xxzxxxlexxxxxxxxxxlastpaymnq ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z8xxzzprhvxxxxxxxxxxprintmstat ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z9xxczqxlhxxxxxxxxxxprinmtfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zaxxzzfxhhxxxxxxxxxxstatusfl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zbxxcztxlxxxxxxxxxxxstatusfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zcxxzxxxlvxxxxxxxxxxtotlpaid ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zdxxutoxlhxxxxxxxxxxowner ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zzxxu2oxxhxxxxxxxxxxowner2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxuobxbxxxxxxxxxxxsid ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   a0xxukxxbvxxxxxxxxxxvendor ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+        <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                    <ui:param name="propertyLabel" value="Vendor Key"/>
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.jxxxuq300xwwqqhxxxxxvendor.a0xxukxxbvxxxxxxxxxxvendor"/>
+                </ui:include>
+            </f:facet>
+             <!-- 54 -->
+ <!-- jay org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  jxxxuq300xwwqqhxxxxxvendor  -->
+           <h:outputText value="#{jxxxuq300xwwqqhxxxxxvendorList.getKeyValue(_jxxxuq54exwwqqhxxxxxgroupmembers.jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </h:column>
+
+         <!-- jay notcomposite ppn   b1xxuxxrbv21xxxxxxxxtitle ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b2xxuxxrbv22xxxxxxxxjobtitle ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b3xxuslnbvxxxxxxxxxxlastname ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b4xxu2fnbvxxxxxxxxxxfirstname ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   b5xxuxxrbvxxxxxxxxxxmiddlenam ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   d1xxu3cnbvxxxxxxxxxxvendorascompanyname ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   dxxxch1d3xwwqqhxxlxxcompany ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxcq144xwwqqhxxxxxlocation ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq111xwwqqhxxxxxaddressByMailtocode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq111xwwqqhxxxxxaddressByShiptocode ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq89bxwwqqhxxxxxschedules ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   fxxxuq89bxwwqqhxxxxxschedules_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq31bxwwqqhxxxxxvcontacts ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq31bxwwqqhxxxxxvcontacts_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   jxxxuq54exwwqqhxxxxxgroupmemberses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   m1xxh4pobv27xxxxxxxxphoneo ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   m2xxh5phbv27xxxxxxxxphoneh ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   m3xxhxxrbv27xxxxxxxxphonec ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   m4xxhxxrbv27xxxxxxxxphonex ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n1xxhxxrbv19xxxxxxxxlanaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n2xxhxxrbv25xxxxxxxxwanaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n3xxhxxrbv44xxxxxxxxlmailaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n4xxhxxrbv24xxxxxxxximailaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n5xxuxxrbvxxxxxxxxxxrmailaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n6xxuxxrbvxxxxxxxxxxintaddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   n7xxuxxrbvxxxxxxxxxxinraddr ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   o1xxuwmrbv40xxxxxxxxintegrset ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   o3xxuxxrbvxxxxxxxxxxcontacted ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   o4xxuxxrbvxxxxxxxxxxbywho ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   o5xxuzkybvxxxxxxxxxxkeywords ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq255xwwqqhxxxxxshipmentsForCarrier ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq255xwwqqhxxxxxshipmentsForCarrier_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq255xwwqqhxxxxxshipmentsForShipper ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq255xwwqqhxxxxxshipmentsForShipper_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq333xwwqqhxxxxxvenquotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq333xwwqqhxxxxxvenquotes_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq344xwwqqhxxxxxvendorderses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq344xwwqqhxxxxxvendorderses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq377xwwqqhxxxxxvshipmens ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq377xwwqqhxxxxxvshipmens_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq388xwwqqhxxxxxvpayments ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq388xwwqqhxxxxxvpayments_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq3a6xwwqqhxxxxxvinvoices ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trexuq3a6xwwqqhxxxxxvinvoices_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trxxuq9aaxwwqqhefxxxjobassignments ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   trxxuq9aaxwwqqhefxxxjobassignments_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   txxxuq366xwwqqhxxxxxvenarthas ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   txxxuq366xwwqqhxxxxxvenarthas_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xorxeh8cexwwqqhxxxxxscheduledetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xorxeh8cexwwqqhxxxxxscheduledetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2a4xwwqqhxxxxxcuidetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2a4xwwqqhxxxxxcuidetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2b4xwwqqhxxxxxcuodetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2b4xwwqqhxxxxxcuodetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2c4xwwqqhxxxxxcuqdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq2c4xwwqqhxxxxxcuqdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3b4xwwqqhxxxxxvendpdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq3b4xwwqqhxxxxxvendpdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq454xwwqqhxxxxxemplodetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq454xwwqqhxxxxxemplodetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq9bfxwwqqhexxxxjobassignmentdetailses ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y0xxuzsxbvxxxxxxxxxxdescript ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+          <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                    <ui:param name="propertyLabel" value="Vendor Details"/>
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.jxxxuq300xwwqqhxxxxxvendor.y0xxuzsxbvxxxxxxxxxxdescript"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer O  jxxxuq300xwwqqhxxxxxvendor  -->
+            <h:outputText value="#{jxxxuq300xwwqqhxxxxxvendorList.getKeyValue(_jxxxuq54exwwqqhxxxxxgroupmembers.jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </h:column>
+
+         <!-- jay notcomposite ppn   y4xxfxxrbvxxxxxxxxxxshiplabel ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y5xxuxxrbv29xxxxxxxxtype ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   y7xxuznxbvxxxxxxxxxxnotes ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   ycxxuzdrbvxxxxxxxxxxdocmnt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yxxxch601xwwqqhxxxxxaccount ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yxxxuh566xwwqqwxxxxxusers ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   yxxxuh566xwwqqwxxxxxusers_1 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z1xxzvpxlvxxxxxxxxxxvendtotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z2xxzvpxlvxxxxxxxxxxvendtqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z3xxzvrplvxxxxxxxxxxvenrtotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z4xxzvrqlvxxxxxxxxxxvenrtqty ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z5xxzvmplvxxxxxxxxxxvenmtotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z6xxzvdplvxxxxxxxxxxvenddtotl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z7xxuvlolvxxxxxxxxxxlastorder ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z7xxuvlqlvxxxxxxxxxxlastquote ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z8xxuvlilvxxxxxxxxxxlastinvoic ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   z9xxzvlplvxxxxxxxxxxlastpaymq ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zaxxzzprhvxxxxxxxxxxprintmstat ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zbxxczqxlhxxxxxxxxxxprinmtfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zdxxzzfxhhxxxxxxxxxxstatusfl ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zexxcztxlxxxxxxxxxxxstatusfldt ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zfxxzxxrlvxxxxxxxxxxtotlpaid ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zhxxutoxlhxxxxxxxxxxowner ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+
+         <!-- jay notcomposite ppn   zzxxu2oxxhxxxxxxxxxxowner2 ppid a0xxuobxbxxxxxxxxxxxsid zs means descript -->
+     <!-- all y5xxuzyxbv46xxxxxxxxtype  N  54-->
+     <!-- hide y5xxuzyxbv46xxxxxxxxtype  N  54-->
+
+     <!-- all y6xxuxxxbvxxxxxxxxxxcurrpw  N  54-->
+     <!-- hide y6xxuxxxbvxxxxxxxxxxcurrpw  N  54-->
+
+     <!-- all y7xxcxxrlxxxxxxxxxxxexpiry  N  54-->
+     <!-- hide y7xxcxxrlxxxxxxxxxxxexpiry  N  54-->
+
+     <!-- all z1xxzzfxhhxxxxxxxxxxstatusfl  N  54-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Statusfl']}"/>
+
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.z1xxzzfxhhxxxxxxxxxxstatusfl"/>
+                </ui:include>
+            </f:facet>
+              <h:outputText value="#{_jxxxuq54exwwqqhxxxxxgroupmembers.z1xxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(_jxxxuq54exwwqqhxxxxxgroupmembers.z1xxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(_jxxxuq54exwwqqhxxxxxgroupmembers.z1xxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid/waiting approval':( _jxxxuq54exwwqqhxxxxxgroupmembers.z1xxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped/approved': (_jxxxuq54exwwqqhxxxxxgroupmembers.z1xxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced/final approved':'new/other'))))}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl" />
+        </h:column>
+     <!-- all z2xxcztxlxxxxxxxxxxxstatusfldt  N  54-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Statusfldt']}"/>
+
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.z2xxcztxlxxxxxxxxxxxstatusfldt"/>
+                </ui:include>
+            </f:facet>
+              <h:outputText value="#{_jxxxuq54exwwqqhxxxxxgroupmembers.z2xxcztxlxxxxxxxxxxxstatusfldt}"  id="statusfldt" >
+               <f:convertDateTime pattern="dd/MM/yy h:mm:s z"/>
+              </h:outputText>
+        </h:column>
+     <!-- all z3xxutoxlhxxxxxxxxxxowner  N  54-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Owner']}"/>
+
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.z3xxutoxlhxxxxxxxxxxowner"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(z3xxutoxlhxxxxxxxxxxowner) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_jxxxuq54exwwqqhxxxxxgroupmembers.z3xxutoxlhxxxxxxxxxxowner}"  id="z3xxutoxlhxxxxxxxxxxowner" rendered="true"/>
+        </h:column>
+     <!-- all zzxxu2oxxhxxxxxxxxxxowner2  N  54-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList}"/>
+                     <ui:param name="propertyLabel" value="#{messages['Owner2']}"/>
+
+                    <ui:param name="propertyPath" value="jxxxuq54exwwqqhxxxxxgroupmembers.zzxxu2oxxhxxxxxxxxxxowner2"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_jxxxuq54exwwqqhxxxxxgroupmembers.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+        </h:column>
+        <rich:column styleClass="action">
+            <f:facet name="header">Action</f:facet>
+            #{' '}
+            <h:link outcome="/groupmembersEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="jxxxuq54exwwqqhxxxxxgroupmembersEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_jxxxuq54exwwqqhxxxxxgroupmembers.a0xxuobxbxxxxxxxxxxxsid}"/>
+
+            </h:link>
+            #{' '}
+        </rich:column>
+    </rich:extendedDataTable>
+
+    </div>
+    </rich:panel>
+
+    <div class="tableControl">
+        <h:link outcome="/groupmembersList.xhtml"
+            rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+          <f:param name="maxResultsVal"
+                    value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/groupmembersList.xhtml"
+            rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/groupmembersList.xhtml"
+            rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.nextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/groupmembersList.xhtml"
+            rendered="#{jxxxuq54exwwqqhxxxxxgroupmembersList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.lastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+        <h:button outcome="/groupmembersEdit.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+           rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Groupmembers']}">
+
+        </h:button>
+
+
+
+         <h:button outcome="/#{empty jxxxuq54exwwqqhxxxxxgroupmembersFrom ? 'home' : jxxxuq54exwwqqhxxxxxgroupmembersFrom}.xhtml"
+          id="donefy"
+         value="Done"/>&nbsp;
+         <h:commandButton id="importcustomer" value="Import"  action="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.importEntityData('customer',0,'001')}">
+         </h:commandButton>
+        <br></br> 
+        <h:outputText value="#{messages['for']} #{messages['now']} , #{messages['import']} #{messages['allows']} #{messages['customer']} #{messages['selection']} #{messages['only']}. "/>
+        <h:outputText value="#{messages['create']} #{messages['members']} #{messages['button']} #{messages['can']} #{messages['be']} #{messages['used']} #{messages['for']} #{messages['all']} #{messages['types']}"/>
+        <br></br> 
+        <h:outputText value="#{messages['import']} #{messages['data']} #{messages['selection']} #{messages['done']}?"/>
+         <ui:decorate template="layout/edit.xhtml" >
+         <ui:define name="label">#{messages['set']}</ui:define>
+	    <h:selectOneRadio value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.importSet}" >
+				<f:selectItem  
+                         itemLabel="No"
+                         itemValue="N" /> 
+				<f:selectItem  
+                         itemLabel="Yes"
+                         itemValue="Y" /> 
+         </h:selectOneRadio>
+         </ui:decorate>
+              <h:outputText value="#{messages['import']} "/> 
+              <h:outputText value="#{messages['for']} "/> 
+              <h:graphicImage value="/img/Groupmembers16.png" />
+              <h:outputText value="#{messages['select']} #{messages['group']}"/> 
+                 <h:selectOneMenu  value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.groupSid}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                  <f:selectItems value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupList.getSuggestList(' ')}" var="result"
+                   itemValue="#{result.a0xxuobxbxxxxxxxxxxxsid}" itemLabel="#{result.a0xxukxxbvxxxxxxxxxxgroupid}" />
+                 </h:selectOneMenu>
+              <h:outputText value="#{messages['from']} "/> 
+                 <h:selectManyListbox  id="toSelect" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.toSelects}" size="5"
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                  <f:selectItems value="#{jxxxuq201xwwqqhxxxxxcustomerList.getSuggestList(' ')}" var="result"
+
+                   itemValue="#{result.a0xxuobxbxxxxxxxxxxxsid}" itemLabel="#{result.a0xxukxxbvxxxxxxxxxxcustomer}" />
+                   <rich:tooltip id="searchTip" attached="true" for="toSelect" >
+                    <h:outputText value="#{messages['Ctrl']} #{messages['for']} #{messages['multiselect']}" />
+                   </rich:tooltip>
+                 </h:selectManyListbox>
+
+              <h:outputText value=" #{messages['or']} "/> 
+
+                 <h:selectManyListbox  id="ccSelect" value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.ccSelects}" size="5"
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                  <f:selectItems value="#{jxxxuq201xwwqqhxxxxxcustomerList.getSuggestList('time')}" var="result"
+
+                   itemValue="#{result.a0xxuobxbxxxxxxxxxxxsid}" itemLabel="#{result.a0xxukxxbvxxxxxxxxxxcustomer}" />
+                   <rich:tooltip id="searchTipC" attached="true" for="ccSelect" >
+                    <h:outputText value="#{messages['Ctrl']} #{messages['for']} #{messages['multiselect']}" />
+                   </rich:tooltip>
+                 </h:selectManyListbox>
+                 <br></br><br></br>
+         <h:outputText value="#{messages['either']} #{messages['make']} #{messages['selection']} #{messages['from']} #{messages['above']} #{messages['alphabetic']}/#{messages['newest']} #{messages['dropdown']} #{messages['list']}, #{messages['or']} #{messages['select']} #{messages['below']} #{messages['to']} #{messages['include']} #{messages['all']} #{messages['records']}"/> 
+
+         <ui:decorate template="layout/edit.xhtml" >
+         <ui:define name="label">#{messages['include']} #{messages['all']} #{messages['records']} </ui:define>
+	    <h:selectOneRadio value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.importAllSet}" >
+				<f:selectItem  
+                         itemLabel="No"
+                         itemValue="N" /> 
+				<f:selectItem  
+                         itemLabel="Yes"
+                         itemValue="Y" /> 
+           </h:selectOneRadio>
+         </ui:decorate>
+                 <br></br><br></br>
+         <h:outputText value=" #{messages['And']} #{messages['apply']} #{messages['following']} #{messages['filters']}"/> 
+
+
+         <ui:decorate template="layout/edit.xhtml" >
+         <ui:define name="label">#{messages['lastName']} #{messages['contains']} </ui:define>
+	    <h:inputText value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.importLastName}" >
+            </h:inputText>
+         </ui:decorate>
+         <ui:decorate template="layout/edit.xhtml" >
+         <ui:define name="label">#{messages['exclude']} #{messages['if']} #{messages['email']} #{messages['is']} #{messages['empty']}</ui:define>
+	    <h:selectOneRadio value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.importEmailSet}" >
+				<f:selectItem  
+                         itemLabel="No"
+                         itemValue="N" /> 
+				<f:selectItem  
+                         itemLabel="Yes"
+                         itemValue="Y" /> 
+         </h:selectOneRadio>
+         </ui:decorate>
+
+
+
+
+        <h:messages globalOnly="true" styleClass="message" id="globalMessagesb"/>
+
+<br/>
+    </div>
+            <rich:hotKey  onkeydown="#{rich:element('search')}.click();return false;" preventDefault="true" enabledInInput="true" key="return">
+            </rich:hotKey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

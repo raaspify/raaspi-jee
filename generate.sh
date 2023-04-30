@@ -1,0 +1,1 @@
+sh mvn clean generate-sources 

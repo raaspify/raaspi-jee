@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/rtemplate.xhtml">
+<ui:define name="body">
+<h:head>
+<script src="./js/dropzone.min.js"></script>
+<script>Dropzone.options.uploadForm = { paramName: "uploadForm:file" };
+</script>
+<link rel="stylesheet" href="./stylesheet/dropzone.min.css"/>
+
+
+</h:head>
+
+<h:form action="/file-upload"
+      class="dropzone"
+      id="my-awesome-dropzone">
+
+        <div class="fallback">
+            <h:inputFile id="file" value="#{bean.file}" />
+            <h:commandButton id="submit" value="submit" />
+        </div>
+
+</h:form>
+ </ui:define> 
+</ui:composition>

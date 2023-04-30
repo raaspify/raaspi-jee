@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      template="layout/rtemplate.xhtml">
+
+
+    <ui:remove>
+    </ui:remove> 
+<f:metadata>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemFrom" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom}"/>
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemHome.restrict()}" />
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemHome.wire()}" />
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Video']} easy way</ui:define>
+
+<ui:define name="body">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47438939-2', 'raaspi.com');
+  ga('send', 'pageview');
+
+</script>
+<script>
+function myReload() {
+    location.reload(true);
+}
+</script>
+<f:view locale="#{authenticator.locale}"/>
+
+
+ <div id="page">
+    <h:messages globalOnly="true" styleClass="message"/>
+
+    <h:form >
+
+
+  <p:panel toggleable="true" toggleableHeader="true" style="width: 98%;background-color:white;"  header="#{messages['video']}/#{messages['gallery']}" switchType="client" collapsed="false" rendered="#{customIdentity.labelView.contains('VM') }"
+        leftCollapsedIcon="/img/control_add16.png" rightCollapsedIcon="/img/Activitygroup16.png" leftExpandedIcon="/img/control_remove16.png">
+     <p:panel>
+      <h:panelGrid columns="4">
+
+            <h:graphicImage value="/img/musicnotation.jpg" height="50">
+            </h:graphicImage>
+            <h:graphicImage value="/img/Upload_500.png" height="50">
+            </h:graphicImage>
+            <h:graphicImage value="/img/Photos_256.png" height="100">
+            </h:graphicImage>
+            <h:graphicImage value="/img/Search_256.png" height="50">
+            </h:graphicImage>
+      </h:panelGrid>
+     </p:panel>
+         <h:outputText  value="#{messages['You']} #{messages['are ']} #{messages['here']} #{messages['to']} #{messages['post']} #{messages['new']} #{messages['video']} #{messages['or']} #{messages['Album']}/#{messages['Gallery']} #{messages['for']} #{messages['them']}." />
+         &nbsp;<h:outputText value="#{messages['Use']} #{messages['the']} #{messages['load']} #{messages['sample']} #{messages['button']} #{messages['to']} #{messages['see']} #{messages['html']} #{messages['iframe']} #{messages['content']}, #{messages['click']} #{messages['iframe']} #{messages['to']} #{messages['select']} #{messages['it']} #{messages['and']} #{messages['click']}  #{messages['globe']} #{messages['looking']}  #{messages['iframe']} #{messages['icon']} #{messages['on']} #{messages['the']} #{messages['toolbar']} #{messages['to']} #{messages['change']} #{messages['the']} #{messages['properties']} #{messages['to']} #{messages['match']} #{messages['your']} #{messages['video']} #{messages['url']} ."/>  
+         <br></br><br></br>
+         <h:outputText  value="#{messages['Enter']} #{messages['brief']}  #{messages['description']} #{messages['as']} #{messages['name']} #{messages['and']} #{messages['save']} #{messages['as']} #{messages['video']} #{messages['Album']}/#{messages['Gallery']} #{messages['or']} #{messages['as']} #{messages['member']} #{messages['Title']}." 
+          rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getSuggestList('PI-L*').size() gt 0}" />
+         <h:outputText  value="#{messages['Enter']} #{messages['brief']}  #{messages['description']} #{messages['as']} #{messages['name']} #{messages['and']} #{messages['save']} #{messages['as']} #{messages['video']} #{messages['Album']}/#{messages['Gallery']}." 
+          rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getSuggestList('PI-L*').size() eq 0}" />
+         <br></br>
+         <h:outputText  value="#{messages['After']} #{messages['save']} #{messages['click']} #{messages['next']} #{messages['button']} #{messages['for']} #{messages['more']} #{messages['videos']}"/>
+         <br></br><br></br>
+         &nbsp;<h:button value="#{messages['Browse']} #{messages['photos']} "  outcome="/ImagesBrowse.xhtml" rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getBlogDetailsBrowseList().size() gt 0}"/>
+         <br></br>
+            <br></br><p:commandButton id="loadVU"  styleClass="buttonMain"
+                          value="#{messages['Load']} #{messages['YouTube']}/#{messages['Vimeo']} #{messages['samples']} " status="buttonStatus" 
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistTextAndItem('BI-D','sampleT')}" render="topOn,hometop" execute="@form"
+                       rendered="#{!customIdentity.hasRole('PH')}">  
+            </p:commandButton>  
+
+               <h:panelGroup>
+      <div id="gallry" style="background-color:Gray; width:#{yxxxuh566xwwqqwxxxxxuserHome.mobile || !skinBean.leftShown?'100%;':'85%;'} ">
+          <h:messages globalOnly="true" styleClass="message"/>
+              <h:panelGroup id="topOn">
+               &nbsp;&nbsp; <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"   outcome="/home.xhtml" />
+               <h:panelGrid columns="2">
+                <pe:ckEditor id="hometop" secure="false" height="200" width="900"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.homeTopTxt}"
+                 toolbar="[['NewPage','Preview','Cut','Copy','Image','Table','HorizontalRule','Iframe','Link','Unlink','Anchor','Paste','PasteText','PasteFromWord','-', 'Scayt'], '/',['Font','FontSize','Bold','Italic','Strike','-','RemoveFormat' ] ,[ 'TextColor','BGColor' ], ['Undo', 'Redo']]">
+                </pe:ckEditor>
+                  </h:panelGrid>
+        <p:panel>
+         <h:panelGroup>
+         <p:messages ajaxRendered="true"  />
+         <h:outputLabel  for="detailI" value=" #{messages['Video']} #{messages['Title']} ">
+         </h:outputLabel>
+                 <h:inputText id="detailI" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="20" pt:placeholder="#{messages['my video']}"
+                          maxlength="200">
+                 </h:inputText>
+                &nbsp;
+         <h:outputLabel  for="categoryB" value=" #{messages['for']} #{messages['Category']} ">
+         </h:outputLabel>
+                 <h:selectOneMenu id="categoryB" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.valueOverRide}" 
+                  rendered="true">
+                    <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{fpxxfq1a5xwwqqhxxxxxitemList.getSuggestList('PI-L*')}" var="result"
+                     itemValue="#{result.a0xxukixbxxxxxxxxxxxmatcode}" itemLabel="#{result.b1xxuszsbvxxxxxxxxxxdescript}" />
+                 </h:selectOneMenu>
+
+            <p:commandButton id="savetp" styleClass="buttonMain" 
+                          value="#{messages['Save']} " status="buttonStatus" 
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistTextAndItem('BI-D',null)}" render="topOn,hometop" execute="@form"
+                       rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getSuggestList('PI-L*').size() gt 0}">  
+                        
+            </p:commandButton>  
+                                			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{fpxxfq1a5xwwqqhxxxxxitemHome.remove()}"
+                       rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.managed and !yxxxuq1m1xwwqqqxxxxxclobdataHome.entityDeleted}"/>
+
+         </h:panelGroup>
+              <br></br>  
+         <hr></hr>
+
+         <h:panelGroup>
+
+         <h:outputLabel  for="detailCB" value=" #{messages['Category']} #{messages['Title']} ">
+         </h:outputLabel>
+                 <h:inputText id="detailCB" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.contentTheme}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="20" pt:placeholder="#{messages['my blogs']}"
+                          maxlength="200">
+                 </h:inputText>
+                &nbsp;
+
+            <p:commandButton id="updateSys" styleClass="buttonMain" render="@form"
+                          value="#{messages['Save']} #{messages['as']} #{messages['Category']}" status="buttonStatus"  execute="@form"
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistTextAndItem('BI-L1',yxxxuq1m1xwwqqqxxxxxclobdataHome.contentTheme)}"
+                       disabled="#{!yxxxuq1m1xwwqqqxxxxxclobdataHome.wired}"
+                       rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getSuggestList('PI-L*').size() eq 0}" >  
+            </p:commandButton>  
+         <h:outputLabel  for="q1" value=" (#{messages['optional']}) #{messages['Challenge']} #{messages['Question']} " >
+         </h:outputLabel>
+                 <h:inputText id="q1" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.mailingText1}" 
+                          size="20" pt:placeholder="#{messages['my last name']}  or #{messages['password']}"
+                          maxlength="200">
+                 </h:inputText>
+         <h:outputLabel  for="a1" value=" #{messages['Answer']} " >
+         </h:outputLabel>
+                 <h:inputText id="a1" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.mailingText2}" 
+                        size="20" pt:placeholder="#{messages['smith']}  or #{messages['129']}"
+                          maxlength="200">
+                 </h:inputText>
+
+            <h:button id="next" 
+                   value="#{messages['Next']}" styleClass="buttonMain"
+                    outcome="/videoEditEasy.xhtml"
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed or fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+                    outcome="/ImagesBrowse.xhtml"
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed or fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+                    outcome="/ImagesBrowse.xhtml"
+                rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+
+         </h:panelGroup>
+        </p:panel>
+
+         </h:panelGroup>
+         <h:panelGroup>
+
+            <h:panelGroup id="gmessagestop">
+                    <h:messages style="color:red" globalOnly="true"/>
+            </h:panelGroup>
+          </h:panelGroup>
+
+ </div>
+                 </h:panelGroup>
+
+  </p:panel>
+    </h:form >
+             
+
+ </div>
+</ui:define>
+
+</ui:composition>

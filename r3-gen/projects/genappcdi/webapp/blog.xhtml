@@ -1,0 +1,171 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="layout/rtemplateUi.xhtml">
+
+<f:metadata>
+    <f:viewParam name="key" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemFrom" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom}"/>
+
+</f:metadata>
+<!-- Not Generated   -->
+<ui:remove>
+always show blog content ie clobdata (itemtable,A+item docmnt,TXT,0)
+If logged In then show edit blog item(CI-D) and its blobdata image (itemtable,item docmnt,1,1) and
+ edit blog content clobdata text (itemtable,item docmnt,TXT,0) 
+use f:param useSeq to set seq # to 0 or 1 as needed and view:param in the called .xhtml to set the initial seq #
+use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM since default value will be clobdata or blobdata
+blog item docmnt has from key for clob/blob and owner2 is site itself
+System blogs which can be accessed by any site, has both item and clobs/blob owner2 as SYSTEM
+</ui:remove>
+                       
+<ui:define name="body">
+    <h:form id="fpxxfq1a5xwwqqhxxxxxitemSearch" styleClass="edit">
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+    
+     <div>
+      <h:panelGroup>
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/img/Editlog16.png"
+         rendered="#{identity.loggedIn}">
+      </h:graphicImage> 
+        <ui:remove> try using sid as param </ui:remove>
+        <h:button outcome="/itemEditEasy.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')}" 
+                    id="iedit"
+                 value="#{messages['Edit']}(#{messages['blog']} #{messages['Description']})">
+                <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+                <f:param name="useSeq"
+                        value="1"/>
+        </h:button>
+        <ui:remove> item instance may have docmt data or atleast 1 ch like A,B or C if no clob data or atleast 4 if data
+          show either system clobdata or site clobdata , one of which can be null
+          Home.getclobdata() returns string data but List.getclobDataSystemInstance returns instance and get sid
+          if item has System or site blogdata then only pass sid otherwise pass the item docmnt key sdo that new data
+          can be created. passing both parameters will fail as it cancels each other
+        </ui:remove>
+        &nbsp;&nbsp;<h:button outcome="/clobdataEdit.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"
+                    id="cedit"
+                 value="#{messages['Edit']}(#{messages['blog']} #{messages['Content']})">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid"
+                      disable="#{empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) and empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata()}"
+                        value="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0) ? yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).a0xxuobxbxxxxxxxxxxxsid : 
+                          not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).a0xxuobxbxxxxxxxxxxxsid ?
+                           yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).a0xxuobxbxxxxxxxxxxxsid : '' }"/>
+                             
+
+                <f:param name="fromTable" disable="#{not (empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) and empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata())}"
+                        value="FPXXFQ1A5XWWQQHXXXXXITEM"/>
+                <f:param name="fromKey" disable="#{not (empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) and empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata())}"
+                        value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))}"/>
+                <f:param name="qualifier" disable="#{not (empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) and empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata())}"
+                        value="TXT"/>
+                <f:param name="useSeq" disable="#{not (empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) and empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata())}"
+                        value="0"/>
+
+        </h:button>
+      </h:panelGroup>
+      <br></br>
+      <ui:fragment rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}">
+
+
+       <h:outputText   value="#{messages['Use']} #{messages['edit']}(#{messages['blog']} #{messages['Description']}) #{messages['to']} #{messages['change']} #{messages['the']} #{messages['Thumbsnail']} #{messages['view']} #{messages['content']}." 
+        rendered=""/>
+       <br></br>
+       <h:outputText   value="#{messages['Use']} #{messages['edit']}(#{messages['blog']} #{messages['Content']}) #{messages['to']} #{messages['change']} #{messages['the']} #{messages['blog']} #{messages['content']} #{messages['itself']}." 
+        rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+       <br></br>
+       <h:outputText   value="#{messages['However']}, #{messages['if']} #{messages['no']} #{messages['uploaded']} #{messages['image']} #{messages['used']}, #{messages['then']} #{messages['top']} #{messages['part']} #{messages['of']} #{messages['the']} #{messages['image']}/#{messages['text']} #{messages['from']} #{messages['blog']} #{messages['content']} #{messages['will']} #{messages['show']} #{messages['in']} #{messages['Thumbsnail']} #{messages['view']}." 
+        rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+       <hr></hr>
+
+       <h:outputText   value="(#{messages['blog']} #{messages['Content']}) #{messages['can']} #{messages['have']} #{messages['any']} #{messages['text']}  #{messages['or']}  #{messages['text']}  #{messages['with']}  #{messages['image']}, #{messages['and']} #{messages['done']} #{messages['using']} #{messages['HTML']} #{messages['editor']}." 
+        rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+
+       <br></br>
+       <h:outputText  value="#{messages['If']} #{messages['the']} #{messages['image']} #{messages['is']} #{messages['PDF']} (#{messages['uploaded']} #{messages['separately']}), #{messages['it']} #{messages['needs']} #{messages['to']} #{messages['be']} #{messages['inside']} #{messages['Iframe']} #{messages['and']} #{messages['Iframe']} #{messages['source']} #{messages['needs']} #{messages['to']} #{messages['be']} #{messages['the']} #{messages['url']} #{messages['of']} #{messages['the']} #{messages['pdf']}." 
+        rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+       <br></br><hr></hr><br></br>
+       <ui:remove>
+       <h:outputText  value="#{messages['No']} #{messages['blog']} #{messages['Description']} #{messages['Image']} #{messages['found']} #{messages['in']} #{messages['binarydata']} #{messages['for']} #{messages['key']} #{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))} #{messages['Qualifier 1']} #{messages['Seq 1']}" 
+        rendered="#{identity.loggedIn and !customIdentity.hasRole('PH') and fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null}"/>
+       <br></br>
+       <h:graphicImage alt="no picture"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+         value="/ImageServletCdi/?seq=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=300" >
+       </h:graphicImage> 
+       </ui:remove>
+
+       <br></br><br></br><br></br>
+       <h:outputText  value="#{messages['no']} #{messages['blog']} #{messages['content']} #{messages['found']}  #{messages['in']}  #{messages['textdata']} #{messages['for']} #{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))} #{messages['Qualifier TXT']} #{messages['Seq 0']}" 
+       rendered="#{empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000)
+                  and yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata() }"/>
+      </ui:fragment>
+
+      <ui:remove> normally below are mutually exclusive ie empty for one but both system and local clobs can exist for the same item
+        which itself can be either system or local</ui:remove>
+      <div>
+
+      <c:set var="splitNumbers" value="#{fn:split(fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid).g2xxuxn1bvxxxxxxxxxxsubcodesn,' ')}" />
+      <c:set var="cats" value="#{fn:split(fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid).g2xxuxn2bvxxxxxxxxxxsubcodesn2,' ')}" />
+
+      <h:panelGrid columns="16">
+        <h:outputText  escape="true" value="#{splitNumbers[0]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;<h:outputText  escape="true" value="#{splitNumbers[1]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;<h:outputText  escape="true" value="#{splitNumbers[2]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;<h:outputText  escape="true" value="#{splitNumbers[3]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;&nbsp;&nbsp;&nbsp;<h:outputText  escape="true" value="#{cats[0]}"  class="w3-tag w3-round w3-blue "  />
+        &nbsp;<h:outputText  escape="true" value="#{cats[1]}"  class="w3-tag w3-round w3-light-blue "  />
+      </h:panelGrid>
+      &nbsp;<h5>#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid).b1xxuszsbvxxxxxxxxxxdescript}</h5>
+      <hr></hr>
+
+      <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata()}" 
+         rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length()>1}"/>
+      </div>
+      <div>
+       <h:outputText escape="false"  value="#{fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,20000)}" 
+         rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 1}"/>
+      </div>
+     </div>
+     <ui:remove>
+     <iframe src="/ImageServletCdi/?seq=1&amp;id=X380125099&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1 " width="900" height="700" scrolling="no"></iframe>
+     </ui:remove>
+     <br></br><br></br>
+
+    <div class="actionButtons">    
+        <h:button outcome="/#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom == 'video' ? 'ImagesBrowse' : (fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom == 'tree' ?'itemTree':'BlogDetailsBrowse')}.xhtml"
+                    id="done" 
+                 value="#{messages['Done']}"/>
+
+    </div>
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

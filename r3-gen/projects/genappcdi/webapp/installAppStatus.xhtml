@@ -1,0 +1,69 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+
+
+<ui:define name="body">
+   <h:form id="r3iStatus" styleClass="edit">
+   <p:panel>
+    <img  src="/img/icons8-module-96.png"  />
+    <ui:fragment rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',param['websiteName']).f6xxuxxxlvxxxxxxxxxxlicensetype =='TrialPending'}">
+    <h:outputText style="float:auto;font-family:arial;color:blue;font-size:20px;" value="#{messages['Congratulation']}!"/><br></br>
+    <br></br><h:outputText style="font-family:arial;font-size:16px;;color:red;" value="#{messages['Website']} #{messages['with']} #{messages['Backoffice']} #{messages['functions']} #{messages['was']} #{messages['created']} #{messages['for']} #{param['websiteName']}" />
+    
+    <br></br><h:outputText style="font-family:arial;font-size:16px;" value="#{messages['and']} #{messages['will']} #{messages['soon']} #{messages['be']} #{messages['accessible']} #{messages['via']} #{messages['internet']}. #{messages['Normally']}, #{messages['setup']} #{messages['by']} #{messages['our']} #{messages['support']} #{messages['team']} #{messages['takes']} #{messages['only']} #{messages['a']} #{messages['few']} #{messages['hours']} #{messages['but']} #{messages['please']} #{messages['allow']} #{messages['upto']} #{messages['10']} #{messages['hours']} #{messages['before']} #{messages['contacting']} #{messages['us']}."/>
+    </ui:fragment>
+
+    <br></br><h:outputText style="font-family:arial;font-size:16px;" value="#{messages['Site']} #{param['websiteName']} #{messages['found']} " rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',param['websiteName']) !=null}" />
+    <br></br><h:outputText style="font-family:arial;font-size:16px;;color:blue;" value="#{messages['Site']} #{param['websiteName']} #{messages['not']} #{messages['created']} #{messages['yet']} " rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',param['websiteName']) ==null}" />
+
+    <br></br><h:link style="font-family:arial;font-size:16px;color:red;" outcome="/register.wflow?websiteName=#{param['websiteName']}&amp;email=#{param['email']}&amp;registrationName=#{param['registrationName']}&amp;functionGroup=#{param['functionGroup']}&amp;from=#{param['functionGroup']} " value="#{messages['continue']} #{messages['create']}" rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',param['websiteName']) ==null}" />
+
+    <br></br><br></br><h:outputText style="font-family:arial;font-size:14px;" value="#{messages['please']} #{messages['check']} #{messages['here']} #{messages['or']} #{messages['your']} #{messages['email']} #{messages['for']} #{messages['status']} #{messages['updates']}."/>
+    <h:outputText style="font-family:arial;font-size:16px;;color:red;" value="#{messages['Current']} #{messages['status']}: #{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',param['websiteName']).f6xxuxxxlvxxxxxxxxxxlicensetype}" rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',param['websiteName']) !=null}"/>
+
+    <ui:fragment rendered="#{not empty param['websiteFullUrl']}">
+     <br></br><br></br>Check it out <a href="http://#{param['websiteFullUrl']}" target="_blank"> #{param['websiteName']}</a>
+     <br></br>Activation and login id/password details sent by email 
+    </ui:fragment>
+
+
+    <ui:fragment rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',param['websiteName']).f6xxuxxxlvxxxxxxxxxxlicensetype =='TrialPending' }">
+    <br></br><br></br> <h:outputText style="font-family:arial;font-size:14px;" value="#{messages['While']} #{messages['routing']} #{messages['and']} #{messages['SSL(https)']} #{messages['setups']} #{messages['are']} #{messages['being']} #{messages['done']}, #{messages['please']} #{messages['get']} #{messages['familiar']} #{messages['with']} #{messages['the']} #{messages['back']} #{messages['office']} #{messages['functions']} #{messages['using']} #{messages['the']} #{messages['following']} #{messages['demo']} #{messages['sites']}."/>
+    </ui:fragment>
+
+    <ui:fragment rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',param['websiteName']) !=null and yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',param['websiteName']) ==null}">
+     <br></br><br></br><a href="https://mybusinessp.raaspi.com/signup.wflow" target="_blank">Business Demo site</a>
+     <br></br><br></br><a href="https://myorgp.raaspi.com/signup.wflow" target="_blank">Association Demo sites</a>
+    </ui:fragment>
+
+    <ui:fragment rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',param['websiteName']) ==null and yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',param['websiteName']) ==null}">
+    <br></br><br></br> <h:outputText style="font-family:arial;font-size:14px" value="#{messages['To']} #{messages['view']} #{messages['150+']} #{messages['backoffice']} #{messages['functions']} #{messages['including']} #{messages['accounting']} , #{messages['please']} #{messages['try']} #{messages['using']} #{messages['the']} #{messages['following']} #{messages['demo']} #{messages['sites']}."/>
+     <br></br><br></br><a href="https://mybusinessp.raaspi.com/signup.wflow" target="_blank">Business Demo site</a>
+     <br></br><br></br><a href="https://myorgp.raaspi.com/signup.wflow" target="_blank">Association Demo sites</a>
+    </ui:fragment>
+
+
+    <ui:fragment rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',param['websiteName']) !=null and yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',param['websiteName']) !=null}">
+     <br></br><br></br><a href="https://raaspify.raaspi.com/login.wflow" target="_blank">Shopify App Demo site </a> (Use logon Id:raaspi and password:shopify)
+    </ui:fragment>
+    <br></br><br></br><br></br>
+
+    <ui:fragment rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',param['websiteName']) !=null}">
+    <a href="https://#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',param['websiteName']).b2xxuzcxbvxxxxxxxxxxenterprisecompanyna}" target="_blank">Back</a>
+    </ui:fragment>
+    <ui:fragment rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',param['websiteName']) ==null}">
+    <h:button outcome="/register.xhtml?email=mail@yourdomain.com&amp;registrationName=name" value="#{messages['Create']} #{messages['another']} #{messages['site']}" />
+    <h:button outcome="/home.xhtml" value="#{messages['Home']}" />
+    </ui:fragment>
+   </p:panel>
+
+   </h:form>    
+        
+</ui:define> 
+</ui:composition>

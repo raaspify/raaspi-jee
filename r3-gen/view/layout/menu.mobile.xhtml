@@ -1,0 +1,344 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:p="http://primefaces.org/ui">
+	<style>
+  .ui-widget,
+  .ui-widget .ui-widget {
+    font-size: 18px !important;
+  }
+.icon-jay {
+            background: url(/img/calendar_view_day16.png) no-repeat !important;
+            height: 25px;
+            width: 25px;
+        }
+	</style>
+<ui:remove> mobile menu defined in retemplate instead of menu.xhtml </ui:remove>
+	<h:form>
+		<p:menubar style="font: #{skinBean.mobileMenuFontSize} !important;" >
+			<p:submenu mode="ajax" label="#{messages['menutab.QuickStart_Mobile']=='menutab.QuickStart_Mobile'?messages['menutab.QuickStart']:messages['menutab.QuickStart_Mobile']}">
+                     		<p:menuitem mode="ajax" value="#{messages.Sync} #{messages.Shopify} #{messages.data}" rendered="#{!customIdentity.masterSite and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2).dbxxuzxdssxxxxxxxxxxapiclientsecret}"
+					outcome="/syncData.xhtml?faces-redirect=true}" icon="/img/arrow_right16.png"  iconClass="pic"  />
+				<p:menuitem mode="ajax" value="#{messages.Shopping_Items}" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and not empty fpxxfq1a5xwwqqhxxxxxitemList.itemBrowseList
+                                   and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'}"
+					outcome="/ItemDetailsBrowse.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" value="#{messages['Issue_Bug']}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb')}"
+					outcome="/IssuesBrowse.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" value="#{messages.Find_sponsors}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and not empty fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  ))}"
+					outcome="/ItemsGetQuote.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" value="#{messages.select} #{messages.sponsor} #{messages.offers}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemSearchByParameterList !=null  and not empty fpxxfq1a5xwwqqhxxxxxitemList.itemSearchByParameterList) and (identity.loggedIn and !customIdentity.hasRole('PH') )}"
+					outcome="/ItemsPaidSelect.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" value="#{messages.Submit_case} " rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.reviewBrowseList !=null  and not empty fpxxfq1a5xwwqqhxxxxxitemList.reviewBrowseList}"
+					outcome="/ItemsReviewSelect.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" value="#{messages.Check_submission_status}" rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getBasketedList('basket') and identity.loggedIn and customIdentity.hasRole('VH') and skinBean.iconShown}"
+					outcome="/cbasketin.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" value="#{messages.check_submission_status}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa') and not empty fpxxfq1a5xwwqqhxxxxxitemList.getManagerApprovedRejectedCartedList('basket') and identity.loggedIn and customIdentity.hasRole('PH')}"
+					outcome="/vbasketin.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" value="#{messages.check_submission_status}" rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getCustomerRequestedAndUpCartedListCI('basket') and identity.loggedIn and (customIdentity.hasRole('UM') or customIdentity.hasRole('UQ'))}"
+					outcome="/ebasketin.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" value="#{messages.check_waiting_approval}" rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getEmployeeApprovedRejectedCartedListCI('basket') and identity.loggedIn and customIdentity.hasRole('UH')}"
+					outcome="/mbasketin.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" value="#{messages.check_waiting_recommendation}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa') and not empty fpxxfq1a5xwwqqhxxxxxitemList.getCustomerRequestedAndUpCartedList('basket') and identity.loggedIn and customIdentity.hasRole('UH')}"
+					outcome="/basketin.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+
+
+				<p:menuitem mode="ajax" value="#{messages.Browse_Picture}" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and not empty fpxxfq1a5xwwqqhxxxxxitemList.imageBrowseList
+                                   and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'}"
+					outcome="/ImagesBrowse.xhtml?faces-redirect=true" icon="/img/Photos16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" value="#{messages.Blogs}" rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.blogBrowseList
+                                   and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'}"
+					outcome="/BlogDetailsBrowse.xhtml?faces-redirect=true" icon="/img/Photos16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" value="#{messages.View} #{messages.Themes}" rendered="#{customIdentity.masterSite and !identity.loggedIn}"
+					outcome="/ThemesBrowse.xhtml?faces-redirect=true" icon="/img/Photos16.png" iconClass="pic"  />
+
+
+				<p:menuitem mode="ajax" value="#{messages['menutab.AddListReport.LogIn']}"
+					outcome="/login.xhtml?faces-redirect=true" icon="/img/LogIn16.png" iconClass="pic" rendered="#{not identity.loggedIn}" />
+				<p:menuitem mode="ajax"  icon="/img/LogOut16.png" rendered="#{identity.loggedIn}" action="#{customIdentity.logout()}">
+                                 <h:commandButton id="Logout"  value="Logout"
+                                  onclick="if (! confirm('Logout ?') ) { return false;}; return true; " />
+			        </p:menuitem>
+                     <p:menuitem mode="ajax" value="#{messages['QuickStartFlow']}"
+                              rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                                   and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'}"	
+					outcome="/Quick.xhtml?faces-redirect=true" icon="/img/QuickStartFlow16.png">
+			     </p:menuitem>
+                     <p:menuitem mode="ajax" value="#{messages['QuickFinancial']}"
+                              rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                                   and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'}"	
+					outcome="/QuickFinancial.xhtml?faces-redirect=true" icon="/img/QuickFinancial16.png">
+			     </p:menuitem>
+                     <p:menuitem mode="ajax" value="#{messages['MyDashboard']}"
+                              rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))}"
+					outcome="/MyDashboard.xhtml?faces-redirect=true" icon="/img/Clobdata16.png">
+			     </p:menuitem>
+                     <p:menuitem mode="ajax" value="${'#'}{messages['StockCount']}"
+                              rendered="${'#'}{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))and identity.loggedIn  and !skinBean.iconShown
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)=='es'}"
+					outcome="/countAlias.xhtml?faces-redirect=true" >
+			     </p:menuitem>
+                     <p:menuitem mode="ajax" value="${'#'}{messages['Shopping']} ${'#'}{messages['Items']}"
+                              rendered="${'#'}{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))and identity.loggedIn  and !skinBean.iconShown
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)=='ec'}"
+					outcome="/ItemDetailsBrowse.xhtml?faces-redirect=true" >
+			     </p:menuitem>
+                     <p:menuitem mode="ajax" value="${'#'}{messages['Seat']}"
+                              rendered="${'#'}{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))and identity.loggedIn  and !skinBean.iconShown
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)=='ol'}"
+					outcome="/seatList.xhtml?faces-redirect=true" >
+			     </p:menuitem>
+
+
+			</p:submenu>
+
+
+			<p:submenu  label="#{messages['menutab.More_Mobile']=='menutab.More_Mobile'?messages['menutab.More']:messages['menutab.More_Mobile']}" rendered="#{(!identity.loggedIn  || customIdentity.hasRole('VW')) and (not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-1-C','TXT',0,1200) or not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-2-C','TXT',0,1200) or not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-3-C','TXT',0,1200)) }" style="font: #{skinBean.menuFontMobile} !important;" >
+
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-1-C','TXT',0,1200) !=null)}"
+					outcome="/Product-1.xhtml?faces-redirect=true" icon="/img/Package16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['Products_1']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-2-C','TXT',0,1200) !=null)}"
+					outcome="/Product-2.xhtml?faces-redirect=true" icon="/img/Package16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['Products_2']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-3-C','TXT',0,1200) !=null)}"
+					outcome="/Product-3.xhtml?faces-redirect=true" icon="/img/Package16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['Products_3']}" />
+				</p:menuitem>
+
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-1-C','TXT',0,1200) !=null)}"
+					outcome="/News-1.xhtml?faces-redirect=true" icon="/img/News16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['News_1']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-2-C','TXT',0,1200) !=null)}"
+					outcome="/News-2.xhtml?faces-redirect=true" icon="/img/News16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['News_2']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-3-C','TXT',0,1200) !=null)}"
+					outcome="/News-3.xhtml?faces-redirect=true" icon="/img/News16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['News_3']}" />
+				</p:menuitem>
+
+				<p:menuitem mode="ajax"  rendered="#{(!identity.loggedIn || customIdentity.hasRole('VW')) and fxxxuq89bxwwqqhxxxxxscheduleList.nextSchedule('FP') !=null }"
+					outcome="/clientFcal.xhtml?faces-redirect=true" icon="/img/calendar_view_day16.png" iconClass="pic"  >
+			          <h:outputText value="#{messages['menutab.Calendar']}"/>
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-1-C','TXT',0,1200) !=null)}"
+					outcome="/About-1.xhtml?faces-redirect=true" icon="/img/Package16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['About_1']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-2-C','TXT',0,1200) !=null)}"
+					outcome="/About-2.xhtml?faces-redirect=true" icon="/img/Package16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['About_2']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-3-C','TXT',0,1200) !=null)}"
+					outcome="/About-3.xhtml?faces-redirect=true" icon="/img/Package16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['About_3']}" />
+				</p:menuitem>
+			</p:submenu>
+			<p:submenu  label="#{messages['menutab.Resellers_Mobile']=='menutab.Resellers_Mobile'?messages['menutab.Resellers']:messages['menutab.Resellers_Mobile']}" rendered="#{(!identity.loggedIn  || customIdentity.hasRole('VW')) and request.serverName.contains('myflowp.') and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-C','TXT',0,1200) !=null }" >
+				<p:menuitem mode="ajax"   rendered="#{(!identity.loggedIn  || customIdentity.hasRole('VW')) and request.serverName.contains('myflowp.') and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-C','TXT',0,1200) !=null)}"
+					outcome="/Resellers-1.xhtml?faces-redirect=true" icon="/img/Vendor16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['Resellers_1']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(!identity.loggedIn  || customIdentity.hasRole('VW')) and request.serverName.contains('myflowp.') and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-2-C','TXT',0,1200) !=null)}"
+					outcome="/Resellers-2.xhtml?faces-redirect=true" icon="/img/Vendor16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['Resellers_2']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(!identity.loggedIn  || customIdentity.hasRole('VW')) and request.serverName.contains('myflowp.') and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-3-C','TXT',0,1200) !=null)}"
+					outcome="/Resellers-3.xhtml?faces-redirect=true" icon="/img/Vendor16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['Resellers_3']}" />
+				</p:menuitem>
+			</p:submenu>
+			<p:submenu label="#{messages['ContactUs_Mobile']=='ContactUs_Mobile'?messages['ContactUs']:messages['ContactUs_Mobile']}"  rendered="#{(!identity.loggedIn  || customIdentity.hasRole('VW')) and (not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-1-C','TXT',0,1200) or not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-2-C','TXT',0,1200) or not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-3-C','TXT',0,1200)) }" style="font: #{skinBean.menuFontMobile} !important;">
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-1-C','TXT',0,1200) !=null) and skinBean.iconShown}"
+					outcome="/ContactUs-1.xhtml?faces-redirect=true" icon="/img/ContactUs16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['ContactUs_1']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-1-C','TXT',0,1200) !=null) and !skinBean.iconShown}"
+					outcome="/ContactUs-1.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['ContactUs_1']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-2-C','TXT',0,1200) !=null) and skinBean.iconShown}"
+					outcome="/ContactUs-2.xhtml?faces-redirect=true" icon="/img/ContactUs16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['ContactUs_2']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-2-C','TXT',0,1200) !=null) and !skinBean.iconShown}"
+					outcome="/ContactUs-2.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['ContactUs_2']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-3-C','TXT',0,1200) !=null) and skinBean.iconShown}"
+					outcome="/ContactUs-3.xhtml?faces-redirect=true" icon="/img/ContactUs16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['ContactUs_3']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-3-C','TXT',0,1200) !=null) and !skinBean.iconShown}"
+					outcome="/ContactUs-3.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['ContactUs_3']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="${'#'}{!skinBean.iconShown}"
+					outcome="/invoicecart.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="${'#'}{messages['Customer']} ${'#'}{messages['Payment']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"  rendered="${'#'}{skinBean.iconShown}"
+					outcome="/invoicecart.xhtml?faces-redirect=true" icon="/img/Cpayment16.png" iconClass="pic"  >
+                             <h:outputText  value="${'#'}{messages['Customer']} ${'#'}{messages['Payment']}" />
+				</p:menuitem>
+
+			</p:submenu>
+
+			<p:submenu icon="pi pi-users" rendered="#{identity.loggedIn }" >
+                           <p:menuitem mode="ajax" value="#{messages['POS']}"
+                               rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('UW') )
+                                and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                 and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                }"
+					 outcome="/cartPOS.xhtml?faces-redirect=true" icon="/img/icons8-pricing-96.png">
+			   </p:menuitem>
+				<p:menuitem mode="ajax"  value="#{messages['Mailings']}"
+					outcome="/customerMailingSend.xhtml?faces-redirect=true" icon="/img/ComposeMail16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" value="#{messages['call']} #{messages['list']}" 
+                                  rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('UW') )  and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'}"
+					outcome="/customerList.xhtml?faces-redirect=true" icon="/img/List16.png" iconClass="pic" /> 
+				<p:menuitem mode="ajax" value="#{messages['to']} #{messages['call']}" 
+                                   rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'}"	
+					outcome="/customerFcal.xhtml?faces-redirect=true" icon="/img/telephone16.png" iconClass="pic"/>  
+				<p:menuitem mode="ajax" value="#{messages['load_sales_data']}" 
+                                   rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'}"	
+					outcome="/usagebyperiodsList.xhtml?faces-redirect=true" icon="/img/database_refresh16.png" iconClass="pic"/>  
+				<p:menuitem mode="ajax"   value="#{messages['sales_data_report']}"
+                                   rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'}"	
+					outcome="/usagebyperiodsReport.xhtml?faces-redirect=true" icon="/img/chart_bar16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax"  value="#{messages['menutab.Mailings']}"
+					outcome="/customerMailingSend.xhtml?faces-redirect=true" icon="/img/ComposeMail16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax"  value="#{messages['Cuorders']}"
+                                  rendered="#{identity.loggedIn and (customIdentity.hasRole('UQ')||customIdentity.hasRole('UH')) and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es' }"
+					outcome="/cuordersEdit.xhtml?faces-redirect=true" icon="/img/Cuorders16.png" iconClass="pic"  />
+			</p:submenu>
+			<p:submenu  icon="pi pi-car" rendered="#{identity.loggedIn }" >
+
+				<p:menuitem mode="ajax" value="#{messages['menutab.AddListReport.ListL1']}" 
+                                  rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('UW') )  and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'}"
+					outcome="/vendorList.xhtml?faces-redirect=true" icon="/img/List16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax"  value="#{messages['menutab.Mailings']}"
+					outcome="/vendorMailingSend.xhtml?faces-redirect=true" icon="/img/ComposeMail16.png" iconClass="pic"  >
+				</p:menuitem>
+				<p:menuitem mode="ajax"  value="#{messages['Vendorders']}"
+					outcome="/vendordersEdit.xhtml?faces-redirect=true" icon="/img/Vendorders16.png" iconClass="pic"  >
+				</p:menuitem>
+			</p:submenu>
+			<p:submenu icon="pi pi-shopping-cart" rendered="#{identity.loggedIn }" >
+
+				<p:menuitem mode="ajax" value="#{messages['menutab.AddListReport.ListL1']}" 
+					outcome="/itemList.xhtml?faces-redirect=true" icon="/img/List16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax"  value="#{messages['Vendorders']}"
+					outcome="/vendordersEdit.xhtml?faces-redirect=true" icon="/img/Vendorders16.png" iconClass="pic"  >
+				</p:menuitem>
+                           <p:menuitem mode="ajax" value="#{messages['Stock']} #{messages['count']} [SKU]"
+                               rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ') ||customIdentity.hasRole('UW')
+                               ||customIdentity.hasRole('VH')||customIdentity.hasRole('VQ')
+                               ) 
+                                and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                 and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                  and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'
+                               }"
+					outcome="/countAlias.xhtml?faces-redirect=true" icon="/img/Serialnumbers16.png">
+			   </p:menuitem>
+                           <p:menuitem mode="ajax" value="#{messages['Item']} #{messages['count']} [no SKU]"
+                               rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ') ||customIdentity.hasRole('UW')
+                               ||customIdentity.hasRole('VH')||customIdentity.hasRole('VQ')
+                               ) 
+                                and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                 and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                  and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'
+                               }"
+					outcome="/countItem.xhtml?faces-redirect=true" icon="/img/Serialnumbers16.png">
+			   </p:menuitem>
+
+			</p:submenu>
+
+			<p:submenu icon="pi pi-calendar" rendered="#{identity.loggedIn }" >
+
+				<p:menuitem mode="ajax" value="#{ messages['MyCalendar']}" 
+                                   rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'}"	
+					outcome="/clientFcal.xhtml?faces-redirect=true" icon="/img/List16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax"  value="#{ messages.Schedule}"
+                                   rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'}"	
+					outcome="/scheduleEdit.xhtml?faces-redirect=true" icon="/img/Vendorders16.png" iconClass="pic"  >
+				</p:menuitem>
+				<p:menuitem mode="ajax"  value="#{ messages.MyTasks}"
+                                   rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+                                    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'}"	
+					outcome="/emplordersFcalOrd.xhtml?faces-redirect=true" icon="/img/Vendorders16.png" iconClass="pic"  >
+				</p:menuitem>
+
+				<p:menuitem mode="ajax"  value="#{ messages.Calculator}"
+					outcome="/calculatorBasic.xhtml?faces-redirect=true" icon="/img/calculator.png" iconClass="pic"  >
+				</p:menuitem>
+				<p:menuitem mode="ajax" value="#{messages.online} #{messages.tutorial} " rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.systemBlogBrowseList}"
+					outcome="/BlogDetailsSBrowse.xhtml?faces-redirect=true" icon="/img/comment_play16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" value="#{messages.pictures} " rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ') ) }"
+					outcome="/blobdataList.xhtml?faces-redirect=true" icon="/img/Blobdata16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" value="#{messages.notes} / #{messages.text} " rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ') ) }"
+					outcome="/clobdataList.xhtml?faces-redirect=true" icon="/img/Blobdata16.png" iconClass="pic"  />
+			</p:submenu>
+                        <p:menuitem id="hdrLink" value="#{messages['Reset']}" outcome="/home.xhtml?faces-redirect=true">
+                         <p:graphicImage value="/img/Customer16.png" styleClass="pic"/>
+                        </p:menuitem>
+                         <p:tooltip id="resetTip" attached="true" for="hdrLink" >
+                          <h:outputText value="#{messages.reset_tip}" rendered ="#{(request.requestURI.contains('home.'))}"/>
+                         </p:tooltip>
+                        <p:menuitem id="shLnd" value="#{messages['Click']}" action="#{authenticator.setHomePageclickCount(-1)}" rendered="#{!identity.loggedIn and authenticator.homePageclickCount gt 1}"/>
+                         <p:tooltip id="shLndTip" attached="true" for="shLnd" >
+                          <h:outputText value="#{messages['Show']} #{messages['home']} #{messages['top']}" rendered ="#{(request.requestURI.contains('home.'))}"/>
+                         </p:tooltip>
+
+       </p:menubar>
+
+	</h:form>
+</ui:composition>
+
+
+
+
+

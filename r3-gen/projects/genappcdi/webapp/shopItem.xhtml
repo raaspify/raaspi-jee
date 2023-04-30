@@ -1,0 +1,230 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<ui:remove>
+    This page comes from ThemesBrowse to edit an Item. Each theme or a shopping item is defined and described in Item table with a link to the actual 
+    image in blobdata table or text with image in clobdata table. So this page has  edits related to item table only and covers themes as products and its summary,
+    specification and reviews information. It does not cover theme contents which are in clob or blob data tables.
+   This page is shown to backoffice Users and to visitors if social sharing site with high to medium level roles. Theme vendors ie PH type and role creates and modifies themes and its content but do not
+    have access  to edit product info for a theme.
+   
+</ui:remove>
+
+<f:metadata>
+    <f:viewParam name="key" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewAction action="#{customIdentity.setHoldValue3('')}" />
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemFrom" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom}"/>
+
+</f:metadata>
+                       
+<ui:define name="body">
+    <h:form id="fpxxfq1a5xwwqqhxxxxxitemSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ItemHelp']!='ItemHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+     <br></br>    
+     <div>
+      <panelGroup>
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/img/Editlog16.png"
+         rendered="#{identity.loggedIn}">
+      </h:graphicImage> 
+        <ui:remove> try using sid as param </ui:remove>
+
+        <h:button class="btn btn-primary" outcome="/itemEditEasy.xhtml" rendered="#{identity.loggedIn  and !customIdentity.hasRole('PH') }"
+                    id="iedit"
+                 value="#{messages['Edit']}(#{messages['Item']} #{messages['Description']})">
+                <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+
+        </h:button>
+
+
+      </panelGroup>
+
+      <br></br><br></br>
+       <h:outputText  style="font-size: medium;color:#{a4jSkin.hoverLinkColor};" value="#{messages['Use']} #{messages['edit']}(#{messages['Item']} #{messages['Description']}) #{messages['to']} #{messages['change']} #{messages['details']} #{messages['like']} #{messages['Price']} #{messages['or']}  #{messages['the']} #{messages['Thumbsnail']} #{messages['image']}." 
+        rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+
+       <hr></hr>
+       <h:outputText  style="font-size: medium;" value="#{messages['Whats']} #{messages['about']} #{messages['the']} #{messages['carousel']} #{messages['items']}? #{messages['They']}  #{messages['use']}  #{messages['Binary']}  #{messages['data']}  #{messages['with']} #{messages['key']} #{messages['3E-CAR-1-C']}, #{messages['qualifier']} #{messages['PIC']}, #{messages['SEQ']} 0,1,2... " 
+        rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+
+        <h:button outcome="/blobdataList.xhtml" rendered="#{identity.loggedIn  and !customIdentity.hasRole('PH') }"
+                    id="bedit"
+                 value="#{messages['List']} #{messages['Images']}">
+
+        </h:button>
+      <hr></hr>
+       <h:outputText  class="text-info" style="font-size: medium;" value="#{messages['Whats']} #{messages['about']} #{messages['adding']} #{messages['product']} #{messages['summary']}/#{messages['specifications']}/#{messages['reviews']}? " 
+        rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+
+       <br></br>
+       <h:outputText  class="text-info" style="font-size: large;" value="#{messages['All']} #{messages['items']} " 
+        rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+
+       <br></br>
+              <h:commandButton id="summaryS" class="btn btn-success" value ="#{messages['Show']}/#{messages['Hide']} #{messages['Product']} #{messages['Summary']}" 
+                onclick="let spinner = document.getElementById('summary');spinner.style.visibility = 'visible';"  
+                action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistUpdateClobData('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-SUMMARY','HDR','txt',0,'','',messages['Summary'],'')}" 
+                rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}">
+               <span id="summary" class="spinner-border spinner-border-sm text-muted" style="visibility: hidden"></span>
+              </h:commandButton>
+              <h:outputText value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-SUMMARY','HDR',0,'',0).size() gt 0?'ON':'OFF'}"
+                rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+              &nbsp;<h:commandButton id="specS" class="btn btn-success" value ="#{messages['Show']}/#{messages['Hide']} #{messages['Product']} #{messages['Specifications']}" 
+                onclick="let spinner = document.getElementById('spec');spinner.style.visibility = 'visible';"  
+                action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistUpdateClobData('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-SPECIFICATIONS','HDR','txt',10,'','',messages['Specifications'],'')}" 
+                rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}">
+               <span id="spec" class="spinner-border spinner-border-sm text-muted" style="visibility: hidden"></span>
+              </h:commandButton>
+              <h:outputText value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-SPECIFICATIONS','HDR',10,'',10).size() gt 0?'ON':'OFF'}" 
+                rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+
+              &nbsp;<h:commandButton id="reviewS" class="btn btn-success" value ="#{messages['Show']}/#{messages['Hide']} #{messages['Product']} #{messages['Reviews']}" 
+                onclick="let spinner = document.getElementById('review');spinner.style.visibility = 'visible';"  
+                action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistUpdateClobData('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-REVIEWS','HDR','txt',30,'','',messages['Reviews'],'')}" 
+                rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}">
+               <span id="review" class="spinner-border spinner-border-sm text-muted" style="visibility: hidden"></span>
+              </h:commandButton>
+              <h:outputText value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-REVIEWS','HDR',30,'',30).size() gt 0?'ON':'OFF'}" 
+                rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+       <br></br>
+        <h:outputText  style="font-size: medium;" value="#{messages['Summary']}: #{messages['uses']} #{messages['sequence']} 0 to 4, #{messages['HDR']} as Label, #{messages['TXT']} for details." 
+        rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+       <br></br>
+       <h:outputText  style="font-size: medium;" value="#{messages['Specification']}: #{messages['uses']} #{messages['sequence']} 10 to 15, #{messages['HDR']} as Label, #{messages['TXT']} for details." 
+        rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+       <br></br>
+       <h:outputText  style="font-size: medium;" value="#{messages['Review']}: #{messages['uses']} #{messages['sequence']} 30 , #{messages['HDR']} as Label, users create #{messages['TXT']} as reviews ." 
+        rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+       <br></br>
+               <h:outputText  class="text-info" style="font-size: large;" value="#{messages['This']} #{messages['item']} " 
+                 rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"/>
+
+               <h:link class="btn btn-link" outcome="/clobdataEdit.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"
+                    id="ceditS" target="_blank"
+                 value="#{messages['Edit']}(#{messages['Summary']} #{messages['Text']})">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0) ? yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).a0xxuobxbxxxxxxxxxxxsid : '' }"/>
+
+                <f:param name="fromTable" 
+                        value="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0) ? 'FPXXFQ1A5XWWQQHXXXXXITEM':'FPXXFQ1A5XWWQQHXXXXXITEM'}"/>
+                <f:param name="fromKey" 
+                        value="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0) ? fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt)):fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))}"/>
+                <f:param name="qualifier" 
+                        value="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0) ? 'TXT':'TXT'}"/>
+                <f:param name="useSeq" 
+                        value="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0) ? 0:0}"/>
+                <f:param name="data" 
+                        value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0)==null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).b1xxuzaxbvxxxxxxxxxxdata}"/>
+               </h:link>
+
+               &nbsp;<h:link class="btn btn-link" outcome="/clobdataEdit.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ'))
+                                 and customIdentity.product =='f' and customIdentity.subProduct =='s')  and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() gt 3}"
+                    id="ceditSp" target="_blank"
+                 value="#{messages['Edit']}(#{messages['Specifications']} #{messages['Text']})">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0) ? yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).a0xxuobxbxxxxxxxxxxxsid : ''}"/>
+
+                <f:param name="fromTable" 
+                        value="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0) ? 'FPXXFQ1A5XWWQQHXXXXXITEM':'FPXXFQ1A5XWWQQHXXXXXITEM'}"/>
+                <f:param name="fromKey" 
+                        value="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0) ? fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt)):fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))}"/>
+                <f:param name="qualifier" 
+                        value="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0) ? 'TXT':'TXT'}"/>
+                <f:param name="useSeq" 
+                        value="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0) ? 10:10}"/>
+                <f:param name="data" 
+                        value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',10)==null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',10).b1xxuzaxbvxxxxxxxxxxdata}"/>
+               </h:link>
+       <br></br>
+
+
+
+
+       <h:outputText rendered="#{identity.loggedIn}" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b1xxuszsbvxxxxxxxxxxdescript}" />
+      <br></br>
+       <h:outputText  value="#{messages['No']} #{messages['item']} #{messages['Image']} #{messages['found']} #{messages['in']} #{messages['binarydata']} #{messages['for']} #{messages['key']} #{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))} #{messages['Qualifier 1']} #{messages['Seq 1']}" 
+        rendered="#{!customIdentity.hasRole('PH') and fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null}"/>
+       <br></br>
+       <h:graphicImage alt="no picture"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+         value="/ImageServletCdi/?seq=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=300" >
+       </h:graphicImage> 
+
+     </div>
+     <br></br><br></br>
+
+    <div class="actionButtons">    
+        <h:button outcome="/#{empty fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom ? 'home': fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom}.xhtml"
+                    id="done"
+                 value="#{messages['Done']}"/>
+
+    </div>
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

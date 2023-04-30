@@ -1,0 +1,98 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="xlrxuq1iixwwqqhexxxxscandateA0xxuobxbxxxxxxxxxxxsid" value="#{xlrxuq1iixwwqqhexxxxscandateHome.xlrxuq1iixwwqqhexxxxscandateA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewAction action="#{xlrxuq1iixwwqqhexxxxscandateHome.restrict()}" />
+
+</f:metadata>
+                       
+<ui:define name="body">
+    <h:form id="xlrxuq1iixwwqqhexxxxscandateSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!xlrxuq1iixwwqqhexxxxscandateHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{xlrxuq1iixwwqqhexxxxscandateHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ScandateHelp']!='ScandateHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ScandateHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+         <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+    
+    <p:panel>
+        <h:panelGrid columns="10">
+        <f:facet name="header">scandate</f:facet>
+            <ui:decorate id="b1xxcsxraxxxxxxxxxxxdatetimeofscan" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Datetimeofscan']}</ui:define>
+
+            <h:outputText value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.b1xxcsxraxxxxxxxxxxxdatetimeofscan}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" switchType="client" collapsede="true"
+     toggleable="true" toggleableHeader="true">
+    <h:panelGrid columns="10">
+            <ui:decorate id="z1xxcxxrlvxxxxxxxxxxlastdateDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Lastdate']}</ui:define>
+
+            <h:outputText value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.z1xxcxxrlvxxxxxxxxxxlastdate}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="z1xxutoxlhxxxxxxxxxxownerDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner']}</ui:define>
+
+             <h:outputText value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.z1xxutoxlhxxxxxxxxxxowner}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="z2xxcxxrlvxxxxxxxxxxbkupdateDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Bkupdate']}</ui:define>
+
+            <h:outputText value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.z2xxcxxrlvxxxxxxxxxxbkupdate}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="zzxxu2oxxhxxxxxxxxxxowner2Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner2']}</ui:define>
+
+        </ui:decorate>
+   </h:panelGrid>
+   </p:panel>
+        <div style="clear:both"/>
+    </p:panel>
+    <div class="actionButtons">      
+
+        <h:button outcome="/scandateEdit.xhtml" 
+                    id="edit" 
+                    rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('SH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('IH')||customIdentity.hasRole('IQ') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}"
+                 value="Edit" styleClass="buttonMain"> 
+          <f:param name="from" value="Xlrxuq1iixwwqqhexxxxscandateList"/>
+          <f:param name="xlrxuq1iixwwqqhexxxxscandateA0xxuobxbxxxxxxxxxxxsid" value="#{xlrxuq1iixwwqqhexxxxscandateHome.xlrxuq1iixwwqqhexxxxscandateA0xxuobxbxxxxxxxxxxxsid}"/>
+        </h:button>
+    </div>
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

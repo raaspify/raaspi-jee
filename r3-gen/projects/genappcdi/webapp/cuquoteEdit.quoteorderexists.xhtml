@@ -1,0 +1,1875 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="trexuq233xwwqqhxxxxxcuquoteA0xxuobxbxxxxxxxxxxxsid" value="#{trexuq233xwwqqhxxxxxcuquoteHome.trexuq233xwwqqhxxxxxcuquoteA0xxuobxbxxxxxxxxxxxsid}"/>
+     <f:viewParam name="useSeq" value="#{trexuq233xwwqqhxxxxxcuquoteHome.useSeq}"/>
+    <f:viewParam name="trexuq233xwwqqhxxxxxcuquoteFrom" value="#{trexuq233xwwqqhxxxxxcuquoteHome.trexuq233xwwqqhxxxxxcuquoteFrom}"/>
+    <f:viewAction action="#{trexuq233xwwqqhxxxxxcuquoteHome.restrict()}" />
+    <f:viewAction action="#{trexuq233xwwqqhxxxxxcuquoteHome.wire()}" />
+
+
+      <f:viewAction action="#{trexuq233xwwqqhxxxxxcuquoteHome.showrunt()}"/>
+      <f:viewAction action="#{trexuq233xwwqqhxxxxxcuquoteHome.setEMailingAddress(trexuq233xwwqqhxxxxxcuquoteHome.getInstance().getJxxxuq201xwwqqhxxxxxcustomer().getQ4xxhxxxbv24xxxxxxxximailaddr())}" />
+      <f:viewParam name="key" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.lastfpxxfq1a5xwwqqhxxxxxitemP}"/>
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Cuquote']}</ui:define>
+
+<ui:define name="body">
+<h:form id="trexuq233xwwqqhxxxxxcuquote" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("trexuq233xwwqqhxxxxxcuquote:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!trexuq233xwwqqhxxxxxcuquoteHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['CuquoteEditHelp']!='CuquoteEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['CuquoteEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{trexuq233xwwqqhxxxxxcuquoteHome.managed ? 'Edit' : 'Add'} #{messages['Cuquote']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+     <h:panelGrid columns="2">
+       <p:tabView switchType="client" >
+          <h:outputText value="#{messages['cuquote']} - #{messages['no']} #{messages['data']} #{messages['to']} #{messages['select']}" rendered="#{trexuq233xwwqqhxxxxxcuquoteList.getSuggestList('0').isEmpty()}" />
+         <p:tab title="#{messages['Cuquote']}" rendered="true">
+          <ui:decorate id="trexuq233xwwqqhxxxxxcuquoteDecorationT" template="layout/edit.xhtml" >
+          <ui:define name="label">#{messages['Cuquote']} 
+          </ui:define>
+                <p:remoteCommand name="trexuq233xwwqqhxxxxxcuquoteFunction" proces="@all" update="@none" />
+                <h:selectOneMenu styleClass="autoCompleteWidth50"  
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                     required="false" 
+                       label="cuquote"
+                    requiredMessage="#{messages['Cuquote']} #{messages['ValueRequired']}"
+                    validator="#{trexuq233xwwqqhxxxxxcuquoteHome.validateAndSelectXxxxxxxxpurchsno}" 
+                   var ="result"   
+                   value="#{trexuq233xwwqqhxxxxxcuquoteHome.lasttrexuq233xwwqqhxxxxxcuquoteP}"
+                 > 
+                 <f:selectItem itemValue="#{null}" itemLabel="" />
+                  <f:selectItems value="#{trexuq233xwwqqhxxxxxcuquoteList.getSuggestList('NCNINP')}" var="result"
+                  itemValue="#{result.a0xxuncqbvxxxxxxxxxxpurchsno}"
+     
+                 itemLabel="#{result.a0xxuncqbvxxxxxxxxxxpurchsno.concat('/').concat(result.z1xxztprlxxxxxxxxxxxamounttotal).concat('/').concat(result.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript).concat('/').concat(
+                  result.jxxxuq201xwwqqhxxxxxcustomer.c1xxuslnbvixxxxxxxxxlastname).concat('/').concat(
+                   result.jxxxuq201xwwqqhxxxxxcustomer.d1xxu3cnbvixxxxxxxxxcustomerascompanyname)}"
+                  />
+                </h:selectOneMenu>
+          </ui:decorate>
+          #{messages['Cuquote']} [#{messages['closed']}]
+                <h:selectOneMenu styleClass="autoCompleteWidth50"  
+                 rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                     required="false" 
+                       label="cuquote"
+                    requiredMessage="#{messages['Cuquote']} #{messages['ValueRequired']}"
+                    validator="#{trexuq233xwwqqhxxxxxcuquoteHome.validateAndSelectXxxxxxxxpurchsno}" 
+                   var ="result"   
+                   value="#{trexuq233xwwqqhxxxxxcuquoteHome.lasttrexuq233xwwqqhxxxxxcuquoteP}"
+                 > 
+                 <f:selectItem itemValue="#{null}" itemLabel="" />
+                  <f:selectItems value="#{trexuq233xwwqqhxxxxxcuquoteList.getSuggestList('C')}" var="result"
+                  itemValue="#{result.a0xxuncqbvxxxxxxxxxxpurchsno}"
+                 itemLabel="#{result.a0xxuncqbvxxxxxxxxxxpurchsno.concat('/').concat(result.z1xxztprlxxxxxxxxxxxamounttotal).concat('/').concat(result.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript).concat('/').concat(
+                  result.jxxxuq201xwwqqhxxxxxcustomer.c1xxuslnbvixxxxxxxxxlastname).concat('/').concat(
+                   result.jxxxuq201xwwqqhxxxxxcustomer.d1xxu3cnbvixxxxxxxxxcustomerascompanyname)}"
+                  />
+                </h:selectOneMenu>
+          <br/>
+          <ui:remove>  added vq-sv to hide qtyord </ui:remove>
+
+
+            <h:panelGroup  template="layout/edit.xhtml" rendered="false">
+            <ui:define name="label">cuquote #{messages['Qtyordrd']}
+            </ui:define>
+                <h:inputText  
+                          value="#{empty trexuq233xwwqqhxxxxxcuquoteHome.instance.fpxxfq1a5xwwqqhxxxxxitem.tempQuantity ?1.0:trexuq233xwwqqhxxxxxcuquoteHome.instance.fpxxfq1a5xwwqqhxxxxxitem.tempQuantity}"
+                          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.fpxxfq1a5xwwqqhxxxxxitem.tempQuantity}:this.value;"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+         </p:tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   </p:tabView>
+
+
+
+     </h:panelGrid>
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="a0xxuncqbvxxxxxxxxxxpurchsnoDecoration" rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.managed}"   >
+        <h:outputLabel  for="a0xxuncqbvxxxxxxxxxxpurchsno" value="#{messages['Purchsno']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxuncqbvxxxxxxxxxxpurchsno" 
+                       required="false"
+                       rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.managed}"  
+                       disabled="#{trexuq233xwwqqhxxxxxcuquoteHome.managed}"
+                           size="20"
+                      maxlength="32"
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuncqbvxxxxxxxxxxpurchsno}">
+
+         </h:inputText>
+            <p:tooltip for="a0xxuncqbvxxxxxxxxxxpurchsno"> <span style="white-space: nowrap"> <h:outputText value="Value Auto generated "/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="b1xxcxxrlxxxxxxxxxxxdelvdatetDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b1xxcxxrlxxxxxxxxxxxdelvdatet" value="#{messages['Delvdatet']}">
+      </h:outputLabel>
+     <p:datePicker id="b1xxcxxrlxxxxxxxxxxxdelvdatet" 
+
+                          showTime="true" value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.b1xxcxxrlxxxxxxxxxxxdelvdatet}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="2">
+
+             <h:panelGroup id="b5xxuxxrbl10xxxxxxxxtypeDecoration"    >
+        <h:outputLabel  for="b5xxuxxrbl10xxxxxxxxtype" value="#{messages['Type']}">
+      </h:outputLabel>
+ 
+               <h:selectOneMenu style="width:250px;"  value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.b5xxuxxrbl10xxxxxxxxtype}" required="false" id="b5xxuxxrbl10xxxxxxxxtype">
+               <f:ajax  render="b5xxuxxrbl10xxxxxxxxtypeI" bypassUpdates="false"/>
+                                <f:selectItem itemValue="#{null}" itemLabel="" />
+                                <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('23',10)}"  var="babu"  
+                                 itemLabel="#{babu.key}"
+                                 itemValue="#{babu.value}" /> 
+                               </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b6xxuxxrbl09xxxxxxxxtermsDecoration"    >
+        <h:outputLabel  for="b6xxuxxrbl09xxxxxxxxterms" value="#{messages['Terms']}">
+      </h:outputLabel>
+ 
+               <h:selectOneMenu style="width:250px;"  value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.b6xxuxxrbl09xxxxxxxxterms}" required="false" id="b6xxuxxrbl09xxxxxxxxterms">
+               <f:ajax  render="b6xxuxxrbl09xxxxxxxxtermsI" bypassUpdates="false"/>
+                                <f:selectItem itemValue="#{null}" itemLabel="" />
+                                <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('23',09)}"  var="babu"  
+                                 itemLabel="#{babu.key}"
+                                 itemValue="#{babu.value}" /> 
+                               </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b7xxfxxrbvxxxxxxxxxxpriorityDecoration"    >
+        <h:outputLabel  for="b7xxfxxrbvxxxxxxxxxxpriority" value="#{messages['Priority']}">
+      </h:outputLabel>
+                <h:selectBooleanCheckbox id="b7xxfxxrbvxxxxxxxxxxpriority"
+                                      value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.b7xxfxxrbvxxxxxxxxxxpriority}">
+                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value</ui:remove>
+                   <f:ajax  render="b7xxfxxrbvxxxxxxxxxxpriority" bypassUpdates="false"/>
+                 </h:selectBooleanCheckbox>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="b8xxcxxrlxxxxxxxxxxxodatetDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b8xxcxxrlxxxxxxxxxxxodatet" value="#{messages['Odatet']}">
+      </h:outputLabel>
+     <p:datePicker id="b8xxcxxrlxxxxxxxxxxxodatet" 
+
+                          showTime="true" value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.b8xxcxxrlxxxxxxxxxxxodatet}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+
+
+
+
+
+   </h:panelGrid>
+            <p:panel header="#{messages['Fields']}" switchType="client" collapsed="!#{!(trexuq233xwwqqhxxxxxcuquoteList.entityLessStatusDetailedList(trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1)}"
+             leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+    <h:outputText value="#{messages['Shipping_Options_Msg']}"/>
+                            <h:selectOneRadio id="logic" value="#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.z9xxtxsolxxxxxxxxxxxshipoption}" styleClass="radio">
+                             <f:selectItem itemLabel="Pick Up" itemValue="P"/>
+                             <f:selectItem itemLabel="Standard Ship" itemValue="S"/>
+                             <f:selectItem itemLabel="Express Ship" itemValue="E"/>
+                             <f:selectItem itemLabel="Not Applicable" itemValue="X"/>
+                            </h:selectOneRadio>
+            </p:panel>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="y3xxuxxrblxxxxxxxxxxcinvoiceDecoration"  rendered="true">
+        <h:outputLabel  for="y3xxuxxrblxxxxxxxxxxcinvoice" value="#{messages['Cinvoice']}">
+      </h:outputLabel>
+
+         <h:inputText id="y3xxuxxrblxxxxxxxxxxcinvoice" 
+                           size="20"
+                      maxlength="20"
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.y3xxuxxrblxxxxxxxxxxcinvoice}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y4xxzpxxavxxxxxxxxxxordpriceDecoration"  rendered="true">
+        <h:outputLabel  for="y4xxzpxxavxxxxxxxxxxordprice" value="#{messages['Ordprice']}">
+      </h:outputLabel>
+      <h:inputText id="y4xxzpxxavxxxxxxxxxxordprice"  
+         value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.y4xxzpxxavxxxxxxxxxxordprice}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.y4xxzpxxavxxxxxxxxxxordprice}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y5xxuxxrblxxxxxxxxxxjobnoDecoration"  rendered="true">
+        <h:outputLabel  for="y5xxuxxrblxxxxxxxxxxjobno" value="#{messages['Jobno']}">
+      </h:outputLabel>
+
+         <h:inputText id="y5xxuxxrblxxxxxxxxxxjobno" 
+                           size="20"
+                      maxlength="20"
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.y5xxuxxrblxxxxxxxxxxjobno}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y6xxuxxrblxxxxxxxxxxvponoDecoration"  rendered="true">
+        <h:outputLabel  for="y6xxuxxrblxxxxxxxxxxvpono" value="#{messages['Vpono']}">
+      </h:outputLabel>
+
+         <h:inputText id="y6xxuxxrblxxxxxxxxxxvpono" 
+                           size="20"
+                      maxlength="20"
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.y6xxuxxrblxxxxxxxxxxvpono}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y7xxuxxrblxxxxxxxxxxquoordtDecoration"  rendered="true">
+        <h:outputLabel  for="y7xxuxxrblxxxxxxxxxxquoordt" value="#{messages['Quoordt']}">
+      </h:outputLabel>
+
+         <h:inputText id="y7xxuxxrblxxxxxxxxxxquoordt" 
+                           size="20"
+                      maxlength="20"
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.y7xxuxxrblxxxxxxxxxxquoordt}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y8xxuxxrblxxxxxxxxxxshipcodeDecoration"  rendered="true">
+        <h:outputLabel  for="y8xxuxxrblxxxxxxxxxxshipcode" value="#{messages['Shipcode']}">
+      </h:outputLabel>
+                <h:inputText id="y8xxuxxrblxxxxxxxxxxshipcode" 
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.y8xxuxxrblxxxxxxxxxxshipcode}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y9xxuxxrblxxxxxxxxxxactivitycodeDecoration"  rendered="true">
+        <h:outputLabel  for="y9xxuxxrblxxxxxxxxxxactivitycode" value="#{messages['Activitycode']}">
+      </h:outputLabel>
+
+         <h:inputText id="y9xxuxxrblxxxxxxxxxxactivitycode" 
+                           size="20"
+                      maxlength="20"
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.y9xxuxxrblxxxxxxxxxxactivitycode}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="yaxxuxxrblxxxxxxxxxxattachDecoration"  rendered="true">
+        <h:outputLabel  for="yaxxuxxrblxxxxxxxxxxattach" value="#{messages['Attach']}">
+      </h:outputLabel>
+
+         <h:inputText id="yaxxuxxrblxxxxxxxxxxattach" 
+                           size="20"
+                      maxlength="20"
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.yaxxuxxrblxxxxxxxxxxattach}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="ybxxuznybvxxxxxxxxxxnotesDecoration"  rendered="true">
+       <h:outputLabel  for="ybxxuznybvxxxxxxxxxxnotesed" value="#{messages['Notes']}">
+      </h:outputLabel>
+         <h:panelGrid>
+         <pe:ckEditor id="ybxxuznybvxxxxxxxxxxnotesed" height="50" width="250"  value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.ybxxuznybvxxxxxxxxxxnotes}"
+                 toolbar="[['NewPage','Preview','Cut','Copy','Image','Table','HorizontalRule','Iframe','Link','Unlink','Anchor','Paste','PasteText','PasteFromWord','-', 'Scayt'], '/',['Font','FontSize','Bold','Italic','Strike','-','RemoveFormat' ] ,[ 'TextColor','BGColor' ], ['Undo', 'Redo']]">
+         </pe:ckEditor>
+         </h:panelGrid>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="ycxxuzdrblxxxxxxxxxxdocmntDecoration"  rendered="true">
+        <h:outputLabel  for="ycxxuzdrblxxxxxxxxxxdocmnt" value="#{messages['Docmnt']}">
+      </h:outputLabel>
+         <h:inputText id="ycxxuzdrblxxxxxxxxxxdocmntv" 
+                   disabled="true"
+                   size="20"
+                   maxlength="90"
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt}">
+         </h:inputText>
+           <p:tooltip for="ycxxuzdrblxxxxxxxxxxdocmnto"> <span style="white-space: nowrap"> <h:outputText value="Types allowed are: jpg, gif, png, bmp, xml,doc,txt,pdf,xls,mp3,mp4"/></span> </p:tooltip> 
+	    <h:selectOneRadio value="#{trexuq233xwwqqhxxxxxcuquoteHome.upLoadPurpose}" required="false" id="ycxxuzdrblxxxxxxxxxxdocmntd" rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt ne null}">
+             <f:selectItem  
+              itemLabel="Add"
+              itemValue="ad" /> 
+             <f:selectItem  
+              itemLabel="Replace"
+              itemValue="re" /> 
+           </h:selectOneRadio>
+             <h:commandLink action="#{fpxxfq1a5xwwqqhxxxxxitemHome.removeImage()}"
+                value="#{messages['Remove']}" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt ne null}" />
+                 
+         <ui:remove>
+          <h:outputText value="#{trexuq233xwwqqhxxxxxcuquoteHome.clobdata}" rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt ne null  }"  />
+         </ui:remove>
+                 <o:inputFile id="ycxxuzdrblxxxxxxxxxxdocmnto" value="#{file.lfiles}" multiple="true" onclick="upload.show()"
+                   accept="image/png,image/jp*,video/*,text/*,text/csv,.csv,text/comma-separated-values"/>
+                 <h:commandButton value="Upload" action="#{file.fileUpload('clobblob')}"/>
+         <br />
+         <p:panel rendered="#{not empty file.data}">
+          <h:commandButton action="#{trexuq233xwwqqhxxxxxcuquoteHome.clearUploadData}"
+            value="#{messages['Clear']} #{messages['Uploaded']} #{messages['Data']}"
+          rendered="#{not empty file.data}" />
+          #{messages['Uploaded']}&nbsp;
+          <o:graphicImage value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.files[0].data}" dataURI="true" width="100" 
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[0].data}" />
+          <o:graphicImage value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.files[1].data}" dataURI="true" width="100" 
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[1].data}" />
+          <o:graphicImage value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.files[2].data}" dataURI="true" width="100" 
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[2].data}" />
+         </p:panel>
+         <p:panel rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[0].text}">
+          <h:outputText value="#{fn:substring(yxxxuq1n1xwwqqqxxxxxblobdataHome.files[0].text,0,50)}"  
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[0].text}" />
+          #{messages['Doc2:']}<h:outputText value="#{fn:substring(yxxxuq1n1xwwqqqxxxxxblobdataHome.files[1].text,0,50)}"  
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[1].text}" />
+          #{messages['Doc3:']}<h:outputText value="#{fn:substring(yxxxuq1n1xwwqqqxxxxxblobdataHome.files[2].text,0,50)}"  
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[2].text}" />
+         </p:panel>
+         <p:panel rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt.length() >2}">
+          #{messages['Saved']}&nbsp;
+          <img 
+           src="/ImageServletCdi/?seq=0&amp;table=TREXUQ233XWWQQHXXXXXCUQUOTE&amp;qlf=1&amp;id=#{trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt}&amp;height=100" >
+          </img> 
+          <img 
+           src="/ImageServletCdi/?seq=1&amp;table=TREXUQ233XWWQQHXXXXXCUQUOTE&amp;qlf=1&amp;id=#{trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt}&amp;height=100" >
+          </img> 
+          <img 
+           src="/ImageServletCdi/?seq=2&amp;table=TREXUQ233XWWQQHXXXXXCUQUOTE&amp;qlf=1&amp;id=#{trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt}&amp;height=100" >
+          </img> 
+          <h:outputText escape="false"  value="#{trexuq233xwwqqhxxxxxcuquoteHome.getClobdata('TREXUQ233XWWQQHXXXXXCUQUOTE',trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt,'TXT',1,60)}"  />
+          #{messages['Doc2:']}<h:outputText escape="false"  value="#{trexuq233xwwqqhxxxxxcuquoteHome.getClobdata('TREXUQ233XWWQQHXXXXXCUQUOTE',trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt,'TXT',2,60)}"  />
+          #{messages['Doc3:']}<h:outputText escape="false"  value="#{trexuq233xwwqqhxxxxxcuquoteHome.getClobdata('TREXUQ233XWWQQHXXXXXCUQUOTE',trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt,'TXT',3,60)}"  />
+         </p:panel>
+                 <p:panel rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.getSystemBlobdata(yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable,fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}">
+                  #{messages['System']}&nbsp;#{messages['Gallery']}&nbsp;#{messages['current']}&nbsp;
+                  <h:graphicImage 
+                   value="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=1&amp;height=0&amp;scope=SYSTEM"
+                  class="img-responsive" style="object-fit: cover;height:90px">
+                 </h:graphicImage> 
+                 </p:panel>
+                 <p:panel rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.b1xxuzbxbvxxxxxxxxxxdata and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2=='SYSTEM'}">
+                  #{messages['System']}&nbsp;#{messages['Gallery']}&nbsp;#{messages['preview']}&nbsp;
+                  <h:graphicImage 
+                   value="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey}&amp;height=100&amp;scope=SYSTEM" >
+                  </h:graphicImage> 
+                 </p:panel>
+
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z1xxztprlxxxxxxxxxxxamounttotalDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z1xxztprlxxxxxxxxxxxamounttotal" value="#{messages['Amounttotal']}">
+      </h:outputLabel>
+      <h:inputText id="z1xxztprlxxxxxxxxxxxamounttotal"  
+         value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z1xxztprlxxxxxxxxxxxamounttotal}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z1xxztprlxxxxxxxxxxxamounttotal}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z2xxuvxrblxxxxxxxxxxvendorDecoration"  rendered="true">
+        <h:outputLabel  for="z2xxuvxrblxxxxxxxxxxvendor" value="#{messages['Vendor']}">
+      </h:outputLabel>
+                <h:inputText id="z2xxuvxrblxxxxxxxxxxvendor" 
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z2xxuvxrblxxxxxxxxxxvendor}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z2xxzyprlxxxxxxxxxxxamountostndtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxzyprlxxxxxxxxxxxamountostndt" value="#{messages['Amountostndt']}">
+      </h:outputLabel>
+      <h:inputText id="z2xxzyprlxxxxxxxxxxxamountostndt"  
+         value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z2xxzyprlxxxxxxxxxxxamountostndt}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z2xxzyprlxxxxxxxxxxxamountostndt}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z3xxztqrlxxxxxxxxxxxqtytotalDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z3xxztqrlxxxxxxxxxxxqtytotal" value="#{messages['Qtytotal']}">
+      </h:outputLabel>
+      <h:inputText id="z3xxztqrlxxxxxxxxxxxqtytotal"  
+         value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z3xxztqrlxxxxxxxxxxxqtytotal}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z3xxztqrlxxxxxxxxxxxqtytotal}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z4xxzyqrlxxxxxxxxxxxqtyostndtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z4xxzyqrlxxxxxxxxxxxqtyostndt" value="#{messages['Qtyostndt']}">
+      </h:outputLabel>
+      <h:inputText id="z4xxzyqrlxxxxxxxxxxxqtyostndt"  
+         value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z4xxzyqrlxxxxxxxxxxxqtyostndt}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z4xxzyqrlxxxxxxxxxxxqtyostndt}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z5xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z5xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="z5xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z6xxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z6xxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="z6xxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z6xxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z7xxzbtxavxxxxxxxxxxbaseamounttDecoration"  rendered="true">
+        <h:outputLabel  for="z7xxzbtxavxxxxxxxxxxbaseamountt" value="#{messages['Baseamountt']}">
+      </h:outputLabel>
+      <h:inputText id="z7xxzbtxavxxxxxxxxxxbaseamountt"  
+         value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z7xxzbtxavxxxxxxxxxxbaseamountt}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z7xxzbtxavxxxxxxxxxxbaseamountt}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z7xxzzprhvxxxxxxxxxxprintmstatDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z7xxzzprhvxxxxxxxxxxprintmstat" value="#{messages['Printmstat']}">
+      </h:outputLabel>
+                <h:inputText id="z7xxzzprhvxxxxxxxxxxprintmstat" 
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z7xxzzprhvxxxxxxxxxxprintmstat}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z8xxczqxlhxxxxxxxxxxprinmtfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z8xxczqxlhxxxxxxxxxxprinmtfldt" value="#{messages['Prinmtfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="z8xxczqxlhxxxxxxxxxxprinmtfldt" 
+
+                          showTime="true" value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z8xxczqxlhxxxxxxxxxxprinmtfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z9xxzltxavxxxxxxxxxxdelivchrgtDecoration"  rendered="true">
+       <h:outputLabel  for="z9xxzltxavxxxxxxxxxxdelivchrgt" value="#{messages['Delivchrg']}">
+      </h:outputLabel>
+        <h:inputText id="z9xxzltxavxxxxxxxxxxdelivchrgt" 
+                            
+                           size="21"
+                            onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zbxxzlxxavxxxxxxxxxxdelivchrg}:this.value;"
+                            value="#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zbxxzlxxavxxxxxxxxxxdelivchrg}">
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zaxxzmtxavxxxxxxxxxxmiscchrgtDecoration"  rendered="true">
+        <h:outputLabel  for="zaxxzmtxavxxxxxxxxxxmiscchrgt" value="#{messages['Miscchrg']}">
+      </h:outputLabel>
+        <h:inputText id="zaxxzmtxavxxxxxxxxxxmiscchrgt" 
+                            
+                           size="21"
+                            onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zcxxzmxxavxxxxxxxxxxmiscchrg}:this.value;"
+                            value="#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zcxxzmxxavxxxxxxxxxxmiscchrg}">
+                            <ui:remove>
+                            <f:ajax listener = "#{trexuq233xwwqqhxxxxxcuquoteHome.showtemprunt}"  event="select" render="matcodeTDecoration,matcodeDecorationmis" bypassUpdates="false"/>
+                            </ui:remove> 
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zbxxzxz1avxxxxxxxxxxtax1amttDecoration"  rendered="true">
+        <h:outputLabel  for="zbxxzxz1avxxxxxxxxxxtax1amtt" value="#{messages['Tax1']}">
+      </h:outputLabel>
+        <h:inputText id="zbxxzxz1avxxxxxxxxxxtax1amtt" 
+                            
+                           size="21"
+                            disabled="false"
+                            onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zdxxzxz1avxxxxxxxxxxtax1amt}:this.value;"
+                            value="#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zdxxzxz1avxxxxxxxxxxtax1amt}">
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zcxxzxz2avxxxxxxxxxxtax2amttDecoration"  rendered="true">
+        <h:outputLabel  for="zcxxzxz2avxxxxxxxxxxtax2amtt" value="#{messages['Tax2']}">
+      </h:outputLabel>
+        <h:inputText id="zcxxzxz2avxxxxxxxxxxtax2amtt" 
+                            
+                           size="21"
+                            disabled="false"
+                            onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zexxzxz2avxxxxxxxxxxtax2amt}:this.value;"
+                            value="#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zexxzxz2avxxxxxxxxxxtax2amt}">
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zdxxzxz3avxxxxxxxxxxtax3amttDecoration"  rendered="true">
+        <h:outputLabel  for="zdxxzxz3avxxxxxxxxxxtax3amtt" value="#{messages['Tax3']}">
+      </h:outputLabel>
+        <h:inputText id="zdxxzxz3avxxxxxxxxxxtax3amtt" 
+                            
+                           size="21"
+                            disabled="false"
+                            onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zfxxzxz3avxxxxxxxxxxtax3amt}:this.value;"
+                            value="#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zfxxzxz3avxxxxxxxxxxtax3amt}">
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zexxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zexxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="zexxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.zexxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+   <p:panel header="#{messages['Totals']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+              <p:panel>
+               <h:panelGrid columns="5">
+               <ui:decorate id="status" template="layout/display.xhtml">
+                <ui:define name="label">#{messages['Status']}</ui:define>
+               </ui:decorate>
+                   <h:inputText id="statusT" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped': (trexuq233xwwqqhxxxxxcuquoteHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid':'other')}"   >
+                   </h:inputText>
+
+               <ui:decorate id="totals" template="layout/display.xhtml">
+                <ui:define name="label">Totals</ui:define>
+               </ui:decorate>
+                   <h:inputText id="matcodeId2T" 
+                       disabled="true"
+                        size="15"
+                         maxlength="20"
+                          value="#{trexuq233xwwqqhxxxxxcuquoteHome.totalamountTotal}"   >
+                   <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+                   </h:inputText>
+               <ui:decorate id="totalsq" template="layout/display.xhtml">
+                <ui:define name="label">Qty</ui:define>
+               </ui:decorate>
+                   <h:inputText id="matcodeId2TQ" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{trexuq233xwwqqhxxxxxcuquoteHome.totalqtyTotal}"   >
+                   </h:inputText>
+               <ui:decorate id="Detail_Lines" template="layout/display.xhtml">
+                <ui:define name="label">Detail Lines Added</ui:define>
+               </ui:decorate>
+                   <h:inputText id="matcodeId2DLT" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{trexuq233xwwqqhxxxxxcuquoteHome.lastItemLine}"   >
+                   </h:inputText>
+
+             
+                <ui:decorate id="matcodeTDecoration" template="layout/display.xhtml">
+                 <ui:define name="label">Base Total</ui:define>
+                   <h:inputText id="matcodeId2LT" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{trexuq233xwwqqhxxxxxcuquoteHome.totalbaseamt}"   >
+                        <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" groupingUsed="true"
+                     maxFractionDigits="2" type="currency" />
+                   </h:inputText>
+                </ui:decorate>
+                <ui:decorate id="matcodeDecorationmis" template="layout/display.xhtml">
+                 <ui:define name="label">+#{messages['Miscchrgt']}</ui:define>
+                        <h:inputText id="miscchrgIdT" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{trexuq233xwwqqhxxxxxcuquoteHome.totalmis}"   >
+                        <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" groupingUsed="true"
+                     maxFractionDigits="2" type="currency" />
+                        </h:inputText>
+                </ui:decorate>
+
+
+                <ui:decorate id="matcodeDecorationdelT" template="layout/display.xhtml">
+                 <ui:define name="label">+#{messages['Delivchrgt']}</ui:define>
+                        <h:inputText id="delvchrgId" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{trexuq233xwwqqhxxxxxcuquoteHome.totaldel}"   >
+                        <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" groupingUsed="true"
+                     maxFractionDigits="2" type="currency" />
+                        </h:inputText>
+                </ui:decorate>
+
+                <ui:decorate id="matcodeDecorationtax1T" template="layout/display.xhtml">
+                 <ui:define name="label">+#{messages['Tax1amtt']}</ui:define>
+                        <h:inputText id="tax1TId" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{trexuq233xwwqqhxxxxxcuquoteHome.totaltax1}"   >
+                        <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" groupingUsed="true"
+                     maxFractionDigits="2" type="currency" />
+                        </h:inputText>
+                </ui:decorate>
+                <ui:decorate id="matcodeDecorationtax2T" template="layout/display.xhtml">
+                 <ui:define name="label">+#{messages['Tax2amtt']}</ui:define>
+                        <h:inputText id="tax2TId" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{trexuq233xwwqqhxxxxxcuquoteHome.totaltax2}"   >
+                        <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" groupingUsed="true"
+                     maxFractionDigits="2" type="currency" />
+                        </h:inputText>
+                </ui:decorate>
+                <ui:decorate id="matcodeDecorationtax3T" template="layout/display.xhtml">
+                 <ui:define name="label">+#{messages['Tax3amtt']}</ui:define>
+                        <h:inputText id="tax3TId" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{trexuq233xwwqqhxxxxxcuquoteHome.totaltax3}"   >
+                        <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" groupingUsed="true"
+                     maxFractionDigits="2" type="currency" />
+                        </h:inputText>
+                </ui:decorate>
+
+               </h:panelGrid>
+              </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuncqbvxxxxxxxxxxpurchsno} #{messages['sid']} #{trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuncqbvxxxxxxxxxxpurchsno !=''}"/> 
+   </p:panel>
+
+            <p:panel id="lineItems" >
+
+                    <p:dataTable id="LineItemsTable" rendered="#{trexuq233xwwqqhxxxxxcuquoteList.entityLessStatusDetailedList(trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}"
+                     tableStyle="table-layout:auto;" value="#{trexuq233xwwqqhxxxxxcuquoteList.entityLessStatusDetailedList(trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1)}" var="item">
+                        <p:column id="column1">
+                            <f:facet id="CartRemoveFacet" name="header">
+                                <h:outputText id="CartRemoveText" value="#{messages['removeColumn']}" />
+                            </f:facet>
+                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="#{trexuq233xwwqqhxxxxxcuquoteHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                        </p:column>
+                        <p:column id="columnxxo">
+                            <f:facet id="XxoFacet" name="header">
+                                <h:outputText id="CuoText" value="#{messages['quote']}" />
+                            </f:facet>
+                            #{item.trexuq233xwwqqhxxxxxcuquote.a0xxuncqbvxxxxxxxxxxpurchsno} 
+                        </p:column>     
+                        <p:column id="columnxxodl" >
+                            <f:facet id="XxodlFacet" name="header">
+                                <h:outputText id="CuodlText" value="#{messages['line']}" />
+                            </f:facet>
+                            #{item.z1xxzo11bvlxxxxxxxxxline} 
+
+                        </p:column>     
+
+
+                        <p:column id="column2">
+                            <f:facet id="TitleFacet" name="header">
+                                <h:outputText id="TitleText" value="#{messages['matcode']}" />
+                            </f:facet>
+                            #{item.fpxxfq1a5xwwqqhxxxxxitem.a0xxukixbxxxxxxxxxxxmatcode} 
+                        </p:column>     
+                        <p:column id="column3">
+                            <f:facet id="ActorFacet" name="header">
+                                <h:outputText id="ActorText" value="#{messages['descript']}" />
+                            </f:facet>
+                            #{item.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript} 
+                        </p:column>                        
+                        <p:column id="column4">
+                            <f:facet id="PriceFacet" name="header">
+                                <h:outputText id="PriceText" value="#{messages['price']}" />
+                            </f:facet>
+                            <h:outputText id="PriceValueText" value="#{item.z5xxzpxravxxxxxxxxxxordprice}" rendered= "#{!item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" >
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+                            <h:outputText id="PriceValueQuote" value="Request Quotation" rendered= "#{item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                        </p:column>     
+                        <ui:remove> could not get ajax working for qty change</ui:remove>                   
+                        <p:column id="column5">
+                            <f:facet id="QuantityFacet" name="header">
+                                <h:outputText id="QuantityText" value="#{messages['quantity']}" />
+                            </f:facet> 
+                             <h:inputText id="QuantityValueText" value="#{item.z3xxeqxxbvnxxxxxxxxxqtyordrd}" size="6" readonly="true" />
+                        </p:column>   
+
+                        <p:column id="columntx1">
+                            <f:facet id="tx1" name="header">
+                                <h:outputText id="tx1Text" value="#{messages['tax']}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.zdxxzxz1avxxxxxxxxxxtax1amt}" size="6" readonly="true" />
+                        </p:column>    
+                        <p:column id="columnmsc">
+                            <f:facet id="tx1" name="header">
+                                <h:outputText  value="#{messages['Miscchrgt']}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.zcxxzmxxavxxxxxxxxxxmiscchrg}" size="6" readonly="true" />
+                        </p:column>    
+                        <p:column id="columndelv">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages['Delivchrgt']}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.zbxxzlxxavxxxxxxxxxxdelivchrg}" size="6" readonly="true" />
+                        </p:column>    
+                        <p:column id="columnlt">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages['Linetotal']}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.zgxxzlpxxvxxxxxxxxxxlinetotl}" size="6" readonly="true" />
+                        </p:column>  
+
+                     
+                    </p:dataTable>
+           <ui:remove> 
+             removed and !trexuq233xwwqqhxxxxxcuquoteHome.instance.y9xxcxxxbv10xxxxxxxxtype.startsWith('cart') from render of update,remove
+              why was it there , stopped from button showing if came from list etc
+             one schedule can have one detail , so remove the following
+           </ui:remove> 
+            <h:commandButton id="remove"  
+                          value="#{messages['remove']} #{messages['checked']}  #{messages['row']}" 
+                         action="#{trexuq233xwwqqhxxxxxcuquoteHome.updateDetailsAll()}" 
+                       rendered="#{trexuq233xwwqqhxxxxxcuquoteList.entityLessStatusDetailedList(trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}"/>
+
+            </p:panel>
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+           
+            <p:commandButton id="save" styleClass="#{trexuq233xwwqqhxxxxxcuquoteHome.managed?'':'buttonMain'}" 
+                          value="#{messages['convert']} #{messages['to']} #{messages['cuquote']}" status="buttonStatus" update="@form"
+                         action="#{trexuq233xwwqqhxxxxxcuquoteHome.extended_persist(true)}"
+                       rendered="#{trexuq233xwwqqhxxxxxcuquoteList.entityLessStatusDetailedList(trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() eq 0}">  
+            </p:commandButton>   
+
+           <h:commandButton id="delete" 
+                         value="#{messages['Delete']} #{messages['Cuquote']}" onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " 
+                         action="#{trexuq233xwwqqhxxxxxcuquoteHome.remove()}"
+                        rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.managed and !trexuq233xwwqqhxxxxxcuquoteHome.entityDeleted}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Use']} #{messages['List']} #{messages['to']} #{messages['delete']} #{messages['details']} #{messages['records']} #{messages['sametime']},#{messages['but']} #{messages['manually']} #{messages['delete']} #{messages['other']} #{messages['constraints']}"/></span> </p:tooltip> 
+           </h:commandButton>
+
+            <h:button id="new" styleClass="buttonMain" 
+             value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/cuquoteEdit.xhtml"
+                rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.managed}"/>
+
+
+
+
+
+            <f:param name="reportName" value="#{trexuq233xwwqqhxxxxxcuquoteList.reportName}"/>
+            <f:param name="displayAs" value="#{trexuq233xwwqqhxxxxxcuquoteList.displayAs}" /> 
+            <h:button outcome="/cuquoteList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Cuquote']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty trexuq233xwwqqhxxxxxcuquoteHome.trexuq233xwwqqhxxxxxcuquoteFrom ? 'home' : trexuq233xwwqqhxxxxxcuquoteHome.trexuq233xwwqqhxxxxxcuquoteFrom}.xhtml"
+                rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.managed or trexuq233xwwqqhxxxxxcuquoteHome.entityDeleted or trexuq233xwwqqhxxxxxcuquoteList.entityLessStatusDetailedList(trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}"/>
+          <ui:remove> needs more work on method rendered and ui issue, look into using EH
+            <h:commandButton id="close" 
+                          value="#{messages['Set']} #{messages['as']} #{messages['Closed']}" 
+                         action="#{trexuq233xwwqqhxxxxxcuquoteHome.closeRecord(trexuq233xwwqqhxxxxxcuquoteHome.instance)}"
+                       rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.managed and customIdentity.hasRole('UH')}">  
+            </h:commandButton>
+          </ui:remove>
+
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty trexuq233xwwqqhxxxxxcuquoteHome.trexuq233xwwqqhxxxxxcuquoteFrom ? 'home' : trexuq233xwwqqhxxxxxcuquoteHome.trexuq233xwwqqhxxxxxcuquoteFrom}.xhtml"
+                rendered="#{!trexuq233xwwqqhxxxxxcuquoteHome.managed and !trexuq233xwwqqhxxxxxcuquoteHome.entityDeleted}"/>
+
+
+            <h:commandButton id="refreshj" 
+                          value="#{messages['Refresh']} #{messages['data']}" 
+                         action="#{trexuq233xwwqqhxxxxxcuquoteHome.showtemprunt()}"
+                       rendered="#{!trexuq233xwwqqhxxxxxcuquoteHome.managed}"/>
+
+           <h:panelGroup>
+
+            &nbsp;&nbsp;
+            <h:panelGrid columns="2">
+             <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.displayAs']}</ui:define>
+                <h:selectOneMenu id="displayAs" value="#{trexuq233xwwqqhxxxxxcuquoteList.displayAs}">
+                 <f:selectItem id="ditem2" itemLabel="HTML" itemValue="HTML" />
+                 <f:selectItem id="ditem1" itemLabel="PDF" itemValue="PDF" />
+                </h:selectOneMenu> 
+             </ui:decorate>
+            </h:panelGrid>
+             <h:commandButton id="ePrint" value="#{messages['Print']}/#{messages['Preview']} #{messages['report']}"   onclick="this.form.target='_blank'"
+               action="#{trexuq233xwwqqhxxxxxcuquoteList.ePrint('IGNORE',trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuncqbvxxxxxxxxxxpurchsno,trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuncqbvxxxxxxxxxxpurchsno,false,'Trexuq233xwwqqhxxxxxcuquoteMaster')}"
+                rendered="#{trexuq233xwwqqhxxxxxcuquoteList.entityLessStatusDetailedList(trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}"/>
+
+             <h:commandButton id="email" value="Email_to" onclick="this.form.target='_self'"
+               action="#{trexuq233xwwqqhxxxxxcuquoteList.eSend('EMAIL'.concat(trexuq233xwwqqhxxxxxcuquoteList.displayAs),trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuncqbvxxxxxxxxxxpurchsno,trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuncqbvxxxxxxxxxxpurchsno,false,trexuq233xwwqqhxxxxxcuquoteHome.EMailingAddress)}"
+                rendered="#{trexuq233xwwqqhxxxxxcuquoteList.entityLessStatusDetailedList(trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}"/>
+
+               <ui:fragment id="ejay"  template="layout/edit.xhtml" 
+                rendered="#{trexuq233xwwqqhxxxxxcuquoteList.entityLessStatusDetailedList(trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}">
+               <ui:define name="label">#{messages['emailTo']} 
+               </ui:define>
+               <h:inputText  id="eMailA"
+                          size="35"
+                     maxlength="50"
+                         value="#{trexuq233xwwqqhxxxxxcuquoteHome.EMailingAddress}">
+               </h:inputText>
+               </ui:fragment>
+           </h:panelGroup>
+          <h:panelGrid columns="1" rendered="#{trexuq233xwwqqhxxxxxcuquoteList.entityLessStatusDetailedList(trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}">
+            <ui:remove>tbd inputText or clobdata 3R-mailingS.. to change defaultGreeting setMailingSubject</ui:remove>
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['Greeting']} #{messages['text']}- #{messages['Transaction']} #{messages['Receipt']} #{messages['from']} #{customIdentity.owner2}
+                   </ui:define>
+                <pe:ckEditor id="editor" height="100" width="100%"  value="#{trexuq233xwwqqhxxxxxcuquoteList.mailingSource}"
+                 toolbar="[['NewPage','Preview','Cut','Copy','Image','Table','HorizontalRule','Iframe','Link','Unlink','Anchor','Paste','PasteText','PasteFromWord','-', 'Scayt'], '/',['Font','FontSize','Bold','Italic','Strike','-','RemoveFormat' ] ,[ 'TextColor','BGColor' ], ['Undo', 'Redo']]">
+                </pe:ckEditor>
+            </ui:decorate>
+          </h:panelGrid >
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="true" rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" toggleable="true" toggleableHeader="true">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+  <p:tabView switchType="ajax">
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Item']}">
+    <div class="association" id="fpxxfq1a5xwwqqhxxxxxitemParent">
+        
+        <h:outputText value="No item" 
+                   rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.fpxxfq1a5xwwqqhxxxxxitem == null}"/>
+        
+        <p:dataTable var="fpxxfq1a5xwwqqhxxxxxitem" tableStyle="table-layout:auto;"
+                   value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.fpxxfq1a5xwwqqhxxxxxitem}" 
+                rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.fpxxfq1a5xwwqqhxxxxxitem != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fpxxfq1a5xwwqqhxxxxxitemTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewitem" 
+                     value="View" 
+                      outcome="/item.xhtml">
+                       <f:param disable="#{empty fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}" name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">matcode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.a0xxukixbxxxxxxxxxxxmatcode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">quantity</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b0xxziqxlvxxsaxxxxxxquantity}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">source1</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b3xxuxxrbvxxxxxxxxxxsource1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">upccode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b5fbuxxrbvxxxxxxxxxxupccode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">cost</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b6fbzicxbvxxxxxxxxxxcost}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">replcost</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b7fbzxxxbvxxxxxxxxxxreplcost}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">selprice</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spricold</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b9xxzxxxlvxxxxxxxxxxspricold}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spricnew</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c1xxzxxxbhxxsxxxxxxxspricnew}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spriceffdt</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c2fbcxxrehxxsxxxxxxxspriceffdt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">shipcode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c3fbuxscbvxxxxxxxxxxshipcode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">qtylevel1</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c4fbzxxxbvxxxxxxxxxxqtylevel1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">unit</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c5fbuuxrbv18xxxxxxxxunit}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax1</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c7fbfxz1bvxxxxxxxxxxtax1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax2</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c8fbfxz2bvxxxxxxxxxxtax2}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">aliascode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.f1xxuxxrbvxxxxxxxxxxaliascode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">avgprice</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.f3xxzxxxlvxxxxxxxxxxavgprice}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">item sid</f:facet>
+		    	  #{fpxxfq1a5xwwqqhxxxxxitem.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">location sid</f:facet>
+		    	  #{fpxxfq1a5xwwqqhxxxxxitem.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn2</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn2bvxxxxxxxxxxsubcodesn2}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn3</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn3bvxxxxxxxxxxsubcodesn3}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">effdate</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.h1xxcxxrbxxxxxxxxxxxeffdate}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">integrset</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.h2xxuwmrbv40xxxxxxxxintegrset}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">notes</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.w7xxuznxbvxxxxxxxxxxnotes}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.w8xxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.z5xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.z6xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.zexxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Employee']}">
+    <div class="association" id="jxxxbh400xwwqqhxxxxxemployeeParent">
+        
+        <h:outputText value="No employee" 
+                   rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.jxxxbh400xwwqqhxxxxxemployee == null}"/>
+        
+        <p:dataTable var="jxxxbh400xwwqqhxxxxxemployee" tableStyle="table-layout:auto;"
+                   value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.jxxxbh400xwwqqhxxxxxemployee}" 
+                rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.jxxxbh400xwwqqhxxxxxemployee != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="jxxxbh400xwwqqhxxxxxemployeeTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewemployee" 
+                     value="View" 
+                      outcome="/employee.xhtml">
+                       <f:param disable="#{empty jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid}" name="jxxxbh400xwwqqhxxxxxemployeeA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">employee</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.a0xxuktxbvxxxxxxxxxxemployee}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">title</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.b1xxuxxxbv21xxxxxxxxtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">jobtitle</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.b2xxuxxrbx22xxxxxxxxjobtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lastname</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.b3xxuslnbvixxxxxxxxxlastname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">firstname</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.b4xxu2fnbvxxxxxxxxxxfirstname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">middlenam</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.b5xxuxxrbvxxxxxxxxxxmiddlenam}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax1</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.c1xxfxz1bxxxxxxxxxxxtax1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">custtax1</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.c4xxuz1xbv04xxxxxxxxcusttax1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">custtax2</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.c5xxuz2xbv05xxxxxxxxcusttax2}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">company sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">residency sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.dxxxiq155xwwqqhxxxxxresidency.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">department sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.fxxxch122xhhxqhxxlxxdepartment.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">division sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.fxxxch133xhhxqhxxlxxdivision.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">location sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByMailtocode sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.fxxxuq111xwwqqhxxxxxaddressByMailtocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByShiptocode sid</f:facet>
+		    	  #{jxxxbh400xwwqqhxxxxxemployee.fxxxuq111xwwqqhxxxxxaddressByShiptocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneo</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.m1xxh3pobv27xxxxxxxxphoneo}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneh</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.m2xxh4phbv27xxxxxxxxphoneh}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonec</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.m3xxh5pcbv27xxxxxxxxphonec}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonex</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.m4xxhxxrbx27xxxxxxxxphonex}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lanaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n1xxhxxrbx19xxxxxxxxlanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">wanaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n2xxhxxrbx25xxxxxxxxwanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lmailaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n3xxhxxrbx44xxxxxxxxlmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">imailaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n4xxhxxrbv24xxxxxxxximailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">rmailaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n5xxuxxrbxxxxxxxxxxxrmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">intaddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n6xxhxxrbx23xxxxxxxxintaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inraddr</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.n7xxuxxrbxxxxxxxxxxxinraddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.o1xxuxxrbv45xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">integrset</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.o2xxuwmrbv40xxxxxxxxintegrset}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.ycxxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.zexxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.zexxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{jxxxbh400xwwqqhxxxxxemployee.zfxxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Customer']}">
+    <div class="association" id="jxxxuq201xwwqqhxxxxxcustomerParent">
+        
+        <h:outputText value="No customer" 
+                   rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.jxxxuq201xwwqqhxxxxxcustomer == null}"/>
+        
+        <p:dataTable var="jxxxuq201xwwqqhxxxxxcustomer" tableStyle="table-layout:auto;"
+                   value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.jxxxuq201xwwqqhxxxxxcustomer}" 
+                rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.jxxxuq201xwwqqhxxxxxcustomer != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="jxxxuq201xwwqqhxxxxxcustomerTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewcustomer" 
+                     value="View" 
+                      outcome="/customer.xhtml">
+                       <f:param disable="#{empty jxxxuq201xwwqqhxxxxxcustomer.a0xxuobxbxxxxxxxxxxxsid}" name="jxxxuq201xwwqqhxxxxxcustomerA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{jxxxuq201xwwqqhxxxxxcustomer.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">customer</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.a0xxukxxbvxxxxxxxxxxcustomer}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">title</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.b1xxuxxxbv21xxxxxxxxtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">jobtitle</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.b2xxuxxxbx22xxxxxxxxjobtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lastname</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.c1xxuslnbvixxxxxxxxxlastname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">firstname</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.c2xxu2fnbvixxxxxxxxxfirstname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">middlenam</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.c3xxuxxxbxxxxxxxxxxxmiddlenam}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">customerascompanyname</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.d1xxu3cnbvixxxxxxxxxcustomerascompanyname}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">company sid</f:facet>
+		    	  #{jxxxuq201xwwqqhxxxxxcustomer.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.f1xxuxxxav28xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">integrset</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.f2xxuwmxbv40xxxxxxxxintegrset}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">location sid</f:facet>
+		    	  #{jxxxuq201xwwqqhxxxxxcustomer.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByMailtocode sid</f:facet>
+		    	  #{jxxxuq201xwwqqhxxxxxcustomer.fxxxuq111xwwqqhxxxxxaddressByMailtocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByShiptocode sid</f:facet>
+		    	  #{jxxxuq201xwwqqhxxxxxcustomer.fxxxuq111xwwqqhxxxxxaddressByShiptocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneo</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.p1xxh4pobv27xxxxxxxxphoneo}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneh</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.p2xxh5phbv27xxxxxxxxphoneh}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonec</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.p3xxhxxxbv27xxxxxxxxphonec}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonex</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.p4xxhxxxbx27xxxxxxxxphonex}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lanaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q1xxhxxxbx19xxxxxxxxlanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">wanaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q2xxhxxxbx25xxxxxxxxwanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lmailaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q3xxhxxxbv44xxxxxxxxlmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">imailaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q4xxhxxxbv24xxxxxxxximailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">rmailaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q5xxuxxxbxxxxxxxxxxxrmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">intaddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q6xxhxxxbx23xxxxxxxxintaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">dob</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q7xxdxtdbvxxxxxxxxxxdob}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">placeofbirth</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q7xxhxxxbvxxxxxxxxxxplaceofbirth}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inraddr</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q7xxhxxxbxxxxxxxxxxxinraddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">age</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q7xxhxxxlvxxxxxxxxxxage}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sex</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.q7xxtxsebvxxxxxxxxxxsex}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">shiplabel</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.r1xxfxxxbexxxxxxxxxxshiplabel}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.ycxxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.zaxxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.zbxxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{jxxxuq201xwwqqhxxxxxcustomer.zdxxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Cuquote']}">
+    <div class="association" id="trexuq233xwwqqhxxxxxcuquoteParent">
+        
+        <h:outputText value="No cuquote" 
+                   rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.trexuq233xwwqqhxxxxxcuquote == null}"/>
+        
+        <p:dataTable var="trexuq233xwwqqhxxxxxcuquote" tableStyle="table-layout:auto;"
+                   value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.trexuq233xwwqqhxxxxxcuquote}" 
+                rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.trexuq233xwwqqhxxxxxcuquote != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="trexuq233xwwqqhxxxxxcuquoteTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewcuquote" 
+                     value="View" 
+                      outcome="/cuquote.xhtml">
+                       <f:param disable="#{empty trexuq233xwwqqhxxxxxcuquote.a0xxuobxbxxxxxxxxxxxsid}" name="trexuq233xwwqqhxxxxxcuquoteA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{trexuq233xwwqqhxxxxxcuquote.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">purchsno</f:facet>
+                   #{trexuq233xwwqqhxxxxxcuquote.a0xxuncqbvxxxxxxxxxxpurchsno}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">delvdatet</f:facet>
+                   #{trexuq233xwwqqhxxxxxcuquote.b1xxcxxrlxxxxxxxxxxxdelvdatet}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{trexuq233xwwqqhxxxxxcuquote.b5xxuxxrbl10xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">terms</f:facet>
+                   #{trexuq233xwwqqhxxxxxcuquote.b6xxuxxrbl09xxxxxxxxterms}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">priority</f:facet>
+                   #{trexuq233xwwqqhxxxxxcuquote.b7xxfxxrbvxxxxxxxxxxpriority}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">odatet</f:facet>
+                   #{trexuq233xwwqqhxxxxxcuquote.b8xxcxxrlxxxxxxxxxxxodatet}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">item sid</f:facet>
+		    	  #{trexuq233xwwqqhxxxxxcuquote.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">employee sid</f:facet>
+		    	  #{trexuq233xwwqqhxxxxxcuquote.jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">customer sid</f:facet>
+		    	  #{trexuq233xwwqqhxxxxxcuquote.jxxxuq201xwwqqhxxxxxcustomer.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">cuquote sid</f:facet>
+		    	  #{trexuq233xwwqqhxxxxxcuquote.trexuq233xwwqqhxxxxxcuquote.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{trexuq233xwwqqhxxxxxcuquote.ycxxuzdrblxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{trexuq233xwwqqhxxxxxcuquote.z5xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{trexuq233xwwqqhxxxxxcuquote.z6xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{trexuq233xwwqqhxxxxxcuquote.zexxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+     <p:tab title="#{messages['Cuquote']}">
+        <div class="association" id="trexuq233xwwqqhxxxxxcuquotesChildren">
+         <ui:remove></ui:remove>
+            <h:outputText value="No cuquotes" 
+                       rendered="#{empty trexuq233xwwqqhxxxxxcuquoteHome or empty trexuq233xwwqqhxxxxxcuquoteHome.trexuq233xwwqqhxxxxxcuquotes}"/>
+        
+            <p:dataTable value="#{trexuq233xwwqqhxxxxxcuquoteHome.trexuq233xwwqqhxxxxxcuquotes}" tableStyle="table-layout:auto;"
+                           var="trexuq233xwwqqhxxxxxcuquote" 
+                      rendered="#{not empty trexuq233xwwqqhxxxxxcuquoteHome.trexuq233xwwqqhxxxxxcuquotes}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="trexuq233xwwqqhxxxxxcuquotesTable">
+                <p:column>
+                    <f:facet name="header">action</f:facet>
+                    <h:link outcome="/cuquote.xhtml" 
+                              id="selecttrexuq233xwwqqhxxxxxcuquote" 
+                           value="Select"
+                     propagation="none">
+                        <f:param disable="#{empty trexuq233xwwqqhxxxxxcuquote.a0xxuobxbxxxxxxxxxxxsid}" name="trexuq233xwwqqhxxxxxcuquoteA0xxuobxbxxxxxxxxxxxsid" 
+                                value="#{trexuq233xwwqqhxxxxxcuquote.a0xxuobxbxxxxxxxxxxxsid}"/>
+                        <f:param name="trexuq233xwwqqhxxxxxcuquoteFrom" value="Trexuq233xwwqqhxxxxxcuquote"/>
+                    </h:link>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">purchsno</f:facet>
+                    <h:outputText value="#{trexuq233xwwqqhxxxxxcuquote.a0xxuncqbvxxxxxxxxxxpurchsno}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">delvdatet</f:facet>
+                    <h:outputText value="#{trexuq233xwwqqhxxxxxcuquote.b1xxcxxrlxxxxxxxxxxxdelvdatet}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">type</f:facet>
+                    <h:outputText value="#{trexuq233xwwqqhxxxxxcuquote.b5xxuxxrbl10xxxxxxxxtype}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">terms</f:facet>
+                    <h:outputText value="#{trexuq233xwwqqhxxxxxcuquote.b6xxuxxrbl09xxxxxxxxterms}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">priority</f:facet>
+                    <h:outputText value="#{trexuq233xwwqqhxxxxxcuquote.b7xxfxxrbvxxxxxxxxxxpriority}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">odatet</f:facet>
+                    <h:outputText value="#{trexuq233xwwqqhxxxxxcuquote.b8xxcxxrlxxxxxxxxxxxodatet}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">docmnt</f:facet>
+                    <h:outputText value="#{trexuq233xwwqqhxxxxxcuquote.ycxxuzdrblxxxxxxxxxxdocmnt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfl</f:facet>
+                    <h:outputText value="#{trexuq233xwwqqhxxxxxcuquote.z5xxzzfxhhxxxxxxxxxxstatusfl}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfldt</f:facet>
+                    <h:outputText value="#{trexuq233xwwqqhxxxxxcuquote.z6xxcztxlxxxxxxxxxxxstatusfldt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">owner</f:facet>
+                    <h:outputText value="#{trexuq233xwwqqhxxxxxcuquote.zexxutoxlhxxxxxxxxxxowner}"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+        <f:subview rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.managed}" id="trexuq233xwwqqhxxxxxcuquotes">
+        <div class="actionButtons">
+            <h:button id="addtrexuq233xwwqqhxxxxxcuquote" 
+                   value="Add cuquote"
+                    outcome="/cuquoteEdit.quoteorderexists.xhtml"
+                    propagation="none">
+                 <f:param disable="#{empty trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid}"  name="trexuq233xwwqqhxxxxxcuquoteA0xxuobxbxxxxxxxxxxxsid" 
+                         value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+                   <f:param name="trexuq233xwwqqhxxxxxcuquoteFrom" value="cuquoteEdit.quoteorderexists"/>
+            </h:button>
+        </div>
+        </f:subview>
+    </p:tab>
+     <p:tab title="#{messages['Cuorders']}">
+        <div class="association" id="trexuq244xwwqqhxxxxxcuordersesChildren">
+         <ui:remove></ui:remove>
+            <h:outputText value="No cuorderses" 
+                       rendered="#{empty trexuq233xwwqqhxxxxxcuquoteHome or empty trexuq233xwwqqhxxxxxcuquoteHome.trexuq244xwwqqhxxxxxcuorderses}"/>
+        
+            <p:dataTable value="#{trexuq233xwwqqhxxxxxcuquoteHome.trexuq244xwwqqhxxxxxcuorderses}" tableStyle="table-layout:auto;"
+                           var="trexuq244xwwqqhxxxxxcuorders" 
+                      rendered="#{not empty trexuq233xwwqqhxxxxxcuquoteHome.trexuq244xwwqqhxxxxxcuorderses}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="trexuq244xwwqqhxxxxxcuordersesTable">
+                <p:column>
+                    <f:facet name="header">action</f:facet>
+                    <h:link outcome="/cuorders.xhtml" 
+                              id="selecttrexuq244xwwqqhxxxxxcuorders" 
+                           value="Select"
+                     propagation="none">
+                        <f:param disable="#{empty trexuq244xwwqqhxxxxxcuorders.a0xxuobxbxxxxxxxxxxxsid}" name="trexuq244xwwqqhxxxxxcuordersA0xxuobxbxxxxxxxxxxxsid" 
+                                value="#{trexuq244xwwqqhxxxxxcuorders.a0xxuobxbxxxxxxxxxxxsid}"/>
+                        <f:param name="trexuq244xwwqqhxxxxxcuordersFrom" value="Trexuq233xwwqqhxxxxxcuquote"/>
+                    </h:link>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">purchsno</f:facet>
+                    <h:outputText value="#{trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">delvdatet</f:facet>
+                    <h:outputText value="#{trexuq244xwwqqhxxxxxcuorders.b1xxcxxxbvxxxxxxxxxxdelvdatet}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">cinvoice</f:facet>
+                    <h:outputText value="#{trexuq244xwwqqhxxxxxcuorders.b4xxuxxrlxxxcxxxxxxxcinvoice}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">qtytotal</f:facet>
+                    <h:outputText value="#{trexuq244xwwqqhxxxxxcuorders.b5xxztqrlxxxxxxxxxxxqtytotal}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">odatet</f:facet>
+                    <h:outputText value="#{trexuq244xwwqqhxxxxxcuorders.c1xxcxxxbxxxxxxxxxxxodatet}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">terms</f:facet>
+                    <h:outputText value="#{trexuq244xwwqqhxxxxxcuorders.c2xxcxxxbv09xxxxxxxxterms}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">priority</f:facet>
+                    <h:outputText value="#{trexuq244xwwqqhxxxxxcuorders.c3xxfxxrbv09xxxxxxxxpriority}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">docmnt</f:facet>
+                    <h:outputText value="#{trexuq244xwwqqhxxxxxcuorders.yfxxuzdrbvxxxxxxxxxxdocmnt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfl</f:facet>
+                    <h:outputText value="#{trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfldt</f:facet>
+                    <h:outputText value="#{trexuq244xwwqqhxxxxxcuorders.zdxxcztxlxxxxxxxxxxxstatusfldt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">owner</f:facet>
+                    <h:outputText value="#{trexuq244xwwqqhxxxxxcuorders.zexxutoxlhxxxxxxxxxxowner}"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+        <f:subview rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.managed}" id="trexuq244xwwqqhxxxxxcuorderses">
+        <div class="actionButtons">
+            <h:button id="addtrexuq244xwwqqhxxxxxcuorders" 
+                   value="Add cuorders"
+                    outcome="/cuordersEdit.quoteorderexists.xhtml"
+                    propagation="none">
+                 <f:param disable="#{empty trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid}"  name="trexuq233xwwqqhxxxxxcuquoteA0xxuobxbxxxxxxxxxxxsid" 
+                         value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+                   <f:param name="trexuq244xwwqqhxxxxxcuordersFrom" value="cuquoteEdit.quoteorderexists"/>
+            </h:button>
+        </div>
+        </f:subview>
+    </p:tab>
+    </p:tabView>
+  <p:tabView switchType="ajax">
+     <p:tab title="#{messages['Cuqdetails']}">
+        <div class="association" id="xoxxuq2c4xwwqqhxxxxxcuqdetailsesChildren">
+         <ui:remove></ui:remove>
+            <h:outputText value="No cuqdetailses" 
+                       rendered="#{empty trexuq233xwwqqhxxxxxcuquoteHome or empty trexuq233xwwqqhxxxxxcuquoteHome.xoxxuq2c4xwwqqhxxxxxcuqdetailses}"/>
+        
+            <p:dataTable value="#{trexuq233xwwqqhxxxxxcuquoteHome.xoxxuq2c4xwwqqhxxxxxcuqdetailses}" tableStyle="table-layout:auto;"
+                           var="xoxxuq2c4xwwqqhxxxxxcuqdetails" 
+                      rendered="#{not empty trexuq233xwwqqhxxxxxcuquoteHome.xoxxuq2c4xwwqqhxxxxxcuqdetailses}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="xoxxuq2c4xwwqqhxxxxxcuqdetailsesTable">
+                <p:column>
+                    <f:facet name="header">action</f:facet>
+                    <h:link outcome="/cuqdetails.xhtml" 
+                              id="selectxoxxuq2c4xwwqqhxxxxxcuqdetails" 
+                           value="Select"
+                     propagation="none">
+                        <f:param disable="#{empty xoxxuq2c4xwwqqhxxxxxcuqdetails.a0xxuobxbxxxxxxxxxxxsid}" name="xoxxuq2c4xwwqqhxxxxxcuqdetailsA0xxuobxbxxxxxxxxxxxsid" 
+                                value="#{xoxxuq2c4xwwqqhxxxxxcuqdetails.a0xxuobxbxxxxxxxxxxxsid}"/>
+                        <f:param name="xoxxuq2c4xwwqqhxxxxxcuqdetailsFrom" value="Trexuq233xwwqqhxxxxxcuquote"/>
+                    </h:link>
+                </p:column>
+            </p:dataTable>
+        </div>
+        <f:subview rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.managed}" id="xoxxuq2c4xwwqqhxxxxxcuqdetailses">
+        <div class="actionButtons">
+        </div>
+        </f:subview>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

@@ -1,0 +1,1464 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{yxxxch522xhhxxhxxxxxclientList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{yxxxch522xhhxxhxxxxxclientList.maxResultsVal}"/>
+    <f:viewAction action="#{yxxxch522xhhxxhxxxxxclientHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Client']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="yxxxch522xhhxxhxxxxxclientSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']}" propagation="end"  outcome="/home.xhtml" />
+             <p:ajaxStatus name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ClientListHelp']!='ClientListHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ClientListHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+
+ <p:panel style="width: 50%;" header="#{messages['Client']}- #{messages['List']} #{messages['Search']} #{messages['Result']}, #{messages['click']} #{messages['to']} #{messages['change']} #{messages['search']}  #{messages['criteria']}" switchType="ajax" collapsed="true"
+     toggleable="true" toggleableHeader="true">
+
+<h:panelGrid columns="20">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{yxxxch522xhhxxhxxxxxclientList.searchVal}"/>
+ </ui:decorate>
+  <h:outputText id="searchVJ" value="#{yxxxch522xhhxxhxxxxxclientList.searchValJ}" rendered="#{yxxxch522xhhxxhxxxxxclientList.searchVal.isEmpty()}"/>
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText id="toDay" ph:type="date" value="#{yxxxch522xhhxxhxxxxxclientList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <h:commandButton id="setToday" render="toDay" value="#{messages['set']} #{messages['Today']}"   action="#{yxxxch522xhhxxhxxxxxclientList.setSearchDate(yxxxch522xhhxxhxxxxxclientHome.currentTime)}" />
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label"> #{messages['status']}  </ui:define>
+  <h:panelGrid columns="2" >
+         <h:selectOneMenu value="#{yxxxch522xhhxxhxxxxxclientList.searchStatus}"> 
+          <f:selectItem itemLabel="all" itemValue="#{null}"/>
+          <f:selectItem itemLabel="open" itemValue="0"/>
+          <f:selectItem itemLabel="active/ordered" itemValue="1"/>
+           <f:selectItem itemLabel="return" itemValue="4"/>
+          <f:selectItem itemLabel="closed" itemValue="8"/>
+           <f:selectItem itemLabel="paid" itemValue="16"/>
+           <f:selectItem itemLabel="partial/shipped" itemValue="32"/>
+           <f:selectItem itemLabel="printed/final approved" itemValue="512"/>
+          <f:selectItem itemLabel="marked" itemValue="128"/>
+          <f:selectItem itemLabel="deleted" itemValue="256"/>
+         </h:selectOneMenu>
+  </h:panelGrid>
+ </ui:decorate>
+</h:panelGrid>
+
+
+
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{yxxxch522xhhxxhxxxxxclientList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{yxxxch522xhhxxhxxxxxclientList.suggest(yxxxch522xhhxxhxxxxxclientHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{yxxxch522xhhxxhxxxxxclientList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{yxxxch522xhhxxhxxxxxclientList.suggest(yxxxch522xhhxxhxxxxxclientHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="yxxxch522xhhxxhxxxxxclientList,globalMessages" status="buttonStatus" value="#{messages['Search']}" 
+              actionListener="#{yxxxch522xhhxxhxxxxxclientList.getFirstResult()}" rendered="#{yxxxch522xhhxxhxxxxxclientList.maxResultsVal lt 49}"/>
+            &nbsp;<h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</p:panel>
+
+    <p:panel>
+
+        <div class="actionButtons">
+             <h:commandButton id="copyallt" value="Copy All Flagged"  action="#{yxxxch522xhhxxhxxxxxclientHome.copyAllMarked()}" 
+                rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and yxxxch522xhhxxhxxxxxclientList.maxResultsVal lt 49}" status="buttonStatus"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+             <h:commandButton id="deleteallt" value="#{messages['Delete']} #{messages['All']} #{messages['Flagged']}"  action="#{yxxxch522xhhxxhxxxxxclientHome.deleteAllFlagged()}"
+              onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and yxxxch522xhhxxhxxxxxclientList.maxResultsVal lt 49}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Deletes']} #{messages['detail']} #{messages['records']} #{messages['as-well']},#{messages['but']} #{messages['not']} #{messages['all']} #{messages['constraints']}"/></span> </p:tooltip> 
+             </h:commandButton>
+             <h:commandButton id="updateallt" value="Update All Flagged"  rendered="false" action="#{yxxxch522xhhxxhxxxxxclientHome.updateAllFlagged()}" />
+             <h:commandButton id="emailIcal" value="#{messages['email']} #{messages['as']} #{messages['iCalendar']}"  rendered="false" action="#{yxxxch522xhhxxhxxxxxclientHome.writeAsIcalText()}"/>
+
+            <h:button outcome="/#{empty yxxxch522xhhxxhxxxxxclientFrom ? 'home' : yxxxch522xhhxxhxxxxxclientFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <ui:remove>  do not render list page once > 50 rows  to avoid excedding max http params </ui:remove>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{yxxxch522xhhxxhxxxxxclientList.setMaxResultsVal(6)}" rendered="#{yxxxch522xhhxxhxxxxxclientList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{yxxxch522xhhxxhxxxxxclientList.setMaxResultsVal(50)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and yxxxch522xhhxxhxxxxxclientList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{yxxxch522xhhxxhxxxxxclientList.setMaxResultsVal(100)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and yxxxch522xhhxxhxxxxxclientList.maxResultsVal lt 49}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{yxxxch522xhhxxhxxxxxclientList.setskipColumns(true)}" rendered="#{yxxxch522xhhxxhxxxxxclientList.maxResultsVal lt 49}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{yxxxch522xhhxxhxxxxxclientList.setskipColumns(false)}" rendered="#{yxxxch522xhhxxhxxxxxclientList.maxResultsVal lt 49}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(ity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Client Search Results showing #{empty yxxxch522xhhxxhxxxxxclientList.resultList ? 0 : (yxxxch522xhhxxhxxxxxclientList.paginated ? yxxxch522xhhxxhxxxxxclientList.resultList.size() : yxxxch522xhhxxhxxxxxclientList.resultCount)} of #{yxxxch522xhhxxhxxxxxclientList.resultCount}"/>
+        </f:facet>
+    <div class="results" id="yxxxch522xhhxxhxxxxxclientList" style="overflow-x:auto">
+
+    <h:outputText value="The Client search returned no results."
+               rendered="#{empty yxxxch522xhhxxhxxxxxclientList.resultList}"/>
+
+
+
+
+    <p:dataTable id="yxxxch522xhhxxhxxxxxclientList"  frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" rows="#{yxxxch522xhhxxhxxxxxclientList.maxResultsVal}" scrollRows="6"
+           var="_yxxxch522xhhxxhxxxxxclient" selection="#{yxxxch522xhhxxhxxxxxclientHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}" rowKey="#{_yxxxch522xhhxxhxxxxxclient.a0xxuobxbxxxxxxxxxxxsid}"
+           value="#{yxxxch522xhhxxhxxxxxclientList.resultList}"
+           rendered="#{not empty yxxxch522xhhxxhxxxxxclientList.resultList}">
+         <p:column headerText="Action">
+            <h:selectBooleanCheckbox id="MarkItCheckbox" value="#{yxxxch522xhhxxhxxxxxclientHome.checked[_yxxxch522xhhxxhxxxxxclient.a0xxuobxbxxxxxxxxxxxsid]}"/>
+            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+            <h:link outcome="/#{empty from ? 'client' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+                   propagation="#{empty from ? 'none' : 'default'}"
+                      id="yxxxch522xhhxxhxxxxxclientViewId">
+                <f:param name="yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_yxxxch522xhhxxhxxxxxclient.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+             <h:link outcome="/clientEditEasy.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="yxxxch522xhhxxhxxxxxclientEdit1"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') ||customIdentity.hasRole('SH') ||customIdentity.hasRole('EH') 
+                  || (customIdentity.hasRole('VH') ||customIdentity.hasRole('VQ')
+                  and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_yxxxch522xhhxxhxxxxxclient.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+        </p:column>
+           <p:column rendered="#{!yxxxch522xhhxxhxxxxxclientList.skipColumns}"
+                      headerText="#{messages['Clientversion']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxukxxbvxxxxxxxxxxclientversion) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.a0xxukxxbvxxxxxxxxxxclientversion}"  id="a0xxukxxbvxxxxxxxxxxclientversion" />
+            </p:column>
+           <p:column rendered="#{!yxxxch522xhhxxhxxxxxclientList.skipColumns}"
+                      headerText="#{messages['Serialnum']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b1xxuisxlvxxxxxxxxxxserialnum) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.b1xxuisxlvxxxxxxxxxxserialnum}"  id="b1xxuisxlvxxxxxxxxxxserialnum" />
+            </p:column>
+           <p:column rendered="#{!yxxxch522xhhxxhxxxxxclientList.skipColumns}"
+                      headerText="#{messages['Enterprisecompanyna']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b2xxuzcxbvxxxxxxxxxxenterprisecompanyna) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.b2xxuzcxbvxxxxxxxxxxenterprisecompanyna}"  id="b2xxuzcxbvxxxxxxxxxxenterprisecompanyna" />
+            </p:column>
+           <p:column rendered="#{!yxxxch522xhhxxhxxxxxclientList.skipColumns}"
+                      headerText="#{messages['Descript']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b3xxuxzsbvxxxxxxxxxxdescript) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.b3xxuxzsbvxxxxxxxxxxdescript}"  id="b3xxuxzsbvxxxxxxxxxxdescript" />
+            </p:column>
+           <p:column rendered="#{!yxxxch522xhhxxhxxxxxclientList.skipColumns}"
+                      headerText="#{messages['Addrl1']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b4xxuxa1bvxxxxxxxxxxaddrl1) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.b4xxuxa1bvxxxxxxxxxxaddrl1}"  id="b4xxuxa1bvxxxxxxxxxxaddrl1" />
+            </p:column>
+           <p:column rendered="#{!yxxxch522xhhxxhxxxxxclientList.skipColumns}"
+                      headerText="#{messages['Addrl2']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b5xxub2xbvxxxxxxxxxxaddrl2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.b5xxub2xbvxxxxxxxxxxaddrl2}"  id="b5xxub2xbvxxxxxxxxxxaddrl2" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Addrl3']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b6xxub3xevxxxxxxxxxxaddrl3) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.b6xxub3xevxxxxxxxxxxaddrl3}"  id="b6xxub3xevxxxxxxxxxxaddrl3" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['City']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b7xxhxacbv11xxxxxxxxcity) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.b7xxhxacbv11xxxxxxxxcity}"  id="b7xxhxacbv11xxxxxxxxcity" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Provnstate']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b8xxhbpxbv12xxxxxxxxprovnstate) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.b8xxhbpxbv12xxxxxxxxprovnstate}"  id="b8xxhbpxbv12xxxxxxxxprovnstate" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Countryname']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b9xxhboxev13xxxxxxxxcountryname) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.b9xxhboxev13xxxxxxxxcountryname}"  id="b9xxhboxev13xxxxxxxxcountryname" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Pzcode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c1xxhxazbv14xxxxxxxxpzcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.c1xxhxazbv14xxxxxxxxpzcode}"  id="c1xxhxazbv14xxxxxxxxpzcode" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Phoneo']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c6xxhxxxbv27xxxxxxxxphoneo) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.c6xxhxxxbv27xxxxxxxxphoneo}"  id="c6xxhxxxbv27xxxxxxxxphoneo" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Phoneh']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c7xxhxxxbv27xxxxxxxxphoneh) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.c7xxhxxxbv27xxxxxxxxphoneh}"  id="c7xxhxxxbv27xxxxxxxxphoneh" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Phonec']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c8xxhxxrbv27xxxxxxxxphonec) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.c8xxhxxrbv27xxxxxxxxphonec}"  id="c8xxhxxrbv27xxxxxxxxphonec" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Phonex']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c9xxhxxrbv27xxxxxxxxphonex) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.c9xxhxxrbv27xxxxxxxxphonex}"  id="c9xxhxxrbv27xxxxxxxxphonex" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Lanaddr']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(d1xxhxxrbv19xxxxxxxxlanaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.d1xxhxxrbv19xxxxxxxxlanaddr}"  id="d1xxhxxrbv19xxxxxxxxlanaddr" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Wanaddr']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(d2xxhxxrbv25xxxxxxxxwanaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.d2xxhxxrbv25xxxxxxxxwanaddr}"  id="d2xxhxxrbv25xxxxxxxxwanaddr" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Lmailaddr']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(d3xxhxxrbv44xxxxxxxxlmailaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.d3xxhxxrbv44xxxxxxxxlmailaddr}"  id="d3xxhxxrbv44xxxxxxxxlmailaddr" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Imailaddr']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(d4xxhxxrbv24xxxxxxxximailaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.d4xxhxxrbv24xxxxxxxximailaddr}"  id="d4xxhxxrbv24xxxxxxxximailaddr" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Rmailaddr']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(d5xxuxxrbvxxxxxxxxxxrmailaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.d5xxuxxrbvxxxxxxxxxxrmailaddr}"  id="d5xxuxxrbvxxxxxxxxxxrmailaddr" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Intaddr']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(d6xxuxxrbvxxxxxxxxxxintaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.d6xxuxxrbvxxxxxxxxxxintaddr}"  id="d6xxuxxrbvxxxxxxxxxxintaddr" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Inraddr']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(d7xxuxxrbvxxxxxxxxxxinraddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.d7xxuxxrbvxxxxxxxxxxinraddr}"  id="d7xxuxxrbvxxxxxxxxxxinraddr" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Enterprisecompcode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(d8xxuzxdbvxxxxxxxxxxenterprisecompcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.d8xxuzxdbvxxxxxxxxxxenterprisecompcode}"  id="d8xxuzxdbvxxxxxxxxxxenterprisecompcode" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Enterprisecompsize']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(d9xxuxxxbvxxxxxxxxxxenterprisecompsize) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.d9xxuxxxbvxxxxxxxxxxenterprisecompsize}"  id="d9xxuxxxbvxxxxxxxxxxenterprisecompsize" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Apiclientid']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(daxxuzxdssxxxxxxxxxxapiclientid) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.daxxuzxdssxxxxxxxxxxapiclientid}"  id="daxxuzxdssxxxxxxxxxxapiclientid" rendered="#{customIdentity.hasRole('SH')  or (customIdentity.hasRole('UH') and (customIdentity.username.contains('manager') or customIdentity.username.contains('admin'))) and !(customIdentity.restrict1=='D')}"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Apiclientsecret']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dbxxuzxdssxxxxxxxxxxapiclientsecret) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.dbxxuzxdssxxxxxxxxxxapiclientsecret}"  id="dbxxuzxdssxxxxxxxxxxapiclientsecret" rendered="#{customIdentity.hasRole('SH')  or (customIdentity.hasRole('UH') and (customIdentity.username.contains('manager') or customIdentity.username.contains('admin'))) and !(customIdentity.restrict1=='D')}"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Barcsize']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(e2xxuxxxbvxxxxxxxxxxbarcsize) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.e2xxuxxxbvxxxxxxxxxxbarcsize}"  id="e2xxuxxxbvxxxxxxxxxxbarcsize" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Level']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(e9xxfxxrbvxxxxxxxxxxlevel) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.e9xxfxxrbvxxxxxxxxxxlevel}"  id="e9xxfxxrbvxxxxxxxxxxlevel" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Poskipp']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(f1xxuxxxbvxxxxxxxxxxposkipp) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.f1xxuxxxbvxxxxxxxxxxposkipp}"  id="f1xxuxxxbvxxxxxxxxxxposkipp" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Looseit']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(f2xxfxxxbvxxxxxxxxxxlooseit) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.f2xxfxxxbvxxxxxxxxxxlooseit}"  id="f2xxfxxxbvxxxxxxxxxxlooseit" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Jobskip']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(f3xxuxxxbvxxxxxxxxxxjobskip) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.f3xxuxxxbvxxxxxxxxxxjobskip}"  id="f3xxuxxxbvxxxxxxxxxxjobskip" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cartonfl']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(f4xxfxxxbvxxxxxxxxxxcartonfl) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.f4xxfxxxbvxxxxxxxxxxcartonfl}"  id="f4xxfxxxbvxxxxxxxxxxcartonfl" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Picklist']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(f5xxfxxxbvxxxxxxxxxxpicklist) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.f5xxfxxxbvxxxxxxxxxxpicklist}"  id="f5xxfxxxbvxxxxxxxxxxpicklist" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Licensetype']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(f6xxuxxxlvxxxxxxxxxxlicensetype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.f6xxuxxxlvxxxxxxxxxxlicensetype}"  id="f6xxuxxxlvxxxxxxxxxxlicensetype" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Licensestart']}">
+          <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.f7xxcxxxlvxxxxxxxxxxlicensestart}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Licenseend']}">
+          <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.f8xxcxxxlvxxxxxxxxxxlicenseend}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Proddesc']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g1xxuxxxbvxxxxxxxxxxproddesc) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.g1xxuxxxbvxxxxxxxxxxproddesc}"  id="g1xxuxxxbvxxxxxxxxxxproddesc" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Prodcode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g2xxuxpclvxxxxxxxxxxprodcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.g2xxuxpclvxxxxxxxxxxprodcode}"  id="g2xxuxpclvxxxxxxxxxxprodcode" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Njob']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g3xxuxxxbvxxnxxxxxxxnjob) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.g3xxuxxxbvxxnxxxxxxxnjob}"  id="g3xxuxxxbvxxnxxxxxxxnjob" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nmateria']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g4xxuxxxssxxnxxxxxxxnmateria) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.g4xxuxxxssxxnxxxxxxxnmateria}"  id="g4xxuxxxssxxnxxxxxxxnmateria" rendered="#{customIdentity.hasRole('SH')  or (customIdentity.hasRole('UH') and (customIdentity.username.contains('manager') or customIdentity.username.contains('admin'))) and !(customIdentity.restrict1=='D')}"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nactivity']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g5xxuxxxbvxxxxxxxxxxnactivity) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.g5xxuxxxbvxxxxxxxxxxnactivity}"  id="g5xxuxxxbvxxxxxxxxxxnactivity" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nbutt']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g6xxuxxxbvxxxxxxxxxxnbutt) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.g6xxuxxxbvxxxxxxxxxxnbutt}"  id="g6xxuxxxbvxxxxxxxxxxnbutt" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Ncustome']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g7xxuxrrbvxxxxxxxxxxncustome) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.g7xxuxrrbvxxxxxxxxxxncustome}"  id="g7xxuxrrbvxxxxxxxxxxncustome" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Ncontact']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g8xxuxrcbvxxxxxxxxxxncontact) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.g8xxuxrcbvxxxxxxxxxxncontact}"  id="g8xxuxrcbvxxxxxxxxxxncontact" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nvendor']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g9xxuxvvbvxxnxxxxxxxnvendor) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.g9xxuxvvbvxxnxxxxxxxnvendor}"  id="g9xxuxvvbvxxnxxxxxxxnvendor" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nemployee']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(h1xxuxttbvxxxxxxxxxxnemployee) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.h1xxuxttbvxxxxxxxxxxnemployee}"  id="h1xxuxttbvxxxxxxxxxxnemployee" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nschedule']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(h2xxuxxxbvxxxxxxxxxxnschedule) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.h2xxuxxxbvxxxxxxxxxxnschedule}"  id="h2xxuxxxbvxxxxxxxxxxnschedule" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nreject']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(h3xxuxxxbvxxxxxxxxxxnreject) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.h3xxuxxxbvxxxxxxxxxxnreject}"  id="h3xxuxxxbvxxxxxxxxxxnreject" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nreturn']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(h4xxuxxxbvxxxxxxxxxxnreturn) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.h4xxuxxxbvxxxxxxxxxxnreturn}"  id="h4xxuxxxbvxxxxxxxxxxnreturn" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Ncode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(h5xxuxxxivxxxxxxxxxxncode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.h5xxuxxxivxxxxxxxxxxncode}"  id="h5xxuxxxivxxxxxxxxxxncode" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Manufid']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(h6xxuxxxbvxxxxxxxxxxmanufid) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.h6xxuxxxbvxxxxxxxxxxmanufid}"  id="h6xxuxxxbvxxxxxxxxxxmanufid" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Bartype']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(h7xxuxxxbvxxxxxxxxxxbartype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.h7xxuxxxbvxxxxxxxxxxbartype}"  id="h7xxuxxxbvxxxxxxxxxxbartype" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cadtype']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(h8xxuxxxbvxxxxxxxxxxcadtype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.h8xxuxxxbvxxxxxxxxxxcadtype}"  id="h8xxuxxxbvxxxxxxxxxxcadtype" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cartype']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(h9xxuxxxbvxxxxxxxxxxcartype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.h9xxuxxxbvxxxxxxxxxxcartype}"  id="h9xxuxxxbvxxxxxxxxxxcartype" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Shitype']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(i1xxuxxxbvxxxxxxxxxxshitype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.i1xxuxxxbvxxxxxxxxxxshitype}"  id="i1xxuxxxbvxxxxxxxxxxshitype" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Reptype']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(i2xxuxxxbvxxxxxxxxxxreptype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.i2xxuxxxbvxxxxxxxxxxreptype}"  id="i2xxuxxxbvxxxxxxxxxxreptype" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Loctype']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(i3xxuxxxbvxxxxxxxxxxloctype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.i3xxuxxxbvxxxxxxxxxxloctype}"  id="i3xxuxxxbvxxxxxxxxxxloctype" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Barcol']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(i4xxfxxxbvxxxxxxxxxxbarcol) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.i4xxfxxxbvxxxxxxxxxxbarcol}"  id="i4xxfxxxbvxxxxxxxxxxbarcol" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Carcol']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(i5xxfxxxbvxxxxxxxxxxcarcol) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.i5xxfxxxbvxxxxxxxxxxcarcol}"  id="i5xxfxxxbvxxxxxxxxxxcarcol" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cadcol']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(i6xxfxxxbvxxxxxxxxxxcadcol) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.i6xxfxxxbvxxxxxxxxxxcadcol}"  id="i6xxfxxxbvxxxxxxxxxxcadcol" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Shicol']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(i7xxfxxxbvxxxxxxxxxxshicol) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.i7xxfxxxbvxxxxxxxxxxshicol}"  id="i7xxfxxxbvxxxxxxxxxxshicol" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Repcol']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(i8xxfxxxbvxxxxxxxxxxrepcol) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.i8xxfxxxbvxxxxxxxxxxrepcol}"  id="i8xxfxxxbvxxxxxxxxxxrepcol" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Loccol']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(i9xxfxxxbvxxxxxxxxxxloccol) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.i9xxfxxxbvxxxxxxxxxxloccol}"  id="i9xxfxxxbvxxxxxxxxxxloccol" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Altseria']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(j1xxfxxxbvxxxxxxxxxxaltseria) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.j1xxfxxxbvxxxxxxxxxxaltseria}"  id="j1xxfxxxbvxxxxxxxxxxaltseria" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Countrycode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(j2xxuxxxbvxxxxxxxxxxcountrycode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.j2xxuxxxbvxxxxxxxxxxcountrycode}"  id="j2xxuxxxbvxxxxxxxxxxcountrycode" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Naltseri']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(j3xxuxxxbvxxxxxxxxxxnaltseri) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.j3xxuxxxbvxxxxxxxxxxnaltseri}"  id="j3xxuxxxbvxxxxxxxxxxnaltseri" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Scrcolor']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(j4xxuxxxbvxxxxxxxxxxscrcolor) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.j4xxuxxxbvxxxxxxxxxxscrcolor}"  id="j4xxuxxxbvxxxxxxxxxxscrcolor" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Hilcolor']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(j5xxuxxxbvxxxxxxxxxxhilcolor) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.j5xxuxxxbvxxxxxxxxxxhilcolor}"  id="j5xxuxxxbvxxxxxxxxxxhilcolor" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Textcolor']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(j6xxuxxxbvxxxxxxxxxxtextcolor) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.j6xxuxxxbvxxxxxxxxxxtextcolor}"  id="j6xxuxxxbvxxxxxxxxxxtextcolor" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Baccolor']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(j7xxuxxxbvxxxxxxxxxxbaccolor) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.j7xxuxxxbvxxxxxxxxxxbaccolor}"  id="j7xxuxxxbvxxxxxxxxxxbaccolor" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Datetype']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(j8xxuxxxbvxxxxxxxxxxdatetype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.j8xxuxxxbvxxxxxxxxxxdatetype}"  id="j8xxuxxxbvxxxxxxxxxxdatetype" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Currsymb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(j9xxuxxxbvxxxxxxxxxxcurrsymb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.j9xxuxxxbvxxxxxxxxxxcurrsymb}"  id="j9xxuxxxbvxxxxxxxxxxcurrsymb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Currcode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(k1xxuxxxbvxxxxxxxxxxcurrcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.k1xxuxxxbvxxxxxxxxxxcurrcode}"  id="k1xxuxxxbvxxxxxxxxxxcurrcode" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Prinbar']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(k2xxfxxxbvxxxxxxxxxxprinbar) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.k2xxfxxxbvxxxxxxxxxxprinbar}"  id="k2xxfxxxbvxxxxxxxxxxprinbar" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Barprint']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(k3xxuxxxbvxxxxxxxxxxbarprint) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.k3xxuxxxbvxxxxxxxxxxbarprint}"  id="k3xxuxxxbvxxxxxxxxxxbarprint" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Carprint']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(k4xxuxxxbvxxxxxxxxxxcarprint) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.k4xxuxxxbvxxxxxxxxxxcarprint}"  id="k4xxuxxxbvxxxxxxxxxxcarprint" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cadprint']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(k5xxuxxxbvxxxxxxxxxxcadprint) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.k5xxuxxxbvxxxxxxxxxxcadprint}"  id="k5xxuxxxbvxxxxxxxxxxcadprint" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Locprint']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(k6xxuxxxbvxxxxxxxxxxlocprint) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.k6xxuxxxbvxxxxxxxxxxlocprint}"  id="k6xxuxxxbvxxxxxxxxxxlocprint" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Shiprint']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(k7xxuxxxbvxxxxxxxxxxshiprint) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.k7xxuxxxbvxxxxxxxxxxshiprint}"  id="k7xxuxxxbvxxxxxxxxxxshiprint" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Repprint']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(k8xxuxxxbvxxxxxxxxxxrepprint) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.k8xxuxxxbvxxxxxxxxxxrepprint}"  id="k8xxuxxxbvxxxxxxxxxxrepprint" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Barprty']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(k9xxuxxxbvxxxxxxxxxxbarprty) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.k9xxuxxxbvxxxxxxxxxxbarprty}"  id="k9xxuxxxbvxxxxxxxxxxbarprty" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Repprty']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(l1xxuxxxbvxxxxxxxxxxrepprty) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.l1xxuxxxbvxxxxxxxxxxrepprty}"  id="l1xxuxxxbvxxxxxxxxxxrepprty" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Carprty']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(l2xxuxxxbvxxxxxxxxxxcarprty) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.l2xxuxxxbvxxxxxxxxxxcarprty}"  id="l2xxuxxxbvxxxxxxxxxxcarprty" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cadprty']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(l3xxuxxxbvxxxxxxxxxxcadprty) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.l3xxuxxxbvxxxxxxxxxxcadprty}"  id="l3xxuxxxbvxxxxxxxxxxcadprty" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Shiprty']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(l4xxuxxxbvxxxxxxxxxxshiprty) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.l4xxuxxxbvxxxxxxxxxxshiprty}"  id="l4xxuxxxbvxxxxxxxxxxshiprty" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Locprty']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(l5xxuxxxbvxxxxxxxxxxlocprty) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.l5xxuxxxbvxxxxxxxxxxlocprty}"  id="l5xxuxxxbvxxxxxxxxxxlocprty" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Altselen']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(l6xxzxxrbvxxxxxxxxxxaltselen) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.l6xxzxxrbvxxxxxxxxxxaltselen}"  id="l6xxzxxrbvxxxxxxxxxxaltselen" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Custolen']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(l7xxzxxrbvxxxxxxxxxxcustolen) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.l7xxzxxrbvxxxxxxxxxxcustolen}"  id="l7xxzxxrbvxxxxxxxxxxcustolen" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Carcsize']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(l8xxuxxxbvxxxxxxxxxxcarcsize) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.l8xxuxxxbvxxxxxxxxxxcarcsize}"  id="l8xxuxxxbvxxxxxxxxxxcarcsize" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cadcsize']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(l9xxuxxxbvxxxxxxxxxxcadcsize) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.l9xxuxxxbvxxxxxxxxxxcadcsize}"  id="l9xxuxxxbvxxxxxxxxxxcadcsize" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Shicsize']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m1xxuxxxbvxxxxxxxxxxshicsize) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.m1xxuxxxbvxxxxxxxxxxshicsize}"  id="m1xxuxxxbvxxxxxxxxxxshicsize" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Repcsize']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m2xxuxxxbvxxxxxxxxxxrepcsize) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.m2xxuxxxbvxxxxxxxxxxrepcsize}"  id="m2xxuxxxbvxxxxxxxxxxrepcsize" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Loccsize']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m3xxuxxxbvxxxxxxxxxxloccsize) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.m3xxuxxxbvxxxxxxxxxxloccsize}"  id="m3xxuxxxbvxxxxxxxxxxloccsize" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cs']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m4xxuxxxbvxxxxxxxxxxcs) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.m4xxuxxxbvxxxxxxxxxxcs}"  id="m4xxuxxxbvxxxxxxxxxxcs" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nconftyp']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m5xxuxxxbvxxxxxxxxxxnconftyp) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.m5xxuxxxbvxxxxxxxxxxnconftyp}"  id="m5xxuxxxbvxxxxxxxxxxnconftyp" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nlocatio']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m6xxuxxxbvxxxxxxxxxxnlocatio) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.m6xxuxxxbvxxxxxxxxxxnlocatio}"  id="m6xxuxxxbvxxxxxxxxxxnlocatio" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Ndivcode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m7xxuoxxbvxxxxxxxxxxndivcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.m7xxuoxxbvxxxxxxxxxxndivcode}"  id="m7xxuoxxbvxxxxxxxxxxndivcode" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Ndepcode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m8xxuexxbvxxxxxxxxxxndepcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.m8xxuexxbvxxxxxxxxxxndepcode}"  id="m8xxuexxbvxxxxxxxxxxndepcode" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Naddcode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m9xxuxxxbvxxxxxxxxxxnaddcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.m9xxuxxxbvxxxxxxxxxxnaddcode}"  id="m9xxuxxxbvxxxxxxxxxxnaddcode" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nfloor']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o1xxuxxxbvxxxxxxxxxxnfloor) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.o1xxuxxxbvxxxxxxxxxxnfloor}"  id="o1xxuxxxbvxxxxxxxxxxnfloor" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nroom']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o2xxuxxxbvxxxxxxxxxxnroom) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.o2xxuxxxbvxxxxxxxxxxnroom}"  id="o2xxuxxxbvxxxxxxxxxxnroom" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nrack']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o3xxuxxxbvxxxxxxxxxxnrack) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.o3xxuxxxbvxxxxxxxxxxnrack}"  id="o3xxuxxxbvxxxxxxxxxxnrack" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Menutype']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o4xxuxxxbvxxxxxxxxxxmenutype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.o4xxuxxxbvxxxxxxxxxxmenutype}"  id="o4xxuxxxbvxxxxxxxxxxmenutype" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Padtype']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o5xxuxxxbvxxxxxxxxxxpadtype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.o5xxuxxxbvxxxxxxxxxxpadtype}"  id="o5xxuxxxbvxxxxxxxxxxpadtype" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nrate1ta']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o6xxuxxxbvxxxxxxxxxxnrate1ta) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.o6xxuxxxbvxxxxxxxxxxnrate1ta}"  id="o6xxuxxxbvxxxxxxxxxxnrate1ta" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nrate2ta']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o7xxuxxxbvxxxxxxxxxxnrate2ta) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.o7xxuxxxbvxxxxxxxxxxnrate2ta}"  id="o7xxuxxxbvxxxxxxxxxxnrate2ta" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Defconft']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o8xxuxxxbvxxxxxxxxxxdefconft) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.o8xxuxxxbvxxxxxxxxxxdefconft}"  id="o8xxuxxxbvxxxxxxxxxxdefconft" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Beepsou']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o9xxfxxxbvxxxxxxxxxxbeepsou) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.o9xxfxxxbvxxxxxxxxxxbeepsou}"  id="o9xxfxxxbvxxxxxxxxxxbeepsou" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Confirm']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(p1xxfxxxbvxxxxxxxxxxconfirm) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.p1xxfxxxbvxxxxxxxxxxconfirm}"  id="p1xxfxxxbvxxxxxxxxxxconfirm" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Linefeed']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(p2xxfxxxbvxxxxxxxxxxlinefeed) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.p2xxfxxxbvxxxxxxxxxxlinefeed}"  id="p2xxfxxxbvxxxxxxxxxxlinefeed" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Refbaradj']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(p3xxzxxrbvxxxxxxxxxxrefbaradj) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.p3xxzxxrbvxxxxxxxxxxrefbaradj}"  id="p3xxzxxrbvxxxxxxxxxxrefbaradj" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Shibaradj']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(p4xxzxxrbvxxxxxxxxxxshibaradj) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.p4xxzxxrbvxxxxxxxxxxshibaradj}"  id="p4xxzxxrbvxxxxxxxxxxshibaradj" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cusbaradj']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(p5xxzxxrbvxxxxxxxxxxcusbaradj) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.p5xxzxxrbvxxxxxxxxxxcusbaradj}"  id="p5xxzxxrbvxxxxxxxxxxcusbaradj" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Locbaradj']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(p6xxzxxrbvxxxxxxxxxxlocbaradj) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.p6xxzxxrbvxxxxxxxxxxlocbaradj}"  id="p6xxzxxrbvxxxxxxxxxxlocbaradj" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Carbaradj']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(p7xxzxxrbvxxxxxxxxxxcarbaradj) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.p7xxzxxrbvxxxxxxxxxxcarbaradj}"  id="p7xxzxxrbvxxxxxxxxxxcarbaradj" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Ncorder']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(p8xxuxxxbvxxxxxxxxxxncorder) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.p8xxuxxxbvxxxxxxxxxxncorder}"  id="p8xxuxxxbvxxxxxxxxxxncorder" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Nsperson']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(p9xxuxxxbvxxxxxxxxxxnsperson) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.p9xxuxxxbvxxxxxxxxxxnsperson}"  id="p9xxuxxxbvxxxxxxxxxxnsperson" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Prompti']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(q1xxfxxxbvxxxxxxxxxxprompti) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.q1xxfxxxbvxxxxxxxxxxprompti}"  id="q1xxfxxxbvxxxxxxxxxxprompti" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerquotenb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(q8xxuxcqbvxxxxxxxxxxcustomerquotenb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.q8xxuxcqbvxxxxxxxxxxcustomerquotenb}"  id="q8xxuxcqbvxxxxxxxxxxcustomerquotenb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerquoten']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(q9xxuxcqbvxxxxxxxxxxcustomerquoten) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.q9xxuxcqbvxxxxxxxxxxcustomerquoten}"  id="q9xxuxcqbvxxxxxxxxxxcustomerquoten" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerquotena']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(r1xxuxcqbvxxxxxxxxxxcustomerquotena) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.r1xxuxcqbvxxxxxxxxxxcustomerquotena}"  id="r1xxuxcqbvxxxxxxxxxxcustomerquotena" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerordernb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(r2xxuxcobvxxxxxxxxxxcustomerordernb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.r2xxuxcobvxxxxxxxxxxcustomerordernb}"  id="r2xxuxcobvxxxxxxxxxxcustomerordernb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerordern']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(r3xxuxcobvxxxxxxxxxxcustomerordern) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.r3xxuxcobvxxxxxxxxxxcustomerordern}"  id="r3xxuxcobvxxxxxxxxxxcustomerordern" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerorderna']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(r4xxuxcobvxxxxxxxxxxcustomerorderna) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.r4xxuxcobvxxxxxxxxxxcustomerorderna}"  id="r4xxuxcobvxxxxxxxxxxcustomerorderna" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorordernb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(r5xxuxvobvxxxxxxxxxxvendorordernb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.r5xxuxvobvxxxxxxxxxxvendorordernb}"  id="r5xxuxvobvxxxxxxxxxxvendorordernb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorordern']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(r6xxuxvobvxxxxxxxxxxvendorordern) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.r6xxuxvobvxxxxxxxxxxvendorordern}"  id="r6xxuxvobvxxxxxxxxxxvendorordern" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendororderna']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(r7xxuxvobvxxxxxxxxxxvendororderna) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.r7xxuxvobvxxxxxxxxxxvendororderna}"  id="r7xxuxvobvxxxxxxxxxxvendororderna" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Jobnb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(r8xxuxjobvxxxxxxxxxxjobnb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.r8xxuxjobvxxxxxxxxxxjobnb}"  id="r8xxuxjobvxxxxxxxxxxjobnb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Employeeordernb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(r8xxuxvobvxxxxxxxxxxemployeeordernb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.r8xxuxvobvxxxxxxxxxxemployeeordernb}"  id="r8xxuxvobvxxxxxxxxxxemployeeordernb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Jobn']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(r9xxuxjobvxxxxxxxxxxjobn) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.r9xxuxjobvxxxxxxxxxxjobn}"  id="r9xxuxjobvxxxxxxxxxxjobn" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Employeeordern']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(r9xxuxvobvxxxxxxxxxxemployeeordern) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.r9xxuxvobvxxxxxxxxxxemployeeordern}"  id="r9xxuxvobvxxxxxxxxxxemployeeordern" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Employeeorderna']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(raxxuxvobvxxxxxxxxxxemployeeorderna) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.raxxuxvobvxxxxxxxxxxemployeeorderna}"  id="raxxuxvobvxxxxxxxxxxemployeeorderna" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Jobna']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(s1xxuxjobvxxxxxxxxxxjobna) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.s1xxuxjobvxxxxxxxxxxjobna}"  id="s1xxuxjobvxxxxxxxxxxjobna" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerinvoicenb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(s2xxuxcibvxxxxxxxxxxcustomerinvoicenb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.s2xxuxcibvxxxxxxxxxxcustomerinvoicenb}"  id="s2xxuxcibvxxxxxxxxxxcustomerinvoicenb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerinvoicen']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(s3xxuxcibvxxxxxxxxxxcustomerinvoicen) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.s3xxuxcibvxxxxxxxxxxcustomerinvoicen}"  id="s3xxuxcibvxxxxxxxxxxcustomerinvoicen" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerinvoicena']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(s4xxuxcibvxxxxxxxxxxcustomerinvoicena) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.s4xxuxcibvxxxxxxxxxxcustomerinvoicena}"  id="s4xxuxcibvxxxxxxxxxxcustomerinvoicena" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorinvoicenb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(s5xxuxvibvxxxxxxxxxxvendorinvoicenb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.s5xxuxvibvxxxxxxxxxxvendorinvoicenb}"  id="s5xxuxvibvxxxxxxxxxxvendorinvoicenb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorinvoicen']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(s6xxuxvibvxxxxxxxxxxvendorinvoicen) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.s6xxuxvibvxxxxxxxxxxvendorinvoicen}"  id="s6xxuxvibvxxxxxxxxxxvendorinvoicen" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorinvoicena']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(s7xxuxvibvxxxxxxxxxxvendorinvoicena) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.s7xxuxvibvxxxxxxxxxxvendorinvoicena}"  id="s7xxuxvibvxxxxxxxxxxvendorinvoicena" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerpicknb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(s8xxuxcrbvxxxxxxxxxxcustomerpicknb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.s8xxuxcrbvxxxxxxxxxxcustomerpicknb}"  id="s8xxuxcrbvxxxxxxxxxxcustomerpicknb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerpickn']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(s9xxuxcrbvxxxxxxxxxxcustomerpickn) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.s9xxuxcrbvxxxxxxxxxxcustomerpickn}"  id="s9xxuxcrbvxxxxxxxxxxcustomerpickn" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerpaymntnb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(saxxuxcpbvxxxxxxxxxxcustomerpaymntnb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.saxxuxcpbvxxxxxxxxxxcustomerpaymntnb}"  id="saxxuxcpbvxxxxxxxxxxcustomerpaymntnb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerpaymntn']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(sbxxuxcpbvxxxxxxxxxxcustomerpaymntn) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.sbxxuxcpbvxxxxxxxxxxcustomerpaymntn}"  id="sbxxuxcpbvxxxxxxxxxxcustomerpaymntn" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerpaymntna']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(scxxuxcpbvxxxxxxxxxxcustomerpaymntna) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.scxxuxcpbvxxxxxxxxxxcustomerpaymntna}"  id="scxxuxcpbvxxxxxxxxxxcustomerpaymntna" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customerpickna']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t1xxuxcrbvxxxxxxxxxxcustomerpickna) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t1xxuxcrbvxxxxxxxxxxcustomerpickna}"  id="t1xxuxcrbvxxxxxxxxxxcustomerpickna" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorpaymntnb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t2xxuxvpbvxxxxxxxxxxvendorpaymntnb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t2xxuxvpbvxxxxxxxxxxvendorpaymntnb}"  id="t2xxuxvpbvxxxxxxxxxxvendorpaymntnb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorquotenb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t2xxuxvqbvxxxxxxxxxxvendorquotenb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t2xxuxvqbvxxxxxxxxxxvendorquotenb}"  id="t2xxuxvqbvxxxxxxxxxxvendorquotenb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorpaymntn']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t3xxuxvpbvxxxxxxxxxxvendorpaymntn) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t3xxuxvpbvxxxxxxxxxxvendorpaymntn}"  id="t3xxuxvpbvxxxxxxxxxxvendorpaymntn" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorquoten']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t3xxuxvqbvxxxxxxxxxxvendorquoten) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t3xxuxvqbvxxxxxxxxxxvendorquoten}"  id="t3xxuxvqbvxxxxxxxxxxvendorquoten" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorpaymntna']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t4xxuxvpbvxxxxxxxxxxvendorpaymntna) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t4xxuxvpbvxxxxxxxxxxvendorpaymntna}"  id="t4xxuxvpbvxxxxxxxxxxvendorpaymntna" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Taskn']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t4xxuxvqbvxxxxxxxxxxtaskn) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t4xxuxvqbvxxxxxxxxxxtaskn}"  id="t4xxuxvqbvxxxxxxxxxxtaskn" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Taskna']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t4xxuxvqbvxxxxxxxxxxtaskna) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t4xxuxvqbvxxxxxxxxxxtaskna}"  id="t4xxuxvqbvxxxxxxxxxxtaskna" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Tasknb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t4xxuxvqbvxxxxxxxxxxtasknb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t4xxuxvqbvxxxxxxxxxxtasknb}"  id="t4xxuxvqbvxxxxxxxxxxtasknb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorquotena']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t4xxuxvqbvxxxxxxxxxxvendorquotena) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t4xxuxvqbvxxxxxxxxxxvendorquotena}"  id="t4xxuxvqbvxxxxxxxxxxvendorquotena" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorchqnb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t5xxuxvpbvxxxxxxxxxxvendorchqnb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t5xxuxvpbvxxxxxxxxxxvendorchqnb}"  id="t5xxuxvpbvxxxxxxxxxxvendorchqnb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Arseqb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t5xxzwprbvxxxxxxxxxxarseqb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t5xxzwprbvxxxxxxxxxxarseqb}"  id="t5xxzwprbvxxxxxxxxxxarseqb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorchqn']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t6xxuxvpbvxxxxxxxxxxvendorchqn) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t6xxuxvpbvxxxxxxxxxxvendorchqn}"  id="t6xxuxvpbvxxxxxxxxxxvendorchqn" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Arseq']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t6xxzwprbvxxxxxxxxxxarseq) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t6xxzwprbvxxxxxxxxxxarseq}"  id="t6xxzwprbvxxxxxxxxxxarseq" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vendorchqna']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t7xxuxvpbvxxxxxxxxxxvendorchqna) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t7xxuxvpbvxxxxxxxxxxvendorchqna}"  id="t7xxuxvpbvxxxxxxxxxxvendorchqna" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Arseqa']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t7xxzwprbvxxxxxxxxxxarseqa) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t7xxzwprbvxxxxxxxxxxarseqa}"  id="t7xxzwprbvxxxxxxxxxxarseqa" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Apseqb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t8xxzwppbvxxxxxxxxxxapseqb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t8xxzwppbvxxxxxxxxxxapseqb}"  id="t8xxzwppbvxxxxxxxxxxapseqb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Apseq']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(t9xxzwppbvxxxxxxxxxxapseq) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.t9xxzwppbvxxxxxxxxxxapseq}"  id="t9xxzwppbvxxxxxxxxxxapseq" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Apseqa']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(u1xxzwppbvxxxxxxxxxxapseqa) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.u1xxzwppbvxxxxxxxxxxapseqa}"  id="u1xxzwppbvxxxxxxxxxxapseqa" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Glseqb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(u2xxzwplbvxxxxxxxxxxglseqb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.u2xxzwplbvxxxxxxxxxxglseqb}"  id="u2xxzwplbvxxxxxxxxxxglseqb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Glseq']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(u3xxzwplbvxxxxxxxxxxglseq) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.u3xxzwplbvxxxxxxxxxxglseq}"  id="u3xxzwplbvxxxxxxxxxxglseq" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Glseqa']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(u4xxzwplbvxxxxxxxxxxglseqa) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.u4xxzwplbvxxxxxxxxxxglseqa}"  id="u4xxzwplbvxxxxxxxxxxglseqa" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Paseqb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(u5xxzwpabvxxxxxxxxxxpaseqb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.u5xxzwpabvxxxxxxxxxxpaseqb}"  id="u5xxzwpabvxxxxxxxxxxpaseqb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Paseq']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(u6xxzwpabvxxxxxxxxxxpaseq) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.u6xxzwpabvxxxxxxxxxxpaseq}"  id="u6xxzwpabvxxxxxxxxxxpaseq" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Paseqa']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(u7xxzwpabvxxxxxxxxxxpaseqa) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.u7xxzwpabvxxxxxxxxxxpaseqa}"  id="u7xxzwpabvxxxxxxxxxxpaseqa" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Icseqb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(u8xxzwpibvxxxxxxxxxxicseqb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.u8xxzwpibvxxxxxxxxxxicseqb}"  id="u8xxzwpibvxxxxxxxxxxicseqb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Icseq']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(u9xxzwpibvxxxxxxxxxxicseq) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.u9xxzwpibvxxxxxxxxxxicseq}"  id="u9xxzwpibvxxxxxxxxxxicseq" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Icseqa']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(v1xxzwpibvxxxxxxxxxxicseqa) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.v1xxzwpibvxxxxxxxxxxicseqa}"  id="v1xxzwpibvxxxxxxxxxxicseqa" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Joseqb']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(v2xxzwpjbvxxxxxxxxxxjoseqb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.v2xxzwpjbvxxxxxxxxxxjoseqb}"  id="v2xxzwpjbvxxxxxxxxxxjoseqb" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Joseq']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(v3xxzwpjbvxxxxxxxxxxjoseq) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.v3xxzwpjbvxxxxxxxxxxjoseq}"  id="v3xxzwpjbvxxxxxxxxxxjoseq" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Joseqa']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(v4xxzwpjbvxxxxxxxxxxjoseqa) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.v4xxzwpjbvxxxxxxxxxxjoseqa}"  id="v4xxzwpjbvxxxxxxxxxxjoseqa" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Sglentry']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(v5xxuxxxbvxxxxxxxxxxsglentry) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.v5xxuxxxbvxxxxxxxxxxsglentry}"  id="v5xxuxxxbvxxxxxxxxxxsglentry" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Tax1code']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(v6xxuxz1bvxxxxxxxxxxtax1code) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.v6xxuxz1bvxxxxxxxxxxtax1code}"  id="v6xxuxz1bvxxxxxxxxxxtax1code" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Tax2code']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(v7xxuxz2bvxxxxxxxxxxtax2code) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.v7xxuxz2bvxxxxxxxxxxtax2code}"  id="v7xxuxz2bvxxxxxxxxxxtax2code" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Tax3code']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(v8xxuxz3bvxxxxxxxxxxtax3code) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.v8xxuxz3bvxxxxxxxxxxtax3code}"  id="v8xxuxz3bvxxxxxxxxxxtax3code" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Ndecimal']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(v9xxuxxxbvxxxxxxxxxxndecimal) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.v9xxuxxxbvxxxxxxxxxxndecimal}"  id="v9xxuxxxbvxxxxxxxxxxndecimal" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Edipassw']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(w1xxuxxxbvxxxxxxxxxxedipassw) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.w1xxuxxxbvxxxxxxxxxxedipassw}"  id="w1xxuxxxbvxxxxxxxxxxedipassw" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Intpassw']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(w2xxuxxxbvxxxxxxxxxxintpassw) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.w2xxuxxxbvxxxxxxxxxxintpassw}"  id="w2xxuxxxbvxxxxxxxxxxintpassw" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Inrpassw']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(w3xxuxxxbvxxxxxxxxxxinrpassw) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.w3xxuxxxbvxxxxxxxxxxinrpassw}"  id="w3xxuxxxbvxxxxxxxxxxinrpassw" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Imlpassw']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(w4xxuxxxbvxxxxxxxxxximlpassw) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.w4xxuxxxbvxxxxxxxxxximlpassw}"  id="w4xxuxxxbvxxxxxxxxxximlpassw" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Rmlpassw']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(w5xxuxxxbvxxxxxxxxxxrmlpassw) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.w5xxuxxxbvxxxxxxxxxxrmlpassw}"  id="w5xxuxxxbvxxxxxxxxxxrmlpassw" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Lmlpassw']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(w6xxuxxxbvxxxxxxxxxxlmlpassw) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.w6xxuxxxbvxxxxxxxxxxlmlpassw}"  id="w6xxuxxxbvxxxxxxxxxxlmlpassw" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Hospassw']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(w7xxuxxxbvxxxxxxxxxxhospassw) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.w7xxuxxxbvxxxxxxxxxxhospassw}"  id="w7xxuxxxbvxxxxxxxxxxhospassw" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Lanpassw']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(w8xxuxxxbvxxxxxxxxxxlanpassw) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.w8xxuxxxbvxxxxxxxxxxlanpassw}"  id="w8xxuxxxbvxxxxxxxxxxlanpassw" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Wanpassw']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(w9xxuxxxbvxxxxxxxxxxwanpassw) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.w9xxuxxxbvxxxxxxxxxxwanpassw}"  id="w9xxuxxxbvxxxxxxxxxxwanpassw" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Ashostid']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(x1xxuxxxbvxxxxxxxxxxashostid) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.x1xxuxxxbvxxxxxxxxxxashostid}"  id="x1xxuxxxbvxxxxxxxxxxashostid" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Hdstyle']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(x2xxuxxxbvxxxxxxxxxxhdstyle) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.x2xxuxxxbvxxxxxxxxxxhdstyle}"  id="x2xxuxxxbvxxxxxxxxxxhdstyle" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Mtstyle']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(x3xxuxxxbvxxxxxxxxxxmtstyle) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.x3xxuxxxbvxxxxxxxxxxmtstyle}"  id="x3xxuxxxbvxxxxxxxxxxmtstyle" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Ststyle']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(x4xxuxxxbvxxxxxxxxxxststyle) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.x4xxuxxxbvxxxxxxxxxxststyle}"  id="x4xxuxxxbvxxxxxxxxxxststyle" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Dtstyle']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(x5xxuxxxbvxxxxxxxxxxdtstyle) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.x5xxuxxxbvxxxxxxxxxxdtstyle}"  id="x5xxuxxxbvxxxxxxxxxxdtstyle" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Ftstyle']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(x6xxuxxxbvxxxxxxxxxxftstyle) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.x6xxuxxxbvxxxxxxxxxxftstyle}"  id="x6xxuxxxbvxxxxxxxxxxftstyle" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Defaultr']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(x7xxuxxxbvxxxxxxxxxxdefaultr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.x7xxuxxxbvxxxxxxxxxxdefaultr}"  id="x7xxuxxxbvxxxxxxxxxxdefaultr" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Dbname']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(x9xxuxxxbvxxxxxxxxxxdbname) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.x9xxuxxxbvxxxxxxxxxxdbname}"  id="x9xxuxxxbvxxxxxxxxxxdbname" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Rootdir']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y1xxuxxxbvxxxxxxxxxxrootdir) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.y1xxuxxxbvxxxxxxxxxxrootdir}"  id="y1xxuxxxbvxxxxxxxxxxrootdir" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Keyorder']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y2xxuxxxbvxxxxxxxxxxkeyorder) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.y2xxuxxxbvxxxxxxxxxxkeyorder}"  id="y2xxuxxxbvxxxxxxxxxxkeyorder" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Currbusdat']}">
+          <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.y3xxcxxrlxxxxxxxxxxxcurrbusdat}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Lastbusdat']}">
+          <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.y4xxcxxrlxxxxxxxxxxxlastbusdat}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Currcaldat']}">
+          <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.y5xxcxxrlxxxxxxxxxxxcurrcaldat}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Lastcaldat']}">
+          <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.y6xxcxxrlxxxxxxxxxxxlastcaldat}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Preprocess']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y7xxfxxxbvxxxxxxxxxxpreprocess) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.y7xxfxxxbvxxxxxxxxxxpreprocess}"  id="y7xxfxxxbvxxxxxxxxxxpreprocess" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Defaultc']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y8xxuxxxbvxxxxxxxxxxdefaultc) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.y8xxuxxxbvxxxxxxxxxxdefaultc}"  id="y8xxuxxxbvxxxxxxxxxxdefaultc" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Margin']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y8xxzxxrbvxxxxxxxxxxmargin) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.y8xxzxxrbvxxxxxxxxxxmargin}"  id="y8xxzxxrbvxxxxxxxxxxmargin" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Footer']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y9xxzxxrbvxxxxxxxxxxfooter) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.y9xxzxxrbvxxxxxxxxxxfooter}"  id="y9xxzxxrbvxxxxxxxxxxfooter" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Lastuser']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z1xxuxxxbvxxxxxxxxxxlastuser) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.z1xxuxxxbvxxxxxxxxxxlastuser}"  id="z1xxuxxxbvxxxxxxxxxxlastuser" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Listbuildc']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z2xxfxxxbvxxxxxxxxxxlistbuildc) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.z2xxfxxxbvxxxxxxxxxxlistbuildc}"  id="z2xxfxxxbvxxxxxxxxxxlistbuildc" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Listbuildv']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z3xxfxxxbvxxxxxxxxxxlistbuildv) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.z3xxfxxxbvxxxxxxxxxxlistbuildv}"  id="z3xxfxxxbvxxxxxxxxxxlistbuildv" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Listbuilde']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z4xxfxxxbvxxxxxxxxxxlistbuilde) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.z4xxfxxxbvxxxxxxxxxxlistbuilde}"  id="z4xxfxxxbvxxxxxxxxxxlistbuilde" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Listbrownc']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z5xxzxxrbvxxxxxxxxxxlistbrownc) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.z5xxzxxrbvxxxxxxxxxxlistbrownc}"  id="z5xxzxxrbvxxxxxxxxxxlistbrownc" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Listbrownv']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z6xxzxxrbvxxxxxxxxxxlistbrownv) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.z6xxzxxrbvxxxxxxxxxxlistbrownv}"  id="z6xxzxxrbvxxxxxxxxxxlistbrownv" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Listbrowne']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z7xxzxxrbvxxxxxxxxxxlistbrowne) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.z7xxzxxrbvxxxxxxxxxxlistbrowne}"  id="z7xxzxxrbvxxxxxxxxxxlistbrowne" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Pop3server']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z8xxuxxxbvxxxxxxxxxxpop3server) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.z8xxuxxxbvxxxxxxxxxxpop3server}"  id="z8xxuxxxbvxxxxxxxxxxpop3server" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Smtpserver']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z8xxuxxxbvxxxxxxxxxxsmtpserver) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.z8xxuxxxbvxxxxxxxxxxsmtpserver}"  id="z8xxuxxxbvxxxxxxxxxxsmtpserver" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Pop3user']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z9xxuxxxbvxxxxxxxxxxpop3user) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.z9xxuxxxbvxxxxxxxxxxpop3user}"  id="z9xxuxxxbvxxxxxxxxxxpop3user" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Smtpuser']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z9xxuxxxbvxxxxxxxxxxsmtpuser) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.z9xxuxxxbvxxxxxxxxxxsmtpuser}"  id="z9xxuxxxbvxxxxxxxxxxsmtpuser" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Pop3pass']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zaxxuxxxssxxxxxxxxxxpop3pass) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.zaxxuxxxssxxxxxxxxxxpop3pass}"  id="zaxxuxxxssxxxxxxxxxxpop3pass" rendered="#{customIdentity.hasRole('SH')  or (customIdentity.hasRole('UH') and (customIdentity.username.contains('manager') or customIdentity.username.contains('admin'))) and !(customIdentity.restrict1=='D')}"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Smtppass']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zaxxuxxxssxxxxxxxxxxsmtppass) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.zaxxuxxxssxxxxxxxxxxsmtppass}"  id="zaxxuxxxssxxxxxxxxxxsmtppass" rendered="#{customIdentity.hasRole('SH')  or (customIdentity.hasRole('UH') and (customIdentity.username.contains('manager') or customIdentity.username.contains('admin'))) and !(customIdentity.restrict1=='D')}"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Smatcode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zbxxuxxxbvxxxxxxxxxxsmatcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.zbxxuxxxbvxxxxxxxxxxsmatcode}"  id="zbxxuxxxbvxxxxxxxxxxsmatcode" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Fyrend']}">
+          <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.zcxxdwfebvxxxxxxxxxxfyrend}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Fperiods']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zdxxzwfpbvxxxxxxxxxxfperiods) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.zdxxzwfpbvxxxxxxxxxxfperiods}"  id="zdxxzwfpbvxxxxxxxxxxfperiods" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Statusfl']}">
+              <h:outputText value="#{_yxxxch522xhhxxhxxxxxclient.zexxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(_yxxxch522xhhxxhxxxxxclient.zexxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(_yxxxch522xhhxxhxxxxxclient.zexxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid/waiting approval':( _yxxxch522xhhxxhxxxxxclient.zexxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped/approved': (_yxxxch522xhhxxhxxxxxclient.zexxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced/final approved':(_trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 1 ?'active/ordered':'new/other')))))}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Statusfldt']}">
+              <h:outputText value="#{_yxxxch522xhhxxhxxxxxclient.zfxxcztxlxxxxxxxxxxxstatusfldt}"  id="statusfldt" >
+               <f:convertDateTime pattern="dd/MM/yy h:mm:s z"/>
+              </h:outputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Notes']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zgxxuznxbvxxxxxxxxxxnotes) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.zgxxuznxbvxxxxxxxxxxnotes}"  id="zgxxuznxbvxxxxxxxxxxnotes" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Owner']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zhxxutoxlhxxxxxxxxxxowner) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.zhxxutoxlhxxxxxxxxxxowner}"  id="zhxxutoxlhxxxxxxxxxxowner" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Owner2']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_yxxxch522xhhxxhxxxxxclient.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+            </p:column>
+        <p:column 
+            headerText="Action">
+            #{' '}
+             <h:link outcome="/clientEditEasy.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="yxxxch522xhhxxhxxxxxclientEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_yxxxch522xhhxxhxxxxxclient.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+        </p:column>
+    </p:dataTable>
+    </div>
+    </p:panel>
+    <div class="tableControl">
+        <h:link outcome="/clientList.xhtml"
+            rendered="#{yxxxch522xhhxxhxxxxxclientList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+          <f:param name="maxResultsVal"
+                    value="#{yxxxch522xhhxxhxxxxxclientList.maxResultsVal}"/>
+        </h:link>
+        <h:link outcome="/clientList.xhtml"
+            rendered="#{yxxxch522xhhxxhxxxxxclientList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{yxxxch522xhhxxhxxxxxclientList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{yxxxch522xhhxxhxxxxxclientList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/clientList.xhtml"
+            rendered="#{yxxxch522xhhxxhxxxxxclientList.nextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{yxxxch522xhhxxhxxxxxclientList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{yxxxch522xhhxxhxxxxxclientList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/clientList.xhtml"
+            rendered="#{yxxxch522xhhxxhxxxxxclientList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{yxxxch522xhhxxhxxxxxclientList.lastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{yxxxch522xhhxxhxxxxxclientList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+         <h:button outcome="/clientEditEasy.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+            rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Client']}">
+        </h:button>
+
+
+
+         <h:button outcome="/#{empty yxxxch522xhhxxhxxxxxclientFrom ? 'home' : yxxxch522xhhxxhxxxxxclientFrom}.xhtml"
+          id="donefy"
+         value="Done"/>&nbsp;
+
+
+       <ui:remove>
+       </ui:remove>
+
+            <br></br>
+            &nbsp;&nbsp;<h:outputText style="font-weight:bold" value="#{messages['configure']} #{messages['Paypal']} #{messages['payment']} #{messages['integration']} / #{messages['Outgoing']} #{messages['Email']} and #{messages['Others']} - #{messages['use']} #{messages['version']} 01 " /> 
+            <br></br>
+            &nbsp;&nbsp;<h:outputText style="font-weight:lighter" value="#{messages['configure']} #{messages['Shopify']} #{messages['integration']} - #{messages['auto']} #{messages['created']} #{messages['version']} 02 " /> 
+            <br></br>
+            &nbsp;&nbsp;<h:outputText style="font-weight:lighter" value="#{messages['configure']} #{messages['Square']} #{messages['payment']} #{messages['integration']} - #{messages['create']}/#{messages['use']} #{messages['version']} 03 " /> 
+            <h:commandButton id="sqr" value="#{messages['Create']} #{messages['Square']} #{messages['Payment']} #{messages['Record']}"  rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}" action="#{yxxxch522xhhxxhxxxxxclientHome.createRecord('03')}" />
+            <br></br>
+            &nbsp;&nbsp;<h:outputText style="font-weight:lighter" value="#{messages['configure']} #{messages['Sprite']} #{messages['payment']} #{messages['integration']} - #{messages['create']}/#{messages['use']} #{messages['version']} 04 (#{messages['Beta']})" /> 
+            <h:commandButton id="spr" value="#{messages['Create']} #{messages['Sprite']} #{messages['Payment']} #{messages['Record']}"  rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}" action="#{yxxxch522xhhxxhxxxxxclientHome.createRecord('04')}" />
+            <br></br>
+            &nbsp;&nbsp;<h:outputText style="font-weight:lighter" value="#{messages['Future']} - #{messages['auto']} #{messages['created']} #{messages['version']} 05 " /> 
+            <br></br>
+            &nbsp;&nbsp;<h:outputText style="font-weight:lighter" value="#{messages['configure']} #{messages['Google']} #{messages['Mail']} #{messages['Server']} #{messages['integration']} - #{messages['create']}/#{messages['use']} #{messages['version']} 07 " /> 
+            <h:commandButton id="gsmtp" value="#{messages['Create']} #{messages['Google']} #{messages['Oauth']} #{messages['Record']}"  rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}" action="#{yxxxch522xhhxxhxxxxxclientHome.createRecord('07')}" >
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['To']} #{messages['store']} #{messages['Oauth']} #{messages['tokens']} #{messages['and']} #{messages['set']} #{messages['record 01']} #{messages['SMTP']} #{messages['parameters']}"/></span> </p:tooltip> 
+            </h:commandButton>
+          <ui:fragment rendered="#{customIdentity.masterSite}">
+            <br></br>
+            &nbsp;&nbsp;<h:outputText style="font-weight:lighter" value="#{messages['configure']} #{messages['Openshift']} #{messages['Oauth']} #{messages['Server']} #{messages['integration']} - #{messages['create']}/#{messages['use']} #{messages['version']} 08 " /> 
+            <h:commandButton id="openshft" value="#{messages['Create']} #{messages['Openshift']} #{messages['Oauth']} #{messages['Record']}"  rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}" action="#{yxxxch522xhhxxhxxxxxclientHome.createRecord('08')}" >
+            </h:commandButton>
+            <br></br>
+            &nbsp;&nbsp;<h:outputText style="font-weight:lighter" value="#{messages['configure']} #{messages['Openshift']} #{messages['Route']} #{messages['ssl_cert']} #{messages['integration']} - #{messages['create']}/#{messages['use']} #{messages['version']} 09 " /> 
+            <h:commandButton id="opnroutrcrt" value="#{messages['Create']} #{messages['Openshift']} #{messages['Route']} #{messages['Record']}"  rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}" action="#{yxxxch522xhhxxhxxxxxclientHome.createRecord('09')}" >
+            </h:commandButton>
+            <br></br>
+            &nbsp;&nbsp;<h:outputText style="font-weight:lighter" value="#{messages['configure']} #{messages['Openshift']} #{messages['Route']} #{messages['ssl_pkey']} #{messages['integration']} - #{messages['create']}/#{messages['use']} #{messages['version']} 10 " /> 
+            <h:commandButton id="opnroutrpvt" value="#{messages['Create']} #{messages['Openshift']} #{messages['Route']} #{messages['Record']}"  rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}" action="#{yxxxch522xhhxxhxxxxxclientHome.createRecord('10')}" >
+            </h:commandButton>
+          </ui:fragment>
+            <br></br><br></br>
+            &nbsp;&nbsp;<h:outputText style="font-weight:lighter" value="#{messages['Change']} #{messages['Appname']} #{messages['needs']} #{messages['new']} #{messages['name']} #{messages['in']} #{messages['requestor']} #{messages['client']} #{messages['record']} #{messages['field']} hdstyle" 
+              rendered="#{customIdentity.masterSite}"/> 
+
+
+
+        <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessagesb"/>
+
+<br/>
+    </div>
+            <p:hotkey  actionListener="#{yxxxch522xhhxxhxxxxxclientList.getFirstResult()}" bind="return">
+            </p:hotkey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

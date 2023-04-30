@@ -1,0 +1,528 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="trexuq3a6xwwqqhxxxxxvinvoiceA0xxuobxbxxxxxxxxxxxsid" value="#{trexuq3a6xwwqqhxxxxxvinvoiceHome.trexuq3a6xwwqqhxxxxxvinvoiceA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal}"/>
+    <f:viewAction action="#{trexuq3a6xwwqqhxxxxxvinvoiceHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Vinvoice']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="trexuq3a6xwwqqhxxxxxvinvoiceSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']}" propagation="end"  outcome="/home.xhtml" />
+             <p:ajaxStatus name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['VinvoiceListHelp']!='VinvoiceListHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['VinvoiceListHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+
+ <p:panel style="width: 50%;" header="#{messages['Vinvoice']}- #{messages['List']} #{messages['Search']} #{messages['Result']}, #{messages['click']} #{messages['to']} #{messages['change']} #{messages['search']}  #{messages['criteria']}" switchType="ajax" collapsed="true"
+     toggleable="true" toggleableHeader="true">
+
+<h:panelGrid columns="20">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.searchVal}"/>
+ </ui:decorate>
+  <h:outputText id="searchVJ" value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.searchValJ}" rendered="#{trexuq3a6xwwqqhxxxxxvinvoiceList.searchVal.isEmpty()}"/>
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText id="toDay" ph:type="date" value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <h:commandButton id="setToday" render="toDay" value="#{messages['set']} #{messages['Today']}"   action="#{trexuq3a6xwwqqhxxxxxvinvoiceList.setSearchDate(trexuq3a6xwwqqhxxxxxvinvoiceHome.currentTime)}" />
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label"> #{messages['status']}  </ui:define>
+  <h:panelGrid columns="2" >
+         <h:selectOneMenu value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.searchStatus}"> 
+          <f:selectItem itemLabel="all" itemValue="#{null}"/>
+          <f:selectItem itemLabel="open" itemValue="0"/>
+          <f:selectItem itemLabel="active/ordered" itemValue="1"/>
+           <f:selectItem itemLabel="return" itemValue="4"/>
+          <f:selectItem itemLabel="closed" itemValue="8"/>
+           <f:selectItem itemLabel="paid" itemValue="16"/>
+           <f:selectItem itemLabel="partial/shipped" itemValue="32"/>
+           <f:selectItem itemLabel="printed/final approved" itemValue="512"/>
+          <f:selectItem itemLabel="marked" itemValue="128"/>
+          <f:selectItem itemLabel="deleted" itemValue="256"/>
+         </h:selectOneMenu>
+  </h:panelGrid>
+ </ui:decorate>
+</h:panelGrid>
+
+
+
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.suggest(trexuq3a6xwwqqhxxxxxvinvoiceHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.suggest(trexuq3a6xwwqqhxxxxxvinvoiceHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="trexuq3a6xwwqqhxxxxxvinvoiceList,globalMessages" status="buttonStatus" value="#{messages['Search']}" 
+              actionListener="#{trexuq3a6xwwqqhxxxxxvinvoiceList.getFirstResult()}" rendered="#{trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal lt 49}"/>
+            &nbsp;<h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</p:panel>
+
+    <p:panel>
+
+        <div class="actionButtons">
+             <h:commandButton id="copyallt" value="Copy All Flagged"  action="#{trexuq3a6xwwqqhxxxxxvinvoiceHome.copyAllMarked()}" 
+                rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal lt 49}" status="buttonStatus"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+             <h:commandButton id="deleteallt" value="#{messages['Delete']} #{messages['All']} #{messages['Flagged']}"  action="#{trexuq3a6xwwqqhxxxxxvinvoiceHome.deleteAllFlagged()}"
+              onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal lt 49}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Deletes']} #{messages['detail']} #{messages['records']} #{messages['as-well']},#{messages['but']} #{messages['not']} #{messages['all']} #{messages['constraints']}"/></span> </p:tooltip> 
+             </h:commandButton>
+             <h:commandButton id="updateallt" value="Update All Flagged"  rendered="false" action="#{trexuq3a6xwwqqhxxxxxvinvoiceHome.updateAllFlagged()}" />
+             <h:commandButton id="emailIcal" value="#{messages['email']} #{messages['as']} #{messages['iCalendar']}"  rendered="false" action="#{trexuq3a6xwwqqhxxxxxvinvoiceHome.writeAsIcalText()}"/>
+
+            <h:button outcome="/#{empty trexuq3a6xwwqqhxxxxxvinvoiceFrom ? 'home' : trexuq3a6xwwqqhxxxxxvinvoiceFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <ui:remove>  do not render list page once > 50 rows  to avoid excedding max http params </ui:remove>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{trexuq3a6xwwqqhxxxxxvinvoiceList.setMaxResultsVal(6)}" rendered="#{trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{trexuq3a6xwwqqhxxxxxvinvoiceList.setMaxResultsVal(50)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{trexuq3a6xwwqqhxxxxxvinvoiceList.setMaxResultsVal(100)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal lt 49}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{trexuq3a6xwwqqhxxxxxvinvoiceList.setskipColumns(true)}" rendered="#{trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal lt 49}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{trexuq3a6xwwqqhxxxxxvinvoiceList.setskipColumns(false)}" rendered="#{trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal lt 49}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(ity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Vinvoice Search Results showing #{empty trexuq3a6xwwqqhxxxxxvinvoiceList.resultList ? 0 : (trexuq3a6xwwqqhxxxxxvinvoiceList.paginated ? trexuq3a6xwwqqhxxxxxvinvoiceList.resultList.size() : trexuq3a6xwwqqhxxxxxvinvoiceList.resultCount)} of #{trexuq3a6xwwqqhxxxxxvinvoiceList.resultCount}"/>
+        </f:facet>
+    <div class="results" id="trexuq3a6xwwqqhxxxxxvinvoiceList" style="overflow-x:auto">
+
+    <h:outputText value="The Vinvoice search returned no results."
+               rendered="#{empty trexuq3a6xwwqqhxxxxxvinvoiceList.resultList}"/>
+
+
+
+
+    <p:dataTable id="trexuq3a6xwwqqhxxxxxvinvoiceList"  frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" rows="#{trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal}" scrollRows="6"
+           var="_trexuq3a6xwwqqhxxxxxvinvoice" selection="#{trexuq3a6xwwqqhxxxxxvinvoiceHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}" rowKey="#{_trexuq3a6xwwqqhxxxxxvinvoice.a0xxuobxbxxxxxxxxxxxsid}"
+           value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.resultList}"
+           rendered="#{not empty trexuq3a6xwwqqhxxxxxvinvoiceList.resultList}">
+         <p:column headerText="Action">
+            <h:selectBooleanCheckbox id="MarkItCheckbox" value="#{trexuq3a6xwwqqhxxxxxvinvoiceHome.checked[_trexuq3a6xwwqqhxxxxxvinvoice.a0xxuobxbxxxxxxxxxxxsid]}"/>
+            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+            <h:link outcome="/#{empty from ? 'vinvoice' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+                   propagation="#{empty from ? 'none' : 'default'}"
+                      id="trexuq3a6xwwqqhxxxxxvinvoiceViewId">
+                <f:param name="trexuq3a6xwwqqhxxxxxvinvoiceA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_trexuq3a6xwwqqhxxxxxvinvoice.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+             <h:link outcome="/vinvoiceEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="trexuq3a6xwwqqhxxxxxvinvoiceEdit1"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') ||customIdentity.hasRole('SH') ||customIdentity.hasRole('EH') 
+                  || (customIdentity.hasRole('VH') ||customIdentity.hasRole('VQ')
+                  and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="trexuq3a6xwwqqhxxxxxvinvoiceA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_trexuq3a6xwwqqhxxxxxvinvoice.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            <h:commandButton id="Download1" image="/img/arrow_down16.png" rendered="#{empty from and _trexuq3a6xwwqqhxxxxxvinvoice.yfxxuzdrbvxxxxxxxxxxdocmnt.length() >2}" action="#{trexuq3a6xwwqqhxxxxxvinvoiceHome.downloadThis(_trexuq3a6xwwqqhxxxxxvinvoice.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </p:column>
+        <p:column rendered = "#{!trexuq3a6xwwqqhxxxxxvinvoiceList.skipColumns}"
+                    headerText="Sid">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.a0xxuobxbxxxxxxxxxxxsid}"  id="a0xxuobxbxxxxxxxxxxxsid" />
+        </p:column>
+        <p:column rendered = "#{!trexuq3a6xwwqqhxxxxxvinvoiceList.skipColumns}"
+                    headerText="Invoice">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxunvibvxxxxxxxxxxinvoice) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.a0xxunvibvxxxxxxxxxxinvoice}"  id="a0xxunvibvxxxxxxxxxxinvoice" />
+        </p:column>
+        <p:column rendered = "#{!trexuq3a6xwwqqhxxxxxvinvoiceList.skipColumns}"
+                    headerText="Invodate">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.b3xxuxxrbvxxxxxxxxxxinvodate}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column rendered = "#{!trexuq3a6xwwqqhxxxxxvinvoiceList.skipColumns}"
+                    headerText="Amounttotal">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.b3xxztprlxxxxxxxxxxxamounttotal}"  id="b3xxztprlxxxxxxxxxxxamounttotal">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column rendered = "#{!trexuq3a6xwwqqhxxxxxvinvoiceList.skipColumns}"
+                    headerText="Terms">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b4xxuxxrbv09xxxxxxxxterms) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.b4xxuxxrbv09xxxxxxxxterms}"  id="b4xxuxxrbv09xxxxxxxxterms" />
+        </p:column>
+        <p:column rendered = "#{!trexuq3a6xwwqqhxxxxxvinvoiceList.skipColumns}"
+                    headerText="Discounp">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.c1xxzixrbvxxxxxxxxxxdiscounp}"  id="c1xxzixrbvxxxxxxxxxxdiscounp">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column rendered = "#{!trexuq3a6xwwqqhxxxxxvinvoiceList.skipColumns}"
+                    headerText="Discoudt">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.c2xxcxxrlxxxxxxxxxxxdiscoudt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Discouds">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.c3xxzxxrlvxxxxxxxxxxdiscouds}"  id="c3xxzxxrlvxxxxxxxxxxdiscouds">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Netddat">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.c4xxcxxrlxxxxxxxxxxxnetddat}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Netddys">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c5xxzxxrbvxxxxxxxxxxnetddys) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.c5xxzxxrbvxxxxxxxxxxnetddys}"  id="c5xxzxxrbvxxxxxxxxxxnetddys" />
+        </p:column>
+        <p:column 
+                    headerText="Fob">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c6xxuxxrbvxxxxxxxxxxfob) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.c6xxuxxrbvxxxxxxxxxxfob}"  id="c6xxuxxrbvxxxxxxxxxxfob" />
+        </p:column>
+        <p:column 
+                    headerText="Type">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c7xxuxxrbv10xxxxxxxxtype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.c7xxuxxrbv10xxxxxxxxtype}"  id="c7xxuxxrbv10xxxxxxxxtype" />
+        </p:column>
+        <p:column 
+                    headerText="Item Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fpxxfq1a5xwwqqhxxxxxitem pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Item Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fpxxfq1a5xwwqqhxxxxxitem pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Employee Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  jxxxbh400xwwqqhxxxxxemployee pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{jxxxbh400xwwqqhxxxxxemployeeList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Employee Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  jxxxbh400xwwqqhxxxxxemployee pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{jxxxbh400xwwqqhxxxxxemployeeList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+          <p:column
+                    headerText="Employee Details">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer O  jxxxbh400xwwqqhxxxxxemployee pfS 5 pfE 7 efS 6 efE 8 -->
+            <h:outputText value="#{jxxxbh400xwwqqhxxxxxemployeeList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Vendor Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  jxxxuq300xwwqqhxxxxxvendor pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{jxxxuq300xwwqqhxxxxxvendorList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Vendor Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  jxxxuq300xwwqqhxxxxxvendor pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{jxxxuq300xwwqqhxxxxxvendorList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+          <p:column
+                    headerText="Vendor Details">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer O  jxxxuq300xwwqqhxxxxxvendor pfS 5 pfE 7 efS 6 efE 8 -->
+            <h:outputText value="#{jxxxuq300xwwqqhxxxxxvendorList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Vendorders Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  trexuq344xwwqqhxxxxxvendorders pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{trexuq344xwwqqhxxxxxvendordersList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.trexuq344xwwqqhxxxxxvendorders.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Vendorders Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  trexuq344xwwqqhxxxxxvendorders pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{trexuq344xwwqqhxxxxxvendordersList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.trexuq344xwwqqhxxxxxvendorders.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Vshipmen Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  trexuq377xwwqqhxxxxxvshipmen pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{trexuq377xwwqqhxxxxxvshipmenList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.trexuq377xwwqqhxxxxxvshipmen.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Vshipmen Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  trexuq377xwwqqhxxxxxvshipmen pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{trexuq377xwwqqhxxxxxvshipmenList.getKeyValue(_trexuq3a6xwwqqhxxxxxvinvoice.trexuq377xwwqqhxxxxxvshipmen.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Integrset">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y2xxuwmxbv40xxxxxxxxintegrset) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.y2xxuwmxbv40xxxxxxxxintegrset}"  id="y2xxuwmxbv40xxxxxxxxintegrset" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Ref1typ">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y4xxuxxrbvxxxxxxxxxxref1typ) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.y4xxuxxrbvxxxxxxxxxxref1typ}"  id="y4xxuxxrbvxxxxxxxxxxref1typ" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Ref1code">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y5xxuxxrbvxxxxxxxxxxref1code) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.y5xxuxxrbvxxxxxxxxxxref1code}"  id="y5xxuxxrbvxxxxxxxxxxref1code" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Shipdatet">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.y6xxcxxrlxxxxxxxxxxxshipdatet}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Shiptype">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y7xxuxxrbv51xxxxxxxxshiptype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.y7xxuxxrbv51xxxxxxxxshiptype}"  id="y7xxuxxrbv51xxxxxxxxshiptype" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Attach">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ydxxuxxrbvxxxxxxxxxxattach) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.ydxxuxxrbvxxxxxxxxxxattach}"  id="ydxxuxxrbvxxxxxxxxxxattach" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Notes">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(yexxuznybvxxxxxxxxxxnotes) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.yexxuznybvxxxxxxxxxxnotes}"  id="yexxuznybvxxxxxxxxxxnotes" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Amountostndt">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.z1xxzyprlxxxxxxxxxxxamountostndt}"  id="z1xxzyprlxxxxxxxxxxxamountostndt">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Qtytotal">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.z2xxztqrlxxxxxxxxxxxqtytotal}"  id="z2xxztqrlxxxxxxxxxxxqtytotal">
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Qtyostndt">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.z3xxzyqrlxxxxxxxxxxxqtyostndt}"  id="z3xxzyqrlxxxxxxxxxxxqtyostndt">
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Statusfldt">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.z5xxcztxlxxxxxxxxxxxstatusfldt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Termsdat">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.z6xxcxxrlxxxxxxxxxxxtermsdat}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Baseamountt">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.z7xxzbtxavxxxxxxxxxxbaseamountt}"  id="z7xxzbtxavxxxxxxxxxxbaseamountt">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Delivchrgt">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.z7xxzltxavxxxxxxxxxxdelivchrgt}"  id="z7xxzltxavxxxxxxxxxxdelivchrgt">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Miscchrgt">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.z8xxzmtxavxxxxxxxxxxmiscchrgt}"  id="z8xxzmtxavxxxxxxxxxxmiscchrgt">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Tax1amtt">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.z9xxzxz1avxxxxxxxxxxtax1amtt}"  id="z9xxzxz1avxxxxxxxxxxtax1amtt">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Tax2amtt">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.zaxxzxz2avxxxxxxxxxxtax2amtt}"  id="zaxxzxz2avxxxxxxxxxxtax2amtt">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Tax3amtt">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.zbxxzxz3avxxxxxxxxxxtax3amtt}"  id="zbxxzxz3avxxxxxxxxxxtax3amtt">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Printmstat">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zcxxzzprhvxxxxxxxxxxprintmstat) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.zcxxzzprhvxxxxxxxxxxprintmstat}"  id="zcxxzzprhvxxxxxxxxxxprintmstat" rendered="#{customIdentity.hasRole('EH')}"/>
+        </p:column>
+        <p:column 
+                    headerText="Prinmtfldt">
+          <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.zdxxczqxlhxxxxxxxxxxprinmtfldt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Owner2">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_trexuq3a6xwwqqhxxxxxvinvoice.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+        </p:column>
+        <p:column 
+            headerText="Action">
+            #{' '}
+             <h:link outcome="/vinvoiceEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="trexuq3a6xwwqqhxxxxxvinvoiceEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="trexuq3a6xwwqqhxxxxxvinvoiceA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_trexuq3a6xwwqqhxxxxxvinvoice.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+            <h:commandButton id="Download" image="/img/arrow_down16.png" rendered="#{empty from and _trexuq3a6xwwqqhxxxxxvinvoice.yfxxuzdrbvxxxxxxxxxxdocmnt.length() >2}" action="#{trexuq3a6xwwqqhxxxxxvinvoiceHome.downloadThis(_trexuq3a6xwwqqhxxxxxvinvoice.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </p:column>
+    </p:dataTable>
+    </div>
+    </p:panel>
+    <div class="tableControl">
+        <h:link outcome="/vinvoiceList.more.xhtml"
+            rendered="#{trexuq3a6xwwqqhxxxxxvinvoiceList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+            <f:param name="maxResultsVal"
+                    value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/vinvoiceList.more.xhtml"
+            rendered="#{trexuq3a6xwwqqhxxxxxvinvoiceList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/vinvoiceList.more.xhtml"
+            rendered="#{trexuq3a6xwwqqhxxxxxvinvoiceList.nextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/vinvoiceList.more.xhtml"
+            rendered="#{trexuq3a6xwwqqhxxxxxvinvoiceList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.lastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+         <h:button outcome="/vinvoiceEdit.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+            rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Vinvoice']}">
+        </h:button>
+
+
+
+         <h:button outcome="/#{empty trexuq3a6xwwqqhxxxxxvinvoiceFrom ? 'home' : trexuq3a6xwwqqhxxxxxvinvoiceFrom}.xhtml"
+          id="donefy"
+         value="Done"/>&nbsp;
+
+
+       <ui:remove>
+       </ui:remove>
+
+
+
+
+        <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessagesb"/>
+
+<br/>
+    </div>
+            <p:hotkey  actionListener="#{trexuq3a6xwwqqhxxxxxvinvoiceList.getFirstResult()}" bind="return">
+            </p:hotkey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

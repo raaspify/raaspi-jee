@@ -1,0 +1,463 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="xoxxuq9f4xwwqqhxxxxxprocessattributesA0xxuobxbxxxxxxxxxxxsid" value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.xoxxuq9f4xwwqqhxxxxxprocessattributesA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="xoxxuq9f4xwwqqhxxxxxprocessattributesFrom" value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.xoxxuq9f4xwwqqhxxxxxprocessattributesFrom}"/>
+    <f:viewAction action="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.restrict()}" />
+    <f:viewAction action="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Processattributes']}</ui:define>
+
+<ui:define name="body">
+<h:form id="xoxxuq9f4xwwqqhxxxxxprocessattributes" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("xoxxuq9f4xwwqqhxxxxxprocessattributes:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!xoxxuq9f4xwwqqhxxxxxprocessattributesHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ProcessattributesEditHelp']!='ProcessattributesEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ProcessattributesEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.managed ? 'Edit' : 'Add'} #{messages['Processattributes']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+       <p:tabView switchType="client" >
+           <p:tab title="#{messages['Processdetails']}"
+             rendered="true">
+           <ui:decorate id="xxxxuq9ccxwwqqhxxxxxprocessdetailsDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Processdetails']} 
+            </ui:define>
+                <p:remoteCommand name="xxxxuq9ccxwwqqhxxxxxprocessdetailsFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="xxxxuq9ccxwwqqhxxxxxprocessdetailssm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.validateAndSelectXxxxxxxxprocess}" 
+                   value="#{xxxxuq9ccxwwqqhxxxxxprocessdetailsHome.lastxxxxuq9ccxwwqqhxxxxxprocessdetailsP}" onchange="xxxxuq9ccxwwqqhxxxxxprocessdetailsFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{xxxxuq9ccxwwqqhxxxxxprocessdetailsList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+
+
+
+
+
+
+   </p:tabView>
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a4xxuuxxbv19xxxxxxxxnameDecoration"    >
+        <h:outputLabel  for="a4xxuuxxbv19xxxxxxxxname" value="#{messages['Name']}">
+      </h:outputLabel>
+ 
+               <h:selectOneMenu style="width:250px;"  value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.a4xxuuxxbv19xxxxxxxxname}" required="false" id="a4xxuuxxbv19xxxxxxxxname">
+               <f:ajax  render="a4xxuuxxbv19xxxxxxxxnameI" bypassUpdates="false"/>
+                                <f:selectItem itemValue="#{null}" itemLabel="" />
+                                <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('9f',19)}"  var="babu"  
+                                 itemLabel="#{babu.key}"
+                                 itemValue="#{babu.value}" /> 
+                               </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="a8xxuxxrlxxxxxxxxxxxrangeDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="a8xxuxxrlxxxxxxxxxxxrange" value="#{messages['Range']}">
+      </h:outputLabel>
+
+         <h:inputText id="a8xxuxxrlxxxxxxxxxxxrange" 
+                           size="20"
+                      maxlength="32"
+                          value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.a8xxuxxrlxxxxxxxxxxxrange}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="a9xxtxsclxxxxxxxxxxxtypeDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="a9xxtxsclxxxxxxxxxxxtype" value="#{messages['Type']}">
+      </h:outputLabel>
+
+         <h:inputText id="a9xxtxsclxxxxxxxxxxxtype" 
+                           size="20"
+                      maxlength="32"
+                        rendered="false"
+                          value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.a9xxtxsclxxxxxxxxxxxtype}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="a9xxtxsolxxxxxxxxxxxvalueDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="a9xxtxsolxxxxxxxxxxxvalue" value="#{messages['Value']}">
+      </h:outputLabel>
+
+         <h:inputText id="a9xxtxsolxxxxxxxxxxxvalue" 
+                           size="20"
+                      maxlength="32"
+                        rendered="false"
+                          value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.a9xxtxsolxxxxxxxxxxxvalue}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="yaxxzxxxavxxxxxxxxxxnotesDecoration"  rendered="true">
+        <h:outputLabel  for="yaxxzxxxavxxxxxxxxxxnotes" value="#{messages['Notes']}">
+      </h:outputLabel>
+
+         <h:inputText id="yaxxzxxxavxxxxxxxxxxnotes" 
+                           size="20"
+                      maxlength="60"
+                          value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.yaxxzxxxavxxxxxxxxxxnotes}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z1xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z1xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="z1xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z2xxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="z2xxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.z2xxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z4xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z4xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="z4xxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.z4xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zaxxzxxxavxxxxxxxxxxstepDecoration"  rendered="true">
+        <h:outputLabel  for="zaxxzxxxavxxxxxxxxxxstep" value="#{messages['Step']}">
+      </h:outputLabel>
+                <h:inputText id="zaxxzxxxavxxxxxxxxxxstep" 
+                          value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.zaxxzxxxavxxxxxxxxxxstep}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.} #{messages['sid']} #{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance. !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.persist()}"
+                       disabled="#{!xoxxuq9f4xwwqqhxxxxxprocessattributesHome.wired}"
+                       rendered="#{!xoxxuq9f4xwwqqhxxxxxprocessattributesHome.managed  and !xoxxuq9f4xwwqqhxxxxxprocessattributesHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.update()}"
+                       rendered="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.managed  and !xoxxuq9f4xwwqqhxxxxxprocessattributesHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.update()}"
+                       rendered="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.managed and xoxxuq9f4xwwqqhxxxxxprocessattributesHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.remove()}"
+                       rendered="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.managed and !xoxxuq9f4xwwqqhxxxxxprocessattributesHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/processattributesEdit.xhtml"
+                       rendered="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesList.reportName}"/>
+            <f:param name="displayAs" value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesList.displayAs}" /> 
+            <h:button outcome="/processattributesList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Processattributes']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty xoxxuq9f4xwwqqhxxxxxprocessattributesHome.xoxxuq9f4xwwqqhxxxxxprocessattributesFrom ? 'home' : xoxxuq9f4xwwqqhxxxxxprocessattributesHome.xoxxuq9f4xwwqqhxxxxxprocessattributesFrom}.xhtml"
+                rendered="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.managed or xoxxuq9f4xwwqqhxxxxxprocessattributesHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty xoxxuq9f4xwwqqhxxxxxprocessattributesHome.xoxxuq9f4xwwqqhxxxxxprocessattributesFrom ? 'home' : xoxxuq9f4xwwqqhxxxxxprocessattributesHome.xoxxuq9f4xwwqqhxxxxxprocessattributesFrom}.xhtml"
+                rendered="#{!xoxxuq9f4xwwqqhxxxxxprocessattributesHome.managed and !xoxxuq9f4xwwqqhxxxxxprocessattributesHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="true" rendered="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" toggleable="true" toggleableHeader="true">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+  <p:tabView switchType="ajax">
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Processdetails']}">
+    <div class="association" id="xxxxuq9ccxwwqqhxxxxxprocessdetailsParent">
+        
+        <h:outputText value="No processdetails" 
+                   rendered="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.xxxxuq9ccxwwqqhxxxxxprocessdetails == null}"/>
+        
+        <p:dataTable var="xxxxuq9ccxwwqqhxxxxxprocessdetails" tableStyle="table-layout:auto;"
+                   value="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.xxxxuq9ccxwwqqhxxxxxprocessdetails}" 
+                rendered="#{xoxxuq9f4xwwqqhxxxxxprocessattributesHome.instance.xxxxuq9ccxwwqqhxxxxxprocessdetails != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="xxxxuq9ccxwwqqhxxxxxprocessdetailsTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewprocessdetails" 
+                     value="View" 
+                      outcome="/processdetails.xhtml">
+                       <f:param disable="#{empty xxxxuq9ccxwwqqhxxxxxprocessdetails.a0xxuobxbxxxxxxxxxxxsid}" name="xxxxuq9ccxwwqqhxxxxxprocessdetailsA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{xxxxuq9ccxwwqqhxxxxxprocessdetails.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">process</f:facet>
+                   #{xxxxuq9ccxwwqqhxxxxxprocessdetails.a0xxukpdbvxxxxxxxxxxprocess}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">notes</f:facet>
+                   #{xxxxuq9ccxwwqqhxxxxxprocessdetails.b9xxuxznbvxxxxxxxxxxnotes}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">item sid</f:facet>
+		    	  #{xxxxuq9ccxwwqqhxxxxxprocessdetails.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">customer sid</f:facet>
+		    	  #{xxxxuq9ccxwwqqhxxxxxprocessdetails.jxxxuq201xwwqqhxxxxxcustomer.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">cuorders sid</f:facet>
+		    	  #{xxxxuq9ccxwwqqhxxxxxprocessdetails.trexuq244xwwqqhxxxxxcuorders.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{xxxxuq9ccxwwqqhxxxxxprocessdetails.z2xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{xxxxuq9ccxwwqqhxxxxxprocessdetails.z3xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{xxxxuq9ccxwwqqhxxxxxprocessdetails.z4xxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

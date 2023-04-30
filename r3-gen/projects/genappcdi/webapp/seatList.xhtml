@@ -1,0 +1,681 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid" value="#{fxxxuq1skxwwqqhxxxxxseatHome.fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}"/>
+    <f:viewAction action="#{fxxxuq1skxwwqqhxxxxxseatHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Seat']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="fxxxuq1skxwwqqhxxxxxseatSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']}" propagation="end"  outcome="/home.xhtml" />
+             <p:ajaxStatus name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['SeatListHelp']!='SeatListHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['SeatListHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+
+ <p:panel style="width: 50%;" header="#{messages['Seat']}- #{messages['List']} #{messages['Search']} #{messages['Result']}, #{messages['click']} #{messages['to']} #{messages['change']} #{messages['search']}  #{messages['criteria']}" switchType="ajax" collapsed="true"
+     toggleable="true" toggleableHeader="true">
+
+<h:panelGrid columns="20">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{fxxxuq1skxwwqqhxxxxxseatList.searchVal}"/>
+ </ui:decorate>
+  <h:outputText id="searchVJ" value="#{fxxxuq1skxwwqqhxxxxxseatList.searchValJ}" rendered="#{fxxxuq1skxwwqqhxxxxxseatList.searchVal.isEmpty()}"/>
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText id="toDay" ph:type="date" value="#{fxxxuq1skxwwqqhxxxxxseatList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <h:commandButton id="setToday" render="toDay" value="#{messages['set']} #{messages['Today']}"   action="#{fxxxuq1skxwwqqhxxxxxseatList.setSearchDate(fxxxuq1skxwwqqhxxxxxseatHome.currentTime)}" />
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label"> #{messages['status']}  </ui:define>
+  <h:panelGrid columns="2" >
+         <h:selectOneMenu value="#{fxxxuq1skxwwqqhxxxxxseatList.searchStatus}"> 
+          <f:selectItem itemLabel="all" itemValue="#{null}"/>
+          <f:selectItem itemLabel="open" itemValue="0"/>
+          <f:selectItem itemLabel="active/ordered" itemValue="1"/>
+           <f:selectItem itemLabel="return" itemValue="4"/>
+          <f:selectItem itemLabel="closed" itemValue="8"/>
+           <f:selectItem itemLabel="paid" itemValue="16"/>
+           <f:selectItem itemLabel="partial/shipped" itemValue="32"/>
+           <f:selectItem itemLabel="printed/final approved" itemValue="512"/>
+          <f:selectItem itemLabel="marked" itemValue="128"/>
+          <f:selectItem itemLabel="deleted" itemValue="256"/>
+         </h:selectOneMenu>
+  </h:panelGrid>
+ </ui:decorate>
+</h:panelGrid>
+
+
+
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{fxxxuq1skxwwqqhxxxxxseatList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{fxxxuq1skxwwqqhxxxxxseatList.suggest(fxxxuq1skxwwqqhxxxxxseatHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{fxxxuq1skxwwqqhxxxxxseatList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{fxxxuq1skxwwqqhxxxxxseatList.suggest(fxxxuq1skxwwqqhxxxxxseatHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="fxxxuq1skxwwqqhxxxxxseatList,globalMessages" status="buttonStatus" value="#{messages['Search']}" 
+              actionListener="#{fxxxuq1skxwwqqhxxxxxseatList.getFirstResult()}" rendered="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+            &nbsp;<h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</p:panel>
+
+    <p:panel>
+
+        <div class="actionButtons">
+             <h:commandButton id="copyallt" value="Copy All Flagged"  action="#{fxxxuq1skxwwqqhxxxxxseatHome.copyAllMarked()}" 
+                rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}" status="buttonStatus"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+             <h:commandButton id="deleteallt" value="#{messages['Delete']} #{messages['All']} #{messages['Flagged']}"  action="#{fxxxuq1skxwwqqhxxxxxseatHome.deleteAllFlagged()}"
+              onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Deletes']} #{messages['detail']} #{messages['records']} #{messages['as-well']},#{messages['but']} #{messages['not']} #{messages['all']} #{messages['constraints']}"/></span> </p:tooltip> 
+             </h:commandButton>
+             <h:commandButton id="updateallt" value="Update All Flagged"  rendered="false" action="#{fxxxuq1skxwwqqhxxxxxseatHome.updateAllFlagged()}" />
+             <h:commandButton id="emailIcal" value="#{messages['email']} #{messages['as']} #{messages['iCalendar']}"  rendered="false" action="#{fxxxuq1skxwwqqhxxxxxseatHome.writeAsIcalText()}"/>
+
+            <h:button outcome="/#{empty fxxxuq1skxwwqqhxxxxxseatFrom ? 'home' : fxxxuq1skxwwqqhxxxxxseatFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <ui:remove>  do not render list page once > 50 rows  to avoid excedding max http params </ui:remove>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{fxxxuq1skxwwqqhxxxxxseatList.setMaxResultsVal(6)}" rendered="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{fxxxuq1skxwwqqhxxxxxseatList.setMaxResultsVal(50)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{fxxxuq1skxwwqqhxxxxxseatList.setMaxResultsVal(100)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{fxxxuq1skxwwqqhxxxxxseatList.setskipColumns(true)}" rendered="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{fxxxuq1skxwwqqhxxxxxseatList.setskipColumns(false)}" rendered="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(ity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Seat Search Results showing #{empty fxxxuq1skxwwqqhxxxxxseatList.resultList ? 0 : (fxxxuq1skxwwqqhxxxxxseatList.paginated ? fxxxuq1skxwwqqhxxxxxseatList.resultList.size() : fxxxuq1skxwwqqhxxxxxseatList.resultCount)} of #{fxxxuq1skxwwqqhxxxxxseatList.resultCount}"/>
+        </f:facet>
+    <div class="results" id="fxxxuq1skxwwqqhxxxxxseatList" style="overflow-x:auto">
+
+    <h:outputText value="The Seat search returned no results."
+               rendered="#{empty fxxxuq1skxwwqqhxxxxxseatList.resultList}"/>
+
+
+    <p:panel id="stage" style="text-align:center;align-content:center;width:90%;height:50px;#{a4jSkin.generalBackgroundColor} !important; ">
+     <h:outputText value="|||||| STAGE ||||||" style="color:black;"/>
+    </p:panel>
+
+
+    <p:dataTable id="fxxxuq1skxwwqqhxxxxxseatList"  frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" rows="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}" scrollRows="6"
+           var="_fxxxuq1skxwwqqhxxxxxseat" selection="#{fxxxuq1skxwwqqhxxxxxseatHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}" rowKey="#{_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid}"
+           value="#{fxxxuq1skxwwqqhxxxxxseatList.resultList}"
+           rendered="#{not empty fxxxuq1skxwwqqhxxxxxseatList.resultList}">
+         <p:column >
+            <h:selectBooleanCheckbox id="MarkItCheckbox" value="#{fxxxuq1skxwwqqhxxxxxseatHome.checked[_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid]}"/>
+            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+            <h:link outcome="/#{empty from ? 'seat' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+                   propagation="#{empty from ? 'none' : 'default'}"
+                      id="fxxxuq1skxwwqqhxxxxxseatViewId">
+                <f:param name="fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+             <h:link outcome="/seatEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="fxxxuq1skxwwqqhxxxxxseatEdit1"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') ||customIdentity.hasRole('SH') ||customIdentity.hasRole('EH') 
+                  || (customIdentity.hasRole('VH') ||customIdentity.hasRole('VQ')
+                  and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+            <h:link outcome="/seatAllocateEdit.xhtml"
+                   value="#{messages['Assign']} #{messages['Seat']}"
+             propagation="none"
+                      id="fxxxuq1skxwwqqhxxxxxseatEditA"
+                rendered="#{empty from and (customIdentity.hasRole('UH') ||customIdentity.hasRole('UQ'))}">
+                <f:param name="fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+        </p:column>
+           <p:column rendered="#{!fxxxuq1skxwwqqhxxxxxseatList.skipColumns}"
+                      headerText="#{messages['Row']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a2xxukstbvxxxxxxxxxxrow) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.a2xxukstbvxxxxxxxxxxrow}"  id="a2xxukstbvxxxxxxxxxxrow" />
+            </p:column>
+           <p:column rendered="#{!fxxxuq1skxwwqqhxxxxxseatList.skipColumns}"
+                      headerText="#{messages['Rowlabel']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a3xxuxxxbvxxxxxxxxxxrowlabel) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.a3xxuxxxbvxxxxxxxxxxrowlabel}"  id="a3xxuxxxbvxxxxxxxxxxrowlabel" />
+            </p:column>
+           <p:column rendered="#{!fxxxuq1skxwwqqhxxxxxseatList.skipColumns}" 
+                      headerText="#{messages['001']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b1xxxxxxbvxxxxxxxxxxseat001status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b1xxxxxxbvxxxxxxxxxxseat001status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b1xxxxxxbvxxxxxxxxxxseat001status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.b2xxxxxxbvxxxxxxxxxxname001}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.b3xxxxxxbvxxxxxxxxxxticket001}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.b4xxxxxxbvxxxxxxxxxxpo001}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['002']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b5xxxxxxbvxxxxxxxxxxseat002status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b5xxxxxxbvxxxxxxxxxxseat002status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b5xxxxxxbvxxxxxxxxxxseat002status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.b6xxxxxxbvxxxxxxxxxxname002}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.b7xxxxxxbvxxxxxxxxxxticket002}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.b8xxxxxxbvxxxxxxxxxxpo002}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['003']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b9xxxxxxbvxxxxxxxxxxseat003status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b9xxxxxxbvxxxxxxxxxxseat003status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b9xxxxxxbvxxxxxxxxxxseat003status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.baxxxxxxbvxxxxxxxxxxname003}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.bbxxxxxxbvxxxxxxxxxxticket003}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.bcxxxxxxbvxxxxxxxxxxpo003}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['004']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bdxxxxxxbvxxxxxxxxxxseat004status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bdxxxxxxbvxxxxxxxxxxseat004status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bdxxxxxxbvxxxxxxxxxxseat004status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.bexxxxxxbvxxxxxxxxxxname004}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.bfxxxxxxbvxxxxxxxxxxticket004}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.bgxxxxxxbvxxxxxxxxxxpo004}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['005']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bhxxxxxxbvxxxxxxxxxxseat005status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bhxxxxxxbvxxxxxxxxxxseat005status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bhxxxxxxbvxxxxxxxxxxseat005status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.bixxxxxxbvxxxxxxxxxxname005}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.bjxxxxxxbvxxxxxxxxxxticket005}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.bkxxxxxxbvxxxxxxxxxxpo005}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['006']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(blxxxxxxbvxxxxxxxxxxseat006status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.blxxxxxxbvxxxxxxxxxxseat006status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.blxxxxxxbvxxxxxxxxxxseat006status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.bmxxxxxxbvxxxxxxxxxxname006}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.bnxxxxxxbvxxxxxxxxxxticket006}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.boxxxxxxbvxxxxxxxxxxpo006}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['007']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bpxxxxxxbvxxxxxxxxxxseat007status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bpxxxxxxbvxxxxxxxxxxseat007status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bpxxxxxxbvxxxxxxxxxxseat007status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.bqxxxxxxbvxxxxxxxxxxname007}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.brxxxxxxbvxxxxxxxxxxticket007}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.bsxxxxxxbvxxxxxxxxxxpo007}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['008']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(btxxxxxxbvxxxxxxxxxxseat008status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.btxxxxxxbvxxxxxxxxxxseat008status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.btxxxxxxbvxxxxxxxxxxseat008status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.buxxxxxxbvxxxxxxxxxxname008}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.bvxxxxxxbvxxxxxxxxxxticket008}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.bwxxxxxxbvxxxxxxxxxxpo008}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['009']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bxxxxxxxbvxxxxxxxxxxseat009status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bxxxxxxxbvxxxxxxxxxxseat009status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bxxxxxxxbvxxxxxxxxxxseat009status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.byxxxxxxbvxxxxxxxxxxname009}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.bzxxxxxxbvxxxxxxxxxxticket009}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.c1xxxxxxbvxxxxxxxxxxpo009}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['010']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c2xxxxxxbvxxxxxxxxxxseat010status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.c2xxxxxxbvxxxxxxxxxxseat010status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.c2xxxxxxbvxxxxxxxxxxseat010status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.c3xxxxxxbvxxxxxxxxxxname010}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.c4xxxxxxbvxxxxxxxxxxticket010}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.c5xxxxxxbvxxxxxxxxxxpo010}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['011']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c6xxxxxxbvxxxxxxxxxxseat011status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.c6xxxxxxbvxxxxxxxxxxseat011status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.c6xxxxxxbvxxxxxxxxxxseat011status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.c7xxxxxxbvxxxxxxxxxxname011}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.c8xxxxxxbvxxxxxxxxxxticket011}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.c9xxxxxxbvxxxxxxxxxxpo011}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['012']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(caxxxxxxbvxxxxxxxxxxseat012status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.caxxxxxxbvxxxxxxxxxxseat012status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.caxxxxxxbvxxxxxxxxxxseat012status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.cbxxxxxxbvxxxxxxxxxxname012}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.ccxxxxxxbvxxxxxxxxxxticket012}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.cdxxxxxxbvxxxxxxxxxxpo012}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['013']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cexxxxxxbvxxxxxxxxxxseat013status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cexxxxxxbvxxxxxxxxxxseat013status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cexxxxxxbvxxxxxxxxxxseat013status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.cfxxxxxxbvxxxxxxxxxxname013}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.cgxxxxxxbvxxxxxxxxxxticket013}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.chxxxxxxbvxxxxxxxxxxpo013}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['014']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cixxxxxxbvxxxxxxxxxxseat014status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cixxxxxxbvxxxxxxxxxxseat014status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cixxxxxxbvxxxxxxxxxxseat014status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.cjxxxxxxbvxxxxxxxxxxname014}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.ckxxxxxxbvxxxxxxxxxxticket014}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.clxxxxxxbvxxxxxxxxxxpo014}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['015']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cmxxxxxxbvxxxxxxxxxxseat015status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cmxxxxxxbvxxxxxxxxxxseat015status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cmxxxxxxbvxxxxxxxxxxseat015status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.cnxxxxxxbvxxxxxxxxxxname015}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.coxxxxxxbvxxxxxxxxxxticket015}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.cpxxxxxxbvxxxxxxxxxxpo015}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['016']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cqxxxxxxbvxxxxxxxxxxseat016status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cqxxxxxxbvxxxxxxxxxxseat016status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cqxxxxxxbvxxxxxxxxxxseat016status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.crxxxxxxbvxxxxxxxxxxname016}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.csxxxxxxbvxxxxxxxxxxticket016}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.ctxxxxxxbvxxxxxxxxxxpo016}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['017']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cuxxxxxxbvxxxxxxxxxxseat017status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cuxxxxxxbvxxxxxxxxxxseat017status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cuxxxxxxbvxxxxxxxxxxseat017status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.cvxxxxxxbvxxxxxxxxxxname017}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.cxxxxxxxbvxxxxxxxxxxticket017}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.cyxxxxxxbvxxxxxxxxxxpo017}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['018']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(daxxxxxxbvxxxxxxxxxxseat018status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.daxxxxxxbvxxxxxxxxxxseat018status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.daxxxxxxbvxxxxxxxxxxseat018status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.dbxxxxxxbvxxxxxxxxxxname018}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.dcxxxxxxbvxxxxxxxxxxticket018}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.ddxxxxxxbvxxxxxxxxxxpo018}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['019']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dexxxxxxbvxxxxxxxxxxseat019status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dexxxxxxbvxxxxxxxxxxseat019status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dexxxxxxbvxxxxxxxxxxseat019status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.dfxxxxxxbvxxxxxxxxxxname019}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.dgxxxxxxbvxxxxxxxxxxticket019}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.dhxxxxxxbvxxxxxxxxxxpo019}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['020']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dixxxxxxbvxxxxxxxxxxseat020status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dixxxxxxbvxxxxxxxxxxseat020status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dixxxxxxbvxxxxxxxxxxseat020status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.djxxxxxxbvxxxxxxxxxxname020}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.dkxxxxxxbvxxxxxxxxxxticket020}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.dlxxxxxxbvxxxxxxxxxxpo020}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['021']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dmxxxxxxbvxxxxxxxxxxseat021status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dmxxxxxxbvxxxxxxxxxxseat021status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dmxxxxxxbvxxxxxxxxxxseat021status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.dnxxxxxxbvxxxxxxxxxxname021}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.doxxxxxxbvxxxxxxxxxxticket021}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.dpxxxxxxbvxxxxxxxxxxpo021}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['022']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dqxxxxxxbvxxxxxxxxxxseat022status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dqxxxxxxbvxxxxxxxxxxseat022status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dqxxxxxxbvxxxxxxxxxxseat022status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.drxxxxxxbvxxxxxxxxxxname022}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.dsxxxxxxbvxxxxxxxxxxticket022}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.dtxxxxxxbvxxxxxxxxxxpo022}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['023']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(duxxxxxxbvxxxxxxxxxxseat023status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.duxxxxxxbvxxxxxxxxxxseat023status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.duxxxxxxbvxxxxxxxxxxseat023status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.dvxxxxxxbvxxxxxxxxxxname023}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.dwxxxxxxbvxxxxxxxxxxticket023}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.dxxxxxxxbvxxxxxxxxxxpo023}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['024']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(e1xxxxxxbvxxxxxxxxxxseat024status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.e1xxxxxxbvxxxxxxxxxxseat024status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.e1xxxxxxbvxxxxxxxxxxseat024status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.e2xxxxxxbvxxxxxxxxxxname024}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.e3xxxxxxbvxxxxxxxxxxticket024}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.e4xxxxxxbvxxxxxxxxxxpo024}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['025']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(eaxxxxxxbvxxxxxxxxxxseat025status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.eaxxxxxxbvxxxxxxxxxxseat025status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.eaxxxxxxbvxxxxxxxxxxseat025status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.ebxxxxxxbvxxxxxxxxxxname025}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.ecxxxxxxbvxxxxxxxxxxticket025}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.edxxxxxxbvxxxxxxxxxxpo025}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['026']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(efxxxxxxbvxxxxxxxxxxseat026status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.efxxxxxxbvxxxxxxxxxxseat026status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.efxxxxxxbvxxxxxxxxxxseat026status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.egxxxxxxbvxxxxxxxxxxname026}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.ehxxxxxxbvxxxxxxxxxxticket026}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.eixxxxxxbvxxxxxxxxxxpo026}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['027']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ejxxxxxxbvxxxxxxxxxxseat027status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.ejxxxxxxbvxxxxxxxxxxseat027status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.ejxxxxxxbvxxxxxxxxxxseat027status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.ekxxxxxxbvxxxxxxxxxxname027}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.elxxxxxxbvxxxxxxxxxxticket027}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.emxxxxxxbvxxxxxxxxxxpo027}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['028']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(enxxxxxxbvxxxxxxxxxxseat028status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.enxxxxxxbvxxxxxxxxxxseat028status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.enxxxxxxbvxxxxxxxxxxseat028status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.eoxxxxxxbvxxxxxxxxxxname028}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.epxxxxxxbvxxxxxxxxxxticket028}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.eqxxxxxxbvxxxxxxxxxxpo028}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['029']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(erxxxxxxbvxxxxxxxxxxseat029status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.erxxxxxxbvxxxxxxxxxxseat029status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.erxxxxxxbvxxxxxxxxxxseat029status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.esxxxxxxbvxxxxxxxxxxname029}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.etxxxxxxbvxxxxxxxxxxticket029}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.euxxxxxxbvxxxxxxxxxxpo029}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['030']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(evxxxxxxbvxxxxxxxxxxseat030status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.evxxxxxxbvxxxxxxxxxxseat030status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.evxxxxxxbvxxxxxxxxxxseat030status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.ewxxxxxxbvxxxxxxxxxxname030}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.exxxxxxxbvxxxxxxxxxxticket030}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.eyxxxxxxbvxxxxxxxxxxpo030}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['031']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(faxxxxxxbvxxxxxxxxxxseat031status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.faxxxxxxbvxxxxxxxxxxseat031status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.faxxxxxxbvxxxxxxxxxxseat031status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.fbxxxxxxbvxxxxxxxxxxname031}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.fcxxxxxxbvxxxxxxxxxxticket031}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.fdxxxxxxbvxxxxxxxxxxpo031}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['032']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fexxxxxxbvxxxxxxxxxxseat032status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fexxxxxxbvxxxxxxxxxxseat032status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fexxxxxxbvxxxxxxxxxxseat032status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.ffxxxxxxbvxxxxxxxxxxname032}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.fgxxxxxxbvxxxxxxxxxxticket032}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.fhxxxxxxbvxxxxxxxxxxpo032}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['033']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fixxxxxxbvxxxxxxxxxxseat033status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fixxxxxxbvxxxxxxxxxxseat033status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fixxxxxxbvxxxxxxxxxxseat033status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.fjxxxxxxbvxxxxxxxxxxname033}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.fkxxxxxxbvxxxxxxxxxxticket033}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.flxxxxxxbvxxxxxxxxxxpo033}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['034']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fmxxxxxxbvxxxxxxxxxxseat034status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fmxxxxxxbvxxxxxxxxxxseat034status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fmxxxxxxbvxxxxxxxxxxseat034status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.fnxxxxxxbvxxxxxxxxxxname034}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.foxxxxxxbvxxxxxxxxxxticket034}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.fpxxxxxxbvxxxxxxxxxxpo034}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['035']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fqxxxxxxbvxxxxxxxxxxseat035status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fqxxxxxxbvxxxxxxxxxxseat035status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fqxxxxxxbvxxxxxxxxxxseat035status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.frxxxxxxbvxxxxxxxxxxname035}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.fsxxxxxxbvxxxxxxxxxxticket035}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.ftxxxxxxbvxxxxxxxxxxpo035}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['036']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fuxxxxxxbvxxxxxxxxxxseat036status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fuxxxxxxbvxxxxxxxxxxseat036status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fuxxxxxxbvxxxxxxxxxxseat036status=='H'}"/>
+        <p:column 
+                    headerText="Location Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fxxxcq144xwwqqhxxxxxlocation pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fxxxcq144xwwqqhxxxxxlocationList.getKeyValue(_fxxxuq1skxwwqqhxxxxxseat.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.fvxxxxxxbvxxxxxxxxxxname036}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.fwxxxxxxbvxxxxxxxxxxticket036}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.fxxxxxxxbvxxxxxxxxxxpo036}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['037']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gaxxxxxxbvxxxxxxxxxxseat037status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gaxxxxxxbvxxxxxxxxxxseat037status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gaxxxxxxbvxxxxxxxxxxseat037status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.gbxxxxxxbvxxxxxxxxxxname037}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.gcxxxxxxbvxxxxxxxxxxticket037}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.gdxxxxxxbvxxxxxxxxxxpo037}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['038']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gexxxxxxbvxxxxxxxxxxseat038status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gexxxxxxbvxxxxxxxxxxseat038status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gexxxxxxbvxxxxxxxxxxseat038status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.gfxxxxxxbvxxxxxxxxxxname038}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.ggxxxxxxbvxxxxxxxxxxticket038}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.ghxxxxxxbvxxxxxxxxxxpo038}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['039']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gixxxxxxbvxxxxxxxxxxseat039status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gixxxxxxbvxxxxxxxxxxseat039status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gixxxxxxbvxxxxxxxxxxseat039status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.gjxxxxxxbvxxxxxxxxxxname039}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.gkxxxxxxbvxxxxxxxxxxticket039}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.glxxxxxxbvxxxxxxxxxxpo039}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['040']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gmxxxxxxbvxxxxxxxxxxseat040status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gmxxxxxxbvxxxxxxxxxxseat040status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gmxxxxxxbvxxxxxxxxxxseat040status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.gnxxxxxxbvxxxxxxxxxxname040}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.goxxxxxxbvxxxxxxxxxxticket040}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.gpxxxxxxbvxxxxxxxxxxpo040}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['041']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gqxxxxxxbvxxxxxxxxxxseat041status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gqxxxxxxbvxxxxxxxxxxseat041status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gqxxxxxxbvxxxxxxxxxxseat041status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.grxxxxxxbvxxxxxxxxxxname041}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.gsxxxxxxbvxxxxxxxxxxticket041}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.gtxxxxxxbvxxxxxxxxxxpo041}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['042']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(guxxxxxxbvxxxxxxxxxxseat042status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.guxxxxxxbvxxxxxxxxxxseat042status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.guxxxxxxbvxxxxxxxxxxseat042status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.gvxxxxxxbvxxxxxxxxxxname042}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.gwxxxxxxbvxxxxxxxxxxticket042}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.gxxxxxxxbvxxxxxxxxxxpo042}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['043']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(haxxxxxxbvxxxxxxxxxxseat043status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.haxxxxxxbvxxxxxxxxxxseat043status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.haxxxxxxbvxxxxxxxxxxseat043status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.hbxxxxxxbvxxxxxxxxxxname043}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.hcxxxxxxbvxxxxxxxxxxticket043}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.hdxxxxxxbvxxxxxxxxxxpo043}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['044']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hexxxxxxbvxxxxxxxxxxseat044status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hexxxxxxbvxxxxxxxxxxseat044status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hexxxxxxbvxxxxxxxxxxseat044status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.hfxxxxxxbvxxxxxxxxxxname044}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.hgxxxxxxbvxxxxxxxxxxticket044}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.hhxxxxxxbvxxxxxxxxxxpo044}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['045']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hixxxxxxbvxxxxxxxxxxseat045status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hixxxxxxbvxxxxxxxxxxseat045status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hixxxxxxbvxxxxxxxxxxseat045status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.hjxxxxxxbvxxxxxxxxxxname045}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.hkxxxxxxbvxxxxxxxxxxticket045}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.hlxxxxxxbvxxxxxxxxxxpo045}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['046']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hmxxxxxxbvxxxxxxxxxxseat046status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hmxxxxxxbvxxxxxxxxxxseat046status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hmxxxxxxbvxxxxxxxxxxseat046status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.hnxxxxxxbvxxxxxxxxxxname046}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.hoxxxxxxbvxxxxxxxxxxticket046}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.hpxxxxxxbvxxxxxxxxxxpo046}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['047']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hqxxxxxxbvxxxxxxxxxxseat047status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hqxxxxxxbvxxxxxxxxxxseat047status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hqxxxxxxbvxxxxxxxxxxseat047status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.hrxxxxxxbvxxxxxxxxxxname047}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.hsxxxxxxbvxxxxxxxxxxticket047}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.htxxxxxxbvxxxxxxxxxxpo047}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['048']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(huxxxxxxbvxxxxxxxxxxseat048status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.huxxxxxxbvxxxxxxxxxxseat048status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.huxxxxxxbvxxxxxxxxxxseat048status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.hvxxxxxxbvxxxxxxxxxxname048}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.hwxxxxxxbvxxxxxxxxxxticket048}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.hxxxxxxxbvxxxxxxxxxxpo048}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['049']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(iaxxxxxxbvxxxxxxxxxxseat049status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.iaxxxxxxbvxxxxxxxxxxseat049status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.iaxxxxxxbvxxxxxxxxxxseat049status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.ibxxxxxxbvxxxxxxxxxxname049}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.icxxxxxxbvxxxxxxxxxxticket049}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.idxxxxxxbvxxxxxxxxxxpo049}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column  
+                      headerText="#{messages['050']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(iexxxxxxbvxxxxxxxxxxseat050status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.iexxxxxxbvxxxxxxxxxxseat050status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.iexxxxxxbvxxxxxxxxxxseat050status=='H'}"/>
+        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.ifxxxxxxbvxxxxxxxxxxname050}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.igxxxxxxbvxxxxxxxxxxticket050}"/><h:outputText value=" #{_fxxxuq1skxwwqqhxxxxxseat.ihxxxxxxbvxxxxxxxxxxpo050}"/></span> </p:tooltip> 
+         </p:column> 
+           <p:column 
+                      headerText="#{messages['Owner']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z3xxutoxlhxxxxxxxxxxowner) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.z3xxutoxlhxxxxxxxxxxowner}"  id="z3xxutoxlhxxxxxxxxxxowner" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Statusfl']}">
+              <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.zixxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(_fxxxuq1skxwwqqhxxxxxseat.zixxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(_fxxxuq1skxwwqqhxxxxxseat.zixxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid/waiting approval':( _fxxxuq1skxwwqqhxxxxxseat.zixxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped/approved': (_fxxxuq1skxwwqqhxxxxxseat.zixxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced/final approved':(_trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 1 ?'active/ordered':'new/other')))))}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Statusfldt']}">
+              <h:outputText value="#{_fxxxuq1skxwwqqhxxxxxseat.zjxxcztxlxxxxxxxxxxxstatusfldt}"  id="statusfldt" >
+               <f:convertDateTime pattern="dd/MM/yy h:mm:s z"/>
+              </h:outputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Owner2']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+            </p:column>
+        <p:column 
+            headerText="Action">
+            #{' '}
+             <h:link outcome="/seatEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="fxxxuq1skxwwqqhxxxxxseatEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+        </p:column>
+    </p:dataTable>
+    </div>
+    </p:panel>
+    <div class="tableControl">
+        <h:link outcome="/seatList.xhtml"
+            rendered="#{fxxxuq1skxwwqqhxxxxxseatList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+          <f:param name="maxResultsVal"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}"/>
+        </h:link>
+        <h:link outcome="/seatList.xhtml"
+            rendered="#{fxxxuq1skxwwqqhxxxxxseatList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/seatList.xhtml"
+            rendered="#{fxxxuq1skxwwqqhxxxxxseatList.nextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/seatList.xhtml"
+            rendered="#{fxxxuq1skxwwqqhxxxxxseatList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.lastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+         <h:button outcome="/seatEdit.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+            rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Seat']}">
+        </h:button>
+
+
+
+         <h:button outcome="/#{empty fxxxuq1skxwwqqhxxxxxseatFrom ? 'home' : fxxxuq1skxwwqqhxxxxxseatFrom}.xhtml"
+          id="donefy"
+         value="Done"/>&nbsp;
+
+
+       <ui:remove>
+         <h:button id="seatAllo" value="#{messages['Assign']} #{messages['seat']}"   outcome="/seatAllocateEdit.xhtml" target="_blank"/>
+       </ui:remove>
+
+
+
+
+        <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessagesb"/>
+
+<br/>
+    </div>
+            <p:hotkey  actionListener="#{fxxxuq1skxwwqqhxxxxxseatList.getFirstResult()}" bind="return">
+            </p:hotkey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,388 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:fb="http://www.facebook.com/2008/fbml"
+                template="layout/rtemplate.xhtml">
+<!-- This is optional, better control if set up of a vendor is through back office new user . Copied not Generated  , shown in menu if resellers supported via clobdata 3R-RESELLERS-1-C-->
+<ui:define name="body">
+    <h:messages globalOnly="true" styleClass="message"/>
+   
+ <h:form id="register">
+     <p:remoteCommand immediate="true" name="onFbLogin" ajaxSingle="true" action="#{yxxxuh566xwwqqwxxxxxuserHome.onFbLogin()}"
+        onclick="rc([{name: 'id', value: '#{yxxxuh566xwwqqwxxxxxuserHome.fbUid}'}, 
+                             {name: 'email', value: '#{yxxxuh566xwwqqwxxxxxuserHome.fbEmail}'},
+                             {first_name: 'name', value: '#{yxxxuh566xwwqqwxxxxxuserHome.fbFirst_Name}'},
+                             {last_name: 'email', value: '#{yxxxuh566xwwqqwxxxxxuserHome.fbLast_Name}'},
+                             {name: 'gender', value: '#{yxxxuh566xwwqqwxxxxxuserHome.fbGender}'},
+                             {name: 'agree', value: '#{yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUsefb}'},])">
+     </p:remoteCommand>
+<h:outputStylesheet>
+
+</h:outputStylesheet>
+<script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  var aid;
+   //alert(window.location.href);
+  if (window.location.href.indexOf(".l3r") > -1) {
+   aid = "1493497040950348";
+  } else {
+   aid = "462928240562239";
+  }
+   //alert(aid);
+  FB.init({
+    appId      : aid,
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.4' // use version 2.2
+  });
+  //appid if myflowp.3re..   462928240562239
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful FB login for: ' + response.name);
+      if(!document.getElementById('register:agreedToTermsfb').checked){
+        document.getElementById('status').innerHTML = response.name+' Please Agree to Terms, to continue ' ;
+        Logout();
+      }else{
+      onFbLogin(response.id, response.email, response.name, response.first_name, response.last_name, response.gender,document.getElementById('register:agreedToTermsfb').checked);
+      document.getElementById('status').innerHTML = 'Welcome Facebook User '+response.name ;
+      //final response to user will come from server
+      }
+    });
+  }
+  function Logout() {
+  FB.logout(function () { document.location.reload(); });
+  }
+
+</script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+<ui:remove>
+/// add a new method in controlusageperiods?
+              <h:outputText value="Business Date Rolled" rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed}"/> 
+</ui:remove>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?'left':'right'}">
+         <h:outputText value="Last Signed As " rendered="#{!identity.loggedIn}"/> 
+         <h:outputText value="#{customIdentity.username}"/> 
+         <h:outputText value="#{messages.Today} "/> 
+         <h:outputText value="#{authenticator.getCurrcaldates()}"/> 
+        <h:button id="lbdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml" />
+         <h:outputText id="QueryLabel" value="#{messages.searchTerm}" />
+         <h:inputText id="Query" value="put search here" size="15" />
+         <h:commandButton id="r3Search" action="/home.xhtml"  image="/img/Findblue16.png"
+            value="#{messages.searchButton}" />
+         <h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none"  rendered="#{identity.loggedIn and !customIdentity.product=='s'}"  >
+          <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+         </h:link>
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['signupHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+    
+  <p:accordionPanel switchType="client" itemInactiveLeftIcon="/img/control_add16.png">
+   <p:tab title="#{messages.signup}" leftInactiveIcon="/img/LogIn16.png" >
+   <ui:remove> 
+   july25 2018 customIdentity has value after login and this is before that
+   <h:outputText value="#{messages.Signup_tip}"/>
+   <h:outputText value=" #{messages['or']} #{messages['to']} #{messages['add']} #{messages['a']} #{messages['new']} #{messages['picture']} #{messages['or']} #{messages['blog']}"
+       rendered="#{customIdentity.product =='f' and customIdentity.subProduct =='s'}"/>
+   <h:outputText value=" #{messages['or']} #{messages['to']} #{messages['add']} #{messages['a']} #{messages['new']} #{messages['issue']} #{messages['or']} #{messages['bug']}"
+       rendered="#{customIdentity.product =='f' and customIdentity.subProduct =='b'}"/>
+   </ui:remove>
+   <br></br>
+   <ui:remove>
+   <h:outputText value="#{messages.sso_supported}"  rendered ="#{yxxxch522xhhxxhxxxxxclientList.isSSOActive()}"/>
+   </ui:remove>
+   <h:panelGroup>          
+   <div class="dialog">
+   <h:panelGrid id="signupx">
+     <ui:remove>vensignup for vendors only mainly Theme resellers 
+     needed backend method doVsignUp to set signupas V and then call doSignUp 
+     </ui:remove>
+      <h:panelGrid columns="6">
+       <ui:decorate id="sclientEmailField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.login_email}</ui:define>
+            <h:inputText id="semail" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid}" size="30" 
+             pt:placeholder="email@xyz.com" maxlength="50"/>
+            <h:outputText value="        "/>
+            <h:graphicImage id="semailTipImg" value="/img/help.gif">
+             <p:tooltip id="semailTip" attached="true" for="semailTipImg">
+              <h:outputText value="#{messages.semail_tip}"/>
+             </p:tooltip>
+            </h:graphicImage>
+       </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="4">
+          <ui:decorate id="suserFirstNameField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.Firstname}</ui:define>
+            <h:inputText id="userFirstName2" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.a0xxukuxbvxxxxxxxxxxid2}" pt:placeholder="john" size="12" maxlength="20">
+            </h:inputText>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="4">
+          <ui:decorate id="suserLastNameField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.Lastname}</ui:define>
+            <h:inputText id="suserlastName" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientName}" size="17" pt:placeholder="smith"  maxlength="30"/>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="4">
+          <ui:decorate id="suserCompanyNameField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.companyname} (#{messages.optional})</ui:define>
+            <h:inputText id="susercompanyName" required="false" value="#{yxxxuh566xwwqqwxxxxxuserHome.companyName}" size="17" pt:placeholder="Abc Rentals" maxlength="30"/>
+          </ui:decorate>
+      </h:panelGrid>
+
+      <h:panelGrid columns="8">
+       <ui:decorate id="logonIdField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages['Logonid']}</ui:define>
+            <h:inputText id="slogonIdT" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.instance.a0xxukuxbvxxxxxxxxxxid}" size="17" pt:placeholder="smithj" maxlength="30"/>
+            <h:outputText value="        "/>
+            <h:graphicImage id="slogonidTipImg" value="/img/help.gif">
+             <p:tooltip id="slogonidTip" attached="true" for="slogonidTipImg">
+              <h:outputText value="#{messages.slogonid_tip}"/>
+             </p:tooltip>
+            </h:graphicImage>
+       </ui:decorate>
+      </h:panelGrid>
+
+       <p:panel toggleable="true" toggleableHeader="true" header="#{messages['OptionalToggle']}" switchType="client" collapsed="false"
+            leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+         <h:outputText value="  #{messages['address']} #{messages['can']} #{messages['be']} #{messages['added']} #{messages['or']} #{messages['changed']} #{messages['later']} #{messages['using']} #{messages['setup']}"/><br/>
+        <h:panelGrid columns="4">
+         <ui:decorate id="l1" template="layout/edit.xhtml">
+          <ui:define name="label">Address Line1 
+          </ui:define>
+          <h:inputText id="addrl1" pt:placeholder="123 main st" 
+                          size="35"
+                     maxlength="35"
+                         value="#{fxxxuq111xwwqqhxxxxxaddressHome.instance.b1pxusa1bvxxxxxxxxxxaddrl1}">
+          </h:inputText>
+         </ui:decorate>
+      </h:panelGrid>
+        <h:panelGrid columns="4">
+         <ui:decorate id="l2" template="layout/edit.xhtml">
+          <ui:define name="label">Address Line2 
+          </ui:define>
+          <h:inputText id="addrl2" pt:placeholder="unit 2"
+                          size="35"
+                     maxlength="35"
+                         value="#{fxxxuq111xwwqqhxxxxxaddressHome.instance.b2xxub2xbvxxxxxxxxxxaddrl2}">
+          </h:inputText>
+         </ui:decorate>
+      </h:panelGrid>
+        <h:panelGrid columns="4">
+         <ui:decorate id="city" template="layout/edit.xhtml">
+          <ui:define name="label">City 
+          </ui:define>
+             <h:panelGrid columns="2">
+             <h:selectOneMenu  value="#{fxxxuq111xwwqqhxxxxxaddressHome.instance.b3xxh2acbv11xxxxxxxxcity}" 
+              rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+              <p:ajax  render="CityI" bypassUpdates="false"/>
+              <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItem itemValue="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','11').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','11').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
+	      <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('xx',11)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+             </h:selectOneMenu>
+             <h:inputText id="CityI" value="#{fxxxuq111xwwqqhxxxxxaddressHome.instance.b3xxh2acbv11xxxxxxxxcity}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="20"
+                          maxlength="35">
+             </h:inputText>
+             </h:panelGrid>
+         </ui:decorate>
+      </h:panelGrid>
+        <h:panelGrid columns="4">
+         <ui:decorate id="prov" template="layout/edit.xhtml">
+          <ui:define name="label">Prov-State 
+          </ui:define>
+             <h:panelGrid columns="2">
+             <h:selectOneMenu  value="#{fxxxuq111xwwqqhxxxxxaddressHome.instance.b4xxhbpxbv12xxxxxxxxprovnstate}" 
+              rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+              <p:ajax  render="provstateI" bypassUpdates="false"/>
+              <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItem itemValue="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
+	      <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('xx',12)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+             </h:selectOneMenu>
+             <h:inputText id="provstateI" value="#{fxxxuq111xwwqqhxxxxxaddressHome.instance.b4xxhbpxbv12xxxxxxxxprovnstate}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="35"
+                          maxlength="35">
+             </h:inputText>
+             </h:panelGrid>
+         </ui:decorate>
+      </h:panelGrid>
+        <h:panelGrid columns="4">
+         <ui:decorate id="pz" template="layout/edit.xhtml">
+          <ui:define name="label">PZCode 
+          </ui:define>
+             <h:panelGrid columns="2">
+             <h:selectOneMenu  value="#{fxxxuq111xwwqqhxxxxxaddressHome.instance.b6xxh3azbv14xxxxxxxxpzcode}" 
+              rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+              <p:ajax  render="pzcodeI" bypassUpdates="false"/>
+              <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItem itemValue="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','14').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','14').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
+	      <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('xx',14)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+             </h:selectOneMenu>
+             <h:inputText id="pzcodeI" value="#{fxxxuq111xwwqqhxxxxxaddressHome.instance.b6xxh3azbv14xxxxxxxxpzcode}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="35"
+                          maxlength="35">
+             </h:inputText>
+             </h:panelGrid>
+         </ui:decorate>
+        </h:panelGrid>
+       </p:panel>
+<ui:remove>
+       <p:panel id="captcha">
+          <ui:decorate id="verifyCaptchaField">
+            <h:graphicImage id="captchaChallenge" value="/seam/resource/captcha?f=#{currentDate.time}" styleClass="captchaChallenge"/>
+            <h:outputText value=" " style="margin-left: 18px;"/>
+            <p:commandButton id="captchaI" value="next" render="captcha" execute="captcha"  image="/img/Reload16.png">
+           <p:tooltip id="reloadTip" attached="true" for="captchaI">
+            <h:outputText value="#{messages.captcha_reload_tip}" />
+           </p:tooltip>
+           </p:commandButton>
+            <h:inputText id="verifyCaptcha" value="#{captcha.response}" required="true" size="5"/>
+          <h:outputText value="        "/>
+          <h:graphicImage id="captchaTipHelp" value="/img/help.gif">
+           <p:tooltip id="captchaTip" attached="true" for="captchaTipHelp">
+            <h:outputText value="#{messages.captcha_tip}"/>
+           </p:tooltip>
+          </h:graphicImage>
+          </ui:decorate>
+
+       </p:panel>
+</ui:remove>
+          <h:panelGroup>
+            <h:selectBooleanCheckbox id="agreedToTerms" value="#{yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"/>
+            <h:outputText value="#{messages.agree_to_terms}" escape="false"/>
+            <h:commandLink value=" " id="termsOfUseLink" onclick="PF('termsOfUse').show()">
+              <h:outputText value=" #{messages['read']}"/>
+            </h:commandLink><br/>
+            <p:commandButton  id="signupButton" styleClass="buttonMain" value="#{messages.signup}"  status="buttonStatus" render="signupx"
+                action="#{yxxxuh566xwwqqwxxxxxuserHome.doVsignup()}"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+            <h:button id="lstdone"  value="#{messages.done}" propagation="end" outcome="/home.xhtml" />
+          </h:panelGroup>
+       <h:messages globalOnly="false" styleClass="message" />
+   </h:panelGrid>
+   <div style="clear:both">
+    <span class="required">*</span> 
+    required fields
+   </div>
+   </div>
+   </h:panelGroup> 
+  </p:tab> 
+  </p:accordionPanel>
+          <h:panelGroup>
+            <h:outputText value="#{messages.signup_done_logon_now}" style="margin-right: 18px;" rendered ="#{(request.requestURI.contains('signup.'))}"/>
+            <h:link id="loginb"  styleClass="hdrLink"  outcome="/login.xhtml" icon="/img/LogIn16.png" iconClass="pic" rendered="#{not identity.loggedIn}" value="#{messages.login}" >
+             <p:tooltip id="loginTip" attached="true" for="loginb" >
+              <h:outputText value="#{messages.login_tip}" rendered ="#{(request.requestURI.contains('signup.'))}"/>
+             </p:tooltip>
+            </h:link>
+
+          </h:panelGroup>
+       <h:messages globalOnly="false" styleClass="message" />
+
+
+ <p:dialog id="termsOfUse" width="640" height="480" >
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p:commandButton value="#{messages.close}" onclick="PF('termsOfUse').hide()"/>
+  <f:facet name="header"><h:outputText value="#{messages.terms_of_use}"/></f:facet>
+  <f:facet name="controls">
+    <p:commandButton onclick="PF('termsOfUse').hide()" type="image" image="/img/Cancel16.png"/>
+  </f:facet>
+  <ui:include src="signupTerms.xhtml"/>
+  <h:panelGroup style="width: 600px; text-align: center;">
+      <p:commandButton value="#{messages.ok}" onclick="PF('termsOfUse').hide()"/>
+  </h:panelGroup>
+ </p:dialog>
+</h:form>
+
+
+ </ui:define> 
+</ui:composition>
+
+
+

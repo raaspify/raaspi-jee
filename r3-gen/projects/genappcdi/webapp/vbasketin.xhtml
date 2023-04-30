@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+     template="layout/rtemplate.xhtml">
+<ui:remove>
+ copied-not generated
+ invoked by Vendor/Approver to final Approve(64)/Reject(256) each detail and to Process Request (order) 
+  updateProductToApprove(ApproveFinal)
+  view Attachments
+</ui:remove>
+<ui:define name="body">
+
+
+    
+    <h:form id="r3checkout" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel"  outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+ 		   <h:graphicImage value="/img/Search16.gif" styleClass="pic"/>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['checkoutHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+	</p:toolbar>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+
+	<h:panelGroup layout="block">
+
+	
+	<br/>
+
+            <h1>Approval Basket</h1>
+            <p:panel id="emptycart" rendered="#{empty fpxxfq1a5xwwqqhxxxxxitemList.getManagerApprovedRejectedCartedList('basket')}">
+                <p>Your cart is empty.</p>
+
+                    <h:commandButton id="ContinueShoppingButton0" action="/home.xhtml?faces-redirect=true" value="Return" />
+                    <h:outputText  value="#{messages.Thank_you}" rendered="#{identity.loggedIn and r3Cart.inConfirmed }" />
+            </p:panel>
+
+            <p:panel id="cartdetails"  rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getManagerApprovedRejectedCartedList('basket')}">
+                    <p:dataTable id="CartItemsTable" 
+                                 value="#{fpxxfq1a5xwwqqhxxxxxitemList.getManagerApprovedRejectedCartedList('basket')}" var="item">
+
+                        <h:column id="column1" >
+                            <f:facet id="TitleFacet" name="header">
+                                <h:outputText id="CartRemoveText" value="#{messages.reject}" />
+                            </f:facet>
+                    <h:commandButton id="UpdateCartButtonr" 
+                                     action="#{fpxxfq1a5xwwqqhxxxxxitemHome.rejectProductsToOrderByVendor(item)}" 
+                                     value="#{messages['reject']} " />
+                        </h:column>
+
+                        <h:column id="column1b" >
+                            <f:facet id="TitleFacetb" name="header">
+                                <h:outputText id="CartRemoveTextb" value="#{messages.approve}" />
+                            </f:facet>
+                    <h:commandButton id="UpdateCartButtonrb" 
+                                     action="#{fpxxfq1a5xwwqqhxxxxxitemHome.approveProductsToOrderByVendor(item)}" 
+                                     value="#{messages['approve']} " />
+                        </h:column>
+
+
+                        <h:column id="column1c" >
+                            <f:facet id="TitleFacetc" name="header">
+                                <h:outputText id="CartRemoveTextc" value="#{messages.customer}" />
+                            </f:facet>
+                            #{item.trexuq244xwwqqhxxxxxcuorders.jxxxuq201xwwqqhxxxxxcustomer.c1xxuslnbvixxxxxxxxxlastname} 
+                            <br></br>
+                     #{item.trexuq244xwwqqhxxxxxcuorders.jxxxuq201xwwqqhxxxxxcustomer.d1xxu3cnbvixxxxxxxxxcustomerascompanyname} 
+                        </h:column>
+                        <h:column id="column1d" >
+                            <f:facet id="TitleFacetd" name="header">
+                                <h:outputText id="CartRemoveTextd" value="#{messages.order}" />
+                            </f:facet>
+                            #{item.trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno} 
+                        </h:column>
+                        <h:column id="columncuodl">
+                            <f:facet id="CuodlFacet" name="header">
+                                <h:outputText id="CuodlText" value="#{messages.line}" />
+                            </f:facet>
+                            #{item.b1xxzo11bvlxxxxxxxxxline} 
+                        </h:column>     
+
+                        <h:column id="column2">
+                            <f:facet id="TitleFacet" name="header">
+                                <h:outputText id="TitleText" value="#{messages.code}" />
+                            </f:facet>
+                            #{item.fpxxfq1a5xwwqqhxxxxxitem.a0xxukixbxxxxxxxxxxxmatcode} 
+                        </h:column>     
+                        <h:column id="column3" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+                            <f:facet id="ActorFacet" name="header">
+                                <h:outputText id="ActorText" value="#{messages.description}" />
+                            </f:facet>
+                            #{item.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript} 
+                        </h:column>                        
+                        <h:column id="column4">
+                            <f:facet id="PriceFacet" name="header">
+                                <h:outputText id="PriceText" value="#{messages.approval} #{messages.amount}" />
+                            </f:facet>
+                            <h:outputText id="PriceValueText" value="#{item.fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice}" rendered= "#{!item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" >
+                                <f:convertNumber type="currency" currencySymbol="$" />
+                            </h:outputText>
+                            <h:outputText id="PriceValueQuote" value="Request Quotation" rendered= "#{item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                        </h:column>                          <h:column id="column6" >
+                            <f:facet id="ShippingFacet" name="header">
+                                <h:outputText id="ShippingText" value="#{messages.shipping}" />
+                            </f:facet>
+                            <h:outputText id="logic" value="#{item.z9xxtxsolxxxxxxxxxxxshipoption}" >
+                            </h:outputText>
+                        </h:column>                        
+                        <h:column id="column7">
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText id="StatusText" value="#{messages.status}" />
+                            </f:facet>
+                            #{item.zhxxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'recommended':(item.zhxxzzfxhhxxxxxxxxxxstatusfl eq 64 ? 'approved': (item.zhxxzzfxhhxxxxxxxxxxstatusfl eq 256 ?'rejected':'other'))}
+                        </h:column>   
+                        <h:column id="column8">
+                            <f:facet id="OstatusFacet" name="header">
+                                <h:outputText id="OstatusText" value="#{messages.order} #{messages.status}" />
+                            </f:facet>
+                            #{item.trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'recommended':(item.trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 64 ? 'approved': (item.trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 256 ?'rejected':'other'))}
+                        </h:column>                        
+                     
+                    </p:dataTable>
+                    <h:commandButton id="ContinueShoppingButton"
+                                     action="/home.xhtml?faces-redirect=true"  
+                                     value="Return" />
+                 <div style="width: 100%;" >
+                    <div class="cntInfo" style="${yxxxuh566xwwqqwxxxxxuserHome.mobile?'float:left':'float:right'};background-color:#{richSkin.generalBackgroundColor}">
+
+                        <!-- shoppingCartBean is named r3Cart -->
+                       <p:panel rendered="false" >
+                        <h:commandButton action="#{fpxxfq1a5xwwqqhxxxxxitemHome.updateProductsToApprove('approveFinal')}" value="#{messages['process']} #{messages['request(s)']}" 
+                           rendered="#{r3Cart.inSaleReady }" 
+                        styleClass="buttonMain"/>
+                        <ui:remove> below links to Paypal url, cant use command button </ui:remove>
+                        <h:outputLink value="#{r3Cart.approvalUrl}"  rendered="#{r3Cart.inPayment }">
+                         <h:graphicImage alt="PayPal Login" value="https://www.paypalobjects.com/webstatic/en_US/developer/docs/lipp/loginwithpaypalbutton.png"  />
+                        </h:outputLink>
+                      </p:panel>
+
+                    </div>
+
+                 </div>
+            </p:panel>
+   <ui:decorate template="layout/display.xhtml">
+   <p:panel toggleable="true" toggleableHeader="true" style="width: 100%;" header="#{messages['update']} #{messages['Notes']}/#{messages['Attachment']} #{messages['using']} #{messages['Action']}" switchType="client" collapsed="true"  
+          leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+
+    <ui:decorate id="ydxxuznybvxxxxxxxxxxnotesDecoration" template="layout/edit.xhtml" rendered="true">
+      <ui:define name="label">#{messages['additional']} #{messages['notes']}
+      </ui:define>
+         <h:panelGrid>
+                              <h:inputTextarea id="tEdit"
+                               cols="80"
+                               rows="3"
+                              value="#{fpxxfq1a5xwwqqhxxxxxitemHome.notesToPass}"/>
+         </h:panelGrid>
+    </ui:decorate>
+
+     
+     <p:panel>
+        <f:facet name="header">#{messages['image']} / #{messages['pdf']}</f:facet>
+         <p:commandButton id="reload" image="/img/Reload16.png"
+                          value="#{messages['reFresh']}" render="@form" />
+        <h:panelGrid columns="1">
+            <p:outputPanel id="panelp1" layout="block">
+                <p:repeat value="#{yxxxuq1n1xwwqqqxxxxxblobdataList.getAllResultListSeqs('blobdata','A3R-ATTACHMENT-1-C','PIC',0,customIdentity.owner)}" var="row" iterationStatusVar="status"  rowKeyVar="ij" rows="5" id="repeatp1">
+                    <p:panel style="float:left; width:#{customIdentity.product=='s' and customIdentity.subProduct=='b'  ?'700px':'150px'}; padding:5px; height:100px;">
+                        <f:facet name="header">
+                            <h:panelGroup>
+                             <h:graphicImage alt="no picture"  rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-ATTACHMENT-1-C','PIC',row.a3xxexnsbvxxxxxxxxxxsequence) != null and row.a4xxexxxbvxxxxxxxxxxtype !='pdf'}"
+                              value="/ImageServletCdi/?table=yxxxuq1n1xwwqqqxxxxxblobdata&amp;seq=1&amp;qlf=1&amp;id=row.b1xxuzbxbvxxxxxxxxxxdata&amp;height=50" >
+                             </h:graphicImage> 
+                             <h:outputText value="PDF" style="font-weight:bold" rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-ATTACHMENT-1-C','PIC',row.a3xxexnsbvxxxxxxxxxxsequence) != null and row.a4xxexxxbvxxxxxxxxxxtype =='pdf'}"/>
+                             <p:panel id="statusPI">
+                             <h:outputText value="#{fn:substring(row.y3xxuxznbvxxxxxxxxxxnotes,0,20)}" style="font-weight:bold" />
+                             <h:outputText value=" " />
+                             <ui:remove> 
+                             <h:outputText value="#{row.a3xxexnsbvxxxxxxxxxxsequence}" style="font-weight:bold" />
+                             </ui:remove>
+                             <h:selectBooleanCheckbox value="#{jxxxuq201xwwqqhxxxxxcustomerList.checkMapI[ij+1]}"> 
+                              <f:ajax event="click" execute="@form" render="@form" />
+                             </h:selectBooleanCheckbox>
+                             </p:panel>
+                            </h:panelGroup>
+                        </f:facet>
+                    </p:panel>
+                </p:repeat>
+            </p:outputPanel>
+
+        </h:panelGrid>
+
+      </p:panel>
+    <p:panel >
+        <f:facet name="header">#{messages['Text']}</f:facet>
+        <h:panelGrid columns="1">
+            <p:outputPanel id="panelt1" layout="block">
+                <p:repeat value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('clobdata','B3R-ATTACHMENT-1-C','TXT',0,customIdentity.owner)}" var="row" iterationStatusVar="status" rowKeyVar="ij" rows="5" id="repeatp1h">
+                    <p:panel style="float:left; width:#{customIdentity.product=='s' and customIdentity.subProduct=='b'  ?'700px':'150px'}; padding:5px; height:100px;">
+                        <f:facet name="header">
+                            <h:panelGroup>
+                             <p:panel id="statusPT">
+                             <h:inputTextarea readonly="true"  value="#{row.b1xxuzaxbvxxxxxxxxxxdata}" />
+                             <h:outputText value="#{fn:substring(row.y3xxuxznbvxxxxxxxxxxnotes,0,20)}" style="font-weight:bold" />
+                             <h:outputText value=" " />
+                             <h:selectBooleanCheckbox value="#{jxxxuq201xwwqqhxxxxxcustomerList.checkMapT[ij+1]}"> 
+                              <f:ajax event="click" execute="@form" render="@form" />
+                             </h:selectBooleanCheckbox>
+                             </p:panel>
+                            </h:panelGroup>
+                        </f:facet>
+                    </p:panel>
+                </p:repeat>
+            </p:outputPanel>
+        </h:panelGrid>
+
+      </p:panel>
+   </p:panel >
+            </ui:decorate>
+   <p:panel toggleable="true" toggleableHeader="true" style="width: 100%;" header="#{messages['show']} #{messages['existing']} #{messages['Notes']}/#{messages['Attachment']}" switchType="client" collapsed="true"  
+          leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+         <ui:decorate id="prov2" template="layout/edit.xhtml">
+          <ui:define name="label">#{messages['customer']} #{messages['request']}
+          </ui:define>
+          <p:commandButton id="reloadc" image="/img/Reload16.png"
+                          value="#{messages['reFresh']}" render="@form" />
+          <h:panelGrid columns="2">
+             <ui:remove>using groupSid for OrderSid </ui:remove>
+             <h:selectOneMenu  value="#{fpxxfq1a5xwwqqhxxxxxitemList.groupSid}" 
+              rendered="true">
+              <p:ajax  render="dxxxch1d3xwwqqhxxlxxcompanyprovstateI" bypassUpdates="false"/>
+	      <f:selectItems value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrdersV('basket')}"  var="babu"  
+                         itemLabel="#{babu.a0xxuncobvxxxxxxxxxxpurchsno}/#{babu.fpxxfq1a5xwwqqhxxxxxitem.w7xxuznxbvxxxxxxxxxxnotes}"
+                         itemValue="#{babu.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}" /> 
+             </h:selectOneMenu>
+          </h:panelGrid>
+         </ui:decorate>
+                    <p:dataTable id="CartItemsExisngTable"
+                                 value="#{fpxxfq1a5xwwqqhxxxxxitemList.entityDetailedList(fpxxfq1a5xwwqqhxxxxxitemList.groupSid)}" var="item">
+                        <h:column id="column1h">
+                            <f:facet id="CartRemoveFaceth" name="header">
+                                <h:outputText id="od" value="#{messages.dateadded}" />
+                            </f:facet>
+                                <h:outputText value="#{item.z2xxcsxrlxxxxxxxxxxxdateadded}" >
+                                 <f:convertDateTime  dateStyle="short" timeStyle="short" type="both" />
+                                </h:outputText>
+                        </h:column>
+
+   
+                        <h:column id="column3h">
+                            <f:facet id="de" name="header">
+                                <h:outputText id="ActorTexth" value="#{messages.notes}" />
+                            </f:facet>
+                            #{item.w7xxuznxbvxxxxxxxxxxnotes} 
+                            <h:commandButton oncomplete="PF('popup').show()" value="+" rendered="#{not empty item.w7xxuznxbvxxxxxxxxxxnotes}">
+                            </h:commandButton>
+              <p:popupPanel id="popup" modal="false" autosized="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF('popup').hide(); return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+                             <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{item.w7xxuznxbvxxxxxxxxxxnotes}"/>
+                             <p:commandButton value="-" onclick="PF('popup').hide()"/>
+              </p:popupPanel>
+
+                        </h:column>                        
+                    </p:dataTable>
+
+
+
+   </p:panel >
+
+            <p:panel toggleable="true" toggleableHeader="true"  id="cartdetailsHistory"  rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getManagerApprovedRejectedCartedList('basket')}"
+              header="#{messages['History']}" switchType="client" collapsed="true" 
+              leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+                    <p:dataTable id="CartItemsHistoryTable"
+                                 value="#{fpxxfq1a5xwwqqhxxxxxitemList.getManagerApprovedRejectedCartedList('basket')}" var="item">
+                        <h:column id="column1h">
+                            <f:facet id="CartRemoveFaceth" name="header">
+                                <h:outputText id="CartRemoveTexth" value="#{messages.orderDate}" />
+                            </f:facet>
+                                <h:outputText value="#{item.z6xxcxxxbxxxxxxxxxxxiodate}" >
+                                 <f:convertDateTime  dateStyle="short" timeStyle="short" type="both" />
+                                </h:outputText>
+                        </h:column>
+
+                        <h:column id="column2h">
+                            <f:facet id="TitleFaceth" name="header">
+                                <h:outputText id="TitleTexth" value="#{messages.delvdate}" >
+                                </h:outputText>
+                            </f:facet>
+                                <h:outputText value="#{item.z7xxcxxxbvxxxxxxxxxxidelvdate}" >
+                                 <f:convertDateTime  dateStyle="short" timeStyle="short" type="both" />
+                                </h:outputText>
+
+                        </h:column>     
+                        <h:column id="column2h2">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages.last_payment_statusdate}" >
+                                </h:outputText>
+                            </f:facet>
+                                <h:outputText value="#{item.zixxcztxlxxxxxxxxxxxstatusfldt}" >
+                                 <f:convertDateTime  dateStyle="medium" timeStyle="medium" type="both" />
+                                </h:outputText>
+                        </h:column>  
+                        <h:column >
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText  value="#{messages.Order_ref}" />
+                            </f:facet>
+                            #{item.trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno}
+                        </h:column>                        
+                        <h:column >
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText  value="#{messages.Payment_ref}" />
+                            </f:facet>
+                            #{item.trexuq244xwwqqhxxxxxcuorders.ybxxuxxrblxxxxxxxxxxattach}
+                        </h:column>                        
+   
+                        <h:column id="column3h">
+                            <f:facet id="ActorFaceth" name="header">
+                                <h:outputText id="ActorTexth" value="#{messages.Item}" />
+                            </f:facet>
+                            #{item.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript} 
+                        </h:column>                        
+                        <h:column id="column4h">
+                            <f:facet id="PriceFaceth" name="header">
+                                <h:outputText id="PriceTexth" value="#{messages.Price}" />
+                            </f:facet>
+                            <h:outputText id="PriceValueTexth" value="#{item.fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice}" rendered= "#{!item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" >
+                                <f:convertNumber type="currency" currencySymbol="$" />
+                            </h:outputText>
+                            <h:outputText id="PriceValueQuoteh" value="Request Quotation" rendered= "#{item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                        </h:column>                        
+                        <h:column id="column5h">
+                            <f:facet id="QuantityFaceth" name="header">
+                                <h:outputText id="QuantityTexth" value="#{messages.Quantity}" />
+                            </f:facet>
+                            #{item.z3xxeqxxbvnxxxxxxxxxqtyordrd}
+                        </h:column>                        
+                        <h:column id="column7h">
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText id="StatusTexth" value="#{messages.status}" />
+                            </f:facet>
+                            #{item.trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'pending':(item.trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 32 ? 'approved': (item.trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 04 ?'rejected':'other'))}
+                        </h:column>                        
+                    </p:dataTable>
+
+            </p:panel >
+
+
+
+
+
+	</h:panelGroup>
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+
+
+ </h:form>
+
+</ui:define>
+	
+</ui:composition>

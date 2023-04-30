@@ -1,0 +1,173 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="key" value="#{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey}"/>
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemHome.restrict()}" />
+
+</f:metadata>
+<!-- Not Generated   -->
+<ui:remove>
+always show blog content ie clobdata (itemtable,A+item docmnt,TXT,0)
+If logged In then show edit blog item(CI-D) and its blobdata image (itemtable,item docmnt,1,1) and
+ edit blog content clobdata text (itemtable,item docmnt,TXT,0) 
+use f:param useSeq to set seq # to 0 or 1 as needed and view:param in the called .xhtml to set the initial seq #
+use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM since default value will be clobdata or blobdata
+
+</ui:remove>
+                       
+<ui:define name="body">
+    <h:form  styleClass="edit">
+<h:outputStylesheet>
+
+.rf-edt-c {
+    height: 40px !important;
+}
+.rf-tb {
+    background-color:#{richSkin.tableSubHeaderBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+
+}
+.rf-cp-hdr {
+    background-color:#{richSkin.additionalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.rf-edt-hdr {
+    background-color:#{richSkin.generalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+
+
+</h:outputStylesheet>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ItemHelp']!='ItemHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+    
+     <div class="dialog">
+   <h:panelGrid >
+      <panelGroup>
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/img/Editlog16.png"
+         rendered="#{identity.loggedIn}">
+      </h:graphicImage> 
+      <h:outputText  value="#{messages['Resource']} #{messages['label']} #{messages['value']}"/>
+      </panelGroup>
+      </h:panelGrid>
+     </div>
+
+
+     <div class="dialog">
+  <p:panel>
+   <h:panelGrid >
+      <br></br>
+       <ui:decorate  template="layout/edit.xhtml">
+        <ui:define name="label">#{messages['for']} #{messages['key']}: #{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey}</ui:define>
+       </ui:decorate>
+
+       <ui:remove>feb 28 2020 confusing and no real use case
+        <br></br>
+       <ui:decorate  template="layout/edit.xhtml">
+        <ui:define name="label">#{messages['preview']} #{messages['value']}:  #{messages[yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey]}</ui:define>
+       </ui:decorate>
+       </ui:remove>
+
+        <br></br>
+       <ui:decorate  template="layout/edit.xhtml">
+        <ui:define name="label">#{messages['published']} #{messages['value']}:  #{messages[yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey]}</ui:define>
+       </ui:decorate>
+        <br></br><br></br>
+<ui:remove>
+       <ui:decorate  template="layout/edit.xhtml">
+        <ui:define name="label">#{messages['new']} #{messages['value']}</ui:define>
+        <h:inputText  value="#{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a1xxuxxxbvxxxxxxxxxxvalue}" 
+        pt:placeholder="enter here" />
+       </ui:decorate>
+</ui:remove>
+
+      </h:panelGrid>
+  </p:panel>
+
+     </div>
+    
+    <br></br><br></br><div class="actionButtons">    
+          <h:panelGroup>
+
+       <ui:remove>feb 28 2020 confusing and no real use case
+        <h:button outcome="/resourceEdit.xhtml" rendered="#{identity.loggedIn and yxxxuq1r1xwwqqhxxxxxresourceList.getKeyToEntity(yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey) !=null}"
+                    id="iedit2"
+                 value="#{messages['Edit']} (#{messages['for']} #{messages['preview']})">
+                <f:param name="yxxxuq1r1xwwqqhxxxxxresourceA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1r1xwwqqhxxxxxresourceList.getKeyToEntity(yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey).a0xxuobxbxxxxxxxxxxxsid}"/>
+                <f:param name="type" value="_M"/>
+        </h:button>
+       </ui:remove>
+
+
+        <h:button outcome="/resourceEdit.xhtml" rendered="#{identity.loggedIn and yxxxuq1r1xwwqqhxxxxxresourceList.getKeyToEntity(yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey) !=null}"
+                    id="iedit22"
+                 value="#{messages['Edit']} (#{messages['to']} #{messages['publish']})">
+                <f:param name="yxxxuq1r1xwwqqhxxxxxresourceA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1r1xwwqqhxxxxxresourceList.getKeyToEntity(yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey).a0xxuobxbxxxxxxxxxxxsid}"/>
+                <f:param name="type" value=""/>
+        </h:button>
+        <h:button outcome="/resourceEdit.xhtml" rendered="#{identity.loggedIn and yxxxuq1r1xwwqqhxxxxxresourceList.getKeyToEntity(yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey) ==null}"
+                    id="iedit2n" styleClass="buttonMain"
+                 value="#{messages['Edit']} (#{messages['for']} #{messages['preview']})">
+                <f:param name="key" value="#{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey}"/>
+                <f:param name="type" value="_M"/>
+        </h:button> 
+
+        <h:button outcome="/resourceEdit.xhtml" rendered="#{identity.loggedIn and yxxxuq1r1xwwqqhxxxxxresourceList.getKeyToEntity(yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey) ==null}"
+                    id="iedit22n" styleClass="buttonMain"
+                 value="#{messages['Edit']} (#{messages['to']} #{messages['publish']})">
+                <f:param name="key" value="#{yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey}"/>
+                <f:param name="type" value=""/>
+        </h:button> 
+      <h:outputText  value="#{messages['default']} #{messages['value']} #{messages['being']} #{messages['used']}, #{messages['put']} #{messages['new']}#{messages['value']} #{messages['in']} #{messages['edit']} #{messages['panel']}" rendered="#{identity.loggedIn and yxxxuq1r1xwwqqhxxxxxresourceList.getKeyToEntity(yxxxuq1r1xwwqqhxxxxxresourceHome.instance.a0xxukrdbvxxxxxxxxxxkey) ==null}" />
+
+        <h:button outcome="/home.xhtml"
+                    id="done"
+                 value="#{messages['Done']}"/>
+
+        &nbsp;<h:button outcome="/resourcelabelEdtr.xhtml"
+                    id="more"
+                 value="#{messages['More']}"/>
+          </h:panelGroup>
+
+    </div>
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

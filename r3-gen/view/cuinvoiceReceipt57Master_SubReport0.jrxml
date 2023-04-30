@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Xoxxuq2a4xwwqqhxxxxxcuidetails" pageWidth="535" pageHeight="802" whenNoDataType="NoPages" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Key" uuid="c374f256-4ec2-405a-8f4b-44f31544c7a5">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="genapp"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="owner2Code" class="java.lang.String">
+		<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+		<defaultValueExpression><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="INVOICEETC_ID" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Detail]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{INVOICEETC_ID}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT genapp.cuidetails.*,genapp.item.matcode as item_matcode  ,genapp.item.descript as 
+item_descript FROM
+       genapp.cuidetails left join "genapp"."item"  on 
+        cuidetails."matcode"=item."sid" WHERE cuidetails."line" > (-1) AND
+        cuidetails."cuino" =   $P!{INVOICEETC_ID} AND cuidetails."owner2" = $P{owner2Code} AND item."owner2" = $P{owner2Code}]]>
+	</queryString>
+	<field name="SID" class="java.lang.String"/>
+	<field name="LINE" class="java.lang.String"/>
+	<field name="MATCODE" class="java.lang.String"/>
+	<field name="VENDOR" class="java.lang.String"/>
+	<field name="CUINO" class="java.lang.String"/>
+	<field name="QTYORDRD" class="java.lang.String"/>
+	<field name="ORDUNIT" class="java.lang.String"/>
+	<field name="ORDPRICE" class="java.lang.String"/>
+	<field name="IODATET" class="java.sql.Timestamp"/>
+	<field name="DELVDATEIT" class="java.sql.Timestamp"/>
+	<field name="QTYOSTND" class="java.lang.String"/>
+	<field name="BASEAMOUNT" class="java.lang.String"/>
+	<field name="DELIVCHRG" class="java.lang.String"/>
+	<field name="MISCCHRG" class="java.lang.String"/>
+	<field name="TAX1AMT" class="java.lang.String"/>
+	<field name="TAX2AMT" class="java.lang.String"/>
+	<field name="TAX3AMT" class="java.lang.String"/>
+	<field name="LINETOTL" class="java.lang.String"/>
+	<field name="OWNER2" class="java.lang.String"/>
+	<field name="item_matcode" class="java.lang.String"/>
+	<field name="item_descript" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="150" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement key="textField-1" x="0" y="0" width="1119" height="15" uuid="d383a2d2-a73d-47e0-b377-f9dbf70888ac"/>
+				<box leftPadding="0" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" size="12" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_matcode}.substring(0,$F{item_matcode}.length()>12?12:$F{item_matcode}.length())+".."+$F{item_matcode}.substring($F{item_matcode}.length()-4)]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement key="textField" x="0" y="18" width="97" height="15" uuid="579f15b1-29cd-4db4-828d-4ed1eedc775c"/>
+				<box leftPadding="0" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" size="12" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTYORDRD}+" @ "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement key="textField" x="45" y="18" width="100" height="15" uuid="03525832-bdf0-4f16-bf23-7fe7bc135701"/>
+				<box leftPadding="0" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" size="12" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ORDPRICE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true" isStretchWithOverflow="true">
+				<reportElement key="textField" stretchType="RelativeToBandHeight" x="0" y="33" width="100" height="15" uuid="dfae2431-97d6-4850-a680-7001b2d6311a"/>
+				<box leftPadding="0" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" size="12" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_descript}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="68" width="100" height="15" uuid="817b2079-2f96-45b5-8e78-d29e07502ada"/>
+				<text><![CDATA[cost]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="65" width="100" height="15" uuid="a52ebec7-8c8d-460c-bbd6-4bb9ebe02c2b"/>
+				<textFieldExpression><![CDATA[$F{BASEAMOUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="80" width="100" height="15" uuid="a442cedd-02ba-42e0-bd0c-53feb4f76f8f"/>
+				<text><![CDATA[delivchrg]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="80" width="100" height="15" uuid="41ddc9d5-45a9-4699-b3ce-339fce30ce4d"/>
+				<textFieldExpression><![CDATA[$F{DELIVCHRG}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="95" width="100" height="15" uuid="b2d22cc6-220a-4e13-9f70-fc3dc090e65b"/>
+				<text><![CDATA[miscchrg]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="95" width="96" height="15" uuid="d339b66c-326b-4527-b852-bd17a1de6b2e"/>
+				<textFieldExpression><![CDATA[$F{MISCCHRG}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-10" y="110" width="100" height="15" uuid="61aa9a2d-e087-409a-b012-53db2444c5c8"/>
+				<text><![CDATA[taxamt]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="45" y="110" width="100" height="14" uuid="4ab835c2-46c4-496d-9003-32a67d032aee"/>
+				<textFieldExpression><![CDATA[new Double(Double.parseDouble($F{TAX1AMT}) + Double.parseDouble($F{TAX2AMT})+ Double.parseDouble($F{TAX3AMT}))]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line" positionType="FixRelativeToBottom" x="0" y="110" width="90" height="1" forecolor="#808080" uuid="711cad97-bd3f-4a4d-a34e-ec1386e2a486"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement key="textField" x="45" y="130" width="97" height="15" uuid="3cf6d231-a6ee-4ed5-9e8d-d663f74c35d3"/>
+				<box leftPadding="0" rightPadding="2">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" size="12" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LINETOTL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

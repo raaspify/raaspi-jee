@@ -1,0 +1,37 @@
+
+Host smtp.mandrillapp.com
+Port 587
+SMTP Username jaymitra@3rcomputer.com
+SMTP Password any valid API key like below
+
+
+k5buKf6L5FuYRpM_CSxGcA
+
+This is a test key.
+	myflowm
+
+E05pt6m2FPRoVZfNnri6GQ
+	myflowp
+
+notes:
+Adding the SPF record explicitly also allows Mandrill to send on your behalf and the DKIM record lets Mandrill digitally
+'sign' emails for your domain. Without this record, Mandrill still adds a DKIM signature to your emails,
+but it's signed for the Mandrill sending server instead of your domain, for example:
+
+From: someone@gmail.com via mandrillapp.com
+or    manager mail@3rcomputer.com via mail114.us4.mandrillapp.com 
+to remove via add dkim record
+v=spf1 include:spf.mandrillapp.com ?all
+
+If you already have a TXT record with SPF information, you'll need to add Mandrill's servers to that record by adding include:spf.mandrillapp.com in the record (before the last operator, which is usually ?all, ~all, or -all).
+DKIM Record
+
+Add a new TXT record with the name mandrill._domainkey.yourdomain.com (just replace yourdomain.com with the domain you're setting up).
+
+
+setting up custom signing domain ie to send as
+From: someone@gmail.com via yourdomain.com
+setup sending domain in mandrill and spf/dkim in hostpapa as usual but enable a custom signing domain using Settings > Sending Deafults > Custom SPF/DKIM Signing Domain
+
+history of delees to cpanel
+v=spf1 +a +mx +ip4:70.33.246.80 ?all

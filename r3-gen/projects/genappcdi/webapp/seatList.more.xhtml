@@ -1,0 +1,1383 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid" value="#{fxxxuq1skxwwqqhxxxxxseatHome.fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}"/>
+    <f:viewAction action="#{fxxxuq1skxwwqqhxxxxxseatHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Seat']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="fxxxuq1skxwwqqhxxxxxseatSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']}" propagation="end"  outcome="/home.xhtml" />
+             <p:ajaxStatus name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['SeatListHelp']!='SeatListHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['SeatListHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+
+ <p:panel style="width: 50%;" header="#{messages['Seat']}- #{messages['List']} #{messages['Search']} #{messages['Result']}, #{messages['click']} #{messages['to']} #{messages['change']} #{messages['search']}  #{messages['criteria']}" switchType="ajax" collapsed="true"
+     toggleable="true" toggleableHeader="true">
+
+<h:panelGrid columns="20">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{fxxxuq1skxwwqqhxxxxxseatList.searchVal}"/>
+ </ui:decorate>
+  <h:outputText id="searchVJ" value="#{fxxxuq1skxwwqqhxxxxxseatList.searchValJ}" rendered="#{fxxxuq1skxwwqqhxxxxxseatList.searchVal.isEmpty()}"/>
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText id="toDay" ph:type="date" value="#{fxxxuq1skxwwqqhxxxxxseatList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <h:commandButton id="setToday" render="toDay" value="#{messages['set']} #{messages['Today']}"   action="#{fxxxuq1skxwwqqhxxxxxseatList.setSearchDate(fxxxuq1skxwwqqhxxxxxseatHome.currentTime)}" />
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label"> #{messages['status']}  </ui:define>
+  <h:panelGrid columns="2" >
+         <h:selectOneMenu value="#{fxxxuq1skxwwqqhxxxxxseatList.searchStatus}"> 
+          <f:selectItem itemLabel="all" itemValue="#{null}"/>
+          <f:selectItem itemLabel="open" itemValue="0"/>
+          <f:selectItem itemLabel="active/ordered" itemValue="1"/>
+           <f:selectItem itemLabel="return" itemValue="4"/>
+          <f:selectItem itemLabel="closed" itemValue="8"/>
+           <f:selectItem itemLabel="paid" itemValue="16"/>
+           <f:selectItem itemLabel="partial/shipped" itemValue="32"/>
+           <f:selectItem itemLabel="printed/final approved" itemValue="512"/>
+          <f:selectItem itemLabel="marked" itemValue="128"/>
+          <f:selectItem itemLabel="deleted" itemValue="256"/>
+         </h:selectOneMenu>
+  </h:panelGrid>
+ </ui:decorate>
+</h:panelGrid>
+
+
+
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{fxxxuq1skxwwqqhxxxxxseatList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{fxxxuq1skxwwqqhxxxxxseatList.suggest(fxxxuq1skxwwqqhxxxxxseatHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{fxxxuq1skxwwqqhxxxxxseatList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{fxxxuq1skxwwqqhxxxxxseatList.suggest(fxxxuq1skxwwqqhxxxxxseatHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="fxxxuq1skxwwqqhxxxxxseatList,globalMessages" status="buttonStatus" value="#{messages['Search']}" 
+              actionListener="#{fxxxuq1skxwwqqhxxxxxseatList.getFirstResult()}" rendered="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+            &nbsp;<h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</p:panel>
+
+    <p:panel>
+
+        <div class="actionButtons">
+             <h:commandButton id="copyallt" value="Copy All Flagged"  action="#{fxxxuq1skxwwqqhxxxxxseatHome.copyAllMarked()}" 
+                rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}" status="buttonStatus"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+             <h:commandButton id="deleteallt" value="#{messages['Delete']} #{messages['All']} #{messages['Flagged']}"  action="#{fxxxuq1skxwwqqhxxxxxseatHome.deleteAllFlagged()}"
+              onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Deletes']} #{messages['detail']} #{messages['records']} #{messages['as-well']},#{messages['but']} #{messages['not']} #{messages['all']} #{messages['constraints']}"/></span> </p:tooltip> 
+             </h:commandButton>
+             <h:commandButton id="updateallt" value="Update All Flagged"  rendered="false" action="#{fxxxuq1skxwwqqhxxxxxseatHome.updateAllFlagged()}" />
+             <h:commandButton id="emailIcal" value="#{messages['email']} #{messages['as']} #{messages['iCalendar']}"  rendered="false" action="#{fxxxuq1skxwwqqhxxxxxseatHome.writeAsIcalText()}"/>
+
+            <h:button outcome="/#{empty fxxxuq1skxwwqqhxxxxxseatFrom ? 'home' : fxxxuq1skxwwqqhxxxxxseatFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <ui:remove>  do not render list page once > 50 rows  to avoid excedding max http params </ui:remove>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{fxxxuq1skxwwqqhxxxxxseatList.setMaxResultsVal(6)}" rendered="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{fxxxuq1skxwwqqhxxxxxseatList.setMaxResultsVal(50)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{fxxxuq1skxwwqqhxxxxxseatList.setMaxResultsVal(100)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{fxxxuq1skxwwqqhxxxxxseatList.setskipColumns(true)}" rendered="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{fxxxuq1skxwwqqhxxxxxseatList.setskipColumns(false)}" rendered="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal lt 49}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(ity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Seat Search Results showing #{empty fxxxuq1skxwwqqhxxxxxseatList.resultList ? 0 : (fxxxuq1skxwwqqhxxxxxseatList.paginated ? fxxxuq1skxwwqqhxxxxxseatList.resultList.size() : fxxxuq1skxwwqqhxxxxxseatList.resultCount)} of #{fxxxuq1skxwwqqhxxxxxseatList.resultCount}"/>
+        </f:facet>
+    <div class="results" id="fxxxuq1skxwwqqhxxxxxseatList" style="overflow-x:auto">
+
+    <h:outputText value="The Seat search returned no results."
+               rendered="#{empty fxxxuq1skxwwqqhxxxxxseatList.resultList}"/>
+
+
+    <p:panel id="stage" style="text-align:center;align-content:center;width:90%;height:50px;#{a4jSkin.generalBackgroundColor} !important; ">
+     <h:outputText value="|||||| STAGE ||||||" style="color:black;"/>
+    </p:panel>
+
+
+    <p:dataTable id="fxxxuq1skxwwqqhxxxxxseatList"  frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" rows="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}" scrollRows="6"
+           var="_fxxxuq1skxwwqqhxxxxxseat" selection="#{fxxxuq1skxwwqqhxxxxxseatHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}" rowKey="#{_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid}"
+           value="#{fxxxuq1skxwwqqhxxxxxseatList.resultList}"
+           rendered="#{not empty fxxxuq1skxwwqqhxxxxxseatList.resultList}">
+         <p:column >
+            <h:selectBooleanCheckbox id="MarkItCheckbox" value="#{fxxxuq1skxwwqqhxxxxxseatHome.checked[_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid]}"/>
+            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+            <h:link outcome="/#{empty from ? 'seat' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+                   propagation="#{empty from ? 'none' : 'default'}"
+                      id="fxxxuq1skxwwqqhxxxxxseatViewId">
+                <f:param name="fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+             <h:link outcome="/seatEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="fxxxuq1skxwwqqhxxxxxseatEdit1"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') ||customIdentity.hasRole('SH') ||customIdentity.hasRole('EH') 
+                  || (customIdentity.hasRole('VH') ||customIdentity.hasRole('VQ')
+                  and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+            <h:link outcome="/seatAllocateEdit.xhtml"
+                   value="#{messages['Assign']} #{messages['Seat']}"
+             propagation="none"
+                      id="fxxxuq1skxwwqqhxxxxxseatEditA"
+                rendered="#{empty from and (customIdentity.hasRole('UH') ||customIdentity.hasRole('UQ'))}">
+                <f:param name="fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+        </p:column>
+        <p:column rendered = "#{!fxxxuq1skxwwqqhxxxxxseatList.skipColumns}"
+                    headerText="Sid">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid}"  id="a0xxuobxbxxxxxxxxxxxsid" />
+        </p:column>
+        <p:column rendered = "#{!fxxxuq1skxwwqqhxxxxxseatList.skipColumns}"
+                    headerText="Row">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a2xxukstbvxxxxxxxxxxrow) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.a2xxukstbvxxxxxxxxxxrow}"  id="a2xxukstbvxxxxxxxxxxrow" />
+        </p:column>
+        <p:column rendered = "#{!fxxxuq1skxwwqqhxxxxxseatList.skipColumns}"
+                    headerText="Rowlabel">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a3xxuxxxbvxxxxxxxxxxrowlabel) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.a3xxuxxxbvxxxxxxxxxxrowlabel}"  id="a3xxuxxxbvxxxxxxxxxxrowlabel" />
+        </p:column>
+        <p:column rendered = "#{!fxxxuq1skxwwqqhxxxxxseatList.skipColumns}"
+                    headerText="Seat001status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b1xxxxxxbvxxxxxxxxxxseat001status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b1xxxxxxbvxxxxxxxxxxseat001status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b1xxxxxxbvxxxxxxxxxxseat001status=='H'}"/>
+        </p:column>
+        <p:column rendered = "#{!fxxxuq1skxwwqqhxxxxxseatList.skipColumns}"
+                    headerText="Name001">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b2xxxxxxbvxxxxxxxxxxname001) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.b2xxxxxxbvxxxxxxxxxxname001}"  id="b2xxxxxxbvxxxxxxxxxxname001" />
+        </p:column>
+        <p:column rendered = "#{!fxxxuq1skxwwqqhxxxxxseatList.skipColumns}"
+                    headerText="Ticket001">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b3xxxxxxbvxxxxxxxxxxticket001) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.b3xxxxxxbvxxxxxxxxxxticket001}"  id="b3xxxxxxbvxxxxxxxxxxticket001" />
+        </p:column>
+        <p:column rendered = "#{!fxxxuq1skxwwqqhxxxxxseatList.skipColumns}"
+                    headerText="Po001">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b4xxxxxxbvxxxxxxxxxxpo001) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.b4xxxxxxbvxxxxxxxxxxpo001}"  id="b4xxxxxxbvxxxxxxxxxxpo001" />
+        </p:column>
+        <p:column 
+                    headerText="Seat002status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b5xxxxxxbvxxxxxxxxxxseat002status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b5xxxxxxbvxxxxxxxxxxseat002status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b5xxxxxxbvxxxxxxxxxxseat002status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name002">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b6xxxxxxbvxxxxxxxxxxname002) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.b6xxxxxxbvxxxxxxxxxxname002}"  id="b6xxxxxxbvxxxxxxxxxxname002" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket002">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b7xxxxxxbvxxxxxxxxxxticket002) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.b7xxxxxxbvxxxxxxxxxxticket002}"  id="b7xxxxxxbvxxxxxxxxxxticket002" />
+        </p:column>
+        <p:column 
+                    headerText="Po002">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b8xxxxxxbvxxxxxxxxxxpo002) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.b8xxxxxxbvxxxxxxxxxxpo002}"  id="b8xxxxxxbvxxxxxxxxxxpo002" />
+        </p:column>
+        <p:column 
+                    headerText="Seat003status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b9xxxxxxbvxxxxxxxxxxseat003status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b9xxxxxxbvxxxxxxxxxxseat003status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.b9xxxxxxbvxxxxxxxxxxseat003status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name003">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(baxxxxxxbvxxxxxxxxxxname003) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.baxxxxxxbvxxxxxxxxxxname003}"  id="baxxxxxxbvxxxxxxxxxxname003" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket003">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bbxxxxxxbvxxxxxxxxxxticket003) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bbxxxxxxbvxxxxxxxxxxticket003}"  id="bbxxxxxxbvxxxxxxxxxxticket003" />
+        </p:column>
+        <p:column 
+                    headerText="Po003">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bcxxxxxxbvxxxxxxxxxxpo003) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bcxxxxxxbvxxxxxxxxxxpo003}"  id="bcxxxxxxbvxxxxxxxxxxpo003" />
+        </p:column>
+        <p:column 
+                    headerText="Seat004status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bdxxxxxxbvxxxxxxxxxxseat004status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bdxxxxxxbvxxxxxxxxxxseat004status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bdxxxxxxbvxxxxxxxxxxseat004status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name004">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bexxxxxxbvxxxxxxxxxxname004) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bexxxxxxbvxxxxxxxxxxname004}"  id="bexxxxxxbvxxxxxxxxxxname004" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket004">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bfxxxxxxbvxxxxxxxxxxticket004) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bfxxxxxxbvxxxxxxxxxxticket004}"  id="bfxxxxxxbvxxxxxxxxxxticket004" />
+        </p:column>
+        <p:column 
+                    headerText="Po004">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bgxxxxxxbvxxxxxxxxxxpo004) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bgxxxxxxbvxxxxxxxxxxpo004}"  id="bgxxxxxxbvxxxxxxxxxxpo004" />
+        </p:column>
+        <p:column 
+                    headerText="Seat005status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bhxxxxxxbvxxxxxxxxxxseat005status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bhxxxxxxbvxxxxxxxxxxseat005status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bhxxxxxxbvxxxxxxxxxxseat005status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name005">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bixxxxxxbvxxxxxxxxxxname005) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bixxxxxxbvxxxxxxxxxxname005}"  id="bixxxxxxbvxxxxxxxxxxname005" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket005">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bjxxxxxxbvxxxxxxxxxxticket005) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bjxxxxxxbvxxxxxxxxxxticket005}"  id="bjxxxxxxbvxxxxxxxxxxticket005" />
+        </p:column>
+        <p:column 
+                    headerText="Po005">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bkxxxxxxbvxxxxxxxxxxpo005) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bkxxxxxxbvxxxxxxxxxxpo005}"  id="bkxxxxxxbvxxxxxxxxxxpo005" />
+        </p:column>
+        <p:column 
+                    headerText="Seat006status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(blxxxxxxbvxxxxxxxxxxseat006status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.blxxxxxxbvxxxxxxxxxxseat006status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.blxxxxxxbvxxxxxxxxxxseat006status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name006">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bmxxxxxxbvxxxxxxxxxxname006) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bmxxxxxxbvxxxxxxxxxxname006}"  id="bmxxxxxxbvxxxxxxxxxxname006" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket006">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bnxxxxxxbvxxxxxxxxxxticket006) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bnxxxxxxbvxxxxxxxxxxticket006}"  id="bnxxxxxxbvxxxxxxxxxxticket006" />
+        </p:column>
+        <p:column 
+                    headerText="Po006">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(boxxxxxxbvxxxxxxxxxxpo006) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.boxxxxxxbvxxxxxxxxxxpo006}"  id="boxxxxxxbvxxxxxxxxxxpo006" />
+        </p:column>
+        <p:column 
+                    headerText="Seat007status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bpxxxxxxbvxxxxxxxxxxseat007status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bpxxxxxxbvxxxxxxxxxxseat007status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bpxxxxxxbvxxxxxxxxxxseat007status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name007">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bqxxxxxxbvxxxxxxxxxxname007) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bqxxxxxxbvxxxxxxxxxxname007}"  id="bqxxxxxxbvxxxxxxxxxxname007" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket007">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(brxxxxxxbvxxxxxxxxxxticket007) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.brxxxxxxbvxxxxxxxxxxticket007}"  id="brxxxxxxbvxxxxxxxxxxticket007" />
+        </p:column>
+        <p:column 
+                    headerText="Po007">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bsxxxxxxbvxxxxxxxxxxpo007) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bsxxxxxxbvxxxxxxxxxxpo007}"  id="bsxxxxxxbvxxxxxxxxxxpo007" />
+        </p:column>
+        <p:column 
+                    headerText="Seat008status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(btxxxxxxbvxxxxxxxxxxseat008status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.btxxxxxxbvxxxxxxxxxxseat008status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.btxxxxxxbvxxxxxxxxxxseat008status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name008">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(buxxxxxxbvxxxxxxxxxxname008) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.buxxxxxxbvxxxxxxxxxxname008}"  id="buxxxxxxbvxxxxxxxxxxname008" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket008">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bvxxxxxxbvxxxxxxxxxxticket008) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bvxxxxxxbvxxxxxxxxxxticket008}"  id="bvxxxxxxbvxxxxxxxxxxticket008" />
+        </p:column>
+        <p:column 
+                    headerText="Po008">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bwxxxxxxbvxxxxxxxxxxpo008) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bwxxxxxxbvxxxxxxxxxxpo008}"  id="bwxxxxxxbvxxxxxxxxxxpo008" />
+        </p:column>
+        <p:column 
+                    headerText="Seat009status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bxxxxxxxbvxxxxxxxxxxseat009status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bxxxxxxxbvxxxxxxxxxxseat009status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.bxxxxxxxbvxxxxxxxxxxseat009status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name009">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(byxxxxxxbvxxxxxxxxxxname009) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.byxxxxxxbvxxxxxxxxxxname009}"  id="byxxxxxxbvxxxxxxxxxxname009" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket009">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(bzxxxxxxbvxxxxxxxxxxticket009) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.bzxxxxxxbvxxxxxxxxxxticket009}"  id="bzxxxxxxbvxxxxxxxxxxticket009" />
+        </p:column>
+        <p:column 
+                    headerText="Po009">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c1xxxxxxbvxxxxxxxxxxpo009) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.c1xxxxxxbvxxxxxxxxxxpo009}"  id="c1xxxxxxbvxxxxxxxxxxpo009" />
+        </p:column>
+        <p:column 
+                    headerText="Seat010status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c2xxxxxxbvxxxxxxxxxxseat010status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.c2xxxxxxbvxxxxxxxxxxseat010status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.c2xxxxxxbvxxxxxxxxxxseat010status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name010">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c3xxxxxxbvxxxxxxxxxxname010) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.c3xxxxxxbvxxxxxxxxxxname010}"  id="c3xxxxxxbvxxxxxxxxxxname010" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket010">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c4xxxxxxbvxxxxxxxxxxticket010) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.c4xxxxxxbvxxxxxxxxxxticket010}"  id="c4xxxxxxbvxxxxxxxxxxticket010" />
+        </p:column>
+        <p:column 
+                    headerText="Po010">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c5xxxxxxbvxxxxxxxxxxpo010) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.c5xxxxxxbvxxxxxxxxxxpo010}"  id="c5xxxxxxbvxxxxxxxxxxpo010" />
+        </p:column>
+        <p:column 
+                    headerText="Seat011status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c6xxxxxxbvxxxxxxxxxxseat011status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.c6xxxxxxbvxxxxxxxxxxseat011status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.c6xxxxxxbvxxxxxxxxxxseat011status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name011">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c7xxxxxxbvxxxxxxxxxxname011) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.c7xxxxxxbvxxxxxxxxxxname011}"  id="c7xxxxxxbvxxxxxxxxxxname011" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket011">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c8xxxxxxbvxxxxxxxxxxticket011) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.c8xxxxxxbvxxxxxxxxxxticket011}"  id="c8xxxxxxbvxxxxxxxxxxticket011" />
+        </p:column>
+        <p:column 
+                    headerText="Po011">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c9xxxxxxbvxxxxxxxxxxpo011) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.c9xxxxxxbvxxxxxxxxxxpo011}"  id="c9xxxxxxbvxxxxxxxxxxpo011" />
+        </p:column>
+        <p:column 
+                    headerText="Seat012status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(caxxxxxxbvxxxxxxxxxxseat012status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.caxxxxxxbvxxxxxxxxxxseat012status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.caxxxxxxbvxxxxxxxxxxseat012status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name012">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cbxxxxxxbvxxxxxxxxxxname012) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.cbxxxxxxbvxxxxxxxxxxname012}"  id="cbxxxxxxbvxxxxxxxxxxname012" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket012">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ccxxxxxxbvxxxxxxxxxxticket012) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ccxxxxxxbvxxxxxxxxxxticket012}"  id="ccxxxxxxbvxxxxxxxxxxticket012" />
+        </p:column>
+        <p:column 
+                    headerText="Po012">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cdxxxxxxbvxxxxxxxxxxpo012) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.cdxxxxxxbvxxxxxxxxxxpo012}"  id="cdxxxxxxbvxxxxxxxxxxpo012" />
+        </p:column>
+        <p:column 
+                    headerText="Seat013status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cexxxxxxbvxxxxxxxxxxseat013status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cexxxxxxbvxxxxxxxxxxseat013status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cexxxxxxbvxxxxxxxxxxseat013status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name013">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cfxxxxxxbvxxxxxxxxxxname013) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.cfxxxxxxbvxxxxxxxxxxname013}"  id="cfxxxxxxbvxxxxxxxxxxname013" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket013">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cgxxxxxxbvxxxxxxxxxxticket013) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.cgxxxxxxbvxxxxxxxxxxticket013}"  id="cgxxxxxxbvxxxxxxxxxxticket013" />
+        </p:column>
+        <p:column 
+                    headerText="Po013">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(chxxxxxxbvxxxxxxxxxxpo013) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.chxxxxxxbvxxxxxxxxxxpo013}"  id="chxxxxxxbvxxxxxxxxxxpo013" />
+        </p:column>
+        <p:column 
+                    headerText="Seat014status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cixxxxxxbvxxxxxxxxxxseat014status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cixxxxxxbvxxxxxxxxxxseat014status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cixxxxxxbvxxxxxxxxxxseat014status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name014">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cjxxxxxxbvxxxxxxxxxxname014) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.cjxxxxxxbvxxxxxxxxxxname014}"  id="cjxxxxxxbvxxxxxxxxxxname014" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket014">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ckxxxxxxbvxxxxxxxxxxticket014) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ckxxxxxxbvxxxxxxxxxxticket014}"  id="ckxxxxxxbvxxxxxxxxxxticket014" />
+        </p:column>
+        <p:column 
+                    headerText="Po014">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(clxxxxxxbvxxxxxxxxxxpo014) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.clxxxxxxbvxxxxxxxxxxpo014}"  id="clxxxxxxbvxxxxxxxxxxpo014" />
+        </p:column>
+        <p:column 
+                    headerText="Seat015status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cmxxxxxxbvxxxxxxxxxxseat015status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cmxxxxxxbvxxxxxxxxxxseat015status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cmxxxxxxbvxxxxxxxxxxseat015status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name015">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cnxxxxxxbvxxxxxxxxxxname015) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.cnxxxxxxbvxxxxxxxxxxname015}"  id="cnxxxxxxbvxxxxxxxxxxname015" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket015">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(coxxxxxxbvxxxxxxxxxxticket015) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.coxxxxxxbvxxxxxxxxxxticket015}"  id="coxxxxxxbvxxxxxxxxxxticket015" />
+        </p:column>
+        <p:column 
+                    headerText="Po015">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cpxxxxxxbvxxxxxxxxxxpo015) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.cpxxxxxxbvxxxxxxxxxxpo015}"  id="cpxxxxxxbvxxxxxxxxxxpo015" />
+        </p:column>
+        <p:column 
+                    headerText="Seat016status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cqxxxxxxbvxxxxxxxxxxseat016status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cqxxxxxxbvxxxxxxxxxxseat016status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cqxxxxxxbvxxxxxxxxxxseat016status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name016">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(crxxxxxxbvxxxxxxxxxxname016) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.crxxxxxxbvxxxxxxxxxxname016}"  id="crxxxxxxbvxxxxxxxxxxname016" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket016">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(csxxxxxxbvxxxxxxxxxxticket016) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.csxxxxxxbvxxxxxxxxxxticket016}"  id="csxxxxxxbvxxxxxxxxxxticket016" />
+        </p:column>
+        <p:column 
+                    headerText="Po016">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ctxxxxxxbvxxxxxxxxxxpo016) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ctxxxxxxbvxxxxxxxxxxpo016}"  id="ctxxxxxxbvxxxxxxxxxxpo016" />
+        </p:column>
+        <p:column 
+                    headerText="Seat017status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cuxxxxxxbvxxxxxxxxxxseat017status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cuxxxxxxbvxxxxxxxxxxseat017status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.cuxxxxxxbvxxxxxxxxxxseat017status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name017">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cvxxxxxxbvxxxxxxxxxxname017) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.cvxxxxxxbvxxxxxxxxxxname017}"  id="cvxxxxxxbvxxxxxxxxxxname017" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket017">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cxxxxxxxbvxxxxxxxxxxticket017) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.cxxxxxxxbvxxxxxxxxxxticket017}"  id="cxxxxxxxbvxxxxxxxxxxticket017" />
+        </p:column>
+        <p:column 
+                    headerText="Po017">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(cyxxxxxxbvxxxxxxxxxxpo017) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.cyxxxxxxbvxxxxxxxxxxpo017}"  id="cyxxxxxxbvxxxxxxxxxxpo017" />
+        </p:column>
+        <p:column 
+                    headerText="Seat018status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(daxxxxxxbvxxxxxxxxxxseat018status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.daxxxxxxbvxxxxxxxxxxseat018status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.daxxxxxxbvxxxxxxxxxxseat018status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name018">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dbxxxxxxbvxxxxxxxxxxname018) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dbxxxxxxbvxxxxxxxxxxname018}"  id="dbxxxxxxbvxxxxxxxxxxname018" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket018">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dcxxxxxxbvxxxxxxxxxxticket018) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dcxxxxxxbvxxxxxxxxxxticket018}"  id="dcxxxxxxbvxxxxxxxxxxticket018" />
+        </p:column>
+        <p:column 
+                    headerText="Po018">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ddxxxxxxbvxxxxxxxxxxpo018) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ddxxxxxxbvxxxxxxxxxxpo018}"  id="ddxxxxxxbvxxxxxxxxxxpo018" />
+        </p:column>
+        <p:column 
+                    headerText="Seat019status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dexxxxxxbvxxxxxxxxxxseat019status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dexxxxxxbvxxxxxxxxxxseat019status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dexxxxxxbvxxxxxxxxxxseat019status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name019">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dfxxxxxxbvxxxxxxxxxxname019) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dfxxxxxxbvxxxxxxxxxxname019}"  id="dfxxxxxxbvxxxxxxxxxxname019" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket019">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dgxxxxxxbvxxxxxxxxxxticket019) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dgxxxxxxbvxxxxxxxxxxticket019}"  id="dgxxxxxxbvxxxxxxxxxxticket019" />
+        </p:column>
+        <p:column 
+                    headerText="Po019">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dhxxxxxxbvxxxxxxxxxxpo019) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dhxxxxxxbvxxxxxxxxxxpo019}"  id="dhxxxxxxbvxxxxxxxxxxpo019" />
+        </p:column>
+        <p:column 
+                    headerText="Seat020status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dixxxxxxbvxxxxxxxxxxseat020status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dixxxxxxbvxxxxxxxxxxseat020status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dixxxxxxbvxxxxxxxxxxseat020status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name020">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(djxxxxxxbvxxxxxxxxxxname020) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.djxxxxxxbvxxxxxxxxxxname020}"  id="djxxxxxxbvxxxxxxxxxxname020" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket020">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dkxxxxxxbvxxxxxxxxxxticket020) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dkxxxxxxbvxxxxxxxxxxticket020}"  id="dkxxxxxxbvxxxxxxxxxxticket020" />
+        </p:column>
+        <p:column 
+                    headerText="Po020">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dlxxxxxxbvxxxxxxxxxxpo020) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dlxxxxxxbvxxxxxxxxxxpo020}"  id="dlxxxxxxbvxxxxxxxxxxpo020" />
+        </p:column>
+        <p:column 
+                    headerText="Seat021status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dmxxxxxxbvxxxxxxxxxxseat021status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dmxxxxxxbvxxxxxxxxxxseat021status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dmxxxxxxbvxxxxxxxxxxseat021status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name021">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dnxxxxxxbvxxxxxxxxxxname021) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dnxxxxxxbvxxxxxxxxxxname021}"  id="dnxxxxxxbvxxxxxxxxxxname021" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket021">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(doxxxxxxbvxxxxxxxxxxticket021) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.doxxxxxxbvxxxxxxxxxxticket021}"  id="doxxxxxxbvxxxxxxxxxxticket021" />
+        </p:column>
+        <p:column 
+                    headerText="Po021">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dpxxxxxxbvxxxxxxxxxxpo021) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dpxxxxxxbvxxxxxxxxxxpo021}"  id="dpxxxxxxbvxxxxxxxxxxpo021" />
+        </p:column>
+        <p:column 
+                    headerText="Seat022status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dqxxxxxxbvxxxxxxxxxxseat022status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dqxxxxxxbvxxxxxxxxxxseat022status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.dqxxxxxxbvxxxxxxxxxxseat022status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name022">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(drxxxxxxbvxxxxxxxxxxname022) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.drxxxxxxbvxxxxxxxxxxname022}"  id="drxxxxxxbvxxxxxxxxxxname022" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket022">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dsxxxxxxbvxxxxxxxxxxticket022) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dsxxxxxxbvxxxxxxxxxxticket022}"  id="dsxxxxxxbvxxxxxxxxxxticket022" />
+        </p:column>
+        <p:column 
+                    headerText="Po022">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dtxxxxxxbvxxxxxxxxxxpo022) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dtxxxxxxbvxxxxxxxxxxpo022}"  id="dtxxxxxxbvxxxxxxxxxxpo022" />
+        </p:column>
+        <p:column 
+                    headerText="Seat023status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(duxxxxxxbvxxxxxxxxxxseat023status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.duxxxxxxbvxxxxxxxxxxseat023status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.duxxxxxxbvxxxxxxxxxxseat023status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name023">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dvxxxxxxbvxxxxxxxxxxname023) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dvxxxxxxbvxxxxxxxxxxname023}"  id="dvxxxxxxbvxxxxxxxxxxname023" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket023">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dwxxxxxxbvxxxxxxxxxxticket023) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dwxxxxxxbvxxxxxxxxxxticket023}"  id="dwxxxxxxbvxxxxxxxxxxticket023" />
+        </p:column>
+        <p:column 
+                    headerText="Po023">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(dxxxxxxxbvxxxxxxxxxxpo023) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.dxxxxxxxbvxxxxxxxxxxpo023}"  id="dxxxxxxxbvxxxxxxxxxxpo023" />
+        </p:column>
+        <p:column 
+                    headerText="Seat024status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(e1xxxxxxbvxxxxxxxxxxseat024status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.e1xxxxxxbvxxxxxxxxxxseat024status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.e1xxxxxxbvxxxxxxxxxxseat024status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name024">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(e2xxxxxxbvxxxxxxxxxxname024) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.e2xxxxxxbvxxxxxxxxxxname024}"  id="e2xxxxxxbvxxxxxxxxxxname024" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket024">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(e3xxxxxxbvxxxxxxxxxxticket024) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.e3xxxxxxbvxxxxxxxxxxticket024}"  id="e3xxxxxxbvxxxxxxxxxxticket024" />
+        </p:column>
+        <p:column 
+                    headerText="Po024">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(e4xxxxxxbvxxxxxxxxxxpo024) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.e4xxxxxxbvxxxxxxxxxxpo024}"  id="e4xxxxxxbvxxxxxxxxxxpo024" />
+        </p:column>
+        <p:column 
+                    headerText="Seat025status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(eaxxxxxxbvxxxxxxxxxxseat025status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.eaxxxxxxbvxxxxxxxxxxseat025status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.eaxxxxxxbvxxxxxxxxxxseat025status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name025">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ebxxxxxxbvxxxxxxxxxxname025) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ebxxxxxxbvxxxxxxxxxxname025}"  id="ebxxxxxxbvxxxxxxxxxxname025" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket025">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ecxxxxxxbvxxxxxxxxxxticket025) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ecxxxxxxbvxxxxxxxxxxticket025}"  id="ecxxxxxxbvxxxxxxxxxxticket025" />
+        </p:column>
+        <p:column 
+                    headerText="Po025">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(edxxxxxxbvxxxxxxxxxxpo025) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.edxxxxxxbvxxxxxxxxxxpo025}"  id="edxxxxxxbvxxxxxxxxxxpo025" />
+        </p:column>
+        <p:column 
+                    headerText="Seat026status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(efxxxxxxbvxxxxxxxxxxseat026status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.efxxxxxxbvxxxxxxxxxxseat026status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.efxxxxxxbvxxxxxxxxxxseat026status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name026">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(egxxxxxxbvxxxxxxxxxxname026) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.egxxxxxxbvxxxxxxxxxxname026}"  id="egxxxxxxbvxxxxxxxxxxname026" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket026">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ehxxxxxxbvxxxxxxxxxxticket026) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ehxxxxxxbvxxxxxxxxxxticket026}"  id="ehxxxxxxbvxxxxxxxxxxticket026" />
+        </p:column>
+        <p:column 
+                    headerText="Po026">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(eixxxxxxbvxxxxxxxxxxpo026) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.eixxxxxxbvxxxxxxxxxxpo026}"  id="eixxxxxxbvxxxxxxxxxxpo026" />
+        </p:column>
+        <p:column 
+                    headerText="Seat027status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ejxxxxxxbvxxxxxxxxxxseat027status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.ejxxxxxxbvxxxxxxxxxxseat027status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.ejxxxxxxbvxxxxxxxxxxseat027status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name027">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ekxxxxxxbvxxxxxxxxxxname027) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ekxxxxxxbvxxxxxxxxxxname027}"  id="ekxxxxxxbvxxxxxxxxxxname027" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket027">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(elxxxxxxbvxxxxxxxxxxticket027) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.elxxxxxxbvxxxxxxxxxxticket027}"  id="elxxxxxxbvxxxxxxxxxxticket027" />
+        </p:column>
+        <p:column 
+                    headerText="Po027">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(emxxxxxxbvxxxxxxxxxxpo027) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.emxxxxxxbvxxxxxxxxxxpo027}"  id="emxxxxxxbvxxxxxxxxxxpo027" />
+        </p:column>
+        <p:column 
+                    headerText="Seat028status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(enxxxxxxbvxxxxxxxxxxseat028status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.enxxxxxxbvxxxxxxxxxxseat028status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.enxxxxxxbvxxxxxxxxxxseat028status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name028">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(eoxxxxxxbvxxxxxxxxxxname028) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.eoxxxxxxbvxxxxxxxxxxname028}"  id="eoxxxxxxbvxxxxxxxxxxname028" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket028">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(epxxxxxxbvxxxxxxxxxxticket028) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.epxxxxxxbvxxxxxxxxxxticket028}"  id="epxxxxxxbvxxxxxxxxxxticket028" />
+        </p:column>
+        <p:column 
+                    headerText="Po028">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(eqxxxxxxbvxxxxxxxxxxpo028) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.eqxxxxxxbvxxxxxxxxxxpo028}"  id="eqxxxxxxbvxxxxxxxxxxpo028" />
+        </p:column>
+        <p:column 
+                    headerText="Seat029status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(erxxxxxxbvxxxxxxxxxxseat029status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.erxxxxxxbvxxxxxxxxxxseat029status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.erxxxxxxbvxxxxxxxxxxseat029status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name029">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(esxxxxxxbvxxxxxxxxxxname029) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.esxxxxxxbvxxxxxxxxxxname029}"  id="esxxxxxxbvxxxxxxxxxxname029" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket029">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(etxxxxxxbvxxxxxxxxxxticket029) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.etxxxxxxbvxxxxxxxxxxticket029}"  id="etxxxxxxbvxxxxxxxxxxticket029" />
+        </p:column>
+        <p:column 
+                    headerText="Po029">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(euxxxxxxbvxxxxxxxxxxpo029) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.euxxxxxxbvxxxxxxxxxxpo029}"  id="euxxxxxxbvxxxxxxxxxxpo029" />
+        </p:column>
+        <p:column 
+                    headerText="Seat030status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(evxxxxxxbvxxxxxxxxxxseat030status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.evxxxxxxbvxxxxxxxxxxseat030status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.evxxxxxxbvxxxxxxxxxxseat030status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name030">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ewxxxxxxbvxxxxxxxxxxname030) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ewxxxxxxbvxxxxxxxxxxname030}"  id="ewxxxxxxbvxxxxxxxxxxname030" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket030">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(exxxxxxxbvxxxxxxxxxxticket030) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.exxxxxxxbvxxxxxxxxxxticket030}"  id="exxxxxxxbvxxxxxxxxxxticket030" />
+        </p:column>
+        <p:column 
+                    headerText="Po030">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(eyxxxxxxbvxxxxxxxxxxpo030) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.eyxxxxxxbvxxxxxxxxxxpo030}"  id="eyxxxxxxbvxxxxxxxxxxpo030" />
+        </p:column>
+        <p:column 
+                    headerText="Seat031status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(faxxxxxxbvxxxxxxxxxxseat031status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.faxxxxxxbvxxxxxxxxxxseat031status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.faxxxxxxbvxxxxxxxxxxseat031status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name031">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fbxxxxxxbvxxxxxxxxxxname031) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fbxxxxxxbvxxxxxxxxxxname031}"  id="fbxxxxxxbvxxxxxxxxxxname031" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket031">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fcxxxxxxbvxxxxxxxxxxticket031) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fcxxxxxxbvxxxxxxxxxxticket031}"  id="fcxxxxxxbvxxxxxxxxxxticket031" />
+        </p:column>
+        <p:column 
+                    headerText="Po031">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fdxxxxxxbvxxxxxxxxxxpo031) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fdxxxxxxbvxxxxxxxxxxpo031}"  id="fdxxxxxxbvxxxxxxxxxxpo031" />
+        </p:column>
+        <p:column 
+                    headerText="Seat032status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fexxxxxxbvxxxxxxxxxxseat032status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fexxxxxxbvxxxxxxxxxxseat032status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fexxxxxxbvxxxxxxxxxxseat032status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name032">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ffxxxxxxbvxxxxxxxxxxname032) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ffxxxxxxbvxxxxxxxxxxname032}"  id="ffxxxxxxbvxxxxxxxxxxname032" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket032">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fgxxxxxxbvxxxxxxxxxxticket032) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fgxxxxxxbvxxxxxxxxxxticket032}"  id="fgxxxxxxbvxxxxxxxxxxticket032" />
+        </p:column>
+        <p:column 
+                    headerText="Po032">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fhxxxxxxbvxxxxxxxxxxpo032) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fhxxxxxxbvxxxxxxxxxxpo032}"  id="fhxxxxxxbvxxxxxxxxxxpo032" />
+        </p:column>
+        <p:column 
+                    headerText="Seat033status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fixxxxxxbvxxxxxxxxxxseat033status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fixxxxxxbvxxxxxxxxxxseat033status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fixxxxxxbvxxxxxxxxxxseat033status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name033">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fjxxxxxxbvxxxxxxxxxxname033) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fjxxxxxxbvxxxxxxxxxxname033}"  id="fjxxxxxxbvxxxxxxxxxxname033" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket033">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fkxxxxxxbvxxxxxxxxxxticket033) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fkxxxxxxbvxxxxxxxxxxticket033}"  id="fkxxxxxxbvxxxxxxxxxxticket033" />
+        </p:column>
+        <p:column 
+                    headerText="Po033">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(flxxxxxxbvxxxxxxxxxxpo033) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.flxxxxxxbvxxxxxxxxxxpo033}"  id="flxxxxxxbvxxxxxxxxxxpo033" />
+        </p:column>
+        <p:column 
+                    headerText="Seat034status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fmxxxxxxbvxxxxxxxxxxseat034status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fmxxxxxxbvxxxxxxxxxxseat034status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fmxxxxxxbvxxxxxxxxxxseat034status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name034">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fnxxxxxxbvxxxxxxxxxxname034) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fnxxxxxxbvxxxxxxxxxxname034}"  id="fnxxxxxxbvxxxxxxxxxxname034" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket034">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(foxxxxxxbvxxxxxxxxxxticket034) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.foxxxxxxbvxxxxxxxxxxticket034}"  id="foxxxxxxbvxxxxxxxxxxticket034" />
+        </p:column>
+        <p:column 
+                    headerText="Po034">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fpxxxxxxbvxxxxxxxxxxpo034) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fpxxxxxxbvxxxxxxxxxxpo034}"  id="fpxxxxxxbvxxxxxxxxxxpo034" />
+        </p:column>
+        <p:column 
+                    headerText="Seat035status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fqxxxxxxbvxxxxxxxxxxseat035status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fqxxxxxxbvxxxxxxxxxxseat035status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fqxxxxxxbvxxxxxxxxxxseat035status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name035">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(frxxxxxxbvxxxxxxxxxxname035) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.frxxxxxxbvxxxxxxxxxxname035}"  id="frxxxxxxbvxxxxxxxxxxname035" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket035">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fsxxxxxxbvxxxxxxxxxxticket035) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fsxxxxxxbvxxxxxxxxxxticket035}"  id="fsxxxxxxbvxxxxxxxxxxticket035" />
+        </p:column>
+        <p:column 
+                    headerText="Po035">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ftxxxxxxbvxxxxxxxxxxpo035) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ftxxxxxxbvxxxxxxxxxxpo035}"  id="ftxxxxxxbvxxxxxxxxxxpo035" />
+        </p:column>
+        <p:column 
+                    headerText="Seat036status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fuxxxxxxbvxxxxxxxxxxseat036status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fuxxxxxxbvxxxxxxxxxxseat036status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.fuxxxxxxbvxxxxxxxxxxseat036status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name036">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fvxxxxxxbvxxxxxxxxxxname036) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fvxxxxxxbvxxxxxxxxxxname036}"  id="fvxxxxxxbvxxxxxxxxxxname036" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket036">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fwxxxxxxbvxxxxxxxxxxticket036) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fwxxxxxxbvxxxxxxxxxxticket036}"  id="fwxxxxxxbvxxxxxxxxxxticket036" />
+        </p:column>
+        <p:column 
+                    headerText="Location Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fxxxcq144xwwqqhxxxxxlocation pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fxxxcq144xwwqqhxxxxxlocationList.getKeyValue(_fxxxuq1skxwwqqhxxxxxseat.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Location Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fxxxcq144xwwqqhxxxxxlocation pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fxxxcq144xwwqqhxxxxxlocationList.getKeyValue(_fxxxuq1skxwwqqhxxxxxseat.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Po036">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(fxxxxxxxbvxxxxxxxxxxpo036) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.fxxxxxxxbvxxxxxxxxxxpo036}"  id="fxxxxxxxbvxxxxxxxxxxpo036" />
+        </p:column>
+        <p:column 
+                    headerText="Seat037status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gaxxxxxxbvxxxxxxxxxxseat037status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gaxxxxxxbvxxxxxxxxxxseat037status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gaxxxxxxbvxxxxxxxxxxseat037status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name037">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gbxxxxxxbvxxxxxxxxxxname037) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gbxxxxxxbvxxxxxxxxxxname037}"  id="gbxxxxxxbvxxxxxxxxxxname037" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket037">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gcxxxxxxbvxxxxxxxxxxticket037) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gcxxxxxxbvxxxxxxxxxxticket037}"  id="gcxxxxxxbvxxxxxxxxxxticket037" />
+        </p:column>
+        <p:column 
+                    headerText="Po037">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gdxxxxxxbvxxxxxxxxxxpo037) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gdxxxxxxbvxxxxxxxxxxpo037}"  id="gdxxxxxxbvxxxxxxxxxxpo037" />
+        </p:column>
+        <p:column 
+                    headerText="Seat038status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gexxxxxxbvxxxxxxxxxxseat038status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gexxxxxxbvxxxxxxxxxxseat038status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gexxxxxxbvxxxxxxxxxxseat038status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name038">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gfxxxxxxbvxxxxxxxxxxname038) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gfxxxxxxbvxxxxxxxxxxname038}"  id="gfxxxxxxbvxxxxxxxxxxname038" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket038">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ggxxxxxxbvxxxxxxxxxxticket038) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ggxxxxxxbvxxxxxxxxxxticket038}"  id="ggxxxxxxbvxxxxxxxxxxticket038" />
+        </p:column>
+        <p:column 
+                    headerText="Po038">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ghxxxxxxbvxxxxxxxxxxpo038) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ghxxxxxxbvxxxxxxxxxxpo038}"  id="ghxxxxxxbvxxxxxxxxxxpo038" />
+        </p:column>
+        <p:column 
+                    headerText="Seat039status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gixxxxxxbvxxxxxxxxxxseat039status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gixxxxxxbvxxxxxxxxxxseat039status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gixxxxxxbvxxxxxxxxxxseat039status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name039">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gjxxxxxxbvxxxxxxxxxxname039) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gjxxxxxxbvxxxxxxxxxxname039}"  id="gjxxxxxxbvxxxxxxxxxxname039" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket039">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gkxxxxxxbvxxxxxxxxxxticket039) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gkxxxxxxbvxxxxxxxxxxticket039}"  id="gkxxxxxxbvxxxxxxxxxxticket039" />
+        </p:column>
+        <p:column 
+                    headerText="Po039">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(glxxxxxxbvxxxxxxxxxxpo039) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.glxxxxxxbvxxxxxxxxxxpo039}"  id="glxxxxxxbvxxxxxxxxxxpo039" />
+        </p:column>
+        <p:column 
+                    headerText="Seat040status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gmxxxxxxbvxxxxxxxxxxseat040status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gmxxxxxxbvxxxxxxxxxxseat040status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gmxxxxxxbvxxxxxxxxxxseat040status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name040">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gnxxxxxxbvxxxxxxxxxxname040) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gnxxxxxxbvxxxxxxxxxxname040}"  id="gnxxxxxxbvxxxxxxxxxxname040" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket040">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(goxxxxxxbvxxxxxxxxxxticket040) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.goxxxxxxbvxxxxxxxxxxticket040}"  id="goxxxxxxbvxxxxxxxxxxticket040" />
+        </p:column>
+        <p:column 
+                    headerText="Po040">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gpxxxxxxbvxxxxxxxxxxpo040) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gpxxxxxxbvxxxxxxxxxxpo040}"  id="gpxxxxxxbvxxxxxxxxxxpo040" />
+        </p:column>
+        <p:column 
+                    headerText="Seat041status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gqxxxxxxbvxxxxxxxxxxseat041status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gqxxxxxxbvxxxxxxxxxxseat041status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.gqxxxxxxbvxxxxxxxxxxseat041status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name041">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(grxxxxxxbvxxxxxxxxxxname041) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.grxxxxxxbvxxxxxxxxxxname041}"  id="grxxxxxxbvxxxxxxxxxxname041" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket041">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gsxxxxxxbvxxxxxxxxxxticket041) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gsxxxxxxbvxxxxxxxxxxticket041}"  id="gsxxxxxxbvxxxxxxxxxxticket041" />
+        </p:column>
+        <p:column 
+                    headerText="Po041">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gtxxxxxxbvxxxxxxxxxxpo041) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gtxxxxxxbvxxxxxxxxxxpo041}"  id="gtxxxxxxbvxxxxxxxxxxpo041" />
+        </p:column>
+        <p:column 
+                    headerText="Seat042status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(guxxxxxxbvxxxxxxxxxxseat042status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.guxxxxxxbvxxxxxxxxxxseat042status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.guxxxxxxbvxxxxxxxxxxseat042status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name042">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gvxxxxxxbvxxxxxxxxxxname042) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gvxxxxxxbvxxxxxxxxxxname042}"  id="gvxxxxxxbvxxxxxxxxxxname042" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket042">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gwxxxxxxbvxxxxxxxxxxticket042) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gwxxxxxxbvxxxxxxxxxxticket042}"  id="gwxxxxxxbvxxxxxxxxxxticket042" />
+        </p:column>
+        <p:column 
+                    headerText="Po042">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(gxxxxxxxbvxxxxxxxxxxpo042) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.gxxxxxxxbvxxxxxxxxxxpo042}"  id="gxxxxxxxbvxxxxxxxxxxpo042" />
+        </p:column>
+        <p:column 
+                    headerText="Seat043status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(haxxxxxxbvxxxxxxxxxxseat043status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.haxxxxxxbvxxxxxxxxxxseat043status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.haxxxxxxbvxxxxxxxxxxseat043status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name043">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hbxxxxxxbvxxxxxxxxxxname043) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hbxxxxxxbvxxxxxxxxxxname043}"  id="hbxxxxxxbvxxxxxxxxxxname043" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket043">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hcxxxxxxbvxxxxxxxxxxticket043) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hcxxxxxxbvxxxxxxxxxxticket043}"  id="hcxxxxxxbvxxxxxxxxxxticket043" />
+        </p:column>
+        <p:column 
+                    headerText="Po043">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hdxxxxxxbvxxxxxxxxxxpo043) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hdxxxxxxbvxxxxxxxxxxpo043}"  id="hdxxxxxxbvxxxxxxxxxxpo043" />
+        </p:column>
+        <p:column 
+                    headerText="Seat044status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hexxxxxxbvxxxxxxxxxxseat044status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hexxxxxxbvxxxxxxxxxxseat044status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hexxxxxxbvxxxxxxxxxxseat044status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name044">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hfxxxxxxbvxxxxxxxxxxname044) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hfxxxxxxbvxxxxxxxxxxname044}"  id="hfxxxxxxbvxxxxxxxxxxname044" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket044">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hgxxxxxxbvxxxxxxxxxxticket044) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hgxxxxxxbvxxxxxxxxxxticket044}"  id="hgxxxxxxbvxxxxxxxxxxticket044" />
+        </p:column>
+        <p:column 
+                    headerText="Po044">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hhxxxxxxbvxxxxxxxxxxpo044) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hhxxxxxxbvxxxxxxxxxxpo044}"  id="hhxxxxxxbvxxxxxxxxxxpo044" />
+        </p:column>
+        <p:column 
+                    headerText="Seat045status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hixxxxxxbvxxxxxxxxxxseat045status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hixxxxxxbvxxxxxxxxxxseat045status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hixxxxxxbvxxxxxxxxxxseat045status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name045">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hjxxxxxxbvxxxxxxxxxxname045) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hjxxxxxxbvxxxxxxxxxxname045}"  id="hjxxxxxxbvxxxxxxxxxxname045" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket045">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hkxxxxxxbvxxxxxxxxxxticket045) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hkxxxxxxbvxxxxxxxxxxticket045}"  id="hkxxxxxxbvxxxxxxxxxxticket045" />
+        </p:column>
+        <p:column 
+                    headerText="Po045">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hlxxxxxxbvxxxxxxxxxxpo045) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hlxxxxxxbvxxxxxxxxxxpo045}"  id="hlxxxxxxbvxxxxxxxxxxpo045" />
+        </p:column>
+        <p:column 
+                    headerText="Seat046status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hmxxxxxxbvxxxxxxxxxxseat046status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hmxxxxxxbvxxxxxxxxxxseat046status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hmxxxxxxbvxxxxxxxxxxseat046status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name046">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hnxxxxxxbvxxxxxxxxxxname046) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hnxxxxxxbvxxxxxxxxxxname046}"  id="hnxxxxxxbvxxxxxxxxxxname046" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket046">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hoxxxxxxbvxxxxxxxxxxticket046) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hoxxxxxxbvxxxxxxxxxxticket046}"  id="hoxxxxxxbvxxxxxxxxxxticket046" />
+        </p:column>
+        <p:column 
+                    headerText="Po046">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hpxxxxxxbvxxxxxxxxxxpo046) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hpxxxxxxbvxxxxxxxxxxpo046}"  id="hpxxxxxxbvxxxxxxxxxxpo046" />
+        </p:column>
+        <p:column 
+                    headerText="Seat047status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hqxxxxxxbvxxxxxxxxxxseat047status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hqxxxxxxbvxxxxxxxxxxseat047status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.hqxxxxxxbvxxxxxxxxxxseat047status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name047">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hrxxxxxxbvxxxxxxxxxxname047) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hrxxxxxxbvxxxxxxxxxxname047}"  id="hrxxxxxxbvxxxxxxxxxxname047" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket047">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hsxxxxxxbvxxxxxxxxxxticket047) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hsxxxxxxbvxxxxxxxxxxticket047}"  id="hsxxxxxxbvxxxxxxxxxxticket047" />
+        </p:column>
+        <p:column 
+                    headerText="Po047">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(htxxxxxxbvxxxxxxxxxxpo047) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.htxxxxxxbvxxxxxxxxxxpo047}"  id="htxxxxxxbvxxxxxxxxxxpo047" />
+        </p:column>
+        <p:column 
+                    headerText="Seat048status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(huxxxxxxbvxxxxxxxxxxseat048status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.huxxxxxxbvxxxxxxxxxxseat048status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.huxxxxxxbvxxxxxxxxxxseat048status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name048">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hvxxxxxxbvxxxxxxxxxxname048) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hvxxxxxxbvxxxxxxxxxxname048}"  id="hvxxxxxxbvxxxxxxxxxxname048" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket048">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hwxxxxxxbvxxxxxxxxxxticket048) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hwxxxxxxbvxxxxxxxxxxticket048}"  id="hwxxxxxxbvxxxxxxxxxxticket048" />
+        </p:column>
+        <p:column 
+                    headerText="Po048">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(hxxxxxxxbvxxxxxxxxxxpo048) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.hxxxxxxxbvxxxxxxxxxxpo048}"  id="hxxxxxxxbvxxxxxxxxxxpo048" />
+        </p:column>
+        <p:column 
+                    headerText="Seat049status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(iaxxxxxxbvxxxxxxxxxxseat049status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.iaxxxxxxbvxxxxxxxxxxseat049status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.iaxxxxxxbvxxxxxxxxxxseat049status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name049">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ibxxxxxxbvxxxxxxxxxxname049) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ibxxxxxxbvxxxxxxxxxxname049}"  id="ibxxxxxxbvxxxxxxxxxxname049" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket049">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(icxxxxxxbvxxxxxxxxxxticket049) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.icxxxxxxbvxxxxxxxxxxticket049}"  id="icxxxxxxbvxxxxxxxxxxticket049" />
+        </p:column>
+        <p:column 
+                    headerText="Po049">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(idxxxxxxbvxxxxxxxxxxpo049) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.idxxxxxxbvxxxxxxxxxxpo049}"  id="idxxxxxxbvxxxxxxxxxxpo049" />
+        </p:column>
+        <p:column 
+                    headerText="Seat050status">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(iexxxxxxbvxxxxxxxxxxseat050status) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+     <h:graphicImage  value="./img/Seat16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.iexxxxxxbvxxxxxxxxxxseat050status=='X'}"/>
+     <h:graphicImage  value="./img/flag_green16.png" styleClass="pic" rendered="#{_fxxxuq1skxwwqqhxxxxxseat.iexxxxxxbvxxxxxxxxxxseat050status=='H'}"/>
+        </p:column>
+        <p:column 
+                    headerText="Name050">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ifxxxxxxbvxxxxxxxxxxname050) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ifxxxxxxbvxxxxxxxxxxname050}"  id="ifxxxxxxbvxxxxxxxxxxname050" />
+        </p:column>
+        <p:column 
+                    headerText="Ticket050">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(igxxxxxxbvxxxxxxxxxxticket050) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.igxxxxxxbvxxxxxxxxxxticket050}"  id="igxxxxxxbvxxxxxxxxxxticket050" />
+        </p:column>
+        <p:column 
+                    headerText="Po050">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(ihxxxxxxbvxxxxxxxxxxpo050) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.ihxxxxxxbvxxxxxxxxxxpo050}"  id="ihxxxxxxbvxxxxxxxxxxpo050" />
+        </p:column>
+        <p:column 
+                    headerText="Statusfldt">
+          <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.zjxxcztxlxxxxxxxxxxxstatusfldt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Owner2">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_fxxxuq1skxwwqqhxxxxxseat.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+        </p:column>
+        <p:column 
+            headerText="Action">
+            #{' '}
+             <h:link outcome="/seatEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="fxxxuq1skxwwqqhxxxxxseatEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="fxxxuq1skxwwqqhxxxxxseatA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_fxxxuq1skxwwqqhxxxxxseat.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+        </p:column>
+    </p:dataTable>
+    </div>
+    </p:panel>
+    <div class="tableControl">
+        <h:link outcome="/seatList.more.xhtml"
+            rendered="#{fxxxuq1skxwwqqhxxxxxseatList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+            <f:param name="maxResultsVal"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/seatList.more.xhtml"
+            rendered="#{fxxxuq1skxwwqqhxxxxxseatList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/seatList.more.xhtml"
+            rendered="#{fxxxuq1skxwwqqhxxxxxseatList.nextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/seatList.more.xhtml"
+            rendered="#{fxxxuq1skxwwqqhxxxxxseatList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.lastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{fxxxuq1skxwwqqhxxxxxseatList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+         <h:button outcome="/seatEdit.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+            rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Seat']}">
+        </h:button>
+
+
+
+         <h:button outcome="/#{empty fxxxuq1skxwwqqhxxxxxseatFrom ? 'home' : fxxxuq1skxwwqqhxxxxxseatFrom}.xhtml"
+          id="donefy"
+         value="Done"/>&nbsp;
+
+
+       <ui:remove>
+         <h:button id="seatAllo" value="#{messages['Assign']} #{messages['seat']}"   outcome="/seatAllocateEdit.xhtml" target="_blank"/>
+       </ui:remove>
+
+
+
+
+        <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessagesb"/>
+
+<br/>
+    </div>
+            <p:hotkey  actionListener="#{fxxxuq1skxwwqqhxxxxxseatList.getFirstResult()}" bind="return">
+            </p:hotkey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

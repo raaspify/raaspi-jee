@@ -1,0 +1,466 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}"/>
+     <f:viewParam name="useSeq" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.useSeq}"/>
+     <f:viewParam name="fromTable" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a0xxukcdlvxxxxxxxxxxfromtable}"/>
+     <f:viewParam name="qualifier" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}"/>
+     <f:viewParam name="fromKey" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey}"/>
+     <f:viewParam name="useSeq" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}"/>
+     <f:viewParam name="data" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.b1xxuzaxbvxxxxxxxxxxdata}"/>
+    <f:viewParam name="yxxxuq1m1xwwqqqxxxxxclobdataFrom" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.yxxxuq1m1xwwqqqxxxxxclobdataFrom}"/>
+    <f:viewAction action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.restrict()}" />
+    <f:viewAction action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Clobdata']}</ui:define>
+
+<ui:define name="body">
+<h:form id="yxxxuq1m1xwwqqqxxxxxclobdata" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("yxxxuq1m1xwwqqqxxxxxclobdata:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!yxxxuq1m1xwwqqqxxxxxclobdataHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ClobdataEditHelp']!='ClobdataEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ClobdataEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{yxxxuq1m1xwwqqqxxxxxclobdataHome.managed ? 'Edit' : 'Add'} #{messages['Clobdata']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="a0xxukcdlvxxxxxxxxxxfromtableDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('UH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="a0xxukcdlvxxxxxxxxxxfromtable" value="#{messages['Fromtable']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxukcdlvxxxxxxxxxxfromtable" 
+                       label="fromtable"
+                        required="true"
+                           size="20"
+                      maxlength="35"
+                          value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a0xxukcdlvxxxxxxxxxxfromtable}">
+
+         </h:inputText>
+            <p:tooltip  target="a0xxukcdlvxxxxxxxxxxfromtable"> <span style="white-space: nowrap"> <h:outputText value="Enter Value here"/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a1xxuxxxbv49xxxxxxxxfromkeyDecoration"    >
+        <h:outputLabel  for="a1xxuxxxbv49xxxxxxxxfromkey" value="#{messages['Fromkey']}">
+      </h:outputLabel>
+ 
+              <h:inputText value= "#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey}" disabled="true"
+              rendered="#{fn:endsWith(yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey,'-M')}" />
+                <h:panelGrid columns="2">
+                 <h:selectOneMenu style="width:250px;"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey}" required="false" id="a1xxuxxxbv49xxxxxxxxfromkey" rendered="#{!fn:endsWith(yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey,'-M')}">
+                   <f:ajax  render="a1xxuxxxbv49xxxxxxxxfromkeyI" bypassUpdates="false"/>
+               <f:ajax  render="a1xxuxxxbv49xxxxxxxxfromkeyI" bypassUpdates="false"/>
+                                <f:selectItem itemValue="#{null}" itemLabel="" />
+                         <f:selectItem itemValue="3R-ATTACHMENT-1-C" itemLabel="#{messages['You']} #{messages['can']} #{messages['keyin']} #{messages['override']} #{messages['value']} #{messages['in']} #{messages['next']} #{messages['box']}" />
+                                <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('1m',49)}"  var="babu"  
+                                 itemLabel="#{babu.key}"
+                                 itemValue="#{babu.value}" /> 
+                                  <p:tooltip>  <span style="white-space: nowrap"> <h:outputText value="#{messages['Select']} #{messages['and']} #{messages['use']} #{messages['this']} #{messages['or']} #{messages['select']} #{messages['this']} #{messages['and']} #{messages['then']} #{messages['Enter']} #{messages['override']} #{messages['value']} #{messages['in']} #{messages['next']} #{messages['box']}"/></span> </p:tooltip> 
+                               </h:selectOneMenu>
+                 <h:inputText id="a1xxuxxxbv49xxxxxxxxfromkeyI" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}" label="#{messages['Source']}" required="true"
+                          size="20" maxlength="200">
+                 </h:inputText>
+                </h:panelGrid>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a2xxuxxxbv50xxxxxxxxqualifierDecoration"    >
+        <h:outputLabel  for="a2xxuxxxbv50xxxxxxxxqualifier" value="#{messages['Qualifier']}">
+      </h:outputLabel>
+ 
+               <h:inputText value= "#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}" disabled="true"
+                                   rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a4xxexxxbvxxxxxxxxxxtype=='theme'}"/>
+               <h:panelGrid columns="2">
+               <h:selectOneMenu style="width:250px;"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}" required="false" id="a2xxuxxxbv50xxxxxxxxqualifier" 
+                  rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a4xxexxxbvxxxxxxxxxxtype!='theme'}">
+                  <f:ajax  render="a2xxuxxxbv50xxxxxxxxqualifierI" bypassUpdates="false"/>
+               <f:ajax  render="a2xxuxxxbv50xxxxxxxxqualifierI" bypassUpdates="false"/>
+                                <f:selectItem itemValue="#{null}" itemLabel="" />
+                                <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('1m',50)}"  var="babu"  
+                                 itemLabel="#{babu.key}"
+                                 itemValue="#{babu.value}" /> 
+                               </h:selectOneMenu>
+                 <h:inputText id="a2xxuxxxbv50xxxxxxxxqualifierI" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}" label="#{messages['Source']}" required="true"
+                          size="20" maxlength="200">
+                 </h:inputText>
+                </h:panelGrid>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a3xxexnsbvxxxxxxxxxxsequenceDecoration"    >
+        <h:outputLabel  for="a3xxexnsbvxxxxxxxxxxsequence" value="#{messages['Sequence']}">
+      </h:outputLabel>
+                &nbsp;<p:spinner id="a3xxexnsbvxxxxxxxxxxsequence" 
+                          value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}"
+                           inputSize="2"
+                           step="1">
+                    </p:spinner>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a4xxexxxbvxxxxxxxxxxtypeDecoration"    >
+        <h:outputLabel  for="a4xxexxxbvxxxxxxxxxxtype" value="#{messages['Type']}">
+      </h:outputLabel>
+
+         <h:inputText id="a4xxexxxbvxxxxxxxxxxtype" 
+                           size="20"
+                      maxlength="40"
+                          value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a4xxexxxbvxxxxxxxxxxtype}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="2">
+
+             <h:panelGroup id="b1xxuzaxbvxxxxxxxxxxdataDecoration"    >
+        <h:outputLabel  for="b1xxuzaxbvxxxxxxxxxxdata" value="#{messages['Data']}">
+      </h:outputLabel>
+          <h:inputTextarea id="b1xxuzaxbvxxxxxxxxxxdata" 
+                   readonly="true"
+                   size="20"
+                   maxlength="255"
+                   value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.b1xxuzaxbvxxxxxxxxxxdata}">
+          </h:inputTextarea>
+           <p:tooltip for="b1xxuzaxbvxxxxxxxxxxdatao"> <span style="white-space: nowrap"> <h:outputText value="Types allowed are: xml,txt,csv"/></span> </p:tooltip> 
+         <ui:remove>xss attack possible via direct input of html, server santize added using jsoup</ui:remove>
+         <ui:remove>jul30 2019 check for mastersite removed to allow for all but for clobdata csv only logic in bean </ui:remove>
+         <h:selectOneRadio value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.upLoadPurpose}" required="false" id="b1xxuzaxbvxxxxxxxxxxdatad" rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.b1xxuzaxbvxxxxxxxxxxdata.length() >2}">
+          <f:selectItem  
+           itemLabel="Add"
+           itemValue="ad" /> 
+          <f:selectItem  
+           itemLabel="Replace"
+           itemValue="re" /> 
+         </h:selectOneRadio>
+         <ui:remove>For now, Item entity only</ui:remove>
+         <h:commandLink action="#{fpxxfq1a5xwwqqhxxxxxitemHome.removeImage()}"
+          value="#{messages['Remove']}" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() >2}" />
+         <o:inputFile  id="b1xxuzaxbvxxxxxxxxxxdatao" value="#{file.lfiles}" multiple="true" 
+          accept="text/*,text/csv,.csv,text/comma-separated-values"/>
+         <h:commandButton value="Upload" action="#{file.fileUpload('clobblob')}"/>
+         <br />
+         <p:panel rendered="#{not empty file.data}">
+          <h:commandButton action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.clearUploadData}"
+            value="#{messages['Clear']} #{messages['Uploaded']} #{messages['Data']}"/>
+          #{messages['Uploaded']}&nbsp;
+          <o:graphicImage value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.files[0].data}" dataURI="true" width="100" 
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[0].data}" />
+          <o:graphicImage value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.files[1].data}" dataURI="true" width="100" 
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[1].data}" />
+          <o:graphicImage value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.files[2].data}" dataURI="true" width="100" 
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[2].data}" />
+          <h:outputText value="#{fn:substring(yxxxuq1n1xwwqqqxxxxxblobdataHome.files[0].text,0,50)}"  
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[0].text}" />
+          #{messages['Doc2:']}<h:outputText value="#{fn:substring(yxxxuq1n1xwwqqqxxxxxblobdataHome.files[1].text,0,50)}"  
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[1].text}" />
+          #{messages['Doc3:']}<h:outputText value="#{fn:substring(yxxxuq1n1xwwqqqxxxxxblobdataHome.files[2].text,0,50)}"  
+           rendered="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataHome.files[2].text}" />
+         </p:panel>
+         <ui:remove>
+          <h:outputText value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.clobdata}" rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.b1xxuzaxbvxxxxxxxxxxdata.length() >2}"  />
+         p:upload  needs conversation or session bean to work, so have xxx.page with begin conversaation
+         </ui:remove>
+                  #{messages['Saved']}&nbsp;
+                <h:outputText escape="false"  value="#{fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('fpxxfq1a5xwwqqhxxxxxitem?upper_case',customIdentity.holdValue,'TXT',0,12000)}"  />
+                <pe:ckEditor id="b1xxuzaxbvxxxxxxxxxxdataed" height="50" width="100%"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.b1xxuzaxbvxxxxxxxxxxdata}"
+                 toolbar="[['NewPage','Preview','Cut','Copy','Image','Table','HorizontalRule','Iframe','Link','Unlink','Anchor','Paste','PasteText','PasteFromWord','-', 'Scayt'], '/',['Font','FontSize','Bold','Italic','Strike','-','RemoveFormat' ] ,[ 'TextColor','BGColor' ], ['Undo', 'Redo']]">
+                </pe:ckEditor>
+            </h:panelGroup>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="2">
+
+            <h:panelGroup id="y3xxuxznbvxxxxxxxxxxnotesDecoration"  rendered="true">
+        <h:outputLabel  for="y3xxuxznbvxxxxxxxxxxnotes" value="#{messages['Notes']}">
+      </h:outputLabel>
+                <h:inputTextarea id="y3xxuxznbvxxxxxxxxxxnotes"
+                               cols="80"
+                               rows="3"
+                              value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.y3xxuxznbvxxxxxxxxxxnotes}"/>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z1xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z1xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="z1xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z2xxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('UH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="z2xxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.z2xxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z3xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('UH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z3xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="z3xxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.z3xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('UH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a0xxukcdlvxxxxxxxxxxfromtable} #{messages['sid']} #{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a0xxukcdlvxxxxxxxxxxfromtable !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persist()}"
+                       disabled="#{!yxxxuq1m1xwwqqqxxxxxclobdataHome.wired}"
+                       rendered="#{!yxxxuq1m1xwwqqqxxxxxclobdataHome.managed  and !yxxxuq1m1xwwqqqxxxxxclobdataHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+            <p:commandButton id="saveSys" styleClass="buttonMain" 
+                          value="#{messages['Save']} #{messages['In']} #{messages['Gallery']}" status="buttonStatus" update="@form" 
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persist('SYSTEM')}"
+                       disabled="#{!yxxxuq1m1xwwqqqxxxxxclobdataHome.wired}"
+                       rendered="#{!yxxxuq1m1xwwqqqxxxxxclobdataHome.managed  and customIdentity.masterSite}">  
+            </p:commandButton>  
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.update()}"
+                       rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.managed  and !yxxxuq1m1xwwqqqxxxxxclobdataHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.update()}"
+                       rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.managed and yxxxuq1m1xwwqqqxxxxxclobdataHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.remove()}"
+                       rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.managed and !yxxxuq1m1xwwqqqxxxxxclobdataHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/clobdataEdit.xhtml"
+                       rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.reportName}"/>
+            <f:param name="displayAs" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.displayAs}" /> 
+            <h:button outcome="/clobdataList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Clobdata']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty yxxxuq1m1xwwqqqxxxxxclobdataHome.yxxxuq1m1xwwqqqxxxxxclobdataFrom ? 'home' : yxxxuq1m1xwwqqqxxxxxclobdataHome.yxxxuq1m1xwwqqqxxxxxclobdataFrom}.xhtml"
+                rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.managed or yxxxuq1m1xwwqqqxxxxxclobdataHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty yxxxuq1m1xwwqqqxxxxxclobdataHome.yxxxuq1m1xwwqqqxxxxxclobdataFrom ? 'home' : yxxxuq1m1xwwqqqxxxxxclobdataHome.yxxxuq1m1xwwqqqxxxxxclobdataFrom}.xhtml"
+                rendered="#{!yxxxuq1m1xwwqqqxxxxxclobdataHome.managed and !yxxxuq1m1xwwqqqxxxxxclobdataHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

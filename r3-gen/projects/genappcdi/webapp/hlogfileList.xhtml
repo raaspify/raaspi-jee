@@ -1,0 +1,480 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="xxxxch6ahxhhhhhxxxxxhlogfileA0xxuobxbxxxxxxxxxxxsid" value="#{xxxxch6ahxhhhhhxxxxxhlogfileHome.xxxxch6ahxhhhhhxxxxxhlogfileA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal}"/>
+    <f:viewAction action="#{xxxxch6ahxhhhhhxxxxxhlogfileHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Hlogfile']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="xxxxch6ahxhhhhhxxxxxhlogfileSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']}" propagation="end"  outcome="/home.xhtml" />
+             <p:ajaxStatus name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['HlogfileListHelp']!='HlogfileListHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['HlogfileListHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+
+ <p:panel style="width: 50%;" header="#{messages['Hlogfile']}- #{messages['List']} #{messages['Search']} #{messages['Result']}, #{messages['click']} #{messages['to']} #{messages['change']} #{messages['search']}  #{messages['criteria']}" switchType="ajax" collapsed="true"
+     toggleable="true" toggleableHeader="true">
+
+<h:panelGrid columns="20">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.searchVal}"/>
+ </ui:decorate>
+  <h:outputText id="searchVJ" value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.searchValJ}" rendered="#{xxxxch6ahxhhhhhxxxxxhlogfileList.searchVal.isEmpty()}"/>
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText id="toDay" ph:type="date" value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <h:commandButton id="setToday" render="toDay" value="#{messages['set']} #{messages['Today']}"   action="#{xxxxch6ahxhhhhhxxxxxhlogfileList.setSearchDate(xxxxch6ahxhhhhhxxxxxhlogfileHome.currentTime)}" />
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label"> #{messages['status']}  </ui:define>
+  <h:panelGrid columns="2" >
+         <h:selectOneMenu value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.searchStatus}"> 
+          <f:selectItem itemLabel="all" itemValue="#{null}"/>
+          <f:selectItem itemLabel="open" itemValue="0"/>
+          <f:selectItem itemLabel="active/ordered" itemValue="1"/>
+           <f:selectItem itemLabel="return" itemValue="4"/>
+          <f:selectItem itemLabel="closed" itemValue="8"/>
+           <f:selectItem itemLabel="paid" itemValue="16"/>
+           <f:selectItem itemLabel="partial/shipped" itemValue="32"/>
+           <f:selectItem itemLabel="printed/final approved" itemValue="512"/>
+          <f:selectItem itemLabel="marked" itemValue="128"/>
+          <f:selectItem itemLabel="deleted" itemValue="256"/>
+         </h:selectOneMenu>
+  </h:panelGrid>
+ </ui:decorate>
+</h:panelGrid>
+
+
+
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.suggest(xxxxch6ahxhhhhhxxxxxhlogfileHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.suggest(xxxxch6ahxhhhhhxxxxxhlogfileHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="xxxxch6ahxhhhhhxxxxxhlogfileList,globalMessages" status="buttonStatus" value="#{messages['Search']}" 
+              actionListener="#{xxxxch6ahxhhhhhxxxxxhlogfileList.getFirstResult()}" rendered="#{xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal lt 49}"/>
+            &nbsp;<h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</p:panel>
+
+    <p:panel>
+
+        <div class="actionButtons">
+             <h:commandButton id="copyallt" value="Copy All Flagged"  action="#{xxxxch6ahxhhhhhxxxxxhlogfileHome.copyAllMarked()}" 
+                rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal lt 49}" status="buttonStatus"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+             <h:commandButton id="deleteallt" value="#{messages['Delete']} #{messages['All']} #{messages['Flagged']}"  action="#{xxxxch6ahxhhhhhxxxxxhlogfileHome.deleteAllFlagged()}"
+              onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal lt 49}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Deletes']} #{messages['detail']} #{messages['records']} #{messages['as-well']},#{messages['but']} #{messages['not']} #{messages['all']} #{messages['constraints']}"/></span> </p:tooltip> 
+             </h:commandButton>
+             <h:commandButton id="updateallt" value="Update All Flagged"  rendered="false" action="#{xxxxch6ahxhhhhhxxxxxhlogfileHome.updateAllFlagged()}" />
+             <h:commandButton id="emailIcal" value="#{messages['email']} #{messages['as']} #{messages['iCalendar']}"  rendered="false" action="#{xxxxch6ahxhhhhhxxxxxhlogfileHome.writeAsIcalText()}"/>
+
+            <h:button outcome="/#{empty xxxxch6ahxhhhhhxxxxxhlogfileFrom ? 'home' : xxxxch6ahxhhhhhxxxxxhlogfileFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <ui:remove>  do not render list page once > 50 rows  to avoid excedding max http params </ui:remove>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{xxxxch6ahxhhhhhxxxxxhlogfileList.setMaxResultsVal(6)}" rendered="#{xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{xxxxch6ahxhhhhhxxxxxhlogfileList.setMaxResultsVal(50)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{xxxxch6ahxhhhhhxxxxxhlogfileList.setMaxResultsVal(100)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal lt 49}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{xxxxch6ahxhhhhhxxxxxhlogfileList.setskipColumns(true)}" rendered="#{xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal lt 49}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{xxxxch6ahxhhhhhxxxxxhlogfileList.setskipColumns(false)}" rendered="#{xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal lt 49}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(ity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Hlogfile Search Results showing #{empty xxxxch6ahxhhhhhxxxxxhlogfileList.resultList ? 0 : (xxxxch6ahxhhhhhxxxxxhlogfileList.paginated ? xxxxch6ahxhhhhhxxxxxhlogfileList.resultList.size() : xxxxch6ahxhhhhhxxxxxhlogfileList.resultCount)} of #{xxxxch6ahxhhhhhxxxxxhlogfileList.resultCount}"/>
+        </f:facet>
+    <div class="results" id="xxxxch6ahxhhhhhxxxxxhlogfileList" style="overflow-x:auto">
+
+    <h:outputText value="The Hlogfile search returned no results."
+               rendered="#{empty xxxxch6ahxhhhhhxxxxxhlogfileList.resultList}"/>
+
+
+
+
+    <p:dataTable id="xxxxch6ahxhhhhhxxxxxhlogfileList"  frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" rows="#{xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal}" scrollRows="6"
+           var="_xxxxch6ahxhhhhhxxxxxhlogfile" selection="#{xxxxch6ahxhhhhhxxxxxhlogfileHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}" rowKey="#{_xxxxch6ahxhhhhhxxxxxhlogfile.a0xxuobxbxxxxxxxxxxxsid}"
+           value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.resultList}"
+           rendered="#{not empty xxxxch6ahxhhhhhxxxxxhlogfileList.resultList}">
+         <p:column headerText="Action">
+            <h:selectBooleanCheckbox id="MarkItCheckbox" value="#{xxxxch6ahxhhhhhxxxxxhlogfileHome.checked[_xxxxch6ahxhhhhhxxxxxhlogfile.a0xxuobxbxxxxxxxxxxxsid]}"/>
+            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+            <h:link outcome="/#{empty from ? 'hlogfile' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+                   propagation="#{empty from ? 'none' : 'default'}"
+                      id="xxxxch6ahxhhhhhxxxxxhlogfileViewId">
+                <f:param name="xxxxch6ahxhhhhhxxxxxhlogfileA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+             <h:link outcome="/hlogfileEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="xxxxch6ahxhhhhhxxxxxhlogfileEdit1"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') ||customIdentity.hasRole('SH') ||customIdentity.hasRole('EH') 
+                  || (customIdentity.hasRole('VH') ||customIdentity.hasRole('VQ')
+                  and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="xxxxch6ahxhhhhhxxxxxhlogfileA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+        </p:column>
+           <p:column rendered="#{!xxxxch6ahxhhhhhxxxxxhlogfileList.skipColumns}"
+                      headerText="#{messages['Serialno']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxukxxbvxxxxxxxxxxserialno) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.a0xxukxxbvxxxxxxxxxxserialno}"  id="a0xxukxxbvxxxxxxxxxxserialno" />
+            </p:column>
+           <p:column rendered="#{!xxxxch6ahxhhhhhxxxxxhlogfileList.skipColumns}"
+                      headerText="#{messages['Customej']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(xznxuxxrbvxxxxxxxxxxcustomej) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.xznxuxxrbvxxxxxxxxxxcustomej}"  id="xznxuxxrbvxxxxxxxxxxcustomej" />
+            </p:column>
+           <p:column rendered="#{!xxxxch6ahxhhhhhxxxxxhlogfileList.skipColumns}"
+                      headerText="#{messages['Matcode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z1xxuxxrbvxxxxxxxxxxmatcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.z1xxuxxrbvxxxxxxxxxxmatcode}"  id="z1xxuxxrbvxxxxxxxxxxmatcode" rendered="true"/>
+            </p:column>
+           <p:column rendered="#{!xxxxch6ahxhhhhhxxxxxhlogfileList.skipColumns}"
+                      headerText="#{messages['Quanrecd']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z2xxzxqrbvxxxxxxxxxxquanrecd) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.z2xxzxqrbvxxxxxxxxxxquanrecd}"  id="z2xxzxqrbvxxxxxxxxxxquanrecd" rendered="true"/>
+            </p:column>
+           <p:column rendered="#{!xxxxch6ahxhhhhhxxxxxhlogfileList.skipColumns}"
+                      headerText="#{messages['Vendor']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z3xxuxxrbvxxxxxxxxxxvendor) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.z3xxuxxrbvxxxxxxxxxxvendor}"  id="z3xxuxxrbvxxxxxxxxxxvendor" rendered="true"/>
+            </p:column>
+           <p:column rendered="#{!xxxxch6ahxhhhhhxxxxxhlogfileList.skipColumns}"
+                      headerText="#{messages['Location']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z5xxuxxrbvlxxxxxxxxxlocation) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.z5xxuxxrbvlxxxxxxxxxlocation}"  id="z5xxuxxrbvlxxxxxxxxxlocation" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Recvrpt']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z6xxuxxrbvxxxxxxxxxxrecvrpt) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.z6xxuxxrbvxxxxxxxxxxrecvrpt}"  id="z6xxuxxrbvxxxxxxxxxxrecvrpt" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Inflg']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z7xxfxxxbvxxxxxxxxxxinflg) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.z7xxfxxxbvxxxxxxxxxxinflg}"  id="z7xxfxxxbvxxxxxxxxxxinflg" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Phy']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z8xxfxxxbvxxxxxxxxxxphy) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.z8xxfxxxbvxxxxxxxxxxphy}"  id="z8xxfxxxbvxxxxxxxxxxphy" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Datetin']}">
+          <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.z9xxcxxrlxxxxxxxxxxxdatetin}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Datetout']}">
+          <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zaxxcxxrlxxxxxxxxxxxdatetout}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Jobno']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zbxxuxxrbvxxxxxxxxxxjobno) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zbxxuxxrbvxxxxxxxxxxjobno}"  id="zbxxuxxrbvxxxxxxxxxxjobno" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Printmstat']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zcxxzzprhvxxxxxxxxxxprintmstat) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zcxxzzprhvxxxxxxxxxxprintmstat}"  id="zcxxzzprhvxxxxxxxxxxprintmstat" rendered="#{customIdentity.hasRole('EH')}"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Prinmtfldt']}">
+          <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zdxxczqxlhxxxxxxxxxxprinmtfldt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Pono']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zexxuxxrbvxxxxxxxxxxpono) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zexxuxxrbvxxxxxxxxxxpono}"  id="zexxuxxrbvxxxxxxxxxxpono" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Scandatet']}">
+          <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zfxxcxxrlxxxxxxxxxxxscandatet}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Quanissd']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zgxxzxqrbvxxxxxxxxxxquanissd) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zgxxzxqrbvxxxxxxxxxxquanissd}"  id="zgxxzxqrbvxxxxxxxxxxquanissd" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Butt']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zhxxuxxrbvxxxxxxxxxxbutt) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zhxxuxxrbvxxxxxxxxxxbutt}"  id="zhxxuxxrbvxxxxxxxxxxbutt" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Statusfl']}">
+              <h:outputText value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zixxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(_xxxxch6ahxhhhhhxxxxxhlogfile.zixxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(_xxxxch6ahxhhhhhxxxxxhlogfile.zixxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid/waiting approval':( _xxxxch6ahxhhhhhxxxxxhlogfile.zixxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped/approved': (_xxxxch6ahxhhhhhxxxxxhlogfile.zixxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced/final approved':(_trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 1 ?'active/ordered':'new/other')))))}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl" />
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Quanrejd']}">
+          <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zjxxcxqrlxxxxxxxxxxxquanrejd}"  id="zjxxcxqrlxxxxxxxxxxxquanrejd">
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Customer']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zkxxuxxrbvxxxxxxxxxxcustomer) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zkxxuxxrbvxxxxxxxxxxcustomer}"  id="zkxxuxxrbvxxxxxxxxxxcustomer" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cpono']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zmxxuxxrbvxxxxxxxxxxcpono) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zmxxuxxrbvxxxxxxxxxxcpono}"  id="zmxxuxxrbvxxxxxxxxxxcpono" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Orgcost']}">
+          <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zpxxzcxrlxxxxxxxxxxxorgcost}"  id="zpxxzcxrlxxxxxxxxxxxorgcost">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Orgpono']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zqxxuxxrbvxxxxxxxxxxorgpono) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zqxxuxxrbvxxxxxxxxxxorgpono}"  id="zqxxuxxrbvxxxxxxxxxxorgpono" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Orgjobno']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zrxxuxxrbvxxxxxxxxxxorgjobno) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zrxxuxxrbvxxxxxxxxxxorgjobno}"  id="zrxxuxxrbvxxxxxxxxxxorgjobno" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Altserno']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zsxxuxxrbvxxxxxxxxxxaltserno) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zsxxuxxrbvxxxxxxxxxxaltserno}"  id="zsxxuxxrbvxxxxxxxxxxaltserno" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Selprice']}">
+          <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.ztxxcxxrlxxxxxxxxxxxselprice}"  id="ztxxcxxrlxxxxxxxxxxxselprice">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Physqty']}">
+          <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zuxxcxxrlxxxxxxxxxxxphysqty}"  id="zuxxcxxrlxxxxxxxxxxxphysqty">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Sperson']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zvxxuxxrbvxxsxxxxxxxsperson) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zvxxuxxrbvxxsxxxxxxxsperson}"  id="zvxxuxxrbvxxsxxxxxxxsperson" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cartonid']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zwxxuxxrbvxxxxxxxxxxcartonid) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zwxxuxxrbvxxxxxxxxxxcartonid}"  id="zwxxuxxrbvxxxxxxxxxxcartonid" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Cartonpr']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zxxxfxxxbvxxxxxxxxxxcartonpr) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zxxxfxxxbvxxxxxxxxxxcartonpr}"  id="zxxxfxxxbvxxxxxxxxxxcartonpr" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Packcode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zyxxuxxrbvxxxxxxxxxxpackcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zyxxuxxrbvxxxxxxxxxxpackcode}"  id="zyxxuxxrbvxxxxxxxxxxpackcode" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Statusfldt']}">
+              <h:outputText value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zzxxcztxlxxxxxxxxxxxstatusfldt}"  id="statusfldt" >
+               <f:convertDateTime pattern="dd/MM/yy h:mm:s z"/>
+              </h:outputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Owner2']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Owner']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxutoxlhxxxxxxxxxxowner) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zzxxutoxlhxxxxxxxxxxowner}"  id="zzxxutoxlhxxxxxxxxxxowner" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Shipcode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxuxxrbvxxxxxxxxxxshipcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zzxxuxxrbvxxxxxxxxxxshipcode}"  id="zzxxuxxrbvxxxxxxxxxxshipcode" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Tarecode']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxuxxrbvxxxxxxxxxxtarecode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zzxxuxxrbvxxxxxxxxxxtarecode}"  id="zzxxuxxrbvxxxxxxxxxxtarecode" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Type']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxuxxrbvxxxxxxxxxxtype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.zzxxuxxrbvxxxxxxxxxxtype}"  id="zzxxuxxrbvxxxxxxxxxxtype" rendered="true"/>
+            </p:column>
+        <p:column 
+            headerText="Action">
+            #{' '}
+             <h:link outcome="/hlogfileEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="xxxxch6ahxhhhhhxxxxxhlogfileEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="xxxxch6ahxhhhhhxxxxxhlogfileA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_xxxxch6ahxhhhhhxxxxxhlogfile.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+        </p:column>
+    </p:dataTable>
+    </div>
+    </p:panel>
+    <div class="tableControl">
+        <h:link outcome="/hlogfileList.xhtml"
+            rendered="#{xxxxch6ahxhhhhhxxxxxhlogfileList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+          <f:param name="maxResultsVal"
+                    value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal}"/>
+        </h:link>
+        <h:link outcome="/hlogfileList.xhtml"
+            rendered="#{xxxxch6ahxhhhhhxxxxxhlogfileList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/hlogfileList.xhtml"
+            rendered="#{xxxxch6ahxhhhhhxxxxxhlogfileList.nextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/hlogfileList.xhtml"
+            rendered="#{xxxxch6ahxhhhhhxxxxxhlogfileList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.lastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{xxxxch6ahxhhhhhxxxxxhlogfileList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+         <h:button outcome="/hlogfileEdit.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+            rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Hlogfile']}">
+        </h:button>
+
+
+
+         <h:button outcome="/#{empty xxxxch6ahxhhhhhxxxxxhlogfileFrom ? 'home' : xxxxch6ahxhhhhhxxxxxhlogfileFrom}.xhtml"
+          id="donefy"
+         value="Done"/>&nbsp;
+
+
+       <ui:remove>
+       </ui:remove>
+
+
+
+
+        <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessagesb"/>
+
+<br/>
+    </div>
+            <p:hotkey  actionListener="#{xxxxch6ahxhhhhhxxxxxhlogfileList.getFirstResult()}" bind="return">
+            </p:hotkey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

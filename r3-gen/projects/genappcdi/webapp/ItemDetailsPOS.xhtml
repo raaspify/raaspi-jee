@@ -1,0 +1,1129 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:c="http://java.sun.com/jsp/jstl/core"
+                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                 template="layout/rtemplateUi.xhtml">
+<f:metadata>
+    <f:viewParam name="imail" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.imailaddr}"/>
+    <f:viewParam name="imailAlt" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.imailaddrAlt}"/>
+    <f:viewParam name="poSid" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.valueOverRide}"/>
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemList.setCategory(0)}" />
+
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemHome.restrict()}" />
+</f:metadata>
+
+<ui:define name="title">#{messages['ItemDetailsPOS_page_title']}</ui:define>
+<ui:define name="body">
+<!-- 3E-top-0    3 columns col 1 Logo col 2 Phone,city cr search  col 3 Login,sign up 
+ cr cart. Default dynamic or static using clobdata 3E-TOP-LOGO-C (logo) , -M tbd for preview 
+ note: 3R-TOP-LOGO-C is normally site logo used for reports. 3R-LOGO-C used here and via rtemplate-ui  
+-->
+
+<!-- top-1 Left drop down hover offfers   uses drop down dynamic based on item type SI-L or SI-D -->
+<!-- top-2 carousel for featured items img top label below static from clobdata key 3E-CAR-1-C seq 0,1,..4  one shown 
+     at a time   -->
+<!-- top-3 Link buttons for featured items below carousel    -->
+<!-- top-4 carousel cards for discount items img top label below   -->
+
+<!-- mid-1 cards for Categories   -->
+<!-- mid-2 cards for Categories   -->
+<!-- mid-3 cards for Categories   -->
+
+<!-- footer-1 article for site   -->
+<!-- footer-2 article for site seo   -->
+
+<style>
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+.navbar-nav li:hover > ul.dropdown-menu {
+    display: block;
+}
+.dropdown-submenu {
+    position:relative;
+}
+.dropdown-submenu>.dropdown-menu {
+    top:0;
+    /*left:-100%;*/
+    left:-10rem; /* 10rem is the min-width of dropdown-menu */
+    margin-top:-6px;
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+    text-decoration: underline;
+    transform: rotate(-90deg);
+} 
+
+ .breadcrumb>li+li:before {
+     content: ">" !important;
+ }
+
+    .owl-prev, .owl-next {
+        width: 15px;
+        height: 100px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: block !important;
+        border:0px solid black;
+    }
+    .owl-prev { left: -20px; }
+    .owl-next { right: -20px; }
+    .owl-prev i, .owl-next i {transform : scale(2,5); color: #ccc;}
+</style>
+<ui:remove>
+ extra ?? already in rtemplate-ui
+<ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','HDR',0,1200) !=null
+     and fn:toLowerCase(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','HDR',0,60)).contains('templ1') 
+      and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','TXT',0,1200) !=null}">
+   <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','TXT',0,48000)}" 
+          >
+   </h:outputText>       
+</ui:fragment>
+</ui:remove>
+<ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','HDR',0,1200) !=null
+     and fn:toLowerCase(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','HDR',0,60)).contains('templ1') }">
+ <nav class="navbar navbar-expand-md navbar-dark bg-success "  >
+   <div class="navbar-brand" >
+              <h:link outcome="/home-s.xhtml"  class="bg-light nav-link">                
+               <h:graphicImage  rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','B3R-LOGO-C','PIC',0) !=null)}"
+                value="/ImageServletCdi/?seq=0&amp;id=B3R-LOGO-C&amp;height=0" 
+                style="object-fit: cover;max-height:50px; ">
+               </h:graphicImage> 
+              </h:link>
+   </div>
+   <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+
+              <h:link  class="nav-link" outcome="/login.xhtml" rendered="#{not identity.loggedIn}">
+               <h:graphicImage value="/img/person32.png" />
+              </h:link> 
+              <h:link id="Cartm" class="nav-link" outcome="/cartPOS.xhtml"  propagation="none"  >
+               <h:graphicImage value="/img/Cart32.png" />
+                <f:param name="categoryJay" value="0"/>
+              </h:link>
+              
+              <h:outputText class="text-light" value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() gt 0}">
+              </h:outputText>
+              <h:outputText class="text-light" value="[0]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() == null}"/>
+
+   </ui:fragment>
+
+   <ui:fragment rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+    <div class="collapse navbar-collapse w-100 flex-md-column " id="collapseNavbar">
+      <ul class="navbar-nav small ml-auto mb-2 mb-md-0  " >
+             <ui:fragment  rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile 
+               and yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].c6xxhxxxbv27xxxxxxxxphoneo !=null
+                and !yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].c6xxhxxxbv27xxxxxxxxphoneo.isEmpty()}">
+              <i class="fa fa-phone" aria-hidden="true" style="color:dark grey">
+              </i>
+              &#160;<h:outputText class="text-light" value="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].c6xxhxxxbv27xxxxxxxxphoneo} "/> 
+             </ui:fragment>
+
+             <ui:fragment  rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile 
+               and yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].d4xxhxxrbv24xxxxxxxximailaddr !=null
+                and !yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].d4xxhxxrbv24xxxxxxxximailaddr.isEmpty()}">
+              &#160;&#160;&#160;&#160;
+              <i class="fa fa-envelope" aria-hidden="true" style="color:dark grey">
+              </i>
+              &#160;<h:outputText class="text-light" value="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].d4xxhxxrbv24xxxxxxxximailaddr}" /> 
+              &#160;&#160;&#160;&#160;&#160;&#160;
+             </ui:fragment>
+              <h:link value="#{messages['LogIn']}" class="nav-link" outcome="/login.xhtml" rendered="#{not identity.loggedIn}"/> 
+              &#160;&#160;&#160;
+              <h:link value="#{messages['Signup']}" class="nav-link" outcome="/signup.xhtml" rendered="#{not identity.loggedIn}"/> 
+
+              &#160;&#160;<h:link  class="nav-link" outcome="/cartPOS.xhtml" value="Cart" propagation="none"  >
+               <h:graphicImage value="/img/Cart32.png" />
+              </h:link>
+              &#160;&#160;
+              &#160;<h:outputText class="text-light" value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() gt 0}">
+              </h:outputText>
+              <h:outputText class="text-light" value="[#{messages['empty']}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() == null}"/>
+
+      </ul>
+       <h:inputText id="Queryi" value="#{fpxxfq1a5xwwqqhxxxxxitemList.searchPattern}" size="20" 
+        pt:placeholder="#{messages['search']} #{messages['products']}" />
+        <h:commandButton class="btn " id="r3Search" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('s')}"  
+        value="#{messages.searchButton}"  
+       />
+       &nbsp;&nbsp;
+       <h:link  fragment="#">
+        <h:outputText  value="Reset search" class="large" />
+        <f:param name="categoryJay" value="0" />
+       </h:link>
+    </div>
+   </ui:fragment>
+ </nav>
+</ui:fragment>
+
+
+       <c:set var = "tpc" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:3}">
+       </c:set>
+       <c:set var = "mpc" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:3}">
+       </c:set>
+       <c:set var = "dpc" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:4}">
+       </c:set>
+       <c:set var = "mpr" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?fpxxfq1a5xwwqqhxxxxxitemList.dpr:fpxxfq1a5xwwqqhxxxxxitemList.dpr}">
+       </c:set>
+       <c:set var = "dpr" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?fpxxfq1a5xwwqqhxxxxxitemList.dpr:fpxxfq1a5xwwqqhxxxxxitemList.dpr}">
+       </c:set>
+       <c:set var = "spc" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:12}">
+       </c:set>
+
+
+<h:form> 
+        <ui:remove>   use commandbutton action alias code to sid     </ui:remove>
+
+            <h5>#{messages['Scan']} #{messages['Item']} #{messages['CODE']}</h5> 
+             <h:inputText id="itemA" required="false" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode}" 
+               validator="#{fpxxfq1a5xwwqqhxxxxxitemHome.validateAndSelectXxxxxxxxmatsid}" 
+               pt:autofocus="true" onclick="this.value='';" onfocus="this.select()" 
+             >
+             </h:inputText>
+           <ui:remove> tbd quick payment
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <h:commandButton id="oneItem" styleClass="buttonMainRd"  rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos') == null}"
+             action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addScanToPayment(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode,1,'cart')}" 
+              value="#{messages['Quick']} #{messages['Checkout']} ">
+           </h:commandButton>
+          </ui:remove>
+
+          <h6>#{messages['Quantity']}</h6>
+                            <h:inputText  
+                             value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.tempQuantity}" minValue="-10"
+                             rendered= "true" size="5"
+                              pt:type="number" 
+                             step="1">
+                            </h:inputText>
+
+
+           <ui:remove> addScanToCart needed, since we do not know item sid yet and cannot put link here.
+            tempQuantity used so that default qty can be 1 not 0
+           </ui:remove>
+           &nbsp;<h:commandButton id="AddToCart"   rendered= "true" class="btn btn-primary"
+             action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addScanToCart(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode,fpxxfq1a5xwwqqhxxxxxitemHome.instance.tempQuantity,'pos')}" 
+              value="#{messages['Add']} #{messages['To']} #{messages['POS']}">
+           </h:commandButton>
+<hr></hr>
+
+
+<h:panelGroup layout="block" styleClass="row ">
+
+<h:panelGroup layout="block" styleClass="col-2 text-left" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+
+ <div id="menu" class="dropdown">
+  <button type="button" class="btn-primary  dropdown-toggle" data-toggle="dropdown"  >
+     <h5>#{messages['Shop']} #{messages['by']} #{messages['Category']}</h5>
+  </button>
+  <!-- use ui:repeat -->
+  <div class="dropdown-menu">
+
+   <ul class="list-group border-0 p-0">
+    <!--L1 Top level categories only browseList has Cat items ie top level only -->
+    <!---under L1 show either subCategory (and L3 details under sub cat) or only details if direct for a Category not both -->
+    <h:outputText value="#{messages['Empty']}, #{messages['Reset']} #{messages['search']}" class="small mark"
+        rendered="#{empty fpxxfq1a5xwwqqhxxxxxitemList.getItemBrowseList()}" />
+    <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemBrowseList()}" var="row" iterationStatusVar="status"  id="mrepeat"
+         >
+     <li  class="list-group-item border-0 p-0" >
+       <a class="btn" data-parent="#menu" data-toggle = "collapse" data-target = "#id#{row.a0xxuobxbxxxxxxxxxxxsid}"
+           >#{row.b1xxuszsbvxxxxxxxxxxdescript} (#{fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsForCatOrViaSubBrowseListCnt(row.a0xxuobxbxxxxxxxxxxxsid)} #{messages['items']})</a>
+       <!-- getItemBrowseList() shows all SI-L1 ie category items-->
+       <h:link   class="dropdown-item" fragment="i#{fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsForCatOrViaSubBrowseList(row.a0xxuobxbxxxxxxxxxxxsid)[0].a0xxuobxbxxxxxxxxxxxsid}"   >
+        <h:outputText value="shop" class="small mark" />
+        <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+       </h:link>
+      <div id="id#{row.a0xxuobxbxxxxxxxxxxxsid}" class="panel-collapse collapse">
+      <ul class="list-group border-0 p-0">
+       <!-- L2 subCategories if any under this category sid , show details under subcat -->
+       <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemCatSubBrowseList(row.a0xxuobxbxxxxxxxxxxxsid)}" var="row" iterationStatusVar="status"  id="mrepeatS"
+         styleClass="list-group">
+
+        <li class="list-group-item border-0 p-0">
+           <!-- These are subCat, so show next level list which are details with select link -->   
+           <ul>
+               <h:link class="dropdown-item "    fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}"  rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}" class="small mark" />
+                <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+               </h:link>
+               <h:link class="dropdown-item "  fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}"  rendered= "#{empty row.b0xxziqxlvxxsaxxxxxxquantity or row.b0xxziqxlvxxsaxxxxxxquantity le 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}" class="small mark" />
+                <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+               </h:link>
+
+            <!-- L3 Details for a sub -->
+            <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsForSubOnlyBrowseList(row.a0xxuobxbxxxxxxxxxxxsid)}" var="row" iterationStatusVar="status"  id="mrepeat"
+              styleClass="list-group" >
+             <li class="list-group-item ">
+               <h:link   class="dropdown-item" fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}"  rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}" class="small mark" />
+                <f:param name="catsubJay" value="#{row.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}"
+                 disable="#{empty row.fpxxfq1a5xwwqqhxxxxxitem}"/>
+               </h:link>
+               <h:link class="dropdown-item"  fragment="i#{row.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}"  rendered= "#{empty row.b0xxziqxlvxxsaxxxxxxquantity or row.b0xxziqxlvxxsaxxxxxxquantity le 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}">
+                <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}" class="small mark" />
+                <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+               </h:link>
+             </li>
+            </ui:repeat>
+           </ul> 
+        </li>
+       </ui:repeat>
+      </ul>
+
+      <ul class="list-group border-0 p-0">
+       <!-- L2 These details are directly under Category (not under any subcat), show details -->
+       <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsForCatOnlyBrowseList(row.a0xxuobxbxxxxxxxxxxxsid)}" var="row" iterationStatusVar="status"  id="mrepeat"
+        styleClass="list-group">
+        <li class="list-group-item border-0 p-0">
+         <!-- They are details, show them with select link -->   
+         <h:link class="dropdown-item"  fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}" rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+          <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}" class="small mark"
+           />
+          <f:param name="catsubJay" value="#{row.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}" 
+                 disable="#{empty row.fpxxfq1a5xwwqqhxxxxxitem}"/>
+         </h:link>
+         <h:link class="dropdown-item"  fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}"  rendered= "#{empty row.b0xxziqxlvxxsaxxxxxxquantity or row.b0xxziqxlvxxsaxxxxxxquantity le 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}">
+          <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}" class="small mark" />
+           <f:param name="catsubJay" value="#{row.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}" 
+                 disable="#{empty row.fpxxfq1a5xwwqqhxxxxxitem}"/>
+         </h:link>
+        </li>
+       </ui:repeat>
+      </ul>
+
+      </div> 
+
+
+      <!-- end of sub or details within a Category -->
+     </li>
+    </ui:repeat>
+   </ul>
+
+  </div>
+ </div>
+</h:panelGroup>
+
+<!--                          sale items desktop (upto 3 )                                     -->
+
+<h:panelGroup layout="block" styleClass="col-8 text-center " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}" >
+      <ul class="list-group border-0 p-0 list-group-horizontal" >
+       <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsBrowseList('sale')}" var="row" iterationStatusVar="status"  id="mrepeatb"
+         >
+        <li class="list-group-item border-0 p-0">
+         <h:link  fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}" value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"  >
+          <f:param name="catsubJay" value="#{row.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}" 
+                 disable="#{empty row.fpxxfq1a5xwwqqhxxxxxitem}"/>
+         </h:link>
+
+
+        </li>
+       </ui:repeat>
+      </ul>
+
+
+</h:panelGroup>
+
+<!--                          sale items mobile (upto 2 )                                     -->
+
+<h:panelGroup layout="block" styleClass="col-8 text-center " rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}" >
+      <br></br><br></br><br></br><br></br>
+      <ul class="list-group list-group-horizontal" >
+       <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsBrowseList('sale')}" var="row" iterationStatusVar="status"  id="mrepeatbm0"
+         >
+        <li class="list-group-item border-0 p-0">
+         <h:link  fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}" value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"  >
+          <f:param name="catsubJay" value="#{row.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}" 
+                 disable="#{empty row.fpxxfq1a5xwwqqhxxxxxitem}"/>
+         </h:link>
+
+        </li>
+       </ui:repeat>
+      </ul>
+
+
+</h:panelGroup>
+
+
+<h:panelGroup layout="block" styleClass="col-2 text-right " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+
+  <!--                          hot/promo items               -->
+   <div id="store-entry" class="owl-carousel1 owl-carousel owl-theme " style="width:60%; margin:0 auto;" >
+    <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsBrowseList('promo')}" var="row" iterationStatusVar="status"  id="prepeat"
+    >
+    <h:link  fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}" value="#{row.b1xxuszsbvxxxxxxxxxxdescript}">
+          <f:param name="catsubJay" value="#{row.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}" 
+           disable="#{empty row.fpxxfq1a5xwwqqhxxxxxitem}"/>
+    <h:graphicImage rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+     value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=0"
+     class="card-img-top "  style="object-fit: cover;min-height:40px;max-height:50px;">
+    </h:graphicImage> 
+    </h:link>
+    </ui:repeat>
+   </div>
+        <!-- Store section ends here -->
+</h:panelGroup>
+</h:panelGroup>
+
+</h:form> 
+
+<!--                          toolbar                                     -->
+
+<h:form id="LoginOrEmail_required">
+   <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOOLBR-C','HDR',0,1200) !=null
+     and fn:toLowerCase(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOOLBR-C','HDR',0,60)).contains('static') }">
+   <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOOLBR-C','TXT',0,48000)}" 
+          >
+   </h:outputText>       
+  </ui:fragment>
+   <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOOLBR-C','HDR',0,1200) !=null
+     and fn:toLowerCase(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOOLBR-C','HDR',0,60)).contains('templ1') }"
+          >
+      <div class = "btn-toolbar justify-content-between" role = "toolbar">
+         <div>
+          <ul class="breadcrumb">
+           <li class="breadcrumb-item"><a href="#storeItems">#{messages.All}</a></li>
+           <li class="breadcrumb-item"><a href="#i#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(param['catsubJay']).fpxxfq1a5xwwqqhxxxxxitem.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}">#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(param['categoryJay']).fpxxfq1a5xwwqqhxxxxxitem.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript}</a></li>
+           <li class="breadcrumb-item"><a href="#i#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(param['catsubJay']).fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}">#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(param['catsubJay']).fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript}</a></li>
+           <li class="breadcrumb-item"><a href="#i#{param['catsubJay']}">#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(param['catsubJay']).b1xxuszsbvxxxxxxxxxxdescript}</a></li>
+          </ul> 
+         </div>
+         <div class = "btn-group ">
+              <h:outputText value="#{messages.common_notify}" style="font-size: medium;color: red"  /> 
+              <h:outputText value="#{messages.site_notify}" style="font-size: medium;color: red"/> 
+              <h:outputText value="#{messages.backOffice_notify}" rendered="#{identity.loggedIn}" style="font-size: medium;color: red"/> 
+
+         </div>
+
+
+         <div class = "btn-group ">
+              <h:outputText value="#{customIdentity.imailaddr}" rendered="#{!identity.loggedIn and not customIdentity.imailaddr.isEmpty()}"/> 
+              <h:outputText value="#{customIdentity.username}" rendered="#{identity.loggedIn }"/> 
+              <h:outputText value="&#160;&#160;"/>
+              <!-- Button to Open the Modal -->
+              <ui:fragment rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.currentCartOrder('pos').size() != 0 and (customIdentity.imailaddr == null or customIdentity.imailaddr.isEmpty())  }">
+              <div class="alert alert-info alert-dismissible">
+               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+               <strong>#{messages['Welcome!']}!</strong> #{messages['You']} are in guest mode now. To continue select.
+
+               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                #{messages['Options']} 
+               </button>
+              </div>
+              </ui:fragment>
+              <h:outputText value="&#160;&#160;"/>
+              <ui:remove> show fb only logout for situations where only fb login happened but not identiy login 
+              </ui:remove>
+              <h:link id="logoutfb" onclick="if (! confirm('Logout ?') ) { return false;}; Logout();return true;" value="Logout(FB)" rendered="#{!identity.loggedIn and customIdentity.smUid != null }"/>
+              <h:commandButton class="btn btn-primary" id="logout" onclick="Logout();" action="#{customIdentity.logout()}" value="Logout" rendered="#{identity.loggedIn}"/>
+
+         </div>
+      </div>
+
+  </ui:fragment>
+
+  <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOOLBR-C','HDR',0,1200) ==null}">
+   
+      <div class = "btn-toolbar justify-content-between" role = "toolbar">
+         <div>
+          <ul class="breadcrumb">
+           <li class="breadcrumb-item"><a href="#storeItems">#{messages.All}</a></li>
+           <li class="breadcrumb-item"><a href="#i#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(param['catsubJay']).fpxxfq1a5xwwqqhxxxxxitem.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}">#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(param['catsubJay']).fpxxfq1a5xwwqqhxxxxxitem.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript}</a></li>
+           <li class="breadcrumb-item"><a href="#i#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(param['catsubJay']).fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}">#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(param['catsubJay']).fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript}</a></li>
+           <li class="breadcrumb-item"><a href="#i#{param['catsubJay']}">#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(param['catsubJay']).b1xxuszsbvxxxxxxxxxxdescript}</a></li>
+          </ul> 
+         </div>
+         <div class = "btn-group ">
+              <h:outputText value="#{messages.common_notify}" style="font-size: medium;color: red"  /> 
+              <h:outputText value="#{messages.site_notify}" style="font-size: medium;color: red"/> 
+              <h:outputText value="#{messages.backOffice_notify}" rendered="#{identity.loggedIn}" style="font-size: medium;color: red"/> 
+
+         </div>
+         <div class = "btn-group ">
+              <h:outputText value="#{customIdentity.imailaddr}" rendered="#{!identity.loggedIn and not customIdentity.imailaddr.isEmpty()}"/> 
+              <h:outputText value="#{customIdentity.username}" rendered="#{identity.loggedIn }"/> 
+              <h:outputText value="&#160;&#160;"/>
+              <!-- Button to Open the Modal -->
+              <ui:fragment rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.currentCartOrder('pos').size() != 0 and (customIdentity.imailaddr == null or customIdentity.imailaddr.isEmpty())  }">
+              <div class="alert alert-info alert-dismissible">
+               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+               <strong>#{messages['Welcome!']}!</strong> #{messages['You']} are in guest mode now. To continue select.
+
+               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+                #{messages['Options']} 
+               </button>
+              </div>
+              </ui:fragment>
+              <h:outputText value="&#160;&#160;"/>
+              <ui:remove> show fb only logout for situations where only fb login happened but not identiy login 
+              </ui:remove>
+              <h:link id="logoutfbd" onclick="if (! confirm('Logout ?') ) { return false;}; Logout();return true;" value="Logout(FB)" rendered="#{!identity.loggedIn and customIdentity.smUid != null }"/>
+
+         </div>
+         <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+             <div>
+              <h:link id="Cartmm" class="nav-link" outcome="/cartPOS.xhtml"  propagation="none"  >
+               <h:graphicImage value="/img/Cart32.png" />
+                <f:param name="categoryJay" value="0"/>
+              </h:link>
+
+              <h:outputText  value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() gt 0}">
+              </h:outputText>
+              <h:outputText  value="[0]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() == null}"/>
+             </div>
+
+             <div>
+              <h:commandButton class="btn btn-primary" id="logoutd" onclick="Logout();" action="#{customIdentity.logout()}" value="Logout" rendered="#{identity.loggedIn}"/>
+              <h:inputText id="Queryi" value="#{fpxxfq1a5xwwqqhxxxxxitemList.searchPattern}" size="10" 
+               pt:placeholder="#{messages['products']}" />
+              <h:commandButton  id="r3Search2" class="btn" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('s')}"  
+               value="#{messages.searchButton}"  
+              />
+              &nbsp;&nbsp;
+              <h:link  fragment="#">
+               <h:outputText  value="Reset search" class="small" />
+               <f:param name="categoryJay" value="0" />
+              </h:link>
+             </div>
+
+         </ui:fragment>
+
+        <div class = "btn-group ">
+         <ui:fragment rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+              <h:commandButton class="btn btn-primary" id="logoutdnb" onclick="Logout();" action="#{customIdentity.logout()}" value="Logout" rendered="#{identity.loggedIn}"/>
+              <h:inputText id="Queryinb" value="#{fpxxfq1a5xwwqqhxxxxxitemList.searchPattern}" size="10" 
+               pt:placeholder="#{messages['products']}" />
+              <h:commandButton  id="r3Search2nb" class="btn" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('s')}"  
+               value="#{messages.searchButton}"  
+              />
+              &nbsp;&nbsp;
+              <h:link  fragment="#">
+               <h:outputText  value="Reset search" class="small" />
+               <f:param name="categoryJay" value="0" />
+              </h:link>
+
+              <h:link class="nav-link" outcome="/cartPOS.xhtml" value="Cart" propagation="none"  >
+               <h:graphicImage value="/img/Cart32.png" />
+              </h:link>
+              
+              <h:outputText  value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() gt 0}">
+              </h:outputText>
+              <h:outputText  value="[#{messages['empty']}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() == null}"/>
+         </ui:fragment>
+
+        </div>
+      </div>
+  </ui:fragment>
+
+      <h:messages globalOnly="false" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+
+
+
+<!--                top-2 carousel for featured items img top label below static from clobdata key 3E-top-1-C
+                    we can add link via editor and cotrol destination -->
+<div class="owl-carousel4j owl-carousel owl-theme" style="width:90%;  padding:5px;margin:0 auto;">
+               <h:graphicImage rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','B3E-CAR-1-C','PIC',0) !=null)}"
+                value="/ImageServletCdi/?seq=0&amp;id=B3E-CAR-1-C&amp;height=0"
+                style="object-fit: contain;max-height:300px;">
+               </h:graphicImage> 
+               <h:graphicImage rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','B3E-CAR-1-C','PIC',1) !=null)}"
+                value="/ImageServletCdi/?seq=1&amp;id=B3E-CAR-1-C&amp;height=0"
+                style=" object-fit: contain;;max-height:300px;">
+               </h:graphicImage> 
+               <h:graphicImage rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','B3E-CAR-1-C','PIC',2) !=null)}"
+                value="/ImageServletCdi/?seq=2&amp;id=B3E-CAR-1-C&amp;height=0"
+                style=" object-fit: contain;;max-height:300px;">
+               </h:graphicImage> 
+</div>
+
+
+<!-- top-3 Link buttons for featured sale category items below carousel need new item browselist for new table itemprofl  -->
+       <h:panelGroup  rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemCategoriesBrowseList('promo').size() gt 0}"> 
+        <h:panelGrid columns="#{mpc}" id="midpanel" style="margin: 0 auto;text-align: justify; ">
+                <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemSubBrowseList()}" var="row" iterationStatusVar="status" rows="#{mpr}" id="repeatm">
+                    <h:panelGroup style="float:left;padding:0px;margin:15px;max-width:200px;"> 
+                            <h:panelGroup >
+                             <h:graphicImage alt="no picture"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+                              value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=90" 
+                              style="object-fit: cover;max-width:90px;">
+                             </h:graphicImage> 
+                             <h:link value="#{messages['Edit']}" outcome="/shopItem.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))}" >
+                              <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                             </h:link>
+                            <br/>
+
+                            </h:panelGroup>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}" />
+                            <h:button value="Select"  rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('SI-L*')}"
+	                        id="showCId1Tm"
+                              outcome="/ItemDetailsPOS.xhtml">
+                              <f:param name="subcategory" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                            </h:button>
+
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </ui:repeat>
+        </h:panelGrid>
+       </h:panelGroup>
+
+
+
+
+<!-- top-4 carousel cards for discount/sale category items img top label below new browselist for discount/cipupon items  -->
+<h:panelGroup layout="block" styleClass="col-8 text-center " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}" >
+      <ul class="list-group border-0  p-0 list-group-horizontal list-group-item-info" >
+       <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemCategoriesBrowseList('sale')}" var="row" iterationStatusVar="status"  id="mrepeatb4"
+         size="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemCategoriesBrowseList('sale').size() > 4?4:fpxxfq1a5xwwqqhxxxxxitemList.getItemCategoriesBrowseList('sale').size()}">
+        <li class="list-group-item ">
+         <h:link class="btn btn-info"  value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"  rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getItemBrowseList().size() > 0}" 
+	  id="showCId1Tds"
+          >
+          <f:param name="categoryJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+
+         </h:link>
+
+        </li>
+       </ui:repeat>
+      </ul>
+
+
+</h:panelGroup>
+<h:panelGroup layout="block" styleClass="col-8 text-center " rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}"  >
+      <ul class="list-group border-0  p-0 list-group-horizontal" >
+       <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemCategoriesBrowseList('sale')}" var="row" iterationStatusVar="status"  id="mrepeatbm"
+         size="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemCategoriesBrowseList('sale').size() > 2?2:fpxxfq1a5xwwqqhxxxxxitemList.getItemCategoriesBrowseList('sale').size()}">
+        <li class="list-group-item ">
+         <h:link class="dropdown-item " fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}" value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"  >
+          <f:param name="categoryJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+         </h:link>
+
+
+        </li>
+       </ui:repeat>
+      </ul>
+
+
+</h:panelGroup>
+<hr></hr>
+<!-- mid-cat carousel cards for category/subcat items img top label for detail items shown below  TH$ will show -->
+<ui:fragment rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fpxxfq1a5xwwqqhxxxxxitemList.getItemCatAndSubBrowseList().size() > 0}">
+<div  
+      class="owl-carousel6m owl-carousel owl-theme card-deck" style="width:95%; padding:5px;margin:0 auto;" >
+       <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemCatAndSubBrowseList()}" var="row" iterationStatusVar="status"  id="mrepeatb4t">
+        <ui:fragment rendered="#{row.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'}"> 
+        <li class="card border-0  p-0" style="height:250px;background-color:#{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].o6xxuxxxbvxxxxxxxxxxnrate1ta.trim()?'#f0f0f0':yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].o6xxuxxxbvxxxxxxxxxxnrate1ta}">
+                             <h:link value="#{messages['Edit']}" outcome="/shopItem.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))}" >
+                              <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                             </h:link>
+
+         <div id="i#{row.a0xxuobxbxxxxxxxxxxxsid}" class="card-body text-center border-0 p-0">
+         <h:link class="btn "     rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getItemCatAndSubBrowseList().size() > 0}" 
+	  id="showCId1T" fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}"
+          >
+          <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+           <h:graphicImage rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+            value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=0"
+            class="img-responsive" style="min-width:90px;min-height:90px;max-height:90px;max-width:90px;">
+           </h:graphicImage> 
+           <h:graphicImage value="/img/item-customer.jpg" class="img-responsive"  style="min-width:90px;min-height:90px;max-height:90px;max-width:90px;"
+            rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null}"/>
+
+         </h:link>
+          <div class="card-body border-0 p-0" >
+           <h:link value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"   style="text-align:justify;"  maxlength="40;"
+             fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}" >
+            <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+           </h:link>
+          </div>
+         </div>
+        </li>
+        </ui:fragment>
+       </ui:repeat>
+</div>
+</ui:fragment>
+
+<ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile and fpxxfq1a5xwwqqhxxxxxitemList.getItemCatAndSubBrowseList().size() > 0}">
+<div  
+      class="owl-carousel2m owl-carousel owl-theme card-deck" style="width:95%; padding:5px;margin:0 auto;" >
+       <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemCatAndSubBrowseList()}" var="row" iterationStatusVar="status"  id="mrepeatb4tm">
+        <ui:fragment rendered="#{row.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'}"> 
+        <li class="card border-0 p-0 " style="height:250px;background-color:#{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].o6xxuxxxbvxxxxxxxxxxnrate1ta.trim()?'#f0f0f0':yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].o6xxuxxxbvxxxxxxxxxxnrate1ta}">
+                             <h:link value="#{messages['Edit']}" outcome="/shopItem.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))}" >
+                              <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                             </h:link>
+
+         <div id="i#{row.a0xxuobxbxxxxxxxxxxxsid}" class="card-body text-center border-0 p-0">
+         <h:link class="btn "     rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getItemCatAndSubBrowseList().size() > 0}" 
+	  id="showCId1Tms" fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}"
+          >
+          <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+           <h:graphicImage rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+            value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=0"
+            class="img-responsive" style="min-width:90px;min-height:90px;max-height:90px;max-width:90px;">
+           </h:graphicImage> 
+           <h:graphicImage value="/img/item-customer.jpg" class="img-responsive"  style="min-width:90px;min-height:90px;max-height:90px;max-width:90px;"
+            rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null}"/>
+
+         </h:link>
+          <div class="card-body border-0 p-0" >
+           <h:link value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"   style="text-align:justify;"  maxlength="40;"
+             fragment="i#{row.a0xxuobxbxxxxxxxxxxxsid}" >
+            <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+           </h:link>
+          </div>
+         </div>
+
+        </li>
+        </ui:fragment>
+       </ui:repeat>
+
+
+</div>
+</ui:fragment>
+
+<hr></hr>
+
+<!-- mid-1 cards for all detail items , Categories clicking a product will take to here ??    -->
+
+      <ui:fragment rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsBrowseList().size() > 0}">
+      <!-- store items  non mobile -->
+      <div id="storeItems" class="owl-carousel4m owl-carousel owl-theme card-deck"  style="width:95%; padding:5px;margin:0 auto;" >
+       <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsBrowseList()}" var="row" iterationStatusVar="status"  id="mrepeat"
+        >
+        <ui:fragment rendered="#{row.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'}"> 
+
+         <div id="i#{row.a0xxuobxbxxxxxxxxxxxsid}" class="card r3-image-wrapper border-0" style="padding:50px;width:300px;border:none;">
+          <h:panelGrid columns="4" >
+            <h:link value="#{messages['Product']} #{messages['Info']}" outcome="/cartPOS.xhtml" rendered="#{!identity.loggedIn }" >
+             <f:param name="categoryJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+            </h:link>
+
+            <h:link value="#{messages['Edit']}" outcome="/shopItem.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))}" >
+              <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            &nbsp;&nbsp;<h:link value="#{messages['Restock']} " outcome="/vshipmenEdit.xhtml" rendered="#{identity.loggedIn and empty row.b0xxziqxlvxxsaxxxxxxquantity or row.b0xxziqxlvxxsaxxxxxxquantity le 2 and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))}" >
+              <f:param name="key" value="#{row.a0xxukixbxxxxxxxxxxxmatcode}"/>
+            </h:link>
+            <h:outputText value="#{messages['Price']} #{messages['date']} #{messages['should']} #{messages['have']} #{messages['date']}"  style="text-align: left;"  
+              rendered="#{identity.loggedIn and empty row.h1xxcxxrbxxxxxxxxxxxeffdate}">                        
+            </h:outputText>
+          </h:panelGrid>
+          <h:link id="AddToCart1I"   rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+            and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring')}"
+            outcome="/cartPOS.xhtml" >
+             <f:param name="categoryJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+           <h:graphicImage rendered="#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH' 
+             and fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+            value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=0"
+            class="card-img-top "  style="object-fit: cover;min-height:200px;max-height:200px;">
+           </h:graphicImage> 
+           <h:graphicImage value="/img/item-customer.jpg" class="card-img-top "  style="object-fit: cover;max-height:200px;"
+            rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null}"/>
+          </h:link>
+          <h:commandLink id="AddToCart1M"   rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+            and (row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') or row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))}"
+            action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(1,'trial')}" >
+            <f:param name="poSid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+           <h:graphicImage rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+            value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=0"
+            class="card-img-top "  style="object-fit: cover;min-height:200px;max-height:200px;">
+           </h:graphicImage> 
+           <h:graphicImage value="/img/item-customer.jpg" class="card-img-top "  style="object-fit: cover;max-height:200px;"
+            rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null}"/>
+          </h:commandLink>
+
+          <div class="card-body border-0 p-0" >
+                           <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"   style="text-align:justify;"  maxlength="30;"
+                             rendered="#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'}" />
+
+                           <ui:fragment rendered="#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'
+                              and not empty row.w7xxuznxbvxxxxxxxxxxnotes}">
+                            #{row.w7xxuznxbvxxxxxxxxxxnotes}
+                           </ui:fragment>
+                           <ui:fragment rendered="#{row.w7xxuznxbvxxxxxxxxxxnotes == null or empty row.w7xxuznxbvxxxxxxxxxxnotes}">
+                            <br></br>
+                           </ui:fragment>
+
+                           <ui:fragment rendered="#{not empty row.g2xxuxn2bvxxxxxxxxxxsubcodesn2
+                              and !(row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') 
+                               or row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))}">
+                            #{row.g2xxuxn2bvxxxxxxxxxxsubcodesn2}
+                           </ui:fragment>
+                           <ui:fragment rendered="#{row.w7xxuznxbvxxxxxxxxxxnotes == null or empty row.g2xxuxn2bvxxxxxxxxxxsubcodesn2}">
+                            <br></br>
+                           </ui:fragment>
+
+                           <ui:remove>use effdate to control short period sale or a longer period for perm change to allow manually making new price as selprice before effdate
+                                      also do not show selprice if new price is higher to avoid complain.
+                                      spriceeffdt start of sale and effdt end of sale
+                           </ui:remove>
+                          <ui:fragment rendered="#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'}">
+                           <h:outputText value="#{messages['Price']} #{messages['date']} #{messages['should']} #{messages['have']} #{messages['date']}"  style="text-align: left;"  
+                             rendered="#{empty row.h1xxcxxrbxxxxxxxxxxxeffdate}">                        
+                           </h:outputText>
+                           <ui:fragment rendered="#{row.c2fbcxxrehxxsxxxxxxxspriceffdt.time le session.lastAccessedTime and row.h1xxcxxrbxxxxxxxxxxxeffdate.time ge session.lastAccessedTime}">
+                           <h:panelGrid columns="4"> 
+
+                            <h:outputText value="#{row.c1xxzxxxbhxxsxxxxxxxspricnew}"  style="text-align: left;"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                            <h:outputText value="/"  style="text-align: left;" rendered= "!yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                            </h:outputText>
+
+                             <h:outputText value="#{row.c1xxzxxxbhxxsxxxxxxxspricnew*customIdentity.convRate}"  style="text-align: left;" rendered= "#{!yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').j9xxuxxxbvxxxxxxxxxxcurrsymb}" />
+                             </h:outputText>
+                            <br></br>
+                            <h:outputText value="#{row.b8fbzpxxbvxxxxxxxxxxselprice}"  style="text-align: left;text-decoration: line-through" 
+                             rendered= "#{row.b8fbzpxxbvxxxxxxxxxxselprice.compareTo(row.c1xxzxxxbhxxsxxxxxxxspricnew)>0}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                            <h:outputText value="/"  style="text-align: left;" 
+                             rendered= "#{row.b8fbzpxxbvxxxxxxxxxxselprice.compareTo(row.c1xxzxxxbhxxsxxxxxxxspricnew)>0
+                                           and !yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                            </h:outputText>
+
+                            <h:outputText value="#{row.b8fbzpxxbvxxxxxxxxxxselprice*customIdentity.convRate}"  style="text-align: left;text-decoration: line-through" 
+                             rendered= "#{row.b8fbzpxxbvxxxxxxxxxxselprice.compareTo(row.c1xxzxxxbhxxsxxxxxxxspricnew)>0
+                                           and !yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb}" />
+                            </h:outputText>
+                           </h:panelGrid> 
+                           </ui:fragment>
+                           <ui:fragment rendered="#{row.h1xxcxxrbxxxxxxxxxxxeffdate.time lt session.lastAccessedTime}" >
+                           <h:panelGrid columns="4"> 
+                            <h:outputText value="#{row.b8fbzpxxbvxxxxxxxxxxselprice}"  style="text-align: left;"   >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                            <h:outputText value="/"  style="text-align: left;" rendered= "#{!yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                            </h:outputText>
+                            <h:outputText value="#{row.b8fbzpxxbvxxxxxxxxxxselprice*customIdentity.convRate}"  style="text-align: left;" rendered= "#{!yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb}" />
+                            </h:outputText>
+                           </h:panelGrid> 
+                           </ui:fragment>
+                           <h:panelGrid columns="4"> 
+                            <h:outputText value="Request Quotation" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                            <ui:remove>
+                            <h:outputText value=", #{messages['In']} #{messages['Stock']}, " style="text-align: left;"  rendered= "#{(row.c6xxusxrbv16xxxxxxxxtype.contains('SI-') and !row.c6xxusxrbv16xxxxxxxxtype.contains('SI-L')) and row.b0xxziqxlvxxsaxxxxxxquantity gt 0}" />
+                            </ui:remove>
+                            <h:outputText value=", #{messages['Out']} #{messages['Of']} #{messages['Stock']}, " rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity le 0}" />
+                           </h:panelGrid> 
+                          </ui:fragment>
+
+                          <h:commandButton id="itemSubscribe" rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+                             and (row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))
+                                and not empty fn:trim(row.g2xxuxn1bvxxxxxxxxxxsubcodesn)}"
+                            value="#{messages['Monthly_payment']}"
+                            action="#{yxxxch522xhhxxhxxxxxclientHome.subscribeItem(row.a0xxukixbxxxxxxxxxxxmatcode,'monthly',customIdentity.owner2)}"  >
+                          </h:commandButton>
+                          <h:commandButton id="itemSubscribey" rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+                             and (row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))
+                              and not empty fn:trim(row.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"
+                            value="Yearly_payment"
+                            action="#{yxxxch522xhhxxhxxxxxclientHome.subscribeItem(row.a0xxukixbxxxxxxxxxxxmatcode,'yearly',customIdentity.owner2)}"  >
+                          </h:commandButton>
+                            <h:link id="AddToCart1" styleClass="btn btn-primary"  rendered= "#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'
+                             and (row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+                             and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))}"
+                                 outcome="/cartPOS.xhtml" 
+                                 value="#{messages['Add']} #{messages['To']}  #{messages['POS']}">
+                                <f:param name="categoryJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+                            </h:link>
+                            <ui:remove>misccode1 can have trialx or trialxx ie 1,2,89 etc or a1,a2 etc. it can also 
+                             have recurring for future use. no supporting code exists now   
+                             trial1 bus 2 mfg 45 assoc 67 agency a1 stock a2 ecommerce a3 not used seat a4 event mgmt                      
+                            </ui:remove>
+                            <h:commandLink id="AddToCart1m" styleClass="btn btn-primary"  rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+                             and (row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') )}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(1,'trial')}" 
+                                  value="#{messages['Start']} #{messages['free']} #{messages['trial']}">
+                              <f:param name="poSid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+                            </h:commandLink>
+                             <ui:remove>
+                             <h:link value="#{messages['Notify']} #{messages['me']} " outcome="/ItemsReviewSelect.xhtml"  rendered= "#{empty row.b0xxziqxlvxxsaxxxxxxquantity or row.b0xxziqxlvxxsaxxxxxxquantity le 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}">
+                              <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+                             </h:link>
+                            &nbsp;&nbsp;
+                             </ui:remove>
+                             <h:commandLink id="cexpdt"  rendered= "#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'
+                                 and (empty row.b0xxziqxlvxxsaxxxxxxquantity or row.b0xxziqxlvxxsaxxxxxxquantity le 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)'))}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(row.tempQuantity,'cart')}" 
+                                 value="#{messages['Expected']} #{messages['Date']}?">
+                              <f:param name="poSid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+                            </h:commandLink>
+                             <h:link value="#{messages['Request']} #{messages['quote']}" outcome="/ItemsReviewSelect.xhtml" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                              <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+                             </h:link>
+                             <h:link value="#{messages['Enter']} #{messages['quote']}" outcome="/cuquoteEdit.xhtml" rendered= "#{identity.loggedIn and row.c6xxusxrbv16xxxxxxxxtype.contains('(q)') and (customIdentity.hasRole('UH') or customIdentity.hasRole('UQ'))}"  >
+                             </h:link>
+
+
+          </div>
+        </div>
+
+        </ui:fragment> 
+       </ui:repeat>
+       
+      </div>
+      </ui:fragment>
+      <div id="detailsNav">
+      </div>
+      <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile and fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsBrowseList().size() gt 0}">
+      <!-- store items   mobile same as above but one column-->
+      <div id="storeItemsm" class="owl-carousel1m owl-carousel owl-theme card-deck"  style="width:100%;"  >
+       <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsBrowseList()}" var="row" iterationStatusVar="status"  id="mrepeatm"
+        >
+        <ui:fragment rendered="#{row.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'}"> 
+
+         <div id="i#{row.a0xxuobxbxxxxxxxxxxxsid}" class="card r3-image-wrapper border-0" style="padding:50px;width:300px;border:none;">
+          <h:panelGrid columns="4" >
+            <h:link value="#{messages['Edit']}" outcome="/shopItem.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))}" >
+              <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            &nbsp;&nbsp;<h:link value="#{messages['Restock']} " outcome="/vshipmenEdit.xhtml" rendered="#{identity.loggedIn and empty row.b0xxziqxlvxxsaxxxxxxquantity or row.b0xxziqxlvxxsaxxxxxxquantity le 2 and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))}" >
+              <f:param name="key" value="#{row.a0xxukixbxxxxxxxxxxxmatcode}"/>
+            </h:link>
+            <h:outputText value="#{messages['Price']} #{messages['date']} #{messages['should']} #{messages['have']} #{messages['date']}"  style="text-align: left;"  
+              rendered="#{identity.loggedIn and empty row.h1xxcxxrbxxxxxxxxxxxeffdate}">                        
+            </h:outputText>
+          </h:panelGrid>
+          <h:link id="AddToCart1I"   rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+            and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring')}"
+            outcome="/cartPOS.xhtml" >
+             <f:param name="categoryJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+           <h:graphicImage rendered="#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH' 
+             and fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+            value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=0"
+            class="card-img-top "  style="object-fit: cover;min-height:200px;max-height:200px;">
+           </h:graphicImage> 
+           <h:graphicImage value="/img/item-customer.jpg" class="card-img-top "  style="object-fit: cover;max-height:200px;"
+            rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null}"/>
+          </h:link>
+          <h:commandLink id="AddToCart1MM"   rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+            and (row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') or row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))}"
+            action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(1,'trial')}" >
+            <f:param name="poSid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+           <h:graphicImage rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+            value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=0"
+            class="card-img-top "  style="object-fit: cover;min-height:200px;max-height:200px;">
+           </h:graphicImage> 
+           <h:graphicImage value="/img/item-customer.jpg" class="card-img-top "  style="object-fit: cover;max-height:200px;"
+            rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null}"/>
+          </h:commandLink>
+
+          <div class="card-body border-0 p-0" >
+                           <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"   style="text-align:justify;"  maxlength="30;"
+                             rendered="#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'}" />
+
+                           <ui:fragment rendered="#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'
+                              and not empty row.w7xxuznxbvxxxxxxxxxxnotes}">
+                            #{row.w7xxuznxbvxxxxxxxxxxnotes}
+                           </ui:fragment>
+                           <ui:fragment rendered="#{row.w7xxuznxbvxxxxxxxxxxnotes == null or empty row.w7xxuznxbvxxxxxxxxxxnotes}">
+                            <br></br>
+                           </ui:fragment>
+
+                           <ui:fragment rendered="#{not empty row.g2xxuxn2bvxxxxxxxxxxsubcodesn2
+                              and !(row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') 
+                               or row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))}">
+                            #{row.g2xxuxn2bvxxxxxxxxxxsubcodesn2}
+                           </ui:fragment>
+                           <ui:fragment rendered="#{row.w7xxuznxbvxxxxxxxxxxnotes == null or empty row.g2xxuxn2bvxxxxxxxxxxsubcodesn2}">
+                            <br></br>
+                           </ui:fragment>
+
+                           <ui:remove>use effdate to control short period sale or a longer period for perm change to allow manually making new price as selprice before effdate
+                                      also do not show selprice if new price is higher to avoid complain.
+                                      spriceeffdt start of sale and effdt end of sale
+                           </ui:remove>
+                          <ui:fragment rendered="#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'}">
+                           <h:outputText value="#{messages['Price']} #{messages['date']} #{messages['should']} #{messages['have']} #{messages['date']}"  style="text-align: left;"  
+                             rendered="#{empty row.h1xxcxxrbxxxxxxxxxxxeffdate}">                        
+                           </h:outputText>
+                           <ui:fragment rendered="#{row.c2fbcxxrehxxsxxxxxxxspriceffdt.time le session.lastAccessedTime and row.h1xxcxxrbxxxxxxxxxxxeffdate.time ge session.lastAccessedTime}">
+                           <h:panelGrid columns="4"> 
+
+                            <h:outputText value="#{row.c1xxzxxxbhxxsxxxxxxxspricnew}"  style="text-align: left;"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                            <h:outputText value="/"  style="text-align: left;" rendered= "!yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                            </h:outputText>
+
+                             <h:outputText value="#{row.c1xxzxxxbhxxsxxxxxxxspricnew*customIdentity.convRate}"  style="text-align: left;" rendered= "#{!yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').j9xxuxxxbvxxxxxxxxxxcurrsymb}" />
+                             </h:outputText>
+                            <br></br>
+                            <h:outputText value="#{row.b8fbzpxxbvxxxxxxxxxxselprice}"  style="text-align: left;text-decoration: line-through" 
+                             rendered= "#{row.b8fbzpxxbvxxxxxxxxxxselprice.compareTo(row.c1xxzxxxbhxxsxxxxxxxspricnew)>0}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                            <h:outputText value="/"  style="text-align: left;" 
+                             rendered= "#{row.b8fbzpxxbvxxxxxxxxxxselprice.compareTo(row.c1xxzxxxbhxxsxxxxxxxspricnew)>0
+                                           and !yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                            </h:outputText>
+
+                            <h:outputText value="#{row.b8fbzpxxbvxxxxxxxxxxselprice*customIdentity.convRate}"  style="text-align: left;text-decoration: line-through" 
+                             rendered= "#{row.b8fbzpxxbvxxxxxxxxxxselprice.compareTo(row.c1xxzxxxbhxxsxxxxxxxspricnew)>0
+                                           and !yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb}" />
+                            </h:outputText>
+                           </h:panelGrid> 
+                           </ui:fragment>
+                           <ui:fragment rendered="#{row.h1xxcxxrbxxxxxxxxxxxeffdate.time lt session.lastAccessedTime}" >
+                           <h:panelGrid columns="4"> 
+                            <h:outputText value="#{row.b8fbzpxxbvxxxxxxxxxxselprice}"  style="text-align: left;"   >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                            <h:outputText value="/"  style="text-align: left;" rendered= "#{!yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                            </h:outputText>
+                            <h:outputText value="#{row.b8fbzpxxbvxxxxxxxxxxselprice*customIdentity.convRate}"  style="text-align: left;" rendered= "#{!yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder.equals(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb)}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].j9xxuxxxbvxxxxxxxxxxcurrsymb}" />
+                            </h:outputText>
+                           </h:panelGrid> 
+                           </ui:fragment>
+                           <h:panelGrid columns="4"> 
+                            <h:outputText value="Request Quotation" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                            <ui:remove>
+                            <h:outputText value=", #{messages['In']} #{messages['Stock']}, " style="text-align: left;"  rendered= "#{(row.c6xxusxrbv16xxxxxxxxtype.contains('SI-') and !row.c6xxusxrbv16xxxxxxxxtype.contains('SI-L')) and row.b0xxziqxlvxxsaxxxxxxquantity gt 0}" />
+                            </ui:remove>
+                            <h:outputText value=", #{messages['Out']} #{messages['Of']} #{messages['Stock']}, " rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity le 0}" />
+                           </h:panelGrid> 
+                          </ui:fragment>
+
+                          <h:commandButton id="itemSubscribe" rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+                             and (row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))
+                                and not empty fn:trim(row.g2xxuxn1bvxxxxxxxxxxsubcodesn)}"
+                            value="#{messages['Monthly_payment']}"
+                            action="#{yxxxch522xhhxxhxxxxxclientHome.subscribeItem(row.a0xxukixbxxxxxxxxxxxmatcode,'monthly',customIdentity.owner2)}"  >
+                          </h:commandButton>
+                          <h:commandButton id="itemSubscribey" rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+                             and (row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))
+                              and not empty fn:trim(row.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"
+                            value="Yearly_payment"
+                            action="#{yxxxch522xhhxxhxxxxxclientHome.subscribeItem(row.a0xxukixbxxxxxxxxxxxmatcode,'yearly',customIdentity.owner2)}"  >
+                          </h:commandButton>
+                            <h:link id="AddToCart1mm" styleClass="btn btn-primary"  rendered= "#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'
+                             and (row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+                             and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))}"
+                                 outcome="/cartPOS.xhtml" 
+                                 value="#{messages['Add']} #{messages['To']}  #{messages['POS']}">
+                                <f:param name="categoryJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+                            </h:link>
+                            <ui:remove>misccode1 can have trialx or trialxx ie 1,2,89 etc or a1,a2 etc. it can also 
+                             have recurring for future use. no supporting code exists now   
+                             trial1 bus 2 mfg 45 assoc 67 agency a1 stock a2 ecommerce a3 not used seat a4 event mgmt                      
+                            </ui:remove>
+                            <h:commandLink id="AddToCart1mtt" styleClass="btn btn-primary"  rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+                             and (row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') )}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(1,'trial')}" 
+                                  value="#{messages['Start']} #{messages['free']} #{messages['trial']}">
+                              <f:param name="poSid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+                            </h:commandLink>
+                             <ui:remove>
+                             <h:link value="#{messages['Notify']} #{messages['me']} " outcome="/ItemsReviewSelect.xhtml"  rendered= "#{empty row.b0xxziqxlvxxsaxxxxxxquantity or row.b0xxziqxlvxxsaxxxxxxquantity le 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}">
+                              <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+                             </h:link>
+                            &nbsp;&nbsp;
+                             </ui:remove>
+                             <h:commandLink id="cexpdt"  rendered= "#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'
+                                 and (empty row.b0xxziqxlvxxsaxxxxxxquantity or row.b0xxziqxlvxxsaxxxxxxquantity le 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)'))}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(row.tempQuantity,'cart')}" 
+                                 value="#{messages['Expected']} #{messages['Date']}?">
+                              <f:param name="poSid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+                            </h:commandLink>
+                             <h:link value="#{messages['Request']} #{messages['quote']}" outcome="/ItemsReviewSelect.xhtml" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                              <f:param name="catsubJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
+                             </h:link>
+                             <h:link value="#{messages['Enter']} #{messages['quote']}" outcome="/cuquoteEdit.xhtml" rendered= "#{identity.loggedIn and row.c6xxusxrbv16xxxxxxxxtype.contains('(q)') and (customIdentity.hasRole('UH') or customIdentity.hasRole('UQ'))}"  >
+                             </h:link>
+
+
+          </div>
+        </div>
+
+        </ui:fragment> 
+
+       </ui:repeat>
+       
+      </div>
+
+      </ui:fragment>
+        <!-- Store Items section ends here -->
+       &nbsp;&nbsp;<h:link  fragment="menu" >
+        <h:outputText value="Top" class="large mark" />
+        <f:param name="categoryJay" value="0" />
+       </h:link>
+
+
+<!-- mid-2 cards for Categories tbd  -->
+<!-- mid-3 cards for Categories   -->
+
+<!-- footer-1 article for site  tbd -->
+<!-- footer-2 article for site seo   -->
+
+
+
+<!-- The Modal -->
+<ui:fragment rendered="#{!identity.loggedIn or (customIdentity.imailaddr.isEmpty() and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() gt 0)}">
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">#{messages['Options']}</h4>
+        <button type="button" class="close" data-dismiss="modal">&#215;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+ 
+       #{messages['For']} frequent purchases, we recommend 
+               <h:link value="#{messages['menutab.AddListReport.LogIn']}" outcome="/login.xhtml" rendered="#{not identity.loggedIn}"/>
+
+       <br></br>
+       But you also have the option to continue by entering your email id.
+       <br></br>
+       <div >
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <h:inputText required="false" id="emailE" value="#{customIdentity.imailaddr}" size="25" rendered="true" pt:placeholder="Email"/>
+ <h:form>   
+        <h:commandButton class="btn btn-primary" id="changePWCommand" action="#{fpxxfq1a5xwwqqhxxxxxitemHome.validateEmail(customIdentity.imailaddr)}"
+         value="#{messages['Confirm']}" />
+ </h:form>
+       </div>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div> 
+</ui:fragment>
+
+</h:form>
+
+
+              
+
+
+
+
+</ui:define> 
+
+
+
+</ui:composition>
+

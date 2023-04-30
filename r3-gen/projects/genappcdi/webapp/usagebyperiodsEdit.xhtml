@@ -1,0 +1,1765 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="fxxxuq1bhxwwqqhxxxxxusagebyperiodsA0xxuobxbxxxxxxxxxxxsid" value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.fxxxuq1bhxwwqqhxxxxxusagebyperiodsA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="fxxxuq1bhxwwqqhxxxxxusagebyperiodsFrom" value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.fxxxuq1bhxwwqqhxxxxxusagebyperiodsFrom}"/>
+    <f:viewAction action="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.restrict()}" />
+    <f:viewAction action="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Usagebyperiods']}</ui:define>
+
+<ui:define name="body">
+<h:form id="fxxxuq1bhxwwqqhxxxxxusagebyperiods" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("fxxxuq1bhxwwqqhxxxxxusagebyperiods:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['UsagebyperiodsEditHelp']!='UsagebyperiodsEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['UsagebyperiodsEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+	<p:toolbar >
+	  <p:toolbarGroup location="right">
+            <h:commandButton  styleClass="buttonMain"
+                          value="#{messages['Refresh_Sales_data']}" 
+                         action="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.loadSalesData()}"
+                       disabled="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed}"
+                       rendered="#{(!fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed or fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.moreActive) and !fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.entityDeleted}">  
+                        
+            </h:commandButton>    
+	 <h:graphicImage id="Tel" value="/img/salesChart100x200.jpg" styleClass="pic" />
+	  </p:toolbarGroup>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed ? 'Edit' : 'Add'} #{messages['Usagebyperiods']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     <h:panelGrid columns="2">
+       <p:tabView switchType="client" >
+           <p:tab title="#{messages['Item']}"
+             rendered="true">
+           <ui:decorate id="fpxxfq1a5xwwqqhxxxxxitemDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Item']} 
+            </ui:define>
+                <p:remoteCommand name="fpxxfq1a5xwwqqhxxxxxitemFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="fpxxfq1a5xwwqqhxxxxxitemsm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.validateAndSelectXxxxxxxxmatcode}" 
+                   value="#{fpxxfq1a5xwwqqhxxxxxitemHome.lastfpxxfq1a5xwwqqhxxxxxitemP}" onchange="fpxxfq1a5xwwqqhxxxxxitemFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{fpxxfq1a5xwwqqhxxxxxitemList.getSuggestList(' ')}" var ="result" itemValue="#{result.a0xxukixbxxxxxxxxxxxmatcode}" 
+                      itemLabel="#{result.a0xxukixbxxxxxxxxxxxmatcode} (#{result.b8fbzpxxbvxxxxxxxxxxselprice}) /#{result.b1xxuszsbvxxxxxxxxxxdescript}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           <p:tab title="#{messages['Rollupgroup']}"
+             rendered="true">
+           <ui:decorate id="jxxxuq53dxwwqqhxxxxxrollupgroupDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Rollupgroup']} 
+            </ui:define>
+                <p:remoteCommand name="jxxxuq53dxwwqqhxxxxxrollupgroupFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="jxxxuq53dxwwqqhxxxxxrollupgroupsm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.validateAndSelectXxxxxxxxgroupid}" 
+                   value="#{jxxxuq53dxwwqqhxxxxxrollupgroupHome.lastjxxxuq53dxwwqqhxxxxxrollupgroupP}" onchange="jxxxuq53dxwwqqhxxxxxrollupgroupFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{jxxxuq53dxwwqqhxxxxxrollupgroupList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   </p:tabView>
+
+
+
+                          <h:panelGroup>
+                           <p:commandButton id="calTotalsT" styleClass="buttonMain"
+                            value="#{messages['refresh']} #{messages['totals']}" update="@form"
+                            action="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}"/>
+                          </h:panelGroup>
+     </h:panelGrid>
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="a0xxukupbvxxxxxxxxxxusagetrackeridDecoration"  rendered="false">
+        <h:outputLabel  for="a0xxukupbvxxxxxxxxxxusagetrackerid" value="#{messages['Usagetrackerid']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxukupbvxxxxxxxxxxusagetrackerid" 
+                       label="usagetrackerid"
+                        required="true"
+                        rendered="false"
+                           size="20"
+                      maxlength="32"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.a0xxukupbvxxxxxxxxxxusagetrackerid}">
+
+         </h:inputText>
+            <p:tooltip for="a0xxukupbvxxxxxxxxxxusagetrackerid"> <span style="white-space: nowrap"> <h:outputText value="Value generated from Sub Key Fields.."/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a1xxuszsbxxxxxxxxxxxdescriptDecoration"    >
+        <h:outputLabel  for="a1xxuszsbxxxxxxxxxxxdescript" value="#{messages['Descript']}">
+      </h:outputLabel>
+
+         <h:inputText id="a1xxuszsbxxxxxxxxxxxdescript" 
+                       label="descript"
+                        required="true"
+                           size="32"
+                      maxlength="120"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.a1xxuszsbxxxxxxxxxxxdescript}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b2xxuxxrbxxxxxxxxxxxcurrencyDecoration"    >
+        <h:outputLabel  for="b2xxuxxrbxxxxxxxxxxxcurrency" value="#{messages['Currency']}">
+      </h:outputLabel>
+
+         <h:inputText id="b2xxuxxrbxxxxxxxxxxxcurrency" 
+                           size="20"
+                      maxlength="3"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.b2xxuxxrbxxxxxxxxxxxcurrency}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+               </p:panel>
+               <p:panel>
+                <h:panelGrid columns="4">
+
+             <h:panelGroup id="d3xxul0rbvxxxxxxxxxxperiod0labelDecoration"    >
+        <h:outputLabel  for="d3xxul0rbvxxxxxxxxxxperiod0label" value="#{messages['Period0label']}">
+      </h:outputLabel>
+
+         <h:inputText id="d3xxul0rbvxxxxxxxxxxperiod0label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.d3xxul0rbvxxxxxxxxxxperiod0label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="d3xxzb0rbvxxxxxxxxxxperiod0bDecoration"    >
+        <h:outputLabel  for="d3xxzb0rbvxxxxxxxxxxperiod0b" value="#{messages['Period0b']}">
+      </h:outputLabel>
+      <h:inputText id="d3xxzb0rbvxxxxxxxxxxperiod0b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.d3xxzb0rbvxxxxxxxxxxperiod0b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.d3xxzb0rbvxxxxxxxxxxperiod0b}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="d4xxza0rbvxxxxxxxxxxperiod0Decoration"    >
+        <h:outputLabel  for="d4xxza0rbvxxxxxxxxxxperiod0" value="#{messages['Period0']}">
+      </h:outputLabel>
+      <h:inputText id="d4xxza0rbvxxxxxxxxxxperiod0"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.d4xxza0rbvxxxxxxxxxxperiod0}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.d4xxza0rbvxxxxxxxxxxperiod0}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="d5xxzc0rbxxxxxxxxxxxperiod0formulaeDecoration"    >
+        <h:outputLabel  for="d5xxzc0rbxxxxxxxxxxxperiod0formulae" value="#{messages['Period0formulae']}">
+      </h:outputLabel>
+
+         <h:inputText id="d5xxzc0rbxxxxxxxxxxxperiod0formulae" 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.d5xxzc0rbxxxxxxxxxxxperiod0formulae}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="e3xxul0rbvxxxxxxxxxxperiodtotalslabelDecoration"    >
+        <h:outputLabel  for="e3xxul0rbvxxxxxxxxxxperiodtotalslabel" value="#{messages['Periodtotalslabel']}">
+      </h:outputLabel>
+
+         <h:inputText id="e3xxul0rbvxxxxxxxxxxperiodtotalslabel" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.e3xxul0rbvxxxxxxxxxxperiodtotalslabel}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="e3xxzbtrbvxxxxxxxxxxperiodtotalsbDecoration"    >
+        <h:outputLabel  for="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" value="#{messages['Periodtotalsb']}">
+      </h:outputLabel>
+      <h:inputText id="e3xxzbtrbvxxxxxxxxxxperiodtotalsb"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.e3xxzbtrbvxxxxxxxxxxperiodtotalsb}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.e3xxzbtrbvxxxxxxxxxxperiodtotalsb}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="e4xxzatrbvxxxxxxxxxxperiodtotalsDecoration"    >
+        <h:outputLabel  for="e4xxzatrbvxxxxxxxxxxperiodtotals" value="#{messages['Periodtotals']}">
+      </h:outputLabel>
+      <h:inputText id="e4xxzatrbvxxxxxxxxxxperiodtotals"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.e4xxzatrbvxxxxxxxxxxperiodtotals}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.e4xxzatrbvxxxxxxxxxxperiodtotals}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="e5xxzctrbxxxxxxxxxxxperiodtotalsformulaeDecoration"    >
+        <h:outputLabel  for="e5xxzctrbxxxxxxxxxxxperiodtotalsformulae" value="#{messages['Periodtotalsformulae']}">
+      </h:outputLabel>
+
+         <h:inputText id="e5xxzctrbxxxxxxxxxxxperiodtotalsformulae" 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.e5xxzctrbxxxxxxxxxxxperiodtotalsformulae}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f3xxul1rbvxxxxxxxxxxperiod1labelDecoration"    >
+        <h:outputLabel  for="f3xxul1rbvxxxxxxxxxxperiod1label" value="#{messages['Period1label']}">
+      </h:outputLabel>
+
+         <h:inputText id="f3xxul1rbvxxxxxxxxxxperiod1label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.f3xxul1rbvxxxxxxxxxxperiod1label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f3xxzb1rbvxxxxxxxxxxperiod1budgetDecoration"    >
+        <h:outputLabel  for="f3xxzb1rbvxxxxxxxxxxperiod1budget" value="#{messages['Period1budget']}">
+      </h:outputLabel>
+      <h:inputText id="f3xxzb1rbvxxxxxxxxxxperiod1budget"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.f3xxzb1rbvxxxxxxxxxxperiod1budget}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.f3xxzb1rbvxxxxxxxxxxperiod1budget}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f4xxza1rbvxxxxxxxxxxperiod1Decoration"    >
+        <h:outputLabel  for="f4xxza1rbvxxxxxxxxxxperiod1" value="#{messages['Period1']}">
+      </h:outputLabel>
+      <h:inputText id="f4xxza1rbvxxxxxxxxxxperiod1"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.f4xxza1rbvxxxxxxxxxxperiod1}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.f4xxza1rbvxxxxxxxxxxperiod1}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f5xxzc1rbxxxxxxxxxxxperiod1formulaeDecoration"    >
+        <h:outputLabel  for="f5xxzc1rbxxxxxxxxxxxperiod1formulae" value="#{messages['Period1formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="f5xxzc1rbxxxxxxxxxxxperiod1formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.f5xxzc1rbxxxxxxxxxxxperiod1formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="g3xxul2rbvxxxxxxxxxxperiod2labelDecoration"    >
+        <h:outputLabel  for="g3xxul2rbvxxxxxxxxxxperiod2label" value="#{messages['Period2label']}">
+      </h:outputLabel>
+
+         <h:inputText id="g3xxul2rbvxxxxxxxxxxperiod2label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.g3xxul2rbvxxxxxxxxxxperiod2label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="g3xxzb2rbvxxxxxxxxxxperiod2bDecoration"    >
+        <h:outputLabel  for="g3xxzb2rbvxxxxxxxxxxperiod2b" value="#{messages['Period2b']}">
+      </h:outputLabel>
+      <h:inputText id="g3xxzb2rbvxxxxxxxxxxperiod2b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.g3xxzb2rbvxxxxxxxxxxperiod2b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.g3xxzb2rbvxxxxxxxxxxperiod2b}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="g4xxza2rbvxxxxxxxxxxperiod2Decoration"    >
+        <h:outputLabel  for="g4xxza2rbvxxxxxxxxxxperiod2" value="#{messages['Period2']}">
+      </h:outputLabel>
+      <h:inputText id="g4xxza2rbvxxxxxxxxxxperiod2"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.g4xxza2rbvxxxxxxxxxxperiod2}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.g4xxza2rbvxxxxxxxxxxperiod2}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="g5xxzc2rbxxxxxxxxxxxperiod2formulaeDecoration"    >
+        <h:outputLabel  for="g5xxzc2rbxxxxxxxxxxxperiod2formulae" value="#{messages['Period2formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="g5xxzc2rbxxxxxxxxxxxperiod2formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.g5xxzc2rbxxxxxxxxxxxperiod2formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="h3xxul3rbvxxxxxxxxxxperiod3labelDecoration"    >
+        <h:outputLabel  for="h3xxul3rbvxxxxxxxxxxperiod3label" value="#{messages['Period3label']}">
+      </h:outputLabel>
+
+         <h:inputText id="h3xxul3rbvxxxxxxxxxxperiod3label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.h3xxul3rbvxxxxxxxxxxperiod3label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="h3xxzb3rbvxxxxxxxxxxperiod3bDecoration"    >
+        <h:outputLabel  for="h3xxzb3rbvxxxxxxxxxxperiod3b" value="#{messages['Period3b']}">
+      </h:outputLabel>
+      <h:inputText id="h3xxzb3rbvxxxxxxxxxxperiod3b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.h3xxzb3rbvxxxxxxxxxxperiod3b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.h3xxzb3rbvxxxxxxxxxxperiod3b}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="h4xxza3rbvxxxxxxxxxxperiod3Decoration"    >
+        <h:outputLabel  for="h4xxza3rbvxxxxxxxxxxperiod3" value="#{messages['Period3']}">
+      </h:outputLabel>
+      <h:inputText id="h4xxza3rbvxxxxxxxxxxperiod3"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.h4xxza3rbvxxxxxxxxxxperiod3}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.h4xxza3rbvxxxxxxxxxxperiod3}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="h5xxzc3rbxxxxxxxxxxxperiod3formulaeDecoration"    >
+        <h:outputLabel  for="h5xxzc3rbxxxxxxxxxxxperiod3formulae" value="#{messages['Period3formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="h5xxzc3rbxxxxxxxxxxxperiod3formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.h5xxzc3rbxxxxxxxxxxxperiod3formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="i3xxul4rbvxxxxxxxxxxperiod4labelDecoration"    >
+        <h:outputLabel  for="i3xxul4rbvxxxxxxxxxxperiod4label" value="#{messages['Period4label']}">
+      </h:outputLabel>
+
+         <h:inputText id="i3xxul4rbvxxxxxxxxxxperiod4label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.i3xxul4rbvxxxxxxxxxxperiod4label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="i3xxzb4rbvxxxxxxxxxxperiod4bDecoration"    >
+        <h:outputLabel  for="i3xxzb4rbvxxxxxxxxxxperiod4b" value="#{messages['Period4b']}">
+      </h:outputLabel>
+      <h:inputText id="i3xxzb4rbvxxxxxxxxxxperiod4b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.i3xxzb4rbvxxxxxxxxxxperiod4b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.i3xxzb4rbvxxxxxxxxxxperiod4b}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="i4xxza4rbvxxxxxxxxxxperiod4Decoration"    >
+        <h:outputLabel  for="i4xxza4rbvxxxxxxxxxxperiod4" value="#{messages['Period4']}">
+      </h:outputLabel>
+      <h:inputText id="i4xxza4rbvxxxxxxxxxxperiod4"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.i4xxza4rbvxxxxxxxxxxperiod4}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.i4xxza4rbvxxxxxxxxxxperiod4}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="i5xxzc4rbxxxxxxxxxxxperiod4formulaeDecoration"    >
+        <h:outputLabel  for="i5xxzc4rbxxxxxxxxxxxperiod4formulae" value="#{messages['Period4formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="i5xxzc4rbxxxxxxxxxxxperiod4formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.i5xxzc4rbxxxxxxxxxxxperiod4formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="j3xxul5rbvxxxxxxxxxxperiod5labelDecoration"    >
+        <h:outputLabel  for="j3xxul5rbvxxxxxxxxxxperiod5label" value="#{messages['Period5label']}">
+      </h:outputLabel>
+
+         <h:inputText id="j3xxul5rbvxxxxxxxxxxperiod5label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.j3xxul5rbvxxxxxxxxxxperiod5label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="j3xxzb5rbvxxxxxxxxxxperiod5bDecoration"    >
+        <h:outputLabel  for="j3xxzb5rbvxxxxxxxxxxperiod5b" value="#{messages['Period5b']}">
+      </h:outputLabel>
+      <h:inputText id="j3xxzb5rbvxxxxxxxxxxperiod5b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.j3xxzb5rbvxxxxxxxxxxperiod5b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.j3xxzb5rbvxxxxxxxxxxperiod5b}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="j4xxza5rbvxxxxxxxxxxperiod5Decoration"    >
+        <h:outputLabel  for="j4xxza5rbvxxxxxxxxxxperiod5" value="#{messages['Period5']}">
+      </h:outputLabel>
+      <h:inputText id="j4xxza5rbvxxxxxxxxxxperiod5"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.j4xxza5rbvxxxxxxxxxxperiod5}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.j4xxza5rbvxxxxxxxxxxperiod5}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="j5xxzc5rbxxxxxxxxxxxperiod5formulaeDecoration"    >
+        <h:outputLabel  for="j5xxzc5rbxxxxxxxxxxxperiod5formulae" value="#{messages['Period5formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="j5xxzc5rbxxxxxxxxxxxperiod5formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.j5xxzc5rbxxxxxxxxxxxperiod5formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="k3xxul6rbvxxxxxxxxxxperiod6labelDecoration"    >
+        <h:outputLabel  for="k3xxul6rbvxxxxxxxxxxperiod6label" value="#{messages['Period6label']}">
+      </h:outputLabel>
+
+         <h:inputText id="k3xxul6rbvxxxxxxxxxxperiod6label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.k3xxul6rbvxxxxxxxxxxperiod6label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="k3xxzb6rbvxxxxxxxxxxperiod6bDecoration"    >
+        <h:outputLabel  for="k3xxzb6rbvxxxxxxxxxxperiod6b" value="#{messages['Period6b']}">
+      </h:outputLabel>
+      <h:inputText id="k3xxzb6rbvxxxxxxxxxxperiod6b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.k3xxzb6rbvxxxxxxxxxxperiod6b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.k3xxzb6rbvxxxxxxxxxxperiod6b}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="k4xxza6rbvxxxxxxxxxxperiod6Decoration"    >
+        <h:outputLabel  for="k4xxza6rbvxxxxxxxxxxperiod6" value="#{messages['Period6']}">
+      </h:outputLabel>
+      <h:inputText id="k4xxza6rbvxxxxxxxxxxperiod6"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.k4xxza6rbvxxxxxxxxxxperiod6}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.k4xxza6rbvxxxxxxxxxxperiod6}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="k5xxzc6rbxxxxxxxxxxxperiod6formulaeDecoration"    >
+        <h:outputLabel  for="k5xxzc6rbxxxxxxxxxxxperiod6formulae" value="#{messages['Period6formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="k5xxzc6rbxxxxxxxxxxxperiod6formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.k5xxzc6rbxxxxxxxxxxxperiod6formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="l3xxul7rbvxxxxxxxxxxperiod7labelDecoration"    >
+        <h:outputLabel  for="l3xxul7rbvxxxxxxxxxxperiod7label" value="#{messages['Period7label']}">
+      </h:outputLabel>
+
+         <h:inputText id="l3xxul7rbvxxxxxxxxxxperiod7label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.l3xxul7rbvxxxxxxxxxxperiod7label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="l3xxzb7rbvxxxxxxxxxxperiod7bDecoration"    >
+        <h:outputLabel  for="l3xxzb7rbvxxxxxxxxxxperiod7b" value="#{messages['Period7b']}">
+      </h:outputLabel>
+      <h:inputText id="l3xxzb7rbvxxxxxxxxxxperiod7b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.l3xxzb7rbvxxxxxxxxxxperiod7b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.l3xxzb7rbvxxxxxxxxxxperiod7b}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="l4xxza7rbvxxxxxxxxxxperiod7Decoration"    >
+        <h:outputLabel  for="l4xxza7rbvxxxxxxxxxxperiod7" value="#{messages['Period7']}">
+      </h:outputLabel>
+      <h:inputText id="l4xxza7rbvxxxxxxxxxxperiod7"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.l4xxza7rbvxxxxxxxxxxperiod7}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.l4xxza7rbvxxxxxxxxxxperiod7}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="l5xxzc7rbxxxxxxxxxxxperiod7formulaeDecoration"    >
+        <h:outputLabel  for="l5xxzc7rbxxxxxxxxxxxperiod7formulae" value="#{messages['Period7formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="l5xxzc7rbxxxxxxxxxxxperiod7formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.l5xxzc7rbxxxxxxxxxxxperiod7formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="m3xxul8rbvxxxxxxxxxxperiod8labelDecoration"    >
+        <h:outputLabel  for="m3xxul8rbvxxxxxxxxxxperiod8label" value="#{messages['Period8label']}">
+      </h:outputLabel>
+
+         <h:inputText id="m3xxul8rbvxxxxxxxxxxperiod8label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.m3xxul8rbvxxxxxxxxxxperiod8label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="m3xxzb8rbvxxxxxxxxxxperiod8bDecoration"    >
+        <h:outputLabel  for="m3xxzb8rbvxxxxxxxxxxperiod8b" value="#{messages['Period8b']}">
+      </h:outputLabel>
+      <h:inputText id="m3xxzb8rbvxxxxxxxxxxperiod8b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.m3xxzb8rbvxxxxxxxxxxperiod8b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.m3xxzb8rbvxxxxxxxxxxperiod8b}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="m4xxza8rbvxxxxxxxxxxperiod8Decoration"    >
+        <h:outputLabel  for="m4xxza8rbvxxxxxxxxxxperiod8" value="#{messages['Period8']}">
+      </h:outputLabel>
+      <h:inputText id="m4xxza8rbvxxxxxxxxxxperiod8"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.m4xxza8rbvxxxxxxxxxxperiod8}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.m4xxza8rbvxxxxxxxxxxperiod8}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="m5xxzc8rbxxxxxxxxxxxperiod8formulaeDecoration"    >
+        <h:outputLabel  for="m5xxzc8rbxxxxxxxxxxxperiod8formulae" value="#{messages['Period8formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="m5xxzc8rbxxxxxxxxxxxperiod8formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.m5xxzc8rbxxxxxxxxxxxperiod8formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="n3xxul9rbvxxxxxxxxxxperiod9labelDecoration"    >
+        <h:outputLabel  for="n3xxul9rbvxxxxxxxxxxperiod9label" value="#{messages['Period9label']}">
+      </h:outputLabel>
+
+         <h:inputText id="n3xxul9rbvxxxxxxxxxxperiod9label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.n3xxul9rbvxxxxxxxxxxperiod9label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="n3xxzb9rbvxxxxxxxxxxperiod9bDecoration"    >
+        <h:outputLabel  for="n3xxzb9rbvxxxxxxxxxxperiod9b" value="#{messages['Period9b']}">
+      </h:outputLabel>
+      <h:inputText id="n3xxzb9rbvxxxxxxxxxxperiod9b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.n3xxzb9rbvxxxxxxxxxxperiod9b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.n3xxzb9rbvxxxxxxxxxxperiod9b}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="n4xxza9rbvxxxxxxxxxxperiod9Decoration"    >
+        <h:outputLabel  for="n4xxza9rbvxxxxxxxxxxperiod9" value="#{messages['Period9']}">
+      </h:outputLabel>
+      <h:inputText id="n4xxza9rbvxxxxxxxxxxperiod9"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.n4xxza9rbvxxxxxxxxxxperiod9}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.n4xxza9rbvxxxxxxxxxxperiod9}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="n5xxzc9rbxxxxxxxxxxxperiod9formulaeDecoration"    >
+        <h:outputLabel  for="n5xxzc9rbxxxxxxxxxxxperiod9formulae" value="#{messages['Period9formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="n5xxzc9rbxxxxxxxxxxxperiod9formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.n5xxzc9rbxxxxxxxxxxxperiod9formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="o3xxularbvxxxxxxxxxxperiod10labelDecoration"    >
+        <h:outputLabel  for="o3xxularbvxxxxxxxxxxperiod10label" value="#{messages['Period10label']}">
+      </h:outputLabel>
+
+         <h:inputText id="o3xxularbvxxxxxxxxxxperiod10label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.o3xxularbvxxxxxxxxxxperiod10label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="o3xxzbarbvxxxxxxxxxxperiod10bDecoration"    >
+        <h:outputLabel  for="o3xxzbarbvxxxxxxxxxxperiod10b" value="#{messages['Period10b']}">
+      </h:outputLabel>
+      <h:inputText id="o3xxzbarbvxxxxxxxxxxperiod10b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.o3xxzbarbvxxxxxxxxxxperiod10b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.o3xxzbarbvxxxxxxxxxxperiod10b}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="o4xxzaarbvxxxxxxxxxxperiod10Decoration"    >
+        <h:outputLabel  for="o4xxzaarbvxxxxxxxxxxperiod10" value="#{messages['Period10']}">
+      </h:outputLabel>
+      <h:inputText id="o4xxzaarbvxxxxxxxxxxperiod10"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.o4xxzaarbvxxxxxxxxxxperiod10}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.o4xxzaarbvxxxxxxxxxxperiod10}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="o5xxzcarbxxxxxxxxxxxperiod10formulaeDecoration"    >
+        <h:outputLabel  for="o5xxzcarbxxxxxxxxxxxperiod10formulae" value="#{messages['Period10formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="o5xxzcarbxxxxxxxxxxxperiod10formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.o5xxzcarbxxxxxxxxxxxperiod10formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="p3xxulbrbvxxxxxxxxxxperiod11labelDecoration"    >
+        <h:outputLabel  for="p3xxulbrbvxxxxxxxxxxperiod11label" value="#{messages['Period11label']}">
+      </h:outputLabel>
+
+         <h:inputText id="p3xxulbrbvxxxxxxxxxxperiod11label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.p3xxulbrbvxxxxxxxxxxperiod11label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="p3xxzbbrbvxxxxxxxxxxperiod11bDecoration"    >
+        <h:outputLabel  for="p3xxzbbrbvxxxxxxxxxxperiod11b" value="#{messages['Period11b']}">
+      </h:outputLabel>
+      <h:inputText id="p3xxzbbrbvxxxxxxxxxxperiod11b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.p3xxzbbrbvxxxxxxxxxxperiod11b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.p3xxzbbrbvxxxxxxxxxxperiod11b}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="p4xxzabrbvxxxxxxxxxxperiod11Decoration"    >
+        <h:outputLabel  for="p4xxzabrbvxxxxxxxxxxperiod11" value="#{messages['Period11']}">
+      </h:outputLabel>
+      <h:inputText id="p4xxzabrbvxxxxxxxxxxperiod11"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.p4xxzabrbvxxxxxxxxxxperiod11}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.p4xxzabrbvxxxxxxxxxxperiod11}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="p5xxzcbrbxxxxxxxxxxxperiod11formulaeDecoration"    >
+        <h:outputLabel  for="p5xxzcbrbxxxxxxxxxxxperiod11formulae" value="#{messages['Period11formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="p5xxzcbrbxxxxxxxxxxxperiod11formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.p5xxzcbrbxxxxxxxxxxxperiod11formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="q3xxulcrbvxxxxxxxxxxperiod12labelDecoration"    >
+        <h:outputLabel  for="q3xxulcrbvxxxxxxxxxxperiod12label" value="#{messages['Period12label']}">
+      </h:outputLabel>
+
+         <h:inputText id="q3xxulcrbvxxxxxxxxxxperiod12label" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.q3xxulcrbvxxxxxxxxxxperiod12label}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="q3xxzbcrbvxxxxxxxxxxperiod12bDecoration"    >
+        <h:outputLabel  for="q3xxzbcrbvxxxxxxxxxxperiod12b" value="#{messages['Period12b']}">
+      </h:outputLabel>
+      <h:inputText id="q3xxzbcrbvxxxxxxxxxxperiod12b"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.q3xxzbcrbvxxxxxxxxxxperiod12b}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.q3xxzbcrbvxxxxxxxxxxperiod12b}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="q4xxzacrbvxxxxxxxxxxperiod12Decoration"    >
+        <h:outputLabel  for="q4xxzacrbvxxxxxxxxxxperiod12" value="#{messages['Period12']}">
+      </h:outputLabel>
+      <h:inputText id="q4xxzacrbvxxxxxxxxxxperiod12"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.q4xxzacrbvxxxxxxxxxxperiod12}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.q4xxzacrbvxxxxxxxxxxperiod12}:this.value;"
+      size="21">
+                  <f:ajax   listener="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+     </h:inputText>
+            </h:panelGroup>
+
+
+
+             <h:panelGroup id="q5xxzccrbxxxxxxxxxxxperiod12formulaeDecoration"    >
+        <h:outputLabel  for="q5xxzccrbxxxxxxxxxxxperiod12formulae" value="#{messages['Period12formulae']}">
+      </h:outputLabel>
+
+
+         <h:inputTextarea id="q5xxzccrbxxxxxxxxxxxperiod12formulae" onchange ="calculate(this);"
+ 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.q5xxzccrbxxxxxxxxxxxperiod12formulae}">
+
+         </h:inputTextarea>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="r3xxuldrbvxxxxxxxxxxperiodnlabelDecoration"    >
+        <h:outputLabel  for="r3xxuldrbvxxxxxxxxxxperiodnlabel" value="#{messages['Periodnlabel']}">
+      </h:outputLabel>
+
+         <h:inputText id="r3xxuldrbvxxxxxxxxxxperiodnlabel" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.r3xxuldrbvxxxxxxxxxxperiodnlabel}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="r3xxzbdrbvxxxxxxxxxxperiodnbDecoration"    >
+        <h:outputLabel  for="r3xxzbdrbvxxxxxxxxxxperiodnb" value="#{messages['Periodnb']}">
+      </h:outputLabel>
+      <h:inputText id="r3xxzbdrbvxxxxxxxxxxperiodnb"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.r3xxzbdrbvxxxxxxxxxxperiodnb}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.r3xxzbdrbvxxxxxxxxxxperiodnb}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="r4xxzadrbvxxxxxxxxxxperiodnDecoration"    >
+        <h:outputLabel  for="r4xxzadrbvxxxxxxxxxxperiodn" value="#{messages['Periodn']}">
+      </h:outputLabel>
+      <h:inputText id="r4xxzadrbvxxxxxxxxxxperiodn"  
+         value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.r4xxzadrbvxxxxxxxxxxperiodn}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.r4xxzadrbvxxxxxxxxxxperiodn}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="r5xxzxxrbxxxxxxxxxxxperiodnformulaeDecoration"    >
+        <h:outputLabel  for="r5xxzxxrbxxxxxxxxxxxperiodnformulae" value="#{messages['Periodnformulae']}">
+      </h:outputLabel>
+
+         <h:inputText id="r5xxzxxrbxxxxxxxxxxxperiodnformulae" 
+                           size="32"
+                      maxlength="159"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.r5xxzxxrbxxxxxxxxxxxperiodnformulae}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y1xxuxznbvxxxxxxxxxxnotesDecoration"  rendered="true">
+        <h:outputLabel  for="y1xxuxznbvxxxxxxxxxxnotes" value="#{messages['Notes']}">
+      </h:outputLabel>
+
+         <h:inputText id="y1xxuxznbvxxxxxxxxxxnotes" 
+                           size="20"
+                      maxlength="60"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.y1xxuxznbvxxxxxxxxxxnotes}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zixxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="zixxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="zixxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.zixxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="zjxxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zjxxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="zjxxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.zjxxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="zjxxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zjxxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="zjxxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.zjxxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.a0xxukupbvxxxxxxxxxxusagetrackerid} #{messages['sid']} #{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.a0xxukupbvxxxxxxxxxxusagetrackerid !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.persist()}"
+                       disabled="#{!fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.wired}"
+                       rendered="#{!fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed  and !fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.update()}"
+                       rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed  and !fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.update()}"
+                       rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed and fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.remove()}"
+                       rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed and !fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/usagebyperiodsEdit.xhtml"
+                       rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsList.reportName}"/>
+            <f:param name="displayAs" value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsList.displayAs}" /> 
+            <h:button outcome="/usagebyperiodsList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Usagebyperiods']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.fxxxuq1bhxwwqqhxxxxxusagebyperiodsFrom ? 'home' : fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.fxxxuq1bhxwwqqhxxxxxusagebyperiodsFrom}.xhtml"
+                rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed or fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.fxxxuq1bhxwwqqhxxxxxusagebyperiodsFrom ? 'home' : fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.fxxxuq1bhxwwqqhxxxxxusagebyperiodsFrom}.xhtml"
+                rendered="#{!fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed and !fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.entityDeleted}"/>
+
+            <h:commandButton id="salesdata" 
+                          value="#{messages['Refresh_Sales_data']}" 
+                         action="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.loadSalesData()}"
+                       disabled="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed}"
+                       rendered="#{(!fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed or fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.moreActive) and !fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.entityDeleted}">  
+                        
+            </h:commandButton>    
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="true" rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" toggleable="true" toggleableHeader="true">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+  <p:tabView switchType="ajax">
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Item']}">
+    <div class="association" id="fpxxfq1a5xwwqqhxxxxxitemParent">
+        
+        <h:outputText value="No item" 
+                   rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.fpxxfq1a5xwwqqhxxxxxitem == null}"/>
+        
+        <p:dataTable var="fpxxfq1a5xwwqqhxxxxxitem" tableStyle="table-layout:auto;"
+                   value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.fpxxfq1a5xwwqqhxxxxxitem}" 
+                rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.fpxxfq1a5xwwqqhxxxxxitem != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fpxxfq1a5xwwqqhxxxxxitemTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewitem" 
+                     value="View" 
+                      outcome="/item.xhtml">
+                       <f:param disable="#{empty fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}" name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">matcode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.a0xxukixbxxxxxxxxxxxmatcode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">quantity</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b0xxziqxlvxxsaxxxxxxquantity}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">source1</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b3xxuxxrbvxxxxxxxxxxsource1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">upccode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b5fbuxxrbvxxxxxxxxxxupccode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">cost</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b6fbzicxbvxxxxxxxxxxcost}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">replcost</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b7fbzxxxbvxxxxxxxxxxreplcost}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">selprice</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spricold</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.b9xxzxxxlvxxxxxxxxxxspricold}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spricnew</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c1xxzxxxbhxxsxxxxxxxspricnew}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">spriceffdt</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c2fbcxxrehxxsxxxxxxxspriceffdt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">shipcode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c3fbuxscbvxxxxxxxxxxshipcode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">qtylevel1</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c4fbzxxxbvxxxxxxxxxxqtylevel1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">unit</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c5fbuuxrbv18xxxxxxxxunit}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax1</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c7fbfxz1bvxxxxxxxxxxtax1}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">tax2</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.c8fbfxz2bvxxxxxxxxxxtax2}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">aliascode</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.f1xxuxxrbvxxxxxxxxxxaliascode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">avgprice</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.f3xxzxxxlvxxxxxxxxxxavgprice}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">item sid</f:facet>
+		    	  #{fpxxfq1a5xwwqqhxxxxxitem.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">location sid</f:facet>
+		    	  #{fpxxfq1a5xwwqqhxxxxxitem.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn2</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn2bvxxxxxxxxxxsubcodesn2}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subcodesn3</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn3bvxxxxxxxxxxsubcodesn3}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">effdate</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.h1xxcxxrbxxxxxxxxxxxeffdate}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">integrset</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.h2xxuwmrbv40xxxxxxxxintegrset}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">notes</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.w7xxuznxbvxxxxxxxxxxnotes}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.w8xxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.z5xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.z6xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{fpxxfq1a5xwwqqhxxxxxitem.zexxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Rollupgroup']}">
+    <div class="association" id="jxxxuq53dxwwqqhxxxxxrollupgroupParent">
+        
+        <h:outputText value="No rollupgroup" 
+                   rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.jxxxuq53dxwwqqhxxxxxrollupgroup == null}"/>
+        
+        <p:dataTable var="jxxxuq53dxwwqqhxxxxxrollupgroup" tableStyle="table-layout:auto;"
+                   value="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.jxxxuq53dxwwqqhxxxxxrollupgroup}" 
+                rendered="#{fxxxuq1bhxwwqqhxxxxxusagebyperiodsHome.instance.jxxxuq53dxwwqqhxxxxxrollupgroup != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="jxxxuq53dxwwqqhxxxxxrollupgroupTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewrollupgroup" 
+                     value="View" 
+                      outcome="/rollupgroup.xhtml">
+                       <f:param disable="#{empty jxxxuq53dxwwqqhxxxxxrollupgroup.a0xxuobxbxxxxxxxxxxxsid}" name="jxxxuq53dxwwqqhxxxxxrollupgroupA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{jxxxuq53dxwwqqhxxxxxrollupgroup.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">groupid</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.a0xxukgxbvxxxxxxxxxxgroupid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.a2xxuszsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.a3xxuzyxbv46xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">currpw</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.a4xxuxxxbvxxxxxxxxxxcurrpw}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">expiry</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.a5xxcxxrlxxxxxxxxxxxexpiry}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">currency</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b2xxuxxrbvxxxxxxxxxxcurrency}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period0</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b3xxza0rbvxxxxxxxxxxperiod0}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period0b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b3xxzb0rbvxxxxxxxxxxperiod0b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">periodtotals</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b4xxzatrbvxxxxxxxxxxperiodtotals}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">periodtotalsb</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b4xxzbtrbvxxxxxxxxxxperiodtotalsb}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period1actual</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b5xxza1rbvxxxxxxxxxxperiod1actual}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period1budget</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b5xxzb1rbvxxxxxxxxxxperiod1budget}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period2</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b6xxza2rbvxxxxxxxxxxperiod2}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period2b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b6xxzb2rbvxxxxxxxxxxperiod2b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period3</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b7xxza3rbvxxxxxxxxxxperiod3}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period3b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b7xxzb3rbvxxxxxxxxxxperiod3b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period4</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b8xxza4rbvxxxxxxxxxxperiod4}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period4b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b8xxzb4rbvxxxxxxxxxxperiod4b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period5</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b9xxza5rbvxxxxxxxxxxperiod5}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period5b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.b9xxzb5rbvxxxxxxxxxxperiod5b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period6</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.baxxza6rbvxxxxxxxxxxperiod6}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period6b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.baxxzb6rbvxxxxxxxxxxperiod6b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period7</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bbxxza7rbvxxxxxxxxxxperiod7}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period7b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bbxxzb7rbvxxxxxxxxxxperiod7b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period8</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bcxxza8rbvxxxxxxxxxxperiod8}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period8b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bcxxzb8rbvxxxxxxxxxxperiod8b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period9</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bdxxza9rbvxxxxxxxxxxperiod9}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period9b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bdxxzb9rbvxxxxxxxxxxperiod9b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period10</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bexxzaarbvxxxxxxxxxxperiod10}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period10b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bexxzbarbvxxxxxxxxxxperiod10b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period11</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bfxxzabrbvxxxxxxxxxxperiod11}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period11b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bfxxzbbrbvxxxxxxxxxxperiod11b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period12</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bgxxzacrbvxxxxxxxxxxperiod12}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">period12b</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bgxxzbcrbvxxxxxxxxxxperiod12b}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">periodnb</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bhxxzcarbvxxxxxxxxxxperiodnb}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">periodn</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.bhxxzxxrbvxxxxxxxxxxperiodn}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.z1xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.z2xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{jxxxuq53dxwwqqhxxxxxrollupgroup.z3xxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

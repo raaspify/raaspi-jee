@@ -1,0 +1,296 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                template="layout/rtemplateHomePageEditor.xhtml">
+<!-- Copied from
+Home page
+
+-->
+<f:metadata>
+    <f:viewParam name="yxxxuq1n1xwwqqqxxxxxblobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.yxxxuq1n1xwwqqqxxxxxblobdataA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="yxxxuq1n1xwwqqqxxxxxblobdataFrom" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.yxxxuq1n1xwwqqqxxxxxblobdataFrom}"/>
+    <f:viewParam name="themeName" value="#{skinBean.previewTh}"/>
+    <f:viewAction action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.wire()}" />
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemHome.restrict()}" />
+    <f:viewAction action="#{customIdentity.setHoldValue('')}" />
+    <f:viewAction action="#{customIdentity.setHoldValue2('')}" />
+    <f:viewAction action="#{customIdentity.setHoldValue3('')}" />
+    <f:viewAction action="#{customIdentity.setKeyValue('')}" />
+    <f:viewAction action="#{customIdentity.setKeyValue2('')}" />
+    <f:viewAction action="#{customIdentity.setKeyValue3('')}" />
+
+    <f:event type="preRenderView" listener="#{authenticator.setClientChosenSkin('/homePageEditor.xhtml')}" />
+
+</f:metadata>
+
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"/>
+<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT"/>
+<ui:define name="title">Home page for #{customIdentity.owner2} menue for shopping cart, products and login for back office </ui:define>
+
+<ui:define name="body">
+    <h:form id="homeForm" enctype="multipart/form-data">
+<h:outputStylesheet>
+
+</h:outputStylesheet>
+<script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  var aid;
+   //alert(window.location.href);
+  if (window.location.href.indexOf(".l3r") > -1) {
+   aid = "1493497040950348";
+  } else {
+   aid = "462928240562239";
+  }
+   //alert(aid);
+  FB.init({
+    appId      : aid,
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.4' // use version 2.2
+  });
+
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      onFbLogin(response.id, response.email, response.name, response.first_name, response.last_name, response.gender);
+      document.getElementById('status').innerHTML = 'Welcome Facebook User '+response.name ;
+      //final response to user will come from server
+    });
+  }
+  function Logout() {
+  FB.logout(function () { document.location.reload(); });
+   document.getElementById('status').innerHTML = 'Logged out of Facebook' ;
+  }
+</script>
+<script>
+$(document).ready(function(){
+//alert (window.location);
+// img2 is seq2 and img is seq1 put 1 first and then 2 if needed
+jQuery("#asishdrbkimg2").fadeOut(0);jQuery("#asishdrbkimg").delay(10000).fadeOut(3000);jQuery("#header").delay(10000).fadeOut(3000);jQuery("#asishdrbkimg2").delay(10000).fadeIn(0);jQuery("#asishdrbkimg2").delay(10000).fadeOut(3000);
+});
+</script>
+
+<ui:remove>
+<div class="fb-page" 
+  data-href="'https://www.facebook.com/'+#{customIdentity.masterSite}+'/'"
+  data-tabs="timeline,events,messages"
+  data-width="380" 
+  data-hide-cover="false"
+  data-show-facepile="false">
+</div>
+</ui:remove>
+            <h:outputText value="#{messages['mid']}/#{messages['body']} " />
+
+            <h:panelGroup id="gmessagesmidS">
+                    <p:messages  globalOnly="true" closable="true"/>
+            </h:panelGroup>
+
+
+              <h:panelGroup id="midOn"><a name="home_mid">drag image or click on image tool and copy/paste url</a>
+               <h:panelGrid columns="2">
+                <pe:ckEditor id="homemid" secure="false" height="400" width="900"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.homeMidTxt}"
+                      toolbar="[['NewPage','Preview','Cut','Copy','Image','Table','HorizontalRule','Iframe','Link','Unlink','Anchor','Paste','PasteText','PasteFromWord','-', 'Scayt'], '/', ['Undo', 'Redo']]">  
+                </pe:ckEditor>
+
+                  </h:panelGrid>
+            <h:outputText value="#{messages['mid']}/#{messages['body']} " />
+
+            <p:commandButton id="savemid" styleClass="buttonMain" update="midOn,updatem"
+                          value="#{messages['Save']} #{messages['As']} #{messages['Preview']}" status="buttonStatus" 
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistMid()}"
+                       rendered="#{!customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>  
+                               			  
+                          			  
+
+            <p:commandButton id="loadtmd" styleClass="buttonMain" 
+                          value="#{messages['Load']} #{messages['Preview']} #{messages['Content']}" status="buttonStatus" update="midOn,homemid"
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.takeContentAction('MID-TOP','','')}"
+                       rendered="#{!customIdentity.hasRole('PH')}"/>
+                        			  
+            <p:commandButton id="loadtmdc" styleClass="buttonMain" 
+                          value="#{messages['Load']} #{messages['Published']} #{messages['Content']}" status="buttonStatus" update="midOn,homemid"
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.takePublishContentAction('MID-TOP','','')}"
+                       rendered="#{!customIdentity.hasRole('PH')}"/>
+
+            <p:commandButton id="updatem" styleClass="buttonMain" 
+                          value="#{messages['Publish']}" status="buttonStatus" update="midOn,homemid"
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistMidC()}"
+                       rendered="#{!customIdentity.hasRole('PH')}">
+                 <p:tooltip id="previwTipm" attached="true" for="updatem" >
+                 <h:outputText value="#{messages.editor} #{messages.preview} #{messages.done}?" />
+                 </p:tooltip>
+            </p:commandButton>
+
+            <ui:remove> logic not working/ not needed                        			  
+            <h:commandButton id="delete" onclick="if (! confirm('Really delete ?') ) { return false;}; return true; "
+                          value="#{messages['delete']}" 
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.removeMid()}"
+                       rendered="#{!customIdentity.hasRole('PH')}"/>
+            </ui:remove> 
+
+            &nbsp;<h:button value="#{messages['done']} "  outcome="/home.xhtml" />
+      <p:panel toggleable="true" toggleableHeader="true" style="width: 60%;background-color:white;"  header="#{messages['More']} #{messages['Edit']} #{messages['options']} " switchType="client" collapsed="#{!customIdentity.hasRole('PH')?true:false}" 
+        leftCollapsedIcon="/img/control_add16.png"  leftExpandedIcon="/img/control_remove16.png">
+               <h:outputText value = "#{messages['Above']} #{messages['Editor']} #{messages['toolbar']} #{messages['has']} #{messages['many']} #{messages['features']} #{messages['including']} #{messages['Image']} #{messages['property']} #{messages['named']} #{messages['Link']}, #{messages['to']} #{messages['allow']} #{messages['clickable']} #{messages['image']}." />
+               <br></br><h:outputText value = "#{messages['Use']} #{messages['Advanced']} #{messages['Tab']} #{messages['to']} #{messages['define']} #{messages['CSS']} #{messages['style']} #{messages['classes']} #{messages['for']} #{messages['special']} #{messages['effects']} " />
+               <br></br><h:outputText value = "#{messages['Examples']}: #{messages['slide']}, #{messages['w3-animate-left']} #{messages['w3-animate-fading']}, #{messages['w3-circle']}. #{messages['check']} #{messages['blog']} / #{messages['tutorial']} #{messages['for']} #{messages['details']} " />
+               <br></br>
+               <br></br><h:outputText value = "#{messages['You ']} #{messages['may']} #{messages['also']} #{messages['load']} #{messages['editor']} #{messages['content']} #{messages['from']} #{messages['Gallery']} #{messages['or']} #{messages['upload']} #{messages['raw']} #{messages['HTML']} #{messages['to']} #{messages['preview']} #{messages['and']} #{messages['then']} #{messages['load']} #{messages['Preview']} #{messages['Content']}" />
+
+            <br></br><p:commandButton id="loadVU"  styleClass="buttonMain"
+                          value="#{messages['Load']} #{messages['YouTube']}/#{messages['Vimeo']} #{messages['samples']} " status="buttonStatus" 
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistTextAndItem('BI-D','sampleM')}" update="gmessagesmidS,homemid" process="@form"
+                       rendered="#{!customIdentity.hasRole('PH')}">  
+            </p:commandButton>
+  
+            <hr></hr>
+
+            <h:link id="Cartc" outcome="/ThemesBrowse.xhtml" value="#{messages['View']} #{messages['Gallery']}"   >
+              &nbsp;<h:graphicImage value="/img/Photos16.png" styleClass="pic"/>
+              <f:param name="themeFrom" value="editHome"/>
+
+            </h:link>
+
+            <p:commandButton id="updateSysl" styleClass="buttonMain" 
+                          value="#{messages['Load']} #{messages['Theme']}" status="buttonStatus" update="midOn,homemid,gmessagesbm" process="@form"
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.takeContentAction('MID-TOP','v',skinBean.previewTh)}"
+                       disabled="#{!yxxxuq1m1xwwqqqxxxxxclobdataHome.wired}"
+                       rendered="true">  
+            </p:commandButton> 
+            &nbsp;<h6 style="color:red;">#{empty skinBean.previewTh?'None Selected':skinBean.previewTh}</h6>
+
+            <br></br>
+            <p:commandButton id="updateSys" styleClass="buttonMain" 
+                          value="#{messages['Save']} #{messages['In']} #{messages['Gallery']}" status="buttonStatus" update="homemid" process="@form"
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistMidAsSystem()}"
+                       disabled="#{!yxxxuq1m1xwwqqqxxxxxclobdataHome.wired}"
+                       rendered="#{customIdentity.masterSite
+                                  and customIdentity.hasRole('PH')}">  
+            </p:commandButton>  
+
+            <h:panelGroup id="gmessagesbm">
+              <p:messages  globalOnly="true" redisplay="false" closable="true"/>
+            </h:panelGroup>
+
+
+            <br></br>
+            <h:link value="#{messages['Upload/Replace']} #{messages['preview(-M)']} #{messages['with']} #{messages['raw']} #{messages['HTML']} #{messages['source']}"  outcome="/clobdataEdit.xhtml" target="_blank"
+              rendered="#{!customIdentity.hasRole('PH') and not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-MID-TOP-M','TXT','0')}">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-MID-TOP-M','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-MID-TOP-M','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
+            </h:link>
+ 
+            <h:link value="#{messages['Upload']} #{messages['raw']} #{messages['HTML']} #{messages['source']}"  outcome="/clobdataEdit.xhtml" target="_blank"
+              rendered="#{!customIdentity.hasRole('PH') and empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-MID-TOP-M','TXT','0') }">
+                <f:param name="fromTable" value="clobdata"/>
+                <f:param name="fromKey" value="3R-MID-TOP-M"/>
+                <f:param name="qualifier" value="TXT"/>
+                <f:param name="useSeq" value="0"/>
+            </h:link>
+
+
+            <h:link value="#{messages['Upload/Replace']} #{messages['preview(-M)']} #{messages['with']} #{messages['raw']} #{messages['HTML']} #{messages['source']}"  outcome="/clobdataEdit.xhtml" target="_blank"
+              rendered="#{customIdentity.hasRole('PH') and customIdentity.hasRole('PH') and not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-MID-TOP-M','TXT','0')}">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-MID-TOP-M','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-MID-TOP-M','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
+            </h:link>
+ 
+            <h:link value="#{messages['Upload']} #{messages['raw']} #{messages['HTML']} #{messages['source']}"  outcome="/clobdataEdit.xhtml" target="_blank"
+              rendered="#{customIdentity.hasRole('PH') and empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-MID-TOP-M','TXT','0') }">
+                <f:param name="fromTable" value="clobdata"/>
+                <f:param name="fromKey" value="3R-MID-TOP-M"/>
+                <f:param name="qualifier" value="TXT"/>
+                <f:param name="useSeq" value="0"/>
+            </h:link>
+      </p:panel>
+ 
+            <h:panelGroup id="gmessagesmid">
+                    <p:messages  globalOnly="true" redisplay="false" closable="true"/>
+            </h:panelGroup>
+
+         </h:panelGroup>
+
+                        <p:messages  globalOnly="true" redisplay="false" closable="true"/>
+
+    <ui:remove>
+     Allow upto 3 graphics top seq 0,1 and FTR seq 0(rendered by if text present why? got removed to be added asis)
+      100% float left or asis centre (future)
+      100%  float centre or asis
+      100% float left or asis
+    </ui:remove>
+
+</h:form>
+</ui:define> 
+</ui:composition>
+

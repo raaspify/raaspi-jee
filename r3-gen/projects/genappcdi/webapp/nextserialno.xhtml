@@ -1,0 +1,97 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="mlrbuq1qxxwwqqhexxxxnextserialnoA0xxuobxbxxxxxxxxxxxsid" value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.mlrbuq1qxxwwqqhexxxxnextserialnoA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewAction action="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.restrict()}" />
+
+</f:metadata>
+                       
+<ui:define name="body">
+    <h:form id="mlrbuq1qxxwwqqhexxxxnextserialnoSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['NextserialnoHelp']!='NextserialnoHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['NextserialnoHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+         <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+    
+    <p:panel>
+        <h:panelGrid columns="10">
+        <f:facet name="header">nextserialno</f:facet>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" switchType="client" collapsede="true"
+     toggleable="true" toggleableHeader="true">
+    <h:panelGrid columns="10">
+            <ui:decorate id="z1xxuxxrbvxxxxxxxxxxcursernoDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Curserno']}</ui:define>
+
+               <h:outputText value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.z1xxuxxrbvxxxxxxxxxxcurserno}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="z2xxuxxrbvxxxxxxxxxxprevsernDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Prevsern']}</ui:define>
+
+               <h:outputText value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.z2xxuxxrbvxxxxxxxxxxprevsern}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="z3xxfxxxbvxxxxxxxxxxis9999Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Is9999']}</ui:define>
+
+               <h:outputText value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.z3xxfxxxbvxxxxxxxxxxis9999}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="z4xxuxxrbvxxxxxxxxxxrefnoDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Refno']}</ui:define>
+
+               <h:outputText value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.z4xxuxxrbvxxxxxxxxxxrefno}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="zaxxutoxlhxxxxxxxxxxownerDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner']}</ui:define>
+
+             <h:outputText value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.instance.zaxxutoxlhxxxxxxxxxxowner}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zzxxu2oxxhxxxxxxxxxxowner2Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner2']}</ui:define>
+
+        </ui:decorate>
+   </h:panelGrid>
+   </p:panel>
+        <div style="clear:both"/>
+    </p:panel>
+    <div class="actionButtons">      
+
+        <h:button outcome="/nextserialnoEdit.xhtml" 
+                    id="edit" 
+                    rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('SH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('IH')||customIdentity.hasRole('IQ') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}"
+                 value="Edit" styleClass="buttonMain"> 
+          <f:param name="from" value="Mlrbuq1qxxwwqqhexxxxnextserialnoList"/>
+          <f:param name="mlrbuq1qxxwwqqhexxxxnextserialnoA0xxuobxbxxxxxxxxxxxsid" value="#{mlrbuq1qxxwwqqhexxxxnextserialnoHome.mlrbuq1qxxwwqqhexxxxnextserialnoA0xxuobxbxxxxxxxxxxxsid}"/>
+        </h:button>
+    </div>
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,1240 @@
+
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="yrxxch5b1xhhxxhxxxxximportcsvA0xxuobxbxxxxxxxxxxxsid" value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="yrxxch5b1xhhxxhxxxxximportcsvFrom" value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvFrom}"/>
+    <f:viewAction action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.restrict()}" />
+    <f:viewAction action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.wire()}" />
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to map #{messages['csv']} #{messages['data']} (#{messages['in']} #{messages['beta']})</ui:define>
+
+<ui:define name="body">
+<h:form id="yrxxch5b1xhhxxhxxxxximportcsv" styleClass="edit">
+<h:outputStylesheet>
+.autoCompleteWidth50 {
+    width:200px !important;
+}
+.rf-fu{
+ display: block; width: 500px;
+ }
+
+  .rf-au-lst-scrl {
+    width:200px !important;
+    height:200px;
+    max-height: 300px;
+    min-height: 100px;
+}
+.rf-fu-btn-cnt-add{
+ display: block; height: 40px;width: 200px;
+ }
+
+.autoCompletePopupHieght {
+    width:200px !important;
+}
+
+.rf-tb {
+    background-color:#{a4jSkin.tableSubHeaderBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+
+}
+.rf-cp-hdr {
+    background-color:#{a4jSkin.additionalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.rf-insp-dec {
+ background-color:white
+}
+.rf-insp-inc {
+ background-color:white
+}
+.rf-edt-c {
+    height: 40px !important;
+}
+.rf-edt-hdr {
+    background-color:#{a4jSkin.generalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!yrxxch5b1xhhxxhxxxxximportcsvHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed}" outcome="/home.xhtml" />
+              <h:outputText value="#{messages['Change']} #{messages['done']}-#{yrxxch5b1xhhxxhxxxxximportcsvHome.getCurrentTime()}"
+                style="color:green;"
+                rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.changeDone}">
+               <f:convertDateTime   type="time" />
+              </h:outputText>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ImportEditHelp']!='ImportEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['CompanyEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+
+            <f:facet name="header">#{messages['Import']} #{messages['data']} #{messages['using']} #{messages['mapping']} </f:facet>
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+         </h:panelGrid>
+
+ <ui:remove>
+        <h:panelGrid columns="12">
+           <ui:decorate id="rowDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Csv']} #{messages['row']} 
+            </ui:define>
+             <h:selectOneMenu styleClass="autoCompleteWidth50" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    disabled="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.a0xxuobxbxxxxxxxxxxxsid !=null?true:false}"
+                    validator="#{yrxxch5b1xhhxxhxxxxximportcsvHome.validateKeyDuplicateRow}" 
+                   value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.a2xxukcxbvxxxxxxxxxxrow}"
+             >   
+
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+               <f:selectItem itemValue="th" itemLabel="table col hdr" />
+               <f:selectItem itemValue="01" itemLabel="01" />
+               <f:selectItem itemValue="02" itemLabel="02" />
+               <f:selectItem itemValue="03" itemLabel="03" />
+               <f:selectItem itemValue="04" itemLabel="04" />
+               <f:selectItem itemValue="05" itemLabel="05" />
+               <f:selectItem itemValue="06" itemLabel="06" />
+               <f:selectItem itemValue="07" itemLabel="07" />
+               <f:selectItem itemValue="08" itemLabel="08" />
+               <f:selectItem itemValue="09" itemLabel="09" />
+               <f:selectItem itemValue="10" itemLabel="10" />
+               <f:selectItem itemValue="11" itemLabel="11" />
+               <f:selectItem itemValue="12" itemLabel="12" />
+               <f:selectItem itemValue="13" itemLabel="13" />
+               <f:selectItem itemValue="14" itemLabel="14" />
+               <f:selectItem itemValue="15" itemLabel="15" />
+               <f:selectItem itemValue="16" itemLabel="16" />
+               <f:selectItem itemValue="17" itemLabel="17" />
+               <f:selectItem itemValue="18" itemLabel="18" />
+               <f:selectItem itemValue="19" itemLabel="19" />
+               <f:selectItem itemValue="20" itemLabel="20" />
+               <f:selectItem itemValue="21" itemLabel="21" />
+               <f:selectItem itemValue="22" itemLabel="22" />
+               <f:selectItem itemValue="23" itemLabel="23" />
+               <f:selectItem itemValue="24" itemLabel="24" />
+               <f:selectItem itemValue="25" itemLabel="25" />
+               <f:selectItem itemValue="26" itemLabel="26" />
+               <f:selectItem itemValue="27" itemLabel="27" />
+               <f:selectItem itemValue="28" itemLabel="28" />
+               <f:selectItem itemValue="29" itemLabel="28" />
+               <f:selectItem itemValue="30" itemLabel="30" />
+               <f:selectItem itemValue="31" itemLabel="31" />
+               <f:selectItem itemValue="32" itemLabel="32" />
+               <f:selectItem itemValue="33" itemLabel="33" />
+               <f:selectItem itemValue="34" itemLabel="34" />
+               <f:selectItem itemValue="35" itemLabel="35" />
+               <f:selectItem itemValue="36" itemLabel="36" />
+               <f:selectItem itemValue="37" itemLabel="37" />
+               <f:selectItem itemValue="38" itemLabel="38" />
+               <f:selectItem itemValue="39" itemLabel="39" />
+               <f:selectItem itemValue="40" itemLabel="40" />
+               <f:selectItem itemValue="41" itemLabel="41" />
+               <f:selectItem itemValue="42" itemLabel="42" />
+               <f:selectItem itemValue="43" itemLabel="43" />
+               <f:selectItem itemValue="44" itemLabel="44" />
+               <f:selectItem itemValue="45" itemLabel="45" />
+               <f:selectItem itemValue="46" itemLabel="46" />
+               <f:selectItem itemValue="47" itemLabel="47" />
+               <f:selectItem itemValue="48" itemLabel="48" />
+               <f:selectItem itemValue="49" itemLabel="49" />
+               <f:selectItem itemValue="50" itemLabel="50" />
+             </h:selectOneMenu>
+           </ui:decorate>
+
+           <ui:decorate id="importDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Column']} #{messages['number']} 
+            </ui:define>
+             <h:selectOneMenu styleClass="autoCompleteWidth50" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{yrxxch5b1xhhxxhxxxxximportcsvHome.validateKeyDuplicateRow}" 
+                   value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.mailingText5}"
+             >   
+              <p:ajax  render="importDecorationT" bypassUpdates="false"/>
+
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+               <f:selectItem itemValue="01" itemLabel="01" />
+               <f:selectItem itemValue="02" itemLabel="02" />
+               <f:selectItem itemValue="03" itemLabel="03" />
+               <f:selectItem itemValue="04" itemLabel="04" />
+               <f:selectItem itemValue="05" itemLabel="05" />
+               <f:selectItem itemValue="06" itemLabel="06" />
+               <f:selectItem itemValue="07" itemLabel="07" />
+               <f:selectItem itemValue="08" itemLabel="08" />
+               <f:selectItem itemValue="09" itemLabel="09" />
+               <f:selectItem itemValue="10" itemLabel="10" />
+               <f:selectItem itemValue="11" itemLabel="11" />
+               <f:selectItem itemValue="12" itemLabel="12" />
+               <f:selectItem itemValue="13" itemLabel="13" />
+               <f:selectItem itemValue="14" itemLabel="14" />
+               <f:selectItem itemValue="15" itemLabel="15" />
+               <f:selectItem itemValue="16" itemLabel="16" />
+               <f:selectItem itemValue="17" itemLabel="17" />
+               <f:selectItem itemValue="18" itemLabel="18" />
+               <f:selectItem itemValue="19" itemLabel="19" />
+               <f:selectItem itemValue="20" itemLabel="20" />
+               <f:selectItem itemValue="21" itemLabel="21" />
+               <f:selectItem itemValue="22" itemLabel="22" />
+               <f:selectItem itemValue="23" itemLabel="23" />
+               <f:selectItem itemValue="24" itemLabel="24" />
+               <f:selectItem itemValue="25" itemLabel="25" />
+               <f:selectItem itemValue="26" itemLabel="26" />
+               <f:selectItem itemValue="27" itemLabel="27" />
+               <f:selectItem itemValue="28" itemLabel="28" />
+               <f:selectItem itemValue="29" itemLabel="28" />
+               <f:selectItem itemValue="30" itemLabel="30" />
+               <f:selectItem itemValue="31" itemLabel="31" />
+               <f:selectItem itemValue="32" itemLabel="32" />
+               <f:selectItem itemValue="33" itemLabel="33" />
+               <f:selectItem itemValue="34" itemLabel="34" />
+               <f:selectItem itemValue="35" itemLabel="35" />
+               <f:selectItem itemValue="36" itemLabel="36" />
+               <f:selectItem itemValue="37" itemLabel="37" />
+               <f:selectItem itemValue="38" itemLabel="38" />
+               <f:selectItem itemValue="39" itemLabel="39" />
+               <f:selectItem itemValue="40" itemLabel="40" />
+               <f:selectItem itemValue="41" itemLabel="41" />
+               <f:selectItem itemValue="42" itemLabel="42" />
+               <f:selectItem itemValue="43" itemLabel="43" />
+               <f:selectItem itemValue="44" itemLabel="44" />
+               <f:selectItem itemValue="45" itemLabel="45" />
+               <f:selectItem itemValue="46" itemLabel="46" />
+               <f:selectItem itemValue="47" itemLabel="47" />
+               <f:selectItem itemValue="48" itemLabel="48" />
+               <f:selectItem itemValue="49" itemLabel="49" />
+               <f:selectItem itemValue="50" itemLabel="50" />
+             </h:selectOneMenu>
+           </ui:decorate>
+
+</h:panelGrid>
+</ui:remove>
+             <br/> 
+
+
+        <h:panelGrid columns="18">
+
+
+          <h:outputText value="" />
+           <ui:decorate id="statusDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Select']} #{messages['Map']} #{messages['for']} 
+            </ui:define>
+             <h:selectOneMenu styleClass="autoCompleteWidth50" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                   value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.mailingText2}"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+ 	       <f:selectItems value="#{yxxxch5a1xhhxxhxxxxxtruefalseList.getClassNames('import')}"   /> 
+
+             </h:selectOneMenu>
+           </ui:decorate>
+
+
+
+
+
+
+
+
+            <h:panelGroup id="b6xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b6xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+
+      </h:outputLabel>
+         <h:inputText id="b6xxutoxlhxxxxxxxxxxowner" 
+
+                           size="20"
+                      maxlength="40"
+
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.b6xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+   </h:panelGrid>
+
+
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail, nov20 2018 added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       may07 2018 allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+           <ui:remove>         
+            <p:commandButton id="map" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Create']}/#{messages['Rebuild']} #{messages['CSV']} #{messages['Mapping']}" status="buttonStatus" render="@form"
+                         action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.mapCsvToPojo('customer','csv',1,4096000)}"
+                       rendered="true"/>
+           </ui:remove>                       			  
+
+            <p:commandButton id="mapU" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Import']} #{messages['using']} #{messages['mapping']}" status="buttonStatus" render="@form"
+                         action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.importUsingMapping(yrxxch5b1xhhxxhxxxxximportcsvHome.mailingText2)}"
+                       rendered="true"/>
+
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" render="@form"
+                         action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.update()}"
+                       rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed and yrxxch5b1xhhxxhxxxxximportcsvHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.remove()}"
+                       rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed and !yrxxch5b1xhhxxhxxxxximportcsvHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/importcsvEdit.xhtml"
+                       rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed}"/>
+                 
+
+            <p:hotKey  onkeydown="#{p:element('save')}.click();return false;" preventDefault="true" enabledInInput="true" key="return">
+            </p:hotKey>
+            <p:hotKey  onkeydown="#{p:element('update')}.click();return false;" preventDefault="true" enabledInInput="true" key="ctrl+u">
+            </p:hotKey>
+
+
+
+
+            <f:param name="reportName" value="#yrxxch5b1xhhxxhxxxxximportcsvList.reportName}"/>
+            <f:param name="displayAs" value="#yrxxch5b1xhhxxhxxxxximportcsvList.displayAs}" /> 
+            <h:button outcome="/importcsvList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Csv']} #{messages['rows']}">
+            </h:button>    
+
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvFrom ? 'home' : yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvFrom}.xhtml"
+
+                rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed or yrxxch5b1xhhxxhxxxxximportcsvHome.entityDeleted}"/>
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvFrom ? 'home' : yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvFrom}.xhtml"
+                rendered="#{!yrxxch5b1xhhxxhxxxxximportcsvHome.managed and !yrxxch5b1xhhxxhxxxxximportcsvHome.entityDeleted}"/>
+    <br></br><br></br>
+    <p:extendedDataTable id="yrxxch5b1xhhxxhxxxxximportcsvList"  frozenColumns="2"
+           var="_yrxxch5b1xhhxxhxxxxximportcsv" rowKeyVar="rv"
+           value="#{yrxxch5b1xhhxxhxxxxximportcsvList.getSuggestList(yrxxch5b1xhhxxhxxxxximportcsvHome.mailingText2)}"
+           rendered="#{not empty yrxxch5b1xhhxxhxxxxximportcsvList.getSuggestList(yrxxch5b1xhhxxhxxxxximportcsvHome.mailingText2)}">
+     <!-- all a0xxuobxbxxxxxxxxxxxsid  N  5b-->
+     <!-- hide a0xxuobxbxxxxxxxxxxxsid  N  5b-->
+
+     <!-- all a1xxuxhrbvoxxxxxxxxxtablenm  N  5b-->
+           <h:column rendered="#{!yrxxch5b1xhhxxhxxxxximportcsvList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Tablenm']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.a1xxuxhrbvoxxxxxxxxxtablenm"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(a1xxuxhrbvoxxxxxxxxxtablenm) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.a1xxuxhrbvoxxxxxxxxxtablenm}"  id="a1xxuxhrbvoxxxxxxxxxtablenm" />
+        </h:column>
+     <!-- all a2xxukcxbvxxxxxxxxxxrow  N  5b-->
+           <h:column rendered="#{!yrxxch5b1xhhxxhxxxxximportcsvList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Row']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.a2xxukcxbvxxxxxxxxxxrow"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(a2xxukcxbvxxxxxxxxxxrow) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.a2xxukcxbvxxxxxxxxxxrow}"  id="a2xxukcxbvxxxxxxxxxxrow" />
+        </h:column>
+     <!-- all b1xxuo01bvxxxxxxxxxxcolumn01  N  5b-->
+           <h:column rendered="#{!yrxxch5b1xhhxxhxxxxximportcsvList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column01']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.b1xxuo01bvxxxxxxxxxxcolumn01"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(b1xxuo01bvxxxxxxxxxxcolumn01) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.b1xxuo01bvxxxxxxxxxxcolumn01}"  id="b1xxuo01bvxxxxxxxxxxcolumn01" />
+        </h:column>
+     <!-- all b4xxuo02bvxxxxxxxxxxcolumn02  N  5b-->
+           <h:column rendered="#{!yrxxch5b1xhhxxhxxxxximportcsvList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column02']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.b4xxuo02bvxxxxxxxxxxcolumn02"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(b4xxuo02bvxxxxxxxxxxcolumn02) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.b4xxuo02bvxxxxxxxxxxcolumn02}"  id="b4xxuo02bvxxxxxxxxxxcolumn02" />
+        </h:column>
+     <!-- all b7xxuo03bvxxxxxxxxxxcolumn03  N  5b-->
+           <h:column rendered="#{!yrxxch5b1xhhxxhxxxxximportcsvList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column03']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.b7xxuo03bvxxxxxxxxxxcolumn03"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(b7xxuo03bvxxxxxxxxxxcolumn03) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.b7xxuo03bvxxxxxxxxxxcolumn03}"  id="b7xxuo03bvxxxxxxxxxxcolumn03" />
+        </h:column>
+     <!-- all c1xxuo04bvxxxxxxxxxxcolumn04  N  5b-->
+           <h:column rendered="#{!yrxxch5b1xhhxxhxxxxximportcsvList.skipColumns}">
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column04']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.c1xxuo04bvxxxxxxxxxxcolumn04"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(c1xxuo04bvxxxxxxxxxxcolumn04) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.c1xxuo04bvxxxxxxxxxxcolumn04}"  id="c1xxuo04bvxxxxxxxxxxcolumn04" />
+        </h:column>
+     <!-- all c4xxuo05bvxxxxxxxxxxcolumn05  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column05']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.c4xxuo05bvxxxxxxxxxxcolumn05"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(c4xxuo05bvxxxxxxxxxxcolumn05) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.c4xxuo05bvxxxxxxxxxxcolumn05}"  id="c4xxuo05bvxxxxxxxxxxcolumn05" />
+        </h:column>
+     <!-- all c7xxuo06bvxxxxxxxxxxcolumn06  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column06']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.c7xxuo06bvxxxxxxxxxxcolumn06"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(c7xxuo06bvxxxxxxxxxxcolumn06) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.c7xxuo06bvxxxxxxxxxxcolumn06}"  id="c7xxuo06bvxxxxxxxxxxcolumn06" />
+        </h:column>
+     <!-- all d1xxuo07bvxxxxxxxxxxcolumn07  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column07']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.d1xxuo07bvxxxxxxxxxxcolumn07"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(d1xxuo07bvxxxxxxxxxxcolumn07) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.d1xxuo07bvxxxxxxxxxxcolumn07}"  id="d1xxuo07bvxxxxxxxxxxcolumn07" />
+        </h:column>
+     <!-- all d4xxuo08bvxxxxxxxxxxcolumn08  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column08']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.d4xxuo08bvxxxxxxxxxxcolumn08"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(d4xxuo08bvxxxxxxxxxxcolumn08) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.d4xxuo08bvxxxxxxxxxxcolumn08}"  id="d4xxuo08bvxxxxxxxxxxcolumn08" />
+        </h:column>
+     <!-- all d7xxuo09bvxxxxxxxxxxcolumn09  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column09']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.d7xxuo09bvxxxxxxxxxxcolumn09"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(d7xxuo09bvxxxxxxxxxxcolumn09) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.d7xxuo09bvxxxxxxxxxxcolumn09}"  id="d7xxuo09bvxxxxxxxxxxcolumn09" />
+        </h:column>
+     <!-- all e1xxuo10bvxxxxxxxxxxcolumn10  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column10']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.e1xxuo10bvxxxxxxxxxxcolumn10"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(e1xxuo10bvxxxxxxxxxxcolumn10) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.e1xxuo10bvxxxxxxxxxxcolumn10}"  id="e1xxuo10bvxxxxxxxxxxcolumn10" />
+        </h:column>
+     <!-- all e4xxuo11bvxxxxxxxxxxcolumn11  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column11']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.e4xxuo11bvxxxxxxxxxxcolumn11"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(e4xxuo11bvxxxxxxxxxxcolumn11) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.e4xxuo11bvxxxxxxxxxxcolumn11}"  id="e4xxuo11bvxxxxxxxxxxcolumn11" />
+        </h:column>
+     <!-- all e7xxuo12bvxxxxxxxxxxcolumn12  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column12']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.e7xxuo12bvxxxxxxxxxxcolumn12"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(e7xxuo12bvxxxxxxxxxxcolumn12) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.e7xxuo12bvxxxxxxxxxxcolumn12}"  id="e7xxuo12bvxxxxxxxxxxcolumn12" />
+        </h:column>
+     <!-- all f1xxuo13bvxxxxxxxxxxcolumn13  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column13']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.f1xxuo13bvxxxxxxxxxxcolumn13"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(f1xxuo13bvxxxxxxxxxxcolumn13) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.f1xxuo13bvxxxxxxxxxxcolumn13}"  id="f1xxuo13bvxxxxxxxxxxcolumn13" />
+        </h:column>
+     <!-- all f4xxuo14bvxxxxxxxxxxcolumn14  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column14']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.f4xxuo14bvxxxxxxxxxxcolumn14"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(f4xxuo14bvxxxxxxxxxxcolumn14) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.f4xxuo14bvxxxxxxxxxxcolumn14}"  id="f4xxuo14bvxxxxxxxxxxcolumn14" />
+        </h:column>
+     <!-- all f7xxuo15bvxxxxxxxxxxcolumn15  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column15']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.f7xxuo15bvxxxxxxxxxxcolumn15"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(f7xxuo15bvxxxxxxxxxxcolumn15) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.f7xxuo15bvxxxxxxxxxxcolumn15}"  id="f7xxuo15bvxxxxxxxxxxcolumn15" />
+        </h:column>
+     <!-- all g1xxuo16bvxxxxxxxxxxcolumn16  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column16']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.g1xxuo16bvxxxxxxxxxxcolumn16"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(g1xxuo16bvxxxxxxxxxxcolumn16) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.g1xxuo16bvxxxxxxxxxxcolumn16}"  id="g1xxuo16bvxxxxxxxxxxcolumn16" />
+        </h:column>
+     <!-- all g4xxuo17bvxxxxxxxxxxcolumn17  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column17']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.g4xxuo17bvxxxxxxxxxxcolumn17"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(g4xxuo17bvxxxxxxxxxxcolumn17) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.g4xxuo17bvxxxxxxxxxxcolumn17}"  id="g4xxuo17bvxxxxxxxxxxcolumn17" />
+        </h:column>
+     <!-- all g7xxuo18bvxxxxxxxxxxcolumn18  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column18']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.g7xxuo18bvxxxxxxxxxxcolumn18"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(g7xxuo18bvxxxxxxxxxxcolumn18) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.g7xxuo18bvxxxxxxxxxxcolumn18}"  id="g7xxuo18bvxxxxxxxxxxcolumn18" />
+        </h:column>
+     <!-- all h1xxuo19bvxxxxxxxxxxcolumn19  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column19']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.h1xxuo19bvxxxxxxxxxxcolumn19"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(h1xxuo19bvxxxxxxxxxxcolumn19) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.h1xxuo19bvxxxxxxxxxxcolumn19}"  id="h1xxuo19bvxxxxxxxxxxcolumn19" />
+        </h:column>
+     <!-- all h4xxuo20bvxxxxxxxxxxcolumn20  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column20']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.h4xxuo20bvxxxxxxxxxxcolumn20"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(h4xxuo20bvxxxxxxxxxxcolumn20) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.h4xxuo20bvxxxxxxxxxxcolumn20}"  id="h4xxuo20bvxxxxxxxxxxcolumn20" />
+        </h:column>
+     <!-- all h7xxuo21bvxxxxxxxxxxcolumn21  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column21']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.h7xxuo21bvxxxxxxxxxxcolumn21"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(h7xxuo21bvxxxxxxxxxxcolumn21) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.h7xxuo21bvxxxxxxxxxxcolumn21}"  id="h7xxuo21bvxxxxxxxxxxcolumn21" />
+        </h:column>
+     <!-- all i1xxuo22bvxxxxxxxxxxcolumn22  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column22']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.i1xxuo22bvxxxxxxxxxxcolumn22"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(i1xxuo22bvxxxxxxxxxxcolumn22) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.i1xxuo22bvxxxxxxxxxxcolumn22}"  id="i1xxuo22bvxxxxxxxxxxcolumn22" />
+        </h:column>
+     <!-- all i4xxuo23bvxxxxxxxxxxcolumn23  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column23']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.i4xxuo23bvxxxxxxxxxxcolumn23"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(i4xxuo23bvxxxxxxxxxxcolumn23) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.i4xxuo23bvxxxxxxxxxxcolumn23}"  id="i4xxuo23bvxxxxxxxxxxcolumn23" />
+        </h:column>
+     <!-- all i7xxuo24bvxxxxxxxxxxcolumn24  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column24']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.i7xxuo24bvxxxxxxxxxxcolumn24"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(i7xxuo24bvxxxxxxxxxxcolumn24) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.i7xxuo24bvxxxxxxxxxxcolumn24}"  id="i7xxuo24bvxxxxxxxxxxcolumn24" />
+        </h:column>
+     <!-- all j1xxuo25bvxxxxxxxxxxcolumn25  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column25']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.j1xxuo25bvxxxxxxxxxxcolumn25"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(j1xxuo25bvxxxxxxxxxxcolumn25) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.j1xxuo25bvxxxxxxxxxxcolumn25}"  id="j1xxuo25bvxxxxxxxxxxcolumn25" />
+        </h:column>
+     <!-- all j4xxuo26bvxxxxxxxxxxcolumn26  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column26']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.j4xxuo26bvxxxxxxxxxxcolumn26"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(j4xxuo26bvxxxxxxxxxxcolumn26) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.j4xxuo26bvxxxxxxxxxxcolumn26}"  id="j4xxuo26bvxxxxxxxxxxcolumn26" />
+        </h:column>
+     <!-- all j7xxuo27bvxxxxxxxxxxcolumn27  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column27']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.j7xxuo27bvxxxxxxxxxxcolumn27"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(j7xxuo27bvxxxxxxxxxxcolumn27) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.j7xxuo27bvxxxxxxxxxxcolumn27}"  id="j7xxuo27bvxxxxxxxxxxcolumn27" />
+        </h:column>
+     <!-- all k1xxuo28bvxxxxxxxxxxcolumn28  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column28']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.k1xxuo28bvxxxxxxxxxxcolumn28"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(k1xxuo28bvxxxxxxxxxxcolumn28) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.k1xxuo28bvxxxxxxxxxxcolumn28}"  id="k1xxuo28bvxxxxxxxxxxcolumn28" />
+        </h:column>
+     <!-- all k4xxuo29bvxxxxxxxxxxcolumn29  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column29']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.k4xxuo29bvxxxxxxxxxxcolumn29"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(k4xxuo29bvxxxxxxxxxxcolumn29) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.k4xxuo29bvxxxxxxxxxxcolumn29}"  id="k4xxuo29bvxxxxxxxxxxcolumn29" />
+        </h:column>
+     <!-- all k7xxuo30bvxxxxxxxxxxcolumn30  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column30']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.k7xxuo30bvxxxxxxxxxxcolumn30"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(k7xxuo30bvxxxxxxxxxxcolumn30) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.k7xxuo30bvxxxxxxxxxxcolumn30}"  id="k7xxuo30bvxxxxxxxxxxcolumn30" />
+        </h:column>
+     <!-- all l1xxuo31bvxxxxxxxxxxcolumn31  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column31']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.l1xxuo31bvxxxxxxxxxxcolumn31"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(l1xxuo31bvxxxxxxxxxxcolumn31) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.l1xxuo31bvxxxxxxxxxxcolumn31}"  id="l1xxuo31bvxxxxxxxxxxcolumn31" />
+        </h:column>
+     <!-- all l4xxuo32bvxxxxxxxxxxcolumn32  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column32']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.l4xxuo32bvxxxxxxxxxxcolumn32"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(l4xxuo32bvxxxxxxxxxxcolumn32) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.l4xxuo32bvxxxxxxxxxxcolumn32}"  id="l4xxuo32bvxxxxxxxxxxcolumn32" />
+        </h:column>
+     <!-- all l7xxuo33bvxxxxxxxxxxcolumn33  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column33']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.l7xxuo33bvxxxxxxxxxxcolumn33"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(l7xxuo33bvxxxxxxxxxxcolumn33) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.l7xxuo33bvxxxxxxxxxxcolumn33}"  id="l7xxuo33bvxxxxxxxxxxcolumn33" />
+        </h:column>
+     <!-- all m1xxuo34bvxxxxxxxxxxcolumn34  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column34']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.m1xxuo34bvxxxxxxxxxxcolumn34"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(m1xxuo34bvxxxxxxxxxxcolumn34) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.m1xxuo34bvxxxxxxxxxxcolumn34}"  id="m1xxuo34bvxxxxxxxxxxcolumn34" />
+        </h:column>
+     <!-- all m4xxuo35bvxxxxxxxxxxcolumn35  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column35']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.m4xxuo35bvxxxxxxxxxxcolumn35"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(m4xxuo35bvxxxxxxxxxxcolumn35) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.m4xxuo35bvxxxxxxxxxxcolumn35}"  id="m4xxuo35bvxxxxxxxxxxcolumn35" />
+        </h:column>
+     <!-- all m7xxuo36bvxxxxxxxxxxcolumn36  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column36']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.m7xxuo36bvxxxxxxxxxxcolumn36"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(m7xxuo36bvxxxxxxxxxxcolumn36) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.m7xxuo36bvxxxxxxxxxxcolumn36}"  id="m7xxuo36bvxxxxxxxxxxcolumn36" />
+        </h:column>
+     <!-- all n1xxuo37bvxxxxxxxxxxcolumn37  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column37']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.n1xxuo37bvxxxxxxxxxxcolumn37"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(n1xxuo37bvxxxxxxxxxxcolumn37) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.n1xxuo37bvxxxxxxxxxxcolumn37}"  id="n1xxuo37bvxxxxxxxxxxcolumn37" />
+        </h:column>
+     <!-- all n4xxuo38bvxxxxxxxxxxcolumn38  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column38']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.n4xxuo38bvxxxxxxxxxxcolumn38"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(n4xxuo38bvxxxxxxxxxxcolumn38) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.n4xxuo38bvxxxxxxxxxxcolumn38}"  id="n4xxuo38bvxxxxxxxxxxcolumn38" />
+        </h:column>
+     <!-- all n7xxuo39bvxxxxxxxxxxcolumn39  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column39']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.n7xxuo39bvxxxxxxxxxxcolumn39"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(n7xxuo39bvxxxxxxxxxxcolumn39) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.n7xxuo39bvxxxxxxxxxxcolumn39}"  id="n7xxuo39bvxxxxxxxxxxcolumn39" />
+        </h:column>
+     <!-- all o1xxuo40bvxxxxxxxxxxcolumn40  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column40']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.o1xxuo40bvxxxxxxxxxxcolumn40"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(o1xxuo40bvxxxxxxxxxxcolumn40) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.o1xxuo40bvxxxxxxxxxxcolumn40}"  id="o1xxuo40bvxxxxxxxxxxcolumn40" />
+        </h:column>
+     <!-- all o4xxuo41bvxxxxxxxxxxcolumn41  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column41']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.o4xxuo41bvxxxxxxxxxxcolumn41"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(o4xxuo41bvxxxxxxxxxxcolumn41) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.o4xxuo41bvxxxxxxxxxxcolumn41}"  id="o4xxuo41bvxxxxxxxxxxcolumn41" />
+        </h:column>
+     <!-- all o7xxuo42bvxxxxxxxxxxcolumn42  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column42']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.o7xxuo42bvxxxxxxxxxxcolumn42"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(o7xxuo42bvxxxxxxxxxxcolumn42) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.o7xxuo42bvxxxxxxxxxxcolumn42}"  id="o7xxuo42bvxxxxxxxxxxcolumn42" />
+        </h:column>
+     <!-- all p1xxuo43bvxxxxxxxxxxcolumn43  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column43']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.p1xxuo43bvxxxxxxxxxxcolumn43"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(p1xxuo43bvxxxxxxxxxxcolumn43) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.p1xxuo43bvxxxxxxxxxxcolumn43}"  id="p1xxuo43bvxxxxxxxxxxcolumn43" />
+        </h:column>
+     <!-- all p4xxuo44bvxxxxxxxxxxcolumn44  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column44']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.p4xxuo44bvxxxxxxxxxxcolumn44"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(p4xxuo44bvxxxxxxxxxxcolumn44) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.p4xxuo44bvxxxxxxxxxxcolumn44}"  id="p4xxuo44bvxxxxxxxxxxcolumn44" />
+        </h:column>
+     <!-- all p7xxuo45bvxxxxxxxxxxcolumn45  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column45']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.p7xxuo45bvxxxxxxxxxxcolumn45"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(p7xxuo45bvxxxxxxxxxxcolumn45) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.p7xxuo45bvxxxxxxxxxxcolumn45}"  id="p7xxuo45bvxxxxxxxxxxcolumn45" />
+        </h:column>
+     <!-- all q1xxuo46bvxxxxxxxxxxcolumn46  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column46']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.q1xxuo46bvxxxxxxxxxxcolumn46"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(q1xxuo46bvxxxxxxxxxxcolumn46) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.q1xxuo46bvxxxxxxxxxxcolumn46}"  id="q1xxuo46bvxxxxxxxxxxcolumn46" />
+        </h:column>
+     <!-- all q4xxuo47bvxxxxxxxxxxcolumn47  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column47']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.q4xxuo47bvxxxxxxxxxxcolumn47"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(q4xxuo47bvxxxxxxxxxxcolumn47) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.q4xxuo47bvxxxxxxxxxxcolumn47}"  id="q4xxuo47bvxxxxxxxxxxcolumn47" />
+        </h:column>
+     <!-- all q7xxuo48bvxxxxxxxxxxcolumn48  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column48']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.q7xxuo48bvxxxxxxxxxxcolumn48"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(q7xxuo48bvxxxxxxxxxxcolumn48) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.q7xxuo48bvxxxxxxxxxxcolumn48}"  id="q7xxuo48bvxxxxxxxxxxcolumn48" />
+        </h:column>
+     <!-- all r1xxuo49bvxxxxxxxxxxcolumn49  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column49']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.r1xxuo49bvxxxxxxxxxxcolumn49"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(r1xxuo49bvxxxxxxxxxxcolumn49) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.r1xxuo49bvxxxxxxxxxxcolumn49}"  id="r1xxuo49bvxxxxxxxxxxcolumn49" />
+        </h:column>
+     <!-- all r4xxuo50bvxxxxxxxxxxcolumn50  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column50']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.r4xxuo50bvxxxxxxxxxxcolumn50"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(r4xxuo50bvxxxxxxxxxxcolumn50) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.r4xxuo50bvxxxxxxxxxxcolumn50}"  id="r4xxuo50bvxxxxxxxxxxcolumn50" />
+        </h:column>
+     <!-- all r7xxuo51bvxxxxxxxxxxcolumn51  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column51']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.r7xxuo51bvxxxxxxxxxxcolumn51"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(r7xxuo51bvxxxxxxxxxxcolumn51) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.r7xxuo51bvxxxxxxxxxxcolumn51}"  id="r7xxuo51bvxxxxxxxxxxcolumn51" />
+        </h:column>
+     <!-- all s1xxuo52bvxxxxxxxxxxcolumn52  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column52']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.s1xxuo52bvxxxxxxxxxxcolumn52"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(s1xxuo52bvxxxxxxxxxxcolumn52) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.s1xxuo52bvxxxxxxxxxxcolumn52}"  id="s1xxuo52bvxxxxxxxxxxcolumn52" />
+        </h:column>
+     <!-- all s4xxuo53bvxxxxxxxxxxcolumn53  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column53']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.s4xxuo53bvxxxxxxxxxxcolumn53"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(s4xxuo53bvxxxxxxxxxxcolumn53) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.s4xxuo53bvxxxxxxxxxxcolumn53}"  id="s4xxuo53bvxxxxxxxxxxcolumn53" />
+        </h:column>
+     <!-- all s7xxuo54bvxxxxxxxxxxcolumn54  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column54']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.s7xxuo54bvxxxxxxxxxxcolumn54"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(s7xxuo54bvxxxxxxxxxxcolumn54) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.s7xxuo54bvxxxxxxxxxxcolumn54}"  id="s7xxuo54bvxxxxxxxxxxcolumn54" />
+        </h:column>
+     <!-- all t1xxuo55bvxxxxxxxxxxcolumn55  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column55']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.t1xxuo55bvxxxxxxxxxxcolumn55"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(t1xxuo55bvxxxxxxxxxxcolumn55) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.t1xxuo55bvxxxxxxxxxxcolumn55}"  id="t1xxuo55bvxxxxxxxxxxcolumn55" />
+        </h:column>
+     <!-- all t4xxuo56bvxxxxxxxxxxcolumn56  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Column56']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.t4xxuo56bvxxxxxxxxxxcolumn56"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(t4xxuo56bvxxxxxxxxxxcolumn56) java.lang.String IO    -->
+               <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.t4xxuo56bvxxxxxxxxxxcolumn56}"  id="t4xxuo56bvxxxxxxxxxxcolumn56" />
+        </h:column>
+     <!-- all y9xxuznxbvxxxxxxxxxxnotes  N  5b-->
+     <!-- hide y9xxuznxbvxxxxxxxxxxnotes  N  5b-->
+
+     <!-- all z1xxzzfxhhxxxxxxxxxxstatusfl  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Statusfl']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.z1xxzzfxhhxxxxxxxxxxstatusfl"/>
+                </ui:include>
+            </f:facet>
+              <h:outputText value="#{_yrxxch5b1xhhxxhxxxxximportcsv.z1xxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(_yrxxch5b1xhhxxhxxxxximportcsv.z1xxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(_yrxxch5b1xhhxxhxxxxximportcsv.z1xxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid/waiting approval':( _yrxxch5b1xhhxxhxxxxximportcsv.z1xxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped/approved': (_yrxxch5b1xhhxxhxxxxximportcsv.z1xxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced/final approved':'new/other'))))}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl" />
+        </h:column>
+     <!-- all z2xxcztxlxxxxxxxxxxxstatusfldt  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Statusfldt']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.z2xxcztxlxxxxxxxxxxxstatusfldt"/>
+                </ui:include>
+            </f:facet>
+              <h:outputText value="#{_yrxxch5b1xhhxxhxxxxximportcsv.z2xxcztxlxxxxxxxxxxxstatusfldt}"  id="statusfldt" >
+               <f:convertDateTime pattern="dd/MM/yy h:mm:s z"/>
+              </h:outputText>
+        </h:column>
+     <!-- all z3xxutoxlhxxxxxxxxxxowner  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Owner']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.z3xxutoxlhxxxxxxxxxxowner"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(z3xxutoxlhxxxxxxxxxxowner) java.lang.String IO    -->
+                <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.z3xxutoxlhxxxxxxxxxxowner}"  id="z3xxutoxlhxxxxxxxxxxowner" rendered="true"/>
+        </h:column>
+     <!-- all zzxxu2oxxhxxxxxxxxxxowner2  N  5b-->
+         <h:column >
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{yrxxch5b1xhhxxhxxxxximportcsvList}"/>
+                      <ui:param name="propertyLabel" value="#{messages['Owner2']}"/>
+
+                    <ui:param name="propertyPath" value="yrxxch5b1xhhxxhxxxxximportcsv.zzxxu2oxxhxxxxxxxxxxowner2"/>
+                </ui:include>
+            </f:facet>
+ <!-- jay org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO    -->
+                <h:inputText readonly="true"  value="#{_yrxxch5b1xhhxxhxxxxximportcsv.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+        </h:column>
+        <p:column styleClass="action">
+            <f:facet name="header">Action</f:facet>
+            #{' '}
+            <h:link outcome="/importcsvEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="yrxxch5b1xhhxxhxxxxximportcsvEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="yrxxch5b1xhhxxhxxxxximportcsvA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_yrxxch5b1xhhxxhxxxxximportcsv.a0xxuobxbxxxxxxxxxxxsid}"/>
+
+            </h:link>
+            #{' '}
+        </p:column>
+    </p:extendedDataTable>
+
+
+
+
+
+
+</div>
+</p:panel>
+       <p:messages ajaxRendered="true"  />
+
+
+<p:panel>
+
+
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

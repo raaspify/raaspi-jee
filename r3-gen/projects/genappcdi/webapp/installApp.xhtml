@@ -1,0 +1,76 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:fb="http://www.facebook.com/2008/fbml"
+                template="layout/rtemplate.xhtml">
+<ui:remove> cloned from signup.xhtml.ftl 
+ raaspiBackOffice app in shopify has https://www.raaspi.com/installApp.wflow as App URL ie to install by merchant
+ and same url as whitelisted url to come back to after install.
+ both call r3RestClient.installOrAuthorize method via this page viewAction
+ pass 1 if parameter code (accessToken) is null, method sends back with oAuth credentials and scope for authentication 
+ pass 2 ie accessToken then create new site etc
+ anyone can install unpublished app using where shop=is the store url
+ https://www.raaspi.com/installApp.wflow?shop=mystore.myshopify.com
+ 
+</ui:remove>
+
+
+<ui:define name="body">
+    <h:messages globalOnly="true" styleClass="message"/>
+   
+ <h:form id="installApp">
+<h:outputStylesheet>
+
+</h:outputStylesheet>
+<f:metadata>
+    <f:viewParam name="shop" value="#{yxxxuh566xwwqqwxxxxxuserHome.companyName}"/>
+    <f:event type="preRenderView" listener="#{skinBean.setCurrentSkin}" />
+    <f:viewAction action="#{r3RestClient.installOrAuthorize()}" />
+
+</f:metadata>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+<ui:remove>
+/// add a new method in controlusageperiods?
+              <h:outputText value="Business Date Rolled" rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed}"/> 
+</ui:remove>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?'left':'right'}">
+         <h:outputText value="Last Signed As " rendered="#{!identity.loggedIn}"/> 
+         <h:outputText value="#{customIdentity.username}"/> 
+         <h:outputText value="#{messages.Today} "/> 
+         <h:outputText value="#{authenticator.getCurrcaldates()}"/> 
+        <h:button id="lbdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml" />
+         <h:outputText id="QueryLabel" value="#{messages.searchTerm}" />
+         <h:inputText id="Query" value="put search here" size="15" />
+         <h:commandButton id="r3Search" action="/home.xhtml"  image="/img/Findblue16.png"
+            value="#{messages.searchButton}" />
+         <h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none"  rendered="#{identity.loggedIn and !customIdentity.product=='s'}"  >
+          <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+         </h:link>
+            <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['installappHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+    
+                
+
+ </h:form>
+
+
+
+
+ </ui:define> 
+</ui:composition>
+
+
+

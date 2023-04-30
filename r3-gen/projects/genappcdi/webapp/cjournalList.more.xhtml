@@ -1,0 +1,363 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="xlrxeh675xwwqqhxxxxxcjournalA0xxuobxbxxxxxxxxxxxsid" value="#{xlrxeh675xwwqqhxxxxxcjournalHome.xlrxeh675xwwqqhxxxxxcjournalA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{xlrxeh675xwwqqhxxxxxcjournalList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal}"/>
+    <f:viewAction action="#{xlrxeh675xwwqqhxxxxxcjournalHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Cjournal']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="xlrxeh675xwwqqhxxxxxcjournalSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']}" propagation="end"  outcome="/home.xhtml" />
+             <p:ajaxStatus name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['CjournalListHelp']!='CjournalListHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['CjournalListHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+
+ <p:panel style="width: 50%;" header="#{messages['Cjournal']}- #{messages['List']} #{messages['Search']} #{messages['Result']}, #{messages['click']} #{messages['to']} #{messages['change']} #{messages['search']}  #{messages['criteria']}" switchType="ajax" collapsed="true"
+     toggleable="true" toggleableHeader="true">
+
+<h:panelGrid columns="20">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{xlrxeh675xwwqqhxxxxxcjournalList.searchVal}"/>
+ </ui:decorate>
+  <h:outputText id="searchVJ" value="#{xlrxeh675xwwqqhxxxxxcjournalList.searchValJ}" rendered="#{xlrxeh675xwwqqhxxxxxcjournalList.searchVal.isEmpty()}"/>
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText id="toDay" ph:type="date" value="#{xlrxeh675xwwqqhxxxxxcjournalList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <h:commandButton id="setToday" render="toDay" value="#{messages['set']} #{messages['Today']}"   action="#{xlrxeh675xwwqqhxxxxxcjournalList.setSearchDate(xlrxeh675xwwqqhxxxxxcjournalHome.currentTime)}" />
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label"> #{messages['status']}  </ui:define>
+  <h:panelGrid columns="2" >
+         <h:selectOneMenu value="#{xlrxeh675xwwqqhxxxxxcjournalList.searchStatus}"> 
+          <f:selectItem itemLabel="all" itemValue="#{null}"/>
+          <f:selectItem itemLabel="open" itemValue="0"/>
+          <f:selectItem itemLabel="active/ordered" itemValue="1"/>
+           <f:selectItem itemLabel="return" itemValue="4"/>
+          <f:selectItem itemLabel="closed" itemValue="8"/>
+           <f:selectItem itemLabel="paid" itemValue="16"/>
+           <f:selectItem itemLabel="partial/shipped" itemValue="32"/>
+           <f:selectItem itemLabel="printed/final approved" itemValue="512"/>
+          <f:selectItem itemLabel="marked" itemValue="128"/>
+          <f:selectItem itemLabel="deleted" itemValue="256"/>
+         </h:selectOneMenu>
+  </h:panelGrid>
+ </ui:decorate>
+</h:panelGrid>
+
+
+
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{xlrxeh675xwwqqhxxxxxcjournalList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{xlrxeh675xwwqqhxxxxxcjournalList.suggest(xlrxeh675xwwqqhxxxxxcjournalHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{xlrxeh675xwwqqhxxxxxcjournalList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{xlrxeh675xwwqqhxxxxxcjournalList.suggest(xlrxeh675xwwqqhxxxxxcjournalHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="xlrxeh675xwwqqhxxxxxcjournalList,globalMessages" status="buttonStatus" value="#{messages['Search']}" 
+              actionListener="#{xlrxeh675xwwqqhxxxxxcjournalList.getFirstResult()}" rendered="#{xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal lt 49}"/>
+            &nbsp;<h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</p:panel>
+
+    <p:panel>
+
+        <div class="actionButtons">
+             <h:commandButton id="copyallt" value="Copy All Flagged"  action="#{xlrxeh675xwwqqhxxxxxcjournalHome.copyAllMarked()}" 
+                rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal lt 49}" status="buttonStatus"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+             <h:commandButton id="deleteallt" value="#{messages['Delete']} #{messages['All']} #{messages['Flagged']}"  action="#{xlrxeh675xwwqqhxxxxxcjournalHome.deleteAllFlagged()}"
+              onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal lt 49}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Deletes']} #{messages['detail']} #{messages['records']} #{messages['as-well']},#{messages['but']} #{messages['not']} #{messages['all']} #{messages['constraints']}"/></span> </p:tooltip> 
+             </h:commandButton>
+             <h:commandButton id="updateallt" value="Update All Flagged"  rendered="false" action="#{xlrxeh675xwwqqhxxxxxcjournalHome.updateAllFlagged()}" />
+             <h:commandButton id="emailIcal" value="#{messages['email']} #{messages['as']} #{messages['iCalendar']}"  rendered="false" action="#{xlrxeh675xwwqqhxxxxxcjournalHome.writeAsIcalText()}"/>
+
+            <h:button outcome="/#{empty xlrxeh675xwwqqhxxxxxcjournalFrom ? 'home' : xlrxeh675xwwqqhxxxxxcjournalFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <ui:remove>  do not render list page once > 50 rows  to avoid excedding max http params </ui:remove>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{xlrxeh675xwwqqhxxxxxcjournalList.setMaxResultsVal(6)}" rendered="#{xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{xlrxeh675xwwqqhxxxxxcjournalList.setMaxResultsVal(50)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{xlrxeh675xwwqqhxxxxxcjournalList.setMaxResultsVal(100)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal lt 49}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{xlrxeh675xwwqqhxxxxxcjournalList.setskipColumns(true)}" rendered="#{xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal lt 49}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{xlrxeh675xwwqqhxxxxxcjournalList.setskipColumns(false)}" rendered="#{xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal lt 49}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(ity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Cjournal Search Results showing #{empty xlrxeh675xwwqqhxxxxxcjournalList.resultList ? 0 : (xlrxeh675xwwqqhxxxxxcjournalList.paginated ? xlrxeh675xwwqqhxxxxxcjournalList.resultList.size() : xlrxeh675xwwqqhxxxxxcjournalList.resultCount)} of #{xlrxeh675xwwqqhxxxxxcjournalList.resultCount}"/>
+        </f:facet>
+    <div class="results" id="xlrxeh675xwwqqhxxxxxcjournalList" style="overflow-x:auto">
+
+    <h:outputText value="The Cjournal search returned no results."
+               rendered="#{empty xlrxeh675xwwqqhxxxxxcjournalList.resultList}"/>
+
+
+
+
+    <p:dataTable id="xlrxeh675xwwqqhxxxxxcjournalList"  frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" rows="#{xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal}" scrollRows="6"
+           var="_xlrxeh675xwwqqhxxxxxcjournal" selection="#{xlrxeh675xwwqqhxxxxxcjournalHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}" rowKey="#{_xlrxeh675xwwqqhxxxxxcjournal.a0xxuobxbxxxxxxxxxxxsid}"
+           value="#{xlrxeh675xwwqqhxxxxxcjournalList.resultList}"
+           rendered="#{not empty xlrxeh675xwwqqhxxxxxcjournalList.resultList}">
+         <p:column headerText="Action">
+            <h:selectBooleanCheckbox id="MarkItCheckbox" value="#{xlrxeh675xwwqqhxxxxxcjournalHome.checked[_xlrxeh675xwwqqhxxxxxcjournal.a0xxuobxbxxxxxxxxxxxsid]}"/>
+            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+            <h:link outcome="/#{empty from ? 'cjournal' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+                   propagation="#{empty from ? 'none' : 'default'}"
+                      id="xlrxeh675xwwqqhxxxxxcjournalViewId">
+                <f:param name="xlrxeh675xwwqqhxxxxxcjournalA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_xlrxeh675xwwqqhxxxxxcjournal.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+             <h:link outcome="/cjournalEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="xlrxeh675xwwqqhxxxxxcjournalEdit1"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') ||customIdentity.hasRole('SH') ||customIdentity.hasRole('EH') 
+                  || (customIdentity.hasRole('VH') ||customIdentity.hasRole('VQ')
+                  and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="xlrxeh675xwwqqhxxxxxcjournalA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_xlrxeh675xwwqqhxxxxxcjournal.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+        </p:column>
+        <p:column rendered = "#{!xlrxeh675xwwqqhxxxxxcjournalList.skipColumns}"
+                    headerText="Sid">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.a0xxuobxbxxxxxxxxxxxsid}"  id="a0xxuobxbxxxxxxxxxxxsid" />
+        </p:column>
+        <p:column rendered = "#{!xlrxeh675xwwqqhxxxxxcjournalList.skipColumns}"
+                    headerText="Xpostdate">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxujpshvxxsxxxxxxxxpostdate) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.a0xxujpshvxxsxxxxxxxxpostdate}"  id="a0xxujpshvxxsxxxxxxxxpostdate" rendered="#{customIdentity.hasRole('EH')}"/>
+        </p:column>
+        <p:column rendered = "#{!xlrxeh675xwwqqhxxxxxcjournalList.skipColumns}"
+                    headerText="Postdate">
+          <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.b1xxcjpdhvxxxxxxxxxxpostdate}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column rendered = "#{!xlrxeh675xwwqqhxxxxxcjournalList.skipColumns}"
+                    headerText="Calendardt">
+          <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.b2xxcwcdhvxxxxxxxxxxcalendardt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column rendered = "#{!xlrxeh675xwwqqhxxxxxcjournalList.skipColumns}"
+                    headerText="Jrnltype">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b3xxujjtbvxxxxxxxxxxjrnltype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.b3xxujjtbvxxxxxxxxxxjrnltype}"  id="b3xxujjtbvxxxxxxxxxxjrnltype" />
+        </p:column>
+        <p:column rendered = "#{!xlrxeh675xwwqqhxxxxxcjournalList.skipColumns}"
+                    headerText="Jnlseqb">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b4xxzjbxbvxxxxxxxxxxjnlseqb) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.b4xxzjbxbvxxxxxxxxxxjnlseqb}"  id="b4xxzjbxbvxxxxxxxxxxjnlseqb" />
+        </p:column>
+        <p:column rendered = "#{!xlrxeh675xwwqqhxxxxxcjournalList.skipColumns}"
+                    headerText="Jnlseq">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b5cczjsibvxxxxxxxxxxjnlseq) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.b5cczjsibvxxxxxxxxxxjnlseq}"  id="b5cczjsibvxxxxxxxxxxjnlseq" />
+        </p:column>
+        <p:column 
+                    headerText="Jnlseqs">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b6xxzjjsbvxxxxxxxxxxjnlseqs) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.b6xxzjjsbvxxxxxxxxxxjnlseqs}"  id="b6xxzjjsbvxxxxxxxxxxjnlseqs" />
+        </p:column>
+        <p:column 
+                    headerText="Period">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c1xxzwppbvpxxxxxxxxxperiod) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.c1xxzwppbvpxxxxxxxxxperiod}"  id="c1xxzwppbvpxxxxxxxxxperiod" />
+        </p:column>
+        <p:column 
+                    headerText="Control">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c4xxuxexbvxxxxxxxxxxcontrol) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.c4xxuxexbvxxxxxxxxxxcontrol}"  id="c4xxuxexbvxxxxxxxxxxcontrol" />
+        </p:column>
+        <p:column 
+                    headerText="Debit">
+          <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.c5xxzwdxlvxxxxxxxxxxdebit}"  id="c5xxzwdxlvxxxxxxxxxxdebit">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Credit">
+          <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.c6xxzwrxlvxxxxxxxxxxcredit}"  id="c6xxzwrxlvxxxxxxxxxxcredit">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Xreference">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c7xxuwfxrbvxxxxxxxxxxreference) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.c7xxuwfxrbvxxxxxxxxxxreference}"  id="c7xxuwfxrbvxxxxxxxxxxreference" />
+        </p:column>
+        <p:column 
+                    headerText="Descript">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c8xxuzsxbvxxxxxxxxxxdescript) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.c8xxuzsxbvxxxxxxxxxxdescript}"  id="c8xxuzsxbvxxxxxxxxxxdescript" />
+        </p:column>
+        <p:column 
+                    headerText="Owner2">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xlrxeh675xwwqqhxxxxxcjournal.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+        </p:column>
+        <p:column 
+            headerText="Action">
+            #{' '}
+             <h:link outcome="/cjournalEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="xlrxeh675xwwqqhxxxxxcjournalEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="xlrxeh675xwwqqhxxxxxcjournalA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_xlrxeh675xwwqqhxxxxxcjournal.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+        </p:column>
+    </p:dataTable>
+    </div>
+    </p:panel>
+    <div class="tableControl">
+        <h:link outcome="/cjournalList.more.xhtml"
+            rendered="#{xlrxeh675xwwqqhxxxxxcjournalList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+            <f:param name="maxResultsVal"
+                    value="#{xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/cjournalList.more.xhtml"
+            rendered="#{xlrxeh675xwwqqhxxxxxcjournalList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{xlrxeh675xwwqqhxxxxxcjournalList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/cjournalList.more.xhtml"
+            rendered="#{xlrxeh675xwwqqhxxxxxcjournalList.nextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{xlrxeh675xwwqqhxxxxxcjournalList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/cjournalList.more.xhtml"
+            rendered="#{xlrxeh675xwwqqhxxxxxcjournalList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{xlrxeh675xwwqqhxxxxxcjournalList.lastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{xlrxeh675xwwqqhxxxxxcjournalList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+         <h:button outcome="/cjournalEdit.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+            rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Cjournal']}">
+        </h:button>
+
+
+
+         <h:button outcome="/#{empty xlrxeh675xwwqqhxxxxxcjournalFrom ? 'home' : xlrxeh675xwwqqhxxxxxcjournalFrom}.xhtml"
+          id="donefy"
+         value="Done"/>&nbsp;
+
+
+       <ui:remove>
+       </ui:remove>
+
+
+
+
+        <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessagesb"/>
+
+<br/>
+    </div>
+            <p:hotkey  actionListener="#{xlrxeh675xwwqqhxxxxxcjournalList.getFirstResult()}" bind="return">
+            </p:hotkey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

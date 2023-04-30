@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        template="layout/rtemplate.xhtml">
+<!-- Not Generated   -->
+
+<ui:define name="body">
+<ui:remove>
+label messages.select sponsor offers 
+for sa ie service Agency 
+shown if any fees items ie FI-D example sponsorship or Insurance Policy ? and not logged in or non vendor logged in
+Add to basket 
+</ui:remove>
+
+    
+    <h:form id="r3browse" styleClass="edit">
+<h:outputStylesheet>
+
+</h:outputStylesheet>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup location="right" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  outcome="/home.xhtml" />
+              <h:outputText id="QueryLabel" value="#{messages.searchTerm}" />
+              <h:inputText id="Query" value="#{fpxxfq1a5xwwqqhxxxxxitemList.searchPattern}" size="15" />
+              <h:commandButton id="r3Search" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('s')}"  image="/img/Findblue16.png"
+               value="#{messages.searchButton}" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup id="csizetb" location="${yxxxuh566xwwqqwxxxxxuserHome.mobile?'left':'right'}">
+             <ui:remove>
+              using ternary in el for value ,did not render consistently, specially first time
+             </ui:remove>
+              <h:link id="Cart" outcome="/basketout.xhtml" value="#{messages.selection} #{messages.folder}" propagation="none"   >
+               <h:graphicImage value="/img/folder_24.png" styleClass="pic"/>
+              </h:link>
+              <p:panel id="jcount">
+              <h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getBasketedList('basket').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getBasketedList('basket').size() gt 0}">
+              </h:outputText>
+              <h:outputText value="[Empty]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getBasketedList('basket').size() == null}"/>
+              </p:panel>
+	      <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemDetailsPaidSelectHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+<br/>
+
+      <p:panel>
+
+       <c:set var = "tpc" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:3}">
+       </c:set>
+       <c:set var = "mpc" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:4}">
+       </c:set>
+       <c:set var = "dpc" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:1}">
+       </c:set>
+       <c:set var = "mpr" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:3}">
+       </c:set>
+       <c:set var = "dpr" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:4}">
+       </c:set>
+       <p:panel style="border:none;background:transparent;margin:0;height:25px;">
+        <h:panelGrid columns="#{tpc}">
+         <ui:decorate template="layout/edit.xhtml">
+         <h:button  id="newEntry" value="New Entry"  rendered="#{customIdentity.product =='f' and customIdentity.subProduct =='s'}" action="#{fpxxfq1a5xwwqqhxxxxxitemHome.newEntry('FI-L1','ItemDetailsBrowse')}">
+           <f:param name="type" value="ItemDetailsBrowse"/>
+         </h:button>
+         </ui:decorate>
+         <h:button outcome="/ItemDetailsBrowse.xhtml" value="#{messages['show_all']}" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemBrowseList().size() eq 1 and request.getParameter('hidet')!='y'}"> 
+         </h:button>
+        </h:panelGrid>
+       </p:panel>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+
+       </p:panel>
+             <ui:decorate id="custemailAlt" template="layout/edit.xhtml" rendered="#{!identity.loggedIn }">
+             <ui:define name="label">#{messages['email']} #{messages['address']}
+             </ui:define>
+        	 <h:inputText label="email" id="em2" value="#{customIdentity.imailaddr}" rendered="#{!identity.loggedIn }" required="false"/>
+             </ui:decorate>
+
+       <p:panel    >  
+        <h:panelGrid columns="#{dpc}" id="detailpanel" style="margin: 0 auto;text-align: left; ">
+                <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemSearchByParameterList()}" var="row" iterationStatusVar="status" rows="#{dpr}" id="repeatd">
+                    <p:panel style="float:left; width:#{customIdentity.product=='S' and customIdentity.subProduct=='B'  ?'700px':'200px'}; padding:1px; margin:5px;border:0;height:250px;">
+                        <f:facet name="header">
+                            <h:panelGroup >
+                             <h:graphicImage alt="no picture"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+                              value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=200" >
+                             </h:graphicImage> 
+                             <h:commandButton value="+" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}">
+                              <p:componentControl target="ipopup" operation="show" />
+                             </h:commandButton>
+                            </h:panelGroup>
+                        </f:facet>
+                        <h:panelGrid columns="1" >
+                            <h:inputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"   style="font-size: 120%;font-weight: bold;;text-align:left;"  maxlength="30" disabled="true" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'FI-D'}"/>
+                            <h:outputText value="#{row.b8fbzpxxbvxxxxxxxxxxselprice}"  style="text-align: left;" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'FI-D' and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                                <f:convertNumber type="currency" currencySymbol="$" />
+                            </h:outputText>
+                            <h:outputText value="Request Quotation" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                            <h:outputText value="available #{row.b0xxziqxlvxxsaxxxxxxquantity}" style="text-align: left;"  rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'FI-D' and row.b0xxziqxlvxxsaxxxxxxquantity gt 0}" />
+                            <h:outputText value="Out Of Stock" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'FI-D' and row.b0xxziqxlvxxsaxxxxxxquantity le 0}" />
+
+                            <p:inputNumberSpinner  disabled="true"
+                             value="#{row.tempQuantity}" minValue="1"
+                             rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'FI-D'}"
+                             inputSize="2"
+                             step="1">
+                            </p:inputNumberSpinner>
+                            <ui:decorate id="ydxxuznybvxxxxxxxxxxnotesDecoration" template="layout/edit.xhtml" rendered="true">
+                             <ui:define name="label">#{messages['enter']} #{messages['short']} #{messages['description']}
+                             </ui:define>
+                             <h:panelGrid>
+                              <h:inputTextarea id="tEdit" 
+                               cols="80"
+                               rows="3"
+                              value="#{fpxxfq1a5xwwqqhxxxxxitemHome.notesToPass}"/>
+                             </h:panelGrid>
+                            </ui:decorate>
+
+                            <p:commandButton id="AddToCart" styleClass="buttonMain" render="@all,jcount"   status="buttonStatus" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'FI-D' and row.b0xxziqxlvxxsaxxxxxxquantity gt 0}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrder(row,row.tempQuantity,'basket')}" 
+                                 value="#{messages['add']} #{messages['to']} #{messages['folder']}">
+                            </p:commandButton>
+                            <p:commandButton id="Notify" styleClass="buttonMain" render="@all,jcount"   status="buttonStatus" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'FI-D' and row.b0xxziqxlvxxsaxxxxxxquantity le 0}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrder(row,row.tempQuantity,'basket')}" 
+                                 value="#{messages['notify']} #{messages['me']} #{messages['status']}">
+                            </p:commandButton>
+                            <h:outputText value="Login, Request Quotation" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                            <p:dialog id="ipopup" modal="false" autosized="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="#{p:component('ipopup')}.hide(); return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=200" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdataTypeMime('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="#{p:component('ipopup')}.hide()"/>
+
+                            </p:dialog>
+
+                        </h:panelGrid>
+                    </p:panel>
+                </ui:repeat>
+                <br/><br/>
+                <p:dataScroller for="repeatd"  id="ddsm" render="detailpanel" stepControls="hide" boundaryControls="hide"
+                            fastControls="hide" maxPages="10" />
+        </h:panelGrid>
+       </p:panel>
+</h:form>
+<h:form>
+
+
+
+	<h:panelGroup layout="block">
+
+                                <h:link id="TitleLink1" outcome="/ItemDetails.xhtml">
+                                    <f:param id="ProductIdForTextLink" name="id" value="#{item.productId}"/>
+                                </h:link>
+	
+	<br/>
+
+            <f:subview id="noresults" rendered="#{searchResults==null}">
+                <p> Use the search box at top right </p>
+            
+                <div class="bestouter">
+                    <ui:repeat value="#{topProducts}" var="item">
+                        <div class="bestinner">
+                            <div class="besttitle">
+                                <h:link id="TitleLink" outcome="/ItemDetails.xhtml">
+                                    <f:param id="ProductIdForTextLink" name="id" value="#{item.productId}"/>
+                                </h:link>
+                            </div>
+                            <div class="bestimage">
+                                <h:link id="ImageLink" outcome="/ItemDetails.xhtml">
+                                    <f:param id="ProductIdForImage" name="id" value="#{item.productId}"/>
+                                    <img src="#{item.imageURL}" />
+                                </h:link>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </f:subview>
+            
+            <f:subview id="searchresults" rendered="#{searchResults.rowCount == 0}">
+                <h2>
+                    <h:outputText id="NoResultsMessage" value="#{messages.noSearchResultsHeader}" />
+                </h2>
+            </f:subview>
+                
+            <h:form id="SearchResultsForm" rendered="#{searchResults.rowCount > 0}">
+                <div class="controlBar">
+                    <div class="buttonbox">
+                        <div class="button">
+                            <h:commandLink id="NextPageLink" action="#{search.nextPage}" rendered="#{!search.lastPage}">
+                                <img src="img/arrow-r.png" />
+                            </h:commandLink>
+                            &#160;
+                        </div>
+                        <div class="button">
+                            <h:commandLink id="PreviousPageLink" action="#{search.prevPage}" rendered="#{!search.firstPage}">
+                                <img src="img/arrow-l.png" />
+                            </h:commandLink>
+                            &#160;
+                        </div>
+                    </div>
+                    
+                    <div class="message">#{messages.searchResultsHeader}</div>
+                </div>
+                
+                <h:dataTable id="SearchResultsTable"
+                             value="#{searchResults}" 
+                             var="product" 
+                             styleClass="dvdtable" 
+                             headerClass="dvdtablehead"
+                             rowClasses="results"
+                             columnClasses="dvdtablecol">
+                    <h:column id="column1">
+                        <f:facet id="AddToCartFacet" name="header">
+                            <h:outputText id="AddToCartText" value="#{messages.searchResultsAdd}" />
+                        </f:facet>
+                        <h:selectBooleanCheckbox id="AddToCartCheckbox" value="#{searchSelections[product]}"/>
+                    </h:column>
+                    <h:column id="column2">
+                        <f:facet id="TitleFacet" name="header">
+                            <h:outputText id="TitleText" value="#{messages.searchResultsTitle}" />
+                        </f:facet>
+                        
+                        <h:link id="TitleLink" outcome="/ItemDetails.xhtml" value="#{product.title}">
+                            <f:param id="ProductId" name="id" value="#{product.productId}"/>
+                        </h:link>
+                    </h:column>                        
+                    
+                    <h:column id="column3">
+                        <f:facet id="StarringFacet" name="header">
+                            <h:outputText id="StarringText" value="Starring" />
+                        </f:facet>
+                        <h:outputText id="StarringValue" value="#{product.actors[0].name}" />
+                    </h:column>                        
+                    
+                    <h:column id="column4">
+                        <f:facet id="PriceFacet" name="header">
+                            <h:outputText id="PriceText" value="#{messages.searchResultsPrice}" />
+                        </f:facet>
+                        <h:outputText id="PriceValue" value="#{product.price}">
+                            <f:convertNumber type="currency" currencySymbol="$" />
+                        </h:outputText>
+                    </h:column>                        
+                </h:dataTable>
+                
+                <h:commandButton id="SearchUpdateButton"
+                                 action="#{search.addAllToCart}" 
+                                 value="#{messages.searchUpdateButton}"/>
+               </h:form>
+	</h:panelGroup>
+    <br style="clear: both" />
+
+
+
+ </h:form>
+
+</ui:define>
+	
+</ui:composition>
+
+
+
+
+

@@ -1,0 +1,100 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="key" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+
+</f:metadata>
+                       
+<ui:define name="body">
+    <h:form id="fpxxfq1a5xwwqqhxxxxxitemSearch" styleClass="edit">
+<h:outputStylesheet>
+
+.rf-edt-c {
+    height: 40px !important;
+}
+.rf-tb {
+    background-color:#{richSkin.tableSubHeaderBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+
+}
+.rf-cp-hdr {
+    background-color:#{richSkin.additionalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.rf-edt-hdr {
+    background-color:#{richSkin.generalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+
+
+</h:outputStylesheet>
+
+	<rich:toolbar height="26" itemSeparator="grid">
+	  <rich:toolbarGroup>
+              <h:button id="tdone"  value="Cancel"   rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup>
+              <h:button id="tdoneh"  value="Home"   rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ItemHelp']!='ItemHelp'}">
+             <rich:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemHelp']}"/></span> </rich:tooltip> 
+             </h:graphicImage>
+	  </rich:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</rich:toolbar>
+
+    
+     <div>
+      <panelGroup>
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/img/Editlog16.png"
+         rendered="#{identity.loggedIn}">
+      </h:graphicImage> 
+        <ui:remove> try using sid as param </ui:remove>
+        <h:button outcome="/itemEdit.xhtml" rendered="#{identity.loggedIn}"
+                    id="iedit"
+                 value="#{messages['List']}/#{messages['Edit']}(#{messages['theme']} #{messages['Description']})"/>
+        <h:button outcome="/themeCEditEasy.xhtml" rendered="#{identity.loggedIn}"
+                    id="cedit"
+                 value="#{messages['List']}/#{messages['Edit']}(#{messages['theme']} #{messages['Content']})"/>
+
+      </panelGroup>
+      <br></br>
+      <h:outputText escape="false"  value="#{fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000)}" 
+      rendered="true"/>
+     </div>
+    
+    <div class="actionButtons">    
+        <h:button outcome="/ThemesBrowse.xhtml"
+                    id="done"
+                 value="#{messages['Done']}"/>
+
+    </div>
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

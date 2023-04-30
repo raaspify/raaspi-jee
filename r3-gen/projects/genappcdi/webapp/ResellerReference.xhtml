@@ -1,0 +1,434 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<ui:define name="body">
+    <h:form id="ContactUsForm">
+<h:outputStylesheet>
+
+</h:outputStylesheet>
+
+    <p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup location="right">
+              <h:outputText value="Last Signed As " rendered="#{!identity.loggedIn}"/> 
+              <h:outputText value="#{customIdentity.username}" /> 
+              <h:outputLink value="#" id="settings" rendered ="#{identity.loggedIn}" onclick="PF('changePWPanel').show()">
+               <h:outputText value="#{messages.prefs_change_password}"/>
+              </h:outputLink>
+              <h:link id="logout" action="#{identity.logout()}" value="Logout" rendered="#{identity.loggedIn}"/>
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+              <h:button id="tdoneh" image="./img/Homeblue16.png"  alt="Home" value="Home"  outcome="/home.xhtml" />
+              <h:inputText id="Query" value="#{fpxxfq1a5xwwqqhxxxxxitemList.searchPattern}" size="15" >
+              </h:inputText>
+              <h:commandButton id="r3Search" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('s')}"  image="/img/Findblue16.png"
+               value="#{messages.searchButton}" rendered="#{!(customIdentity.product=='f' and customIdentity.subProduct=='b')}"/>
+              <h:commandButton id="r3Search2" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('b')}"  image="/img/Findblue16.png"
+               value="#{messages.searchButton}" rendered="#{(customIdentity.product=='f' and customIdentity.subProduct=='b')}" />
+              <h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none"  rendered="#{identity.loggedIn and !customIdentity.product=='S'}"  >
+               <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+              </h:link>
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ContactUs-3Help']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+
+    </p:toolbar>
+    <h:messages globalOnly="true" styleClass="message"/>
+    <p:panel >
+    <f:facet name="header">Welcome!</f:facet>
+    <!--
+    -->
+
+<h3>The following links show addtional notes to <a href="/HelpReference.wflow">HelpReferenceManual</a> and are specific for reseller use </h3>
+<h3><a href="#site_menue">By Menu Options</a>&nbsp; &nbsp; &nbsp;&nbsp; <a href="#site_use">By Business Functions</a></h3>
+<h3>Click on the link below for how and what additional testing can be done by resellers</h3> 
+<h3><a href="#site_test">Additional Testing</a>&nbsp; &nbsp; &nbsp;&nbsp; <a href="/BlogDetailsBrowse.wflow?category=375">Reseller Blogs</a></h3>
+<h4><a href="#branding">Reseller branding</a>&nbsp; &nbsp; &nbsp;&nbsp; </h4>
+
+<br/>
+<h3><a name="site_menue">Menu Structure</a></h3>
+
+
+<p>	Main Drop Down Horizontal Menu</p>
+	<h:panelGroup id="qsp">
+	 <h:graphicImage value="/img/QuickStart16.png" styleClass="pic"/>
+	 <h:outputText  value="#{messages['menutab.QuickStart']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['menutab.Products']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['menutab.News']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['menutab.Calendar']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['menutab.About']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['menutab.Resellers']} " styleClass="buttonMain" rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-C','HDR',0,1200) !=null}"/>
+	 <h:outputText value="#{messages['menutab.ContactUs']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['Reset']} " />
+	 <h:outputText value="#{messages['register']} " rendered ="#{request.serverName.startsWith('myflow') or request.serverName.contains('raaspi')}" />
+	</h:panelGroup>
+
+<p>	Left Vertical Panel Menu</p>
+        <h:panelGrid columns="1">
+         <h:panelGroup>
+	  <h:graphicImage value="/img/shopping_bag.24.png" styleClass="pic"/>
+	  <h:outputText  value="#{messages['Spcl']} " styleClass="buttonMain"/>
+         </h:panelGroup>
+         <h:panelGroup>
+	  <h:graphicImage value="/img/flash24.png" styleClass="pic"/>
+	  <h:outputText  value="#{messages['View']} " styleClass="buttonMain"/>
+         </h:panelGroup>
+         <h:commandButton value="#{messages.left_pop}" styleClass="buttonMain" disabled="true"/>
+<p>	Left Vertical Panel Menu may be visible or hidden and is controlled by buttons at the bottom</p> 
+      <h:outputText value="    #{messages['left ']} #{messages['panel']}" />
+      <h:commandButton id="swtLY"  action="#{skinBean.setLeftShownt(true)}" value="#{messages['show']}" />
+      <h:commandButton id="swtLN"  action="#{skinBean.setLeftShownt(false)}" value="#{messages['hide']}" />
+<p>	In case of mobile device it is allways hidden otherwise the admin of the site choses the default value</p> 
+
+        </h:panelGrid> 
+
+<p>
+	Menu Selection shown changes based on whether the user is logged in or not and certain menu options are shown based on the user role and level and in some cases based on the type and size of the business.</p>
+<h4>Main Drop Down Horizontal Menu</h4>
+
+ <h:outputText  value="#{messages['menutab.QuickStart']} " styleClass="buttonMain"/>
+ <h:outputText  value=": Frequently used options are shown here" />
+
+	&nbsp;<h:outputText  value="#{messages['Shopping_Items']} " styleClass="buttonMain" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.itemBrowseList.size() != 0}" />
+<h:outputText  value="-items with short description,price information and availability are shown with a button to dd to a shopping cart or to a service basket. items are grouped under category or subcategory." rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.itemBrowseList.size() != 0}" />
+
+	&nbsp;<h:outputText  value="#{messages['Issue']} " styleClass="buttonMain" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.issueBrowseList.size() != 0}" />
+<h:outputText  value="-items like issues, bugs with short description,date raised and by whom are shown with a button to add new ones. " rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.issueBrowseList.size() != 0}" />
+
+<h:panelGrid columns="1">
+	&nbsp;<h:outputText  value="#{messages.find} #{messages['sponsors']} " styleClass="buttonMain" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList.size() != 0) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  ))}" />
+<h:outputText  value="-find sponsors who are willing to sponsor events. If you enter the search button then all available sponsors will be shown or use geogrphical location, maximum funding amount, criteria and type of events to narrow your search. To continue further, you need to sign up as a customer,agree to terms and pay a small fee for the service. Use #{messages['signupnpay']} if not logged in or #{messages['proceed']} #{messages['to']} #{messages['pay']} if already logged in. Payment button will be shown only if new payment is needed to make selections. The page will show how many selections will be allowed for each payment. " rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList.size() != 0) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  ))}" />
+	&nbsp;<h:outputText  value="#{messages.select} #{messages['offers']} " styleClass="buttonMain" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList.size() != 0) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  ))}" />
+<h:outputText  value="-Here you make your selection and add to the selection basket. You can come back later and look at your selection basket and when ready submit for approval." rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList.size() != 0) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  ))}" />
+	&nbsp;<h:outputText  value="#{messages.check} #{messages.approval} #{messages.status} " styleClass="buttonMain" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList.size() != 0) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('VH')  ))}" />
+<h:outputText  value="In addition to correspondence via emails, one can check the approval status here" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList.size() != 0) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('VH')  ))}" />
+	&nbsp;<h:outputText  value="#{messages.check} #{messages['status']} " styleClass="buttonMain" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList.size() != 0) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  ))}" />
+&nbsp;<h:outputText  value="-sponsor can check status of approval submissions and approve or reject" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList.size() != 0) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  ))}" />
+</h:panelGrid>
+	<h:outputText  value="#{messages['menutab.AddListReport.LogIn']} " styleClass="buttonMain" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList.size() != 0) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  ))}" />
+&nbsp;<h:outputText  value="-login will need an id and password. If id was not created then use #{messages.signup} to create one."/>
+&nbsp;<h:outputText  value= "For one time purchase a login is not needed but some minimum imformation like phone number and or email id will be needed for pick up order. For any shipping item more detailed information like name, address etc will be needed. If user is logged in then these information already exists and user can also save their shopping cart selections to continue later." rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb')}" />
+<p>
+	&nbsp;login/logout-login uses id and password. Although the system encrypts the password to protect it , care should be taken to protect it from being exposed at the client machine. For example letting the browser remember the password is a great convenience but it also means some one else having access to the machine can also see it.</p>
+<h:outputText  value="#{messages['products']} " styleClass="buttonMain"	/>
+<h:outputText  value="#{messages['news']} " styleClass="buttonMain" />	
+<h:outputText  value="#{messages['about']} " styleClass="buttonMain" />	
+<h:outputText  value="#{messages['contactus']}/ #{messages['faq']}" styleClass="buttonMain" />	
+&nbsp;<h:outputText  value="-these are self explanatory and provide information to the visitors "/>
+<p>
+<h:outputText  value="#{messages['resellers']} " styleClass="buttonMain" rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-C','HDR',0,1200) !=null}"/>
+&nbsp;<h:outputText  value="-Talks about opportunities available to the resellers and system integrators who can offer value added service to their clients" rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-C','HDR',0,1200) !=null}" />
+</p>
+<p>
+<h:outputText  value="#{messages['Reset']}  -Similar to pressing the browser reload but takes to Home page as well. To be used if page naviation not working "/>
+</p>
+<p>
+<h:outputText  value="#{messages['register']}  -There is a 14 days free trial and create a new site after providing necessary information like email, name/company name and website name. Once completed you will receive an email confirming your request followed by another  "/>
+<h:outputText  value="email with an activation link and two pre configured user ids their passwords. They are to be used for further set up and customization of the site.    "/>
+</p>
+
+<h4>Left Vertical Panel Menu</h4>
+<h:panelGrid columns="1" >
+	  <h:outputText  value="#{messages['Spcl']} " styleClass="buttonMain" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb')}"/>
+          &nbsp;<h:outputText  value="a subset of shopping items are shown here to highlight products. Category and subcategory can be used here as well." rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb')}"/>
+	  <h:outputText  value="#{messages['View']} " styleClass="buttonMain" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') }"/>
+          &nbsp;<h:outputText  value="a subset of item images are shown here to highlight products. Category and subcategory can be used here as well." rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') }" />
+         <h:commandButton value="#{messages.left_pop}" styleClass="buttonMain" disabled="true"/>
+          &nbsp;<h:outputText  value="this provides a pop up message to the visitor and the content is used to suggest actions or introduce any new information or forthcoming changes" />
+
+<h3>What users will see once logged in</h3>
+<p>	Main Drop Down Horizontal Menu</p>
+	<h:panelGroup id="qspl">
+
+	 <h:graphicImage value="/img/QuickStart16.png" styleClass="pic"/>
+	 <h:outputText  value="#{messages['menutab.QuickStart']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['menutab.AddListReport']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['menutab.Transactions']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['menutab.Mailings']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['menutab.Tools']} " styleClass="buttonMain"/>
+	</h:panelGroup>
+	<h:panelGroup id="qsp2">
+
+	 <h:outputText value="#{messages['menutab.Maintenance']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['menutab.Workspace']} " styleClass="buttonMain"/>
+	 <h:outputText value="#{messages['menutab.ContactUs']} " styleClass="buttonMain"/>
+	</h:panelGroup>
+
+<p>	Left Vertical Panel Menu (if shown)</p>
+        <h:panelGrid columns="1">
+         <h:panelGroup>
+	  <h:graphicImage value="/img/comment_play16.png" styleClass="pic"/>
+	  <h:outputText  value="#{messages['version']} " styleClass="buttonMain"/>
+         </h:panelGroup>
+         <h:panelGroup>
+	  <h:graphicImage value="/img/Customer16.png" styleClass="pic"/>
+	  <h:outputText  value="#{messages['Customer']} " styleClass="buttonMain"/>
+         </h:panelGroup>
+         <h:panelGroup>
+	  <h:graphicImage value="/img/Vendor16.png" styleClass="pic"/>
+	  <h:outputText  value="#{messages['Vendor']} " styleClass="buttonMain"/>
+         </h:panelGroup>
+         <h:panelGroup>
+	  <h:graphicImage value="/img/Item16.png" styleClass="pic"/>
+	  <h:outputText  value="#{messages['Item']} " styleClass="buttonMain"/>
+         </h:panelGroup>
+         <h:panelGroup>
+	  <h:graphicImage value="/img/calendar_view_day16.png" styleClass="pic"/>
+	  <h:outputText  value="#{messages['MyCalendar']} " styleClass="buttonMain"/>
+         </h:panelGroup>
+         <h:panelGroup>
+	  <h:graphicImage value="/img/calendar_view_day16.png" styleClass="pic"/>
+	  <h:outputText  value="#{messages['MyTasks']} " styleClass="buttonMain"/>
+         </h:panelGroup>
+         <h:panelGroup>
+	  <h:graphicImage value="/img/shopping_bag.24.png" styleClass="pic"/>
+	  <h:outputText  value="#{messages['Spcl']} " styleClass="buttonMain"/>
+         </h:panelGroup>
+         <h:panelGroup>
+	  <h:graphicImage value="/img/flash24.png" styleClass="pic"/>
+	  <h:outputText  value="#{messages['View']} " styleClass="buttonMain"/>
+         </h:panelGroup>
+         <h:commandButton value="#{messages.left_pop}" styleClass="buttonMain" disabled="true"/>
+ 
+
+        </h:panelGrid> 
+
+
+<h4>#{messages['menutab.QuickStart']} SubOptions </h4>
+<h:outputText  value="the following new options will appear once logged in." />
+	&nbsp;<h:outputText  value="#{messages['QuickStartFlow']} " styleClass="buttonMain"  />
+<h:outputText  value="-a visual presentation of the order supply work flow involved and the functions can be invoked by clicking on the button or links "  />
+	&nbsp;<h:outputText  value="#{messages['QuickFinancial']} " styleClass="buttonMain"  />
+<h:outputText  value="-a visual presentation of the accounting work flow involved and the functions can be invoked by clicking on the button or links "  />
+	&nbsp;<h:outputText  value="#{messages['MyDashboard']} " styleClass="buttonMain"  />
+<h:outputText  value="-a visual presentation of how the organization is performing and the functions can be invoked by clicking on the button or links "  />
+<h4>#{messages['menutab.AddListReport']} SubOptions </h4>
+<p>
+<h:outputText   value="The less commonly used entities are grouped under the 'Other' category but offers special usage and unique functions.&nbsp; But first a few"/>
+<h:outputText  value=" comments about the regular ones. Address is designed as a separate entity and allows the same address be reused by other entities. There is a"/>
+<h:outputText  value=" separate menue option with #{messages['ExistingAddress']} to make use of this. However for most situations it is more convenient to be able to"/>
+<h:outputText  value=" enter the #{messages['Address']} and #{messages['Customer']} in the same page and there is a option for that as well. #{messages['Location']}"/>
+<h:outputText  value=" also exists as a separate entity to allow more flexibility. It is an extension of #{messages['Address']}. The entitites #{messages['Company']},"/>
+<h:outputText  value=" #{messages['Department']} etc refer to the organization structure and mostly wont apply to smaller business. The other category needs some usage"/>
+<h:outputText  value=" explanation. The #{messages['Membersgroup']} and the related #{messages['Groupmembers']} can be used for #{messages['menutab.Mailings']} or for "/>
+<h:outputText  value=" #{messages['Schedule']}. Since a #{messages['Membersgroup']} can contain various types of #{messages['Groupmembers']}, we suggest the following steps."/>
+<h:outputText  value=" Goto the Add #{messages['Groupmembers']} and select the required #{messages['Membersgroup']} first and then one of the others. Follow some naming conventions"/>
+<h:outputText  value=" for the membership id like first 2 characters of the #{messages['Membersgroup']} followed by incremental number like cm0001,cm0002 etc."/>
+<h:outputText  value=" #{messages['Usagebyperiods']} can provide a great usage to track any usage by upto 12 periods. The application itself uses it to track sales figures."/>
+<h:outputText  value=" The Report can show pie or line charts." />
+</p>
+
+<h4>#{messages['menutab.Maintenance']} SubOptions </h4>
+<h:outputText  value="the following are the main options used to customize the web site ie to change the default content" />
+
+	&nbsp;<h:outputText  value="#{messages['Resource']} " styleClass="buttonMain"  />
+<h:outputText  value="-this option is used to change the labels of menu options and the field labels. Messages and Labels are stored as key and value pair ie read is the key and the default value is Read but you can change the value here. See the screen shot below. You will need to click on the + to see the search option. You can also narrow down your search using the dropn down list."  />
+               <h:graphicImage value="/img/messageChange.png" styleClass="pic"/>
+<h:outputText  value="message with the key legal_notice is used for the sign up terms and conditions. Either plain text or html document can be pasted as the content" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa')}"  />
+
+<h:outputText  value="The drop down list allows the matching message bundle to use in conjunction with the message key and value. Message bundle m with SYSTEM cannot be used because they are for default values but m with the application name can be used. A separate List/Edit/Add page exists to handle message bundle for a specific country or language or application code." />
+               <h:graphicImage value="/img/messageUpdate.png" styleClass="pic"/>
+
+	&nbsp;<h:outputText  value="#{messages['Rate1f']} " styleClass="buttonMain"  />
+<h:outputText  value="-this option is used to change the default shipping cost. The keys are #{messages['Usertype']},#{messages['Prodtype']},#{messages['Stepname']} and #{messages['Step']}. The value is under #{messages['Value']} "  />
+<h:outputText  value="-#{messages['Usertype']} can be CS for customer shipment,#{messages['Prodtype']} can be P for production usage,#{messages['Stepname']} can be SS for standard shipment and small size,ES for Express shipment for small size,PS for PickUp for small size and similarly SM for standard shipment medium size and SL for standard shipment for large size. "  />
+               <h:graphicImage value="/img/Rate1Update.png" styleClass="pic"/>
+
+	&nbsp;<h:outputText  value="#{messages['options']} " styleClass="buttonMain"  />
+<h:outputText  value="-this option is used to change the drop down list values shown in the web pages. There are more than 50 such options and in most cases "/>
+<h:outputText  value=" the default values can be used but if needed they can be and in some cases need to be changed as part of the customization. The values "/>
+<h:outputText  value=" are stored in a table with as many rows as needed and each option has three properties called options,purpose and value. In general, the"/>
+<h:outputText  value=" option values are used internally "/>
+<h:outputText  value=" by the application and purpose values are used externally as user friendly labels and values property is mostly unused but can be used to filter"/>
+<h:outputText  value=" out ie not to show based on application type or country locale value. Sometimes one option may need more rows to hold more values, so for "/>
+<h:outputText  value=" other options any duplicate or blank rows are not shown. An example below shows options08 being used as the type for a scheduled event like meeting"  />
+               <h:graphicImage value="/img/OptionsList.png" styleClass="pic"/>
+
+<h:outputText  value="As a default, all the rows for option01 is shown but a button at the bottom can be used to show another option."/>
+<h:outputText  value=" Lets look at some more complex option entries and see option10 entries below. This option is used to show Pay By values."/>
+<h:outputText  value=" The purpose and value field has entries for country codes ca= for Canada and us= for USA. Because of the country code "/>
+<h:outputText  value=" entries different spelling will be shown. Another filtering example is using entity code like 1a=s meaning show 1a=h "/>
+<h:outputText  value=" meaning hide for items since 1a is internally used as entity code for Item. This entity code is shown as part of the url as position"/>
+<h:outputText  value=" 7 and 8 of the list or edit page for that entity."  />
+               <h:graphicImage value="/img/OptionsList10.png" styleClass="pic"/>
+<h:outputText  value="Options are typically used for all the application types, but if they are not used then all the rows for that option will be blank."  />
+<h:outputText  value="Options 12 is used for search location as well as state/province, Options 52 is used for criteria and Options 53 is used for type in sponsor find ." rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa')}"  />
+
+	&nbsp;<h:outputText  value="#{messages['Truefalse']} " styleClass="buttonMain"  />
+<h:outputText  value="-this option is used to change Report settings and allow controlling which columns will be shown. You need to select the table or functional entity name like item,customer etc and then type of reports like details, demographic, metrics and ad hoc 1 and 2. Each column can then be shown or hidden. It is important to remember that a report page width is limited and we need to hide some columns so that the needed ones can be shown.  "  />
+
+	&nbsp;<h:outputText  value="#{messages['Client']} " styleClass="buttonMain"  />
+<h:outputText  value="-Some of the chages here can severely affect the site functions and one need to be careful before making any changes. The table has many columns and takes some time to load the update page.  "  />
+	&nbsp;<h:outputText  value="#{messages['Client']} " styleClass="buttonMain"  />
+<h:outputText  value="The following may need changes from time to time- Size:S(mall) or M(edium) or L(arge) shows or hides some menue options. SSO Token: Used if client has multiple sites and SSO (Single Sign On) is to be supported. Put the same token value  in all the related sites. apicliendid and apiclientsecret: Enter the appropriate values obtained from Payment processor like Paypal. This field update is available only to an user with sysadmin role."  />
+
+	&nbsp;<h:outputText  value="#{messages['Client']} " styleClass="buttonMain"  />
+<h:outputText  value="The following may need changes from time to time- Size:S(mall) or M(edium) or L(arge) shows or hides some menue options. SSO Token: Used if client has multiple sites and SSO (Single Sign On) is to be supported. Put the same token value  in all the related sites. apicliendid and apiclientsecret: Enter the appropriate values obtained from Payment processor like Paypal. This field update is available only to an user with sysadmin role."  />
+
+<h4><a name="branding">#{messages['Branding']}</a></h4>
+<h:outputText  value="-Go to Setups/Client/Edit record 01 but select Full Configur/Setup. Find and update field named Ashostid with Reseller's web site host address, example 3rcomputer.com. Do not add http or www, it will be added for you. The Footer of Home page will show a Link Supported by xxx.com and is turned on by setting check mark to field Listbuildv.    "  />
+
+	&nbsp;<h:outputText  value="#{messages['Userprofl']} " styleClass="buttonMain"  />
+<h:outputText  value="-User specific values are stored here and are used by system. Examples are theme chosen by an user or values entered by an user for drop down list. Normally will not need any maintenance."  />
+
+	&nbsp;<h:outputText  value="#{messages['User']} " styleClass="buttonMain"  />
+<h:outputText  value="-Normally used by a manager or admin to create a new back office user or delete or alter an existing user information. User themselves have limited access to alter some information including their Email signature"  />
+
+	&nbsp;<h:outputText  value="#{messages['Acperiod']} " styleClass="buttonMain"  />
+<h:outputText  value="-Shows current accounting period information and normally will not need any user maintenance. There is a button to 'hold current business date' which needs some explanation. Normally each calendar day, the business date will also change, but this can stop the business date roll and can be useful at fiscal year end when accounting adjustments are done."  />
+
+	&nbsp;<h:outputText  value="#{messages['Account']} " styleClass="buttonMain"  />
+<h:outputText  value="-Shows accounts related information and normally will not need any user maintenance. However, if the default accounts setup is not adequate then new entries or updates are done here. There is also a facility to upload chart of accounts data as CSV (comma separated value) first and then to import that data."  />
+
+	&nbsp;<h:outputText  value="#{messages['Perioddates']} " styleClass="buttonMain"  />
+<h:outputText  value="-Shows all the accounting period information and normally will not need any user maintenance. There are two extra periods ie 13 and 14 and can be used as a convenience to defer Year end process by up to 2 months. Accounting entries for next fiscal year are captured here and as part of the year end process move under next Fiscal period 1 and 2. The buttons are the same as in 'Year End' and are shown here for convenience"  />
+
+
+	&nbsp;<h:outputText  value="#{messages['Acintegr']} " styleClass="buttonMain"  />
+<h:outputText  value="-Shows related accounts information used for posting and normally will not need any user maintenance. However, if the default setup is not adequate then new entries or updates are done here. "  />
+
+	&nbsp;<h:outputText  value="#{messages['Glentries']} " styleClass="buttonMain"  />
+<h:outputText  value="-Normally used at year end to enter accounting adjustment entries. "  />
+
+	&nbsp;<h:outputText  value="#{messages['account']}  #{messages['period']} #{messages['totals']} " styleClass="buttonMain"  />
+<h:outputText  value="-Extension of accounts information and shows the values in each period and normally will not need any user maintenance "  />
+
+	&nbsp;<h:outputText  value="#{messages['YearEnd']} " styleClass="buttonMain"  />
+<h:outputText  value="-Used at fiscal year end to close the current year and roll to the next fiscal year. There are buttons to first close old journals so that they do not appear in any report and then to delete them "  />
+
+	&nbsp;<h:outputText  value="#{messages['Web Site Customization']} " styleClass="buttonMain"  />
+<h:outputText  value="-Should be used as needed to maintain the web site content. The changes can be done in two steps ie "/>
+<h:outputText  value=" first for preview and approval and next to publish to all visitors to the site."/>
+<h:outputText  value=" The top row allows changing the menue content as follows. Put the new label value as input to New Label"/>
+<h:outputText  value=" and then click on the link label you want to change. So if you want to show menue label Products as Offerings, then type "/>
+<h:outputText  value=" in Offerings as input for New Label and then click on the label currently showing as Offerings. If the radio "/>
+<h:outputText  value=" button selection under the New Label is Preview then only you will see the change but not others. If you are "/>
+<h:outputText  value=" ok with the change and want to publish for general then select Accept for radio button and click the Label now"/>
+<h:outputText  value=" showing Offerings instead of Products."/>
+<h:outputText  value=" You will see multiple collapsed or closed panels with titles like Publish/Preview , (TopBackGround) TopBackground Graphics etc."/>
+<h:outputText  value=" If you press the + ie Plus button then the panels will expand. Publish/Preview will show whole or part of the current panel"/>
+<h:outputText  value=" you are working on. The content panels are all structured the same way ie Top row is for Graphics to be changed."/>
+<h:outputText  value=" Below the Graphics there will be two other rows for Text ie Header and Text data."/>
+<h:outputText  value=" Top Graphics panel has graphics only as there is no applicable text. It is primarily meant for background and "/>
+<h:outputText  value=" can also be used for special effects. All Graphics are stored as blobdata and has key structure Main Key, Qualifier"/>
+<h:outputText  value=" and sequence example 3R-TOP-BKGR,PIC,0. There is also a column called type which can have value like jpg,png or asis. "/>
+<h:outputText  value=" Graphic images are automatically scaled to fit the default page dimension. However if the type is 'asis' then "/>
+<h:outputText  value=" no scaling is done and allows for large images (upto 510 wide and 720 high) for special effect for the Home page."/>
+<h:outputText  value=" Further special effects can be done by giving sequence number as 98 or 99 in conjunction with using type as 'asis'."/>
+<h:outputText  value=" This will allow fade out after a few seconds or by clicking on the image. Image with seq 99 will appear first"/>
+<h:outputText  value=" and then fadeout and if seq 98 is also present then its image will appear and then fadeout."/>  
+<h:outputText  value=" TopLeft panel will allow putting a small image like a logo or highlight something along with a header and body text"/>
+<h:outputText  value=" against the background image."/>
+<h:outputText  value=" The panels starting with Products will allow using seq 0 to 4 ie one can place upto 5 sets of image,header and text body"/>
+<h:outputText  value=" within a page. Since Products itself has _1,_2 and -3 pages you can have upto 15 combination of images and text"/>
+<h:outputText  value=" to present to visitors."/>
+<h:outputText  value=" Within a panel preview data is shown on the left or on top and published data will appear on the right side or below"/>
+<h:outputText  value=" the preview data. For a larger view you can expand the publish/preview panel." />
+               <h:graphicImage value="/img/sitecustomize.jpg" styleClass="pic"/>
+
+	&nbsp;<h:outputText  value="#{messages['RestoreData']} " styleClass="buttonMain"  />
+<h:outputText  value="-Use with extreme caution as this will replace the existing data with the last backup. "  />
+
+
+
+	&nbsp;<h:outputText  value="#{messages['Web Site Customization using theme Gallery']} " styleClass="buttonMain"  />
+<h:outputText  value="-Should be used as needed to change the default layout and content. This Theme gallery is different from the dropdown theme. "/>
+<h:outputText  value=" Theme gallery is used to change the content and how the content is presented, where as the dropdown theme changes the page color "/>
+<h:outputText  value=" combinations only not the content.The work together."/>
+<h:outputText  value=" Theme gallery is structured as categories and themes under a category. Each theme typically will have the home page content along "/>
+<h:outputText  value=" with other pages a visitor will see. The page content will have images and text which are designed to be appealing and relevant to the  "/>
+<h:outputText  value=" theme. "/>
+<h:outputText  value=" To add a new theme, a reseller will have to sign up as a vendor for the Raaspi site. If you login as a vendor, you will see "/>
+<h:outputText  value=" #{messages.Browse} #{messages.themeContent}"/>
+<h:outputText  value=" The browse page will have a button #{messages.new} #{messages.themeContent} to create a new theme category and theme contents under it ."/>
+<br></br>
+<h:outputText  value=" Themes are saved as shopping items ie  type as 'SI-L1' or 'SI-D' but  ."/>
+<ui:remove>
+               <h:graphicImage value="/img/sitecustomize.jpg" styleClass="pic"/>
+</ui:remove>
+	&nbsp;<h:outputText  value="#{messages['RestoreData']} " styleClass="buttonMain"  />
+<h:outputText  value="-Use with extreme caution as this will replace the existing data with the last backup. "  />
+
+
+</h:panelGrid>
+
+
+ 
+<h3><a name="site_use">Buisiness Functions</a>&nbsp; &nbsp; &nbsp;&nbsp; Back to <a href="#site_menue">By Menu Options</a></h3>
+
+<p>	Usage</p>
+<p>
+<h:outputText  value="-Concept of RAAS (Ready Application As Service) is based on a very simple idea. If you think about it most of the business functions follow a pattern "  />
+<h:outputText  value=" The pattern is that we have #{messages['Item']} and some one like #{messages['Vendor']} supplies or produces it and someone like #{messages['Customer']} "  />
+<h:outputText  value=" will buy or use it. And there are established process to carry out these operations "  />
+<h:outputText  value=" We also need #{messages['Employee']} who runs the operation or business "  />
+</p>
+<p>
+<h:outputText  value="Entities like #{messages['Item']},#{messages['Vendor']} are added via #{messages['menutab.AddListReport']} #{messages['menutab.AddListReport.AddL1']} . Less used ones like    "  />
+</p>
+
+<h3>Paypal setup</h3>
+
+<p>	Usage</p>
+<p>
+<h:outputText  value="You will need to have a paypal business account and in verified status."  />
+<h:outputText  value=" Paypal payment service for your site is provided on your behalf as a hosted service,"  />
+<h:outputText  value=" so you will need to give permission to do so. "  />
+<h:outputText  value=" Login to your business account, go to My Profile,go to My account settings." />
+<h:outputText  value=" go to manage users, add user name and id (say Developer1) and grant permission by selecting "  />
+<h:outputText  value=" API activation and authorization. "  />
+<h:outputText  value=" Provide the id to the reseller or integretor who is setting up the system for you,"  />
+<h:outputText  value=" who needs to register the API to your Paypal account."  />
+
+<h:outputText  value=" Its a good idea to create a test shopping item for say $2.00 and try it yourself.  "  />
+</p>
+	
+<h3><a name="site_test">Load/Performance and Functional Testing</a>&nbsp; &nbsp; &nbsp;&nbsp; Back to <a href="#site_menue">By Menu Options</a></h3>
+
+<p>	Testing</p>
+<p>
+<h:outputText  value="-There are a number of good quality commercial and open source test tools available. In this manual we will describe using Jmeter "  />
+<h:outputText  value=" It is primarily used for Load and performance testing but is also suitable for functional testing including regression test "  />
+<h3> For more information <a href="https://jmeter.apache.org/"> go Jmeter </a></h3>
+</p>
+<p>
+<h:outputText  value="It is not a browser but sends http requests and needs to be installed as a desktop java application. "  />
+<h:outputText  value=" Apache JMeter 3.1 (Requires Java 7 or later) "  />
+<h:outputText  value=" Go to Jmeter site and download the binaries. tgz is normally used in Linux and zip is used in Windows. "  />
+<h:outputText  value=" After download unzip to a folder of your choice and run it using the supplied jmeter.bat or jmeter.sh file located in the bin directory. "  />
+<br/>
+               <h:graphicImage value="/img/Jmeter1.png" styleClass="pic"/>
+</p>
+
+<h3>How to set up and use</h3>
+
+<p>	Usage</p>
+<p>
+<h:outputText  value="A new test plan is pretty bare but you can populate it using the mouse right click on it and using Add button. "  />
+<h:outputText  value="A sample is shown below, where a series of requests are sent to myflowp.raaspi.com. "  />
+</p>
+<p>
+               <h:graphicImage value="/img/Jmeterreq.png" styleClass="pic"/>
+</p>
+<h:outputText  value="A login is shown including id and password as parameters. "  />
+               <h:graphicImage value="/img/Jmeterlogin.png" styleClass="pic"/>
+<p>
+<h:outputText  value="The results of all these requests, which are run in sequence, are shown below. "  />
+</p>
+               <h:graphicImage value="/img/Jmeterreslt.png" styleClass="pic"/>
+<p>
+<h:outputText  value="For load test,you can run the same test but as multiple threads using options under Thread Group. "  />
+</p>	
+
+
+
+    </p:panel>
+   </h:form>
+</ui:define> 
+</ui:composition>
+

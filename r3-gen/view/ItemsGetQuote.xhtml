@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:p="http://primefaces.org/ui"
+        template="layout/rtemplate.xhtml">
+<!-- Not Generated   -->
+<ui:remove>
+label messages.sponsors
+for sa ie service Agency 
+shown if any fees items ie FI-D example sponsorship or Insurance Policy ? and not logged in or non vendor logged in
+button messages.find messages.sponsors
+Need to fill up criteria
+bottom part will show
+
+
+</ui:remove>
+
+
+<ui:define name="body">
+    
+    <h:form id="r3browse" styleClass="edit">
+<h:outputStylesheet>
+
+</h:outputStylesheet>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup location="right" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+
+	  <p:toolbarGroup id="csizetb" location="${yxxxuh566xwwqqwxxxxxuserHome.mobile?'left':'right'}">
+             <ui:remove>
+              using ternary in el for value ,did not render consistently, specially first time
+             </ui:remove>
+              <h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none"   >
+               <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+              </h:link>
+              <p:panel id="jcount">
+              <h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0}">
+              </h:outputText>
+              <h:outputText value="[Empty]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() == null}"/>
+              </p:panel>
+	      <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemDetailsGetQuoteHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+<br/>
+	<p:toolbar height="36" itemSeparator="grid">
+              <h:commandButton id="r3FindTargets" styleClass="buttonMain" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemSearchByParameterList(fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y1xxuxxrbvxxxxxxxxxxsource2,fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice,fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y2xxuxxrbvxxxxxxxxxxmisccode1,fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y3xxuxxrbvxxxxxxxxxxmisccode2)}"  
+               value="#{messages.find} #{messages.sponsors}" />
+           <ui:decorate id="locationi" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['for']} #{messages.location} 
+            </ui:define>
+             <h:selectOneMenu  styleClass="autoCompleteWidth50" value="#{fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y1xxuxxrbvxxxxxxxxxxsource2}" 
+              rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+              <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItem itemValue="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
+				<f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('xx',12)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+             </h:selectOneMenu>
+            <br/>
+           </ui:decorate>
+
+
+	</p:toolbar>
+
+
+       <c:set var = "tpc" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:3}">
+       </c:set>
+       <c:set var = "mpc" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:4}">
+       </c:set>
+       <c:set var = "dpc" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:1}">
+       </c:set>
+       <c:set var = "mpr" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:3}">
+       </c:set>
+       <c:set var = "dpr" value="${yxxxuh566xwwqqwxxxxxuserHome.mobile?1:4}">
+       </c:set>
+
+ <p:panel>
+        <h:panelGrid columns="1">
+         <f:facet name="header">#{messages['select']}</f:facet>
+         <ui:decorate  template="layout/edit.xhtml"  >
+            <ui:define name="label">#{messages['target']} #{messages['amount']} 
+            </ui:define>
+                <p:inputNumberSpinner id="amounti"  
+                          value="#{fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice}"
+                           maxValue="900000"
+                           minValue="0"
+                           inputSize="6"
+                           step="500">
+                    </p:inputNumberSpinner>
+                    <h:outputText value="#{messages['0']} #{messages['covers']} #{messages['all']} #{messages['amounts']}"  rendered="#{empty fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice  or fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice == 0}"/>
+
+         </ui:decorate>
+         <ui:decorate  template="layout/edit.xhtml"  >
+            <ui:define name="label">#{messages['criteria']} 
+            </ui:define>
+             <h:selectOneMenu styleClass="autoCompleteWidth50" value="#{fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y2xxuxxrbvxxxxxxxxxxmisccode1}" 
+              rendered="true">
+              <p:ajax  render="dxxxch1d3xwwqqhxxlxxcompanyprovstateI" bypassUpdates="false"/>
+              <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItem itemValue="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
+              <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getSuggestList(jxxxuq201xwwqqhxxxxxcustomerHome.prefix)}" var="result"
+               itemValue="#{result.s1xxuo52bvxxxxxxxxxxoptions52}" itemLabel="#{result.s2xxup52bvxxxxxxxxxxpurpose52}" />
+             </h:selectOneMenu>
+         </ui:decorate>
+
+         <ui:decorate  template="layout/edit.xhtml"  >
+            <ui:define name="label">#{messages['type']} 
+            </ui:define>
+             <h:selectOneMenu styleClass="autoCompleteWidth50" value="#{fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y3xxuxxrbvxxxxxxxxxxmisccode2}" 
+              rendered="true">
+              <p:ajax  render="dxxxch1d3xwwqqhxxlxxcompanyprovstateI" bypassUpdates="false"/>
+              <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItem itemValue="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
+              <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getSuggestList(jxxxuq201xwwqqhxxxxxcustomerHome.prefix)}" var="result"
+               itemValue="#{result.s4xxuo53bvxxxxxxxxxxoptions53}" itemLabel="#{result.s5xxup53bvxxxxxxxxxxpurpose53}" />
+             </h:selectOneMenu>
+         </ui:decorate>
+
+        </h:panelGrid>
+
+ </p:panel>
+
+              <h:commandButton id="r3FindTargets2" styleClass="buttonMain" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemSearchByParameterList(fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y1xxuxxrbvxxxxxxxxxxsource2,fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice,fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y2xxuxxrbvxxxxxxxxxxmisccode1,fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y3xxuxxrbvxxxxxxxxxxmisccode2)}"  
+               value="#{messages.find} #{messages.sponsors}" />
+          <p:panel>  
+           <h:outputText id="ittcount" value="#{messages.matching} #{messages.sponsors} #{messages.identified} [#{fpxxfq1a5xwwqqhxxxxxitemList.getItemSearchByParameterList(fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y1xxuxxrbvxxxxxxxxxxsource2,fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice,fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y2xxuxxrbvxxxxxxxxxxmisccode1,fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.y3xxuxxrbvxxxxxxxxxxmisccode2).size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.showResultsCount}" >
+           </h:outputText>
+            <br></br><br></br>
+            <h:outputText value="#{messages['try']} #{messages['new']} #{messages['search']}" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.showResultsCount and fpxxfq1a5xwwqqhxxxxxitemList.paramResultsCount eq 0}"/>
+            <h:outputText value="To continue further, you need to sign up as a customer,agree to terms and pay a small fee for the service"               rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.showResultsCount and fpxxfq1a5xwwqqhxxxxxitemList.paramResultsCount gt 0 and !identity.loggedIn}"/>
+            <h:outputText value="To continue further, you need to agree to terms and pay a small fee for the service"               rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.showResultsCount and fpxxfq1a5xwwqqhxxxxxitemList.paramResultsCount gt 0 and identity.loggedIn} and !fpxxfq1a5xwwqqhxxxxxitemList.allow3Ok"/>
+
+            <h:outputText value="You have credit for "  rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.showResultsCount and fpxxfq1a5xwwqqhxxxxxitemList.paramResultsCount gt 0 and identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.allow3Ok }">
+             </h:outputText>
+            <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemList.allow3Amount}"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.showResultsCount and fpxxfq1a5xwwqqhxxxxxitemList.paramResultsCount gt 0 and identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.allow3Ok }">
+<f:convertNumber pattern="#0.0" />
+             </h:outputText>
+            <h:outputText value=" selection(s) "  rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.showResultsCount and fpxxfq1a5xwwqqhxxxxxitemList.paramResultsCount gt 0 and identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.allow3Ok }">
+             </h:outputText>
+<br></br>
+            <h:outputText value="You may go back and make your selection(s) now "  rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.showResultsCount and fpxxfq1a5xwwqqhxxxxxitemList.paramResultsCount gt 0 and identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.allow3Ok }"/>
+
+            <h:outputText value="Please try a new search criteria" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.showResultsCount and fpxxfq1a5xwwqqhxxxxxitemList.paramResultsCount lt 1 and identity.loggedIn}"/>
+            <h:button id="signup" styleClass="buttonMain" 
+                   value="#{messages['signupnpay']}"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/signup.xhtml"
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.showResultsCount and !identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.paramResultsCount gt 0}"/>
+
+            <h:button id="signupnpay" styleClass="buttonMain" 
+                   value="#{messages['proceed']} #{messages['to']} #{messages['pay']}"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/ItemDetailsGetQuote.xhtml"
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.showResultsCount and identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.paramResultsCount gt 0 and !fpxxfq1a5xwwqqhxxxxxitemList.allow3Ok}">
+                              <f:param name="detailType" value="SI-F"/>
+            </h:button>
+          </p:panel>  
+       <p:panel rendered="#{param.detailType=='SI-F'}">  
+        <h:panelGrid columns="#{dpc}" id="detailpanel" style="margin: 0 auto;text-align: left; " >
+                <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsFeesList()}" var="row" iterationStatusVar="status" rows="#{dpr}" id="repeatd">
+                    <p:panel style="float:left; width:#{customIdentity.product=='S' and customIdentity.subProduct=='B'  ?'700px':'200px'}; padding:1px; margin:5px;border:0;height:250px;">
+                        <f:facet name="header">
+                            <h:panelGroup >
+                             <h:graphicImage alt="no picture"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+                              value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=90" >
+                             </h:graphicImage> 
+                             <h:commandButton value="+" onclick="PF('ipopup').show()" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}">
+                             </h:commandButton>
+                            </h:panelGroup>
+                        </f:facet>
+                        <h:panelGrid columns="1" >
+                            <h:inputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"   style="font-size: 120%;font-weight: bold;;text-align:left;"  maxlength="30" disabled="true" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'SI-F'}"/>
+                            <h:outputText value="#{row.b8fbzpxxbvxxxxxxxxxxselprice}"  style="text-align: left;" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'SI-F' and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                                <f:convertNumber type="currency" currencySymbol="$" />
+                            </h:outputText>
+                            <h:outputText value="Request Quotation" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                            <h:outputText value="In Stock" style="text-align: left;"  rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'SI-F' and row.b0xxziqxlvxxsaxxxxxxquantity gt 0}" />
+                            <h:outputText value="Out Of Stock" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'SI-F' and row.b0xxziqxlvxxsaxxxxxxquantity le 0}" />
+
+                            <p:inputNumberSpinner  
+                             value="#{row.tempQuantity}" minValue="1"
+                             rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'SI-F'}"
+                             inputSize="2"
+                             step="1">
+                            </p:inputNumberSpinner>
+                            <p:commandButton id="AddToCart" styleClass="buttonMain" render="@all,jcount"   status="buttonStatus" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'SI-F' and row.b0xxziqxlvxxsaxxxxxxquantity gt 0}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrder(row,row.tempQuantity,'cart')}" 
+                                 value="#{messages['Add_To_Cart']}">
+                             <f:param name="detailType" value="#{param.detailType}" />
+                            </p:commandButton>
+
+                            <p:commandButton id="Notify" styleClass="buttonMain" render="@all,jcount"   status="buttonStatus" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'SI-F' and row.b0xxziqxlvxxsaxxxxxxquantity le 0}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrder(row,row.tempQuantity,'cart')}" 
+                                 value="#{messages['notify']} #{messages['me']} #{messages['status']}">
+                             <f:param name="detailType" value="#{param.detailType}" />
+                            </p:commandButton>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+                            <h:outputText value="Login, Request Quotation" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                            <p:dialog id="ipopup" modal="false" autosized="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#"  onclick="PF('ipopup').hide()" ; return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=200" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdataTypeMime('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-"  onclick="PF('ipopup').hide()" />
+
+                            </p:dialog>
+
+                        </h:panelGrid>
+                    </p:panel>
+                </ui:repeat>
+                <br/><br/>
+                <p:dataScroller for="repeatd"  id="ddsm" render="detailpanel" stepControls="hide" boundaryControls="hide"
+                            fastControls="hide" maxPages="10" />
+        </h:panelGrid>
+       </p:panel>
+
+
+
+
+
+
+ </h:form>
+
+</ui:define>
+	
+</ui:composition>
+
+
+
+
+

@@ -1,0 +1,676 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="txxxuq366xwwqqhxxxxxvenarthaA0xxuobxbxxxxxxxxxxxsid" value="#{txxxuq366xwwqqhxxxxxvenarthaHome.txxxuq366xwwqqhxxxxxvenarthaA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="txxxuq366xwwqqhxxxxxvenarthaFrom" value="#{txxxuq366xwwqqhxxxxxvenarthaHome.txxxuq366xwwqqhxxxxxvenarthaFrom}"/>
+    <f:viewAction action="#{txxxuq366xwwqqhxxxxxvenarthaHome.restrict()}" />
+    <f:viewAction action="#{txxxuq366xwwqqhxxxxxvenarthaHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Venartha']}</ui:define>
+
+<ui:define name="body">
+<h:form id="txxxuq366xwwqqhxxxxxvenartha" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("txxxuq366xwwqqhxxxxxvenartha:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!txxxuq366xwwqqhxxxxxvenarthaHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{txxxuq366xwwqqhxxxxxvenarthaHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['VenarthaEditHelp']!='VenarthaEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['VenarthaEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{txxxuq366xwwqqhxxxxxvenarthaHome.managed ? 'Edit' : 'Add'} #{messages['Venartha']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+     <h:panelGrid columns="2">
+       <p:tabView switchType="client" >
+
+
+
+
+
+
+   </p:tabView>
+
+    <br></br><h:outputText value="#{messages['If']} #{messages['a']} #{messages['manual']} #{messages['check']} #{messages['already']} #{messages['issued']}, #{messages['enter']} #{messages['chqnumber']} #{messages['and.']} #{messages['chqamt']}, #{messages['then']} #{messages['use']} #{messages['Manual_chq']} #{messages['button']}."/> 
+    <br></br><h:outputText value="#{messages['If']} #{messages['generating']} #{messages['checks']}, #{messages['ignore']} #{messages['chqamt']} #{messages['but']} #{messages['enter']} #{messages['chqnumber']} #{messages['only']} #{messages['if']} #{messages['the']} #{messages['starting']} #{messages['value']} #{messages['of']} #{messages['the']} #{messages['pre-printed']} #{messages['checks']} #{messages['do']} #{messages['not']} #{messages['match']} #{messages['value']} #{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').t6xxuxvpbvxxxxxxxxxxvendorchqn+1} "/>
+    
+
+
+     </h:panelGrid>
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a0xxukvabvxxxxxxxxxxchqnumberDecoration"    >
+        <h:outputLabel  for="a0xxukvabvxxxxxxxxxxchqnumber" value="#{messages['Chqnumber']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxukvabvxxxxxxxxxxchqnumber" 
+           validator="#{txxxuq366xwwqqhxxxxxvenarthaHome.validateKeyDuplicateChqnumber}" 
+                       label="chqnumber"
+                        required="false"
+                           size="20"
+                      maxlength="32"
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.a0xxukvabvxxxxxxxxxxchqnumber}">
+
+         </h:inputText>
+            <p:tooltip  target="a0xxukvabvxxxxxxxxxxchqnumber"> <span style="white-space: nowrap"> <h:outputText value="Enter Value to overide default"/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b1xxuxxxbvxxxxxxxxxxreconciledDecoration"    >
+        <h:outputLabel  for="b1xxuxxxbvxxxxxxxxxxreconciled" value="#{messages['Reconciled']}">
+      </h:outputLabel>
+
+         <h:inputText id="b1xxuxxxbvxxxxxxxxxxreconciled" 
+                           size="20"
+                      maxlength="12"
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.b1xxuxxxbvxxxxxxxxxxreconciled}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+             <h:panelGroup id="b3xxcxxxbvxxxxxxxxxxdateDecoration"    >
+        <h:outputLabel  for="b3xxcxxxbvxxxxxxxxxxdate" value="#{messages['Date']}">
+      </h:outputLabel>
+     <p:datePicker id="b3xxcxxxbvxxxxxxxxxxdate" 
+
+                          showTime="true" value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.b3xxcxxxbvxxxxxxxxxxdate}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="2">
+
+             <h:panelGroup id="b4xxuxxxbvxxxxxxxxxxaddrescodeDecoration"    >
+        <h:outputLabel  for="b4xxuxxxbvxxxxxxxxxxaddrescode" value="#{messages['Addrescode']}">
+      </h:outputLabel>
+                <h:inputText id="b4xxuxxxbvxxxxxxxxxxaddrescode" 
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.b4xxuxxxbvxxxxxxxxxxaddrescode}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b5xx0xxrbvxxxxxxxxxxchqamtDecoration"    >
+        <h:outputLabel  for="b5xx0xxrbvxxxxxxxxxxchqamt" value="#{messages['Chqamt']}">
+      </h:outputLabel>
+      <h:inputText id="b5xx0xxrbvxxxxxxxxxxchqamt"  
+         value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.b5xx0xxrbvxxxxxxxxxxchqamt}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.b5xx0xxrbvxxxxxxxxxxchqamt}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c1xxuxxxbvxxxxxxxxxxadvisel1Decoration"    >
+        <h:outputLabel  for="c1xxuxxxbvxxxxxxxxxxadvisel1" value="#{messages['Advisel1']}">
+      </h:outputLabel>
+
+         <h:inputText id="c1xxuxxxbvxxxxxxxxxxadvisel1" 
+                           size="20"
+                      maxlength="60"
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.c1xxuxxxbvxxxxxxxxxxadvisel1}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c2xxuxxxbvxxxxxxxxxxadvisel2Decoration"    >
+        <h:outputLabel  for="c2xxuxxxbvxxxxxxxxxxadvisel2" value="#{messages['Advisel2']}">
+      </h:outputLabel>
+
+         <h:inputText id="c2xxuxxxbvxxxxxxxxxxadvisel2" 
+                           size="20"
+                      maxlength="60"
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.c2xxuxxxbvxxxxxxxxxxadvisel2}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c3xxuxxxbvxxxxxxxxxxadvisel3Decoration"    >
+        <h:outputLabel  for="c3xxuxxxbvxxxxxxxxxxadvisel3" value="#{messages['Advisel3']}">
+      </h:outputLabel>
+
+         <h:inputText id="c3xxuxxxbvxxxxxxxxxxadvisel3" 
+                           size="20"
+                      maxlength="60"
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.c3xxuxxxbvxxxxxxxxxxadvisel3}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y1xxuxznbvxxxxxxxxxxnotesDecoration"  rendered="true">
+        <h:outputLabel  for="y1xxuxznbvxxxxxxxxxxnotes" value="#{messages['Notes']}">
+      </h:outputLabel>
+
+         <h:inputText id="y1xxuxznbvxxxxxxxxxxnotes" 
+                           size="20"
+                      maxlength="60"
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.y1xxuxznbvxxxxxxxxxxnotes}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z1xxuxxxlvxxxxxxxxxxamtverbosDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z1xxuxxxlvxxxxxxxxxxamtverbos" value="#{messages['Amtverbos']}">
+      </h:outputLabel>
+
+         <h:inputText id="z1xxuxxxlvxxxxxxxxxxamtverbos" 
+                           size="32"
+                      maxlength="120"
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.z1xxuxxxlvxxxxxxxxxxamtverbos}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z2xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z2xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="z2xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.z2xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z3xxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z3xxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="z3xxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.z3xxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z4xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z4xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="z4xxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.z4xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+   <p:panel header="#{messages['Totals']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+              <p:panel>
+               <h:panelGrid columns="5">
+               <ui:decorate id="status" template="layout/display.xhtml">
+                <ui:define name="label">#{messages['Status']}</ui:define>
+               </ui:decorate>
+                   <h:inputText id="statusT" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.z2xxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped': (txxxuq366xwwqqhxxxxxvenarthaHome.instance.z2xxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid':'other')}"   >
+                   </h:inputText>
+
+               <ui:decorate id="totals" template="layout/display.xhtml">
+                <ui:define name="label">Totals</ui:define>
+               </ui:decorate>
+                   <h:inputText id="matcodeId2T" 
+                       disabled="true"
+                        size="15"
+                         maxlength="20"
+                          value="#{txxxuq366xwwqqhxxxxxvenarthaHome.totalamountTotal}"   >
+                   <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+                   </h:inputText>
+               <ui:decorate id="totalsq" template="layout/display.xhtml">
+                <ui:define name="label">Qty</ui:define>
+               </ui:decorate>
+                   <h:inputText id="matcodeId2TQ" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{txxxuq366xwwqqhxxxxxvenarthaHome.totalqtyTotal}"   >
+                   </h:inputText>
+               <ui:decorate id="Detail_Lines" template="layout/display.xhtml">
+                <ui:define name="label">Detail Lines Added</ui:define>
+               </ui:decorate>
+                   <h:inputText id="matcodeId2DLT" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{txxxuq366xwwqqhxxxxxvenarthaHome.lastItemLine}"   >
+                   </h:inputText>
+
+             
+                <ui:decorate id="matcodeTDecoration" template="layout/display.xhtml">
+                 <ui:define name="label">Base Total</ui:define>
+                   <h:inputText id="matcodeId2LT" 
+                       disabled="true"
+                                   size="15"
+                              maxlength="20"
+                                  value="#{txxxuq366xwwqqhxxxxxvenarthaHome.totalbaseamt}"   >
+                        <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" groupingUsed="true"
+                     maxFractionDigits="2" type="currency" />
+                   </h:inputText>
+                </ui:decorate>
+
+
+
+
+               </h:panelGrid>
+              </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{txxxuq366xwwqqhxxxxxvenarthaHome.instance.a0xxukvabvxxxxxxxxxxchqnumber} #{messages['sid']} #{txxxuq366xwwqqhxxxxxvenarthaHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.a0xxukvabvxxxxxxxxxxchqnumber !=''}"/> 
+   </p:panel>
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+           
+            <p:commandButton id="save" styleClass="#{txxxuq366xwwqqhxxxxxvenarthaHome.managed?'':'buttonMain'}" 
+                          value="#{messages['convert']} #{messages['to']} #{messages['venartha']}" status="buttonStatus" update="@form"
+                         action="#{txxxuq366xwwqqhxxxxxvenarthaHome.extended_persist(true)}"
+                       rendered="#{txxxuq366xwwqqhxxxxxvenarthaList.entityLessStatusDetailedList(txxxuq366xwwqqhxxxxxvenarthaHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() eq 0}">  
+            </p:commandButton>   
+
+           <h:commandButton id="delete" 
+                         value="#{messages['Delete']} #{messages['Venartha']}" onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " 
+                         action="#{txxxuq366xwwqqhxxxxxvenarthaHome.remove()}"
+                        rendered="#{txxxuq366xwwqqhxxxxxvenarthaHome.managed and !txxxuq366xwwqqhxxxxxvenarthaHome.entityDeleted}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Use']} #{messages['List']} #{messages['to']} #{messages['delete']} #{messages['details']} #{messages['records']} #{messages['sametime']},#{messages['but']} #{messages['manually']} #{messages['delete']} #{messages['other']} #{messages['constraints']}"/></span> </p:tooltip> 
+           </h:commandButton>
+            <h:commandButton id="reprint" 
+                          value="#{messages['Allow']} #{messages['Reprint']}" 
+                         action="#{txxxuq366xwwqqhxxxxxvenarthaHome.markPaid()}"
+                       rendered="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.z2xxzzfxhhxxxxxxxxxxstatusfl == 512}"/>
+          
+
+            <h:button id="new" styleClass="buttonMain" 
+             value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/venarthaEdit.xhtml"
+                rendered="#{txxxuq366xwwqqhxxxxxvenarthaHome.managed}"/>
+
+
+
+
+
+            <f:param name="reportName" value="#{txxxuq366xwwqqhxxxxxvenarthaList.reportName}"/>
+            <f:param name="displayAs" value="#{txxxuq366xwwqqhxxxxxvenarthaList.displayAs}" /> 
+            <h:button outcome="/venarthaList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Venartha']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty txxxuq366xwwqqhxxxxxvenarthaHome.txxxuq366xwwqqhxxxxxvenarthaFrom ? 'home' : txxxuq366xwwqqhxxxxxvenarthaHome.txxxuq366xwwqqhxxxxxvenarthaFrom}.xhtml"
+                rendered="#{txxxuq366xwwqqhxxxxxvenarthaHome.managed or txxxuq366xwwqqhxxxxxvenarthaHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty txxxuq366xwwqqhxxxxxvenarthaHome.txxxuq366xwwqqhxxxxxvenarthaFrom ? 'home' : txxxuq366xwwqqhxxxxxvenarthaHome.txxxuq366xwwqqhxxxxxvenarthaFrom}.xhtml"
+                rendered="#{!txxxuq366xwwqqhxxxxxvenarthaHome.managed and !txxxuq366xwwqqhxxxxxvenarthaHome.entityDeleted}"/>
+
+
+            <h:commandButton id="refreshj" 
+                          value="#{messages['Refresh']} #{messages['data']}" 
+                         action="#{txxxuq366xwwqqhxxxxxvenarthaHome.showtemprunt()}"
+                       rendered="#{!txxxuq366xwwqqhxxxxxvenarthaHome.managed}"/>
+
+           <h:panelGroup>
+
+            &nbsp;&nbsp;
+            <h:panelGrid columns="2">
+             <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.displayAs']}</ui:define>
+                <h:selectOneMenu id="displayAs" value="#{txxxuq366xwwqqhxxxxxvenarthaList.displayAs}">
+                 <f:selectItem id="ditem2" itemLabel="HTML" itemValue="HTML" />
+                 <f:selectItem id="ditem1" itemLabel="PDF" itemValue="PDF" />
+                </h:selectOneMenu> 
+             </ui:decorate>
+            </h:panelGrid>
+
+
+           </h:panelGroup>
+          <h:panelGrid columns="1" rendered="#{txxxuq366xwwqqhxxxxxvenarthaList.suggest(txxxuq366xwwqqhxxxxxvenarthaHome.prefix).size() ge 1}">
+            <ui:remove>tbd inputText or clobdata 3R-mailingS.. to change defaultGreeting setMailingSubject</ui:remove>
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['Greeting']} #{messages['text']}- #{messages['Transaction']} #{messages['Receipt']} #{messages['from']} #{customIdentity.owner2}
+                   </ui:define>
+                <pe:ckEditor id="editor" height="100" width="100%"  value="#{txxxuq366xwwqqhxxxxxvenarthaList.mailingSource}"
+                 toolbar="[['NewPage','Preview','Cut','Copy','Image','Table','HorizontalRule','Iframe','Link','Unlink','Anchor','Paste','PasteText','PasteFromWord','-', 'Scayt'], '/',['Font','FontSize','Bold','Italic','Strike','-','RemoveFormat' ] ,[ 'TextColor','BGColor' ], ['Undo', 'Redo']]">
+                </pe:ckEditor>
+            </ui:decorate>
+          </h:panelGrid >
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="true" rendered="#{txxxuq366xwwqqhxxxxxvenarthaHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" toggleable="true" toggleableHeader="true">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+  <p:tabView switchType="ajax">
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Vendor']}">
+    <div class="association" id="jxxxuq300xwwqqhxxxxxvendorParent">
+        
+        <h:outputText value="No vendor" 
+                   rendered="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.jxxxuq300xwwqqhxxxxxvendor == null}"/>
+        
+        <p:dataTable var="jxxxuq300xwwqqhxxxxxvendor" tableStyle="table-layout:auto;"
+                   value="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.jxxxuq300xwwqqhxxxxxvendor}" 
+                rendered="#{txxxuq366xwwqqhxxxxxvenarthaHome.instance.jxxxuq300xwwqqhxxxxxvendor != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="jxxxuq300xwwqqhxxxxxvendorTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewvendor" 
+                     value="View" 
+                      outcome="/vendor.xhtml">
+                       <f:param disable="#{empty jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid}" name="jxxxuq300xwwqqhxxxxxvendorA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">vendor</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.a0xxukxxbvxxxxxxxxxxvendor}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">title</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.b1xxuxxrbv21xxxxxxxxtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">jobtitle</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.b2xxuxxrbv22xxxxxxxxjobtitle}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lastname</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.b3xxuslnbvxxxxxxxxxxlastname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">firstname</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.b4xxu2fnbvxxxxxxxxxxfirstname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">middlenam</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.b5xxuxxrbvxxxxxxxxxxmiddlenam}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">vendorascompanyname</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.d1xxu3cnbvxxxxxxxxxxvendorascompanyname}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">company sid</f:facet>
+		    	  #{jxxxuq300xwwqqhxxxxxvendor.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">location sid</f:facet>
+		    	  #{jxxxuq300xwwqqhxxxxxvendor.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByMailtocode sid</f:facet>
+		    	  #{jxxxuq300xwwqqhxxxxxvendor.fxxxuq111xwwqqhxxxxxaddressByMailtocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">addressByShiptocode sid</f:facet>
+		    	  #{jxxxuq300xwwqqhxxxxxvendor.fxxxuq111xwwqqhxxxxxaddressByShiptocode.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneo</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.m1xxh4pobv27xxxxxxxxphoneo}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phoneh</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.m2xxh5phbv27xxxxxxxxphoneh}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonec</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.m3xxhxxrbv27xxxxxxxxphonec}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">phonex</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.m4xxhxxrbv27xxxxxxxxphonex}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lanaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n1xxhxxrbv19xxxxxxxxlanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">wanaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n2xxhxxrbv25xxxxxxxxwanaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">lmailaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n3xxhxxrbv44xxxxxxxxlmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">imailaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n4xxhxxrbv24xxxxxxxximailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">rmailaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n5xxuxxrbvxxxxxxxxxxrmailaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">intaddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n6xxuxxrbvxxxxxxxxxxintaddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">inraddr</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.n7xxuxxrbvxxxxxxxxxxinraddr}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">integrset</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.o1xxuwmrbv40xxxxxxxxintegrset}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">contacted</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.o3xxuxxrbvxxxxxxxxxxcontacted}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">bywho</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.o4xxuxxrbvxxxxxxxxxxbywho}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">keywords</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.o5xxuzkybvxxxxxxxxxxkeywords}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.ycxxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.zdxxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.zexxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{jxxxuq300xwwqqhxxxxxvendor.zhxxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

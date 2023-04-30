@@ -1,0 +1,347 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:fb="http://www.facebook.com/2008/fbml"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<ui:remove>
+ This used in master site only and has social login part only
+ existing login page has 2 sections. No change to ist section but 2nd section redirects to this master site page
+ This allows master sites to use social login without registering each web site.
+ Any site including master site generated sites ,can use outputLink with parameter redirect_url  to come to this master site site page .
+ Since master site web page is already registered for facebook,Google we can get authentication and
+ send back the internal client sid record # as icr= and ?? creation date if authenticated or 0 if failed
+ to redirect_url/login.xhtml page
+ login page will use f:viewaction takeAction method to check for icr= and if !=null will verify against its own
+ client version 01 sid
+ If ok will invoke its own onfblogon etc
+ use ngrok, dont need to create any site but copy paste socialLogin.wflow after ngrok https link
+ To test fb add the ngrok link to facebook using developer id replace the existing one using edit area
+</ui:remove>
+
+<html>
+<h:head>  
+ 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>#{customIdentity.owner2}- see the difference</title>
+    <link href="stylesheet/3rcustom.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheet/jssocials.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheet/jssocials-theme-flat.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Tangerine"/>
+    <link href="stylesheet/3rw.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico"/>
+    <meta name="keywords"
+     content="trial,cloud,ecommerce,workflow,3R Computer Systems,3recommerce,bar code,low cost,automation,alumni,association,business,manufacturing,apllication,turnkey"/>
+    <meta name="alias" content="https://mystuffp-3rcomp.rhcloud.com"/>
+    <meta name="owner" content="3rcomputer.com"/>
+    <meta name="description" content="Unique cloud workflow solution to meet your needs"/>
+    <meta name="robots" content="index,follow"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/> 
+    <meta name="google-signin-scope" content="profile email"/>
+    <meta name="google-signin-client_id" content="430148632909-ge32b89fs0jr3l48crp5lmn2nl16fkrq.apps.googleusercontent.com"/>
+    <ui:remove> this client_id corresponds to google oauth client apr 19, client_ids are for authentication 
+               ie which google account. user needs to agree
+               and API_key also authenticates but where no pesonal data involved like maps 
+    </ui:remove>    
+</h:head>
+
+<h:body >
+    <h:form id="sociallogin">
+     <p:remoteCommand immediate="true" name="onFbLogin" action="#{yxxxuh566xwwqqwxxxxxuserHome.onSocialLogin()}">
+     </p:remoteCommand>
+
+     <p:remoteCommand immediate="true" name="onGgLogin" ajaxSingle="true" action="#{yxxxuh566xwwqqwxxxxxuserHome.onSocialLogin()}">
+     </p:remoteCommand>
+
+
+<h:outputStylesheet>
+</h:outputStylesheet>
+
+<script crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&amp;version=v3.2&amp;appId=1493497040950348&amp;;autoLogAppEvents=1"></script>
+<script src="https://apis.google.com/js/platform.js" >
+</script>
+    <script>
+        function google_sign_callback(authResult){
+         if(authResult['g-oauth-window']){
+
+         alert("g-oauth-window");
+
+         }else if(authResult['error']) {
+         alert("g-oauth-error");
+
+         }
+        }
+      function onSignIn(googleUser) {
+       // Useful data for your client-side scripts:
+       //alert("google onSignIn start ");
+       if (confirm('Continue, Login to this App using Google ?') ){
+        var profile = googleUser.getBasicProfile();
+        //onGgLogin(profile.getId(), profile.getEmail(), profile.getName(), profile.getGivenName(), profile.getFamilyName(), ' ');
+        onGgLogin([{name: 'id', value: profile.getId()}, {name: 'email', value: profile.getEmail()}])
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        //alert("put delay for "+profile.getId());
+        console.log("Email: " + profile.getEmail());
+        document.getElementById('status').innerHTML = 'Welcome Google User '+profile.getName() ;
+        //var auth2 = gapi.auth2.getAuthInstance();
+        //auth2.disconnect();
+        // The ID token you need to pass to your backend
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+        //following needed to give delay
+        alert("google login start "+profile.getName());
+        googleUser.disconnect();
+        //needed for edge browser 
+        debug;
+       }else{
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.disconnect();
+       }
+
+       document.location.reload();
+
+
+      }
+    </script>
+    <script>
+     function signOut() {
+      alert('signOut');
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+       });
+     }
+    </script>
+
+
+
+
+<script>
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+      //alert("check login state, from login button, getloginstatus, statuschangecallback");
+
+      FB.getLoginStatus(function(response) {
+
+      statusChangeCallback(response);
+
+
+      alert("Logging in to App using fb id");
+    });
+  }
+
+
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+      //alert("status callback from fb");
+
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      //alert("continue with fb");
+      var v1;
+      v1=confirm('Continue with Login using facebook ?');
+      if (v1==true){
+       //alert("continue with fb");
+       FB.api('/me', function(response) {
+       console.log('Successful login for: ' + response.name);
+       console.log('delay Successful login for: ' + response.name);
+       //onFbLogin(response.id, response.email, response.name, response.first_name, response.last_name, response.gender);
+       onFbLogin([{name: 'id', value: response.id}, {name: 'email', value: response.email}])
+       //document.location.reload();
+       console.log('delay Successful login for: ' + response.name);
+       console.log('delay Successful login for: ' + response.name);
+       document.getElementById('status').innerHTML = 'Welcome Facebook User '+response.name ;
+
+       //final response to user will come from server
+       });
+
+      }else{
+        //alert("logout from fb");
+         FB.logout(function () {
+         FB.Auth.setAuthResponse(null, 'unknown');
+         document.location.reload();
+        });
+      };
+      //alert("You are connected/background connected to facebook, attempting ioggning out from fb.");
+      //testAPI();
+      //userLogin()
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      //document.getElementById('status').innerHTML = 'Please log ' +
+      //  'into this app.';
+      alert("connected to fb but not to this App");
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      //document.getElementById('status').innerHTML = 'If you are not LoggedIn to facebook app now, you need to agree to terms';
+    }
+  }
+
+
+  function userLogin()
+    {
+        //alert("user login start");
+        FB.login(function(response) 
+        {
+           if (confirm("Continue with facebook login?")){
+           }else{
+            alert("It seems, on this browser, you are using facebook now or still Logged In in the background. To allow login using non facebook Id , you need to Logout using facebook logout first. if needed, cancel login and then logout here as well. ");
+            fbLogout();   
+   
+           }
+
+           if (response.authResponse) 
+           {
+             //alert("authResponse");
+             console.log('Welcome!  Fetching your information.... ');
+             var access_token = response.authResponse.accessToken;
+             location.href = "login.wflow";
+           } 
+           else 
+           {
+             console.log('User cancelled login or did not fully authorize.');
+           }
+         });
+    }
+
+  window.fbAsyncInit = function() {
+  var aid;
+   //alert(window.location.href);
+  if (window.location.href.indexOf(".l3r") > -1) {
+   aid = "1493497040950348";
+  } else {
+   aid = "462928240562239";
+  }
+   //alert(aid);
+  FB.init({
+    appId      : aid,
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.4' // use version 2.2
+  });
+  //appid if raaspi.com..   462928240562239
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+
+  //FB.getLoginStatus(function(response) {
+    //statusChangeCallback(response);
+  //});
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      onFbLogin(response.id, response.email, response.name, response.first_name, response.last_name, response.gender);
+      console.log('delay here Successful login for: ' );
+      console.log('delay here Successful login for: ' );
+      document.getElementById('status').innerHTML = 'Welcome Facebook User '+response.name ;
+      //final response to user will come from server
+    });
+  }
+  function Logout() {
+  FB.logout(function () { document.location.reload(); });
+  }
+
+</script>
+       <ui:remove> added a new action button to return to fromUrl and removed master site home page button
+       </ui:remove>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:outputText value="Business Date Rolled" rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?'left':'right'}">
+           <h:outputText value="Last Signed As " rendered="#{!identity.loggedIn and !yxxxuh566xwwqqwxxxxxuserHome.mobile}"/> 
+           <h:outputText value="#{customIdentity.username}" rendered="#{!identity.loggedIn and !yxxxuh566xwwqqwxxxxxuserHome.mobile}"/> 
+           <h:outputText value="#{messages.Today} " rendered="#{!identity.loggedIn and !yxxxuh566xwwqqwxxxxxuserHome.mobile}"/> 
+           <h:outputText value="#{authenticator.currcaldates}" rendered="#{!identity.loggedIn and !yxxxuh566xwwqqwxxxxxuserHome.mobile}"/> 
+           <ui:remove> user should not have access to master site home page, but toolbar is needed otherwise params are null
+           <h:button id="lbdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml"
+                    rendered="#{!identity.loggedIn and !yxxxuh566xwwqqwxxxxxuserHome.mobile}" >
+                 <p:tooltip id="homeTip" attached="true" for="lbdone" >
+                 <h:outputText value="#{messages.home_tip}" />
+                 </p:tooltip>
+           </h:button>
+           </ui:remove>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+        <p:accordionPanel switchType="client">
+           <p:tab title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #{messages.Login} #{messages.using} #{messages.social} #{messages.media}" 
+             leftInactiveIcon="/img/fb29.png"  rightInactiveIcon="/img/google-logo29.png"> 
+           <h:panelGrid columns="1" rendered="#{empty param['userKey']}">
+              <p:panel>
+              <div class="fb-login-button" scope="public_profile,email" onlogin="checkLoginState();" data-width="200px" data-size="large" data-button-type="login_with"  data-use-continue-as="true">
+              </div>
+              <br></br><br></br><div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+              </p:panel>
+           </h:panelGrid>  
+            <ui:fragment rendered="#{not empty param['userKey']}">
+             <br></br>
+             <h:outputText value="#{messages['Authentication']} #{messages['done']} #{messages['for']}"/>
+             <br></br><h:outputText style="color:red;"  value="#{param['userOtherId']} #{param['userKey']} " />
+             <br/><h:outputText value="#{messages['Last']} #{messages['step']}, #{messages['you']} #{messages['made']} #{messages['it']} ! "/>
+             <br></br><br></br><h:commandButton class="w3-button w3-blue" id="jay" value="#{messages['Continue']} " action="#{yxxxuh566xwwqqwxxxxxuserHome.onSocialAuthenticated()}"
+                  rendered = "#{not empty param['userKey']}" >
+                    <f:param name="social" value="#{param['social']}" />
+                    <f:param name="userKey" value="#{param['userKey']}" />
+             </h:commandButton>
+            </ui:fragment>
+             &nbsp;<h:button  class="w3-button w3-red " value="#{messages['Cancel']}" outcome="/home.xhtml"  />
+
+            
+           <div>
+           <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+
+           </div>
+
+
+          </p:tab> 
+                
+        </p:accordionPanel>
+</h:form>
+
+</h:body >
+</html>
+</ui:composition>
+
+

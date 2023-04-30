@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:c="http://java.sun.com/jsp/jstl/core"
+                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                 template="layout/rtemplateUi.xhtml">
+
+<ui:define name="title">#{messages['home_page_title']}</ui:define>
+<ui:define name="body">
+<!--                     home-ui  toolbar  includes Login, once loggedIn home is used.                                    -->
+
+<h:form id="Login_required">    
+      <div class = "btn-toolbar justify-content-between" role = "toolbar">
+         <div class = "btn-group ">
+              <h:outputText value="#{messages.common_notify}" style="font-size: medium;color: red"  /> 
+              <h:outputText value="#{messages.site_notify}" style="font-size: medium;color: red"/> 
+         </div>
+         <div>
+           <h:inputText id="Queryi" value="#{fpxxfq1a5xwwqqhxxxxxitemList.searchPattern}" size="20" onclick="this.value='';"
+            pt:placeholder="#{messages['search']} #{messages['site']}" />
+           <h:commandButton class="btn " id="r3Search" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('s')}"  
+            value="#{messages.searchButton}"  
+           />
+           &nbsp;&nbsp;
+           <h:link  fragment="#">
+           <h:outputText  value="Reset search" class="large" />
+           <f:param name="categoryJay" value="0" />
+           </h:link>
+         </div> 
+         <div class = "btn-group ">
+              <h:outputText value="&#160;&#160;"/>
+              <ui:fragment rendered="#{!identity.loggedIn}">
+              <a class="nav-link " href="/login.wflow">Login</a>
+              </ui:fragment>
+              <h:outputText value="#{messages.Today} "/> 
+              &#160;<h:outputText value="#{authenticator.currcaldates}"/> 
+
+         </div>
+      </div>
+      <h:messages globalOnly="false" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+      <h:link id="Cartm" value="#{messages.Results}" class="nav-link" outcome="/ItemDetailsBrowse.xhtml"  propagation="none" rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.searchPattern and fpxxfq1a5xwwqqhxxxxxitemList.searchPattern !='xyz..' and fpxxfq1a5xwwqqhxxxxxitemList.getItemDetailsBrowseList('sale').size() >0}" >
+       <h:graphicImage value="/img/Cart32.png" />
+       <f:param name="searchPattern" value="#{fpxxfq1a5xwwqqhxxxxxitemList.searchPattern}"/>
+       <f:param name="imailAlt" value="fromHome-UI"/>
+      </h:link>
+      <ui:fragment rendered="#{identity.loggedIn}">
+
+      </ui:fragment>
+
+              <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','TXT',0,4096000)}" 
+                rendered="#{!identity.loggedIn and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','TXT',0,12000) !='')}"/>
+</h:form>
+</ui:define> 
+</ui:composition>
+
+
+
+
+
+

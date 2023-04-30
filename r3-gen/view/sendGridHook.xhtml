@@ -1,0 +1,138 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:fb="http://www.facebook.com/2008/fbml"
+                template="layout/rtemplate.xhtml">
+<!-- copied from installApp.xhtml.ftl on 13-oct-2018 3:48:59 PM
+-->
+<ui:define name="body">
+    <h:messages globalOnly="true" styleClass="message"/>
+   
+ <h:form id="installApp">
+<h:outputStylesheet>
+</h:outputStylesheet>
+<f:metadata>
+    <f:event type="preRenderView" listener="#{skinBean.setCurrentSkin}" />
+    <f:viewAction action="#{r3RestClient.processSgWebhook('x')}" />
+
+</f:metadata>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+<ui:remove> specify /sendGridHook.wflow as redirect url in sendgrid
+ add a new method in controlusageperiods?
+              <h:outputText value="Business Date Rolled" rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed}"/> 
+</ui:remove>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?'left':'right'}">
+         <h:outputText value="Last Signed As " rendered="#{!identity.loggedIn}"/> 
+         <h:outputText value="#{customIdentity.username}"/> 
+         <h:outputText value="#{messages.Today} "/> 
+         <h:outputText value="#{authenticator.getCurrcaldates()}"/> 
+        <h:button id="lbdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml" />
+         <h:outputText id="QueryLabel" value="#{messages.searchTerm}" />
+         <h:inputText id="Query" value="put search here" size="15" />
+         <h:commandButton id="r3Search" action="/home.xhtml"  image="/img/Findblue16.png"
+            value="#{messages.searchButton}" />
+         <h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none"  rendered="#{identity.loggedIn and !customIdentity.product=='s'}"  >
+          <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+         </h:link>
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['installappHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+    
+  <p:accordionPanel switchType="client" itemInactiveLeftIcon="/img/control_add16.png" height="300px">
+   <p:tab title="#{messages.Click} #{messages.On} #{messages.Install} #{messages.to} #{messages.create} #{messages.your} #{messages.own} #{messages.store} #{messages.backoffice} #{messages.site}  " leftInactiveIcon="/img/LogIn16.png" > 
+
+   <h:panelGroup>   
+         <h:outputText value="#{messages.This} #{messages.will} #{messages.take} #{messages.you} #{messages.to} #{messages.the} #{messages.new} #{messages.site}, #{messages.at} #{messages.end} #{messages.of} #{messages.install}" /> 
+      
+   <div class="dialog">
+
+   <h:panelGrid id="signupx">
+      <h:panelGrid columns="6">
+       <ui:decorate id="sclientEmailField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.login_email}(#{messages.required})</ui:define>
+            <h:inputText id="email" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid}" 
+             pt:placeholder="email@xyz.com" size="30" maxlength="50"/>
+            <h:outputText value="        "/>
+            <h:graphicImage id="semailTipImg" value="/img/help.gif">
+             <p:tooltip id="semailTip" attached="true" for="semailTipImg">
+              <h:outputText value="#{messages.to} #{messages.notify} #{messages.by} #{messages.email}"/>
+             </p:tooltip>
+            </h:graphicImage>
+       </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="6">
+          <ui:decorate id="suserCompanyNameField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.store} #{messages.name}(#{messages.required})</ui:define>
+            <h:inputText id="storeName" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.companyName}"
+              pt:placeholder="#{messages['mystore']}.#{messages['myshopify']}.com" size="25" maxlength="35"/>
+            <h:outputText value="        "/>
+            <h:graphicImage id="shopTipImg" value="/img/help.gif">
+             <p:tooltip id="shopTip" attached="true" for="shopTipImg">
+              <h:outputText value="#{messages.shop} #{messages.url} #{messages.like} #{messages['mystore']}.#{messages['myshopify']}.com"/>
+             </p:tooltip>
+            </h:graphicImage>
+
+          </ui:decorate>
+      </h:panelGrid>
+          <h:panelGroup>
+            <h:selectBooleanCheckbox id="agreedToTerms" value="#{yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"/>
+            <h:outputText value="#{messages.agree_to_terms}" escape="false"/>
+            <h:commandLink value=" " id="termsOfUseLink" onclick="PF('termsOfUse').show()" >
+              <h:outputText value=" #{messages['read']}"/>
+            </h:commandLink><br/>
+            <p:commandButton  id="signupButton" styleClass="buttonMain" value="#{messages.Install}"  status="buttonStatus" render="signupx"
+                action="#{r3RestClient.installOrAuthorize(yxxxuh566xwwqqwxxxxxuserHome.companyName,yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid,yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse)}"/>
+             <p:status name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:status>
+            <h:button id="lstdone"  value="#{messages.done}" propagation="end" outcome="/home.xhtml" />
+          </h:panelGroup>
+       <h:messages globalOnly="false" styleClass="message" />
+   </h:panelGrid>
+
+   </div>
+   </h:panelGroup> 
+  </p:tab> 
+  </p:accordionPanel> 
+                
+
+ </h:form>
+<h:form>
+
+ <p:popupPanel id="termsOfUse" width="640" height="480" >
+  <f:facet name="header"><h:outputText value="#{messages.terms_of_use}"/></f:facet>
+  <f:facet name="controls">
+   <h:form>
+    <p:commandButton onclick="PF('termsOfUse').hide()"  type="image" image="/img/Cancel16.png"/>
+   </h:form>
+  </f:facet>
+  <ui:include src="signupTerms.xhtml"/>
+  <h:panelGroup style="width: 600px; text-align: center;">
+    <h:form>
+      <p:commandButton value="#{messages.ok}" onclick="PF('termsOfUse').hide()"/>
+    </h:form>
+  </h:panelGroup>
+ </p:popupPanel>
+</h:form>
+
+
+
+ </ui:define> 
+</ui:composition>
+
+
+

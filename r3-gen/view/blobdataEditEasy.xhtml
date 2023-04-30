@@ -1,0 +1,565 @@
+
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="yxxxuq1n1xwwqqqxxxxxblobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.yxxxuq1n1xwwqqqxxxxxblobdataA0xxuobxbxxxxxxxxxxxsid}"/>
+     <f:viewParam name="useSeq" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.useSeq}"/>
+     <f:viewParam name="fromTable" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}"/>
+     <f:viewParam name="qualifier" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}"/>
+     <f:viewParam name="fromKey" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey}"/>
+     <f:viewParam name="useSeq" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}"/>
+    <f:viewParam name="yxxxuq1n1xwwqqqxxxxxblobdataFrom" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.yxxxuq1n1xwwqqqxxxxxblobdataFrom}"/>
+    <f:viewAction action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.restrict()}"/>
+    <f:viewAction action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.wire()}"/>
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Blobdata']}</ui:define>
+
+<ui:define name="body">
+<h:form id="yxxxuq1n1xwwqqqxxxxxblobdata" styleClass="edit"  enctype="multipart/form-data">
+<h:outputStylesheet>
+.autoCompleteWidth50 {
+    width:200px !important;
+}
+  .rf-au-lst-scrl {
+    width:200px !important;
+    height:200px;
+    max-height: 300px;
+    min-height: 100px;
+}
+.rf-fu-btn-cnt-add{
+ display: block; height: 40px;width: 200px;
+ }
+
+.autoCompletePopupHieght {
+    width:200px !important;
+}
+
+.rf-tb {
+    background-color:#{a4jSkin.tableSubHeaderBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+
+}
+.rf-cp-hdr {
+    background-color:#{a4jSkin.additionalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.rf-insp-dec {
+ background-color:white
+}
+.rf-insp-inc {
+ background-color:white
+}
+.rf-edt-c {
+    height: 40px !important;
+}
+.rf-edt-hdr {
+    background-color:#{a4jSkin.generalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.managed}" outcome="/home.xhtml" />
+              <h:outputText value="#{messages['Change']} #{messages['done']}-#{yxxxuq1n1xwwqqqxxxxxblobdataHome.getCurrentTime()}"
+                style="color:green;"
+                rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.changeDone}">
+               <f:convertDateTime   type="time" />
+              </h:outputText>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['BlobdataEditHelp']!='BlobdataEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['BlobdataEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+        <p:panel>
+
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{yxxxuq1n1xwwqqqxxxxxblobdataHome.managed ? 'Edit' : 'Add'} #{messages['Blobdata']}</f:facet>
+
+
+         <p:messages ajaxRendered="true" closable="true" />
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 a0xxuobxbxxxxxxxxxxxsid -->
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 a0xxukbdlvxxxxxxxxxxfromtable -->
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 a1xxuxxxbv49xxxxxxxxfromkey -->
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 a2xxuxxxbv50xxxxxxxxqualifier -->
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 a3xxexnsbvxxxxxxxxxxsequence -->
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 a4xxexxxbvxxxxxxxxxxtype -->
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 b1xxuzbxbvxxxxxxxxxxdata -->
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 y3xxuxznbvxxxxxxxxxxnotes -->
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 z1xxzzfxhhxxxxxxxxxxstatusfl -->
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 z2xxcztxlxxxxxxxxxxxstatusfldt -->
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 z3xxutoxlhxxxxxxxxxxowner -->
+
+
+
+     <!-- not foreign (and not component ) ie autogen key or keyed in or subkey or next number jay entityfunc2 zzxxu2oxxhxxxxxxxxxxowner2 -->
+
+
+
+
+</h:panelGrid>
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+
+
+
+            <h:panelGroup id="a0xxukbdlvxxxxxxxxxxfromtableDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+       <h:outputLabel  for="a0xxukbdlvxxxxxxxxxxfromtable" value="#{messages['Fromtable']}">
+
+      </h:outputLabel>
+         <h:inputText id="a0xxukbdlvxxxxxxxxxxfromtable" 
+           validator="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.validateKeyDuplicateFromtable}" 
+
+                       label="fromtable"
+                        required="true"
+                           size="20"
+                      maxlength="35"
+
+                          value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}">
+
+         </h:inputText>
+
+            <p:tooltip  for="a0xxukbdlvxxxxxxxxxxfromtable"> <span style="white-space: nowrap"> <h:outputText value="Enter Value here"/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+
+
+
+      <h:panelGroup id="a1xxuxxxbv49xxxxxxxxfromkeyDecoration"    >
+       <h:outputLabel  for="a1xxuxxxbv49xxxxxxxxfromkey" value="#{messages['Source']}">
+       </h:outputLabel>
+ 
+              <h:inputText id="source" value= "#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey}" disabled="true"
+              rendered="#{fn:endsWith(yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey,'-M')}"/>
+                <h:panelGrid columns="2">
+                 <h:selectOneMenu  styleClass="autoCompleteWidth50" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey}" required="false" id="a1xxuxxxbv49xxxxxxxxfromkey" rendered="#{!fn:endsWith(yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey,'-M')}">
+                   <f:ajax  render="a1xxuxxxbv49xxxxxxxxfromkeyI" bypassUpdates="false"/>
+                                <f:selectItem itemValue="#{null}" itemLabel="" />
+                                <f:selectItem itemLabel="Photographer" itemValue="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.z3xxutoxlhxxxxxxxxxxowner}"/>
+                                <f:selectItem itemLabel="Brand Name" itemValue="Raaspi"/>
+                                <f:selectItem itemLabel="Website" itemValue="www.site.com"/>
+                                  <p:tooltip>  <span style="white-space: nowrap"> <h:outputText value="#{messages['Select']} #{messages['and']} #{messages['Append']} #{messages['or']} #{messages['Enter']} #{messages['new']} #{messages['value']} #{messages['in']} #{messages['next']} #{messages['box']}"/></span> </p:tooltip> 
+               </h:selectOneMenu>
+                 <h:inputText id="a1xxuxxxbv49xxxxxxxxfromkeyI" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}" label="#{messages['Source']}" required="true"
+                          size="20" maxlength="200">
+
+                 </h:inputText>
+                </h:panelGrid>
+
+
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="a2xxuxxxbv50xxxxxxxxqualifierDecoration"    >
+       <h:outputLabel  for="a2xxuxxxbv50xxxxxxxxqualifier" value="#{messages['Qualifier']}">
+
+      </h:outputLabel>
+ 
+		  <h:selectOneMenu styleClass="autoCompleteWidth50" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}" required="false" id="a2xxuxxxbv50xxxxxxxxqualifier">
+                                <f:selectItem itemValue="PIC" itemLabel="PIC" />
+
+ 		  </h:selectOneMenu>
+
+
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="a3xxexnsbvxxxxxxxxxxsequenceDecoration"    >
+       <h:outputLabel  for="a3xxexnsbvxxxxxxxxxxsequence" value="#{messages['Sequence']}">
+
+      </h:outputLabel>
+                &nbsp;<p:spinner id="a3xxexnsbvxxxxxxxxxxsequence" 
+                          value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}"
+                           inputSize="2"
+                           step="1">
+                    </p:spinner>
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="a4xxexxxbvxxxxxxxxxxtypeDecoration"    >
+       <h:outputLabel  for="a4xxexxxbvxxxxxxxxxxtype" value="#{messages['Type']}">
+
+      </h:outputLabel>
+         <h:inputText id="a4xxexxxbvxxxxxxxxxxtype" 
+
+                           size="20"
+                      maxlength="40"
+
+                          value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a4xxexxxbvxxxxxxxxxxtype}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+   </h:panelGrid>
+
+
+
+   <h:panelGrid columns="1">
+            <h:panelGroup id="b1xxuzbxbvxxxxxxxxxxdataDecoration"    >
+       <h:outputLabel  for="b1xxuzbxbvxxxxxxxxxxdata" value="#{messages['Data']}">
+
+      </h:outputLabel>
+          <h:inputText id="b1xxuzbxbvxxxxxxxxxxdata" 
+                   disabled="true"
+                   size="20"
+                   maxlength="255"
+                   value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.b1xxuzbxbvxxxxxxxxxxdata}">
+         </h:inputText>
+           <p:tooltip target="b1xxuzbxbvxxxxxxxxxxdatad"> <span style="white-space: nowrap"> <h:outputText value="Types allowed are: jpg, gif, png, bmp, xml,doc,txt,pdf,xls,mp3,mp4"/></span> </p:tooltip> 
+          <o:inputFile  value="#{file.lfiles}" multiple="true" 
+           accept="image/png,image/jp*,video/*"/>
+          <h:commandButton value="Upload" action="#{file.fileUpload('clobblob')}" />
+         <br />
+         <p:panel rendered="#{not empty file.data}">
+          <h:commandButton action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.clearUploadData}"
+            value="#{messages['Clear']} #{messages['Uploaded']} #{messages['Data']}"/>
+          #{messages['Uploaded']}&nbsp;
+         <o:graphicImage value="#{file.data}" dataURI="true" width="100" 
+          rendered="#{not empty file.data}" />
+         </p:panel>
+
+          <h:selectOneRadio value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.upLoadPurpose}" required="false" id="b1xxuzbxbvxxxxxxxxxxdatad" rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.b1xxuzbxbvxxxxxxxxxxdata ne null}">
+             <f:selectItem  
+              itemLabel="Add"
+              itemValue="ad" /> 
+             <f:selectItem  
+              itemLabel="Replace"
+              itemValue="re" /> 
+            </h:selectOneRadio>
+                 <ui:remove> url allows delay to load the image as opposed to previous jsf h:graphicImage </ui:remove>
+                 <p:panel rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey.length() >2 and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 !='SYSTEM'}">
+                  #{messages['Saved']}&nbsp;
+                  <img alt="image"
+                   src="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey}&amp;height=100" >
+                  </img> 
+                 </p:panel>
+                 <p:panel rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey.length() >2 and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2=='SYSTEM'}">
+                  #{messages['Gallery']}&nbsp;#{messages['Saved']}&nbsp;
+                  <img alt="image"
+                   src="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey}&amp;height=100&amp;scope=SYSTEM" >
+                  </img> 
+                 </p:panel>
+            </h:panelGroup>
+   </h:panelGrid>
+
+
+
+   <h:panelGrid columns="4">
+
+
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="2">
+
+            <h:panelGroup id="y3xxuxznbvxxxxxxxxxxnotesDecoration"  rendered="true">
+       <h:outputLabel  for="y3xxuxznbvxxxxxxxxxxnotes" value="#{messages['Notes']}">
+
+      </h:outputLabel>
+                <h:inputTextarea id="y3xxuxznbvxxxxxxxxxxnotes"
+                               cols="80"
+                               rows="3"
+                              value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.y3xxuxznbvxxxxxxxxxxnotes}"/>
+            </h:panelGroup>
+
+
+
+
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z1xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+       <h:outputLabel  for="z1xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+
+      </h:outputLabel>
+                <h:inputText id="z1xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z2xxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+       <h:outputLabel  for="z2xxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+
+      </h:outputLabel>
+    				<p:calendar id="z2xxcztxlxxxxxxxxxxxstatusfldt"
+                          value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.z2xxcztxlxxxxxxxxxxxstatusfldt}" datePattern="MM/dd/yyyy hh:mm a" >
+                   </p:calendar>
+
+            </h:panelGroup>
+
+
+
+
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z3xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+       <h:outputLabel  for="z3xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+
+      </h:outputLabel>
+         <h:inputText id="z3xxutoxlhxxxxxxxxxxowner" 
+
+                           size="20"
+                      maxlength="40"
+
+                          value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.z3xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+       <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+
+      </h:outputLabel>
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+
+                           size="20"
+                      maxlength="40"
+
+                          value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+   </h:panelGrid>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail, nov20 2018 added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       may07 2018 allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.persist()}"
+                       disabled="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.wired}"
+                       rendered="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.managed  and !yxxxuq1n1xwwqqqxxxxxblobdataHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+            <p:commandButton id="saveSys" styleClass="buttonMain" 
+                          value="#{messages['Save']} #{messages['In']} #{messages['Gallery']}" status="buttonStatus" update="@form" 
+                         action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.persist('SYSTEM')}"
+                       disabled="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.wired}"
+                       rendered="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.managed  and customIdentity.masterSite}">  
+            </p:commandButton>  
+                        <h:commandLink value="#{messages['Add']} #{messages['fading']}" action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.allowFading(yxxxuq1n1xwwqqqxxxxxblobdataHome.instance)}"
+                           rendered="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a4xxexxxbvxxxxxxxxxxtype.contains('asis') and (yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence == 1 or yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence == 2) and (yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey =='3R-TOP-BKGR-M' or yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey =='3R-TOP-BKGR-C') }"  >
+                        </h:commandLink>
+                        <h:outputText value="#{messages['fading']} #{messages['added']} #{messages['or']} #{messages['in']} #{messages['place']}" rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a4xxexxxbvxxxxxxxxxxtype.contains('asis') and (yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence == 1 or yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence == 2) and (yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey =='3R-TOP-BKGR-M' or yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey =='3R-TOP-BKGR-C') }"/>  
+
+                        <h:commandLink value="#{messages['Remove']} #{messages['fading']}" action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.removeFading(yxxxuq1n1xwwqqqxxxxxblobdataHome.instance)}"
+                           rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a4xxexxxbvxxxxxxxxxxtype.contains('asis') and (yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence == 1 or yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence == 2) and (yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey =='3R-TOP-BKGR-M' or yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey =='3R-TOP-BKGR-C') }"  >
+                        </h:commandLink>
+                        <h:outputText value="#{messages['fading']} #{messages['removed']} #{messages['or']} #{messages['not']} #{messages['in']} #{messages['place']}" rendered="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a4xxexxxbvxxxxxxxxxxtype.contains('asis') and (yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence == 1 or yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence == 2) and (yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey =='3R-TOP-BKGR-M' or yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey =='3R-TOP-BKGR-C') }"/>  
+
+            <p:commandButton id="rotate" styleClass="buttonMain" 
+                          value="#{messages['Rotate']}" status="buttonStatus" update="@form"
+                         action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.rotateClockwise90('u')}"
+                       rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.managed}"/>
+            <h:commandLink  id="resetb" styleClass="hdrLink" onclick="myReload()"  iconClass="pic" value="#{messages['Reload']}" 
+              rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.managed}" >
+            </h:commandLink>
+
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.update()}"
+                       rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.managed  and !yxxxuq1n1xwwqqqxxxxxblobdataHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.update()}"
+                       rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.managed and yxxxuq1n1xwwqqqxxxxxblobdataHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.remove()}"
+                       rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.managed and !yxxxuq1n1xwwqqqxxxxxblobdataHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/blobdataEditEasy.xhtml"
+                       rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty yxxxuq1n1xwwqqqxxxxxblobdataHome.yxxxuq1n1xwwqqqxxxxxblobdataFrom ? 'home' : yxxxuq1n1xwwqqqxxxxxblobdataHome.yxxxuq1n1xwwqqqxxxxxblobdataFrom}.xhtml"
+
+                rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.managed or yxxxuq1n1xwwqqqxxxxxblobdataHome.entityDeleted}"/>
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty yxxxuq1n1xwwqqqxxxxxblobdataHome.yxxxuq1n1xwwqqqxxxxxblobdataFrom ? 'home' : yxxxuq1n1xwwqqqxxxxxblobdataHome.yxxxuq1n1xwwqqqxxxxxblobdataFrom}.xhtml"
+                rendered="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.managed and !yxxxuq1n1xwwqqqxxxxxblobdataHome.entityDeleted}"/>
+
+
+
+
+
+</div>
+</p:panel>
+       <p:messages ajaxRendered="true" closable="true"  />
+  <p:panel toggleable="true" toggleableHeader="true" style="width: 90%;background-color:white;"  header="#{messages['shared']} #{messages['photo']} #{messages['galery']}" switchType="client" collapsed="true" rendered="#{customIdentity.labelView.contains('VM') }"
+        leftCollapsedIcon="/img/control_add16.png" rightCollapsedIcon="/img/Activitygroup16.png" leftExpandedIcon="/img/control_remove16.png">
+            <h:panelGrid columns="2">
+              <p:panel>
+               <c:set var = "dpc" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:1}">
+               </c:set>
+               <c:set var = "dpr" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:2}">
+               </c:set>
+                <h:panelGrid columns="2">
+                 <p:panel>
+                  <h:link  value="#{messages['Browse']}/#{messages['Search']}"   outcome="/blobdataSystemList.xhtml" target="_blank" />
+                   &nbsp;&nbsp;<h:outputText value = "#{messages['in']} #{messages['shared']} #{messages['Image']} #{messages['gallery']}" style="font-size: small;"/>
+                 </p:panel>
+                </h:panelGrid>
+
+             </p:panel>
+           </h:panelGrid>
+
+
+   </p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

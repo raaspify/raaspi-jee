@@ -1,0 +1,542 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid" value="#{fpxxuq9eexwwqqhefxxxmachineHome.fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{fpxxuq9eexwwqqhefxxxmachineList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal}"/>
+    <f:viewAction action="#{fpxxuq9eexwwqqhefxxxmachineHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Machine']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="fpxxuq9eexwwqqhefxxxmachineSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']}" propagation="end"  outcome="/home.xhtml" />
+             <p:ajaxStatus name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['MachineListHelp']!='MachineListHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['MachineListHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+
+ <p:panel style="width: 50%;" header="#{messages['Machine']}- #{messages['List']} #{messages['Search']} #{messages['Result']}, #{messages['click']} #{messages['to']} #{messages['change']} #{messages['search']}  #{messages['criteria']}" switchType="ajax" collapsed="true"
+     toggleable="true" toggleableHeader="true">
+
+<h:panelGrid columns="20">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{fpxxuq9eexwwqqhefxxxmachineList.searchVal}"/>
+ </ui:decorate>
+  <h:outputText id="searchVJ" value="#{fpxxuq9eexwwqqhefxxxmachineList.searchValJ}" rendered="#{fpxxuq9eexwwqqhefxxxmachineList.searchVal.isEmpty()}"/>
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText id="toDay" ph:type="date" value="#{fpxxuq9eexwwqqhefxxxmachineList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <h:commandButton id="setToday" render="toDay" value="#{messages['set']} #{messages['Today']}"   action="#{fpxxuq9eexwwqqhefxxxmachineList.setSearchDate(fpxxuq9eexwwqqhefxxxmachineHome.currentTime)}" />
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label"> #{messages['status']}  </ui:define>
+  <h:panelGrid columns="2" >
+         <h:selectOneMenu value="#{fpxxuq9eexwwqqhefxxxmachineList.searchStatus}"> 
+          <f:selectItem itemLabel="all" itemValue="#{null}"/>
+          <f:selectItem itemLabel="open" itemValue="0"/>
+          <f:selectItem itemLabel="active/ordered" itemValue="1"/>
+           <f:selectItem itemLabel="return" itemValue="4"/>
+          <f:selectItem itemLabel="closed" itemValue="8"/>
+           <f:selectItem itemLabel="paid" itemValue="16"/>
+           <f:selectItem itemLabel="partial/shipped" itemValue="32"/>
+           <f:selectItem itemLabel="printed/final approved" itemValue="512"/>
+          <f:selectItem itemLabel="marked" itemValue="128"/>
+          <f:selectItem itemLabel="deleted" itemValue="256"/>
+         </h:selectOneMenu>
+  </h:panelGrid>
+ </ui:decorate>
+</h:panelGrid>
+
+
+
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{fpxxuq9eexwwqqhefxxxmachineList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{fpxxuq9eexwwqqhefxxxmachineList.suggest(fpxxuq9eexwwqqhefxxxmachineHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{fpxxuq9eexwwqqhefxxxmachineList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{fpxxuq9eexwwqqhefxxxmachineList.suggest(fpxxuq9eexwwqqhefxxxmachineHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="fpxxuq9eexwwqqhefxxxmachineList,globalMessages" status="buttonStatus" value="#{messages['Search']}" 
+              actionListener="#{fpxxuq9eexwwqqhefxxxmachineList.getFirstResult()}" rendered="#{fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal lt 49}"/>
+            &nbsp;<h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</p:panel>
+
+    <p:panel>
+
+        <div class="actionButtons">
+             <h:commandButton id="copyallt" value="Copy All Flagged"  action="#{fpxxuq9eexwwqqhefxxxmachineHome.copyAllMarked()}" 
+                rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal lt 49}" status="buttonStatus"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+             <h:commandButton id="deleteallt" value="#{messages['Delete']} #{messages['All']} #{messages['Flagged']}"  action="#{fpxxuq9eexwwqqhefxxxmachineHome.deleteAllFlagged()}"
+              onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal lt 49}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Deletes']} #{messages['detail']} #{messages['records']} #{messages['as-well']},#{messages['but']} #{messages['not']} #{messages['all']} #{messages['constraints']}"/></span> </p:tooltip> 
+             </h:commandButton>
+             <h:commandButton id="updateallt" value="Update All Flagged"  rendered="false" action="#{fpxxuq9eexwwqqhefxxxmachineHome.updateAllFlagged()}" />
+             <h:commandButton id="emailIcal" value="#{messages['email']} #{messages['as']} #{messages['iCalendar']}"  rendered="false" action="#{fpxxuq9eexwwqqhefxxxmachineHome.writeAsIcalText()}"/>
+
+            <h:button outcome="/#{empty fpxxuq9eexwwqqhefxxxmachineFrom ? 'home' : fpxxuq9eexwwqqhefxxxmachineFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <ui:remove>  do not render list page once > 50 rows  to avoid excedding max http params </ui:remove>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{fpxxuq9eexwwqqhefxxxmachineList.setMaxResultsVal(6)}" rendered="#{fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{fpxxuq9eexwwqqhefxxxmachineList.setMaxResultsVal(50)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{fpxxuq9eexwwqqhefxxxmachineList.setMaxResultsVal(100)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal lt 49}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{fpxxuq9eexwwqqhefxxxmachineList.setskipColumns(true)}" rendered="#{fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal lt 49}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{fpxxuq9eexwwqqhefxxxmachineList.setskipColumns(false)}" rendered="#{fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal lt 49}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(ity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Machine Search Results showing #{empty fpxxuq9eexwwqqhefxxxmachineList.resultList ? 0 : (fpxxuq9eexwwqqhefxxxmachineList.paginated ? fpxxuq9eexwwqqhefxxxmachineList.resultList.size() : fpxxuq9eexwwqqhefxxxmachineList.resultCount)} of #{fpxxuq9eexwwqqhefxxxmachineList.resultCount}"/>
+        </f:facet>
+    <div class="results" id="fpxxuq9eexwwqqhefxxxmachineList" style="overflow-x:auto">
+
+    <h:outputText value="The Machine search returned no results."
+               rendered="#{empty fpxxuq9eexwwqqhefxxxmachineList.resultList}"/>
+
+
+
+
+    <p:dataTable id="fpxxuq9eexwwqqhefxxxmachineList"  frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" rows="#{fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal}" scrollRows="6"
+           var="_fpxxuq9eexwwqqhefxxxmachine" selection="#{fpxxuq9eexwwqqhefxxxmachineHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}" rowKey="#{_fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}"
+           value="#{fpxxuq9eexwwqqhefxxxmachineList.resultList}"
+           rendered="#{not empty fpxxuq9eexwwqqhefxxxmachineList.resultList}">
+         <p:column headerText="Action">
+            <h:selectBooleanCheckbox id="MarkItCheckbox" value="#{fpxxuq9eexwwqqhefxxxmachineHome.checked[_fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid]}"/>
+            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+            <h:link outcome="/#{empty from ? 'machine' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+                   propagation="#{empty from ? 'none' : 'default'}"
+                      id="fpxxuq9eexwwqqhefxxxmachineViewId">
+                <f:param name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+             <h:link outcome="/machineEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="fpxxuq9eexwwqqhefxxxmachineEdit1"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') ||customIdentity.hasRole('SH') ||customIdentity.hasRole('EH') 
+                  || (customIdentity.hasRole('VH') ||customIdentity.hasRole('VQ')
+                  and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            <h:commandButton id="Download1" image="/img/arrow_down16.png" rendered="#{empty from and _fpxxuq9eexwwqqhefxxxmachine.y8xxuzdrbvxxxxxxxxxxdocmnt.length() >2}" action="#{fpxxuq9eexwwqqhefxxxmachineHome.downloadThis(_fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </p:column>
+        <p:column rendered = "#{!fpxxuq9eexwwqqhefxxxmachineList.skipColumns}"
+                    headerText="Sid">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}"  id="a0xxuobxbxxxxxxxxxxxsid" />
+        </p:column>
+        <p:column rendered = "#{!fpxxuq9eexwwqqhefxxxmachineList.skipColumns}"
+                    headerText="Machinecode">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxukmxbvxxxxxxxxxxmachinecode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.a0xxukmxbvxxxxxxxxxxmachinecode}"  id="a0xxukmxbvxxxxxxxxxxmachinecode" rendered="true" />
+        </p:column>
+        <p:column rendered = "#{!fpxxuq9eexwwqqhefxxxmachineList.skipColumns}"
+                    headerText="Descript">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b1xxuszsbvxxxxxxxxxxdescript) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.b1xxuszsbvxxxxxxxxxxdescript}"  id="b1xxuszsbvxxxxxxxxxxdescript" />
+        </p:column>
+        <p:column rendered = "#{!fpxxuq9eexwwqqhefxxxmachineList.skipColumns}"
+                    headerText="Source1">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b3xxuxxrbvxxxxxxxxxxsource1) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.b3xxuxxrbvxxxxxxxxxxsource1}"  id="b3xxuxxrbvxxxxxxxxxxsource1" />
+        </p:column>
+        <p:column rendered = "#{!fpxxuq9eexwwqqhefxxxmachineList.skipColumns}"
+                    headerText="Upccode">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b5xxuxxrbvxxxxxxxxxxupccode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.b5xxuxxrbvxxxxxxxxxxupccode}"  id="b5xxuxxrbvxxxxxxxxxxupccode" />
+        </p:column>
+        <p:column rendered = "#{!fpxxuq9eexwwqqhefxxxmachineList.skipColumns}"
+                    headerText="Cost">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.b6xxzicxbvxxxxxxxxxxcost}"  id="b6xxzicxbvxxxxxxxxxxcost">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column rendered = "#{!fpxxuq9eexwwqqhefxxxmachineList.skipColumns}"
+                    headerText="Replcost">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.b7xxzxxxbvxxxxxxxxxxreplcost}"  id="b7xxzxxxbvxxxxxxxxxxreplcost">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Selprice">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.b8xxzpxxbvxxxxxxxxxxselprice}"  id="b8xxzpxxbvxxxxxxxxxxselprice">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Spricold">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.b9xxzxxxlvxxsxxxxxxxspricold}"  id="b9xxzxxxlvxxsxxxxxxxspricold">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Spricnew">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.c1xxzxxxhhxxsxxxxxxxspricnew}"  id="c1xxzxxxhhxxsxxxxxxxspricnew">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Spriceffdt">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.c2xxcxxrhhxxsxxxxxxxspriceffdt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Shipcode">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c3xxuxxrbvxxxxxxxxxxshipcode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.c3xxuxxrbvxxxxxxxxxxshipcode}"  id="c3xxuxxrbvxxxxxxxxxxshipcode" />
+        </p:column>
+        <p:column 
+                    headerText="Qtylevel1">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.c4xxzxxxbvxxxxxxxxxxqtylevel1}"  id="c4xxzxxxbvxxxxxxxxxxqtylevel1">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Unit">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c5xxuuxrbv18xxxxxxxxunit) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.c5xxuuxrbv18xxxxxxxxunit}"  id="c5xxuuxrbv18xxxxxxxxunit" />
+        </p:column>
+        <p:column 
+                    headerText="Type">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c6xxuxxrbv16xxxxxxxxtype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.c6xxuxxrbv16xxxxxxxxtype}"  id="c6xxuxxrbv16xxxxxxxxtype" />
+        </p:column>
+        <p:column 
+                    headerText="Tax1">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c7xxfxz1bvxxxxxxxxxxtax1) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.c7xxfxz1bvxxxxxxxxxxtax1}"  id="c7xxfxz1bvxxxxxxxxxxtax1" />
+        </p:column>
+        <p:column 
+                    headerText="Tax2">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(c8xxfxz2bvxxxxxxxxxxtax2) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.c8xxfxz2bvxxxxxxxxxxtax2}"  id="c8xxfxz2bvxxxxxxxxxxtax2" />
+        </p:column>
+        <p:column 
+                    headerText="Aliascode">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(f1xxuxxrbvxxxxxxxxxxaliascode) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.f1xxuxxrbvxxxxxxxxxxaliascode}"  id="f1xxuxxrbvxxxxxxxxxxaliascode" />
+        </p:column>
+        <p:column 
+                    headerText="Avgprice">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.f3xxzxxxlvxxxxxxxxxxavgprice}"  id="f3xxzxxxlvxxxxxxxxxxavgprice">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Machine Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fpxxuq9eexwwqqhefxxxmachine pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineList.getKeyValue(_fpxxuq9eexwwqqhefxxxmachine.fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Machine Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fpxxuq9eexwwqqhefxxxmachine pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineList.getKeyValue(_fpxxuq9eexwwqqhefxxxmachine.fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Subcodesn">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g2xxuxn1lvxxxxxxxxxxsubcodesn) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.g2xxuxn1lvxxxxxxxxxxsubcodesn}"  id="g2xxuxn1lvxxxxxxxxxxsubcodesn" />
+        </p:column>
+        <p:column 
+                    headerText="Subcodesn2">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g2xxuxn2lvxxxxxxxxxxsubcodesn2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.g2xxuxn2lvxxxxxxxxxxsubcodesn2}"  id="g2xxuxn2lvxxxxxxxxxxsubcodesn2" />
+        </p:column>
+        <p:column 
+                    headerText="Subcodesn3">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(g2xxuxn3lvxxxxxxxxxxsubcodesn3) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.g2xxuxn3lvxxxxxxxxxxsubcodesn3}"  id="g2xxuxn3lvxxxxxxxxxxsubcodesn3" />
+        </p:column>
+        <p:column 
+                    headerText="Effdate">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.h1xxcxxrlxxxxxxxxxxxeffdate}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Integrset">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(h2xxuwmrbv40xxxxxxxxintegrset) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.h2xxuwmrbv40xxxxxxxxintegrset}"  id="h2xxuwmrbv40xxxxxxxxintegrset" />
+        </p:column>
+        <p:column 
+                    headerText="Source2">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y1xxuxxrbvxxxxxxxxxxsource2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.y1xxuxxrbvxxxxxxxxxxsource2}"  id="y1xxuxxrbvxxxxxxxxxxsource2" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Misccode1">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y2xxuxxrbvxxxxxxxxxxmisccode1) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.y2xxuxxrbvxxxxxxxxxxmisccode1}"  id="y2xxuxxrbvxxxxxxxxxxmisccode1" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Misccode2">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y3xxuxxrbvxxxxxxxxxxmisccode2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.y3xxuxxrbvxxxxxxxxxxmisccode2}"  id="y3xxuxxrbvxxxxxxxxxxmisccode2" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Caseqty">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.y4xxuxxrbvxxxxxxxxxxcaseqty}"  id="y4xxuxxrbvxxxxxxxxxxcaseqty">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Tax3">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y6xxfxz3bvxxxxxxxxxxtax3) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.y6xxfxz3bvxxxxxxxxxxtax3}"  id="y6xxfxz3bvxxxxxxxxxxtax3" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Notes">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y7xxuxznbvxxxxxxxxxxnotes) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.y7xxuxznbvxxxxxxxxxxnotes}"  id="y7xxuxznbvxxxxxxxxxxnotes" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Quantity">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.z1xxziqxlvxxxxxxxxxxquantity}"  id="z1xxziqxlvxxxxxxxxxxquantity">
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Dateadded">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.z2xxcxxrlxxxxxxxxxxxdateadded}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Printmstat">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z2xxzzprhvxxxxxxxxxxprintmstat) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.z2xxzzprhvxxxxxxxxxxprintmstat}"  id="z2xxzzprhvxxxxxxxxxxprintmstat" rendered="#{customIdentity.hasRole('EH')}"/>
+        </p:column>
+        <p:column 
+                    headerText="Prinmtfldt">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.z3xxczqxlhxxxxxxxxxxprinmtfldt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Avgcost">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.z4xxzxxxlvxxxxxxxxxxavgcost}"  id="z4xxzxxxlvxxxxxxxxxxavgcost">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Statusfldt">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.z6xxcztxlxxxxxxxxxxxstatusfldt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Cuordqty">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.z7xxzxxxlvxxxxxxxxxxcuordqty}"  id="z7xxzxxxlvxxxxxxxxxxcuordqty">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Venorqty">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.z8xxzxxxlvxxxxxxxxxxvenorqty}"  id="z8xxzxxxlvxxxxxxxxxxvenorqty">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Cupicqty">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.z9xxzxxxlvxxxxxxxxxxcupicqty}"  id="z9xxzxxxlvxxxxxxxxxxcupicqty">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Venpiqty">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.zaxxzxxxlvxxxxxxxxxxvenpiqty}"  id="zaxxzxxxlvxxxxxxxxxxvenpiqty">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Cuinvqty">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.zbxxzxxxlvxxxxxxxxxxcuinvqty}"  id="zbxxzxxxlvxxxxxxxxxxcuinvqty">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Cushiqty">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.zcxxzxxxlvxxxxxxxxxxcushiqty}"  id="zcxxzxxxlvxxxxxxxxxxcushiqty">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Venshqty">
+          <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.zdxxzxxxlvxxxxxxxxxxvenshqty}"  id="zdxxzxxxlvxxxxxxxxxxvenshqty">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Barupc">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zxxrbvxxxvxxxxxxxxxxbarupc) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.zxxrbvxxxvxxxxxxxxxxbarupc}"  id="zxxrbvxxxvxxxxxxxxxxbarupc" rendered="false"/>
+        </p:column>
+        <p:column 
+                    headerText="Owner2">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_fpxxuq9eexwwqqhefxxxmachine.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+        </p:column>
+        <p:column 
+            headerText="Action">
+            #{' '}
+             <h:link outcome="/machineEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="fpxxuq9eexwwqqhefxxxmachineEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+            <h:commandButton id="Download" image="/img/arrow_down16.png" rendered="#{empty from and _fpxxuq9eexwwqqhefxxxmachine.y8xxuzdrbvxxxxxxxxxxdocmnt.length() >2}" action="#{fpxxuq9eexwwqqhefxxxmachineHome.downloadThis(_fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </p:column>
+    </p:dataTable>
+    </div>
+    </p:panel>
+    <div class="tableControl">
+        <h:link outcome="/machineList.more.xhtml"
+            rendered="#{fpxxuq9eexwwqqhefxxxmachineList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+            <f:param name="maxResultsVal"
+                    value="#{fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/machineList.more.xhtml"
+            rendered="#{fpxxuq9eexwwqqhefxxxmachineList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{fpxxuq9eexwwqqhefxxxmachineList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/machineList.more.xhtml"
+            rendered="#{fpxxuq9eexwwqqhefxxxmachineList.nextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{fpxxuq9eexwwqqhefxxxmachineList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/machineList.more.xhtml"
+            rendered="#{fpxxuq9eexwwqqhefxxxmachineList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{fpxxuq9eexwwqqhefxxxmachineList.lastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{fpxxuq9eexwwqqhefxxxmachineList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+         <h:button outcome="/machineEdit.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+            rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Machine']}">
+        </h:button>
+
+
+
+         <h:button outcome="/#{empty fpxxuq9eexwwqqhefxxxmachineFrom ? 'home' : fpxxuq9eexwwqqhefxxxmachineFrom}.xhtml"
+          id="donefy"
+         value="Done"/>&nbsp;
+
+
+       <ui:remove>
+       </ui:remove>
+
+
+
+
+        <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessagesb"/>
+
+<br/>
+    </div>
+            <p:hotkey  actionListener="#{fpxxuq9eexwwqqhefxxxmachineList.getFirstResult()}" bind="return">
+            </p:hotkey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

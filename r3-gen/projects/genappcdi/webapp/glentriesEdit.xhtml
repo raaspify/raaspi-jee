@@ -1,0 +1,778 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="yxxxch65exwwqqhxxxxxglentriesA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxch65exwwqqhxxxxxglentriesHome.yxxxch65exwwqqhxxxxxglentriesA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="yxxxch65exwwqqhxxxxxglentriesFrom" value="#{yxxxch65exwwqqhxxxxxglentriesHome.yxxxch65exwwqqhxxxxxglentriesFrom}"/>
+    <f:viewAction action="#{yxxxch65exwwqqhxxxxxglentriesHome.restrict()}" />
+    <f:viewAction action="#{yxxxch65exwwqqhxxxxxglentriesHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Glentries']}</ui:define>
+
+<ui:define name="body">
+<h:form id="yxxxch65exwwqqhxxxxxglentries" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("yxxxch65exwwqqhxxxxxglentries:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!yxxxch65exwwqqhxxxxxglentriesHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['GlentriesEditHelp']!='GlentriesEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['GlentriesEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{yxxxch65exwwqqhxxxxxglentriesHome.managed ? 'Edit' : 'Add'} #{messages['Glentries']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <p:tabView switchType="client" >
+           <p:tab title="#{messages['Account']}"
+             rendered="true">
+           <ui:decorate id="yxxxch601xwwqqhxxxxxaccountDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Account']} 
+            </ui:define>
+                <p:remoteCommand name="yxxxch601xwwqqhxxxxxaccountFunction" proces="@all" update="@none" actionListener="#{yxxxch65exwwqqhxxxxxglentriesHome.showNetValue}"/>
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="yxxxch601xwwqqhxxxxxaccountsm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="true" 
+                       label="account"
+                    validator="#{yxxxch65exwwqqhxxxxxglentriesHome.validateAndSelectXxxxxxxxaccount}" 
+                   value="#{yxxxch601xwwqqhxxxxxaccountHome.lastyxxxch601xwwqqhxxxxxaccountP}" onchange="yxxxch601xwwqqhxxxxxaccountFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{yxxxch601xwwqqhxxxxxaccountList.getSuggestList(' ')}" var ="result" 
+                     itemValue="#{result.a0xxukwxbvxxxxxxxxxxaccount}" 
+                     itemLabel="#{result.a0xxukwxbvxxxxxxxxxxaccount.concat('/ ').concat(result.a1xxuzsxbvxxxxxxxxxxdescript)}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+                        <p:tooltip for="yxxxch601xwwqqhxxxxxaccountsm"> <span style="white-space: nowrap"> <h:outputText value="#{messages['default']} #{messages['posting']} #{messages['period']} #{customIdentity.curracperiod} #{messages['and']} #{messages['selected']} #{messages['period']} #{yxxxuq632xwwqqhxxxxxperioddatesHome.lastyxxxuq632xwwqqhxxxxxperioddatesP} , #{messages['select']}/#{messages['change']} #{messages['as']} #{messages['needed']}"/></span> </p:tooltip> 
+
+           <p:tab title="#{messages['Perioddates']}"
+             rendered="true">
+           <ui:decorate id="yxxxuq632xwwqqhxxxxxperioddatesDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Perioddates']} 
+            </ui:define>
+                <p:remoteCommand name="yxxxuq632xwwqqhxxxxxperioddatesFunction" proces="@all" update="@none" actionListener="#{yxxxch65exwwqqhxxxxxglentriesHome.showNetValue}"/>
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="yxxxuq632xwwqqhxxxxxperioddatessm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{yxxxch65exwwqqhxxxxxglentriesHome.validateAndSelectXxxxxxxxperiod}" 
+                   value="#{yxxxuq632xwwqqhxxxxxperioddatesHome.lastyxxxuq632xwwqqhxxxxxperioddatesP}" onchange="yxxxuq632xwwqqhxxxxxperioddatesFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{yxxxuq632xwwqqhxxxxxperioddatesList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+
+
+
+
+   </p:tabView>
+
+
+
+             <ui:decorate id="debitAmtlabel" template="layout/edit.xhtml" >
+             <ui:define name="label">Debit Amount #{customIdentity.mcurrencySymbol}
+             </ui:define>
+                 <ui:remove>reusing existing props, del refers to debit and mis refers to credit</ui:remove>
+        	 <h:inputText id="debitamtIn" value="#{yxxxch65exwwqqhxxxxxglentriesHome.totaldel}"  
+                 onclick="this.value='';if (#{'yxxxch65exwwqqhxxxxxglentries:creditamtIn'}.value != 0.0) {if (! confirm(jay2) ) { return false;}; return true;} " onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xorxeh66exwwqqhxxxxxgentriesdetailsHome.instance.c4xxzxxxbvxxxxxxxxxxdebitamt}}:this.value;"
+                 disabled="false" >
+                 <f:ajax listener = "#{yxxxch65exwwqqhxxxxxglentriesHome.showNetValue}"  event="keyup" render="@all" bypassUpdates="false"/>
+                 <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
+             </h:inputText>
+                 <p:tooltip for="debitamtIn"> <span style="white-space: nowrap"> <h:outputText value="#{messages['Generally']} #{messages['Dividends']}, #{messages['Expenses']}, #{messages['Assets']}, #{messages['Losses']} #{messages['are']} #{messages['increased']} #{messages['by']} #{messages['Debit']}"/></span> </p:tooltip> 
+             </ui:decorate>
+             <ui:decorate id="creditAmtlabel" template="layout/edit.xhtml" >
+             <ui:define name="label">Credit Amount #{customIdentity.mcurrencySymbol}
+             </ui:define>
+        	 <h:inputText id="creditamtIn" value="#{yxxxch65exwwqqhxxxxxglentriesHome.totalmis}"  
+                 onclick="this.value='';if (#{'yxxxch65exwwqqhxxxxxglentries:debitamtIn'}.value != 0.0) {if (! confirm(jay2) ) { return false;}; return true;} " onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xorxeh66exwwqqhxxxxxgentriesdetailsHome.instance.c5xxzxxxbvxxxxxxxxxxcreditamt}}:this.value;"
+                 disabled="false" >
+                 <f:ajax listener = "#{yxxxch65exwwqqhxxxxxglentriesHome.showNetValue}"  event="keyup" render="@all" bypassUpdates="false"/>
+                 <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
+             </h:inputText>
+                 <p:tooltip for="creditamtIn"> <span style="white-space: nowrap"> <h:outputText value="#{messages['Generally']} #{messages['Income']}, #{messages['Revenues']}, #{messages['Liabilities']}, #{messages['Equity']} #{messages['are']} #{messages['increased']} #{messages['by']} #{messages['Credit']}"/></span> </p:tooltip> 
+             </ui:decorate>
+             <ui:decorate id="netAmtlabel" template="layout/edit.xhtml" >
+             <ui:define name="label">Net Amount #{customIdentity.mcurrencySymbol}
+             </ui:define>
+        	 <h:outputText id="netamtIn" value="#{yxxxch65exwwqqhxxxxxglentriesHome.getTotalbaseamt()}"  >
+                 <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
+             </h:outputText>
+             </ui:decorate>
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="a0xxungjbvxxxxxxxxxxglentrynoDecoration" rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.managed}"   >
+        <h:outputLabel  for="a0xxungjbvxxxxxxxxxxglentryno" value="#{messages['Glentryno']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxungjbvxxxxxxxxxxglentryno" 
+                       required="false"
+                       rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.managed}"  
+                       disabled="#{yxxxch65exwwqqhxxxxxglentriesHome.managed}"
+                           size="20"
+                      maxlength="32"
+                          value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.a0xxungjbvxxxxxxxxxxglentryno}">
+
+         </h:inputText>
+            <p:tooltip for="a0xxungjbvxxxxxxxxxxglentryno"> <span style="white-space: nowrap"> <h:outputText value="Value Auto generated "/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b1xxuzsxbvxxxxxxxxxxdescriptDecoration"    >
+        <h:outputLabel  for="b1xxuzsxbvxxxxxxxxxxdescript" value="#{messages['Descript']}">
+      </h:outputLabel>
+
+         <h:inputText id="b1xxuzsxbvxxxxxxxxxxdescript" 
+                           size="32"
+                      maxlength="120"
+                          value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.b1xxuzsxbvxxxxxxxxxxdescript}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b3xxuxxrbvxxxxxxxxxxrefcodeDecoration"    >
+        <h:outputLabel  for="b3xxuxxrbvxxxxxxxxxxrefcode" value="#{messages['Refcode']}">
+      </h:outputLabel>
+
+         <h:inputText id="b3xxuxxrbvxxxxxxxxxxrefcode" 
+                           size="20"
+                      maxlength="20"
+                          value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.b3xxuxxrbvxxxxxxxxxxrefcode}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="b5xxcxxrlxxxxxxxxxxxpostdateDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b5xxcxxrlxxxxxxxxxxxpostdate" value="#{messages['Postdate']}">
+      </h:outputLabel>
+     <p:datePicker id="b5xxcxxrlxxxxxxxxxxxpostdate" 
+
+                          showTime="true" value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.b5xxcxxrlxxxxxxxxxxxpostdate}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="b6xxcxxrlxxxxxxxxxxxcalendardtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b6xxcxxrlxxxxxxxxxxxcalendardt" value="#{messages['Calendardt']}">
+      </h:outputLabel>
+     <p:datePicker id="b6xxcxxrlxxxxxxxxxxxcalendardt" 
+
+                          showTime="true" value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.b6xxcxxrlxxxxxxxxxxxcalendardt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="2">
+
+             <h:panelGroup id="c4xxzxxxbvxxtxxxxxxxtdebitamtDecoration"    >
+        <h:outputLabel  for="c4xxzxxxbvxxtxxxxxxxtdebitamt" value="#{messages['Tdebitamt']}">
+      </h:outputLabel>
+      <h:inputText id="c4xxzxxxbvxxtxxxxxxxtdebitamt"  
+         value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.c4xxzxxxbvxxtxxxxxxxtdebitamt}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{yxxxch65exwwqqhxxxxxglentriesHome.instance.c4xxzxxxbvxxtxxxxxxxtdebitamt}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c5xxzxxxbvxxxxxxxxxxtcreditamtDecoration"    >
+        <h:outputLabel  for="c5xxzxxxbvxxxxxxxxxxtcreditamt" value="#{messages['Tcreditamt']}">
+      </h:outputLabel>
+      <h:inputText id="c5xxzxxxbvxxxxxxxxxxtcreditamt"  
+         value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.c5xxzxxxbvxxxxxxxxxxtcreditamt}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{yxxxch65exwwqqhxxxxxglentriesHome.instance.c5xxzxxxbvxxxxxxxxxxtcreditamt}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y1xxuxexbvxxxxxxxxxxdepcodeDecoration"  rendered="true">
+        <h:outputLabel  for="y1xxuxexbvxxxxxxxxxxdepcode" value="#{messages['Depcode']}">
+      </h:outputLabel>
+                <h:inputText id="y1xxuxexbvxxxxxxxxxxdepcode" 
+                          value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.y1xxuxexbvxxxxxxxxxxdepcode}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y2xxuxoxbvxxxxxxxxxxdivcodeDecoration"  rendered="true">
+        <h:outputLabel  for="y2xxuxoxbvxxxxxxxxxxdivcode" value="#{messages['Divcode']}">
+      </h:outputLabel>
+                <h:inputText id="y2xxuxoxbvxxxxxxxxxxdivcode" 
+                          value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.y2xxuxoxbvxxxxxxxxxxdivcode}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y8xxuznxbvxxxxxxxxxxnotesDecoration"  rendered="true">
+       <h:outputLabel  for="y8xxuznxbvxxxxxxxxxxnotesed" value="#{messages['Notes']}">
+      </h:outputLabel>
+         <h:panelGrid>
+         <pe:ckEditor id="y8xxuznxbvxxxxxxxxxxnotesed" height="50" width="250"  value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.y8xxuznxbvxxxxxxxxxxnotes}"
+                 toolbar="[['NewPage','Preview','Cut','Copy','Image','Table','HorizontalRule','Iframe','Link','Unlink','Anchor','Paste','PasteText','PasteFromWord','-', 'Scayt'], '/',['Font','FontSize','Bold','Italic','Strike','-','RemoveFormat' ] ,[ 'TextColor','BGColor' ], ['Undo', 'Redo']]">
+         </pe:ckEditor>
+         </h:panelGrid>
+            </h:panelGroup>
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z1xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z1xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="z1xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z2xxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="z2xxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.z2xxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z2xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="z2xxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.z2xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{yxxxch65exwwqqhxxxxxglentriesHome.instance.a0xxungjbvxxxxxxxxxxglentryno} #{messages['sid']} #{yxxxch65exwwqqhxxxxxglentriesHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.a0xxungjbvxxxxxxxxxxglentryno !=''}"/> 
+
+            <p:panel id="lineItems" >
+
+                    <p:dataTable id="LineItemsTable" rendered="#{yxxxch65exwwqqhxxxxxglentriesList.entityLessStatusDetailedList(yxxxch65exwwqqhxxxxxglentriesHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}"
+                      tableStyle="table-layout:auto;" value="#{yxxxch65exwwqqhxxxxxglentriesList.entityLessStatusDetailedList(yxxxch65exwwqqhxxxxxglentriesHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1)}" var="item">
+                        <p:column id="column1">
+                            <f:facet id="CartRemoveFacet" name="header">
+                                <h:outputText id="CartRemoveText" value="#{messages['removeColumn']}" />
+                            </f:facet>
+                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="#{yxxxch65exwwqqhxxxxxglentriesHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                        </p:column>
+                        <p:column id="columnxxodl">
+                            <f:facet id="XxodlFacet" name="header">
+                                <h:outputText id="CuodlText" value="#{messages['line']}" />
+                            </f:facet>
+                            #{item.b1xxzo11bvlxxxxxxxxxline} 
+                        </p:column>
+
+
+                        <p:column id="column2">
+                            <f:facet id="TitleFacet" name="header">
+                                <h:outputText id="TitleText" value="#{messages['account']}" />
+                            </f:facet>
+                            #{item.yxxxch601xwwqqhxxxxxaccount.a0xxukwxbvxxxxxxxxxxaccount} 
+                        </p:column>     
+                        <p:column id="column3">
+                            <f:facet id="ActorFacet" name="header">
+                                <h:outputText id="ActorText" value="#{messages['debitamt']}" />
+                            </f:facet>
+                            <h:inputText value="#{item.c4xxzxxxbvxxxxxxxxxxdebitamt}">
+                            </h:inputText>   
+                        </p:column>                        
+                        <p:column id="column5">
+                            <f:facet id="QuantityFacet" name="header">
+                                <h:outputText id="QuantityText" value="#{messages['creditamt']}" />
+                            </f:facet> 
+                             <h:inputText id="QuantityValueText" value="#{item.c5xxzxxxbvxxxxxxxxxxcreditamt}"  />
+                        </p:column>                        
+                        <p:column id="columnnts">
+                            <f:facet id="CartRemoveFacet" name="header">
+                                <h:outputText id="CartNotesText" value="#{messages['notes']}" />
+                            </f:facet>
+                            #{item.y8xxuznxbvxxxxxxxxxxnotes} 
+                        </p:column>
+
+                    </p:dataTable>
+           <ui:remove> 
+             removed and !yxxxch65exwwqqhxxxxxglentriesHome.instance.y9xxcxxxbv10xxxxxxxxtype.startsWith('cart') from render of update,remove
+              why was it there , stopped from button showing if came from list etc
+             one schedule can have one detail , so remove the following
+           </ui:remove> 
+             <p:commandButton id="more" styleClass="#{!yxxxch65exwwqqhxxxxxglentriesHome.managed?'':'buttonMain'}"
+                          value="#{messages['Confirm']} #{messages['next']}/#{messages['offsetting']}  #{messages['entry']}/#{messages['period']} #{messages['entered']}" 
+                         action="#{yxxxch65exwwqqhxxxxxglentriesHome.more()}" update="@form"
+                       disabled="#{yxxxch65exwwqqhxxxxxglentriesHome.moreActive}"
+                       rendered="#{yxxxch65exwwqqhxxxxxglentriesList.entityLessStatusDetailedList(yxxxch65exwwqqhxxxxxglentriesHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}">
+             </p:commandButton>
+
+             <h:commandButton id="update"  styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}"
+                          value="#{messages['save']} #{messages['next']}/#{messages['offsetting']}  #{messages['entry']}" 
+                         action="#{yxxxch65exwwqqhxxxxxglentriesHome.updateDetailsAll()}" 
+                       rendered="#{yxxxch65exwwqqhxxxxxglentriesList.entityLessStatusDetailedList(yxxxch65exwwqqhxxxxxglentriesHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}"/>
+                        <p:tooltip for="update"> <span style="white-space: nowrap"> <h:outputText value="#{messages['default']} #{messages['posting']} #{messages['period']} #{customIdentity.curracperiod} #{messages['and']} #{messages['selected']} #{messages['period']} #{yxxxuq632xwwqqhxxxxxperioddatesHome.lastyxxxuq632xwwqqhxxxxxperioddatesP} , #{messages['select']}/#{messages['change']} #{messages['as']} #{messages['needed']}"/></span> </p:tooltip> 
+
+            <h:commandButton id="remove"  
+                          value="#{messages['remove']} #{messages['checked']}  #{messages['row']}" 
+                         action="#{yxxxch65exwwqqhxxxxxglentriesHome.updateDetailsAll()}" 
+                       rendered="#{yxxxch65exwwqqhxxxxxglentriesList.entityLessStatusDetailedList(yxxxch65exwwqqhxxxxxglentriesHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}"/>
+
+            </p:panel>
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+           
+            <p:commandButton id="save" styleClass="#{yxxxch65exwwqqhxxxxxglentriesHome.managed?'buttonMain':'buttonMain'}" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{yxxxch65exwwqqhxxxxxglentriesHome.addWithDetails()}"
+                       rendered="#{yxxxch65exwwqqhxxxxxglentriesList.entityLessStatusDetailedList(yxxxch65exwwqqhxxxxxglentriesHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() eq 0}">                        
+                        <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['default']} #{messages['posting']} #{messages['period']} #{customIdentity.curracperiod} #{messages['and']} #{messages['selected']} #{messages['period']} #{yxxxuq632xwwqqhxxxxxperioddatesHome.lastyxxxuq632xwwqqhxxxxxperioddatesP} , #{messages['select']}/#{messages['change']} #{messages['as']} #{messages['needed']}"/></span> </p:tooltip> 
+            </p:commandButton>                                  			  
+
+           <h:commandButton id="delete" 
+                         value="#{messages['Delete']} #{messages['Glentries']}" onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " 
+                         action="#{yxxxch65exwwqqhxxxxxglentriesHome.remove()}"
+                        rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.managed and !yxxxch65exwwqqhxxxxxglentriesHome.entityDeleted}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Use']} #{messages['List']} #{messages['to']} #{messages['delete']} #{messages['details']} #{messages['records']} #{messages['sametime']},#{messages['but']} #{messages['manually']} #{messages['delete']} #{messages['other']} #{messages['constraints']}"/></span> </p:tooltip> 
+           </h:commandButton>
+
+            <h:button id="new" styleClass="buttonMain" 
+             value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/glentriesEdit.xhtml"
+                rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.managed}"/>
+
+
+
+
+
+            <f:param name="reportName" value="#{yxxxch65exwwqqhxxxxxglentriesList.reportName}"/>
+            <f:param name="displayAs" value="#{yxxxch65exwwqqhxxxxxglentriesList.displayAs}" /> 
+            <h:button outcome="/glentriesList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Glentries']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty yxxxch65exwwqqhxxxxxglentriesHome.yxxxch65exwwqqhxxxxxglentriesFrom ? 'home' : yxxxch65exwwqqhxxxxxglentriesHome.yxxxch65exwwqqhxxxxxglentriesFrom}.xhtml"
+                rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.managed or yxxxch65exwwqqhxxxxxglentriesHome.entityDeleted or yxxxch65exwwqqhxxxxxglentriesList.entityLessStatusDetailedList(yxxxch65exwwqqhxxxxxglentriesHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1}"/>
+          <ui:remove> needs more work on method rendered and ui issue, look into using EH
+            <h:commandButton id="close" 
+                          value="#{messages['Set']} #{messages['as']} #{messages['Closed']}" 
+                         action="#{yxxxch65exwwqqhxxxxxglentriesHome.closeRecord(yxxxch65exwwqqhxxxxxglentriesHome.instance)}"
+                       rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.managed and customIdentity.hasRole('UH')}">  
+            </h:commandButton>
+          </ui:remove>
+
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty yxxxch65exwwqqhxxxxxglentriesHome.yxxxch65exwwqqhxxxxxglentriesFrom ? 'home' : yxxxch65exwwqqhxxxxxglentriesHome.yxxxch65exwwqqhxxxxxglentriesFrom}.xhtml"
+                rendered="#{!yxxxch65exwwqqhxxxxxglentriesHome.managed and !yxxxch65exwwqqhxxxxxglentriesHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="true" rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" toggleable="true" toggleableHeader="true">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+  <p:tabView switchType="ajax">
+     <p:tab title="#{messages['Gentriesdetails']}">
+        <div class="association" id="xorxeh66exwwqqhxxxxxgentriesdetailsesChildren">
+         <ui:remove></ui:remove>
+            <h:outputText value="No gentriesdetailses" 
+                       rendered="#{empty yxxxch65exwwqqhxxxxxglentriesHome or empty yxxxch65exwwqqhxxxxxglentriesHome.xorxeh66exwwqqhxxxxxgentriesdetailses}"/>
+        
+            <p:dataTable value="#{yxxxch65exwwqqhxxxxxglentriesHome.xorxeh66exwwqqhxxxxxgentriesdetailses}" tableStyle="table-layout:auto;"
+                           var="xorxeh66exwwqqhxxxxxgentriesdetails" 
+                      rendered="#{not empty yxxxch65exwwqqhxxxxxglentriesHome.xorxeh66exwwqqhxxxxxgentriesdetailses}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="xorxeh66exwwqqhxxxxxgentriesdetailsesTable">
+                <p:column>
+                    <f:facet name="header">action</f:facet>
+                    <h:link outcome="/gentriesdetails.xhtml" 
+                              id="selectxorxeh66exwwqqhxxxxxgentriesdetails" 
+                           value="Select"
+                     propagation="none">
+                        <f:param disable="#{empty xorxeh66exwwqqhxxxxxgentriesdetails.a0xxuobxbxxxxxxxxxxxsid}" name="xorxeh66exwwqqhxxxxxgentriesdetailsA0xxuobxbxxxxxxxxxxxsid" 
+                                value="#{xorxeh66exwwqqhxxxxxgentriesdetails.a0xxuobxbxxxxxxxxxxxsid}"/>
+                        <f:param name="xorxeh66exwwqqhxxxxxgentriesdetailsFrom" value="Yxxxch65exwwqqhxxxxxglentries"/>
+                    </h:link>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">line</f:facet>
+                    <h:outputText value="#{xorxeh66exwwqqhxxxxxgentriesdetails.b1xxzo11bvlxxxxxxxxxline}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">debitamt</f:facet>
+                    <h:outputText value="#{xorxeh66exwwqqhxxxxxgentriesdetails.c4xxzxxxbvxxxxxxxxxxdebitamt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">creditamt</f:facet>
+                    <h:outputText value="#{xorxeh66exwwqqhxxxxxgentriesdetails.c5xxzxxxbvxxxxxxxxxxcreditamt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">linetotl</f:facet>
+                    <h:outputText value="#{xorxeh66exwwqqhxxxxxgentriesdetails.c5xxzxxxbvxxxxxxxxxxlinetotl}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfl</f:facet>
+                    <h:outputText value="#{xorxeh66exwwqqhxxxxxgentriesdetails.z1xxzzfxhhxxxxxxxxxxstatusfl}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfldt</f:facet>
+                    <h:outputText value="#{xorxeh66exwwqqhxxxxxgentriesdetails.z2xxcztxlxxxxxxxxxxxstatusfldt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">owner</f:facet>
+                    <h:outputText value="#{xorxeh66exwwqqhxxxxxgentriesdetails.z2xxutoxlhxxxxxxxxxxowner}"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+        <f:subview rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.managed}" id="xorxeh66exwwqqhxxxxxgentriesdetailses">
+        <div class="actionButtons">
+        </div>
+        </f:subview>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Account']}">
+    <div class="association" id="yxxxch601xwwqqhxxxxxaccountParent">
+        
+        <h:outputText value="No account" 
+                   rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.yxxxch601xwwqqhxxxxxaccount == null}"/>
+        
+        <p:dataTable var="yxxxch601xwwqqhxxxxxaccount" tableStyle="table-layout:auto;"
+                   value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.yxxxch601xwwqqhxxxxxaccount}" 
+                rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.yxxxch601xwwqqhxxxxxaccount != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="yxxxch601xwwqqhxxxxxaccountTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewaccount" 
+                     value="View" 
+                      outcome="/account.xhtml">
+                       <f:param disable="#{empty yxxxch601xwwqqhxxxxxaccount.a0xxuobxbxxxxxxxxxxxsid}" name="yxxxch601xwwqqhxxxxxaccountA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{yxxxch601xwwqqhxxxxxaccount.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">account</f:facet>
+                   #{yxxxch601xwwqqhxxxxxaccount.a0xxukwxbvxxxxxxxxxxaccount}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{yxxxch601xwwqqhxxxxxaccount.a1xxuzsxbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">category</f:facet>
+                   #{yxxxch601xwwqqhxxxxxaccount.b1xxuwgxbv01xxxxxxxxcategory}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">type</f:facet>
+                   #{yxxxch601xwwqqhxxxxxaccount.b2xxuwtxbv02xxxxxxxxtype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">budget</f:facet>
+                   #{yxxxch601xwwqqhxxxxxaccount.b3xxzwbxbvxxxxxxxxxxbudget}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">currency</f:facet>
+                   #{yxxxch601xwwqqhxxxxxaccount.b4xxuwuxbv34xxxxxxxxcurrency}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">actual</f:facet>
+                   #{yxxxch601xwwqqhxxxxxaccount.b4xxzwaxlvxxxxxxxxxxactual}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">company sid</f:facet>
+		    	  #{yxxxch601xwwqqhxxxxxaccount.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">department sid</f:facet>
+		    	  #{yxxxch601xwwqqhxxxxxaccount.fxxxch122xhhxqhxxlxxdepartment.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">division sid</f:facet>
+		    	  #{yxxxch601xwwqqhxxxxxaccount.fxxxch133xhhxqhxxlxxdivision.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{yxxxch601xwwqqhxxxxxaccount.z5xxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{yxxxch601xwwqqhxxxxxaccount.z5xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{yxxxch601xwwqqhxxxxxaccount.z6xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Perioddates']}">
+    <div class="association" id="yxxxuq632xwwqqhxxxxxperioddatesParent">
+        
+        <h:outputText value="No perioddates" 
+                   rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.yxxxuq632xwwqqhxxxxxperioddates == null}"/>
+        
+        <p:dataTable var="yxxxuq632xwwqqhxxxxxperioddates" tableStyle="table-layout:auto;"
+                   value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.yxxxuq632xwwqqhxxxxxperioddates}" 
+                rendered="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.yxxxuq632xwwqqhxxxxxperioddates != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="yxxxuq632xwwqqhxxxxxperioddatesTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewperioddates" 
+                     value="View" 
+                      outcome="/perioddates.xhtml">
+                       <f:param disable="#{empty yxxxuq632xwwqqhxxxxxperioddates.a0xxuobxbxxxxxxxxxxxsid}" name="yxxxuq632xwwqqhxxxxxperioddatesA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{yxxxuq632xwwqqhxxxxxperioddates.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">period</f:facet>
+                   #{yxxxuq632xwwqqhxxxxxperioddates.a0xxukwpbv47xxxxxxxxperiod}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{yxxxuq632xwwqqhxxxxxperioddates.b1xxuszsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">startdate</f:facet>
+                   #{yxxxuq632xwwqqhxxxxxperioddates.b2xxdwsrbvxxxxxxxxxxstartdate}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">enddate</f:facet>
+                   #{yxxxuq632xwwqqhxxxxxperioddates.b3xxdwerbvxxxxxxxxxxenddate}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">startofweek</f:facet>
+                   #{yxxxuq632xwwqqhxxxxxperioddates.b4xxew1rbvxxxxxxxxxxstartofweek}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">startofbweek</f:facet>
+                   #{yxxxuq632xwwqqhxxxxxperioddates.b5xxewbrbvxxxxxxxxxxstartofbweek}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">endofbweek</f:facet>
+                   #{yxxxuq632xwwqqhxxxxxperioddates.b6xxewfrbvxxxxxxxxxxendofbweek}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{yxxxuq632xwwqqhxxxxxperioddates.z1xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{yxxxuq632xwwqqhxxxxxperioddates.z2xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{yxxxuq632xwwqqhxxxxxperioddates.z3xxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

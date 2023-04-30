@@ -1,0 +1,397 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="fxxxuq1ggxwwqqhxxxxxmembersgroupA0xxuobxbxxxxxxxxxxxsid" value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.fxxxuq1ggxwwqqhxxxxxmembersgroupA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewAction action="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.restrict()}" />
+
+</f:metadata>
+                       
+<ui:define name="body">
+    <h:form id="fxxxuq1ggxwwqqhxxxxxmembersgroupSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fxxxuq1ggxwwqqhxxxxxmembersgroupHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['MembersgroupHelp']!='MembersgroupHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['MembersgroupHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+         <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+    
+    <p:panel>
+        <h:panelGrid columns="10">
+        <f:facet name="header">membersgroup</f:facet>
+            <ui:decorate id="b1xxuszsbvxxxxxxxxxxdescript" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Descript']}</ui:define>
+
+             #{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.b1xxuszsbvxxxxxxxxxxdescript}
+        </ui:decorate>
+            <ui:decorate id="b2xxfxxxbvxxxxxxxxxxmode" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Mode']}</ui:define>
+
+             #{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.b2xxfxxxbvxxxxxxxxxxmode}
+        </ui:decorate>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" switchType="client" collapsede="true"
+     toggleable="true" toggleableHeader="true">
+    <h:panelGrid columns="10">
+            <ui:decorate id="z1xxziqxlvxxxxxxxxxxquantityDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Quantity']}</ui:define>
+
+             <h:outputText value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.z1xxziqxlvxxxxxxxxxxquantity}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="z1xxzzfxhhxxxxxxxxxxstatusflDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Statusfl']}</ui:define>
+
+              <h:outputText value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid/waiting approval':( fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped/approved': (fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced/final approved':'new/other'))))}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl" />
+
+        </ui:decorate>
+            <ui:decorate id="z2xxcztxlxxxxxxxxxxxstatusfldtDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Statusfldt']}</ui:define>
+
+            <h:outputText value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.z2xxcztxlxxxxxxxxxxxstatusfldt}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="z3xxutoxlhxxxxxxxxxxownerDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner']}</ui:define>
+
+             <h:outputText value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.z3xxutoxlhxxxxxxxxxxowner}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zzxxu2oxxhxxxxxxxxxxowner2Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner2']}</ui:define>
+
+        </ui:decorate>
+   </h:panelGrid>
+   </p:panel>
+        <div style="clear:both"/>
+    </p:panel>
+    <div class="actionButtons">      
+
+        <h:button outcome="/membersgroupEdit.xhtml" 
+                    id="edit" 
+                    rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('SH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('IH')||customIdentity.hasRole('IQ') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}"
+                 value="Edit" styleClass="buttonMain"> 
+          <f:param name="from" value="Fxxxuq1ggxwwqqhxxxxxmembersgroupList"/>
+          <f:param name="fxxxuq1ggxwwqqhxxxxxmembersgroupA0xxuobxbxxxxxxxxxxxsid" value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.fxxxuq1ggxwwqqhxxxxxmembersgroupA0xxuobxbxxxxxxxxxxxsid}"/>
+        </h:button>
+    </div>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="false" rendered="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.managed}"
+     toggleable="true" toggleableHeader="true">
+ <div  style="overflow: auto;width: 850px;height: auto; ">
+
+  <p:tabView switchType="ajax">
+   <p:tab title="#{messages['Resourcedetails']}">
+   <div class="association" id="dxxxuq2drxwwqqhfxxxxresourcedetailsesChildren">
+        
+  <h:outputText value="No resourcedetailses" 
+                   rendered="#{empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.dxxxuq2drxwwqqhfxxxxresourcedetailses}"/>
+  <p:dataTable value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.dxxxuq2drxwwqqhfxxxxresourcedetailses}" 
+                       var="dxxxuq2drxwwqqhfxxxxresourcedetails" 
+                  rendered="#{not empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.dxxxuq2drxwwqqhfxxxxresourcedetailses}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="dxxxuq2drxwwqqhfxxxxresourcedetailsesTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="selectdxxxuq2drxwwqqhfxxxxresourcedetails" 
+                     value="Select" 
+                      outcome="/resourcedetails.xhtml">
+                    <f:param disable="#{empty dxxxuq2drxwwqqhfxxxxresourcedetails.a0xxuobxbxxxxxxxxxxxsid}" name="dxxxuq2drxwwqqhfxxxxresourcedetailsA0xxuobxbxxxxxxxxxxxsid" 
+                            value="#{dxxxuq2drxwwqqhfxxxxresourcedetails.a0xxuobxbxxxxxxxxxxxsid}"/>
+                    <f:param name="dxxxuq2drxwwqqhfxxxxresourcedetailsFrom" value="Fxxxuq1ggxwwqqhxxxxxmembersgroup"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">resourcenumber</f:facet>
+                <h:outputText value="#{dxxxuq2drxwwqqhfxxxxresourcedetails.b1xxzk11bvlxxxxxxxxxresourcenumber}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                <h:outputText value="#{dxxxuq2drxwwqqhfxxxxresourcedetails.zaxxzzfxhhxxxxxxxxxxstatusfl}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                <h:outputText value="#{dxxxuq2drxwwqqhfxxxxresourcedetails.zbxxcztxlxxxxxxxxxxxstatusfldt}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                <h:outputText value="#{dxxxuq2drxwwqqhfxxxxresourcedetails.zcxxutoxlhxxxxxxxxxxowner}"/>
+            </p:column>
+  </p:dataTable>
+
+   </div>
+    
+    <div class="actionButtons">
+        <h:button 
+               value="Add resourcedetails"
+                outcome="/resourcedetailsEdit.xhtml">
+            <f:param disable="#{empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq1ggxwwqqhxxxxxmembersgroupA0xxuobxbxxxxxxxxxxxsid" 
+                    value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+            <f:param name="dxxxuq2drxwwqqhfxxxxresourcedetailsFrom" value="Fxxxuq1ggxwwqqhxxxxxmembersgroup"/>
+        </h:button>
+    </div>        
+   </p:tab>
+   <p:tab title="#{messages['Task']}">
+   <div class="association" id="fxxxuq1kkxwwqqhfxxxxtasksChildren">
+        
+  <h:outputText value="No tasks" 
+                   rendered="#{empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.fxxxuq1kkxwwqqhfxxxxtasks}"/>
+  <p:dataTable value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.fxxxuq1kkxwwqqhfxxxxtasks}" 
+                       var="fxxxuq1kkxwwqqhfxxxxtask" 
+                  rendered="#{not empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.fxxxuq1kkxwwqqhfxxxxtasks}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="fxxxuq1kkxwwqqhfxxxxtasksTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="selectfxxxuq1kkxwwqqhfxxxxtask" 
+                     value="Select" 
+                      outcome="/task.xhtml">
+                    <f:param disable="#{empty fxxxuq1kkxwwqqhfxxxxtask.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq1kkxwwqqhfxxxxtaskA0xxuobxbxxxxxxxxxxxsid" 
+                            value="#{fxxxuq1kkxwwqqhfxxxxtask.a0xxuobxbxxxxxxxxxxxsid}"/>
+                    <f:param name="fxxxuq1kkxwwqqhfxxxxtaskFrom" value="Fxxxuq1ggxwwqqhxxxxxmembersgroup"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">taskid</f:facet>
+                <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.a0xxuktpbvxxxxxxxxxxtaskid}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">descript</f:facet>
+                <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.a1xxuszsbvxxxxxxxxxxdescript}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">eststart</f:facet>
+                <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.b1xxcxxrbxxxxxxxxxxxeststart}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">calcstart</f:facet>
+                <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.b1xxcxxrlxxxxxxxxxxxcalcstart}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">estend</f:facet>
+                <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.b2xxcxxrbxxxxxxxxxxxestend}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">subqty</f:facet>
+                <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.b3xxzqxxavxxxxxxxxxxsubqty}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.zaxxzzfxhhxxxxxxxxxxstatusfl}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.zbxxcztxlxxxxxxxxxxxstatusfldt}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                <h:outputText value="#{fxxxuq1kkxwwqqhfxxxxtask.zcxxutoxlhxxxxxxxxxxowner}"/>
+            </p:column>
+  </p:dataTable>
+
+   </div>
+    
+    <div class="actionButtons">
+        <h:button 
+               value="Add task"
+                outcome="/taskEdit.xhtml">
+            <f:param disable="#{empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq1ggxwwqqhxxxxxmembersgroupA0xxuobxbxxxxxxxxxxxsid" 
+                    value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+            <f:param name="fxxxuq1kkxwwqqhfxxxxtaskFrom" value="Fxxxuq1ggxwwqqhxxxxxmembersgroup"/>
+        </h:button>
+    </div>        
+   </p:tab>
+   <p:tab title="#{messages['Schedule']}">
+   <div class="association" id="fxxxuq89bxwwqqhxxxxxschedulesChildren">
+        
+  <h:outputText value="No schedules" 
+                   rendered="#{empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.fxxxuq89bxwwqqhxxxxxschedules}"/>
+  <p:dataTable value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.fxxxuq89bxwwqqhxxxxxschedules}" 
+                       var="fxxxuq89bxwwqqhxxxxxschedule" 
+                  rendered="#{not empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.fxxxuq89bxwwqqhxxxxxschedules}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="fxxxuq89bxwwqqhxxxxxschedulesTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="selectfxxxuq89bxwwqqhxxxxxschedule" 
+                     value="Select" 
+                      outcome="/schedule.xhtml">
+                    <f:param disable="#{empty fxxxuq89bxwwqqhxxxxxschedule.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq89bxwwqqhxxxxxscheduleA0xxuobxbxxxxxxxxxxxsid" 
+                            value="#{fxxxuq89bxwwqqhxxxxxschedule.a0xxuobxbxxxxxxxxxxxsid}"/>
+                    <f:param name="fxxxuq89bxwwqqhxxxxxscheduleFrom" value="Fxxxuq1ggxwwqqhxxxxxmembersgroup"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">todo</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.a0xxhkscbxxxxxxxxxxxtodo}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">descript</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.b1xxhszsbv35xxxxxxxxdescript}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">ssdatet</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.b2xxuxsxbvxxxxxxxxxxssdatet}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">sdatet</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.b5gxdxsdbvxxxxxxxxxxsdatet}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">durationh</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.b5xxexdhbvxxxxxxxxxxdurationh}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">durationm</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.b6xx0xdmbvxxxxxxxxxxdurationm}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">stimeh</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.b7xxexshbvxxxxxxxxxxstimeh}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">stimem</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.b8bx0xsmbvxxxxxxxxxxstimem}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">stimeampm</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.b8extxsabvxxxxxxxxxxstimeampm}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">edatet</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.b8xxceedbvxxxxxxxxxxedatet}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">priority</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.b9xxfxxxbv08xxxxxxxxpriority}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">percntdone</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.baxxzxxrlvxxxxxxxxxxpercntdone}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">type</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.bexxuxxrbv37xxxxxxxxtype}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">repeatf</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.bgxxuxxrbv18xxxxxxxxrepeatf}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">docmnt</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.yixxuzdrbvxxxxxxxxxxdocmnt}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.z1xxzzfxhhxxxxxxxxxxstatusfl}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.z2xxutoxlhxxxxxxxxxxowner}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                <h:outputText value="#{fxxxuq89bxwwqqhxxxxxschedule.z8xxcztxlxxxxxxxxxxxstatusfldt}"/>
+            </p:column>
+  </p:dataTable>
+
+   </div>
+    
+    <div class="actionButtons">
+        <h:button 
+               value="Add schedule"
+                outcome="/scheduleEdit.xhtml">
+            <f:param disable="#{empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq1ggxwwqqhxxxxxmembersgroupA0xxuobxbxxxxxxxxxxxsid" 
+                    value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+            <f:param name="fxxxuq89bxwwqqhxxxxxscheduleFrom" value="Fxxxuq1ggxwwqqhxxxxxmembersgroup"/>
+        </h:button>
+    </div>        
+   </p:tab>
+   <p:tab title="#{messages['Groupmembers']}">
+   <div class="association" id="jxxxuq54exwwqqhxxxxxgroupmembersesChildren">
+        
+  <h:outputText value="No groupmemberses" 
+                   rendered="#{empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.jxxxuq54exwwqqhxxxxxgroupmemberses}"/>
+  <p:dataTable value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.jxxxuq54exwwqqhxxxxxgroupmemberses}" 
+                       var="jxxxuq54exwwqqhxxxxxgroupmembers" 
+                  rendered="#{not empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.jxxxuq54exwwqqhxxxxxgroupmemberses}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="jxxxuq54exwwqqhxxxxxgroupmembersesTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="selectjxxxuq54exwwqqhxxxxxgroupmembers" 
+                     value="Select" 
+                      outcome="/groupmembers.xhtml">
+                    <f:param disable="#{empty jxxxuq54exwwqqhxxxxxgroupmembers.a0xxuobxbxxxxxxxxxxxsid}" name="jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid" 
+                            value="#{jxxxuq54exwwqqhxxxxxgroupmembers.a0xxuobxbxxxxxxxxxxxsid}"/>
+                    <f:param name="jxxxuq54exwwqqhxxxxxgroupmembersFrom" value="Fxxxuq1ggxwwqqhxxxxxmembersgroup"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">memberid</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.b1xxukgmbvxxxxxxxxxxmemberid}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">descript</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.b2xxuxzsbvxxxxxxxxxxdescript}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">sourcetype</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.b3xxuzyxbv46xxxxxxxxsourcetype}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.z1xxzzfxhhxxxxxxxxxxstatusfl}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.z2xxcztxlxxxxxxxxxxxstatusfldt}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.z3xxutoxlhxxxxxxxxxxowner}"/>
+            </p:column>
+  </p:dataTable>
+
+   </div>
+    
+    <div class="actionButtons">
+        <h:button 
+               value="Add groupmembers"
+                outcome="/groupmembersEdit.xhtml">
+            <f:param disable="#{empty fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq1ggxwwqqhxxxxxmembersgroupA0xxuobxbxxxxxxxxxxxsid" 
+                    value="#{fxxxuq1ggxwwqqhxxxxxmembersgroupHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+            <f:param name="jxxxuq54exwwqqhxxxxxgroupmembersFrom" value="Fxxxuq1ggxwwqqhxxxxxmembersgroup"/>
+        </h:button>
+    </div>        
+   </p:tab>
+    </p:tabView>
+</div>        
+</p:panel>
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

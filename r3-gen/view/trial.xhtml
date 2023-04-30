@@ -1,0 +1,250 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="email" value="#{yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid}"/>
+    <f:viewParam name="registrationName" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientName}"/>
+    <f:viewParam name="websiteName" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName}"/>
+    <f:viewParam name="websiteFullUrl" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientFullUrlName}"/>
+    <f:viewParam name="functionGroup" value="#{yxxxuh566xwwqqwxxxxxuserHome.from}"/>
+</f:metadata>
+
+
+<ui:define name="body">
+   
+    <h:form id="trial">
+        <p:panel>
+            <h2 style="font-family:arial;color:blue;" > #{messages.Free} #{messages.Trial} #{messages['for']} #{messages.two} #{messages.weeks}
+              </h2>
+            <h4> #{messages.Select} #{messages.payment} #{messages.options} #{messages.later}  </h4>
+            <hr></hr>
+            <div class="dialog">
+         <p:messages ajaxRendered="true"  />
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:14}">
+           <ui:fragment rendered="#{empty yxxxuh566xwwqqwxxxxxuserHome.from}"> 
+            <h:outputText style="font-family:arial;color:blue;font-size:18px;" escape="false" value="Addon Products for non Raaspi sites." />
+            <ui:fragment rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+             <i class="fa fa-play"></i>
+            </ui:fragment>
+            <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+             <i class="fa fa-caret-down"></i>
+            </ui:fragment>
+            <br></br><h:link id="more" outcome="/ItemDetailsBrowse.xhtml" value="#{messages['More']} #{messages['Apps']}" >
+             <i class="fa fa-external-link-square"></i>
+            </h:link>
+           </ui:fragment> 
+            <br></br>
+           <ui:fragment rendered="#{!empty yxxxuh566xwwqqwxxxxxuserHome.from}"> 
+            <h:outputText style="font-family:arial;color:blue;font-size:18px;" escape="false" value="App selected."/> 
+           </ui:fragment> 
+            <br></br>
+            <p:panel rendered="#{empty yxxxuh566xwwqqwxxxxxuserHome.from or fn:substring(yxxxuh566xwwqqwxxxxxuserHome.from,0,2)=='a1'}">
+              <h:outputText value="#{messages.Stock} #{messages.Count} #{messages['by']} #{messages['Raaspi']}"
+                 rendered="true"/>&nbsp;
+             <h:graphicImage id="b1t" 
+              value="http://www.raaspi.com//ImageServletCdi/?table=blobdata&amp;seq=1&amp;scope=SYSTEM&amp;qlf=PIC&amp;id=Xscanningbox.jpg7026004&amp;width=700"
+               style="object-fit: cover;max-height:100px;padding:5px;">
+              <p:tooltip attached="true" for="b1t">
+               <h:outputText value="#{messages.Physical} #{messages.Stock} #{messages.Count} #{messages.plus} #{messages.Supply} #{messages.Chain}"/>
+              </p:tooltip>
+             </h:graphicImage><br></br> 
+            <h:commandButton   action="/trial.xhtml?email=mail@yourdomain.com&amp;registrationName=name&amp;websiteName=sitename&amp;functionGroup=a1&amp;faces-redirect=true" 
+              value="#{messages.Select}" rendered="#{empty yxxxuh566xwwqqwxxxxxuserHome.from}">
+            </h:commandButton>
+            </p:panel>
+            <p:panel rendered="#{empty yxxxuh566xwwqqwxxxxxuserHome.from or fn:substring(yxxxuh566xwwqqwxxxxxuserHome.from,0,2)=='a2'}"> 
+              <h:outputText value="#{messages['Ecommerce']} #{messages['by']} #{messages['Raaspi']}"
+                 rendered="true"/>
+              <h:graphicImage id="m1t" value="http://www.raaspi.com//ImageServletCdi/?img=/img/ecomm-wwwcart.jpg&amp;qlf=jpg&amp;height=110"
+                style="object-fit: cover;max-height:100px;padding:5px;">
+             <p:tooltip attached="true" for="m1t">
+              <h:outputText value="#{messages['Shopping']} #{messages['cart']}- #{messages['Online']} #{messages['payment']}- #{messages['InStore']} #{messages['payment']}"/>
+             </p:tooltip>
+              </h:graphicImage>
+            &nbsp;<h:commandButton   action="/trial.xhtml?email=mail@yourdomain.com&amp;registrationName=name&amp;websiteName=sitename&amp;functionGroup=a2&amp;faces-redirect=true" 
+                value="#{messages['Select']}" rendered="#{empty yxxxuh566xwwqqwxxxxxuserHome.from}" >
+            </h:commandButton>
+            </p:panel> 
+
+            <p:panel rendered="#{empty yxxxuh566xwwqqwxxxxxuserHome.from or fn:substring(yxxxuh566xwwqqwxxxxxuserHome.from,0,2)=='a3'}"> 
+              <h:outputText value="#{messages['Event']} #{messages['Seat']} #{messages['Allocation']} (#{messages['now']} #{messages['Free']}!) "
+                 rendered="true"/>
+
+              <h:graphicImage id="a1t" value="http://www.raaspi.com/ImageServletCdi/?img=/img/team-round.jpg&amp;qlf=jpg&amp;height=0"
+                style="object-fit: cover;max-height:100px;padding:5px;">
+               <p:tooltip  attached="true" for="a1t">
+              <h:outputText value="#{messages['Seat']} #{messages['Allocate']}- #{messages['Hold']} #{messages['for']} #{messages['Customer']}/#{messages['Ticket']} "/>
+             </p:tooltip>
+              </h:graphicImage>
+            &nbsp;<h:commandButton   action="/trial.xhtml?email=mail@yourdomain.com&amp;registrationName=name&amp;websiteName=sitename&amp;functionGroup=a3&amp;faces-redirect=true"  
+             value="#{messages.Select}" rendered="#{empty yxxxuh566xwwqqwxxxxxuserHome.from}">
+            </h:commandButton>
+            </p:panel> 
+
+            <p:panel rendered="#{empty yxxxuh566xwwqqwxxxxxuserHome.from or fn:substring(yxxxuh566xwwqqwxxxxxuserHome.from,0,2)=='a4'}"> 
+              <h:outputText value="#{messages['Event']} #{messages['Management']} #{messages['by']} #{messages['Raaspi']}"
+                 rendered="true"/>
+             <h:graphicImage id="c1t"
+              value="http://www.raaspi.com/ImageServletCdi/?table=blobdata&amp;seq=4&amp;scope=SYSTEM&amp;qlf=PIC&amp;id=X3R-TOP-LEFT-C&amp;width=0"
+               style="object-fit: cover;max-height:100px;padding:5px;">
+             <p:tooltip attached="true" for="c1t">
+              <h:outputText value="#{messages['Online']} #{messages['ticket']} #{messages['sell']}- #{messages['Bulk Email']}- #{messages['Seat']} #{messages['Allocate']}- #{messages['Social']} #{messages['Media']}"/>
+             </p:tooltip>
+             </h:graphicImage><br></br> 
+             &nbsp;<h:commandButton   action="/trial.xhtml?email=mail@yourdomain.com&amp;registrationName=name&amp;websiteName=sitename&amp;functionGroup=a4&amp;faces-redirect=true" 
+                 value="#{messages['Select']}" rendered="#{empty yxxxuh566xwwqqwxxxxxuserHome.from}" > 
+            </h:commandButton>
+            </p:panel> 
+      </h:panelGrid>
+      <hr></hr>
+
+
+ <h:panelGrid id="registerx">
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+            <h4>#{messages.your_email}</h4> 
+            <h:outputText value="&#160;&#160;"/>
+            <h:graphicImage id="remailTipImg" value="/img/help.gif">
+             <p:tooltip id="remailTip" attached="true" for="remailTipImg">
+              <h:outputText value="#{messages.remail_tip}"/>
+             </p:tooltip>
+            </h:graphicImage>
+              <i class="fa fa-envelope" aria-hidden="true" style="color:dark grey">
+              </i>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+       <ui:decorate id="rclientEmailFieldb" template="layout/edit.xhtml">
+            <h:inputText id="email" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid}" pt:placeholder="email@xyz.com" size="30" maxlength="50" onclick="this.value='';" onfocus="this.select()"
+             class="w3-input"/>
+       </ui:decorate>
+      </h:panelGrid>
+      <br></br>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="clientRegistrationNameField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.clientRegistrationName}</ui:define>
+            <h:outputText value="&#160;&#160;"/>
+            <h:graphicImage id="rnameTipImg" value="/img/help.gif">
+             <p:tooltip id="rnameTip" attached="true" for="rnameTipImg">
+              <h:outputText value="#{messages.rname_tip}"/>
+             </p:tooltip>
+            </h:graphicImage>
+              <i class="fa fa-user fa-lg" aria-hidden="true" style="color:dark grey">
+              </i>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="clientRegistrationNameFieldb" template="layout/edit.xhtml">
+            <h:inputText id="registrationName" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientName}" size="35" pt:placeholder="Abc Rentals" maxlength="35" onclick="this.value='';" onfocus="this.select()"
+             class="w3-input">
+            </h:inputText>
+          </ui:decorate>
+      </h:panelGrid>
+            <br/>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="clientApplicationNameField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.clientWebsiteName}</ui:define>
+            <h:outputText value="&#160;&#160;"/>
+            <h:graphicImage id="rappTipImg" value="/img/help.gif">
+             <p:tooltip id="rappTip" attached="true" for="rappTipImg">
+              <h:outputText value="#{messages['xxx']} #{messages['part']} #{messages['of']} #{messages['xxx.raaspi.com']} #{messages['or']} #{messages.of} #{messages['xxx.com']}"/>
+             </p:tooltip>
+            </h:graphicImage>
+              <i class="fa fa-laptop" aria-hidden="true" style="color:dark grey">
+              </i>
+            <h:outputText id="revised" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName}"/>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="clientApplicationNameFieldb" template="layout/edit.xhtml">
+            <h:inputText id="websiteName" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName}" size="35" 
+             pt:placeholder="Existing name or a new name" maxlength="35" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input" >
+              <p:ajax event="keyup" render="fullurlName,revised,full" />
+            </h:inputText>
+          </ui:decorate>
+      </h:panelGrid>
+                <h:commandButton id="status" class="w3-button w3-teal"
+                      value="#{messages.Check} #{messages.clientWebsiteName} #{messages.already} #{messages.exists} #{messages.under} #{messages.RAASPI}? / #{messages.status}  "
+                      action="#{yxxxuh566xwwqqwxxxxxuserHome.showInstallStatus()}" target="_blank" >
+                </h:commandButton>
+      <br></br>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate id="clientFullUrlField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.clientFullUrlName}</ui:define>
+            <h:outputText value="&#160;&#160;"/>
+            <h:graphicImage id="tldImg" value="/img/help.gif">
+             <p:tooltip id="tldTip" attached="true" for="tldImg">
+              <h:outputText value="#{messages.tld_tip}"/>
+             </p:tooltip>
+            </h:graphicImage>
+              <i class="fa fa-cloud" aria-hidden="true" style="color:dark grey">
+              </i>
+
+          </ui:decorate>
+      </h:panelGrid>
+            <h:outputText id="full" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientFullUrlName}"/>
+      <hr></hr>
+
+          <h:panelGroup>
+            <h:selectBooleanCheckbox id="agreedToTerms" value="#{yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"/>
+            <h:outputText value="#{messages.agree_to_terms}" escape="false"/>
+             <br/>
+            <ui:remove> aug21 2020 Besides method params,doRegister running in userHome also uses values set by url parameters/metadata
+              like functionGrpup value in userHome from variable.FunctionGroup can be 1 or 1a ie default 14 days or 190 or 1a90 ie 90 days free trial
+             </ui:remove>
+            <p:commandButton id="registerButton" class="w3-btn w3-blue" value ="#{messages.Create} #{messages.Addon} #{messages.site}"  status="buttonStatus"  render="registerx"
+                action="#{yxxxuh566xwwqqwxxxxxuserHome.doRegister('v',yxxxuq1m1xwwqqqxxxxxclobdataHome.contentTheme)}"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+            &nbsp;<h:button id="ltdone"   value="Cancel" propagation="end" outcome="/home.xhtml" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"
+                           class="w3-btn w3-light-gray"/>
+            <h:button id="ltdone2"  value="Done" propagation="end" outcome="/home.xhtml" rendered="#{yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}" 
+                           class="w3-btn w3-light-gray"/>
+          </h:panelGroup>
+       <h:messages globalOnly="true" styleClass="message" />
+ </h:panelGrid>
+
+            </div>
+         <p:messages ajaxRendered="true"  />
+
+                
+        </p:panel>
+  </h:form>
+
+<h:form>
+
+ <p:popupPanel id="termsOfUse" width="640" height="480" >
+    <h:form>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p:commandButton value="#{messages.close}" onclick="PF('termsOfUse').hide()"/>
+    </h:form>
+  <f:facet name="header"><h:outputText value="#{messages.terms_of_use}"/></f:facet>
+  <f:facet name="controls">
+   <h:form>
+    <p:commandButton onclick="PF('termsOfUse').hide()" type="image" image="/img/Cancel16.png"/>
+   </h:form>
+  </f:facet>
+  <ui:include src="legal.xhtml"/>
+  <h:panelGroup style="width: 600px; text-align: center;">
+    <h:form>
+      <p:commandButton value="#{messages.ok}" onclick="PF('termsOfUse').hide()"/>
+    </h:form>
+  </h:panelGroup>
+ </p:popupPanel>
+</h:form>
+
+
+ </ui:define> 
+</ui:composition>
+
+
+

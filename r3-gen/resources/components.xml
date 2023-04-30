@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components xmlns="http://jboss.com/products/seam/components"
+            xmlns:core="http://jboss.com/products/seam/core"
+            xmlns:web="http://jboss.com/products/seam/web"
+            xmlns:persistence="http://jboss.com/products/seam/persistence"
+            xmlns:drools="http://jboss.com/products/seam/drools"
+  	      xmlns:framework="http://jboss.com/products/seam/framework"
+            xmlns:bpm="http://jboss.com/products/seam/bpm"
+            xmlns:security="http://jboss.com/products/seam/security"
+            xmlns:mail="http://jboss.com/products/seam/mail"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:jms="http://jboss.com/products/seam/jms" 
+                        xmlns:transaction="http://jboss.com/products/seam/transaction" 
+            xsi:schemaLocation=
+                "http://jboss.com/products/seam/core http://jboss.com/products/seam/core-2.0.xsd 
+                 http://jboss.com/products/seam/persistence http://jboss.com/products/seam/persistence-2.0.xsd 
+                 http://jboss.com/products/seam/drools http://jboss.com/products/seam/drools-2.0.xsd
+                 http://jboss.com/products/seam/bpm http://jboss.com/products/seam/bpm-2.0.xsd
+                 http://jboss.com/products/seam/security http://jboss.com/products/seam/security-2.0.xsd
+                 http://jboss.com/products/seam/mail http://jboss.com/products/seam/mail-2.0.xsd
+                 http://jboss.com/products/seam/components http://jboss.com/products/seam/components-2.0.xsd">
+
+   <core:init debug="false" jndi-pattern="genapp/#{ejbName}/local"/>
+     <transaction:ejb-transaction /> 
+     
+   <core:manager concurrent-request-timeout="5000" 
+                 conversation-timeout="1200000" 
+                 conversation-id-parameter="cid"/>
+    
+   <persistence:managed-persistence-context name="entityManager"
+                                     auto-create="true"
+                      persistence-unit-jndi-name="@puJndiName@"/>
+
+   <drools:rule-base name="securityRules">
+       <drools:rule-files>
+           <value>/security.drl</value>
+       </drools:rule-files>
+   </drools:rule-base>
+<!--OPTIONS01 refer to optionsv01 and covers all the columns       -->
+  <framework:entity-query name="options01" ejbql="select c from Yxxxuq51options c" />
+
+
+
+<!--GOPTIONS01 refer to genoptionsv01 (jay rename table name to genoptionsv01) and holds all the goptions columns      -->
+  <framework:entity-query name="goptions01" ejbql="select c from Yxxxuq52genoptions c" />
+
+<!-- enable Seam for this non-JSF URL pattern -->
+ <web:context-filter url-pattern="/reports/*"/> 
+
+   <security:rule-based-permission-resolver security-rules="#{securityRules}"/>
+
+   <security:identity authenticate-method="#{authenticator.authenticate}" remember-me="true"/>
+   
+   <event type="org.jboss.seam.notLoggedIn">
+       <action execute="#{redirect.captureCurrentView}"/>
+   </event>
+   <event type="org.jboss.seam.postAuthenticate">
+       <action execute="#{redirect.returnToCapturedView}"/>
+   </event>
+    <mail:mail-session host="mail.3rcomputer.com" port="465" username="jaymitra@3rcomputer.com" password="mAy30j" tls="false" ssl="true" debug="true" />   
+        
+   <!-- For use with jBPM pageflow or process management -->
+   <!--  
+   <bpm:jbpm>
+      <bpm:process-definitions></bpm:process-definitions>
+      <bpm:pageflow-definitions></bpm:pageflow-definitions>
+   </bpm:jbpm>
+   -->
+<jms:managed-queue-sender name="requestSender" auto-create="true" queue-jndi-name="/queue/rcomputer.getArcustomer.request" />
+
+<jms:managed-queue-sender name="phoneQueueSender" auto-create="true" queue-jndi-name="queue/phoneQueue"/> 
+
+<jms:queue-connection queue-connection-factory-jndi-name="java:/JmsXA" />
+     
+</components>

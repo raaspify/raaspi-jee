@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+<h:form>
+
+<h:panelGroup rendered="true">
+
+         <!-- left panel top-1 content can be descript and doc for text and  image/notes for picture/caption from ITEM table only --> 
+         <!-- keys are 
+              'blobdata','3R-LEFT-TOP-M','PIC',0 for any picture at left top
+              'clobdata','3R-LEFT-TOP-M','HDR',0 for header1 
+              'clobdata','3R-LEFT-TOP-M','TXT',0 for content1 
+              'clobdata','3R-LEFT-TOP-M','HDR',1 for header2 
+              'clobdata','3R-LEFT-TOP-M','TXT',1 for content2 
+               all rendered if not logged in
+          --> 
+              <h:graphicImage 
+              value="/ImageServletCdi/?seq=0&amp;id=A3R-LEFT-TOP-M&amp;width=100"
+                rendered="#{customIdentity.labelView.contains('VM')  and (yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-LEFT-TOP-M','PIC',0) !=null)}">
+              </h:graphicImage> 
+              <h:outputText escape="false" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-TOP-M','HDR',0,1200)}" 
+                rendered="#{customIdentity.labelView.contains('VM')  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-TOP-M','HDR',0,1200) !=null)}"/>
+              <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-TOP-M','TXT',0,4096000)}" 
+                rendered="#{customIdentity.labelView.contains('VM')  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-TOP-M','TXT',0,1200) !='')}"/>
+
+              <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-TOP-M','HDR',1,1200)}"
+                rendered="#{customIdentity.labelView.contains('VM')  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-TOP-M','HDR',1,1200) !=null)}"/>
+              <h:outputText escape="false" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-TOP-M','TXT',1,4096000)}"
+                rendered="#{customIdentity.labelView.contains('VM')  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-TOP-M','TXT',1,1200) !=null)}"/>
+              <h:graphicImage 
+              value="/ImageServletCdi/?seq=0&amp;id=A3R-LEFT-FTR-M&amp;width=100" 
+                rendered="#{customIdentity.labelView.contains('VM')  and (yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-LEFT-FTR-M','PIC',0) !=null)}">
+              </h:graphicImage> 
+
+
+
+    <ui:include src="panelMenuMockUp.xhtml">
+        <ui:param name="projectName" value="genapp"/>
+    </ui:include>
+<ui:remove>
+    <h:commandButton value="#{messages.left_pop}" onclick="PF('lpopup').show()">
+    </h:commandButton>
+</ui:remove>
+
+    <p:dialog id="lpopup" modal="false" autosized="true" resizeable="false">
+        <f:facet name="header">
+            <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-POP-C','HDR',0,1200)}"
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-POP-C','HDR',0,1200) !=null)}"/>
+        </f:facet>
+        <f:facet name="controls">
+            <h:outputLink value="#" onclick="PF('lpopup').hide()">
+                X
+            </h:outputLink>
+        </f:facet>
+        <p>
+        <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-POP-C','TXT',0,4096000)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LEFT-POP-C','TXT',0,1200) !='')}"/>
+
+            <a href="#" onclick="PF('lpopup').hide()">Close</a>:
+        </p>
+
+    </p:dialog>
+</h:panelGroup>
+</h:form>
+</ui:composition>
+
+</html>
+

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<!--
+maven build default lifecycle phases
+validate, Initialize, generate sources, Process Sources, , generate resources, Process reSources, 
+ compile, Process classes, Generate-test-sources, Process-test-source, test compile, Process-test-classes,
+ test, prepare package, package, pre int test, int test, post int test, verify, install, Deploy, validate
+
+pom common phases
+validate, compile, test, package, verify, install, deploy
+mvn package command >  runs all phases to package
+mvn deploy > runs all phases to deploy (copies the final package to the remote repository for sharing with other developers and projects.)
+Each phase is a sequence of goals, and each goal is responsible for a specific task.
+To run a specific goal, without executing its entire phase (and the preceding phases) we can use the command:
+mvn <PLUGIN>:<GOAL>
+mvn compiler:compile
+To pass parameters, use mvn phase -DpropertyName=value use as $propertyName inside pom.xml
+
+0. manually delete dir genappcdi first. This is optional and needed if step1 ie delete-project fails to delete project dir
+1. r3 delete-project
+2. r3 create-project
+3. mvn generate-sources       (runs 0-3) to generate sources only
+4. mvn deploy                 (runs 0-4) to generate war for tomee
+5. mvn deploy -Dtarget=wildfly copies persistence-wildfly.xml into persistence.xml and jee6 war, default tomee-hsql 
+6. mvn deploy -Dtarget=wildfly -Das=ear  creates ear  default war
+7. mvn deploy -Dproduct=-ee  Business ecommerce, -oc Association club -sc Service learning centre default ee
+pom.xml will put the output in C:\genapp\target
+but it also uses maven-antrun-plugin to use ant scripts which uses C:\genapp\r3-gen\projects\genappcdi 
+ to put output like .war 
+We need to tell pom re location of .war
+
+pom properties are defined as 
+<properties>
+    <someproperty> ${someproperty} </someproperty>
+</properties>
+or created via -D parameter or are predefined system proprties like project.name
+
+passing pom proprties to antrun plugin  is a separate thing.
+
+one can pass the properties by defining new Ant properties
+ (using the property name/value tag in your target within the configuration). 
+  <property name="antproperty1" value="${someproperty}"/>
+witinn Ant itself a default value can be set, so that ant script can run without POM
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.raaspi.genapp</groupId>
+<!--  <artifactId>genappcdi</artifactId>  artifactId value must match with 
+  a. project.name in genapp\r3-gen dir build-r3gen.properties file
+  b. if ear file involved then application.xml in r3-gen/resourses dir needs changes to web-uri and ejb tag values to match the artifactId
+  c. persistentunit is genappcdi and hardcoded in .ftl and in persistence.xml
+  jun23 2021 tomee-maven-plugin to produce war file 
+  jul12 2021 added executions goal in phase package to produce java.jar for tomee+war
+-->
+  <artifactId>genappcdi</artifactId>
+  <version>0.0.1</version>
+   <build>
+    <plugins>   
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>3.0.0</version>
+
+            <executions>
+
+                <execution> <!--existing ant target generate which calls delete, create first -->
+                    <phase>generate-sources</phase>
+                    <configuration>
+                        <target>
+                            <property name="working.dir" value="${project.basedir}"/>
+                            <property name="project.home.maven" value="${project.basedir}/r3-gen/projects/${project.name}"/>
+                            <echo message="${project.name}" />
+                            <property name="project.name.maven" value="${project.name}"/>
+                            <property name="target.ant" value="${target}"/>
+                            <property name="as.ant" value="${as}"/>
+                            <property name="as.product" value="${product}"/>
+                            <echo> passed to ant as target.ant value ${target} </echo>
+                            <echo message="${reveng.home.maven}" />
+
+                            <echo message="Start generating sources view, backend entities .."/>
+                            <ant antfile="${project.basedir}/r3-gen/build-r3model.xml">
+                             <target name="generate"/>
+                            </ant> 
+                            <echo message="End generating sources"/>
+                        </target>
+                    </configuration>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                </execution>
+
+            </executions>
+            <dependencies>
+             <dependency>
+              <groupId>com.sun</groupId>
+              <artifactId>tools</artifactId>
+              <version>1.5.0</version>
+              <scope>system</scope>
+              <systemPath> ${env.JAVA_HOME}/lib/tools.jar</systemPath>
+             </dependency>
+            </dependencies>
+        </plugin>
+     <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-source-plugin</artifactId>
+      <version>3.2.0</version>
+      <executions>
+        <execution>
+            <id>attach-sources</id>
+            <goals>
+                <goal>jar</goal>
+            </goals>
+        </execution>
+      </executions>
+     </plugin>
+     
+    </plugins>    
+    <sourceDirectory>${project.basedir}/r3-gen/projects/genappcdi</sourceDirectory>
+  </build>
+
+     
+      
+</project>

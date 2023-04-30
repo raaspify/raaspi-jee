@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+     template="layout/rtemplate.xhtml">
+
+<f:metadata>
+    <f:viewAction action="#{jxxxuq201xwwqqhxxxxxcustomerHome.restrict()}" />
+</f:metadata>
+
+<ui:define name="body">
+    <h:form id="plotsitems" styleClass="edit">
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel"  view="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['fullcalendarOrdHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+	</p:toolbar>
+    <h:messages globalOnly="false" styleClass="message" id="globalMessages"/>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<h:head>
+<script src='./js/moment.min.js'></script>
+<script src='./js/fullcalendar.min.js'></script>
+<script>
+$(document).ready(function() {
+ $('#calendar').fullCalendar({
+				header:
+				{
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+    eventTextColor:"black",
+    eventBackgroundColor:"AliceBlue",
+    events: function(start, end, callback) {
+//                alert("Jay: function called" );
+
+        $.ajax({
+            url:'rest/customero',
+            beforeSend: function(xhr) {
+             //alert ('jay before send');
+             xhr.setRequestHeader('Authorization', 'Basic ' + btoa(unescape(encodeURIComponent('clientId' + ':' + 'restPW'))))
+            },
+
+            success: function(result) {
+       //        alert("Jay suicess: " + result );
+                var events = [];
+                $(result).find('root').each(function() {
+               //     alert("Jay2: " + $(this).text()) ;
+                     $(this).children().each(function(){
+                   //    alert("Jay3: " + $(this).children("Item").text()) ;
+                       events.push({
+                        url: '/customer.wflow?jxxxuq201xwwqqhxxxxxcustomerA0xxuobxbvxxxxxxxxxxsid='+$(this).children("ItemUrl").text(),
+                        title: $(this).children("Item").text(),
+                        start: $(this).children("Value").text()
+                       });
+                     });
+                });
+                callback(events);
+            },
+    error: function (xhr, status, error) {
+     //   alert(xhr+"-j- "+status+"-j- "+error);
+    },
+           complete: function (xhr,status) {
+            // Handle the complete event
+//            alert("ajax completed " + xhr);
+           }
+        });
+    }
+ });
+});
+
+
+</script>
+<style>
+
+	body {
+		margin-top: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		}
+		
+	#loading {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		}
+
+</style>
+</h:head>
+<h:body>
+<div id='loading' style='display:none'>loading...</div>
+<div id='calendar'></div>
+<p>
+     title: #{messages['Customer']} Ordered,
+</p>
+</h:body>
+</html>
+
+
+            <h:button id="done" 
+                   value="Done"
+             propagation="end"
+                    outcome="/customerReport.xhtml" />
+
+    </h:form>
+
+</ui:define>
+
+</ui:composition>
+

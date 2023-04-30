@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+                  xmlns:p="http://primefaces.org/ui"
+                  template="layout/rtemplate.xhtml">
+<!-- not generated-->
+<ui:remove>
+ used in ItemDetailsBrowse
+ to show all categories
+</ui:remove>
+<f:metadata>
+    <f:viewParam name="imail" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.imailaddr}"/>
+    <f:viewParam name="imailAlt" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.imailaddrAlt}"/>
+</f:metadata>
+
+<ui:define name="body">
+    
+    <h:form id="dxxxuq9bitemjobSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel"  outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+ 		   <h:graphicImage value="/img/Search16.gif" styleClass="pic"/>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:commandButton id="categories"  styleClass="buttonMain" value="  #{messages.select} #{messages.shopping_categories}  "  action="#{fpxxfq1a5xwwqqhxxxxxitemHome.goItemBrowse()}" includeViewParams="true" />
+              <h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none"   >
+               <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+              </h:link>
+              <p:panel id="jcount">
+              <h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0}">
+              </h:outputText>
+              <h:outputText value="[Empty]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() == null}"/>
+              </p:panel>
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['gentreeHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+	<h:panelGroup layout="block">
+
+	
+             <h:outputText value="#{messages['for']} #{messages['faster']} #{messages['and']} #{messages['repeat']} #{messages['purchase']},  " rendered="#{!identity.loggedIn}"/> 
+             <h:outputText value="#{messages['signup']} #{messages['and']} #{messages['login']} #{messages['is']} #{messages['recommended']},  " rendered="#{!identity.loggedIn}"/> 
+             <h:outputText value="#{messages['but']} #{messages['you']} #{messages['may']} #{messages['continue']} #{messages['your']} #{messages['purchase']} #{messages['here']}  " rendered="#{!identity.loggedIn }"/> 
+             <h:outputText value="(#{messages['please']} #{messages['enter']} #{messages['email']} #{messages['first']})  " rendered="#{!identity.loggedIn}"/> 
+             <br></br>
+             <h:outputText value=" #{messages['in']} #{messages['guest']}   " rendered="#{!identity.loggedIn}"/> 
+             <h:graphicImage value="/img/person32.png" styleClass="pic" rendered="#{!identity.loggedIn}"/>
+             <h:outputText value=" #{messages['mode']}  " rendered="#{!identity.loggedIn}"/> 
+             <br></br><br></br>
+             <h:panelGroup id="custemailAlt" template="layout/edit.xhtml" rendered="#{!identity.loggedIn }">
+             <ui:define name="label">#{messages['email']} #{messages['address']}
+             </ui:define>
+        	 <h:inputText label="email" id="em2" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.imailaddrAlt}" rendered="#{!identity.loggedIn }" required="false"/>
+             </h:panelGroup>
+	<br/>
+        <p:messages ajaxRendered="true"  />
+
+<p:panel>
+ <h:panelGrid columns="2" >
+  <h:panelGroup>
+<p:tree var="node" toggleType="client">
+ <p:treeModelAdaptor nodes="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemsSIMapKeys}">
+   <p:treeNode >
+     #{fpxxfq1a5xwwqqhxxxxxitemList.getKeyToEntity(node).b1xxuszsbvxxxxxxxxxxdescript}
+     <br/>
+   </p:treeNode>
+   <p:treeModelAdaptor nodes="#{fpxxfq1a5xwwqqhxxxxxitemList.itemsSIMap[node]}">
+    <p:treeNode>
+              <h:graphicImage 
+              value="/ImageServletCdi/?seq=1&amp;id=#{node.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=50" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdataTypeMime('FPXXFQ1A5XWWQQHXXXXXITEM',node.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+              </h:graphicImage> 
+              #{node.b1xxuszsbvxxxxxxxxxxdescript}
+                            <p:commandButton id="AddToCart"  update="@all"    status="buttonStatus" rendered= "#{ node.b0xxziqxlvxxsaxxxxxxquantity gt 0}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrder(node,1,'cart')}" image="/img/control_add16.png" >
+                              <h:graphicImage value="/img/cart_put16.png"/>
+                              <f:param name="category" value="#{node.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}" />
+                              <f:param name="categoryJay" value="#{node.a0xxuobxbxxxxxxxxxxxsid}" />
+                            </p:commandButton>
+                            <p:commandButton id="Notify"  update="@all"   status="buttonStatus" rendered= "#{ node.b0xxziqxlvxxsaxxxxxxquantity le 0}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrder(node,1,'cart')}" 
+                                 image="/img/help.gif">
+                              <h:graphicImage value="/img/date16.png"/>
+                              <f:param name="category" value="#{node.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}" />
+                              <f:param name="categoryJay" value="#{node.a0xxuobxbxxxxxxxxxxxsid}" />
+                            </p:commandButton>
+
+
+    </p:treeNode>
+    <p:treeModelAdaptor nodes="#{fpxxfq1a5xwwqqhxxxxxitemList.itemsMap[node.a0xxukixbxxxxxxxxxxxmatcode]}">
+     <p:treeNode>
+      #{node.b1xxuszsbvxxxxxxxxxxdescript}
+              <h:graphicImage 
+              value="/ImageServletCdi/?seq=1&amp;id=#{node.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=50" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdataTypeMime('FPXXFQ1A5XWWQQHXXXXXITEM',node.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+              </h:graphicImage> 
+     </p:treeNode>
+     <p:treeModelAdaptor nodes="#{fpxxfq1a5xwwqqhxxxxxitemList.itemsMap[node.a0xxukixbxxxxxxxxxxxmatcode]}">
+      <p:treeNode >
+       #{node.a0xxukixbxxxxxxxxxxxmatcode}- #{node.b1xxuszsbvxxxxxxxxxxdescript}
+              <h:graphicImage 
+              value="/ImageServletCdi/?seq=1&amp;id=#{node.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=50" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdataTypeMime('FPXXFQ1A5XWWQQHXXXXXITEM',node.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+              </h:graphicImage> 
+      </p:treeNode>
+     </p:treeModelAdaptor>
+    </p:treeModelAdaptor>
+   </p:treeModelAdaptor>
+ </p:treeModelAdaptor>
+</p:tree>
+
+<br/>
+<br/>
+<br/>
+<br/>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessagesb"/>
+              <h:panelGrid columns="3" >
+             <h:panelGroup id="custemail2" template="layout/edit.xhtml" rendered="#{!identity.loggedIn }">
+             <ui:define name="label">#{messages['email']} #{messages['address']}
+             </ui:define>
+        	 <h:inputText  label="email" id="em1b" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.imailaddr}" rendered="#{!identity.loggedIn }" />
+             </h:panelGroup>
+              <h:link id="Cartb" outcome="/checkout.xhtml" value="Cart" propagation="none"   >
+               <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+              </h:link>
+              <p:panel id="jcountb">
+              <h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0}">
+              </h:outputText>
+              <h:outputText value="[Empty]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() == null}"/>
+              </p:panel>
+              </h:panelGrid>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+
+
+        <h:button outcome="/home.xhtml"
+                    id="done"
+                 value="Done"/>
+     </h:panelGroup>
+     <h:panelGroup>
+                              <h:graphicImage value="/ImageServletCdi/?img=/img/ecomm-wwwcart.jpg&amp;qlf=jpg&amp;height=110">
+                              </h:graphicImage>
+     </h:panelGroup>
+
+    </h:panelGrid>
+  </p:panel>
+	</h:panelGroup>
+<br/><br/>
+    <br style="clear: both" />
+ 
+ 
+    <p:jQuery selector="#tree img" query="addClass('pic-normal')" />
+    <p:jQuery selector="#tree img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
+    <p:jQuery selector="#tree img" event="mouseover" query="jQuery(this).stop().animate({width:'70px'})" />
+    <p:jQuery selector="#tree img" event="mouseout" query="jQuery(this).stop().animate({width:'50px'})" />
+
+
+ </h:form>
+
+</ui:define>
+	
+</ui:composition>
+

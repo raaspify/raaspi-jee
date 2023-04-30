@@ -1,0 +1,935 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="nxxxiha2rxwwqqhxxxxxgendbA0xxuobxbxxxxxxxxxxxsid" value="#{nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha2rxwwqqhxxxxxgendbA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="nxxxiha2rxwwqqhxxxxxgendbFrom" value="#{nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha2rxwwqqhxxxxxgendbFrom}"/>
+    <f:viewAction action="#{nxxxiha2rxwwqqhxxxxxgendbHome.restrict()}" />
+    <f:viewAction action="#{nxxxiha2rxwwqqhxxxxxgendbHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Gendb']}</ui:define>
+
+<ui:define name="body">
+<h:form id="nxxxiha2rxwwqqhxxxxxgendb" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("nxxxiha2rxwwqqhxxxxxgendb:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!nxxxiha2rxwwqqhxxxxxgendbHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['GendbEditHelp']!='GendbEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['GendbEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{nxxxiha2rxwwqqhxxxxxgendbHome.managed ? 'Edit' : 'Add'} #{messages['Gendb']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <p:tabView switchType="client" >
+           <p:tab title="#{messages['Genapp']}"
+             rendered="true">
+           <ui:decorate id="nxxxiha1rxwwqqhxxxxxgenappDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Genapp']} 
+            </ui:define>
+                <p:remoteCommand name="nxxxiha1rxwwqqhxxxxxgenappFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="nxxxiha1rxwwqqhxxxxxgenappsm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{nxxxiha2rxwwqqhxxxxxgendbHome.validateAndSelectXxxxxxxxappname}" 
+                   value="#{nxxxiha1rxwwqqhxxxxxgenappHome.lastnxxxiha1rxwwqqhxxxxxgenappP}" onchange="nxxxiha1rxwwqqhxxxxxgenappFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{nxxxiha1rxwwqqhxxxxxgenappList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+
+
+
+
+
+
+
+   </p:tabView>
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a0xxukxxbvxxxxxxxxxxdbnameDecoration"    >
+        <h:outputLabel  for="a0xxukxxbvxxxxxxxxxxdbname" value="#{messages['Dbname']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxukxxbvxxxxxxxxxxdbname" 
+           validator="#{nxxxiha2rxwwqqhxxxxxgendbHome.validateKeyDuplicateDbname}" 
+                       label="dbname"
+                        required="true"
+                           size="20"
+                      maxlength="40"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a0xxukxxbvxxxxxxxxxxdbname}">
+
+         </h:inputText>
+            <p:tooltip  target="a0xxukxxbvxxxxxxxxxxdbname"> <span style="white-space: nowrap"> <h:outputText value="Enter Value here"/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a1xxfxxxbvxxxxxxxxxxdbtypeDecoration"    >
+        <h:outputLabel  for="a1xxfxxxbvxxxxxxxxxxdbtype" value="#{messages['Dbtype']}">
+      </h:outputLabel>
+
+         <h:inputText id="a1xxfxxxbvxxxxxxxxxxdbtype" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a1xxfxxxbvxxxxxxxxxxdbtype}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a1xxfxxxbvxxxxxxxxxxdescriptDecoration"    >
+        <h:outputLabel  for="a1xxfxxxbvxxxxxxxxxxdescript" value="#{messages['Descript']}">
+      </h:outputLabel>
+
+         <h:inputText id="a1xxfxxxbvxxxxxxxxxxdescript" 
+                           size="32"
+                      maxlength="120"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a1xxfxxxbvxxxxxxxxxxdescript}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a2xxfxxxbvxxxxxxxxxxdbxxxxxxxxvendorDecoration"    >
+        <h:outputLabel  for="a2xxfxxxbvxxxxxxxxxxdbxxxxxxxxvendor" value="#{messages['Dbxxxxxxxxvendor']}">
+      </h:outputLabel>
+
+         <h:inputText id="a2xxfxxxbvxxxxxxxxxxdbxxxxxxxxvendor" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a2xxfxxxbvxxxxxxxxxxdbxxxxxxxxvendor}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a3xxfxxxbvxxxxxxxxxxdbplatformDecoration"    >
+        <h:outputLabel  for="a3xxfxxxbvxxxxxxxxxxdbplatform" value="#{messages['Dbplatform']}">
+      </h:outputLabel>
+
+         <h:inputText id="a3xxfxxxbvxxxxxxxxxxdbplatform" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a3xxfxxxbvxxxxxxxxxxdbplatform}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a3xxfxxxbvxxxxxxxxxxdbversionDecoration"    >
+        <h:outputLabel  for="a3xxfxxxbvxxxxxxxxxxdbversion" value="#{messages['Dbversion']}">
+      </h:outputLabel>
+
+         <h:inputText id="a3xxfxxxbvxxxxxxxxxxdbversion" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a3xxfxxxbvxxxxxxxxxxdbversion}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a6xxfxxxbvxxxxxxxxxxsqldriverDecoration"    >
+        <h:outputLabel  for="a6xxfxxxbvxxxxxxxxxxsqldriver" value="#{messages['Sqldriver']}">
+      </h:outputLabel>
+
+         <h:inputText id="a6xxfxxxbvxxxxxxxxxxsqldriver" 
+                           size="20"
+                      maxlength="40"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a6xxfxxxbvxxxxxxxxxxsqldriver}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a7xxfxxxbvxxxxxxxxxxsqlurlDecoration"    >
+        <h:outputLabel  for="a7xxfxxxbvxxxxxxxxxxsqlurl" value="#{messages['Sqlurl']}">
+      </h:outputLabel>
+
+         <h:inputText id="a7xxfxxxbvxxxxxxxxxxsqlurl" 
+                           size="20"
+                      maxlength="40"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a7xxfxxxbvxxxxxxxxxxsqlurl}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a8xxfxxxbvxxxxxxxxxxsqluserDecoration"    >
+        <h:outputLabel  for="a8xxfxxxbvxxxxxxxxxxsqluser" value="#{messages['Sqluser']}">
+      </h:outputLabel>
+
+         <h:inputText id="a8xxfxxxbvxxxxxxxxxxsqluser" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a8xxfxxxbvxxxxxxxxxxsqluser}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a9xxfxxxbvxxxxxxxxxxsqlpasswordDecoration"    >
+        <h:outputLabel  for="a9xxfxxxbvxxxxxxxxxxsqlpassword" value="#{messages['Sqlpassword']}">
+      </h:outputLabel>
+
+         <h:inputText id="a9xxfxxxbvxxxxxxxxxxsqlpassword" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a9xxfxxxbvxxxxxxxxxxsqlpassword}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b0xxfxxxbvxxxxxxxxxxsqlclasspathDecoration"    >
+        <h:outputLabel  for="b0xxfxxxbvxxxxxxxxxxsqlclasspath" value="#{messages['Sqlclasspath']}">
+      </h:outputLabel>
+
+         <h:inputText id="b0xxfxxxbvxxxxxxxxxxsqlclasspath" 
+                           size="20"
+                      maxlength="40"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.b0xxfxxxbvxxxxxxxxxxsqlclasspath}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b1xxfxxxbvxxxxxxxxxxsqlcreatedbscriptDecoration"    >
+        <h:outputLabel  for="b1xxfxxxbvxxxxxxxxxxsqlcreatedbscript" value="#{messages['Sqlcreatedbscript']}">
+      </h:outputLabel>
+
+         <h:inputText id="b1xxfxxxbvxxxxxxxxxxsqlcreatedbscript" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.b1xxfxxxbvxxxxxxxxxxsqlcreatedbscript}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b2xxfxxxbvxxxxxxxxxxsqldropdbscriptDecoration"    >
+        <h:outputLabel  for="b2xxfxxxbvxxxxxxxxxxsqldropdbscript" value="#{messages['Sqldropdbscript']}">
+      </h:outputLabel>
+
+         <h:inputText id="b2xxfxxxbvxxxxxxxxxxsqldropdbscript" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.b2xxfxxxbvxxxxxxxxxxsqldropdbscript}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b3xxfxxxbvxxxxxxxxxxsqlcreatetblsscriptDecoration"    >
+        <h:outputLabel  for="b3xxfxxxbvxxxxxxxxxxsqlcreatetblsscript" value="#{messages['Sqlcreatetblsscript']}">
+      </h:outputLabel>
+
+         <h:inputText id="b3xxfxxxbvxxxxxxxxxxsqlcreatetblsscript" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.b3xxfxxxbvxxxxxxxxxxsqlcreatetblsscript}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b4xxfxxxbvxxxxxxxxxxsqlloadtblsscriptDecoration"    >
+        <h:outputLabel  for="b4xxfxxxbvxxxxxxxxxxsqlloadtblsscript" value="#{messages['Sqlloadtblsscript']}">
+      </h:outputLabel>
+
+         <h:inputText id="b4xxfxxxbvxxxxxxxxxxsqlloadtblsscript" 
+                           size="20"
+                      maxlength="20"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.b4xxfxxxbvxxxxxxxxxxsqlloadtblsscript}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zexxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="zexxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="zexxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.zexxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="zfxxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zfxxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="zfxxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.zfxxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="zgxxuxznbvxxxxxxxxxxnotesDecoration"  rendered="true">
+        <h:outputLabel  for="zgxxuxznbvxxxxxxxxxxnotes" value="#{messages['Notes']}">
+      </h:outputLabel>
+
+         <h:inputText id="zgxxuxznbvxxxxxxxxxxnotes" 
+                           size="20"
+                      maxlength="60"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.zgxxuxznbvxxxxxxxxxxnotes}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zhxxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zhxxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="zhxxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.zhxxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a0xxukxxbvxxxxxxxxxxdbname} #{messages['sid']} #{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a0xxukxxbvxxxxxxxxxxdbname !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{nxxxiha2rxwwqqhxxxxxgendbHome.persist()}"
+                       disabled="#{!nxxxiha2rxwwqqhxxxxxgendbHome.wired}"
+                       rendered="#{!nxxxiha2rxwwqqhxxxxxgendbHome.managed  and !nxxxiha2rxwwqqhxxxxxgendbHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{nxxxiha2rxwwqqhxxxxxgendbHome.update()}"
+                       rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.managed  and !nxxxiha2rxwwqqhxxxxxgendbHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{nxxxiha2rxwwqqhxxxxxgendbHome.update()}"
+                       rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.managed and nxxxiha2rxwwqqhxxxxxgendbHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{nxxxiha2rxwwqqhxxxxxgendbHome.remove()}"
+                       rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.managed and !nxxxiha2rxwwqqhxxxxxgendbHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/gendbEdit.xhtml"
+                       rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{nxxxiha2rxwwqqhxxxxxgendbHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{nxxxiha2rxwwqqhxxxxxgendbHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{nxxxiha2rxwwqqhxxxxxgendbList.reportName}"/>
+            <f:param name="displayAs" value="#{nxxxiha2rxwwqqhxxxxxgendbList.displayAs}" /> 
+            <h:button outcome="/gendbList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Gendb']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha2rxwwqqhxxxxxgendbFrom ? 'home' : nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha2rxwwqqhxxxxxgendbFrom}.xhtml"
+                rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.managed or nxxxiha2rxwwqqhxxxxxgendbHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha2rxwwqqhxxxxxgendbFrom ? 'home' : nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha2rxwwqqhxxxxxgendbFrom}.xhtml"
+                rendered="#{!nxxxiha2rxwwqqhxxxxxgendbHome.managed and !nxxxiha2rxwwqqhxxxxxgendbHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="true" rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" toggleable="true" toggleableHeader="true">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+  <p:tabView switchType="ajax">
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Genapp']}">
+    <div class="association" id="nxxxiha1rxwwqqhxxxxxgenappParent">
+        
+        <h:outputText value="No genapp" 
+                   rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.nxxxiha1rxwwqqhxxxxxgenapp == null}"/>
+        
+        <p:dataTable var="nxxxiha1rxwwqqhxxxxxgenapp" tableStyle="table-layout:auto;"
+                   value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.nxxxiha1rxwwqqhxxxxxgenapp}" 
+                rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.nxxxiha1rxwwqqhxxxxxgenapp != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="nxxxiha1rxwwqqhxxxxxgenappTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewgenapp" 
+                     value="View" 
+                      outcome="/genapp.xhtml">
+                       <f:param disable="#{empty nxxxiha1rxwwqqhxxxxxgenapp.a0xxuobxbxxxxxxxxxxxsid}" name="nxxxiha1rxwwqqhxxxxxgenappA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{nxxxiha1rxwwqqhxxxxxgenapp.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">appname</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.a0xxukxxbvxxxxxxxxxxappname}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">appwemail</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.a1xxfemxbvxxxxxxxxxxappwemail}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">appwjmsmq</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.a1xxfjmxbvxxxxxxxxxxappwjmsmq}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">appwaccounting</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.a1xxfwxxbvxxxxxxxxxxappwaccounting}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">apptype</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.a1xxfxxxbvxxxxxxxxxxapptype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.a1xxfxxxbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">xxxvendor</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.b1xxfxxxbvxxappxxxxxxxxvendor}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">appversion</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.b3xxfxxxbvxxxxxxxxxxappversion}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">appdeploytype</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.b5xxfxxxbvxxxxxxxxxxappdeploytype}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">appplatform</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.b5xxfxxxbvxxxxxxxxxxappplatform}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">appmodelpkg</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.b6xxfxxxbvxxxxxxxxxxappmodelpkg}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">appactionpkg</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.b7xxfxxxbvxxxxxxxxxxappactionpkg}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">createfidata</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.b7xxuxxxbvxxxxxxxxxxcreatefidata}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">initializefidata</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.b7xxuxxxbvxxxxxxxxxxinitializefidata}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">revengdata</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.b7xxuxxxbvxxxxxxxxxxrevengdata}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">appskin</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.b8xxfxxxbvxxxxxxxxxxappskin}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.zexxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.zfxxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{nxxxiha1rxwwqqhxxxxxgenapp.zhxxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+     <p:tab title="#{messages['Gentable']}">
+        <div class="association" id="nxxxiha3rxwwqqhxxxxxgentablesChildren">
+         <ui:remove></ui:remove>
+            <h:outputText value="No gentables" 
+                       rendered="#{empty nxxxiha2rxwwqqhxxxxxgendbHome or empty nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha3rxwwqqhxxxxxgentables}"/>
+        
+            <p:dataTable value="#{nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha3rxwwqqhxxxxxgentables}" tableStyle="table-layout:auto;"
+                           var="nxxxiha3rxwwqqhxxxxxgentable" 
+                      rendered="#{not empty nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha3rxwwqqhxxxxxgentables}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="nxxxiha3rxwwqqhxxxxxgentablesTable">
+                <p:column>
+                    <f:facet name="header">action</f:facet>
+                    <h:link outcome="/gentable.xhtml" 
+                              id="selectnxxxiha3rxwwqqhxxxxxgentable" 
+                           value="Select"
+                     propagation="none">
+                        <f:param disable="#{empty nxxxiha3rxwwqqhxxxxxgentable.a0xxuobxbxxxxxxxxxxxsid}" name="nxxxiha3rxwwqqhxxxxxgentableA0xxuobxbxxxxxxxxxxxsid" 
+                                value="#{nxxxiha3rxwwqqhxxxxxgentable.a0xxuobxbxxxxxxxxxxxsid}"/>
+                        <f:param name="nxxxiha3rxwwqqhxxxxxgentableFrom" value="Nxxxiha2rxwwqqhxxxxxgendb"/>
+                    </h:link>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">tablename</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.a0xxukxxbvxxxxxxxxxxtablename}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">inaddmenu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.a2xxfxxxbvxxxxxxxxxxinaddmenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">inlistmenu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.a3xxfxxxbvxxxxxxxxxxinlistmenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">intransactionmenu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.a4xxfxxxbvxxxxxxxxxxintransactionmenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">inreportmenu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.a5xxfxxrbvxxxxxxxxxxinreportmenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">ingraphsmenu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.a6xxfxxrbvxxxxxxxxxxingraphsmenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">inmailingmenu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.a7xxfxxrbvxxxxxxxxxxinmailingmenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">ingeneratemenu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.a8xxfxxrbvxxxxxxxxxxingeneratemenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">inadminmenu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.a9xxfxxrbvxxxxxxxxxxinadminmenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">inmaintenancemenu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.aaxxfxxrbvxxxxxxxxxxinmaintenancemenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">inlabelsmenu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.abxxfxxrbvxxxxxxxxxxinlabelsmenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">inskipmenu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.acxxfxxrbvxxxxxxxxxxinskipmenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">incustom1menu</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.adxxfxxrbvxxxxxxxxxxincustom1menu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">menulevel</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.b1xxgxxxbv01xxxxxxxxmenulevel}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">menurole</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.c1xxgxxxbv02xxxxxxxxmenurole}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">menulabelgroup</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.d1xxgxxxbv03xxxxxxxxmenulabelgroup}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">submenusequence</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.d2xxgxxxbv04xxxxxxxxsubmenusequence}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">usagescope</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.d4xxgxxxbv04xxxxxxxxusagescope}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfl</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.zexxzzfxhhxxxxxxxxxxstatusfl}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfldt</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.zfxxcztxlxxxxxxxxxxxstatusfldt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">owner</f:facet>
+                    <h:outputText value="#{nxxxiha3rxwwqqhxxxxxgentable.zhxxutoxlhxxxxxxxxxxowner}"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+        <f:subview rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.managed}" id="nxxxiha3rxwwqqhxxxxxgentables">
+        <div class="actionButtons">
+            <h:button id="addnxxxiha3rxwwqqhxxxxxgentable" 
+                   value="Add gentable"
+                    outcome="/gentableEdit.xhtml"
+                    propagation="none">
+                 <f:param disable="#{empty nxxxiha2rxwwqqhxxxxxgendbHome.instance.a0xxuobxbxxxxxxxxxxxsid}"  name="nxxxiha2rxwwqqhxxxxxgendbA0xxuobxbxxxxxxxxxxxsid" 
+                         value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+                   <f:param name="nxxxiha3rxwwqqhxxxxxgentableFrom" value="gendbEdit" />
+            </h:button>
+        </div>
+        </f:subview>
+    </p:tab>
+     <p:tab title="#{messages['Genfields']}">
+        <div class="association" id="nxxxiha4rxwwqqhxxxxxgenfieldsesChildren">
+         <ui:remove></ui:remove>
+            <h:outputText value="No genfieldses" 
+                       rendered="#{empty nxxxiha2rxwwqqhxxxxxgendbHome or empty nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha4rxwwqqhxxxxxgenfieldses}"/>
+        
+            <p:dataTable value="#{nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha4rxwwqqhxxxxxgenfieldses}" tableStyle="table-layout:auto;"
+                           var="nxxxiha4rxwwqqhxxxxxgenfields" 
+                      rendered="#{not empty nxxxiha2rxwwqqhxxxxxgendbHome.nxxxiha4rxwwqqhxxxxxgenfieldses}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="nxxxiha4rxwwqqhxxxxxgenfieldsesTable">
+                <p:column>
+                    <f:facet name="header">action</f:facet>
+                    <h:link outcome="/genfields.xhtml" 
+                              id="selectnxxxiha4rxwwqqhxxxxxgenfields" 
+                           value="Select"
+                     propagation="none">
+                        <f:param disable="#{empty nxxxiha4rxwwqqhxxxxxgenfields.a0xxuobxbxxxxxxxxxxxsid}" name="nxxxiha4rxwwqqhxxxxxgenfieldsA0xxuobxbxxxxxxxxxxxsid" 
+                                value="#{nxxxiha4rxwwqqhxxxxxgenfields.a0xxuobxbxxxxxxxxxxxsid}"/>
+                        <f:param name="nxxxiha4rxwwqqhxxxxxgenfieldsFrom" value="Nxxxiha2rxwwqqhxxxxxgendb"/>
+                    </h:link>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">fieldname</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.a0xxukxxbxxxxxxxxxxxfieldname}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">ingroup</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.b2xxgxxxbv08xxxxxxxxingroup}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">fieldlength</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.b2xxgxxxbv10xxxxxxxxfieldlength}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">fieldtype</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.b2xxgxxxbvxxxxxxxxxxfieldtype}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">seqwithingroup</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.b3xxgxxxbv09xxxxxxxxseqwithingroup}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">focusseq</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.b4xxgxxxbv10xxxxxxxxfocusseq}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">future1</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.c1xxuxxxbvxxxxxxxxxxfuture1}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">initialvalue</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.c2xxgxxxbv12xxxxxxxxinitialvalue}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">keyoradditional</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.d1xxgxxxbv13xxxxxxxxkeyoradditional}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">keyoradditional2</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.d2xxgxxxbv14xxxxxxxxkeyoradditional2}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">keyoradditional3</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.d3xxgxxxbv15xxxxxxxxkeyoradditional3}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">showinmenu</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.e1xxgxxxbv16xxxxxxxxshowinmenu}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">showinreport</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.e2xxgxxxbv17xxxxxxxxshowinreport}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">processoption1</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.f1xxgxxxbv18xxxxxxxxprocessoption1}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">processoption2</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.f2xxuxxxbvxxxxxxxxxxprocessoption2}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">fdbcode</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.f3xxuhxxbvxxxxxxxxxxfdbcode}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">ftablename</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.f4xxuhxxbvxxxxxxxxxxftablename}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">ffieldkeyname1</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.f6xxuxxxbvxxxxxxxxxxffieldkeyname1}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">ffieldkeyname2</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.f6xxuxxxbvxxxxxxxxxxffieldkeyname2}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">ffieldkeyname3</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.f6xxuxxxbvxxxxxxxxxxffieldkeyname3}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfl</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.zexxzzfxhhxxxxxxxxxxstatusfl}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfldt</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.zfxxcztxlxxxxxxxxxxxstatusfldt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">owner</f:facet>
+                    <h:outputText value="#{nxxxiha4rxwwqqhxxxxxgenfields.zhxxutoxlhxxxxxxxxxxowner}"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+        <f:subview rendered="#{nxxxiha2rxwwqqhxxxxxgendbHome.managed}" id="nxxxiha4rxwwqqhxxxxxgenfieldses">
+        <div class="actionButtons">
+            <h:button id="addnxxxiha4rxwwqqhxxxxxgenfields" 
+                   value="Add genfields"
+                    outcome="/genfieldsEdit.xhtml"
+                    propagation="none">
+                 <f:param disable="#{empty nxxxiha2rxwwqqhxxxxxgendbHome.instance.a0xxuobxbxxxxxxxxxxxsid}"  name="nxxxiha2rxwwqqhxxxxxgendbA0xxuobxbxxxxxxxxxxxsid" 
+                         value="#{nxxxiha2rxwwqqhxxxxxgendbHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+                   <f:param name="nxxxiha4rxwwqqhxxxxxgenfieldsFrom" value="gendbEdit" />
+            </h:button>
+        </div>
+        </f:subview>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

@@ -1,0 +1,14 @@
+META-INF\persistence-dev.xml:      <jta-data-source>java:/PostgreSQLDS</jta-data-source>
+META-INF\persistence-tomee-hsql.xml:      <jta-data-source>PostgreSQLDS</jta-data-source>
+META-INF\persistence-tomee-psql.xml:      <jta-data-source>PostgreSQLDS</jta-data-source>
+META-INF\persistence-wildfly-hsql.xml:      <jta-data-source>PostgreSQLDS</jta-data-source>
+META-INF\persistence-wildfly-psql.xml:      <jta-data-source>PostgreSQLDS</jta-data-source>
+META-INF\persistence.xml:      <jta-data-source>PostgreSQLDS</jta-data-source>
+release2.x\wildflyAdmin.txt: <datasource jta="true" jndi-name="java:jboss/datasources/PostgreSQLDS" pool-name="PostgreSQLDS" enabled="true" use-ccm="true" statistics-enabled="true">
+release2.x\wildflyAdmin.txt:/subsystem=datasources/data-source=PostgreSQLDS/statistics=pool:write-attribute(name=statistics-enabled,value=true)
+release2.x\wildflyAdmin.txt:/subsystem=datasources/data-source=PostgreSQLDS/statistics=jdbc:read-resource(include-runtime=true)
+release2.x\wildflyAdmin.txt:/subsystem=datasources/data-source=PostgreSQLDS:read-resource(include-runtime=true,recursive=true)
+release2.x\wildflyAdmin.txt:[standalone@localhost:9990 /] /subsystem=datasources/data-source=PostgreSQLDS/statistics=pool:read-resource(include-runtime=true)
+tomee\conf\context.xml: <Resource auth="Container" driverClassName="org.hsqldb.jdbcDriver" name="PostgreSQLDS" password="" type="javax.sql.DataSource" url="jdbc:hsqldb:file:./data/h;hsqldb.lock_file=false" username="sa"/> 
+tomee\conf\tomee.xml:Also in cdi to get datasource, we need to use (DataSource) ctx.lookup("java:openejb/Resource/PostgreSQLDS")
+tomee\conf\tomee.xml:  <Resource id="PostgreSQLDS" type="DataSource">

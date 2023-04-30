@@ -1,0 +1,253 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemHome.restrict()}" />
+
+</f:metadata>
+
+<ui:remove>
+if the item does not have sku (stock control number), this allows counting using the item id.
+enter button calls itemHome itemCount method to create 
+ do not put any {messages['server']}, causes jdbc call when no connection and exception
+</ui:remove>
+<ui:define name="title">#{customIdentity.owner2} webpage to count #{messages['Item']} stocks</ui:define>
+
+<ui:define name="body">
+<h:form id="Item" styleClass="edit">
+
+<h:outputStylesheet>
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+              <h:outputText value="#{messages['Change']} #{messages['done']}-#{fpxxfq1a5xwwqqhxxxxxitemHome.getCurrentTime()}"
+                style="color:green;"
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.changeDone}">
+               <f:convertDateTime   type="time" />
+              </h:outputText>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ItemEditHelp']!='ItemEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+	</p:toolbar>
+       <h:messages globalOnly="true" styleClass="messageL" id="globalMessages"/>
+
+
+ <p:panel>
+     <div class="w3-panel w3-leftbar w3-small" >
+      <h:outputText value="#{messages['Use']} #{messages['this']}, #{messages['for']} #{messages['non']} #{messages['SKU']} #{messages['items']} #{messages['or']} #{messages['if']} #{messages['SKU']} #{messages['is']} #{messages['not']} #{messages['used']} #{messages['for']} #{messages['inventory']}. #{messages['You']} #{messages['may']} #{messages['scan']} #{messages['UPC']} #{messages['label']} #{messages['or']} #{messages['pre-printed']} #{messages['Item']} #{messages['with']} #{messages['barcode']} #{messages['labels']} "/> 
+      <br></br><h:outputText value="#{messages['Enter']} #{messages['creates']} #{messages['physical']} #{messages['count']} / #{messages['serialnumbers']} #{messages['record']} #{messages['for']} #{messages['scan']} #{messages['or']} #{messages['selected']}  #{messages['Item']}  "/> 
+      <br></br><h:outputText value="#{messages['Item']} #{messages['Metrics']} #{messages['report']} #{messages['will']} #{messages['show']} #{messages['item']} #{messages['quantity']} #{messages['versus']} #{messages['counted']} #{messages['stock']}. #{messages['List']} #{messages['or']} #{messages['Item']} #{messages['stock']} #{messages['count']} #{messages['report']} #{messages['shows']} #{messages['physical']} #{messages['count']} / #{messages['serialnumbers']} #{messages['records']} "/> 
+      </div>
+      <h:panelGrid columns="1">
+           <ui:decorate template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Scan']} #{messages['Item']}    
+            </ui:define>
+
+             <h:inputText id="itemI" required="false" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode}" 
+                       requiredMessage="#{messages['Item']} #{messages['Value']} #{messages['Required']}"
+                       validator="#{fpxxfq1a5xwwqqhxxxxxitemHome.validateAndSelectXxxxxxxxmatsid}" 
+                        pt:autofocus="true" onclick="this.value='';" onfocus="this.select()" class="w3-input" >
+             </h:inputText>
+           </ui:decorate>
+           <ui:decorate template="layout/edit.xhtml" >
+            #{messages['Select']} #{messages['Item']} 
+             <h:selectOneMenu id="items"  
+                   required="false"  
+                       label="item"
+                       rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                       value="#{fpxxfq1a5xwwqqhxxxxxitemHome.valueOverRide}"> 
+               <f:selectItem itemValue="#{null}" itemLabel="" noSelectionOption="true" />
+              <f:selectItems class="w3-input"
+                     value="#{fpxxfq1a5xwwqqhxxxxxitemList.getSuggestList(' ')}" var ="result" itemValue="#{result.a0xxukixbxxxxxxxxxxxmatcode}" 
+                     itemLabel="#{result.f1xxuxxrbvxxxxxxxxxxaliascode}/#{yxxxuh566xwwqqwxxxxxuserHome.mobile?fn:substring(result.b1xxuszsbvxxxxxxxxxxdescript,0,12):result.b1xxuszsbvxxxxxxxxxxdescript}-#{yxxxuh566xwwqqwxxxxxuserHome.mobile?fn:substring(result.b0xxziqxlvxxsaxxxxxxquantity,0,7):result.b0xxziqxlvxxsaxxxxxxquantity}"/>
+             </h:selectOneMenu>
+           </ui:decorate>
+
+          <br></br>
+  
+         <ui:decorate template="layout/edit.xhtml" >
+          <h:outputLabel  for="phy" value="#{messages['Quantity']} #{messages['Count']}">
+          </h:outputLabel>
+          <p:spinner  id="phy" class="w3-input"
+            value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity}" minValue="-10"
+                   inputSize="3" maxValue="999"
+                   step="1">
+          </p:spinner>
+         </ui:decorate>
+      </h:panelGrid>
+          <br></br>
+       <h:outputText value="#{messages['No']} #{messages['dates']} #{messages['setup']} #{messages['yet']}  " rendered="#{xlrxuq1iixwwqqhexxxxscandateList.resultList.size() le 0}"/> 
+       <ui:fragment rendered="#{xlrxuq1iixwwqqhexxxxscandateList.resultList.size() gt 0}">
+        #{messages['Current']} #{messages['Scan']} #{messages['Setup']}- #{messages['Start']}:<h:outputText value="#{xlrxuq1iixwwqqhexxxxscandateList.resultList[0].b1xxcsxraxxxxxxxxxxxdatetimeofscan}">
+         <f:convertDateTime type="both" dateStyle="short"/>
+        </h:outputText>
+        &nbsp;#{messages['End']}:<h:outputText value="#{xlrxuq1iixwwqqhexxxxscandateList.resultList[0].z1xxcxxrlvxxxxxxxxxxlastdate}">
+         <f:convertDateTime type="both" dateStyle="short"/>
+        </h:outputText>
+       </ui:fragment>
+
+       <p:panel toggleable="true" toggleableHeader="true" style="width: 40%;"  header="#{messages['Setup']}: #{messages['Dates']} #{messages['to']}  #{messages['allow']} #{messages['scanning']} " switchType="client" collapsed="true" 
+           leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" rendered="#{customIdentity.hasRole('UH') or customIdentity.hasRole('UQ') }">
+              <h:panelGrid columns="1">
+               <h:panelGroup id="start"    >
+                <h:outputLabel  for="startdate" value="#{messages['Stock']} #{messages['start']}">
+                </h:outputLabel>
+		<p:calendar id="startdate"
+                  value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.b1xxcsxraxxxxxxxxxxxdatetimeofscan}" datePattern="MM/dd/yyyy"  enableManualInput="true" >
+                </p:calendar>
+               </h:panelGroup>
+              </h:panelGrid>
+
+              <h:panelGrid columns="1">
+               <h:panelGroup id="end"    >
+                <h:outputLabel  for="enddate" value="#{messages['Stock']} #{messages['end']}">
+                </h:outputLabel>
+		<p:calendar id="enddate"
+                  value="#{xlrxuq1iixwwqqhexxxxscandateHome.instance.z1xxcxxrlvxxxxxxxxxxlastdate}" datePattern="MM/dd/yyyy"  enableManualInput="true" >
+                </p:calendar>
+               </h:panelGroup>
+              </h:panelGrid>
+            <h:outputText value="#{messages['Proceed']} #{messages['creates']} #{messages['or']} #{messages['reuses']} #{messages['physical']} #{messages['count']} / #{messages['serialnumbers']}  #{messages['records']}  #{messages['for']} #{messages['Stock']} #{messages['taking']}."/>
+            <br></br><h:outputText value="#{messages['Also']} #{messages['controls']} #{messages['Stock']} #{messages['taking']} #{messages['window']}"/> 
+            <p:commandButton id="proceed" styleClass="buttonMainSq" 
+                          value="#{messages['Proceed']}" status="buttonStatus" update="@form"
+                         action="#{xlrxuq1iixwwqqhexxxxscandateHome.setup(xlrxuq1iixwwqqhexxxxscandateHome.instance.b1xxcsxraxxxxxxxxxxxdatetimeofscan,xlrxuq1iixwwqqhexxxxscandateHome.instance.z1xxcxxrlvxxxxxxxxxxlastdate)}"
+                       disabled="#{!fpxxfq1a5xwwqqhxxxxxitemHome.wired}"
+                       rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed  and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}">  
+             <p:tooltip target="proceed"> <span style="white-space: nowrap"> <h:outputText value="Read blogs for information"/></span> </p:tooltip> 
+            </p:commandButton>   
+
+
+       </p:panel>
+<hr></hr>
+
+
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                        allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+            #{messages['Scanned']} #{messages['Item']}
+            <p:commandButton id="saveE" class="w3-button" style="background-color:#{a4jSkin.trimColor};" 
+                          value="#{messages['Enter']}" status="buttonStatus" update="@form"
+                         action="#{fpxxfq1a5xwwqqhxxxxxitemHome.itemCount(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode,' ',fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity,'s')}"
+                       disabled="#{!fpxxfq1a5xwwqqhxxxxxitemHome.wired}"
+                       rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed  and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}">  
+             <p:tooltip for="saveE"> <span style="white-space: nowrap"> <h:outputText value="Creates if needed, resets quantity to new value"/></span> </p:tooltip> 
+            </p:commandButton>   
+                       <i class="fa fa-barcode"></i>
+          
+            <p:commandButton id="addE" styleClass="button" 
+                          value="#{messages['Adjust']} #{messages['Quantity']}" status="buttonStatus" update="@form"
+                         action="#{fpxxfq1a5xwwqqhxxxxxitemHome.itemCount(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode,' ',fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity,'m')}"
+                       disabled="#{!fpxxfq1a5xwwqqhxxxxxitemHome.wired}"
+                       rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed  and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}">  
+             <p:tooltip for="addE"> <span style="white-space: nowrap"> <h:outputText value="Creates if needed, adds quantity to existing value"/></span> </p:tooltip> 
+            </p:commandButton> 
+            <br></br><br></br>
+            #{messages['Selected']} #{messages['Item']}
+
+            <p:commandButton id="save" class="w3-button" style="background-color:#{a4jSkin.trimColor};" 
+                          value="#{messages['Enter']}" status="buttonStatus" update="@form"
+                         action="#{fpxxfq1a5xwwqqhxxxxxitemHome.itemCount(fpxxfq1a5xwwqqhxxxxxitemHome.valueOverRide,' ',fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity,'s')}"
+                       disabled="#{!fpxxfq1a5xwwqqhxxxxxitemHome.wired}"
+                       rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed  and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}">  
+             <p:tooltip for="save"> <span style="white-space: nowrap"> <h:outputText value="Creates if needed, resets quantity to new value"/></span> </p:tooltip> 
+            </p:commandButton>   
+                       <i class="fa fa-keyboard-o"></i>
+          
+            <p:commandButton id="add" styleClass="button" 
+                          value="#{messages['Adjust']} #{messages['Quantity']}" status="buttonStatus" update="@form"
+                         action="#{fpxxfq1a5xwwqqhxxxxxitemHome.itemCount(fpxxfq1a5xwwqqhxxxxxitemHome.valueOverRide,' ',fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity,'m')}"
+                       disabled="#{!fpxxfq1a5xwwqqhxxxxxitemHome.wired}"
+                       rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed  and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}">  
+             <p:tooltip for="add"> <span style="white-space: nowrap"> <h:outputText value="Creates if needed, adds quantity to existing value"/></span> </p:tooltip> 
+            </p:commandButton>   
+  
+            <br></br>
+            <h:button id="new" styleClass="buttonMain" 
+                   value="#{messages['Next']}"
+             includePageParams="false" 
+                    outcome="/countItem.xhtml"
+                       rendered="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed}"/>
+                 
+
+            <p:hotkey  onkeydown="PF('save').click()" preventDefault="true" enabledInInput="true" key="return">
+            </p:hotkey>
+            <p:hotkey  onkeydown="PF('update').click()" preventDefault="true" enabledInInput="true" key="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{fpxxfq1a5xwwqqhxxxxxitemList.reportName}"/>
+            <f:param name="displayAs" value="#{fpxxfq1a5xwwqqhxxxxxitemList.displayAs}" /> 
+            <h:button outcome="/itemList.xhtml" id="list" styleClass="button" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Item']}">
+            </h:button>    
+
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom ? 'home' : fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom}.xhtml"
+
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed or fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom ? 'home' : fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom}.xhtml"
+                rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;<h:button outcome="/itemLabelsPrint.xhtml" id="label" styleClass="button" 
+                 value="#{messages['Print']} #{messages['Label']}">
+            </h:button>    
+
+
+
+
+
+</div>
+         <p:messages ajaxRendered="true"  />
+    
+</p:panel>
+</h:form>
+
+        
+</ui:define> 
+</ui:composition>

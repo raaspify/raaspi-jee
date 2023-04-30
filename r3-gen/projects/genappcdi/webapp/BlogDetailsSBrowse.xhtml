@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:p="http://primefaces.org/ui"
+     template="layout/rtemplate.xhtml">
+<!-- Not Generated   -->
+<ui:remove>
+ Allows system blogs to be shown under say Tool for any site and ideal for online Tutorials for backOffice
+ System blogs can also be shown for any site along with other blogs if client field listbuilde is set true
+ but may not be suitable for most sites except master site and demo sites
+</ui:remove>
+
+
+
+<ui:define name="body">
+    
+    <h:form id="r3browse" styleClass="edit">
+<h:outputStylesheet>
+.rf-tb {
+    background-color:#{richSkin.tableSubHeaderBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+
+}
+.rf-cp-hdr {
+    background-color:#{richSkin.additionalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border:none;
+}
+.rf-p-hdr {
+    background-color:#{richSkin.generalBackgroundColor} !important;
+    background-image: none; !important;
+    color:black;
+    border:none;
+}
+
+.rf-insp-dec {
+ background-color:white;
+ height:20px;
+}
+.rf-insp-inc {
+ background-color:white;
+ height:20px;
+}
+
+
+</h:outputStylesheet>
+
+	<p:toolbar height="26" itemSeparator="grid">
+  <ui:remove>
+           itemSITree a4j command is not firing  
+	  <p:toolbarGroup location="left" >
+              <h:commandButton id="bycategories"  styleClass="buttonMain" value="  #{messages.all} #{messages.shopping_categories}  "  action="#{fpxxfq1a5xwwqqhxxxxxitemHome.goSITree()}" includeViewParams="true" >
+              </h:commandButton>
+	  </p:toolbarGroup>
+  </ui:remove>
+	  <p:toolbarGroup location="right" >
+              <h:outputText value="#{authenticator.currcaldates}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"/> 
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  outcome="/home.xhtml" 
+               rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"/>
+              <h:outputText id="QueryLabel" value="#{messages.searchTerm}" />
+              <h:inputText id="Query" value="#{fpxxfq1a5xwwqqhxxxxxitemList.searchPattern}" size="15" onclick="this.value='';" />
+              <h:commandButton id="r3Search" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('lS')}"  image="/img/Findblue16.png"
+               value="#{messages.searchButton}" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup id="csizetb" location="${yxxxuh566xwwqqwxxxxxuserHome.mobile?'left':'right'}">
+             <ui:remove>
+              using ternary in el for value ,did not render consistently, specially first time
+             </ui:remove>
+              <h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"  >
+               <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+              </h:link>
+              <p:panel id="jcount" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+               <h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()}]" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0}">
+               </h:outputText>
+               <h:outputText value="[Empty]" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() == null}"/>
+              </p:panel>
+	      <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+              <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['BrowseDetailsBrowseHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+    
+	</p:toolbar>
+
+      <p:panel>
+       <ui:remove> tpc is used to give some vertical space 
+        mpc,dpc refer to columns for (main n middle) and detail browselist and datascroller, mpr,dpr refers to repeat item rows (shows as columns). 
+        For mobile, we avoid horizontal scroll
+       </ui:remove>
+       <c:set var = "tpc" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:3}">
+       </c:set>
+       <c:set var = "mpc" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:3}">
+       </c:set>
+       <c:set var = "dpc" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:4}">
+       </c:set>
+       <c:set var = "mpr" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?fpxxfq1a5xwwqqhxxxxxitemList.dpr:fpxxfq1a5xwwqqhxxxxxitemList.dpr}">
+       </c:set>
+       <c:set var = "dpr" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?fpxxfq1a5xwwqqhxxxxxitemList.dpr:fpxxfq1a5xwwqqhxxxxxitemList.dpr}">
+       </c:set>
+          <ui:remove> unlike shopping cart where paypal sign in is needed, do not allow to add based on eMail only as it can be missused
+          </ui:remove>
+             <h:outputText value=" #{messages['in']} #{messages['guest']}   " rendered="#{!identity.loggedIn and !yxxxuh566xwwqqwxxxxxuserHome.mobile}"/> 
+             <h:graphicImage value="/img/person32.png" styleClass="pic" rendered="#{!identity.loggedIn and !yxxxuh566xwwqqwxxxxxuserHome.mobile}"/>
+             <h:outputText value=" #{messages['mode']}  " rendered="#{!identity.loggedIn and !yxxxuh566xwwqqwxxxxxuserHome.mobile}"/> 
+             <br></br>
+             <h:outputText value="#{messages['to']} #{messages['add']} #{messages['new']} #{messages['item']} ,  " rendered="#{!identity.loggedIn and !yxxxuh566xwwqqwxxxxxuserHome.mobile}"/> 
+             <h:link id="logInl" 
+               outcome="/login.xhtml" rendered="#{!identity.loggedIn and !yxxxuh566xwwqqwxxxxxuserHome.mobile}"
+               value="#{messages['signup']} #{messages['and']} #{messages['login']} "/>
+             
+                 <br></br><br></br>
+
+        <p:messages ajaxRendered="true"  />
+
+         &nbsp;<h:button id="bdone"  value="Done"  outcome="/home.xhtml" styleClass="buttonMain" />
+         &nbsp;<h:commandButton action="#{fpxxfq1a5xwwqqhxxxxxitemList.selectCategory()}" value="#{messages['show']} #{messages['all']}"
+          styleClass="buttonMain" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemBrowseList() != null and request.getParameter('hidet')!='y'}"> 
+                              <f:param name="category" value="0"/>
+         </h:commandButton>
+         &nbsp;<h:outputText value="#{messages['sort']}:"  rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"/>
+         <h:selectOneMenu value="#{fpxxfq1a5xwwqqhxxxxxitemList.sortByValue}"  
+          onchange="submit()">
+          <f:selectItem itemLabel="Best Match" itemValue="bm"/>
+          <f:selectItem itemLabel="Price: Low to High" itemValue="lh"/>
+          <f:selectItem itemLabel="Price: High to Low" itemValue="hl"/>
+          <f:selectItem itemLabel="Title: Sale Items" itemValue="si"/>
+          <f:selectItem itemLabel="Title: A to Z" itemValue="az"/>
+          <f:selectItem itemLabel="Title: Z to A" itemValue="za"/>
+          <f:selectItem itemLabel="Title: Highest Rated" itemValue="hr"/>
+          <f:selectItem itemLabel="Title: Newest" itemValue="ne"/>
+         </h:selectOneMenu>
+             &nbsp;&nbsp;<h:outputText value="#{messages['show']}:" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"/>
+             <h:commandButton id="maxrows6" value="16 "  action="#{fpxxfq1a5xwwqqhxxxxxitemList.setDpr(16)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"/>
+             <h:commandButton id="maxrows5" value="32 "  action="#{fpxxfq1a5xwwqqhxxxxxitemList.setDpr(32)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"/>
+             <ui:remove>
+             <h:commandButton id="maxrows1" value="64 "  action="#{fpxxfq1a5xwwqqhxxxxxitemList.setDpr(64)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"/>
+             </ui:remove>
+
+
+       <p:panel style="border:none;background:transparent;margin:0;height:25px;">
+        <h:panelGrid columns="#{tpc}">
+        </h:panelGrid>
+       </p:panel>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+        <h:panelGrid columns="#{mpc}" id="mainpanel" style="margin: 0 auto;text-align: center; ">
+                <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getSystemBlogBrowseList()}" var="row" iterationStatusVar="status" rows="#{mpr}" id="mrepeat">
+                    <p:panel style="float:left;padding:0px;margin:0px;"
+                        rendered="#{request.getParameter('hidet')!='y'}">
+                             <br/>
+                             <p:panel style="float:left;padding:0px;margin:0px;min-height:130px;height:130px;overflow:visible;max-width:200px;">
+                             <h:outputText escape="false"  value="#{fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,4096000)}" 
+                              rendered="#{row.w8xxuzdrbvxxxxxxxxxxdocmnt.length()>1}"/>
+
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;width=200" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdataTypeMime('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+                             </h:graphicImage> 
+                             <h:graphicImage value="/ImageServletCdi/?id=xblog-category&amp;scope=SYSTEM&amp;table=blobdata&amp;seq=1&amp;qlf=PIC&amp;width=200"  
+                              rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null and row.w8xxuzdrbvxxxxxxxxxxdocmnt.length() ==0}"/>
+                             </p:panel><br/>
+                        <h:panelGrid columns="1">
+                            <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}" style="text-align:center;" />
+           	            <h:outputText  value="#{row.y2xxuxxrbvxxxxxxxxxxmisccode1}" rendered="#{not empty row.y2xxuxxrbvxxxxxxxxxxmisccode1}" >
+                            </h:outputText>
+                            <ui:fragment rendered="#{empty row.y2xxuxxrbvxxxxxxxxxxmisccode1}"><br/></ui:fragment>
+           	            <h:inputText  value="#{row.y1xxuxxrbvxxxxxxxxxxsource2}" pt:placeholder="#{messages['answer']}  #{messages['here']} #{messages['and']} #{messages['Select']}" rendered="#{not empty row.y2xxuxxrbvxxxxxxxxxxmisccode1}" 
+                             size="20"
+                              maxlength="25" >
+                            </h:inputText>
+                            <ui:fragment rendered="#{empty row.y2xxuxxrbvxxxxxxxxxxmisccode1}"><br/></ui:fragment>
+                            <h:button value="#{messages['Select']}"  rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('BI-L')}" render="@form" execute="@form"
+	                        id="showCId1T" styleClass="buttonMain"
+                                outcome="/BlogDetailsSBrowse.xhtml">
+                              <f:param name="category" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                            <h:outputText value="#{messages['Scroll']} #{messages['down']} #{messages['for']} #{messages['more']} " style="font-size: medium;color: blue"  rendered= "#{!(row.c6xxusxrbv16xxxxxxxxtype.contains('BI-L') and fpxxfq1a5xwwqqhxxxxxitemList.category ==0)}"/>
+                            </h:button>
+
+                            <p:dialog id="midpopup" modal="false" autosized="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF('midpopup').hide(); return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;width=200&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdataTypeMime('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="PF('midpopup').hide()"/>
+
+                            </p:dialog>
+                        </h:panelGrid>
+                    </p:panel>
+                </ui:repeat>
+                <p:messages ajaxRendered="true"  />
+        </h:panelGrid>
+             <h:panelGrid columns="1"  style="margin: 0 auto;text-align: center; ">
+               <h:panelGroup> 
+                <c:if test= "#{fpxxfq1a5xwwqqhxxxxxitemList.getSystemBlogBrowseList().size() gt mpr}">
+                <h:graphicImage value="/img/left24.png" onclick="PF('dsm').previous()"
+                    alt="arr_left"  />
+                </c:if>
+                &nbsp;&nbsp;<c:if test= "#{fpxxfq1a5xwwqqhxxxxxitemList.getSystemBlogBrowseList().size() gt mpr}">
+                <h:graphicImage value="/img/right24.png" onclick="PF('dsm').next()"
+                    alt="arr_right"  />
+                </c:if>
+               </h:panelGroup > 
+                <p:dataScroller lazy="true" for="mrepeat" id="dsm" render="mainpanel" stepControls="hide" boundaryControls="hide"
+                        rendered="#{request.getParameter('hidet')!='y'}" 
+                            fastControls="hide" maxPages="10" />
+             </h:panelGrid>
+       </p:panel>
+
+
+       <p:panel rendered="false"> 
+        <ui:remove> decide to remove or not using ItemSubBrowseList </ui:remove>
+        <h:panelGrid columns="#{mpc}" id="midpanel" style="margin: 0 auto;text-align: center; ">
+                <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemSubBrowseList()}" var="row" iterationStatusVar="status" rows="#{mpr}" id="repeatm">
+                    <p:panel style="float:left; width:#{customIdentity.product=='S' and customIdentity.subProduct=='B'  ?'700px':'200px'}; padding:1px; margin:5px;border:0;height:250px;">
+                        <f:facet name="header">
+                            <h:panelGroup >
+                             <h:graphicImage alt="no picture"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+                              value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=90" >
+                             </h:graphicImage> 
+                             <h:commandButton value="+" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null and !yxxxuh566xwwqqwxxxxxuserHome.mobile}"
+                              onclick="PF('ipopup').show()">
+                             </h:commandButton>
+                            </h:panelGroup>
+                        </f:facet>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}" />
+                            <h:button value="Select"  rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('BI-L*')}"
+	                        id="showCId1Tm"
+                              outcome="/BlogDetailsSBrowse.xhtml">
+                              <f:param name="subcategory" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                            </h:button>
+                            <p:dialog id="midpopupm" modal="false" autosized="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF('midpopupm').hide(); return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;width=200&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdataTypeMime('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="PF('midpopupm').hide()"/>
+
+                            </p:dialog>
+
+                        </h:panelGrid>
+                    </p:panel>
+                </ui:repeat>
+                <c:if test= "#{fpxxfq1a5xwwqqhxxxxxitemList.getItemSubBrowseList().size() gt mpr}">
+                <h:graphicImage value="/img/left24.png" onclick="PF('mddsm').previous()"
+                    alt="arr_left"  />
+                </c:if>
+                <c:if test= "#{fpxxfq1a5xwwqqhxxxxxitemList.getItemSubBrowseList().size() gt mpr}">
+                <h:graphicImage value="/img/right24.png" onclick="PF('mddsm').next()"
+                    alt="arr_right"  />
+                </c:if>
+                <p:dataScroller lazy="true" for="repeatm"  id="mddsm" render="midpanel" stepControls="hide" boundaryControls="hide"
+                            fastControls="hide" maxPages="10" />
+        </h:panelGrid>
+       </p:panel>
+
+
+
+<ui:remove>
+ DetailsBrowseList will show all SI detail types ie SI-D regular Detail, SI-S drop ship, SI-C COD ie pay when delivered/picked up 
+ SI-DG digital goods without shipment like lecense fees SI-P pays but no shipment (cost?) pickUp only 
+ checkout will filter out  payment later types via itemHome and shoppingcartbean methods
+</ui:remove>
+       <p:panel>  
+     <h:panelGroup rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getSystemBlogDetailsBrowseList() == null}">
+                              <h:graphicImage value="/ImageServletCdi/?img=/img/ecomm-wwwcart.jpg&amp;qlf=jpg&amp;height=110">
+                              </h:graphicImage>
+     </h:panelGroup>
+        <h:panelGrid columns="#{dpc}" id="detailpanel" style="margin: 0 auto;text-align: center; ">
+
+                <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getSystemBlogDetailsBrowseList()}" var="row" iterationStatusVar="statusVar" rows="#{dpr}" id="repeatd">
+                    <p:panel style="float:left;padding:0px;margin:15px;max-width:200px;" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype == 'BI-D' and row.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype == 'BI-L1'}">
+                             <p:panel style="float:left;padding:0px;margin:0px;min-height:100px;height:100px;overflow:hidden;max-width:150px;">
+
+                             <h:link  outcome="/blogS.xhtml" > 
+                              <f:param name="key" value="#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+                              <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                              <f:param name="fpxxfq1a5xwwqqhxxxxxitemFrom" value="blog"/>
+                             <h:graphicImage alt="no picture"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+                              value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=150" >
+                             </h:graphicImage> 
+                             </h:link>
+
+                             <h:link  outcome="/blogS.xhtml" > 
+                              <f:param name="key" value="#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+                              <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                              <f:param name="fpxxfq1a5xwwqqhxxxxxitemFrom" value="blog"/>
+                             <h:graphicImage value="/ImageServletCdi/?id=xblog-detail&amp;scope=SYSTEM&amp;table=blobdata&amp;seq=1&amp;qlf=PIC&amp;height=150"  
+                              rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null and row.w8xxuzdrbvxxxxxxxxxxdocmnt.length() ==0}"/>
+                             </h:link>
+
+                             <h:link  outcome="/blogS.xhtml" > 
+                              <f:param name="key" value="#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+                              <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                              <f:param name="fpxxfq1a5xwwqqhxxxxxitemFrom" value="blog"/>
+                             <h:outputText escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata()}" 
+                              rendered="#{row.w8xxuzdrbvxxxxxxxxxxdocmnt.length()>1}"/>
+                             <h:outputText escape="false"  value="#{fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,4096000)}" 
+                              rendered="#{row.w8xxuzdrbvxxxxxxxxxxdocmnt.length()>1}"/>
+                             </h:link>
+
+
+
+                             </p:panel>
+                        <h:panelGrid columns="1" >
+                        <br/>
+                            <h:outputText value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"   style="text-align:center;" length="30" maxlength="30" disabled="true" />
+                            <p:panel toggleable="true" toggleableHeader="true" style="width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'100%':'100%'};font-size: 60%;"  switchType="client" collapsed="true" 
+                             rendered="#{not empty(row.w7xxuznxbvxxxxxxxxxxnotes)}" header="#{fn:substring(row.w7xxuznxbvxxxxxxxxxxnotes,0,70)}..."
+                             leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+                            </p:panel>
+                             <h:link value="#{messages['View']}" outcome="/blogS.xhtml" > 
+                              <f:param name="key" value="#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+                              <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                              <f:param name="fpxxfq1a5xwwqqhxxxxxitemFrom" value="blog"/>
+
+                             </h:link>
+                        </h:panelGrid>
+                    </p:panel>
+                </ui:repeat>
+                <br/><br/>
+        </h:panelGrid>
+             <h:panelGrid columns="1"  style="margin: 0 auto;text-align: center; ">
+               <h:panelGroup > 
+                <c:if test= "#{fpxxfq1a5xwwqqhxxxxxitemList.getSystemBlogDetailsBrowseList().size() gt dpr}">
+                <h:graphicImage value="/img/left24.png" onclick="PF('ddsm').previous()"
+                    alt="arr_left"  />
+                </c:if>
+                &nbsp;&nbsp;<c:if test= "#{fpxxfq1a5xwwqqhxxxxxitemList.getSystemBlogDetailsBrowseList().size() gt dpr}">
+                <h:graphicImage value="/img/right24.png" onclick="PF('ddsm').next()"
+                    alt="arr_right"  />
+                </c:if>
+               </h:panelGroup> 
+                <p:dataScroller lazy="true" for="repeatd"  id="ddsm" render="detailpanel" stepControls="hide" boundaryControls="hide"
+                            fastControls="hide" maxPages="10" />
+             </h:panelGrid>
+
+       </p:panel>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+<ui:remove>
+                <p> Use the search box at top right </p>
+</ui:remove>
+            
+   </h:form>
+
+    <br style="clear: both" />
+
+
+
+
+</ui:define>
+	
+</ui:composition>
+
+
+
+
+

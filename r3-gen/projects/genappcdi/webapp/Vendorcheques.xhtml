@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+ 
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewAction action="#{txxxuq366xwwqqhxxxxxvenarthaHome.restrict()}" />
+    <f:viewAction action="#{txxxuq366xwwqqhxxxxxvenarthaList.setDisplayAs('PDF')}" />
+</f:metadata>
+                       
+<ui:define name="body">
+    <h:form id="txxxuq366xwwqqhxxxxxvenarthaReport" styleClass="edit">
+     <h:outputStylesheet>
+
+     </h:outputStylesheet>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:commandButton id="printb" value="Print"  action="#{txxxuq366xwwqqhxxxxxvenarthaList.print}" image="/img/Print16.gif" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+ 		   <h:graphicImage value="/img/Search16.gif" styleClass="pic"/>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+             <h:commandButton id="About" value="Help" alt="Help" action="#{txxxuq366xwwqqhxxxxxvenarthaList.print}" image="/img/About16.gif" >
+             <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="Put Help Info here"/></span> </p:tooltip> 
+             </h:commandButton>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+         <p:panel toggleable="true" toggleableHeader="true" label="#{messages['Venartha']} Reports using default parameters          (Use the Browser back button after viewing or have multiple browser windows open)  " switchType="ajax" opened="true">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.reportName']}</ui:define>
+                <h:selectOneMenu id="reportName" value="#{txxxuq366xwwqqhxxxxxvenarthaList.reportName}">
+                 <f:selectItem id="ritem1" itemLabel="Cheques" itemValue="fiVendorcheques" />
+                </h:selectOneMenu> 
+
+            </ui:decorate>
+
+        </p:panel>
+         <p:panel toggleable="true" toggleableHeader="true" style="width: 25%;" header="Report Generation parameters" switchType="client" collapsed="true"
+          leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+       <h:panelGrid columns="2">
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.displayAs']}</ui:define>
+                <h:selectOneMenu id="displayAs" value="#{txxxuq366xwwqqhxxxxxvenarthaList.displayAs}">
+                 <f:selectItem id="ditem1" itemLabel="PDF" itemValue="PDF" />
+                 <f:selectItem id="ditem2" itemLabel="HTML" itemValue="HTML" />
+                 <f:selectItem id="ditem3" itemLabel="CSV" itemValue="CSV" />
+                 <f:selectItem id="ditem4" itemLabel="EXCEL" itemValue="EXCEL" />
+                </h:selectOneMenu> 
+            </ui:decorate>
+        </h:panelGrid>
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.markedOnes']}</ui:define>
+                <h:inputText id="markedOnes" value="#{txxxuq366xwwqqhxxxxxvenarthaList.markedOnes}"/>
+            </ui:decorate>
+        </h:panelGrid>
+       </h:panelGrid>
+       <h:panelGrid columns="2">
+
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.targetId']}</ui:define>
+                <h:selectOneMenu id="targetId" value="#{txxxuq366xwwqqhxxxxxvenarthaList.targetId}">
+                 <f:selectItem id="titem1" itemLabel="None" itemValue="None" />
+                 <f:selectItem id="titem2" itemLabel="DownLoad" itemValue="DownLoad" />
+                 <f:selectItem id="titem3" itemLabel="Archive" itemValue="Archive" />
+                </h:selectOneMenu> 
+            </ui:decorate>
+        </h:panelGrid>
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['sortBy']}</ui:define>
+                <h:selectOneMenu id="oby" value="#{txxxuq366xwwqqhxxxxxvenarthaList.sortKey}">
+                 <f:selectItem id="oitem1" itemLabel="record id " itemValue="sid" />
+                  <f:selectItem id="oitem2" itemLabel="KeyField" itemValue="customer" />
+                </h:selectOneMenu> 
+            </ui:decorate>
+        </h:panelGrid>
+       </h:panelGrid>
+       <h:panelGrid columns="2">
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['sortOrder']}</ui:define>
+                <h:selectOneMenu id="so" value="#{txxxuq366xwwqqhxxxxxvenarthaList.sortOrder}">
+                 <f:selectItem id="soitem1" itemLabel="Ascending" itemValue="Asc" />
+                 <f:selectItem id="soitem2" itemLabel="Descending" itemValue="Desc" />
+                </h:selectOneMenu> 
+            </ui:decorate>
+        </h:panelGrid>
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['font']}</ui:define>
+                <h:selectOneMenu id="fo" value="#{txxxuq366xwwqqhxxxxxvenarthaList.fontName}">
+                 <ui:remove>
+                 <f:selectItem id="foitem1" itemLabel="DejaVu Sans" itemValue="DejaVu Sans" />
+                 </ui:remove>
+                 <f:selectItem id="foitem2" itemLabel="DejaVu Serif" itemValue="DejaVu Serif" />
+                 <ui:remove>
+                 <f:selectItem id="foitem3" itemLabel="DejaVu Sans Mono" itemValue="DejaVu Sans Mono" />
+                 </ui:remove>
+                </h:selectOneMenu> 
+            </ui:decorate>
+        </h:panelGrid>
+       </h:panelGrid>
+         </p:panel>
+
+        <div class="actionButtons">
+         <h:panelGrid columns="15">      
+            <h:commandButton id="report" value="#{messages['Generate']} #{messages['only']} " styleClass="buttonMain"  onclick="this.form.target='_blank'" action="#{txxxuq366xwwqqhxxxxxvenarthaList.print}"/>
+
+            <h:commandButton id="reportpr" value="#{messages['Generate']} #{messages['and']} #{messages['mark']} #{messages['as']} #{messages['Printed']}" styleClass="buttonMain"  onclick="this.form.target='_blank'" action="#{txxxuq366xwwqqhxxxxxvenarthaList.markPrinted}"/>
+
+            <h:button outcome="/#{empty venarthaFrom ? 'home' : txxxuq366xwwqqhxxxxxvenarthaFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+            <h:graphicImage value="/img/report_start16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{txxxuq366xwwqqhxxxxxvenarthaList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{txxxuq366xwwqqhxxxxxvenarthaList.suggest('*')}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/report_stop16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{txxxuq366xwwqqhxxxxxvenarthaList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{txxxuq366xwwqqhxxxxxvenarthaList.suggest('*')}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            &nbsp;<h:outputText style="color:red;" value=" #{messages['will']} #{messages['take']} #{messages['some']} #{messages['time']} #{messages['to']} #{messages['load']} #{txxxuq366xwwqqhxxxxxvenarthaList.resultCount} #{messages['records']}, #{messages['use']} #{messages['range']} #{messages['to']} #{messages['reduce']} #{messages['time']}  " rendered="#{txxxuq366xwwqqhxxxxxvenarthaList.resultCount gt 500}"/>     
+         </h:panelGrid>      
+        </div>
+        
+    
+    <p:panel>
+            <f:facet name="header">Venartha search results</f:facet>
+
+        <f:facet name="header">Venartha search results</f:facet>
+    <div class="results" id="txxxuq366xwwqqhxxxxxvenarthaList">
+
+    <h:outputText value="No Venartha exists" 
+               rendered="#{empty txxxuq366xwwqqhxxxxxvenarthaList.resultList}"/>
+               
+    <p:dataTable id="txxxuq366xwwqqhxxxxxvenarthaList" 
+                var="txxxuq366xwwqqhxxxxxvenartha"
+              value="#{txxxuq366xwwqqhxxxxxvenarthaList.resultList}" 
+           rendered="#{not empty txxxuq366xwwqqhxxxxxvenarthaList.resultList}">
+
+        <h:column>
+          <f:facet name="header">Select</f:facet>
+          <h:commandButton id="SelectStart" value="Start"  action="#{txxxuq366xwwqqhxxxxxvenarthaList.setStart(txxxuq366xwwqqhxxxxxvenartha.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </h:column>
+
+        <h:column>
+          <f:facet name="header">Select</f:facet>
+          <h:commandButton id="SelectEnd" value="End"  action="#{txxxuq366xwwqqhxxxxxvenarthaList.setEnd(txxxuq366xwwqqhxxxxxvenartha.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="sid #{txxxuq366xwwqqhxxxxxvenarthaList.order=='a0xxuobxbxxxxxxxxxxxsid asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='a0xxuobxbxxxxxxxxxxxsid desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='a0xxuobxbxxxxxxxxxxxsid asc' ? 'a0xxuobxbxxxxxxxxxxxsid desc' : 'a0xxuobxbxxxxxxxxxxxsid asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.a0xxuobxbxxxxxxxxxxxsid}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="chqnumber #{txxxuq366xwwqqhxxxxxvenarthaList.order=='a0xxukvabvxxxxxxxxxxchqnumber asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='a0xxukvabvxxxxxxxxxxchqnumber desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='a0xxukvabvxxxxxxxxxxchqnumber asc' ? 'a0xxukvabvxxxxxxxxxxchqnumber desc' : 'a0xxukvabvxxxxxxxxxxchqnumber asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.a0xxukvabvxxxxxxxxxxchqnumber}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="reconciled #{txxxuq366xwwqqhxxxxxvenarthaList.order=='b1xxuxxxbvxxxxxxxxxxreconciled asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='b1xxuxxxbvxxxxxxxxxxreconciled desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='b1xxuxxxbvxxxxxxxxxxreconciled asc' ? 'b1xxuxxxbvxxxxxxxxxxreconciled desc' : 'b1xxuxxxbvxxxxxxxxxxreconciled asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.b1xxuxxxbvxxxxxxxxxxreconciled}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="date #{txxxuq366xwwqqhxxxxxvenarthaList.order=='b3xxcxxxbvxxxxxxxxxxdate asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='b3xxcxxxbvxxxxxxxxxxdate desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='b3xxcxxxbvxxxxxxxxxxdate asc' ? 'b3xxcxxxbvxxxxxxxxxxdate desc' : 'b3xxcxxxbvxxxxxxxxxxdate asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.b3xxcxxxbvxxxxxxxxxxdate}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="addrescode #{txxxuq366xwwqqhxxxxxvenarthaList.order=='b4xxuxxxbvxxxxxxxxxxaddrescode asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='b4xxuxxxbvxxxxxxxxxxaddrescode desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='b4xxuxxxbvxxxxxxxxxxaddrescode asc' ? 'b4xxuxxxbvxxxxxxxxxxaddrescode desc' : 'b4xxuxxxbvxxxxxxxxxxaddrescode asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.b4xxuxxxbvxxxxxxxxxxaddrescode}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="chqamt #{txxxuq366xwwqqhxxxxxvenarthaList.order=='b5xx0xxrbvxxxxxxxxxxchqamt asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='b5xx0xxrbvxxxxxxxxxxchqamt desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='b5xx0xxrbvxxxxxxxxxxchqamt asc' ? 'b5xx0xxrbvxxxxxxxxxxchqamt desc' : 'b5xx0xxrbvxxxxxxxxxxchqamt asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.b5xx0xxrbvxxxxxxxxxxchqamt}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="advisel1 #{txxxuq366xwwqqhxxxxxvenarthaList.order=='c1xxuxxxbvxxxxxxxxxxadvisel1 asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='c1xxuxxxbvxxxxxxxxxxadvisel1 desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='c1xxuxxxbvxxxxxxxxxxadvisel1 asc' ? 'c1xxuxxxbvxxxxxxxxxxadvisel1 desc' : 'c1xxuxxxbvxxxxxxxxxxadvisel1 asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.c1xxuxxxbvxxxxxxxxxxadvisel1}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="advisel2 #{txxxuq366xwwqqhxxxxxvenarthaList.order=='c2xxuxxxbvxxxxxxxxxxadvisel2 asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='c2xxuxxxbvxxxxxxxxxxadvisel2 desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='c2xxuxxxbvxxxxxxxxxxadvisel2 asc' ? 'c2xxuxxxbvxxxxxxxxxxadvisel2 desc' : 'c2xxuxxxbvxxxxxxxxxxadvisel2 asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.c2xxuxxxbvxxxxxxxxxxadvisel2}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="advisel3 #{txxxuq366xwwqqhxxxxxvenarthaList.order=='c3xxuxxxbvxxxxxxxxxxadvisel3 asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='c3xxuxxxbvxxxxxxxxxxadvisel3 desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='c3xxuxxxbvxxxxxxxxxxadvisel3 asc' ? 'c3xxuxxxbvxxxxxxxxxxadvisel3 desc' : 'c3xxuxxxbvxxxxxxxxxxadvisel3 asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.c3xxuxxxbvxxxxxxxxxxadvisel3}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="vendor sid #{txxxuq366xwwqqhxxxxxvenarthaList.order=='jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid asc' ? 'jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid desc' : 'jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="notes #{txxxuq366xwwqqhxxxxxvenarthaList.order=='y1xxuxznbvxxxxxxxxxxnotes asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='y1xxuxznbvxxxxxxxxxxnotes desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='y1xxuxznbvxxxxxxxxxxnotes asc' ? 'y1xxuxznbvxxxxxxxxxxnotes desc' : 'y1xxuxznbvxxxxxxxxxxnotes asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.y1xxuxznbvxxxxxxxxxxnotes}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="amtverbos #{txxxuq366xwwqqhxxxxxvenarthaList.order=='z1xxuxxxlvxxxxxxxxxxamtverbos asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='z1xxuxxxlvxxxxxxxxxxamtverbos desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='z1xxuxxxlvxxxxxxxxxxamtverbos asc' ? 'z1xxuxxxlvxxxxxxxxxxamtverbos desc' : 'z1xxuxxxlvxxxxxxxxxxamtverbos asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.z1xxuxxxlvxxxxxxxxxxamtverbos}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="statusfl #{txxxuq366xwwqqhxxxxxvenarthaList.order=='z2xxzzfxhhxxxxxxxxxxstatusfl asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='z2xxzzfxhhxxxxxxxxxxstatusfl desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='z2xxzzfxhhxxxxxxxxxxstatusfl asc' ? 'z2xxzzfxhhxxxxxxxxxxstatusfl desc' : 'z2xxzzfxhhxxxxxxxxxxstatusfl asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.z2xxzzfxhhxxxxxxxxxxstatusfl}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="statusfldt #{txxxuq366xwwqqhxxxxxvenarthaList.order=='z3xxcztxlxxxxxxxxxxxstatusfldt asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='z3xxcztxlxxxxxxxxxxxstatusfldt desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='z3xxcztxlxxxxxxxxxxxstatusfldt asc' ? 'z3xxcztxlxxxxxxxxxxxstatusfldt desc' : 'z3xxcztxlxxxxxxxxxxxstatusfldt asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.z3xxcztxlxxxxxxxxxxxstatusfldt}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="owner #{txxxuq366xwwqqhxxxxxvenarthaList.order=='z4xxutoxlhxxxxxxxxxxowner asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='z4xxutoxlhxxxxxxxxxxowner desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='z4xxutoxlhxxxxxxxxxxowner asc' ? 'z4xxutoxlhxxxxxxxxxxowner desc' : 'z4xxutoxlhxxxxxxxxxxowner asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.z4xxutoxlhxxxxxxxxxxowner}
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="owner2 #{txxxuq366xwwqqhxxxxxvenarthaList.order=='zzxxu2oxxhxxxxxxxxxxowner2 asc' ? messages.down : ( txxxuq366xwwqqhxxxxxvenarthaList.order=='zzxxu2oxxhxxxxxxxxxxowner2 desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{txxxuq366xwwqqhxxxxxvenarthaList.order=='zzxxu2oxxhxxxxxxxxxxowner2 asc' ? 'zzxxu2oxxhxxxxxxxxxxowner2 desc' : 'zzxxu2oxxhxxxxxxxxxxowner2 asc'}"/>
+                </h:link>
+            </f:facet>
+            #{txxxuq366xwwqqhxxxxxvenartha.zzxxu2oxxhxxxxxxxxxxowner2}
+        </h:column>
+        <h:column>
+            <f:facet name="header">action</f:facet>
+            <h:link outcome="/#{empty from ? 'venartha' : from}.xhtml" 
+                   value="Select" 
+                      id="txxxuq366xwwqqhxxxxxvenartha">
+                <f:param name="txxxuq366xwwqqhxxxxxvenarthaA0xxuobxbxxxxxxxxxxxsid" 
+                        value="#{txxxuq366xwwqqhxxxxxvenartha.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+        </h:column>
+    </p:dataTable>
+
+    </div>
+    </p:panel>
+    
+    <div class="tableControl">
+      
+        <h:link outcome="/venarthaList.xhtml" 
+            rendered="#{txxxuq366xwwqqhxxxxxvenarthaList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </h:link>
+        
+        <h:link outcome="/venarthaList.xhtml" 
+            rendered="#{txxxuq366xwwqqhxxxxxvenarthaList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult" 
+                    value="#{txxxuq366xwwqqhxxxxxvenarthaList.previousFirstResult}"/>
+        </h:link>
+        
+        <h:link outcome="/venarthaList.xhtml" 
+            rendered="#{txxxuq366xwwqqhxxxxxvenarthaList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult" 
+                    value="#{txxxuq366xwwqqhxxxxxvenarthaList.nextFirstResult}"/>
+        </h:link>
+        
+        <h:link outcome="/venarthaList.xhtml" 
+            rendered="#{txxxuq366xwwqqhxxxxxvenarthaList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult" 
+                    value="#{txxxuq366xwwqqhxxxxxvenarthaList.lastFirstResult}"/>
+        </h:link>
+        
+    </div>
+    
+    </h:form>
+    
+</ui:define>
+
+</ui:composition>
+

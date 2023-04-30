@@ -1,0 +1,902 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid" value="#{fpxxuq9eexwwqqhefxxxmachineHome.fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewAction action="#{fpxxuq9eexwwqqhefxxxmachineHome.restrict()}" />
+
+</f:metadata>
+                       
+<ui:define name="body">
+    <h:form id="fpxxuq9eexwwqqhefxxxmachineSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fpxxuq9eexwwqqhefxxxmachineHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{fpxxuq9eexwwqqhefxxxmachineHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['MachineHelp']!='MachineHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['MachineHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+         <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+    
+    <p:panel>
+        <h:panelGrid columns="10">
+        <f:facet name="header">machine</f:facet>
+            <ui:decorate id="b1xxuszsbvxxxxxxxxxxdescript" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Descript']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.b1xxuszsbvxxxxxxxxxxdescript}
+        </ui:decorate>
+            <ui:decorate id="b3xxuxxrbvxxxxxxxxxxsource1" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Source1']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.b3xxuxxrbvxxxxxxxxxxsource1}
+        </ui:decorate>
+            <ui:decorate id="b5xxuxxrbvxxxxxxxxxxupccode" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Upccode']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.b5xxuxxrbvxxxxxxxxxxupccode}
+        </ui:decorate>
+            <ui:decorate id="b6xxzicxbvxxxxxxxxxxcost" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Cost']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.b6xxzicxbvxxxxxxxxxxcost}
+        </ui:decorate>
+            <ui:decorate id="b7xxzxxxbvxxxxxxxxxxreplcost" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Replcost']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.b7xxzxxxbvxxxxxxxxxxreplcost}
+        </ui:decorate>
+            <ui:decorate id="b8xxzpxxbvxxxxxxxxxxselprice" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Selprice']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.b8xxzpxxbvxxxxxxxxxxselprice}
+        </ui:decorate>
+            <ui:decorate id="b9xxzxxxlvxxsxxxxxxxspricoldDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Spricold']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.b9xxzxxxlvxxsxxxxxxxspricold}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="c1xxzxxxhhxxsxxxxxxxspricnewDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Spricnew']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.c1xxzxxxhhxxsxxxxxxxspricnew}" rendered="#{customIdentity.hasRole('EH')}"/>
+             <h:outputText value="XXXXXX" rendered="#{!customIdentity.hasRole('EH')}"/>
+        </ui:decorate>
+            <ui:decorate id="c2xxcxxrhhxxsxxxxxxxspriceffdtDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Spriceffdt']}</ui:define>
+
+            <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.c2xxcxxrhhxxsxxxxxxxspriceffdt}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="c3xxuxxrbvxxxxxxxxxxshipcode" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Shipcode']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.c3xxuxxrbvxxxxxxxxxxshipcode}
+        </ui:decorate>
+            <ui:decorate id="c4xxzxxxbvxxxxxxxxxxqtylevel1" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Qtylevel1']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.c4xxzxxxbvxxxxxxxxxxqtylevel1}
+        </ui:decorate>
+            <ui:decorate id="c5xxuuxrbv18xxxxxxxxunit" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Unit']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.c5xxuuxrbv18xxxxxxxxunit}
+        </ui:decorate>
+            <ui:decorate id="c6xxuxxrbv16xxxxxxxxtype" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Type']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.c6xxuxxrbv16xxxxxxxxtype}
+        </ui:decorate>
+            <ui:decorate id="c7xxfxz1bvxxxxxxxxxxtax1" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Tax1']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.c7xxfxz1bvxxxxxxxxxxtax1}
+        </ui:decorate>
+            <ui:decorate id="c8xxfxz2bvxxxxxxxxxxtax2" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Tax2']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.c8xxfxz2bvxxxxxxxxxxtax2}
+        </ui:decorate>
+            <ui:decorate id="f1xxuxxrbvxxxxxxxxxxaliascode" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Aliascode']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.f1xxuxxrbvxxxxxxxxxxaliascode}
+        </ui:decorate>
+            <ui:decorate id="f3xxzxxxlvxxxxxxxxxxavgpriceDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Avgprice']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.f3xxzxxxlvxxxxxxxxxxavgprice}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="g2xxuxn1lvxxxxxxxxxxsubcodesnDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Subcodesn']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.g2xxuxn1lvxxxxxxxxxxsubcodesn}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="g2xxuxn2lvxxxxxxxxxxsubcodesn2Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Subcodesn2']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.g2xxuxn2lvxxxxxxxxxxsubcodesn2}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="g2xxuxn3lvxxxxxxxxxxsubcodesn3Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Subcodesn3']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.g2xxuxn3lvxxxxxxxxxxsubcodesn3}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="h1xxcxxrlxxxxxxxxxxxeffdateDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Effdate']}</ui:define>
+
+            <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.h1xxcxxrlxxxxxxxxxxxeffdate}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="h2xxuwmrbv40xxxxxxxxintegrset" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Integrset']}</ui:define>
+
+             #{fpxxuq9eexwwqqhefxxxmachineHome.instance.h2xxuwmrbv40xxxxxxxxintegrset}
+        </ui:decorate>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" switchType="client" collapsede="true"
+     toggleable="true" toggleableHeader="true">
+    <h:panelGrid columns="10">
+            <ui:decorate id="y1xxuxxrbvxxxxxxxxxxsource2Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Source2']}</ui:define>
+
+               <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.y1xxuxxrbvxxxxxxxxxxsource2}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="y2xxuxxrbvxxxxxxxxxxmisccode1Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Misccode1']}</ui:define>
+
+               <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.y2xxuxxrbvxxxxxxxxxxmisccode1}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="y3xxuxxrbvxxxxxxxxxxmisccode2Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Misccode2']}</ui:define>
+
+               <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.y3xxuxxrbvxxxxxxxxxxmisccode2}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="y4xxuxxrbvxxxxxxxxxxcaseqtyDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Caseqty']}</ui:define>
+
+               <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.y4xxuxxrbvxxxxxxxxxxcaseqty}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="y6xxfxz3bvxxxxxxxxxxtax3Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Tax3']}</ui:define>
+
+               <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.y6xxfxz3bvxxxxxxxxxxtax3}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="y7xxuxznbvxxxxxxxxxxnotesDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Notes']}</ui:define>
+
+               <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.y7xxuxznbvxxxxxxxxxxnotes}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="y8xxuzdrbvxxxxxxxxxxdocmntDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Docmnt']}</ui:define>
+
+              <h:graphicImage 
+              value="/ImageServletCdi/?table=FPXXUQ9EEXWWQQHEFXXXMACHINE&amp;seq=1&amp;qlf=1&amp;id=#{fpxxuq9eexwwqqhefxxxmachineHome.instance.y8xxuzdrbvxxxxxxxxxxdocmnt}&amp;width=50" rendered="#{fpxxuq9eexwwqqhefxxxmachineHome.getBlobdataTypeMime('FPXXUQ9EEXWWQQHEFXXXMACHINE',fpxxuq9eexwwqqhefxxxmachineHome.instance.y8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+              </h:graphicImage> 
+              <h:commandButton value="+" oncomplete="PF('popup').show()" rendered="#{fpxxuq9eexwwqqhefxxxmachineHome.getBlobdataTypeMime('FPXXUQ9EEXWWQQHEFXXXMACHINE',fpxxuq9eexwwqqhefxxxmachineHome.instance.y8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+              </h:commandButton>
+              <h:outputText value="fpxxuq9eexwwqqhefxxxmachineHome.getClobdata({'FPXXUQ9EEXWWQQHEFXXXMACHINE',fpxxuq9eexwwqqhefxxxmachineHome.instance.y8xxuzdrbvxxxxxxxxxxdocmnt,1,1,500)}" rendered="#{fpxxuq9eexwwqqhefxxxmachineHome.getBlobdataTypeMime('FPXXUQ9EEXWWQQHEFXXXMACHINE',fpxxuq9eexwwqqhefxxxmachineHome.instance.y8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('t')}" />
+              <h:outputText value="PDF" rendered="#{fpxxuq9eexwwqqhefxxxmachineHome.getBlobdataTypeMime('FPXXUQ9EEXWWQQHEFXXXMACHINE',fpxxuq9eexwwqqhefxxxmachineHome.instance.y8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('pd',pL)}" />
+              <h:outputText value="XLS" rendered="#{fpxxuq9eexwwqqhefxxxmachineHome.getBlobdataTypeMime('FPXXUQ9EEXWWQQHEFXXXMACHINE',fpxxuq9eexwwqqhefxxxmachineHome.instance.y8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('ex',20)}" />
+              <h:outputText value="PPT" rendered="#{fpxxuq9eexwwqqhefxxxmachineHome.getBlobdataTypeMime('FPXXUQ9EEXWWQQHEFXXXMACHINE',fpxxuq9eexwwqqhefxxxmachineHome.instance.y8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('po',19)}" />
+              <p:dialog id="popup" modal="false" autosized="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                              <h:outputLink value="#" onclick="PF.hide()">
+                                 CLOSE X
+                               </h:outputLink>
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF.hide()">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+
+                             <h:graphicImage
+                               value="/ImageServletCdi/?table=FPXXUQ9EEXWWQQHEFXXXMACHINE&amp;seq=1&amp;qlf=1&amp;id=#{fpxxuq9eexwwqqhefxxxmachineHome.instance.y8xxuzdrbvxxxxxxxxxxdocmnt}&amp;width=200" rendered="#{fpxxuq9eexwwqqhefxxxmachineHome.getBlobdataTypeMime('FPXXUQ9EEXWWQQHEFXXXMACHINE',fpxxuq9eexwwqqhefxxxmachineHome.instance.y8xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="PF.hide()"/>
+              </p:dialog>
+
+        </ui:decorate>
+            <ui:decorate id="z1xxziqxlvxxxxxxxxxxquantityDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Quantity']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.z1xxziqxlvxxxxxxxxxxquantity}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="z2xxcxxrlxxxxxxxxxxxdateaddedDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Dateadded']}</ui:define>
+
+            <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.z2xxcxxrlxxxxxxxxxxxdateadded}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="z2xxzzprhvxxxxxxxxxxprintmstatDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Printmstat']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.z2xxzzprhvxxxxxxxxxxprintmstat}" rendered="#{customIdentity.hasRole('EH')}"/>
+             <h:outputText value="XXXXXX" rendered="#{!customIdentity.hasRole('EH')}"/>
+        </ui:decorate>
+            <ui:decorate id="z3xxczqxlhxxxxxxxxxxprinmtfldtDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Prinmtfldt']}</ui:define>
+
+            <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.z3xxczqxlhxxxxxxxxxxprinmtfldt}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="z4xxzxxxlvxxxxxxxxxxavgcostDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Avgcost']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.z4xxzxxxlvxxxxxxxxxxavgcost}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="z5xxzzfxhhxxxxxxxxxxstatusflDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Statusfl']}</ui:define>
+
+              <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(fpxxuq9eexwwqqhefxxxmachineHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(fpxxuq9eexwwqqhefxxxmachineHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid/waiting approval':( fpxxuq9eexwwqqhefxxxmachineHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped/approved': (fpxxuq9eexwwqqhefxxxmachineHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced/final approved':'new/other'))))}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl" />
+
+        </ui:decorate>
+            <ui:decorate id="z6xxcztxlxxxxxxxxxxxstatusfldtDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Statusfldt']}</ui:define>
+
+            <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.z6xxcztxlxxxxxxxxxxxstatusfldt}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="z7xxzxxxlvxxxxxxxxxxcuordqtyDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Cuordqty']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.z7xxzxxxlvxxxxxxxxxxcuordqty}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="z8xxzxxxlvxxxxxxxxxxvenorqtyDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Venorqty']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.z8xxzxxxlvxxxxxxxxxxvenorqty}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="z9xxzxxxlvxxxxxxxxxxcupicqtyDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Cupicqty']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.z9xxzxxxlvxxxxxxxxxxcupicqty}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zaxxzxxxlvxxxxxxxxxxvenpiqtyDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Venpiqty']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.zaxxzxxxlvxxxxxxxxxxvenpiqty}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zbxxzxxxlvxxxxxxxxxxcuinvqtyDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Cuinvqty']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.zbxxzxxxlvxxxxxxxxxxcuinvqty}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zcxxzxxxlvxxxxxxxxxxcushiqtyDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Cushiqty']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.zcxxzxxxlvxxxxxxxxxxcushiqty}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zdxxzxxxlvxxxxxxxxxxvenshqtyDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Venshqty']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.zdxxzxxxlvxxxxxxxxxxvenshqty}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zexxutoxlhxxxxxxxxxxownerDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.zexxutoxlhxxxxxxxxxxowner}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zxxrbvxxxvxxxxxxxxxxbarupcDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Barupc']}</ui:define>
+
+             <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.zxxrbvxxxvxxxxxxxxxxbarupc}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zzxxu2oxxhxxxxxxxxxxowner2Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner2']}</ui:define>
+
+        </ui:decorate>
+   </h:panelGrid>
+   </p:panel>
+        <div style="clear:both"/>
+    </p:panel>
+    <div class="actionButtons">      
+
+        <h:button outcome="/machineEdit.xhtml" 
+                    id="edit" 
+                    rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('SH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('IH')||customIdentity.hasRole('IQ') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}"
+                 value="Edit" styleClass="buttonMain"> 
+          <f:param name="from" value="Fpxxuq9eexwwqqhefxxxmachineList"/>
+          <f:param name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid" value="#{fpxxuq9eexwwqqhefxxxmachineHome.fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid}"/>
+        </h:button>
+    </div>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="false" rendered="#{fpxxuq9eexwwqqhefxxxmachineHome.managed}"
+     toggleable="true" toggleableHeader="true">
+ <div  style="overflow: auto;width: 850px;height: auto; ">
+
+  <p:tabView switchType="ajax">
+
+    <p:tab title="Parent #{messages['Machine']}">
+    <div class="association" id="fpxxuq9eexwwqqhefxxxmachineParent">
+        
+        <h:outputText value="No machine" 
+                   rendered="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.fpxxuq9eexwwqqhefxxxmachine == null}"/>
+        
+        <p:dataTable var="fpxxuq9eexwwqqhefxxxmachine"  tableStyle="table-layout:auto;"
+                   value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.fpxxuq9eexwwqqhefxxxmachine}" 
+                rendered="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.fpxxuq9eexwwqqhefxxxmachine != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fpxxuq9eexwwqqhefxxxmachineTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewfpxxuq9eexwwqqhefxxxmachine" 
+                     value="View" 
+                      outcome="/machine.xhtml">
+                       <f:param disable="#{empty fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}" name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">machinecode</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.a0xxukmxbvxxxxxxxxxxmachinecode}
+            </p:column>
+            <p:column>
+                <f:facet name="header">descript</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.b1xxuszsbvxxxxxxxxxxdescript}
+            </p:column>
+            <p:column>
+                <f:facet name="header">source1</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.b3xxuxxrbvxxxxxxxxxxsource1}
+            </p:column>
+            <p:column>
+                <f:facet name="header">upccode</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.b5xxuxxrbvxxxxxxxxxxupccode}
+            </p:column>
+            <p:column>
+                <f:facet name="header">cost</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.b6xxzicxbvxxxxxxxxxxcost}
+            </p:column>
+            <p:column>
+                <f:facet name="header">replcost</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.b7xxzxxxbvxxxxxxxxxxreplcost}
+            </p:column>
+            <p:column>
+                <f:facet name="header">selprice</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.b8xxzpxxbvxxxxxxxxxxselprice}
+            </p:column>
+            <p:column>
+                <f:facet name="header">spricold</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.b9xxzxxxlvxxsxxxxxxxspricold}
+            </p:column>
+            <p:column>
+                <f:facet name="header">spricnew</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.c1xxzxxxhhxxsxxxxxxxspricnew}
+            </p:column>
+            <p:column>
+                <f:facet name="header">spriceffdt</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.c2xxcxxrhhxxsxxxxxxxspriceffdt}
+            </p:column>
+            <p:column>
+                <f:facet name="header">shipcode</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.c3xxuxxrbvxxxxxxxxxxshipcode}
+            </p:column>
+            <p:column>
+                <f:facet name="header">qtylevel1</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.c4xxzxxxbvxxxxxxxxxxqtylevel1}
+            </p:column>
+            <p:column>
+                <f:facet name="header">unit</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.c5xxuuxrbv18xxxxxxxxunit}
+            </p:column>
+            <p:column>
+                <f:facet name="header">type</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.c6xxuxxrbv16xxxxxxxxtype}
+            </p:column>
+            <p:column>
+                <f:facet name="header">tax1</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.c7xxfxz1bvxxxxxxxxxxtax1}
+            </p:column>
+            <p:column>
+                <f:facet name="header">tax2</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.c8xxfxz2bvxxxxxxxxxxtax2}
+            </p:column>
+            <p:column>
+                <f:facet name="header">aliascode</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.f1xxuxxrbvxxxxxxxxxxaliascode}
+            </p:column>
+            <p:column>
+                <f:facet name="header">avgprice</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.f3xxzxxxlvxxxxxxxxxxavgprice}
+            </p:column>
+            <p:column>
+	    	    <f:facet name="header">machine sid</f:facet>
+		    	#{fpxxuq9eexwwqqhefxxxmachine.fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}
+            </p:column>
+            <p:column>
+                <f:facet name="header">subcodesn</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.g2xxuxn1lvxxxxxxxxxxsubcodesn}
+            </p:column>
+            <p:column>
+                <f:facet name="header">subcodesn2</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.g2xxuxn2lvxxxxxxxxxxsubcodesn2}
+            </p:column>
+            <p:column>
+                <f:facet name="header">subcodesn3</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.g2xxuxn3lvxxxxxxxxxxsubcodesn3}
+            </p:column>
+            <p:column>
+                <f:facet name="header">effdate</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.h1xxcxxrlxxxxxxxxxxxeffdate}
+            </p:column>
+            <p:column>
+                <f:facet name="header">integrset</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.h2xxuwmrbv40xxxxxxxxintegrset}
+            </p:column>
+            <p:column>
+                <f:facet name="header">docmnt</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.y8xxuzdrbvxxxxxxxxxxdocmnt}
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.z5xxzzfxhhxxxxxxxxxxstatusfl}
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.z6xxcztxlxxxxxxxxxxxstatusfldt}
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                #{fpxxuq9eexwwqqhefxxxmachine.zexxutoxlhxxxxxxxxxxowner}
+            </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <p:tab title="#{messages['Machine']}">
+   <div class="association" id="fpxxuq9eexwwqqhefxxxmachinesChildren">
+        
+  <h:outputText value="No machines" 
+                   rendered="#{empty fpxxuq9eexwwqqhefxxxmachineHome.fpxxuq9eexwwqqhefxxxmachines}"/>
+  <p:dataTable value="#{fpxxuq9eexwwqqhefxxxmachineHome.fpxxuq9eexwwqqhefxxxmachines}" 
+                       var="fpxxuq9eexwwqqhefxxxmachine" 
+                  rendered="#{not empty fpxxuq9eexwwqqhefxxxmachineHome.fpxxuq9eexwwqqhefxxxmachines}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="fpxxuq9eexwwqqhefxxxmachinesTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="selectfpxxuq9eexwwqqhefxxxmachine" 
+                     value="Select" 
+                      outcome="/machine.xhtml">
+                    <f:param disable="#{empty fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}" name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid" 
+                            value="#{fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}"/>
+                    <f:param name="fpxxuq9eexwwqqhefxxxmachineFrom" value="Fpxxuq9eexwwqqhefxxxmachine"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">machinecode</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.a0xxukmxbvxxxxxxxxxxmachinecode}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">descript</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.b1xxuszsbvxxxxxxxxxxdescript}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">source1</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.b3xxuxxrbvxxxxxxxxxxsource1}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">upccode</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.b5xxuxxrbvxxxxxxxxxxupccode}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">cost</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.b6xxzicxbvxxxxxxxxxxcost}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">replcost</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.b7xxzxxxbvxxxxxxxxxxreplcost}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">selprice</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.b8xxzpxxbvxxxxxxxxxxselprice}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">spricold</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.b9xxzxxxlvxxsxxxxxxxspricold}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">spricnew</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.c1xxzxxxhhxxsxxxxxxxspricnew}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">spriceffdt</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.c2xxcxxrhhxxsxxxxxxxspriceffdt}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">shipcode</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.c3xxuxxrbvxxxxxxxxxxshipcode}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">qtylevel1</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.c4xxzxxxbvxxxxxxxxxxqtylevel1}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">unit</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.c5xxuuxrbv18xxxxxxxxunit}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">type</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.c6xxuxxrbv16xxxxxxxxtype}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">tax1</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.c7xxfxz1bvxxxxxxxxxxtax1}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">tax2</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.c8xxfxz2bvxxxxxxxxxxtax2}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">aliascode</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.f1xxuxxrbvxxxxxxxxxxaliascode}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">avgprice</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.f3xxzxxxlvxxxxxxxxxxavgprice}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">subcodesn</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.g2xxuxn1lvxxxxxxxxxxsubcodesn}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">subcodesn2</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.g2xxuxn2lvxxxxxxxxxxsubcodesn2}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">subcodesn3</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.g2xxuxn3lvxxxxxxxxxxsubcodesn3}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">effdate</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.h1xxcxxrlxxxxxxxxxxxeffdate}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">integrset</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.h2xxuwmrbv40xxxxxxxxintegrset}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">docmnt</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.y8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.z5xxzzfxhhxxxxxxxxxxstatusfl}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.z6xxcztxlxxxxxxxxxxxstatusfldt}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                <h:outputText value="#{fpxxuq9eexwwqqhefxxxmachine.zexxutoxlhxxxxxxxxxxowner}"/>
+            </p:column>
+  </p:dataTable>
+
+   </div>
+    
+    <div class="actionButtons">
+        <h:button 
+               value="Add machine"
+                outcome="/machineEdit.xhtml">
+            <f:param disable="#{empty fpxxuq9eexwwqqhefxxxmachineHome.instance.a0xxuobxbxxxxxxxxxxxsid}" name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid" 
+                    value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+            <f:param name="fpxxuq9eexwwqqhefxxxmachineFrom" value="Fpxxuq9eexwwqqhefxxxmachine"/>
+        </h:button>
+    </div>        
+   </p:tab>
+   <p:tab title="#{messages['Groupmembers']}">
+   <div class="association" id="jxxxuq54exwwqqhxxxxxgroupmembersesChildren">
+        
+  <h:outputText value="No groupmemberses" 
+                   rendered="#{empty fpxxuq9eexwwqqhefxxxmachineHome.jxxxuq54exwwqqhxxxxxgroupmemberses}"/>
+  <p:dataTable value="#{fpxxuq9eexwwqqhefxxxmachineHome.jxxxuq54exwwqqhxxxxxgroupmemberses}" 
+                       var="jxxxuq54exwwqqhxxxxxgroupmembers" 
+                  rendered="#{not empty fpxxuq9eexwwqqhefxxxmachineHome.jxxxuq54exwwqqhxxxxxgroupmemberses}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="jxxxuq54exwwqqhxxxxxgroupmembersesTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="selectjxxxuq54exwwqqhxxxxxgroupmembers" 
+                     value="Select" 
+                      outcome="/groupmembers.xhtml">
+                    <f:param disable="#{empty jxxxuq54exwwqqhxxxxxgroupmembers.a0xxuobxbxxxxxxxxxxxsid}" name="jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid" 
+                            value="#{jxxxuq54exwwqqhxxxxxgroupmembers.a0xxuobxbxxxxxxxxxxxsid}"/>
+                    <f:param name="jxxxuq54exwwqqhxxxxxgroupmembersFrom" value="Fpxxuq9eexwwqqhefxxxmachine"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">memberid</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.b1xxukgmbvxxxxxxxxxxmemberid}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">descript</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.b2xxuxzsbvxxxxxxxxxxdescript}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">sourcetype</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.b3xxuzyxbv46xxxxxxxxsourcetype}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.z1xxzzfxhhxxxxxxxxxxstatusfl}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.z2xxcztxlxxxxxxxxxxxstatusfldt}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                <h:outputText value="#{jxxxuq54exwwqqhxxxxxgroupmembers.z3xxutoxlhxxxxxxxxxxowner}"/>
+            </p:column>
+  </p:dataTable>
+
+   </div>
+    
+    <div class="actionButtons">
+        <h:button 
+               value="Add groupmembers"
+                outcome="/groupmembersEdit.xhtml">
+            <f:param disable="#{empty fpxxuq9eexwwqqhefxxxmachineHome.instance.a0xxuobxbxxxxxxxxxxxsid}" name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid" 
+                    value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+            <f:param name="jxxxuq54exwwqqhxxxxxgroupmembersFrom" value="Fpxxuq9eexwwqqhefxxxmachine"/>
+        </h:button>
+    </div>        
+   </p:tab>
+   <p:tab title="#{messages['Jobassignment']}">
+   <div class="association" id="trxxuq9aaxwwqqhefxxxjobassignmentsChildren">
+        
+  <h:outputText value="No jobassignments" 
+                   rendered="#{empty fpxxuq9eexwwqqhefxxxmachineHome.trxxuq9aaxwwqqhefxxxjobassignments}"/>
+  <p:dataTable value="#{fpxxuq9eexwwqqhefxxxmachineHome.trxxuq9aaxwwqqhefxxxjobassignments}" 
+                       var="trxxuq9aaxwwqqhefxxxjobassignment" 
+                  rendered="#{not empty fpxxuq9eexwwqqhefxxxmachineHome.trxxuq9aaxwwqqhefxxxjobassignments}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="trxxuq9aaxwwqqhefxxxjobassignmentsTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="selecttrxxuq9aaxwwqqhefxxxjobassignment" 
+                     value="Select" 
+                      outcome="/jobassignment.xhtml">
+                    <f:param disable="#{empty trxxuq9aaxwwqqhefxxxjobassignment.a0xxuobxbxxxxxxxxxxxsid}" name="trxxuq9aaxwwqqhefxxxjobassignmentA0xxuobxbxxxxxxxxxxxsid" 
+                            value="#{trxxuq9aaxwwqqhefxxxjobassignment.a0xxuobxbxxxxxxxxxxxsid}"/>
+                    <f:param name="trxxuq9aaxwwqqhefxxxjobassignmentFrom" value="Fpxxuq9eexwwqqhefxxxmachine"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">jobassign</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.a0xxukxxbvxxxxxxxxxxjobassign}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">sequence</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.b1xxuxxrbvxxxxxxxxxxsequence}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">sdatet</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.b5gxdxsdbvxxxxxxxxxxsdatet}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">durationh</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.b5xxexdhbvxxxxxxxxxxdurationh}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">qtytotal</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.b5xxztqrlxxxxxxxxxxxqtytotal}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">durationm</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.b6xx0xdmbvxxxxxxxxxxdurationm}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">qtyostndt</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.b6xxzyqrlxxxxxxxxxxxqtyostndt}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">stimeh</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.b7xxexshbvxxxxxxxxxxstimeh}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">stimem</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.b8bx0xsmbvxxxxxxxxxxstimem}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">stimeampm</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.b8extxsabvxxxxxxxxxxstimeampm}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">edatet</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.b8xxceedbvxxxxxxxxxxedatet}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">priority</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.b9xxfxxxbv08xxxxxxxxpriority}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">percntdone</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.baxxzxxrlvxxxxxxxxxxpercntdone}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">repeatf</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.bgxxuxxrbv18xxxxxxxxrepeatf}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.z2xxcztxlxxxxxxxxxxxstatusfldt}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.z3xxzzfxhhxxxxxxxxxxstatusfl}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                <h:outputText value="#{trxxuq9aaxwwqqhefxxxjobassignment.z4xxutoxlhxxxxxxxxxxowner}"/>
+            </p:column>
+  </p:dataTable>
+
+   </div>
+    
+    <div class="actionButtons">
+        <h:button 
+               value="Add jobassignment"
+                outcome="/jobassignmentEdit.xhtml">
+            <f:param disable="#{empty fpxxuq9eexwwqqhefxxxmachineHome.instance.a0xxuobxbxxxxxxxxxxxsid}" name="fpxxuq9eexwwqqhefxxxmachineA0xxuobxbxxxxxxxxxxxsid" 
+                    value="#{fpxxuq9eexwwqqhefxxxmachineHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+            <f:param name="trxxuq9aaxwwqqhefxxxjobassignmentFrom" value="Fpxxuq9eexwwqqhefxxxmachine"/>
+        </h:button>
+    </div>        
+   </p:tab>
+   <p:tab title="#{messages['Jobassignmentdetails']}">
+   <div class="association" id="xoxxuq9bfxwwqqhexxxxjobassignmentdetailsesChildren">
+        
+  <h:outputText value="No jobassignmentdetailses" 
+                   rendered="#{empty fpxxuq9eexwwqqhefxxxmachineHome.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses}"/>
+  <p:dataTable value="#{fpxxuq9eexwwqqhefxxxmachineHome.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses}" 
+                       var="xoxxuq9bfxwwqqhexxxxjobassignmentdetails" 
+                  rendered="#{not empty fpxxuq9eexwwqqhefxxxmachineHome.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="xoxxuq9bfxwwqqhexxxxjobassignmentdetailsesTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="selectxoxxuq9bfxwwqqhexxxxjobassignmentdetails" 
+                     value="Select" 
+                      outcome="/jobassignmentdetails.xhtml">
+                    <f:param disable="#{empty xoxxuq9bfxwwqqhexxxxjobassignmentdetails.a0xxuobxbxxxxxxxxxxxsid}" name="xoxxuq9bfxwwqqhexxxxjobassignmentdetailsA0xxuobxbxxxxxxxxxxxsid" 
+                            value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.a0xxuobxbxxxxxxxxxxxsid}"/>
+                    <f:param name="xoxxuq9bfxwwqqhexxxxjobassignmentdetailsFrom" value="Fpxxuq9eexwwqqhefxxxmachine"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">sequence</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b1xxuxxrbvxxxxxxxxxxsequence}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">line</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b1xxzo11bvlxxxxxxxxxline}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">sdatet</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b5gxdxsdbvxxxxxxxxxxsdatet}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">durationh</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b5xxexdhbvxxxxxxxxxxdurationh}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">qtytotal</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b5xxztqrlxxxxxxxxxxxqtytotal}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">durationm</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b6xx0xdmbvxxxxxxxxxxdurationm}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">pono</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b6xxuxcobvxxxxxxxxxxpono}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">qtyostndt</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b6xxzyqrlxxxxxxxxxxxqtyostndt}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">stimeh</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b7xxexshbvxxxxxxxxxxstimeh}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">stimem</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b8bx0xsmbvxxxxxxxxxxstimem}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">stimeampm</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b8extxsabvxxxxxxxxxxstimeampm}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">edatet</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b8xxceedbvxxxxxxxxxxedatet}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">priority</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b9xxfxxxbv08xxxxxxxxpriority}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">cpono</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b9xxuxxrbvxxxxxxxxxxcpono}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">jafield1</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b9xxuxxrbvxxxxxxxxxxjafield1}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">jafield2</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b9xxuxxrbvxxxxxxxxxxjafield2}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">jafield3</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b9xxuxxrbvxxxxxxxxxxjafield3}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">jafield4</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b9xxuxxrbvxxxxxxxxxxjafield4}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">notes</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.b9xxuxznbvxxxxxxxxxxnotes}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">percntdone</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.baxxzxxrlvxxxxxxxxxxpercntdone}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">repeatf</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.bgxxuxxrbv18xxxxxxxxrepeatf}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.z3xxzzfxhhxxxxxxxxxxstatusfl}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                <h:outputText value="#{xoxxuq9bfxwwqqhexxxxjobassignmentdetails.z4xxutoxlhxxxxxxxxxxowner}"/>
+            </p:column>
+  </p:dataTable>
+
+   </div>
+    
+    <div class="actionButtons">
+    </div>        
+   </p:tab>
+    </p:tabView>
+</div>        
+</p:panel>
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui"
+      template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="yxxxch522xhhxxhxxxxxclientFrom" value="#{yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientFrom}"/>
+    <f:viewAction action="#{yxxxuh566xwwqqwxxxxxuserHome.restrict()}" />
+    <f:viewAction action="#{r3RestClient.applicationCharge('a','shopId')}" />
+
+</f:metadata>
+ 
+<ui:define name="body">
+    <h:form id="qflow" styleClass="edit">
+<!-- Not Generated but copied  -->
+<ui:remove>
+viewaction applicationcharge to capture authentication response?
+SqlAdmin Page
+For initial app deployment manually create genapp schema (seam needs it) and create empty resource_bundle and resource (databaseResourceLoader
+needs them)
+DROP SCHEMA genapp cascade; (only if schema already exists and we dont want the data like in developmenmt)
+CREATE SCHEMA genapp AUTHORIZATION postgres;
+CREATE  TABLE IF NOT EXISTS  genapp.RESOURCE_BUNDLE (  SID SERIAL,NAME varchar(50),LANGUAGE varchar(2),COUNTRY varchar(2),VARIANT varchar(2),  STATUSFL  INT,  STATUSFLDT  TIMESTAMP,  OWNER  varchar(40),  OWNER2  varchar(40), PRIMARY  KEY(  SID));
+CREATE  TABLE IF NOT EXISTS  genapp.RESOURCE (  SID SERIAL, _KEY  varchar(50) ,  _VALUE varchar(2555),  RESOURCEBUNDLE  INT  not null,  STATUSFL  INT,  STATUSFLDT  TIMESTAMP,  OWNER  varchar(40),  OWNER2  varchar(40),  PRIMARY  KEY(  SID), FOREIGN  KEY  (  RESOURCEBUNDLE)  REFERENCES genapp.RESOURCE_BUNDLE  (  SID) );
+At this point, must use SqlAdminBase because it does not use client table
+
+parameters passed: none
+popupPanels: 0
+create tables are used standalone but backup/restore used through logged in menue. create MockUp etc are used standalone to load system
+stock images and text and after create tables.
+todo:add page.xml to enforce login and add to menue
+</ui:remove>
+ <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:6}" columnClasses="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?'cell':'cell'}"
+  rendered="#{(fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol')}"
+       >
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+        <h:button id="lbdone" image="./img/Homeblue16.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:commandButton id="BackUp"  value="BackUp Data"  action="#{sqlAdminSupport.backupTenant()}" />
+	  </p:toolbarGroup>
+
+	  <p:toolbarGroup>
+              <h:commandButton id="BackUpL"  value="BackUp To Local"  action="#{sqlAdminSupport.backupTenantToLocal('','')}" />
+	  </p:toolbarGroup>
+
+	  <p:toolbarGroup>
+              <h:commandButton id="BackUpT"  value="Remove All BackUp Records "  action="#{sqlAdminSupport.truncateBackupTenants()}" />
+	  </p:toolbarGroup>
+
+	  <p:toolbarGroup>
+              <h:commandButton id="BackUpA"  value="BackUp All Records "  action="#{sqlAdminSupport.fullBackupAll()}" />
+	  </p:toolbarGroup>
+
+	  <p:toolbarGroup>
+              <h:commandButton id="Restore"  value="Restore Data"  action="#{sqlAdminSupport.restoreTenant()}"
+                onclick="if (! confirm('Continue with Restore ?') ) { return false;}; return true; " />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:commandButton id="Validate"  value="Validate Sites Data "  action="#{sqlAdminSupport.validateSitesData()}"
+                onclick="if (! confirm('Continue with Validate ?') ) { return false;}; return true; " />
+	  </p:toolbarGroup>
+
+
+	</p:toolbar>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:commandButton id="BackUpS"  value="BackUp All Sites Data to _C"  action="#{sqlSupport.backupTenants()}" />
+              <h:commandButton id="BackUpC"  value="BackUp site Data to _C"  action="#{sqlSupport.backupTenantC()}" />
+              <h:commandButton id="RestoreC"  value="Restore Site Data from _C"  action="#{sqlSupport.restoreTenantC()}"
+                 onclick="if (! confirm('Continue with Restore ?') ) { return false;}; return true; " />
+              <h:outputText  value="#{messages['gmt']} #{messages['time']} #{messages['yy-mm-ddhhmm']}" rendered="#{sqlAdminSupport.lastBupDate ne null}"/>
+
+              <h:outputText  value="#{messages['last']} #{messages['backup']} #{messages['date']} 
+#{sqlAdminSupport.lastBupDate}" rendered="#{sqlAdminSupport.lastBupDate ne null}"/>
+              &nbsp;<h:outputText  value="#{messages['last']} #{messages['daily']} #{messages['backup']} #{messages['date']} 
+#{sqlAdminSupport.systemLastBupDate}" rendered="#{sqlAdminSupport.systemLastBupDate ne null}"/>
+	  </p:toolbarGroup>
+	</p:toolbar>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:commandButton id="CleanUp"  value="CleanUp Data"  action="#{sqlAdminSupport.cleanUpUnlinked()}" />
+	  </p:toolbarGroup>
+
+	  <p:toolbarGroup>
+              <h:commandButton id="oneTime"  value="one Time"  action="#{sqlAdminSupport.oneTimeCleanUp()}" />
+	  </p:toolbarGroup>
+
+	  <p:toolbarGroup>
+              <h:commandButton id="Create_b"   value="Create Tables_b"  action="#{sqlAdminSupport.createTables_b('','')}" />
+              <h:commandButton id="Create_c"   value="Create Tables_c"  action="#{sqlAdminSupport.createTables_c('','')}" />
+              <h:commandButton id="Create_dd"  value="Recreate Data Dictionary"  action="#{sqlAdminSupport.putComments()}" />
+	  </p:toolbarGroup>
+
+	</p:toolbar>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+        <h:button id="lbdone2" image="./img/Homeblue16.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+
+	  <p:toolbarGroup>
+              <h:commandButton id="MMessages"  value="(1)Delete system bundles/messages(m) and create Messages(m)"  action="#{yxxxuq1r1xwwqqhxxxxxresourceHome.copyDefaultMessagesToSYSTEM()}" />
+              <h:commandButton id="MessagesFr"  value="Create FrMessages(prereq (1)) "  action="#{yxxxuq1r1xwwqqhxxxxxresourceHome.copyDefaultFrMessagesToSYSTEM()}" />
+              <h:commandButton id="MessagesBn"  value="Create DeMessages(prereq (1)) "  action="#{yxxxuq1r1xwwqqhxxxxxresourceHome.copyDefaultDeMessagesToSYSTEM()}" />
+              <h:commandButton id="MessagesDe"  value="Create BnMessages(prereq (1)) "  action="#{yxxxuq1r1xwwqqhxxxxxresourceHome.copyDefaultBnMessagesToSYSTEM()}" />
+              <h:commandButton id="MessagesFld"  value="Create FldMessages(prereq (1)) "  action="#{yxxxuq1r1xwwqqhxxxxxresourceHome.copyDefaultFldMessagesToSYSTEM()}" />
+	  </p:toolbarGroup>
+	</p:toolbar>
+<br></br>
+    <h:messages globalOnly="false" styleClass="message" id="globalMessages"/>
+
+
+        <h:panelGrid columns="1">
+                <ui:repeat value="#{yxxxch522xhhxxhxxxxxclientList.getClientsList(yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientFrom)}" var="row"  offset="0" size="#{yxxxch522xhhxxhxxxxxclientList.getClientsList(yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientFrom).size() gt 4?5:yxxxch522xhhxxhxxxxxclientList.getClientsList(yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientFrom).size()}" id="repeat">
+                    <p:panel style="float:left; width:'200px'; padding:5px; height:475px;">
+                        <f:facet name="header">
+                            <h:panelGroup>
+                             <h:outputText value="#{row.d6xxuxxrbvxxxxxxxxxxintaddr}" style="font-weight:bold" />
+                             <h:outputText value=" #{row.f6xxuxxxlvxxxxxxxxxxlicensetype}"  />
+                             <h:outputText value=" #{messages['Serial#']}"  />
+                             <h:outputText value=" #{row.b1xxuisxlvxxxxxxxxxxserialnum} #{messages['Expired']} " style="color: red;"
+                               rendered="#{row.f8xxcxxxlvxxxxxxxxxxlicenseend le authenticator.currcaldate}"/>
+                             <h:outputText value=" #{row.b1xxuisxlvxxxxxxxxxxserialnum}" style="color: blue;"
+                               rendered="#{row.f8xxcxxxlvxxxxxxxxxxlicenseend gt authenticator.currcaldate}"/>
+
+                            </h:panelGroup>
+                        </f:facet>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="License Started" style="font-weight:bold" />
+                            <h:outputText value=" #{row.f7xxcxxxlvxxxxxxxxxxlicensestart}"  >
+                            </h:outputText>
+                            <h:outputText value="EMail" style="font-weight:bold" />
+                            <h:outputText value="#{row.d4xxhxxrbv24xxxxxxxximailaddr}"  />
+                            <h:outputText value="CompanyCode" style="font-weight:bold" />
+                            <h:outputText value="#{row.d8xxuzxdbvxxxxxxxxxxenterprisecompcode}"  />
+                             <h:outputText value="ProductCode" style="font-weight:bold" />
+                             <h:outputText value="#{row.g2xxuxpclvxxxxxxxxxxprodcode}"  />
+                             <h:outputText value="LicenseType/ending" style="font-weight:bold" />
+                             <h:outputText value="#{row.f6xxuxxxlvxxxxxxxxxxlicensetype} / #{row.f8xxcxxxlvxxxxxxxxxxlicenseend}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl"  />
+                             <h:outputText value="Status/Last Activity" style="font-weight:bold" />
+                             <h:outputText value="#{row.zexxzzfxhhxxxxxxxxxxstatusfl} / #{row.zfxxcztxlxxxxxxxxxxxstatusfldt}"  />
+                            <h:outputText value="Access Code" style="font-weight:bold" />
+                             <h:inputText  readonly="true"
+                              size="35"
+                              maxlength="50"
+                              value="#{row.w1xxuxxxbvxxxxxxxxxxedipassw}">
+                             </h:inputText>
+
+                            <h:commandButton  
+                                 action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailNoactivity(row)}" 
+                                 onclick="if (! confirm('Checked site name ?') ) { return false;}; return true; "
+                                 value="Email No Activity">
+                            </h:commandButton>
+                            <h:commandButton  
+                                 action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailEndOfTrial(row)}" 
+                                 onclick="if (! confirm('Checked site name ?') ) { return false;}; return true; "
+                                 value="Email EndOfTrial/License">
+                            </h:commandButton>
+                            <h:commandButton  
+                                 action="#{yxxxuh566xwwqqwxxxxxuserHome.closeClient(row)}" 
+                                 value="Flip_Close">
+                            </h:commandButton>
+                            <h:commandButton  onclick="if (! confirm('Checked site name, Send Trial/License Ready Email  ?') ) { return false;}; return true; "
+                                 action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailReadyToActivate(row)}" 
+                                 value="EMail Trial/LicenseReady">
+                            </h:commandButton>
+                            <h:commandButton  onclick="if (! confirm('Checked site name, Really delete ?') ) { return false;}; return true; "
+                                 action="#{sqlAdminSupport.removeData(row.zzxxu2oxxhxxxxxxxxxxowner2)}" 
+                                 value="Remove Data">
+                            </h:commandButton>
+
+                            <h:commandButton  onclick="if (! confirm('Really Alter ?') ) { return false;}; return true; "
+                                 action="#{sqlAdminSupport.AlterAppName(row.zzxxu2oxxhxxxxxxxxxxowner2,row.x2xxuxxxbvxxxxxxxxxxhdstyle)}" 
+                                 value="Alter App Name To">
+                            </h:commandButton>
+                            <h:outputText value="New Name" style="font-weight:bold" />
+                            <h:inputText  readonly="false"
+                             size="35"
+                             maxlength="50"
+                             value="#{row.x2xxuxxxbvxxxxxxxxxxhdstyle}">
+                            </h:inputText>
+                            <h:commandButton  onclick="if (! confirm('Really Alter ?') ) { return false;}; return true; "
+                                 action="#{sqlAdminSupport.AlterAppNameInBackUp(row.x3xxuxxxbvxxxxxxxxxxmtstyle,row.zzxxu2oxxhxxxxxxxxxxowner2)}" 
+                                 value="Alter App Name in BackUp">
+                            </h:commandButton>
+                            <p:commandButton value="Refresh"
+                              action="#{sqlAdminSupport.getLastBupDate()}"
+                            update="@all" />
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="3">
+                            <h:commandButton value="email Paid(Mo)" onclick="if (! confirm('Really manually paid ?') ) { return false;}; return true; "
+                              action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailSubscribed(row,'Monthly')}">
+                            </h:commandButton>
+                            <h:commandButton value="email Paid(Yr)" onclick="if (! confirm('Really manually paid ?') ) { return false;}; return true; "
+                              action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailSubscribed(row,'Yearly')}">
+                            </h:commandButton>
+
+                            <h:commandButton  onclick="if (! confirm('Really Bill ?') ) { return false;}; return true; "
+                                 action="#{r3RestClient.applicationCharge('c',row.zzxxu2oxxhxxxxxxxxxxowner2)}" 
+                                 value="#{messages['Create']} #{messages['charge']}"
+                                 rendered="#{!(customIdentity.masterSite) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2).dbxxuzxdssxxxxxxxxxxapiclientsecret and !skinBean.iconShown}">
+                            </h:commandButton>
+
+                            <h:commandButton  onclick="if (! confirm('Really Activate Charge ?') ) { return false;}; return true; "
+                                 action="#{r3RestClient.applicationCharge('a',row.zzxxu2oxxhxxxxxxxxxxowner2)}" 
+                                 value="#{messages['Activate']}#{messages['charge']}"
+                                 rendered="#{!(customIdentity.masterSite) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2).dbxxuzxdssxxxxxxxxxxapiclientsecret and !skinBean.iconShown}">
+                            </h:commandButton>
+                            <h:commandButton  onclick="if (! confirm('Really Create Route ?') ) { return false;}; return true; "
+                                 action="#{r3RestClient.openAuthorize('r',row)}" 
+                                 value="#{messages['Create']} #{messages['Route']}" rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2).h8xxuxxxbvxxxxxxxxxxcadtype == 'or'}">
+                            </h:commandButton>
+                          <ui:remove> for future
+                            <h:commandButton  
+                                 action="#{r3RestClient.manageDns('r',row)}" 
+                                 value="#{messages['Dns']}#{messages['whoami']}">
+                            </h:commandButton>
+                          </ui:remove>
+
+                        </h:panelGrid>
+                    </p:panel>
+                </ui:repeat>
+        </h:panelGrid>
+<br></br>
+        <h:panelGrid columns="1" rendered="#{yxxxch522xhhxxhxxxxxclientList.getClientsList().size() gt 5}">
+        <p:commandButton value="Next"
+           action="#{yxxxch522xhhxxhxxxxxclientList.nextDataOwner2Code()}"
+        update="@all" />
+        &nbsp;<p:commandButton value="Prev"
+           action="#{yxxxch522xhhxxhxxxxxclientList.prevDataOwner2Code()}"
+        update="@all" />
+        </h:panelGrid>
+
+
+
+   	
+
+ </h:panelGrid>
+
+  </h:form>
+
+</ui:define>
+
+</ui:composition>

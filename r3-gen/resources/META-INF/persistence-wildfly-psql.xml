@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Persistence deployment descriptor for wildfly profile
+     persistence-dev.xml becomes persistence.xml via ant/maven build
+ -->
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+   <persistence-unit name="genappcdi">
+      <!-- following still needed in reveng.xml gen part, but both Tomee and wildfly can use uptodate the jpa provider   
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      -->
+      <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+      <jta-data-source>RaaspiSQLDS</jta-data-source>
+      <!-- classes are explicitly put in here why ?? --> 
+      <class>com.rcomputer.genapp.model.Yxxxuq1r1xwwqqhxxxxxresource</class>
+      <class>com.rcomputer.genapp.model.Yxxxuq1l1xwwqqhxxxxxresource_bundle</class>
+      <properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+         <!-- in production change none to validate. none is needed to allow app to come up and create and populate schema and tables -->
+         <property name="hibernate.hbm2ddl.auto" value="none"/>
+         <property name="hibernate.show_sql" value="false"/>
+         <property name="hibernate.format_sql" value="true"/>
+         <property name="hibernate.default_schema" value="genapp"/>
+         <!-- not needed in wildfly default uses infinispan and entityManager handled by CDI
+          <property name="jboss.entity.manager.factory.jndi.name" value="java:/genappEntityManagerFactory"/>
+          <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
+         -->
+         <property name="hibernate.cache.use_second_level_cache"
+          value="false" />
+         <property name="hibernate.cache.use_query_cache"
+         value="false" /> 
+         <property name="hibernate.transaction.jta.platform" 
+         value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform"/>
+         <!-- following avoids org.hibernate.LazyInitializationException: could not initialize proxy - no Session
+          but anti-pattern and slows down app -->
+         <property name="hibernate.enable_lazy_load_no_trans" value="true" />
+      </properties>
+   </persistence-unit>
+    
+</persistence>

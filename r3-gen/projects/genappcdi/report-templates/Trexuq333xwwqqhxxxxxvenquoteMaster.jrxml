@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with genJaspermasterreports - A generator for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+		 name="Trexuq333xwwqqhxxxxxvenquote"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 resourceBundle="messages"
+           whenResourceMissingType="Key">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+
+	<parameter name="DisplayAs" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Report Output as HTML or as PDF]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["PDF"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Start" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Start Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="End" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[End Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Status" isForPrompting="true" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Status flag value for Select]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+
+	<parameter name="MarkedOnes" isForPrompting="true" class="java.lang.Boolean">
+ 		<parameterDescription><![CDATA[Select Marked Records Only]]></parameterDescription>
+      </parameter>
+	<parameter name="INVOICEETC_ID" isForPrompting="false" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Detail]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ForTargetId" isForPrompting="false" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Customer,Vendor etc]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[9999]]></defaultValueExpression>
+	</parameter>
+	<parameter name="owner2Code" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reqUrl" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Url like https://www.xxx.com]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["https://www.raaspi.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subreportPath" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA[SubReport class absolute path]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["."]]></defaultValueExpression>
+	</parameter>
+
+
+
+
+
+
+     	<queryString><![CDATA[SELECT
+      venquote.sid AS VENQUOTE_sid,
+
+      venquote.purchsno AS VENQUOTE_purchsno,
+
+      venquote.delvdatet AS VENQUOTE_delvdatet,
+
+      venquote.odatet AS VENQUOTE_odatet,
+
+      venquote.terms AS VENQUOTE_terms,
+
+      venquote.priority AS VENQUOTE_priority,
+
+      venquote.type AS VENQUOTE_type,
+
+      venquote.startdatet AS VENQUOTE_startdatet,
+
+
+      venquote.matcode AS venquote_MATCODE,
+
+      venquote.agent AS venquote_AGENT,
+
+      venquote.vendor AS venquote_VENDOR,
+
+      venquote.replicate AS venquote_REPLICATE,
+
+
+
+      venquote.cinvoice AS VENQUOTE_cinvoice,
+
+      venquote.jobno AS VENQUOTE_jobno,
+
+      venquote.vpono AS VENQUOTE_vpono,
+
+      venquote.rfpord AS VENQUOTE_rfpord,
+
+      venquote.vinvoice AS VENQUOTE_vinvoice,
+
+      venquote.rcpono AS VENQUOTE_rcpono,
+
+      venquote.attach AS VENQUOTE_attach,
+
+      venquote.shipcode AS VENQUOTE_shipcode,
+
+      venquote.notes AS VENQUOTE_notes,
+
+      venquote.docmnt AS VENQUOTE_docmnt,
+
+      venquote.amounttotal AS VENQUOTE_amounttotal,
+
+      venquote.amountostndt AS VENQUOTE_amountostndt,
+
+      venquote.qtytotal AS VENQUOTE_qtytotal,
+
+      venquote.qtyostndt AS VENQUOTE_qtyostndt,
+
+      venquote.statusfl AS VENQUOTE_statusfl,
+
+      venquote.statusfldt AS VENQUOTE_statusfldt,
+
+      venquote.baseamountt AS VENQUOTE_baseamountt,
+
+      venquote.printmstat AS VENQUOTE_printmstat,
+
+      venquote.prinmtfldt AS VENQUOTE_prinmtfldt,
+
+      venquote.delivchrgt AS VENQUOTE_delivchrgt,
+
+      venquote.miscchrgt AS VENQUOTE_miscchrgt,
+
+      venquote.tax1amtt AS VENQUOTE_tax1amtt,
+
+      venquote.tax2amtt AS VENQUOTE_tax2amtt,
+
+      venquote.tax3amtt AS VENQUOTE_tax3amtt,
+
+      venquote.owner AS VENQUOTE_owner,
+
+      venquote.owner2 AS venquote_owner2
+
+
+FROM
+       genapp.venquote venquote WHERE 
+         (venquote.purchsno) >=  $P{Start} AND   (venquote.purchsno) <= $P{End} AND (venquote.statusfl = $P{Status} or $P{Status} is null) AND venquote.owner2 = $P{owner2Code}]]></queryString>
+
+
+      <field name="VENQUOTE_SID" class="java.lang.Integer"/>
+      <field name="VENQUOTE_PURCHSNO" class="java.lang.String"/>
+      <field name="VENQUOTE_DELVDATET" class="java.sql.Timestamp"/>
+      <field name="VENQUOTE_ODATET" class="java.sql.Timestamp"/>
+      <field name="VENQUOTE_TERMS" class="java.lang.String"/>
+      <field name="VENQUOTE_PRIORITY" class="java.lang.String"/>
+      <field name="VENQUOTE_TYPE" class="java.lang.String"/>
+      <field name="VENQUOTE_STARTDATET" class="java.sql.Timestamp"/>
+      <field name="VENQUOTE_MATCODE" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+      <field name="VENQUOTE_AGENT" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+      <field name="VENQUOTE_VENDOR" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+      <field name="VENQUOTE_REPLICATE" class="java.lang.Integer"/>
+      <field name="VENQUOTE_CINVOICE" class="java.lang.String"/>
+      <field name="VENQUOTE_JOBNO" class="java.lang.String"/>
+      <field name="VENQUOTE_VPONO" class="java.lang.String"/>
+      <field name="VENQUOTE_RFPORD" class="java.lang.String"/>
+      <field name="VENQUOTE_VINVOICE" class="java.lang.String"/>
+      <field name="VENQUOTE_RCPONO" class="java.lang.String"/>
+      <field name="VENQUOTE_ATTACH" class="java.lang.String"/>
+      <field name="VENQUOTE_SHIPCODE" class="java.lang.String"/>
+      <field name="VENQUOTE_NOTES" class="java.lang.String"/>
+      <field name="VENQUOTE_DOCMNT" class="java.lang.String"/>
+      <field name="VENQUOTE_AMOUNTTOTAL" class="java.lang.String"/>
+      <field name="VENQUOTE_AMOUNTOSTNDT" class="java.lang.String"/>
+      <field name="VENQUOTE_QTYTOTAL" class="java.lang.String"/>
+      <field name="VENQUOTE_QTYOSTNDT" class="java.lang.String"/>
+      <field name="VENQUOTE_STATUSFL" class="java.lang.Integer"/>
+      <field name="VENQUOTE_STATUSFLDT" class="java.sql.Timestamp"/>
+      <field name="VENQUOTE_BASEAMOUNTT" class="java.lang.String"/>
+      <field name="VENQUOTE_PRINTMSTAT" class="java.lang.Integer"/>
+      <field name="VENQUOTE_PRINMTFLDT" class="java.sql.Timestamp"/>
+      <field name="VENQUOTE_DELIVCHRGT" class="java.lang.String"/>
+      <field name="VENQUOTE_MISCCHRGT" class="java.lang.String"/>
+      <field name="VENQUOTE_TAX1AMTT" class="java.lang.String"/>
+      <field name="VENQUOTE_TAX2AMTT" class="java.lang.String"/>
+      <field name="VENQUOTE_TAX3AMTT" class="java.lang.String"/>
+      <field name="VENQUOTE_OWNER" class="java.lang.String"/>
+      <field name="VENQUOTE_OWNER2" class="java.lang.String"/>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="21"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+		<band height="183" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="160" width="109" height="20"/>
+				<textElement/>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{reference}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="132" y="160" width="400" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[($F{VENQUOTE_NOTES}.length() > 7 && $F{VENQUOTE_NOTES}.contains("<p>"))?$F{VENQUOTE_NOTES}.substring(3,$F{VENQUOTE_NOTES}.length()-4):$F{VENQUOTE_NOTES}]]></textFieldExpression>
+			</textField>
+
+
+			<textField pattern="yyyyMMMdd">
+				<reportElement x="3" y="119" width="97" height="30"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{VENQUOTE_ODATET}]]></textFieldExpression>
+			</textField>
+
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="140"
+						y="119"
+						width="90"
+						height="22"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{Venquote}]]></textFieldExpression>
+				</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="230" y="119" width="100" height="23"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VENQUOTE_PURCHSNO}]]></textFieldExpression>
+			</textField>
+
+			<componentElement>
+				<reportElement x="370" y="120" width="156" height="29"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Codabar" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{VENQUOTE_PURCHSNO}.trim().replaceAll("\\D+","");]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+
+			<line direction="BottomUp">
+				<reportElement key="line" mode="Opaque" x="0" y="8" width="562" height="1" forecolor="#000000" backcolor="#FFFFFF" uuid="aad95a22-1351-41c7-810d-e0f4924c4518"/>
+			</line>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="-40"
+						width="532"
+						height="95"
+						key="subreport-2"/>
+				        <subreportParameter name="owner2Code">
+					<subreportParameterExpression><![CDATA[$P{owner2Code}]]></subreportParameterExpression>
+				        </subreportParameter>
+				        <subreportParameter name="reqUrl">
+					<subreportParameterExpression><![CDATA[$P{reqUrl}]]></subreportParameterExpression>
+				        </subreportParameter>
+				        <subreportParameter name="subreportPath">
+					<subreportParameterExpression><![CDATA[$P{subreportPath}]]></subreportParameterExpression>
+				        </subreportParameter>
+
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA[$P{subreportPath}+"/Yxxxch522xhhxxhxxxxxclientMaster_SubReport1.jasper"]]></subreportExpression>
+				</subreport>
+			<line>
+				<reportElement x="3" y="100" width="562" height="1" uuid="fcb687ee-85ed-4368-bfd2-757bb2e00403"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="325" y="63" width="210" height="37" uuid="d2c5a243-78f6-434b-ae8f-7e6afe1c0141"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{Venquote}]]></textFieldExpression>
+			</textField>
+
+
+		</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="266"  isSplitAllowed="true" >
+
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="12"
+						y="157"
+						width="514"
+						height="107"
+						key="subreport-1"/>
+					<subreportParameter  name="INVOICEETC_ID">
+						<subreportParameterExpression><![CDATA[$F{VENQUOTE_SID}]]></subreportParameterExpression>
+					</subreportParameter>
+				        <subreportParameter name="owner2Code">
+					 <subreportParameterExpression><![CDATA[$P{owner2Code}]]></subreportParameterExpression>
+				        </subreportParameter>
+				        <subreportParameter name="subreportPath">
+					<subreportParameterExpression><![CDATA[$P{subreportPath}]]></subreportParameterExpression>
+				        </subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA[$P{subreportPath}+"/Xoxxuq3e4xwwqqhxxxxxvendqdetailsMaster_SubReport0.jasper"]]></subreportExpression>
+				</subreport>
+				<subreport  isUsingCache="true">
+					<reportElement
+						x="0"
+						y="71"
+						width="466"
+						height="31"
+						key="subreport-3"/>
+					<subreportParameter  name="ForTargetId">
+						<subreportParameterExpression><![CDATA[$F{VENQUOTE_VENDOR}]]></subreportParameterExpression>
+					</subreportParameter>
+				        <subreportParameter name="owner2Code">
+					<subreportParameterExpression><![CDATA[$P{owner2Code}]]></subreportParameterExpression>
+				        </subreportParameter>
+				        <subreportParameter name="subreportPath">
+					<subreportParameterExpression><![CDATA[$P{subreportPath}]]></subreportParameterExpression>
+				        </subreportParameter>
+
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA[$P{subreportPath}+"/Jxxxuq300xwwqqhxxxxxvendorMaster_SubReport2.jasper"]]></subreportExpression>
+				</subreport>
+
+			</band>
+
+		</detail>
+		<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="225" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totals]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="0" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VENQUOTE_AMOUNTTOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="27"  isSplitAllowed="true" >
+
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="325"
+						y="4"
+						width="170"
+						height="19"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="DejaVu Serif"  size="14"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="499"
+						y="4"
+						width="36"
+						height="19"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="DejaVu Serif"  size="14"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="3"
+						width="535"
+						height="0"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="line"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1"
+						y="6"
+						width="209"
+						height="19"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="DejaVu Serif"  size="14"/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>
+
+
+
+
+
+
+
+

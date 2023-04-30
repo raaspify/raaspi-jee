@@ -1,0 +1,233 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemHome.restrict()}" />
+
+</f:metadata>
+<!-- Not Generated   -->
+<ui:remove>
+always show blog content ie clobdata (itemtable,A+item docmnt,TXT,0)
+If logged In then show edit blog item(CI-D) and its blobdata image (itemtable,item docmnt,1,1) and
+ edit blog content clobdata text (itemtable,item docmnt,TXT,0) 
+use f:param useSeq to set seq # to 0 or 1 as needed and view:param in the called .xhtml to set the initial seq #
+use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM since default value will be clobdata or blobdata
+
+</ui:remove>
+                       
+<ui:define name="body">
+    <h:form  styleClass="edit">
+<h:outputStylesheet>
+
+.rf-edt-c {
+    height: 40px !important;
+}
+.rf-tb {
+    background-color:#{richSkin.tableSubHeaderBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+
+}
+.rf-cp-hdr {
+    background-color:#{richSkin.additionalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.rf-edt-hdr {
+    background-color:#{richSkin.generalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+
+
+</h:outputStylesheet>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ItemHelp']!='ItemHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+    
+     <div class="dialog">
+   <h:panelGrid >
+      <panelGroup>
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/img/Editlog16.png"
+         rendered="#{identity.loggedIn}">
+      </h:graphicImage> 
+      <h:outputText  value="#{messages['Resource']} #{messages['Easy']} #{messages['editor']}"/>
+      </panelGroup>
+      </h:panelGrid>
+     </div>
+
+<p:panel>
+
+ <h:panelGrid columns="2">
+            <h:graphicImage value="/img/productxx.png" height="100">
+            </h:graphicImage>
+  
+            <p>
+<a name="menu1"></a>
+
+<h3> Manage #{customIdentity.owner2} #{messages['menue']} </h3>
+<li> Click on #{messages['menue']} #{messages['look']} (the bar just under this section) to change #{messages['menue']} labels like show News as Upcoming News </li>
+<li> Cannot hide or remove #{messages['menue']} here, but is done under <a href="/homeOtherPagesEdtr.wflow#product1" target="_blank">#{messages['content']} #{messages['look']}</a></li>
+<li> If header text for a section like Products_1 has some value, then the menu for it will be shown automatically.  </li>
+<li> To change #{messages['menue']} fonts, you need to click on #{messages['theme']} #{messages['and']} #{messages['fonts']} #{messages['look']} <a href="/homeOtherPagesEdtr.wflow#theme" target="_blank">#{messages['fonts']} </a> </li>
+<li> Click on #{messages['menue']} #{messages['look']} (the bar just under this section) to change #{messages['menue']} labels like show News as Upcoming News </li>
+            </p>
+ </h:panelGrid>
+
+</p:panel>
+
+   <p:panel toggleable="true" toggleableHeader="true" style="width: 100%;"  header="#{messages['menue']} #{messages['label']}-#{messages['click']} #{messages['on']} #{messages['a']} #{messages['link']} #{messages['to']} #{messages['change']}" switchType="client" collapsed="false" rendered="#{customIdentity.labelView.contains('VM') }"
+        leftCollapsedIcon="/img/control_add16.png" rightCollapsedIcon="/img/Activitygroup16.png" leftExpandedIcon="/img/control_remove16.png">
+
+              <ui:include src="/layout/menuMockUp.xhtml">
+               <ui:param name="projectName" value="genapp"/>
+             </ui:include>
+
+             <div id="left" style="background-color:#{richSkin.tableSubfooterBackgroundColor}">
+                    <ui:include src="/layout/leftpopMockUp.xhtml" />
+             </div>
+   </p:panel>
+<br></br>
+<div style="margin-left:20px;margin-top:auto;width:80%;" class="w3-border w3-round-large w3-topbar w3-bottombar">
+        <h3> Manage #{customIdentity.owner2} #{messages['other']} #{messages['labels']} </h3>
+        <h:button outcome="/resourceEdit.xhtml" rendered="#{identity.loggedIn }"
+                    id="iedit2"
+                 value="#{messages['Edit']}(#{messages['resource']} #{messages['value']})">
+        </h:button>
+        <h:button  value="#{messages['site']} #{messages['notification']}" outcome="/resourcelabel.xhtml" >
+          <f:param name="key" value="site_notify" />
+        </h:button>
+        <h:button  value="#{messages['backoffice']} #{messages['notification']}" outcome="/resourcelabel.xhtml" >
+          <f:param name="key" value="backOffice_notify" />
+        </h:button>
+        <h:button  value="#{messages['All']} #{messages['site']} #{messages['notification']}" 
+               rendered="#{customIdentity.masterSite}" outcome="/resourcelabel.xhtml" >
+          <f:param name="key" value="common_notify" />
+        </h:button>
+
+
+
+
+        &nbsp;&nbsp;<h:button outcome="/home.xhtml"
+                    id="done"
+                 value="#{messages['Done']}"/>
+        <br></br>
+        <h3> Manage #{customIdentity.owner2} #{messages['visitor']} #{messages['pages']} #{messages['title']} #{messages['for']} #{messages['SEO']} #{messages['optimization']}</h3>
+        <p> #{messages['SEO']} #{messages['key']} #{messages['examples']} </p>
+        <p> key:'home_page_title' value: #{messages['home_page_title']}  </p>
+        <p> key:'About-1_Page_title' value: #{messages['About-1_Page_title']}  </p>
+        <p> key:'News-1_Page_title' value: #{messages['News-1_Page_title']}  </p>
+        <p> Shopping Items SEO key:'ItemDetails_page_title' value: #{messages['ItemDetails_page_title']}  </p>
+        <p> Page Url xxx SEO key:'xxx_page_title' value: #{messages['xxx_page_title']}  </p>
+        <h:link outcome="/resourceEdit.xhtml" rendered="#{identity.loggedIn }"
+                    id="iedit2l"
+                 value="#{messages['Edit']} #{messages['SEO']}">
+        </h:link>
+
+
+        <h3> Customize #{customIdentity.owner2} #{messages['Marketing']} #{messages['campaign']} #{messages['landing']} #{messages['pages']} </h3>
+        <p> #{messages['Content']} #{messages['should']} #{messages['match']} #{messages['camaign']} #{messages['purpose']} </p>
+
+        <h:button outcome="/clobdataList.xhtml" rendered="#{identity.loggedIn }"
+                    id="iedit3"
+                 value="#{messages['Edit']} / (#{messages['Create']} #{messages['content']})">
+        </h:button>
+        &nbsp;&nbsp;<h:button outcome="/home.xhtml"
+                    id="done3"
+                 value="#{messages['Done']}"/>
+        <br></br>
+        <h3> #{messages['Textdata']} #{messages['key']} , #{messages['pagename']} &amp; #{messages['suggested']} #{messages['usage']} #{messages['examples']} </h3>
+        <p> #{messages['3R-Click-f-C']} #{messages['Click-f']}  via Facebook  </p>
+        <p> #{messages['3R-Click-g-C']} #{messages['3R-Click-g-C']}  via Google  </p>
+        <p> #{messages['3R-Click-b-C']} #{messages['3R-Click-b-C']}  via Browser  </p>
+        <p> #{messages['3R-Click-e-C']} #{messages['3R-Click-e-C']}  via Email  </p>
+        <p> #{messages['3R-Click-m-C']} #{messages['3R-Click-m-C']}  via Mobile  </p>
+        <p> Example HTML Link will be &lt;a  href="https://#{request.serverName}/Click-f.wflow" target="_blank"&gt;For you&lt;/a&gt;  </p>
+        <a href="https://#{request.serverName}/Click-f.wflow" target="_blank">#{messages['campaign']} #{messages['via Facebook']} #{messages['Page']} </a>
+        &nbsp;&nbsp;<h:link value="#{messages['Upload/Replace']} #{messages['content']} #{messages['for']} #{messages['campaign']} #{messages['via Facebook']} "  outcome="/clobdataEdit.xhtml" target="_blank"
+              rendered="#{!customIdentity.hasRole('PH')}">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-f-C','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-f-C','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
+                <f:param name="fromKey" value="3R-Click-f-C"/>
+                <f:param name="useSeq" value="0"/>
+                <f:param name="qualifier" value="TXT"/>
+        </h:link>
+        <br></br>
+        <a href="https://#{request.serverName}/Click-g.wflow" target="_blank">#{messages['campaign']} #{messages['via Google']} #{messages['Page']} </a>
+        &nbsp;&nbsp;<h:link value="#{messages['Upload/Replace']} #{messages['content']} #{messages['for']} #{messages['campaign']} #{messages['via Google']} "  outcome="/clobdataEdit.xhtml" target="_blank"
+              rendered="#{!customIdentity.hasRole('PH')}">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-g-C','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-g-C','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
+                <f:param name="fromKey" value="3R-Click-g-C"/>
+                <f:param name="useSeq" value="0"/>
+                <f:param name="qualifier" value="TXT"/>
+               </h:link>
+        <br></br>
+        <a href="https://#{request.serverName}/Click-b.wflow" target="_blank">#{messages['campaign']} #{messages['via Browser']} #{messages['Page']} </a>
+        &nbsp;&nbsp;<h:link value="#{messages['Upload/Replace']} #{messages['content']} #{messages['for']} #{messages['campaign']} #{messages['via Browser']} "  outcome="/clobdataEdit.xhtml" target="_blank"
+              rendered="#{!customIdentity.hasRole('PH')}">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-b-C','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-b-C','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
+                <f:param name="fromKey" value="3R-Click-b-C"/>
+                <f:param name="useSeq" value="0"/>
+                <f:param name="qualifier" value="TXT"/>
+               </h:link>
+        <br></br>
+        <a href="https://#{request.serverName}/Click-e.wflow" target="_blank">#{messages['campaign']} #{messages['via Email']} #{messages['Page']} </a>
+        &nbsp;&nbsp;<h:link value="#{messages['Upload/Replace']} #{messages['content']} #{messages['for']} #{messages['campaign']} #{messages['via Email']} "  outcome="/clobdataEdit.xhtml" target="_blank"
+              rendered="#{!customIdentity.hasRole('PH')}">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-e-C','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-e-C','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
+                <f:param name="fromKey" value="3R-Click-e-C"/>
+                <f:param name="useSeq" value="0"/>
+                <f:param name="qualifier" value="TXT"/>
+               </h:link>
+        <br></br>
+        <a href="https://#{request.serverName}/Click-m.wflow" target="_blank">#{messages['campaign']} #{messages['via Mobile']} #{messages['Page']} </a>
+        &nbsp;&nbsp;<h:link value="#{messages['Upload/Replace']} #{messages['content']} #{messages['for']} #{messages['campaign']} #{messages['via Mobile']} "  outcome="/clobdataEdit.xhtml" target="_blank"
+              rendered="#{!customIdentity.hasRole('PH')}">
+                <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-m-C','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-m-C','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
+                <f:param name="fromKey" value="3R-Click-m-C"/>
+                <f:param name="useSeq" value="0"/>
+                <f:param name="qualifier" value="TXT"/>
+               </h:link>
+
+
+
+
+</div>
+
+
+
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

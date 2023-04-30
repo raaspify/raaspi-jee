@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:c="http://java.sun.com/jsp/jstl/core"
+                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="layout/rtemplateUi.xhtml">
+<!-- Not Generated   -->
+
+<ui:remove>
+label messages.submit case 
+for all products 
+shown if case items ie CI-L1 example fraud case , resume submit  and not logged in or non logged in
+needs email if not logged in
+Add to basket 
+click to basketoutCase
+flow is
+submit case creates customer, user, item (CI-D) and order and its orderdetail (item refers to CI-D just created)
+if extra note is added then a new child item (CI-D) is created to hold new information but is a child under the CI-D created in step 1 , which is parent
+once a CI-D item exists, a button will appear to upload image/text? and attach to the existing item record ie a new clob/blob via item docmnt 
+</ui:remove>
+
+<ui:define name="title">#{messages['ItemsReviewSelect_page_title']}</ui:define>
+
+<ui:define name="body">
+    
+<h:form id="LoginOrEmail_required">    
+ 
+
+<!--                          toolbar                                     -->
+
+      <div class = "btn-toolbar justify-content-between" role = "toolbar">
+         <div class = "btn-group ">
+              <h:outputText value="#{messages.common_notify}" style="font-size: medium;color: red"  /> 
+              <h:outputText value="#{messages.site_notify}" style="font-size: medium;color: red"/> 
+              <h:outputText value="#{messages.backOffice_notify}" rendered="#{identity.loggedIn}" style="font-size: medium;color: red"/> 
+
+         </div>
+         <div class = "btn-group ">
+              <h:outputText value="#{customIdentity.imailaddr}" rendered="#{!identity.loggedIn and not customIdentity.imailaddr.isEmpty()}"/> 
+              <h:outputText value="#{customIdentity.username}" rendered="#{identity.loggedIn }"/> 
+              <h:outputText value="&#160;&#160;"/>
+              <!-- Button to Open the Modal -->
+              <ui:fragment rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getBasketedList('basketCI').size() != 0 and (customIdentity.imailaddr == null or customIdentity.imailaddr.isEmpty())  }">
+              <div class="alert alert-info alert-dismissible">
+               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+               <strong>#{messages['Welcome!']}!</strong> #{messages['You']} are in guest mode now. To continue select.
+
+               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" data-backdrop="false">
+                #{messages['Options']} 
+               </button>
+              </div>
+              </ui:fragment>
+
+              <h:outputText value="&#160;&#160;"/>
+              <ui:remove> show fb only logout for situations where only fb login happened but not identiy login 
+              </ui:remove>
+              <h:link id="logoutfb" onclick="if (! confirm('Logout ?') ) { return false;}; Logout();return true;" value="Logout(FB)" rendered="#{!identity.loggedIn and customIdentity.smUid != null }"/>
+              <h:commandButton class="btn btn-primary" id="logout" onclick="Logout();" action="#{customIdentity.logout()}" value="Logout" rendered="#{identity.loggedIn}"/>
+              &#160;<h:link id="Cart" outcome="/basketoutCs.xhtml" value="#{messages['submit']} #{messages['folder']}" propagation="none"  >
+               <h:graphicImage value="/img/folder_24.png" />
+              </h:link>
+              &#160;<h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getBasketedList('basketCI').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getBasketedList('basketCI').size() gt 0}">
+              </h:outputText>
+              <h:outputText value="[#{messages['empty']}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getBasketedList('basketCI') == null}"/>
+              &nbsp;
+              <h:outputText value="#{messages.Today} "/> 
+              &#160;<h:outputText value="#{authenticator.currcaldates}"/> 
+              <ui:remove> 
+              &nbsp;<h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  outcome="/home.xhtml" />
+              </ui:remove>
+              &nbsp;<h:button id="tdoneh2" value="Home"   outcome="/home.xhtml" />
+
+         </div>
+      </div>
+      <h:messages globalOnly="false" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+
+
+      <ui:remove> mid-1 cards for all detail items for categories,jul29 2021 tbd radiobutton to select 
+       one of the categories and then inputTextArea for that category. For now assume one categotry or 
+       user need to decide which one.
+      </ui:remove>
+      <ui:fragment rendered="true">
+      <!-- store items  both non mobile and mobile, input area width adjusted -->
+      <div id="storeItems" class="card"  style="width:100%;" >
+       <ui:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getReviewBrowseList()}" var="row" iterationStatusVar="status"  id="mrepeat"
+        >
+         <div id="i#{row.a0xxuobxbxxxxxxxxxxxsid}" class="card-body" style="padding:50px;">
+
+          <h:graphicImage rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+           value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=0"
+           class="card-img-top "  style="object-fit: cover;min-height:200px;max-height:200px;">
+          </h:graphicImage> 
+
+
+                           <h4>#{row.b1xxuszsbvxxxxxxxxxxdescript}</h4>
+
+                           <ui:fragment rendered="#{not empty row.w7xxuznxbvxxxxxxxxxxnotes}">
+                            #{row.w7xxuznxbvxxxxxxxxxxnotes}
+                           </ui:fragment>
+                           <ui:fragment rendered="#{row.w7xxuznxbvxxxxxxxxxxnotes == null or empty row.w7xxuznxbvxxxxxxxxxxnotes}">
+                            <br></br>
+                           </ui:fragment>
+
+                           <ui:fragment rendered="#{not empty row.g2xxuxn2bvxxxxxxxxxxsubcodesn2}">
+                            #{row.g2xxuxn2bvxxxxxxxxxxsubcodesn2}
+                           </ui:fragment>
+                           <ui:fragment rendered="#{row.w7xxuznxbvxxxxxxxxxxnotes == null or empty row.g2xxuxn2bvxxxxxxxxxxsubcodesn2}">
+                            <br></br>
+                           </ui:fragment>
+
+                       <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getBasketedList('basketCI').size() gt 0}">
+                        <h:outputText value="#{messages.Submit_case} #{messages['already']} #{messages['exists']} "/> 
+                        &#160;<h:link id="Cart2" outcome="/basketoutCs.xhtml" value="#{messages['submit']} #{messages['folder']}" propagation="none"  >
+                         <h:graphicImage value="/img/folder_24.png" />
+                        </h:link>
+                       </ui:fragment>
+
+                       <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getBasketedList('basketCI').size() eq 0}">
+                         <div class="form-group">
+                            <ui:decorate id="ydxxuznybvxxxxxxxxxxnotesDecoration" template="layout/edit.xhtml" rendered="true">
+                             <ui:define name="label">#{messages['Enter']} #{messages['short']} #{messages['description']} #{messages['below']} <br/>#{messages['and']} #{messages['click']} #{messages['Submit']} 
+                             </ui:define>
+                             <h:panelGrid>
+                              <h:inputTextarea styleClass="form-control" id="tEdit" rendered="#{!identity.loggedIn or (identity.loggedIn and (customIdentity.hasRole('VH') or customIdentity.hasRole('PH')))}"
+                               cols="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?30:80}" 
+                               rows="3"
+                              value="#{fpxxfq1a5xwwqqhxxxxxitemHome.notesToPass}"/>
+
+                              <h:inputTextarea id="tEdit2" rendered="#{identity.loggedIn and (customIdentity.hasRole('UH') or customIdentity.hasRole('UQ'))}"
+                               cols="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?30:80}" style="border-radius: 5px;"
+                               rows="3"
+                              value="#{fpxxfq1a5xwwqqhxxxxxitemHome.notesToPass}"/>
+                             </h:panelGrid>
+                            </ui:decorate>
+                         </div>
+                            <h:commandButton id="AddToCart1" styleClass="btn btn-primary"  
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrder(row,0,'basket')}" 
+                                 value="#{messages['submit']}">
+                             <f:ajax execute="@form" render="@form" /> 
+                            </h:commandButton>
+
+                       </ui:fragment>
+
+
+        </div>
+
+
+       </ui:repeat>
+       
+      </div>
+      </ui:fragment>
+   <ui:remove>
+    <input type="file" id="myFile" name="filename2"/>
+  
+    <div class="mt-3">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+   </ui:remove>
+<!-- The Modal -->
+<ui:fragment rendered="#{!identity.loggedIn}">
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">#{messages['Options']}</h4>
+        <button type="button" class="close" data-dismiss="modal">&#215;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+ 
+       #{messages['For']} frequent submissions, we recommend 
+               <h:link value="#{messages['menutab.AddListReport.LogIn']}" outcome="/login.xhtml" rendered="#{not identity.loggedIn}"/>
+
+       <br></br>
+       But you also have the option to continue by entering your email id.
+       <br></br>
+       <div >
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <h:inputText required="false" id="emailE" value="#{customIdentity.imailaddr}" size="25" rendered="true" pt:placeholder="Email"/>
+              <ui:remove>
+               july24 2021 added data-backdrop="false" to button with data-toggle="modal", if same page otherwise page backdrop remain covered
+               also removed recursive h:form and put f:ajax for commands 
+              </ui:remove>
+        <h:commandButton class="btn btn-primary" id="changePWCommand" action="#{fpxxfq1a5xwwqqhxxxxxitemHome.validateEmail(customIdentity.imailaddr)}"
+         value="#{messages['Confirm']}" >
+         <f:ajax execute="@form" render="@form" /> 
+        </h:commandButton>
+       </div>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div> 
+</ui:fragment>
+
+
+</h:form>
+
+
+
+
+</ui:define>
+</ui:composition>
+
+
+
+
+

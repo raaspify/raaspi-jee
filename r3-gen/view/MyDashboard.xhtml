@@ -1,0 +1,526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+
+<style type="text/css">
+.box {
+background-color: #FFF;
+height:400px;
+width: 800px;
+text-align:center;
+}
+.cell { 
+vertical-align:top;
+
+}
+</style>
+<f:metadata>
+    <f:viewAction action="#{yxxxuh566xwwqqwxxxxxuserHome.restrict()}" />
+</f:metadata>
+
+<ui:define name="body">
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+    <h:form id="fpxxuq15item" styleClass="edit">
+<h:outputStylesheet>
+.rf-p-b {
+    padding: 5px !important;
+}
+</h:outputStylesheet>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+           <ui:remove>
+              <h:outputText value="Email Alerts- #{yxxxuq1m1xwwqqqxxxxxclobdataList.resultList.size() >0 ? yxxxuq1m1xwwqqqxxxxxclobdataList.resultList.size() :'None' }"/> 
+           </ui:remove>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{ciustomIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['MyDashboardHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+	</p:toolbar>
+    <h:messages globalOnly="false" styleClass="message" id="globalMessages"/>
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<h:head>
+<link href='./stylesheet/jquery.jqplot.min.css' rel='stylesheet' />
+<script src='./js/jquery.jqplot.min.js'></script>
+<script src='./js/lib/jqplot.pieRenderer.min.js'></script>
+<script src='./js/lib/jqplot.donutRenderer.min.js'></script>
+<script type="text/javascript" src="./js/lib/jqplot.json2.min.js"></script>
+
+<script>
+//alert (window.location.hostname);
+
+$.jqplot.config.enablePlugins = true; 
+$(document).ready(function(){
+//alert (window.location);
+      //pie chart  [[[n,v],[n,v]]] n name and v value
+      //bar chart  [[v,v,v,v][v,v,v]] v y axis value x axis will show 1,2 etc
+      //    ticks  [n,n,n,n]  n x axis tick names instead of 1,2  
+      //line chart [[v,v,v]]  v y axis values x axis done automatically to show 1,2
+      //    each group of [n.v] or [v,v..] is part of series
+      //    series label [{label:"xx"},]    
+      // pie chart series will be added later,but bar chart needs series now
+      // pie chart will show distribution of say amount of purchase  among customers 
+      // bar chart will show purchase amt, return amt etc for one customer and same thing for others 
+      // in the series
+      // rest request will be /seam/resource/rest/itemq/{m(arked)}/a(mt)q(ty)
+      //                                                                         /a(ll)/r(trn)
+      //                                                                         /k(ey)xxxxx/m(isc)
+      //                                                                         /m/m(etrics)
+
+  // Our ajax data renderer which here retrieves a text file.
+  // it could contact any source and pull data, however.
+  // The options argument isn't used in this renderer.
+  var sSeries = " ";
+   var sLabels=['Qty in Stock','Customer Orders','Vendor Orders','Customer Picked Up','Picked Up from Supplier','Customer Invoiced ','Shipped ','Received '];
+  var ajaxDataRenderer = function(url, plot, options) {
+    var filtered = [];
+    var setbrkt = [];
+    var jay = [];
+    $.ajax({
+      // have to use synchronous here, else the function
+      // will return before the data is fetched
+      // alerts removed use firebug to step through find xxbar.js under script  
+      async: false,
+      url: url,
+      dataType:"xml",
+      success: function(data) {
+       $(data).find("entity").each(function() {
+        sSeries=sSeries+$(this).children("label").text()+" > " 
+        $(this).children("metrix").each(function(index){
+          filtered.push([sLabels[index],parseFloat($(this).children("Value").text())]);
+        });
+        setbrkt.push(filtered);
+        filtered=[];
+       });
+      } 
+    });
+    return setbrkt;
+  };
+ 
+  // The url for our json data resteasy does not need front part of url
+  var jsonurl = "/seam/resource/rest/itemq";
+  //Get the data prior to creating the graph.
+  var plotData = ajaxDataRenderer(jsonurl);
+ 
+  // passing in the url string as the jqPlot data argument is a handy
+  // shortcut for our renderer.  You could also have used the
+  // "dataRendererOptions" option to pass in the url.
+  var ticks = ['Jan', 'Feb', 'Mar', 'Apr'];
+  var plot2 = $.jqplot('chart2', plotData,{
+    seriesDefaults: {
+        // Make this a pie chart.
+        renderer: jQuery.jqplot.DonutRenderer,
+        rendererOptions: {
+          // Put data labels on the pie slices.
+          // By default, labels show the percentage of the slice.
+          showDataLabels: true
+        }
+    },
+    grid: {borderColor: 'white', shadow: false, drawBorder: true},
+     title: "#{messages['Item']} Ordered "+sSeries,
+    legend: { show:true, location: 'e' }
+  });
+});
+</script>
+</h:head>
+<h:body>
+
+
+</h:body>
+</html>
+
+ <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:6}" columnClasses="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?'cell':'cell'}"
+  rendered="#{(fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol')}"
+       >
+  <ui:remove>use customer next contact date vs contected date, assume </ui:remove>
+  <p:panel id="cQuote" class="card w3-border" style="padding:5px; height:100px;">
+   <f:facet name="header">Sales calls (Performance)  </f:facet>
+   <progress value="#{jxxxuq201xwwqqhxxxxxcustomerList.getSuggestList('nextC').size() gt 0?(jxxxuq201xwwqqhxxxxxcustomerList.getSuggestList('contacted').size()*15/jxxxuq201xwwqqhxxxxxcustomerList.getSuggestList('nextC').size()):0}" max="15"></progress>  
+   <br></br><h:link value="#{messages['Go']}"  outcome="/customerList.xhtml" target="_blank" />
+              &nbsp;<h:outputText value="#{jxxxuq201xwwqqhxxxxxcustomerList.getSuggestList('nextC').size()}"/> 
+		   &nbsp;<h:graphicImage  value="/img/telephone-icon200.jpg" width="40px" styleClass="pic">
+             </h:graphicImage>
+
+  </p:panel>
+  <ui:remove>needs setup in usagebyperiods ie put target value in periodtotals for key cqb+owner2Code ex cqbmybusinessp
+  and use quotelist compare against total quotes </ui:remove>
+   <p:panel id="cOrderQ" style="padding:5px; height:100px;">
+   <f:facet name="header">Sales Quote(Performance) </f:facet>
+   <progress value="#{trexuq233xwwqqhxxxxxcuquoteList.resultAmountOrdered gt 0?(trexuq233xwwqqhxxxxxcuquoteList.resultAmountOrderedVsBudget):0}" max="15"></progress>  
+   <br></br><h:link value="#{messages['Go']}"  outcome="/cuquoteEdit.xhtml" target="_blank" />
+              &nbsp;<h:outputText value="#{trexuq233xwwqqhxxxxxcuquoteList.resultAmountOrdered}"/> 
+		   &nbsp;<h:graphicImage  value="/img/toplefto.jpg" width="40px" styleClass="pic">
+              </h:graphicImage>
+  </p:panel>
+  <ui:remove>needs setup in usagebyperiods ie put target value in periodtotals for key cob+owner2Code ex cobmybusinessp
+   and use quotelist compare against total quotes </ui:remove>
+  <p:panel id="cOrderA" style="padding:5px; height:100px;">
+   <f:facet name="header">Sales Amount (Performance) </f:facet>
+   <progress value="#{trexuq244xwwqqhxxxxxcuordersList.resultAmountOrdered gt 0?(trexuq244xwwqqhxxxxxcuordersList.resultAmountOrderedVsBudget):0}" max="15"></progress>  
+   <br></br><h:link value="#{messages['Go']}"  outcome="/cuordersEdit.xhtml" target="_blank" />
+              &nbsp;<h:outputText value="#{trexuq244xwwqqhxxxxxcuordersList.resultAmountOrdered}"/> 
+		   &nbsp;<h:graphicImage  value="/img/salesChart.jpg" width="40px" styleClass="pic">
+             </h:graphicImage>
+  </p:panel>
+
+  <ui:remove>use item returned count vs total items</ui:remove>
+  <p:panel id="cOrderR" style="padding:5px; height:100px;">
+   <f:facet name="header">Customer Returns (Performance) </f:facet>
+   <progress value="#{fpxxfq1a5xwwqqhxxxxxitemList.resultCountReturned gt 0?(fpxxfq1a5xwwqqhxxxxxitemList.resultCountReturned/fpxxfq1a5xwwqqhxxxxxitemList.resultCount*15):0}" max="15"></progress>  
+   <br></br><h:link value="#{messages['Go']}"  outcome="/customerReport.xhtml" target="_blank" />
+              &nbsp;<h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemList.resultCountReturned}"/> 
+		   &nbsp;<h:graphicImage  value="/img/topleftxx.png" width="30px" styleClass="pic">
+             </h:graphicImage>
+		   &nbsp;<h:graphicImage  value="/img/Cancel16.png" width="20px" styleClass="pic">
+             </h:graphicImage>
+
+  </p:panel>
+
+  <ui:remove>use item carted count vs total items</ui:remove>
+  <p:panel id="cOrderN" style="padding:5px; height:100px;">
+   <f:facet name="header">#{messages['New']} #{messages['Sales']} </f:facet>
+   <progress value="#{fpxxfq1a5xwwqqhxxxxxitemList.allCartedCount gt 0?(fpxxfq1a5xwwqqhxxxxxitemList.allCartedCount/fpxxfq1a5xwwqqhxxxxxitemList.resultCount*15):0}" max="15"></progress>  
+   <br></br><h:link value="#{messages['Go']}"  outcome="/cuordersList.xhtml" target="_blank" />
+              &nbsp;<h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemList.allCartedCount}"/> 
+		   &nbsp;<h:graphicImage  value="/img/topleftxx.png" width="40px" styleClass="pic">
+             </h:graphicImage>
+  </p:panel>
+
+ </h:panelGrid>
+ <br></br>
+ <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:6}" columnClasses="cell"
+  rendered="#{(fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+   and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe')}"
+       >
+ <p:panel id="voptionsC" style="padding:5px; height:100px;">
+  <f:facet name="header">Visitor Options Implemented </f:facet>
+  <progress value="#{fpxxfq1a5xwwqqhxxxxxitemList.vistorOptionsDone gt 0?fpxxfq1a5xwwqqhxxxxxitemList.vistorOptionsDone*15/5:0}" max="5"></progress>  
+  <br></br>use <h:link value="#{messages['Add']} #{messages['Items']}"  outcome="/itemEdit.xhtml" target="_blank" />
+		   &nbsp;<h:graphicImage  value="/img/product2xx.jpg" width="40px" styleClass="pic">
+             </h:graphicImage>
+ </p:panel>
+
+ <p:panel id="soptionsC" style="padding:5px; height:75px;">
+  <f:facet name="header">Site Customizations Implemented </f:facet>
+  <progress value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.siteCustommizationsDone gt 0?yxxxuq1m1xwwqqqxxxxxclobdataList.siteCustommizationsDone*15/20:0}" max="15"></progress>  
+  <br></br>use <h:link value="#{messages['Site']} #{messages['Customization']}"  outcome="/homePageEditor.xhtml" target="_blank" />
+		   &nbsp;<h:graphicImage  value="/img/webpagedesign.jpg" width="40px" styleClass="pic">
+             </h:graphicImage>
+ </p:panel>
+
+ <ui:remove>footer(legal,privacy,returns),signup(signup)</ui:remove>
+
+ <p:panel id="soptionsP" style="padding:5px; height:75px;">
+  <f:facet name="header">Site Policy Implemented </f:facet>
+  <progress value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.sitePolicyDone gt 0?yxxxuq1m1xwwqqqxxxxxclobdataList.sitePolicyDone*15/3:0}" max="4"></progress>  
+  <br></br>use <h:link value="#{messages['Site']} #{messages['Policy']}"  outcome="/clobdataEdit.xhtml" target="_blank" />
+		   &nbsp;<h:graphicImage  value="/img/bank.jpg" width="40px" styleClass="pic">
+             </h:graphicImage>
+ </p:panel>
+
+ </h:panelGrid>
+ <br></br>
+ <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+ <br></br><br></br><br></br><br></br>
+ </ui:fragment>
+
+ <h:panelGrid style="padding:5px; min-height:400px;" columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:6}" columnClasses="cell"
+  rendered="#{(fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+   and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe')}"
+       >
+  <p:panel id="fadebox" style="padding:5px; height:125px;">
+   <f:facet name="header">EMail Send Monitoring </f:facet>
+   <h:outputText value="#{messages['status']}"/>
+              #{fn:substring(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','XMAIL-STATUS','managersss',0,40),0,19)} <br/> 
+              #{fn:substring(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','XMAIL-STATUS','managersss',0,40),19,40)} 
+   <br></br><h:link value="#{messages['Go']}"  outcome="/customerMailingSend.xhtml" target="_blank" />
+		   <h:graphicImage  value="/img/contactus.jpg" width="50px" styleClass="pic">
+             </h:graphicImage>
+  </p:panel>
+
+  <p:panel id="bdbox" style="padding:5px; height:100px;">
+   <f:facet name="header">Todo List </f:facet>
+              <h:outputText value="#{empty fxxxuq89bxwwqqhxxxxxscheduleList.resultList ? 0 : (fxxxuq89bxwwqqhxxxxxscheduleList.paginated ? fxxxuq89bxwwqqhxxxxxscheduleList.resultCount : fxxxuq89bxwwqqhxxxxxscheduleList.resultList.size())}"/> 
+		   <h:graphicImage  value="/img/productxx.png" width="50px" styleClass="pic">
+             </h:graphicImage>
+   <h:link outcome="/scheduleFcal.xhtml"
+                value="#{messages['schedule']}">
+   </h:link>
+  </p:panel>
+ <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+ <br></br><br></br><br></br><br></br>
+ </ui:fragment>
+
+  <p:panel  style="padding:0px;height:190px;">
+   <f:facet name="header">Actions </f:facet>
+   <h:panelGrid>
+    <p:panel >
+     <h:outputText style=";font-size:12px;" value="#{messages['Due']} #{messages['invoice']}:  #{trexuq266xwwqqhxxxxxcuinvoiceList.resultCountInvoicedNotPaid > 0?trexuq266xwwqqhxxxxxcuinvoiceList.resultCountInvoicedNotPaid:'none'} "/> 
+     <h:link style=";font-size:14px;" value="#{messages['Email']}"  outcome="/customerStatements.xhtml" target="_blank" />
+    </p:panel>
+    <p:panel >
+     <h:outputText style=";font-size:12px;" value="#{messages['Pending']} #{messages['signup']}:  #{yxxxuh566xwwqqwxxxxxuserHome.deleteStatDropOuts('sc') > 0?yxxxuh566xwwqqwxxxxxuserHome.deleteStatDropOuts('sc'):'none'} "/> 
+     <h:link style=";font-size:14px;" value="#{messages['Email']}"  outcome="/userList.xhtml" target="_blank" />
+     </p:panel>
+    <p:panel >
+     <h:outputText style=";font-size:12px;" value="#{messages['Dropout']} #{messages['users']}:  #{yxxxuh566xwwqqwxxxxxuserHome.deleteStatDropOuts('dc') > 0?yxxxuh566xwwqqwxxxxxuserHome.deleteStatDropOuts('dc'):'none'} "/> 
+     <h:link style=";font-size:14px;" value="#{messages['Email']}"  outcome="/userList.xhtml" target="_blank" />
+    </p:panel>
+    <p:panel >
+     <h:outputText style=";font-size:12px;" value="#{messages['Inactive']} #{messages['users']}:  #{yxxxuh566xwwqqwxxxxxuserHome.deleteStatDropOuts('uc') > 0?yxxxuh566xwwqqwxxxxxuserHome.deleteStatDropOuts('uc'):'none'} "/> 
+     <h:link style=";font-size:14px;" value="#{messages['Email']}"  outcome="/userList.xhtml" target="_blank" />
+    </p:panel>
+    <p:panel  rendered="#{customIdentity.masterSite and !facesContext.externalContext.context.serverInfo.contains('omcat')}">
+     <h:outputText style=";font-size:12px;" value="#{messages['Create']} #{messages['route']} "/> 
+     <h:link style=";font-size:14px;" value="#{messages['Create']}"  outcome="/SqlAdmin.xhtml" target="_blank" />
+    </p:panel>
+   </h:panelGrid>  
+  </p:panel>
+
+ <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+ <br></br><br></br><br></br><br></br>
+ </ui:fragment>
+
+ <p:panel  style="padding:5px; height:190px;" rendered="#{customIdentity.masterSite}">
+  <f:facet name="header">Client Actions </f:facet>
+  <h:panelGrid>
+   <p:panel>
+   <h:outputText style=";font-size:12px;" value="#{messages['Trial']} #{messages['pending']}:  #{yxxxch522xhhxxhxxxxxclientList.resultCountTrialPending > 0?yxxxch522xhhxxhxxxxxclientList.resultCountTrialPending:'none'} "/> 
+   <h:link style=";font-size:12px;" value="#{messages['Email']}"  outcome="/SqlAdmin.xhtml" target="_blank" >
+                <f:param name="yxxxch522xhhxxhxxxxxclientFrom"
+                        value="TrialPending"/>
+  </h:link>
+
+		   &nbsp;<h:graphicImage  value="/img/email_start16.png" width="20px" styleClass="pic">
+             </h:graphicImage>
+   </p:panel>
+   <p:panel>
+   <h:outputText style=";font-size:12px;" value="#{messages['Trial']} #{messages['expiring']}/#{messages['expired']}:  #{yxxxch522xhhxxhxxxxxclientList.resultCountTrialExpiring > 0?yxxxch522xhhxxhxxxxxclientList.resultCountTrialExpiring:'none'} "/> 
+   <h:link style=";font-size:12px;" value="#{messages['Email']}"  outcome="/SqlAdmin.xhtml" target="_blank" />
+		   &nbsp;<h:graphicImage  value="/img/email_start16.png" width="20px" styleClass="pic">
+             </h:graphicImage>
+   </p:panel>
+   <p:panel>
+   <h:outputText style=";font-size:12px;" value="#{messages['Trial']} #{messages['not']} #{messages['activated(>3days)']}:  #{yxxxch522xhhxxhxxxxxclientList.resultCountNotActivated > 0?yxxxch522xhhxxhxxxxxclientList.resultCountNotActivated:'none'} "/> 
+   <h:link style=";font-size:12px;" value="#{messages['Email']}"  outcome="/SqlAdmin.xhtml" target="_blank" />
+		   &nbsp;<h:graphicImage  value="/img/email_start16.png" width="20px" styleClass="pic">
+             </h:graphicImage>
+   </p:panel>
+
+ <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+ <br></br><br></br><br></br><br></br>
+ </ui:fragment>
+   <p:panel>
+   <h:outputText style=";font-size:12px;" value="#{messages['Site']} #{messages['idle']}:  #{yxxxch522xhhxxhxxxxxclientList.resultCountSiteIdle > 0?yxxxch522xhhxxhxxxxxclientList.resultCountSiteIdle:'none'} "/> 
+   <h:link style=";font-size:12px;" value="#{messages['Email']}"  outcome="/SqlAdmin.xhtml" target="_blank" />
+		   &nbsp;<h:graphicImage  value="/img/email_start16.png" width="20px" styleClass="pic">
+             </h:graphicImage>
+   </p:panel>
+ <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+ <br></br><br></br><br></br><br></br>
+ </ui:fragment>
+
+   <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype==null}"  >
+   <h:outputText style=";font-size:12px;" value="#{messages['Subscription']} #{messages['non']} #{messages['expiring']}:  #{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01') !=null?yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f8xxcxxxlvxxxxxxxxxxlicenseend:'none'} "> 
+         >
+    <f:convertDateTime pattern="yyyy-MM-dd" type="date"/> 
+   </h:outputText>
+   <h:link style=";font-size:12px;" value="#{messages['Email']}"  outcome="/SqlAdmin.xhtml" target="_blank" />
+              &nbsp;<h:outputText value="#{yxxxch522xhhxxhxxxxxclientList.resultCountTrialExpiring}"/> 
+		   &nbsp;<h:graphicImage  value="/img/email_start16.png" width="20px" styleClass="pic">
+             </h:graphicImage>
+   </p:panel>
+ </h:panelGrid>  
+</p:panel>
+<br/>
+
+ </h:panelGrid>  
+
+ <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:6}" columnClasses="cell, cell, cell,cell, cell, cell">
+
+<p:panel id="vhomeCount" style="padding:5px; height:#{yxxxuh566xwwqqwxxxxxuserHome.mobile?300:250}px;">
+ <f:facet name="header">Site visits </f:facet>
+              <h:outputText value="#{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].p6xxzxxrbvxxxxxxxxxxlocbaradj ? 0 : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].p6xxzxxrbvxxxxxxxxxxlocbaradj)}"/> 
+	      <h:graphicImage  value="/img/woman-using-computer.jpg" width="50px" styleClass="pic">
+              </h:graphicImage>
+              <br></br><h:outputText value="#{messages['Last']} #{messages['user']} : #{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].z1xxuxxxbvxxxxxxxxxxlastuser ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].z1xxuxxxbvxxxxxxxxxxlastuser)}"/> 
+              <br></br><h:outputText value="#{messages['user']} #{messages['Date']} : #{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w3xxuxxxbvxxxxxxxxxxinrpassw ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w3xxuxxxbvxxxxxxxxxxinrpassw)}"/> 
+              <br></br><h:outputText value="#{messages['visitor']} #{messages['IP']}/#{messages['Country']} : "/> 
+              <br></br><h:outputText value="#{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw)}"/> 
+              <br></br><iframe src="https://ip2c.org/#{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw)}"
+               width="180" height="60" frameborder="0" style="border:0" allowfullscreen="false"></iframe>
+              <h:outputText rendered="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw}"
+               value="#{r3RestClient.ip2C(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw)}" />
+              <br></br><h:outputText value="#{messages['Last']} #{messages['hour']} #{messages['users']} : #{yxxxuh566xwwqqwxxxxxuserList.getSuggestList('LH').size()==0 ? 'None' : yxxxuh566xwwqqwxxxxxuserList.getSuggestList('LH').size()}"/> 
+              <br></br> <h:link outcome="/userList.xhtml"
+                value="#{messages['Users']}">
+              </h:link>
+              &nbsp; <h:link outcome="/clientList.xhtml"
+                value="#{messages['Client']} #{messages['Settings']}">
+              </h:link>
+              <br></br><h:link outcome="/truefalseList.xhtml"
+                value="#{messages['Report']} #{messages['Settings']}">
+              </h:link>
+              &nbsp; <h:link outcome="/siteEditEasy.xhtml"
+                value="#{messages['Site']} #{messages['Edit']}">
+              </h:link>
+
+</p:panel>
+
+<p:panel  style="padding:5px; height:#{yxxxuh566xwwqqwxxxxxuserHome.mobile?300:250}px;">
+ <f:facet name="header">Site Maintenance Status </f:facet>
+              <h:outputText value="#{messages['release']} #{messages['date']}:  Mar 30 2023 "/> 
+              <br></br><h:outputText value="#{messages['release']} #{messages['version']}:  2.00.00  "/> 
+              <h:graphicImage  value="/img/newsupdtxx.png" width="50px" styleClass="pic">
+             </h:graphicImage>
+
+</p:panel>
+
+<p:panel  style="padding:5px; height:#{yxxxuh566xwwqqwxxxxxuserHome.mobile?300:250}px;" rendered="#{!customIdentity.masterSite}">
+ <f:facet name="header">Subscription Actions </f:facet>
+  <h:panelGrid>
+   #{messages['Product']} #{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').b1xxuisxlvxxxxxxxxxxserialnum}
+   <br></br><h:outputText value="#{messages['Current']} #{messages['site']} #{messages['use']}: #{yxxxuh566xwwqqwxxxxxuserHome.getProductLabel(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode)}" />
+
+   <!-- in Trial but can extend using valid trialxxx coupon or subscribe to continue -->
+  
+   <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype =='Trial'}">
+   <h:outputText style=";font-size:14px;" value="#{messages['Trial']} #{messages['expiring']}/#{messages['expired']}:  #{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01') !=null?yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f8xxcxxxlvxxxxxxxxxxlicenseend:'none'} "
+           >
+        <f:convertDateTime pattern="MM/dd/yyyy" type="both" dateStyle="short" />
+   </h:outputText>
+    <br></br>
+    #{messages['Trial']} #{messages['extension']} #{messages['coupon']}: 
+    <h:inputText style=";font-size:14px;" value="#{yxxxch522xhhxxhxxxxxclientHome.notesToPass}" /> 
+    &nbsp;<h:commandButton id="coupon" 
+     value="#{messages['Apply']} #{messages['Coupon']}"
+      action="#{yxxxch522xhhxxhxxxxxclientHome.applyCoupon(yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').b1xxuisxlvxxxxxxxxxxserialnum,yxxxch522xhhxxhxxxxxclientHome.notesToPass,yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').a0xxuobxbxxxxxxxxxxxsid)}"  >
+    </h:commandButton>
+   </p:panel>
+
+   <!-- in Trial pending, needs activation to go into Trial-->
+   <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype =='TrialPending'}"   >
+   <h:outputText style=";font-size:14px;" value="#{messages['Trial']} #{messages['pending']}:  #{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01') !=null?yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f8xxcxxxlvxxxxxxxxxxlicenseend:'none'} "
+        >
+    <f:convertDateTime pattern="yyyy-MM-dd" type="date"/> 
+   </h:outputText>
+   </p:panel>
+
+   <!-- subscribed  ie in license type Yearly -->
+   <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype=='Yearly'}"  >
+   <h:outputText style=";font-size:14px;" value="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype}  #{messages['Subscription']} #{messages['expiring']}/#{messages['expired']}:  #{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01') !=null?yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f8xxcxxxlvxxxxxxxxxxlicenseend:'none'} "> 
+         >
+    <f:convertDateTime  type="date" /> 
+   </h:outputText>
+   </p:panel>
+
+   <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype ==null}"  >
+   <h:outputText style=";font-size:14px;" value="#{messages['Subscription']} #{messages['non']} #{messages['expiring']}:  #{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01') !=null?yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f8xxcxxxlvxxxxxxxxxxlicenseend:'none'} "> 
+         >
+    <f:convertDateTime pattern="yyyy-MM-dd" type="date"/> 
+   </h:outputText>
+   </p:panel>
+
+   <!-- in Trial and can subscribe  or in Yearly but startdate < today(via param null) ie not expired yet -->
+   <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype !=null
+           and (!yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype.contains('Yearly')
+            or  yxxxch522xhhxxhxxxxxclientHome.dateCompare(yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f8xxcxxxlvxxxxxxxxxxlicenseend,null) lt 0  )}"  >
+    <h:outputText style=";font-size:14px;" value="#{messages['Renew']} #{messages['subscription']} #{messages['now']}: " /> 
+	   &nbsp;<h:graphicImage  value="/img/Cart32.png" width="32px" styleClass="pic">
+             </h:graphicImage>
+    <h:commandButton id="subscribe" 
+     value="#{messages['Monthly_payment']}"
+      action="#{yxxxch522xhhxxhxxxxxclientHome.subscribe(yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').b1xxuisxlvxxxxxxxxxxserialnum,'monthly',customIdentity.masterSiteCode)}"  >
+    </h:commandButton>
+    <h:commandButton id="subscribey" 
+     value="Yearly_payment"
+      action="#{yxxxch522xhhxxhxxxxxclientHome.subscribe(yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').b1xxuisxlvxxxxxxxxxxserialnum,'yearly',customIdentity.masterSiteCode)}"  >
+    </h:commandButton>
+   </p:panel>
+
+   <p:panel>
+   <h:outputText style=";font-size:14px;" value="#{messages['Subscription']} #{messages['cancel']}/#{messages['Remove']} #{messages['site']}:   "/> 
+   <h:outputLink style=";font-size:14px;" value="https://www.#{customIdentity.masterSiteCode}.com/ItemsReviewSelect.wflow" target="_blank" rendered="#{!fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['cancel']} 
+   </h:outputLink>
+   <h:outputLink style=";font-size:14px;" value="ItemsReviewSelect.wflow" target="_blank" rendered="#{fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['cancel']} 
+   </h:outputLink>
+   &nbsp;<h:graphicImage  value="/img/basket_24.png" width="20px" styleClass="pic">
+         </h:graphicImage>
+   </p:panel>
+
+   <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype !=null
+           and (yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype.contains('Trial') )}"  >
+   <h:outputText style=";font-size:14px;" value="#{messages['Custom']} #{messages['domain']} #{messages['routing']} :   "/> 
+   <h:outputLink id="cd" style=";font-size:14px;" value="https://www.'+#{customIdentity.masterSiteCode}+'.com/ItemsReviewSelect.wflow" target="_blank" rendered="#{!fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['route']} #{messages['setup']} 
+             <p:tooltip attached="true" for="cd">
+              <h:outputText value="#{messages.Specify} #{messages.registered} #{messages.domain} #{messages.name}"/>
+             </p:tooltip>
+   </h:outputLink>
+   <h:outputLink id="cdl" style=";font-size:14px;" value="ItemsReviewSelect.wflow" target="_blank" rendered="#{fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['route']} #{messages['setup']} 
+             <p:tooltip attached="true" for="cd">
+              <h:outputText value="#{messages.Specify} #{messages.registered} #{messages.domain} #{messages.name}"/>
+             </p:tooltip>
+   </h:outputLink>
+
+   &nbsp;<h:graphicImage  value="/img/basket_24.png" width="20px" styleClass="pic">
+         </h:graphicImage>
+   </p:panel>
+   <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype !=null
+           and (yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype.contains('Trial') )}"  >
+   <h:outputText style=";font-size:14px;" value="#{messages['SSL']} #{messages['certificate']} #{messages['with']} #{messages['install']} :   "/> 
+   <h:outputLink id="cdS" style=";font-size:14px;" value="https://www.'+#{customIdentity.masterSiteCode}+'.com/ItemsReviewSelect.wflow" target="_blank" rendered="#{!fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['SSL']} #{messages['setup']} 
+             <p:tooltip attached="true" for="cdS">
+              <h:outputText value="#{messages.Involves} #{messages.purchasing} #{messages.ssl} #{messages.with} #{messages.setup}"/>
+             </p:tooltip>
+   </h:outputLink>
+   <h:outputLink id="cdSl" style=";font-size:14px;" value="ItemsReviewSelect.wflow" target="_blank" rendered="#{fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['SSL']} #{messages['setup']} 
+             <p:tooltip attached="true" for="cdS">
+              <h:outputText value="#{messages.Involves} #{messages.purchasing} #{messages.ssl} #{messages.with} #{messages.setup}"/>
+             </p:tooltip>
+   </h:outputLink>
+
+   &nbsp;<h:graphicImage  value="/img/basket_24.png" width="20px" styleClass="pic">
+         </h:graphicImage>
+   </p:panel>
+
+
+ </h:panelGrid>  
+</p:panel>
+
+<p:panel class="actionButtons">
+        <h:button outcome="/#{empty fpxxuq15itemFrom ? 'home' : fpxxuq15itemFrom}.xhtml"
+                    id="done"
+                 value="#{messages['Done']}"/>
+        <br></br>
+
+</p:panel>
+ </h:panelGrid>  
+
+   <h:messages globalOnly="true"  styleClass="message" id="globalMessagesbb"/>
+
+    </h:form>
+ </ui:define> 
+
+</ui:composition>
+
+
+

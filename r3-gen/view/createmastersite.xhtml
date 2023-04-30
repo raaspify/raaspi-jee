@@ -1,0 +1,123 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplateUiNoSql.xhtml">
+
+<ui:define name="body">
+ <h3 id="step2b">Install Raaspi Master Website.</h3>
+ <h5 id="step2b">This is done only once after application is deployed and is a two step process </h5>
+ <h5 id="step2b">Step1: creates the database schema and empty tables. </h5>
+ <h5 id="step2b">Step2: populates the site content including creating users admin and manager to allow login </h5>
+ <h6 id="step2b">Note: The webapp allows running multitenant sites ie one master website </h6>
+ <h6 id="step2b">      Whose menu options can allow indepedent and isolated dynamic websites sharing the same resource.  </h6>
+
+ <div>.
+   <ui:fragment rendered="true">
+    <div style="text-align:center" id="crdiv2">
+
+    <h:form id="create2" >
+
+      <br></br>
+      <ui:remove>Not used, replaced by automatic creation via authenticator.java
+       the schemaname is used in creating tables here , in web-inf/classes/meta-inf persistence.xml 
+       as well as in all report .jrxml source as value for com.jaspersoft.studio.data.defaultdataadapter
+       so until changes are implemented to make these changes as automated and in sync, value will be hardcoded
+       shema owner is used to create schema and can be same as the database owner
+      </ui:remove>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate  template="layout/edit.xhtml">
+            <ui:define name="label">Predefined schema name     </ui:define>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate template="layout/edit.xhtml">
+            <h:inputText id="schemaname" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientName}" size="35"
+              pt:placeholder="genapp" maxlength="35" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray">
+            </h:inputText>
+          </ui:decorate>
+      </h:panelGrid>
+
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate  template="layout/edit.xhtml">
+            <ui:define name="label">Enter schema owner name   </ui:define>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+       <ui:decorate id="schemaowner" template="layout/edit.xhtml">
+            <h:inputText id="owner" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientSerialNum}"
+             pt:placeholder="can be the same as database owner, default value postgres" size="30" maxlength="50" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray">
+            </h:inputText>
+       </ui:decorate>
+      </h:panelGrid>
+
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate  template="layout/edit.xhtml">
+            <ui:define name="label">Enter master web site name     </ui:define>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate template="layout/edit.xhtml">
+            <h:inputText id="siteName2" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName}" size="35"
+              pt:placeholder="raaspi" maxlength="35" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray">
+            </h:inputText>
+          </ui:decorate>
+      </h:panelGrid>
+
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+          <ui:decorate  template="layout/edit.xhtml">
+            <ui:define name="label">Enter email to be used for users admin and manager   </ui:define>
+          </ui:decorate>
+      </h:panelGrid>
+      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+       <ui:decorate id="rclientEmailFieldb" template="layout/edit.xhtml">
+            <h:inputText id="eemail" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid}"
+             pt:placeholder="email@xyz.com" size="30" maxlength="50" onclick="this.value='';" onfocus="this.select()"
+              class="w3-input  w3-light-gray">
+            </h:inputText>
+       </ui:decorate>
+      </h:panelGrid>
+      <hr></hr>
+       <h:messages styleClass="messageL" id="redeemmsg1b"/>
+
+     <h:commandButton id="createTables" class="w3-btn w3-blue" value ="Step1: Install DataBase / Tables "  
+                onclick="let spinner = document.getElementById('createB');spinner.style.visibility = 'visible';"  
+                rendered="true"
+                action="#{yxxxuh566xwwqqwxxxxxuserHome.doAllTablesAndMessages(yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName)}">
+      <ui:remove>3 params String email,String siteName,String couponName</ui:remove>
+         <f:ajax execute="@form" render="@form" /> 
+             <span id="createB2" class="spinner-border spinner-border-sm text-muted" style="visibility: hidden"></span>
+     </h:commandButton>
+     &nbsp;&nbsp;
+     <h:commandButton id="createSite" class="w3-btn w3-blue " value ="Step2: Populate Master Website"  
+                onclick="let spinner = document.getElementById('createBT');spinner.style.visibility = 'visible';"  
+                rendered="true"
+                action="#{yxxxuh566xwwqqwxxxxxuserHome.doMasterSite(yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName,yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid)}">
+         <f:ajax execute="@form" render="@form" /> 
+             <span id="createBT2" class="spinner-border spinner-border-sm text-muted" style="visibility: hidden"></span>
+     </h:commandButton>
+
+     <h:button id="ltdone22"  value="Done" propagation="end" outcome="/home.xhtml" rendered="true"
+       class="w3-btn w3-light-gray" />
+
+       <h:messages globalOnly="true" styleClass="messageL" id="redeemmsg2b"/>
+    </h:form>
+
+    </div>
+
+   </ui:fragment>
+  </div>
+
+ </ui:define> 
+</ui:composition>
+
+
+

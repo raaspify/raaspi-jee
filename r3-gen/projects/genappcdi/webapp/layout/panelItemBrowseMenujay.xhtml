@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<style>
+	.pic {
+		margin-bottom: -4px;
+		margin-right: 2px;
+	}
+	</style>
+
+	<h:form>
+                 <a4j:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getItemBrowseList()}" var="row" iterationStatusVar="status" rows="10" >
+                            <s:link value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"  rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('SI-L')}"
+	                        id="showCId1T" image="/img/shopping_bag.24.png"
+                              view="/ItemDetailsBrowse.xhtml">
+                              <f:param name="category" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                              <f:param name="type" value="SI-L*"/>
+                              <f:param name="hidet" value="y"/>
+                            </s:link>
+                 </a4j:repeat>
+                 <a4j:repeat value="#{fpxxfq1a5xwwqqhxxxxxitemList.getImageBrowseList()}" var="row" iterationStatusVar="status" rows="10" >
+                 <rich:panelMenu style="width:120px;word-wrap:break-word;" itemMode="ajax" groupMode="ajax" groupExpandedLeftIcon="/img/triangleUp.png"
+                  groupCollapsedLeftIcon="triangleDown" topGroupExpandedRightIcon="/img/control_remove16.png" expandSingle="false"
+                  rendered="true" >
+                    <rich:panelMenuItem label="#{row.b1xxuszsbvxxxxxxxxxxdescript}" rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('PI-L')}"
+                       action="/ImageDetailsBrowse.xhtml" leftIcon="/img/Photos16.png" iconClass="pic">
+                              <f:param name="category" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                              <f:param name="type" value="PI-L*"/>
+                              <f:param name="hidet" value="y"/>
+                     </rich:panelMenuItem>
+<rich:panelMenuItem>
+  <h:graphicImage value="/img/Photos16.png" style="border: none;float: left;margin:5px;" />
+<h:button outcome="/ImageDetailsBrowse.xhtml" includeViewParams="true" value="#{row.b1xxuszsbvxxxxxxxxxxdescript}" style="width:90px !important;word-break: break-word;">
+
+                              <f:param name="category" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                              <f:param name="type" value="PI-L*"/>
+                              <f:param name="hidet" value="y"/>
+
+</h:button>
+</rich:panelMenuItem>
+
+
+<rich:panelMenuItem style="word-wrap:break-word;">
+  <h:graphicImage value="/img/Photos16.png" style="border: none;float: left;margin:5px;" />
+
+                            <s:button value="#{row.b1xxuszsbvxxxxxxxxxxdescript}"  rendered= "#{row.c6xxusxrbv16xxxxxxxxtype.contains('PI-L')}"
+	                        id="showCId1TP" style="width:90px !important;word-break: break-all;"
+                              view="/ImageDetailsBrowse.xhtml">
+                              <f:param name="category" value="#{row.a0xxuobxbxxxxxxxxxxxsid}"/>
+                              <f:param name="type" value="PI-L*"/>
+                              <f:param name="hidet" value="y"/>
+                            </s:button>
+</rich:panelMenuItem>
+                 </rich:panelMenu>
+                 </a4j:repeat>
+	</h:form>
+</ui:composition>
+
+
+
+
+

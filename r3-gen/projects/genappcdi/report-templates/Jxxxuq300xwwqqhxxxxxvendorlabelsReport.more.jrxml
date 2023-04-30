@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with genJasperlabelsreports - A generator for JasperReports Labels -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+		 name="Jxxxuq300xwwqqhxxxxxvendorAvery5960"
+		 columnCount="3"
+		 printOrder="Horizontal"
+		 orientation="Portrait"
+		 pageWidth="612"
+		 pageHeight="792"
+		 columnWidth="192"
+		 columnSpacing="8"
+		 leftMargin="13"
+		 rightMargin="7"
+		 topMargin="36"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 resourceBundle="messages"
+           whenResourceMissingType="Key">
+	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+
+	<parameter name="DisplayAs" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Report Output as HTML or as PDF]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["PDF"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Start" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Start Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="End" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[End Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MarkedOnes" isForPrompting="true" class="java.lang.Boolean">
+ 		<parameterDescription><![CDATA[Select Marked Records Only]]></parameterDescription>
+      </parameter>
+	<parameter name="INVOICEETC_ID" isForPrompting="false" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Detail]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ForTargetId" isForPrompting="false" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Customer,Vendor etc]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[9999]]></defaultValueExpression>
+	</parameter>
+	<parameter name="owner2Code" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reference" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Reference used in the report as notes or Pono etc]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+
+
+
+
+
+     	<queryString><![CDATA[SELECT
+      vendor.sid AS VENDOR_sid,
+      vendor.vendor AS VENDOR_vendor,
+      vendor.title AS VENDOR_title,
+      vendor.jobtitle AS VENDOR_jobtitle,
+      vendor.lastname AS VENDOR_lastname,
+      vendor.firstname AS VENDOR_firstname,
+      vendor.middlenam AS VENDOR_middlenam,
+      vendor.vendorascompanyname AS VENDOR_vendorascompanyname,
+      vendor.companycode AS vendor_COMPANYCODE,
+      vendor.location AS vendor_LOCATION,
+      vendor.mailtocode AS vendor_MAILTOCODE,
+      vendor.shiptocode AS vendor_SHIPTOCODE,
+      vendor.phoneo AS VENDOR_phoneo,
+      vendor.phoneh AS VENDOR_phoneh,
+      vendor.phonec AS VENDOR_phonec,
+      vendor.phonex AS VENDOR_phonex,
+      vendor.lanaddr AS VENDOR_lanaddr,
+      vendor.wanaddr AS VENDOR_wanaddr,
+      vendor.lmailaddr AS VENDOR_lmailaddr,
+      vendor.imailaddr AS VENDOR_imailaddr,
+      vendor.rmailaddr AS VENDOR_rmailaddr,
+      vendor.intaddr AS VENDOR_intaddr,
+      vendor.inraddr AS VENDOR_inraddr,
+      vendor.integrset AS VENDOR_integrset,
+      vendor.contacted AS VENDOR_contacted,
+      vendor.bywho AS VENDOR_bywho,
+      vendor.keywords AS VENDOR_keywords,
+      vendor.descript AS VENDOR_descript,
+      vendor.shiplabel AS VENDOR_shiplabel,
+      vendor.type AS VENDOR_type,
+      vendor.notes AS VENDOR_notes,
+      vendor.docmnt AS VENDOR_docmnt,
+      vendor.defaultglac AS vendor_DEFAULTGLAC,
+      vendor.vendtotl AS VENDOR_vendtotl,
+      vendor.vendtqty AS VENDOR_vendtqty,
+      vendor.venrtotl AS VENDOR_venrtotl,
+      vendor.venrtqty AS VENDOR_venrtqty,
+      vendor.venmtotl AS VENDOR_venmtotl,
+      vendor.venddtotl AS VENDOR_venddtotl,
+      vendor.lastorder AS VENDOR_lastorder,
+      vendor.lastquote AS VENDOR_lastquote,
+      vendor.lastinvoic AS VENDOR_lastinvoic,
+      vendor.lastpaymq AS VENDOR_lastpaymq,
+      vendor.printmstat AS VENDOR_printmstat,
+      vendor.prinmtfldt AS VENDOR_prinmtfldt,
+      vendor.statusfl AS VENDOR_statusfl,
+      vendor.statusfldt AS VENDOR_statusfldt,
+      vendor.totlpaid AS VENDOR_totlpaid,
+      vendor.owner AS VENDOR_owner,
+      vendor.owner2 AS vendor_owner2,
+      address.addrl1 AS address_addrl1,
+      address.addrl2 AS address_addrl2,
+      address.city AS address_city,
+      address.provnstate AS address_provnstate,
+      address.country AS address_country,
+      address.pzcode AS address_pzcode
+FROM
+       genapp.vendor vendor left join genapp.address address on 
+        vendor.mailtocode=address.sid WHERE 
+         (vendor.vendor) >=  $P{Start} AND   (vendor.vendor) <= $P{End} AND
+       vendor.owner2 = $P{owner2Code}]]></queryString>
+      <field name="VENDOR_SID" class="java.lang.Integer"/>
+
+      <field name="VENDOR_VENDOR" class="java.lang.String"/>
+
+      <field name="VENDOR_TITLE" class="java.lang.String"/>
+
+      <field name="VENDOR_JOBTITLE" class="java.lang.String"/>
+
+      <field name="VENDOR_LASTNAME" class="java.lang.String"/>
+
+      <field name="VENDOR_FIRSTNAME" class="java.lang.String"/>
+
+      <field name="VENDOR_MIDDLENAM" class="java.lang.String"/>
+
+      <field name="VENDOR_VENDORASCOMPANYNAME" class="java.lang.String"/>
+
+
+      <field name="VENDOR_COMPANYCODE" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="VENDOR_LOCATION" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="VENDOR_MAILTOCODE" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="VENDOR_SHIPTOCODE" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+
+
+      <field name="VENDOR_PHONEO" class="java.lang.String"/>
+
+      <field name="VENDOR_PHONEH" class="java.lang.String"/>
+
+      <field name="VENDOR_PHONEC" class="java.lang.String"/>
+
+      <field name="VENDOR_PHONEX" class="java.lang.String"/>
+
+      <field name="VENDOR_LANADDR" class="java.lang.String"/>
+
+      <field name="VENDOR_WANADDR" class="java.lang.String"/>
+
+      <field name="VENDOR_LMAILADDR" class="java.lang.String"/>
+
+      <field name="VENDOR_IMAILADDR" class="java.lang.String"/>
+
+      <field name="VENDOR_RMAILADDR" class="java.lang.String"/>
+
+      <field name="VENDOR_INTADDR" class="java.lang.String"/>
+
+      <field name="VENDOR_INRADDR" class="java.lang.String"/>
+
+      <field name="VENDOR_INTEGRSET" class="java.lang.String"/>
+
+      <field name="VENDOR_CONTACTED" class="java.sql.Timestamp"/>
+
+      <field name="VENDOR_BYWHO" class="java.lang.String"/>
+
+      <field name="VENDOR_KEYWORDS" class="java.lang.String"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <field name="VENDOR_DESCRIPT" class="java.lang.String"/>
+
+      <field name="VENDOR_SHIPLABEL" class="java.lang.String"/>
+
+      <field name="VENDOR_TYPE" class="java.lang.String"/>
+
+      <field name="VENDOR_NOTES" class="java.lang.String"/>
+
+      <field name="VENDOR_DOCMNT" class="java.lang.String"/>
+
+
+      <field name="VENDOR_DEFAULTGLAC" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="VENDOR_VENDTOTL" class="java.lang.String"/>
+
+      <field name="VENDOR_VENDTQTY" class="java.lang.String"/>
+
+      <field name="VENDOR_VENRTOTL" class="java.lang.String"/>
+
+      <field name="VENDOR_VENRTQTY" class="java.lang.String"/>
+
+      <field name="VENDOR_VENMTOTL" class="java.lang.String"/>
+
+      <field name="VENDOR_VENDDTOTL" class="java.lang.String"/>
+
+      <field name="VENDOR_LASTORDER" class="java.lang.String"/>
+
+      <field name="VENDOR_LASTQUOTE" class="java.lang.String"/>
+
+      <field name="VENDOR_LASTINVOIC" class="java.lang.String"/>
+
+      <field name="VENDOR_LASTPAYMQ" class="java.lang.String"/>
+
+      <field name="VENDOR_PRINTMSTAT" class="java.lang.Integer"/>
+
+      <field name="VENDOR_PRINMTFLDT" class="java.sql.Timestamp"/>
+
+      <field name="VENDOR_STATUSFL" class="java.lang.Integer"/>
+
+      <field name="VENDOR_STATUSFLDT" class="java.sql.Timestamp"/>
+
+      <field name="VENDOR_TOTLPAID" class="java.lang.String"/>
+
+      <field name="VENDOR_OWNER" class="java.lang.String"/>
+
+      <field name="VENDOR_OWNER2" class="java.lang.String"/>
+
+	<field name="address_addrl1" class="java.lang.String"/>
+	<field name="address_addrl2" class="java.lang.String"/>
+	<field name="address_city" class="java.lang.String"/>
+	<field name="address_provnstate" class="java.lang.String"/>
+	<field name="address_country" class="java.lang.String"/>
+	<field name="address_pzcode" class="java.lang.String"/>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="72"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="9"
+						y="2"
+						width="138"
+						height="13"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($F{VENDOR_FIRSTNAME}==null?" ":$F{VENDOR_FIRSTNAME})+"," + ($F{VENDOR_LASTNAME}==null?"":$F{VENDOR_LASTNAME}) + " "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="9"
+						y="15"
+						width="182"
+						height="26"
+						key="textField-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="DejaVu Serif"  size="8" isBold="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($F{address_addrl1}==null?" ":$F{address_addrl1}) + "\n" +
+($F{address_addrl2}==null?" ":$F{address_addrl2})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="9"
+						y="47"
+						width="66"
+						height="11"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[($F{address_city}.equals(null)?" ":$F{address_city})+" "+($F{address_provnstate}.equals(null)?" ":$F{address_provnstate})+" "+($F{address_country}.equals(null)?" ":$F{address_country})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="90"
+						y="57"
+						width="77"
+						height="12"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{address_pzcode}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="10"
+						y="53"
+						width="100"
+						height="16"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{reference}]]></textFieldExpression>
+				</textField>
+
+			</band>
+
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>
+
+
+
+
+
+
+
+

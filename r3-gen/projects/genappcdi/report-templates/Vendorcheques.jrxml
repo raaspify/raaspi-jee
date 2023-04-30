@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vendorcheques" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="messages" whenResourceMissingType="Key">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="owner2Code" class="java.lang.String">
+		<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+		<defaultValueExpression><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="End" class="java.lang.String">
+		<parameterDescription><![CDATA[End Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA["zzzzzzzzz"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Start" class="java.lang.String">
+		<parameterDescription><![CDATA[Start Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+     	<queryString><![CDATA[SELECT
+       VENARTHA.sid AS VENARTHA_sid,
+
+       VENARTHA.chqnumber AS VENARTHA_chqnumber,
+
+       VENARTHA.reconciled AS VENARTHA_reconciled,
+
+       VENARTHA.vendorc AS VENARTHA_vendorc,
+
+       VENARTHA.date AS VENARTHA_date,
+
+       VENARTHA.addrescode AS VENARTHA_addrescode,
+
+       VENARTHA.chqamt AS VENARTHA_chqamt,
+
+       VENARTHA.advisel1 AS VENARTHA_advisel1,
+
+       VENARTHA.advisel2 AS VENARTHA_advisel2,
+
+       VENARTHA.advisel3 AS VENARTHA_advisel3,
+
+       VENARTHA.notes AS VENARTHA_notes,
+
+       VENARTHA.amtverbos AS VENARTHA_amtverbos,
+
+       VENARTHA.statusfl AS VENARTHA_statusfl,
+
+       VENARTHA.statusfldt AS VENARTHA_statusfldt,
+
+       VENARTHA.owner AS VENARTHA_owner,
+
+       VENARTHA.owner2 AS VENARTHA_owner2,
+
+       vendor.vendor AS vendor_vendor,
+
+       vendor.firstname AS vendor_firstname,
+
+       vendor.lastname AS vendor_lastname,
+
+       vendor.vendorascompanyname AS vendor_vendorascompanyname
+
+FROM
+       genapp.venartha VENARTHA left join genapp.vendor vendor on
+        VENARTHA.vendorc=vendor.sid WHERE 
+       (VENARTHA.chqnumber) >=  $P{Start} AND   (VENARTHA.chqnumber <= $P{End}) AND VENARTHA.owner2 = $P{owner2Code} AND vendor.owner2 = $P{owner2Code}]]>
+
+</queryString>
+   
+	<field name="VENARTHA_CHQNUMBER" class="java.lang.String"/>
+	<field name="VENARTHA_RECONCILED" class="java.lang.String"/>
+	<field name="VENARTHA_VENDORC" class="java.lang.String"/>
+	<field name="VENARTHA_DATE" class="java.sql.Timestamp"/>
+	<field name="VENARTHA_ADDRESCODE" class="java.lang.String"/>
+	<field name="VENARTHA_CHQAMT" class="java.math.BigDecimal"/>
+	<field name="VENARTHA_AMTVERBOS" class="java.lang.String"/>
+	<field name="VENARTHA_NOTES" class="java.lang.String"/>
+	<field name="VENARTHA_ADVISEL1" class="java.lang.String"/>
+	<field name="VENARTHA_ADVISEL2" class="java.lang.String"/>
+	<field name="VENARTHA_ADVISEL3" class="java.lang.String"/>
+	<field name="VENARTHA_STATUSFL" class="java.lang.Integer"/>
+	<field name="vendor_vendor" class="java.lang.String"/>
+	<field name="vendor_vendorascompanyname" class="java.lang.String"/>
+	<field name="vendor_firstname" class="java.lang.String"/>
+	<field name="vendor_lastname" class="java.lang.String"/>
+
+	<group name="VENARTHA_VENDORC">
+		<groupExpression><![CDATA[$F{VENARTHA_VENDORC}]]></groupExpression>
+	</group>
+	<group name="VENARTHA_DATE">
+		<groupExpression><![CDATA[$F{VENARTHA_DATE}]]></groupExpression>
+	</group>
+	<group name="VENARTHA_CHQNUMBER">
+		<groupExpression><![CDATA[$F{VENARTHA_CHQNUMBER}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="1" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="250" splitType="Stretch">
+			<textField pattern="yyyy/MMM/dd" isBlankWhenNull="true">
+				<reportElement x="504" y="29" width="100" height="20" uuid="ef85dd92-41a8-4695-a1f7-b34bcc6365ff">
+                                 <printWhenExpression><![CDATA[$F{VENARTHA_DATE} !=null]]></printWhenExpression>
+                                </reportElement>
+				<textFieldExpression><![CDATA[$F{VENARTHA_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="504" y="40" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VENARTHA_CHQAMT}]]></textFieldExpression>
+			</textField>
+
+			<textField isBlankWhenNull="true">
+				<reportElement x="28" y="80" width="363" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VENARTHA_AMTVERBOS}]]></textFieldExpression>
+			</textField>
+
+			<textField isBlankWhenNull="true">
+				<reportElement x="28" y="128" width="100" height="20" uuid="ef85dd92-41a8-4695-a1f7-b34bcc6365ff">
+                                 <printWhenExpression><![CDATA[$F{vendor_vendorascompanyname} !=null && !$F{vendor_vendorascompanyname}.isEmpty()]]></printWhenExpression>
+                                </reportElement>
+				<textFieldExpression><![CDATA[$F{vendor_vendorascompanyname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="28" y="128" width="100" height="20" uuid="ef85dd92-41a8-4695-a1f7-b34bcc6365ff">
+                                 <printWhenExpression><![CDATA[$F{vendor_vendorascompanyname} ==null || $F{vendor_vendorascompanyname}.isEmpty()]]></printWhenExpression>
+                                </reportElement>
+				<textFieldExpression><![CDATA[$F{vendor_firstname}+' '+$F{vendor_lastname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="128" y="145" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VENARTHA_ADVISEL3}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="250">
+			<textField pattern="yyyy/MMM/dd" isBlankWhenNull="true">
+				<reportElement x="504" y="20" width="100" height="20" uuid="ef85dd92-41a8-4695-a1f7-b34bcc6365ff">
+                                 <printWhenExpression><![CDATA[$F{VENARTHA_DATE} !=null]]></printWhenExpression>
+                                </reportElement>
+				<textFieldExpression><![CDATA[$F{VENARTHA_DATE}]]></textFieldExpression>
+			</textField>
+
+			<textField isBlankWhenNull="true">
+				<reportElement x="28" y="24" width="100" height="20" uuid="d9f21ec9-fcdd-4a71-a956-8f90e7a1cedd"/>
+				<textFieldExpression><![CDATA[$P{owner2Code}]]></textFieldExpression>
+			</textField>
+
+
+			<textField isBlankWhenNull="true">
+				<reportElement x="250" y="24" width="100" height="20" uuid="d9f21ec9-fcdd-4a71-a956-8f90e7a1cedd"/>
+				<textFieldExpression><![CDATA[$F{VENARTHA_CHQNUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="504" y="24" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VENARTHA_CHQAMT}]]></textFieldExpression>
+			</textField>
+
+
+			<textField isBlankWhenNull="true">
+				<reportElement x="404" y="34" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VENARTHA_ADVISEL1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="141" y="42" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VENARTHA_VENDORC}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="250">
+			<textField isBlankWhenNull="true">
+				<reportElement x="28" y="24" width="100" height="20" uuid="d9f21ec9-fcdd-4a71-a956-8f90e7a1cedd"/>
+				<textFieldExpression><![CDATA[$P{owner2Code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="250" y="24" width="100" height="20" uuid="d9f21ec9-fcdd-4a71-a956-8f90e7a1cedd"/>
+				<textFieldExpression><![CDATA[$F{VENARTHA_CHQNUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy/MMM/dd" isBlankWhenNull="true">
+				<reportElement x="504" y="24" width="100" height="20" uuid="ef85dd92-41a8-4695-a1f7-b34bcc6365ff">
+                                 <printWhenExpression><![CDATA[$F{VENARTHA_DATE} !=null]]></printWhenExpression>
+                                </reportElement>
+				<textFieldExpression><![CDATA[$F{VENARTHA_DATE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="35" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VENARTHA_VENDORC}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="542" y="35" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{VENARTHA_CHQAMT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
+
+
+
+
+
+

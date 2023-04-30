@@ -1,0 +1,477 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:remove>
+     This template allows migration from richfaces and positions to replace java with nodes.js alternative
+     This template for now will be used for front end only, back office admin pages will use rtemplate
+     unlike backoffice page rtemplate, this one is kept more flexible to suit different end user needs by not
+     including any jsf ui:includes like menu or leftpop or footer.
+     Those needs are met by including raw html fragments. For backoffice use the pages are function oriented 
+     and easier to maintain and kept at standard look by using ui:includes.
+     Both templates are content based ie actual html content are kept in pre-defined text/clob records with
+     keys like A3r-MENU-C,A3R-LOGO-C,A3R-PRODUCT-1-C,A3R-TOP-BKGR-C,A3R-FOOTER-1-C etc.    
+     template has ui:insert name=xx which can be replaced by using ui:define for the same name. Example
+     ui:insert name="body" and using <ui:define name="body">......</ui:define> in pages usung the template
+     addon section added in view template to add html content and buttons to access addon beans method
+
+    </ui:remove> 
+    <title><ui:insert name="title"/></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="stylesheet/3rcustom.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheet/jssocials.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheet/jssocials-theme-flat.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheet/3rw.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.boomcdn.com/libs/owl-carousel/2.3.4/assets/owl.carousel.min.css"/>
+  <link rel="stylesheet" href="https://cdn.boomcdn.com/libs/owl-carousel/2.3.4/assets/owl.theme.default.min.css"/>
+    <link rel="stylesheet" href="stylesheet/footer-basic-centered.css"/>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Exo+2"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,700"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Tangerine"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Monoton"/>
+    <link href='./stylesheet/fullcalendar.css' rel='stylesheet' />
+    <link href='./stylesheet/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <meta name="keywords"
+     content="trial,cloud,ecommerce,workflow,raaspi.com,raaspi,bar code,low cost,automation,alumni,association,business,manufacturing,apllication,turnkey"/>
+    <meta name="alias" content="http://genapp-raaspi.b9ad.pro-us-east-1.openshiftapps.com/"/>
+    <meta name="owner" content="#{customIdentity.owner2}"/>
+    <meta name="description" content="#{skinBean.metaDescript()}"/>
+    <meta name="robots" content="index,follow"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="google-signin-scope" content="profile email"/>
+    <meta name="google-signin-client_id" content="430148632909-ge32b89fs0jr3l48crp5lmn2nl16fkrq.apps.googleusercontent.com"/>
+
+
+   <ui:remove> favicon area Insert custom header like favicon base64data via 3R-TEMPL-C seq 0, seo content. This is not for logo. See 3R-LOGO below   </ui:remove>
+   <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TEMPL-C','TXT',0,48000)}" 
+        rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TEMPL-C','TXT',0,48000) !=null}"  >
+   </h:outputText>       
+   <h:outputText   escape="false" value="&lt;link rel='icon' type=' image/x-icon' href='/img/favicon.ico' /&gt;" 
+        rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TEMPL-C','TXT',0,48000) ==null}"  >
+   </h:outputText>
+      <p  data-toggle="tooltip" title="Needs Base64 encoded image !" data-placement="top" style="width:200px;">
+       <h:button  class="btn btn-primary btn-sm " outcome="/clobdataEdit.wflow" value="#{messages['Change']} #{messages['favicon']}?" 
+         rendered="#{identity.loggedIn and !customIdentity.hasRole('PH') and view.viewId.contains('/ThemesBrowse.')}">
+                <f:param name="fromTable" 
+                        value="clobdata"/>
+                <f:param name="fromKey" 
+                        value="3R-TEMPL-C"/>
+                <f:param name="qualifier" 
+                        value="TXT"/>
+                <f:param name="useSeq" disable="#{not empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) or not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata()}"
+                        value="0"/>
+       </h:button>
+      </p>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47438939-2', 'raaspi.com');
+  ga('send', 'pageview');
+
+</script>
+<script>
+function myReload() {
+    location.reload(true);
+}
+</script>
+
+
+<script type="text/javascript" src="./js/3rw.js">
+</script>
+<f:view locale="#{authenticator==null ?'en,US':(authenticator.locale==null?'en,US':authenticator.locale)}"/>
+ <div id="page">
+  <ui:fragment rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','HDR',0,1200) ==null
+    or !(fn:toLowerCase(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','HDR',0,60)).contains('templ1')
+     or !fn:toLowerCase(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','HDR',0,60)).contains('static')))
+      and (fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol')
+       }">
+  <ui:remove> for any page, show default menue if menu file(3R-MENU-C) hdr empty or menufile hdr content not templ1/static 
+     or prodcode not addon. If hdr not empty then 3R-MENU-C txt will be shown.  
+     ItemdetailsBrowse (shopping) page has extra feature to allow a navbar menu with logo only and link to home-s ie static
+      putting templ1 in hdr text but no menu-c. This may be needed in static pages. 
+     But like all visitor pages it can show the menu-C TXT  navbar if HDR not empty with templ1/static text and menu-c has menu .  
+     menu file can also be static ie part of all static pages. Used where existing website content need to be maintained.
+     home.xhtml goes to home-s or home-ui depending on not loggedIn and client.getw5xxuxxxbvxxxxxxxxxxrmlpassw
+      or to home if loggedIn 
+      Following is default menu under home-ui for all pages if 3R-MENU-C HDR is null/empty or prodcode is for Addon
+      **** to avoid conflicts, themes should not have a navbar menu  but can be offered as an addon menu   
+      **** via 3R-MENU custom menu and have HDR as templ1  
+     </ui:remove>
+ <nav class="navbar navbar-expand-md navbar-light bg-light " >
+   <div class="navbar-brand" >
+              <h:link outcome="/home.xhtml" class="nav-link" >                
+               <h:graphicImage  rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','B3R-LOGO-C','PIC',0) !=null)}"
+                value="/ImageServletCdi/?seq=0&amp;id=B3R-LOGO-C&amp;height=0" 
+                style="object-fit: cover;max-height:50px; ">
+               </h:graphicImage> 
+               <h:graphicImage  rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','B3R-LOGO-C','PIC',0) ==null)}"
+                value="./img/home_24.png" 
+                style="object-fit: cover;max-height:50px; ">
+               </h:graphicImage> 
+
+               <h:outputText escape="false" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-LOGO-C','TXT',0,12000)}"/>      
+              </h:link>
+       <h:button  class="btn btn-secondary btn-sm " outcome="/blobdataEdit.wflow" value="#{messages['Change']} #{messages['logo']}?" 
+         rendered="#{identity.loggedIn and !customIdentity.hasRole('PH') and view.viewId.contains('/ThemesBrowse.')}">
+                <f:param name="fromTable" 
+                        value="blobdata"/>
+                <f:param name="fromKey" 
+                        value="3R-LOGO-C"/>
+                <f:param name="qualifier" 
+                        value="PIC"/>
+                <f:param name="useSeq" disable="#{not empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) or not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata()}"
+                        value="0"/>
+       </h:button>
+
+   </div>
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapseNavbar">
+    <span class="" role="button" >
+     <i class="fa fa-bars" aria-hidden="true" style="color:dark grey">
+     </i>
+    </span>
+   </button>
+
+   <div class="collapse navbar-collapse w-100 flex-md-column " id="collapseNavbar">
+       <h:button  class="btn btn-secondary btn-sm " outcome="/clobdataEdit.wflow" value="#{messages['Change']} #{messages['menubar']}?" 
+         rendered="#{identity.loggedIn and !customIdentity.hasRole('PH') and view.viewId.contains('/ThemesBrowse.')}">
+                <f:param name="fromTable" 
+                        value="clobdata"/>
+                <f:param name="fromKey" 
+                        value="3R-MENU-C"/>
+                <f:param name="qualifier" 
+                        value="TXT"/>
+                <f:param name="useSeq" disable="#{not empty fpxxfq1a5xwwqqhxxxxxitemHome.getClobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,12000) or not empty yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0).getB1xxuzaxbvxxxxxxxxxxdata()}"
+                        value="0"/>
+
+       </h:button>
+      <ul class="navbar-nav ml-auto " >
+        <!-- shopping Items or Issues -->
+        <ui:fragment rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='fb' and (fpxxfq1a5xwwqqhxxxxxitemList.getItemBrowseList().size() >0 or not empty fpxxfq1a5xwwqqhxxxxxitemList.searchPattern)}">
+	 <li class="nav-item btn-lg" ><a class="nav-link py-0" href="/ItemDetailsBrowse.wflow">#{messages.Shopping_Items}</a>
+         </li>
+        </ui:fragment>
+        <ui:fragment rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)=='fb' }">
+	 <li class="nav-item btn-lg" ><a class="nav-link py-0" href="/IssuesBrowse.wflow">#{messages['Issue_Bug']}</a>
+         </li>
+        </ui:fragment>
+        <!-- Dropdown service and fees or review browse -->
+        <ui:fragment rendered="#{(!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH'))) 
+          and (fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)=='sa' and not empty fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList)
+           or (fpxxfq1a5xwwqqhxxxxxitemList.reviewBrowseList !=null  and not empty fpxxfq1a5xwwqqhxxxxxitemList.reviewBrowseList)
+           or (fpxxfq1a5xwwqqhxxxxxitemList.blogBrowseList !=null  and not empty fpxxfq1a5xwwqqhxxxxxitemList.blogBrowseList)
+           or (fpxxfq1a5xwwqqhxxxxxitemList.imageBrowseList !=null  and not empty fpxxfq1a5xwwqqhxxxxxitemList.imageBrowseList)
+            }">
+         <li class="nav-item btn-lg" href="/ItemDetailsBrowse.wflow">
+          <a class="nav-link dropdown-toggle py-0" href="#" id="navbardrop" data-toggle="dropdown">
+           #{messages['menutab.QuickStart']}
+          </a>
+          <div class="dropdown-menu">
+
+         <ui:fragment rendered="#{(fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)=='sa'
+            and not empty fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList)
+             and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  ))}">
+ 	   <h:button  class=" dropdown-item" outcome="/ItemsGetQuote.wflow" value="#{messages['Find_sponsors']}" >
+           </h:button>
+         </ui:fragment>
+
+         <ui:fragment rendered="#{(fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)=='sa' and not empty fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  ))}">
+ 	   <h:button  class=" dropdown-item" outcome="/ItemsPaidSelect.wflow" value="#{messages['Select_sponsor_offers']}" >
+           </h:button>
+         </ui:fragment>
+
+         <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.reviewBrowseList !=null  and not empty fpxxfq1a5xwwqqhxxxxxitemList.reviewBrowseList}">
+ 	   <h:button  class=" dropdown-item" outcome="/ItemsReviewSelect.wflow" value="#{messages['Submit_case']}" >
+           </h:button>
+         </ui:fragment>
+        
+         <!--blogs or images --> 
+         <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.blogBrowseList !=null  and not empty fpxxfq1a5xwwqqhxxxxxitemList.blogBrowseList}">
+ 	   <h:button  class=" dropdown-item" outcome="/BlogDetailsBrowse.wflow" value="#{messages['Browse_Blog']}" >
+           </h:button>
+         </ui:fragment>
+
+         <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.imageBrowseList !=null  and not empty fpxxfq1a5xwwqqhxxxxxitemList.imageBrowseList}">
+ 	   <h:button  class=" dropdown-item" outcome="/ImagesBrowse.wflow" value="#{messages['Browse_Picture']}" >
+           </h:button>
+         </ui:fragment>
+
+         <!--Show Themes if master site  and promoting as SASS solution, otherwise put rendered="false". If logged in  and master site, via menu.xhtml,
+               it will be shown for users PH (vendor High) or UH(user High) -->
+         <ui:fragment rendered="#{customIdentity.masterSite
+            and fpxxfq1a5xwwqqhxxxxxitemList.getThemeBrowseList('','') !=null 
+             and not empty fpxxfq1a5xwwqqhxxxxxitemList.getThemeBrowseList('','')}">
+ 	   <h:button  class=" dropdown-item" outcome="/ThemesBrowse.wflow" value="#{messages['Browse_Theme']}" >
+           </h:button>
+         </ui:fragment>
+
+          </div>
+         </li>
+         </ui:fragment>
+        <ui:fragment rendered="#{!identity.loggedIn and not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-1-C','TXT',0,1200)}">
+        <li class="nav-item btn-lg"><a class="nav-link py-0" href="/Product-1.wflow">#{messages['Products_1']}</a></li>
+        </ui:fragment>
+        <ui:fragment rendered="#{!identity.loggedIn and not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-1-C','TXT',0,1200)}">
+        <li class="nav-item btn-lg"><a class="nav-link py-0" href="/News-1.wflow">#{messages['menutab.News']}</a></li>
+        </ui:fragment>
+        <ui:fragment rendered="#{(!identity.loggedIn || customIdentity.hasRole('VW')) and fxxxuq89bxwwqqhxxxxxscheduleList.nextSchedule('FP') !=null}">
+        <li class="nav-item btn-lg"><a class="nav-link py-0" href="/clientFcal.wflow">#{messages['Events']}</a></li>
+        </ui:fragment>
+        <ui:fragment rendered="#{!identity.loggedIn and not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-1-C','TXT',0,1200)}">
+        <li class="nav-item btn-lg"><a class="nav-link py-0" href="/About-1.wflow">#{messages['About_1']}</a></li>
+        </ui:fragment>
+        <ui:fragment rendered="#{!identity.loggedIn and not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-1-C','TXT',0,1200)}">
+        <li class="nav-item btn-lg"><a class="nav-link py-0" href="/ContactUs-1.wflow">#{messages['menutab.ContactUs']}</a></li>
+        </ui:fragment>
+        <ui:fragment rendered="#{!identity.loggedIn}">
+         <li class="nav-item btn-sm"><a class="nav-link py-0" href="/login.wflow">Login</a></li>
+        </ui:fragment>
+      </ul>
+
+
+   </div>
+  </nav>
+  </ui:fragment>
+  <ui:remove> following used for both visitor or backoffice oct01 2020 added default menu control. see comment on top.
+    menu-c hdr hdr controls default menu or custom menu like templ1, static etc.
+    menu-c,es,ec,ol,oe txt controls what to show if not default.
+    menu-c txt if client rmlpassw value not 2. value 2 means static pages and static menu.   
+    menu-es etc (add on products have subset menu) if not empty but menu-c txt empty
+  </ui:remove>
+  <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','HDR',0,1200) !=null
+     and fn:toLowerCase(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','HDR',0,60)).contains('static') 
+      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
+      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+      and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'
+       }">
+   <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','TXT',0,48000)}" 
+         rendered="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w5xxuxxxbvxxxxxxxxxxrmlpassw !=null
+          and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w5xxuxxxbvxxxxxxxxxxrmlpassw,2,4)!='2'}" >
+   </h:outputText>       
+  </ui:fragment>
+  <ui:fragment rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)=='es'}">
+   <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('clobdata','A3R-MENU-ES-C','TXT',0,48000)}" 
+          >
+   </h:outputText>       
+  </ui:fragment>
+  <ui:fragment rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)=='ec'}">
+   <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('clobdata','A3R-MENU-EC-C','TXT',0,48000)}" 
+          >
+   </h:outputText>       
+  </ui:fragment>
+  <ui:fragment rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)=='ol'}">
+   <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('clobdata','A3R-MENU-OL-C','TXT',0,48000)}" 
+          >
+   </h:outputText>       
+  </ui:fragment>
+  <ui:fragment rendered="#{fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)=='oe'}">
+   <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance('clobdata','A3R-MENU-OE-C','TXT',0,48000)}" 
+          >
+   </h:outputText>       
+  </ui:fragment>
+
+             <div id="right" style="background-color:white; width:98%; ">
+                     
+		      <ui:insert name="body"/>
+             </div>
+             <ui:remove>Optionally, Addon vendor provides content as addon-xxx.csv (xxx is page url ie cartPOS as #{request.requestURL})
+               and imported into WEB-INF\resources and loaded for addon content. If it can render h:commandbutton 
+               action we can use it replace xxx.addon.xhtml to invoke addon extented class methods
+             </ui:remove>
+             <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ADDON-C',fn:substring(view.viewId,1,fn:length(view.viewId)-6),0,48000)}" 
+              rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ADDON-C',fn:substring(view.viewId,1,fn:length(view.viewId)-6),0,48000) !=null}"  >
+             </h:outputText>   
+
+
+ </div>
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.boomcdn.com/libs/owl-carousel/2.3.4/owl.carousel.min.js"></script>
+  <script>    jQuery.noConflict();</script>
+
+<script>
+var owl1 = jQuery('.owl-carousel1');
+owl1.owlCarousel({
+    items:1,
+    loop:false,
+    margin:10,
+    autoplay:true,
+    nav:false,   
+    dots:false,   
+    autoplayTimeout:5000,
+    autoplayHoverPause:true
+});
+jQuery('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[5000])
+})
+jQuery('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+})</script>
+
+<script>
+var owl1m = jQuery('.owl-carousel1m');
+owl1m.owlCarousel({
+    items:1,
+    margin:10,
+    navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+    nav:true   
+});
+jQuery('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[5000])
+})
+jQuery('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+})</script>
+
+
+<script>
+var owl4j = jQuery('.owl-carousel4j');
+owl4j.owlCarousel({
+      margin:10,
+      loop:true,
+      autoplay:true,
+      autoWidth:false,
+      nav:true,
+      items:1,
+      navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>']
+  });</script>
+
+<script>
+var owl4 = jQuery('.owl-carousel4');
+owl4.owlCarousel({
+    items:4,
+    loop:false,
+    margin:10,
+    autoplay:true,
+    nav:false,   
+    dots:false,   
+    autoplayTimeout:5000,
+    autoplayHoverPause:true
+});
+jQuery('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[5000])
+})
+jQuery('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+})</script>
+
+
+<script>
+var owl4m = jQuery('.owl-carousel4m');
+owl4m.owlCarousel({
+    items:4,
+    margin:10,
+    navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+    nav:true
+});
+
+jQuery('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[5000])
+})
+jQuery('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+})
+</script>
+
+<script>
+var owl4m = jQuery('.owl-carousel6m');
+owl4m.owlCarousel({
+    items:6,
+    margin:10,
+    navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+    nav:true
+});
+
+jQuery('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[5000])
+})
+jQuery('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+})
+</script>
+
+<script>
+var owl4m = jQuery('.owl-carousel2m');
+owl4m.owlCarousel({
+    items:2,
+    margin:10,
+    navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+    nav:true
+});
+
+jQuery('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[5000])
+})
+jQuery('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+})
+</script>
+
+<script>
+
+jQuery('body').on('click','[data-toggle="collapse"][data-mytarget^="jQuery("]',function(){
+     eval(jQuery(this).data('mytarget')).collapse('toggle');
+});</script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+<script>
+jQuery(document).ready(function(){
+
+jQuery('.radio-group .radio').click(function(){
+jQuery('.radio').addClass('gray');
+
+
+jQuery(this).removeClass('gray');
+jQuery(this).append("<b>&#10003;</b>");
+
+});
+
+jQuery('.plus-minus .plus').click(function(){
+var count = jQuery(this).parent().prev().text();
+jQuery(this).parent().prev().html(Number(count) + 1);
+});
+
+jQuery('.plus-minus .minus').click(function(){
+var count = jQuery(this).parent().prev().text();
+jQuery(this).parent().prev().html(Number(count) - 1);
+});
+
+});
+</script>
+
+<script>
+jQuery('#cartItem input').on('change', function() {
+   //alert(jQuery('input[name=rating]:checked', '#cartItem').val()); 
+   jQuery("#ratingVal").val(jQuery('input[name=rating]:checked', '#cartItem').val());
+});
+</script>
+
+
+</html>

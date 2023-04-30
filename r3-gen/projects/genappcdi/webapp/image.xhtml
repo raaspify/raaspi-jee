@@ -1,0 +1,146 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="layout/rtemplateUi.xhtml">
+<ui:remove>
+    This page comes from either Imagesbrowse or from ThemesBrowse to edit an image. Each image is defined and described in Item table with a link to the actual 
+    image in blobdata table. So this page has two edits ie edit image title/description for Item record and  image content for blobdata table
+   
+</ui:remove>
+
+<f:metadata>
+    <f:viewParam name="key" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="descript" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b1xxuszsbvxxxxxxxxxxdescript}"/>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemFrom" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom}"/>
+    <f:viewParam name="qualifier" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.zexxutoxlhxxxxxxxxxxowner}"/>
+    <f:viewParam name="docmnt" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+
+</f:metadata>
+                       
+<ui:define name="body">
+    <h:form id="fpxxfq1a5xwwqqhxxxxxitemSearch" styleClass="edit">
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+
+    
+     <div>
+      <panelGroup>
+      <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
+        value="/img/Editlog16.png"
+         rendered="#{identity.loggedIn}">
+      </h:graphicImage> 
+        <ui:remove> try using sid as param, allow PH to edit if masterSite and owned but update method should reject if owner mismatch. </ui:remove>
+        <h:button outcome="/itemEditEasy.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ'))
+                               ||((customIdentity.hasRole('VH')||customIdentity.hasRole('VQ')) and customIdentity.product =='f' and customIdentity.subProduct =='s')}"
+                    id="ieditE"
+                 value="#{messages['Edit']}(#{messages['image']} #{messages['Title']}/#{messages['Description']})">
+                <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+        </h:button>&nbsp;
+        <h:button outcome="/itemEditEasy.xhtml" rendered="#{identity.loggedIn and customIdentity.hasRole('PH') and customIdentity.masterSite }"
+                    id="iedit"
+                 value="#{messages['Edit']}(#{messages['image']} #{messages['Title']}/#{messages['Description']})">
+                <f:param name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+        </h:button>&nbsp;
+        <ui:remove> dont check for iamge instance, it may be null and will abend and also allows adding a new one </ui:remove>
+       <h:outputText value="#{messages['No']} #{messages['image']} #{messages['Content']} #{messages['to']} #{messages['Edit']}" rendered="#{identity.loggedIn 
+            and !(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.substring(0,1) == 'B' and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() > 3)}" />
+        <h:button outcome="/blobdataEdit.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('PH') and fpxxfq1a5xwwqqhxxxxxitemHome.instance.zexxutoxlhxxxxxxxxxxowner==customIdentity.owner) or ( customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')
+                               ||(customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s')) 
+              and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.substring(0,1) == 'B' and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length()>3}"
+                    id="cedit"
+                 value="#{messages['Edit']}(#{messages['image']} #{messages['Content']})">
+                <f:param name="yxxxuq1n1xwwqqqxxxxxblobdataA0xxuobxbxxxxxxxxxxxsid" disable="#{empty yxxxuq1n1xwwqqqxxxxxblobdataList.getUserBlobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'1',1)}"
+                        value="#{yxxxuq1n1xwwqqqxxxxxblobdataList.getUserBlobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'1',1).a0xxuobxbxxxxxxxxxxxsid}"/>
+                <f:param name="fromTable" disable="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataList.getUserBlobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'1',1)}"
+                        value="FPXXFQ1A5XWWQQHXXXXXITEM"/>
+                <f:param name="fromKey" disable="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataList.getUserBlobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'1',1)}"
+                        value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))}"/>
+                <f:param name="qualifier" disable="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataList.getUserBlobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'1',1)}"
+                        value="1"/>
+                <f:param name="useSeq" disable="#{not empty yxxxuq1n1xwwqqqxxxxxblobdataList.getUserBlobDataInstance('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'1',1)}"
+                        value="1"/>
+               <f:param name="fpxxfq1a5xwwqqhxxxxxitemFrom" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom}"/>
+               <f:param name="docmnt" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+
+
+        </h:button>
+        <h:button outcome="/clobdataEdit.xhtml" rendered="#{identity.loggedIn and (customIdentity.hasRole('PH') and fpxxfq1a5xwwqqhxxxxxitemHome.instance.zexxutoxlhxxxxxxxxxxowner==customIdentity.owner) or ( customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')
+                               ||(customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s'))
+              and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.substring(0,1) == 'A' and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length()>3}"
+                    id="cledit"
+                 value="#{messages['Edit']}(#{messages['text']} #{messages['Content']})">
+                <f:param name="fromKey" 
+                        value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))}"/>
+               <f:param name="docmnt" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+
+        </h:button>
+      <c:set var="splitNumbers" value="#{fn:split(fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid).g2xxuxn1bvxxxxxxxxxxsubcodesn,' ')}" />
+      <c:set var="cats" value="#{fn:split(fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid).g2xxuxn2bvxxxxxxxxxxsubcodesn2,' ')}" />
+      <h:panelGrid columns="16">
+        <h:outputText  escape="true" value="#{splitNumbers[0]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;<h:outputText  escape="true" value="#{splitNumbers[1]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;<h:outputText  escape="true" value="#{splitNumbers[2]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;<h:outputText  escape="true" value="#{splitNumbers[3]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;&nbsp;&nbsp;&nbsp;<h:outputText  escape="true" value="#{cats[0]}"  class="w3-tag w3-round w3-blue "  />
+        &nbsp;<h:outputText  escape="true" value="#{cats[1]}"  class="w3-tag w3-round w3-light-blue "  />
+      </h:panelGrid>
+      &nbsp;<h5>#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid).b1xxuszsbvxxxxxxxxxxdescript}</h5>
+      <hr></hr>
+
+          <h:graphicImage rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn1bvxxxxxxxxxxsubcodesn=='TH'
+             and fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+           value="/ImageServletCdi/?seq=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=0"
+           class="card-img-top "  style="width:100%;">
+          </h:graphicImage>
+
+          <h:graphicImage rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH' 
+            and fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+           value="/ImageServletCdi/?seq=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=0"
+           class="card-img-top "  style="object-fit: cover;min-height:200px;">
+          </h:graphicImage> 
+ 
+
+
+      </panelGroup>
+      <br></br><br></br><br></br>
+      <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b1xxuszsbvxxxxxxxxxxdescript}" />
+      <ui:fragment rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length()>3}">
+                  <img alt="no image"
+                   src="/ImageServletCdi/?seq=1&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;height=200" >
+                  </img> 
+      </ui:fragment>
+      <ui:fragment rendered="#{identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length()>3}">
+                  <img alt="no image"
+                   src="/ImageServletCdi/?seq=1&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;height=200&amp;scope=SYSTEM" >
+                  </img> 
+      </ui:fragment>
+
+     </div>
+     <br></br><br></br>
+       <h:outputText  value="#{messages['No']} #{messages['Image']} #{messages['found']} #{messages['in']} #{messages['binarydata']} #{messages['for']} #{messages['key']} #{fn:substring(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,fn:length(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt))} #{messages['Qualifier 1']} #{messages['Seq 1']}" 
+        rendered="#{!customIdentity.hasRole('PH') and fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null}"/>
+     <br></br><br></br>
+
+    
+    <div class="actionButtons">    
+        <h:button outcome="/#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom == 'theme' ? 'ItemDetailsBrowse' : fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom=='themesb' ?'ThemesBrowse':'ImagesBrowse'}.xhtml"
+                    id="done"
+                 value="#{messages['Done']}"/>
+
+    </div>
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

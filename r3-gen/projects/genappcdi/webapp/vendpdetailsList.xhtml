@@ -1,0 +1,341 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="xoxxuq3b4xwwqqhxxxxxvendpdetailsA0xxuobxbxxxxxxxxxxxsid" value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsHome.xoxxuq3b4xwwqqhxxxxxvendpdetailsA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal}"/>
+    <f:viewAction action="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Vendpdetails']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="xoxxuq3b4xwwqqhxxxxxvendpdetailsSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']}" propagation="end"  outcome="/home.xhtml" />
+             <p:ajaxStatus name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['VendpdetailsListHelp']!='VendpdetailsListHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['VendpdetailsListHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+
+ <p:panel style="width: 50%;" header="#{messages['Vendpdetails']}- #{messages['List']} #{messages['Search']} #{messages['Result']}, #{messages['click']} #{messages['to']} #{messages['change']} #{messages['search']}  #{messages['criteria']}" switchType="ajax" collapsed="true"
+     toggleable="true" toggleableHeader="true">
+
+<h:panelGrid columns="20">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.searchVal}"/>
+ </ui:decorate>
+  <h:outputText id="searchVJ" value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.searchValJ}" rendered="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.searchVal.isEmpty()}"/>
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText id="toDay" ph:type="date" value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <h:commandButton id="setToday" render="toDay" value="#{messages['set']} #{messages['Today']}"   action="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.setSearchDate(xoxxuq3b4xwwqqhxxxxxvendpdetailsHome.currentTime)}" />
+
+</h:panelGrid>
+
+
+
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.suggest(xoxxuq3b4xwwqqhxxxxxvendpdetailsHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.suggest(xoxxuq3b4xwwqqhxxxxxvendpdetailsHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="xoxxuq3b4xwwqqhxxxxxvendpdetailsList,globalMessages" status="buttonStatus" value="#{messages['Search']}" 
+              actionListener="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.getFirstResult()}" rendered="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal lt 49}"/>
+            &nbsp;<h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</p:panel>
+
+    <p:panel>
+
+        <div class="actionButtons">
+            <h:button outcome="/#{empty xoxxuq3b4xwwqqhxxxxxvendpdetailsFrom ? 'home' : xoxxuq3b4xwwqqhxxxxxvendpdetailsFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <ui:remove>  do not render list page once > 50 rows  to avoid excedding max http params </ui:remove>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.setMaxResultsVal(6)}" rendered="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.setMaxResultsVal(50)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.setMaxResultsVal(100)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal lt 49}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.setskipColumns(true)}" rendered="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal lt 49}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.setskipColumns(false)}" rendered="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal lt 49}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(ity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Vendpdetails Search Results showing #{empty xoxxuq3b4xwwqqhxxxxxvendpdetailsList.resultList ? 0 : (xoxxuq3b4xwwqqhxxxxxvendpdetailsList.paginated ? xoxxuq3b4xwwqqhxxxxxvendpdetailsList.resultList.size() : xoxxuq3b4xwwqqhxxxxxvendpdetailsList.resultCount)} of #{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.resultCount}"/>
+        </f:facet>
+    <div class="results" id="xoxxuq3b4xwwqqhxxxxxvendpdetailsList" style="overflow-x:auto">
+
+    <h:outputText value="The Vendpdetails search returned no results."
+               rendered="#{empty xoxxuq3b4xwwqqhxxxxxvendpdetailsList.resultList}"/>
+
+
+
+
+    <p:dataTable id="xoxxuq3b4xwwqqhxxxxxvendpdetailsList"  frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" rows="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal}" scrollRows="6"
+           var="_xoxxuq3b4xwwqqhxxxxxvendpdetails" selection="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}" rowKey="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.a0xxuobxbxxxxxxxxxxxsid}"
+           value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.resultList}"
+           rendered="#{not empty xoxxuq3b4xwwqqhxxxxxvendpdetailsList.resultList}">
+           <p:column rendered="#{!xoxxuq3b4xwwqqhxxxxxvendpdetailsList.skipColumns}"
+                      headerText="#{messages['Line']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a1xxzo11bvlxxxxxxxxxline) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.a1xxzo11bvlxxxxxxxxxline}"  id="a1xxzo11bvlxxxxxxxxxline" />
+            </p:column>
+           <p:column rendered="#{!xoxxuq3b4xwwqqhxxxxxvendpdetailsList.skipColumns}"
+                      headerText="#{messages['Paytype']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b6xxuxxrbv10xxxxxxxxpaytype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.b6xxuxxrbv10xxxxxxxxpaytype}"  id="b6xxuxxrbv10xxxxxxxxpaytype" />
+            </p:column>
+        <p:column rendered = "#{!xoxxuq3b4xwwqqhxxxxxvendpdetailsList.skipColumns}"
+                    headerText="Vendor Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  jxxxuq300xwwqqhxxxxxvendor pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{jxxxuq300xwwqqhxxxxxvendorList.getKeyValue(_xoxxuq3b4xwwqqhxxxxxvendpdetails.jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+          <p:column
+                    headerText="Vendor Details">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer O  jxxxuq300xwwqqhxxxxxvendor pfS 5 pfE 7 efS 6 efE 8 -->
+            <h:outputText value="#{jxxxuq300xwwqqhxxxxxvendorList.getKeyValue(_xoxxuq3b4xwwqqhxxxxxvendpdetails.jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column rendered = "#{!xoxxuq3b4xwwqqhxxxxxvendpdetailsList.skipColumns}"
+                    headerText="Vpayment Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  trexuq388xwwqqhxxxxxvpayment pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{trexuq388xwwqqhxxxxxvpaymentList.getKeyValue(_xoxxuq3b4xwwqqhxxxxxvendpdetails.trexuq388xwwqqhxxxxxvpayment.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column rendered = "#{!xoxxuq3b4xwwqqhxxxxxvendpdetailsList.skipColumns}"
+                    headerText="Vinvoice Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  trexuq3a6xwwqqhxxxxxvinvoice pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{trexuq3a6xwwqqhxxxxxvinvoiceList.getKeyValue(_xoxxuq3b4xwwqqhxxxxxvendpdetails.trexuq3a6xwwqqhxxxxxvinvoice.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+           <p:column rendered="#{!xoxxuq3b4xwwqqhxxxxxvendpdetailsList.skipColumns}"
+                      headerText="#{messages['Qtyordrd']}">
+          <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.z3xxeqxxbvnxxxxxxxxxqtyordrd}"  id="z3xxeqxxbvnxxxxxxxxxqtyordrd">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Paybyid']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z5xxuxxrbvxxxxxxxxxxpaybyid) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.z5xxuxxrbvxxxxxxxxxxpaybyid}"  id="z5xxuxxrbvxxxxxxxxxxpaybyid" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Ordprice']}">
+          <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.z5xxzpxravxxxxxxxxxxordprice}"  id="z5xxzpxravxxxxxxxxxxordprice">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Amountin']}">
+          <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.z6xxzxxxavxxxxxxxxxxamountin}"  id="z6xxzxxxavxxxxxxxxxxamountin">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Vontact']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z8xxurxravxxxxxxxxxxvontact) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.z8xxurxravxxxxxxxxxxvontact}"  id="z8xxurxravxxxxxxxxxxvontact" rendered="true"/>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Qtyostnd']}">
+          <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.z9xxzxxxavxxxxxxxxxxqtyostnd}"  id="z9xxzxxxavxxxxxxxxxxqtyostnd">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Delivchrg']}">
+          <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.zaxxzlxxavxxxxxxxxxxdelivchrg}"  id="zaxxzlxxavxxxxxxxxxxdelivchrg">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Baseamount']}">
+          <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.zbxxzbxxavxxxxxxxxxxbaseamount}"  id="zbxxzbxxavxxxxxxxxxxbaseamount">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Miscchrg']}">
+          <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.zbxxzmxxavxxxxxxxxxxmiscchrg}"  id="zbxxzmxxavxxxxxxxxxxmiscchrg">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Tax1amt']}">
+          <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.zcxxzxz1avxxxxxxxxxxtax1amt}"  id="zcxxzxz1avxxxxxxxxxxtax1amt">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Tax2amt']}">
+          <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.zdxxzxz2avxxxxxxxxxxtax2amt}"  id="zdxxzxz2avxxxxxxxxxxtax2amt">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Tax3amt']}">
+          <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.zexxzxz3avxxxxxxxxxxtax3amt}"  id="zexxzxz3avxxxxxxxxxxtax3amt">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Linetotl']}">
+          <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.zfxxzlpxxvxxxxxxxxxxlinetotl}"  id="zfxxzlpxxvxxxxxxxxxxlinetotl">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+            </p:column>
+           <p:column 
+                      headerText="#{messages['Owner2']}">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+            </p:column>
+        <p:column 
+            headerText="Action">
+            #{' '}
+             <h:link outcome="/vendpdetailsEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="xoxxuq3b4xwwqqhxxxxxvendpdetailsEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="xoxxuq3b4xwwqqhxxxxxvendpdetailsA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_xoxxuq3b4xwwqqhxxxxxvendpdetails.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+        </p:column>
+    </p:dataTable>
+    </div>
+    </p:panel>
+    <div class="tableControl">
+        <h:link outcome="/vendpdetailsList.xhtml"
+            rendered="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+          <f:param name="maxResultsVal"
+                    value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal}"/>
+        </h:link>
+        <h:link outcome="/vendpdetailsList.xhtml"
+            rendered="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/vendpdetailsList.xhtml"
+            rendered="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.nextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/vendpdetailsList.xhtml"
+            rendered="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.lastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+         <h:button outcome="/vendpdetailsEdit.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+            rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Vendpdetails']}">
+        </h:button>
+
+
+
+         <h:button outcome="/#{empty xoxxuq3b4xwwqqhxxxxxvendpdetailsFrom ? 'home' : xoxxuq3b4xwwqqhxxxxxvendpdetailsFrom}.xhtml"
+          id="donefy"
+         value="Done"/>&nbsp;
+
+
+       <ui:remove>
+       </ui:remove>
+
+
+
+
+        <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessagesb"/>
+
+<br/>
+    </div>
+            <p:hotkey  actionListener="#{xoxxuq3b4xwwqqhxxxxxvendpdetailsList.getFirstResult()}" bind="return">
+            </p:hotkey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

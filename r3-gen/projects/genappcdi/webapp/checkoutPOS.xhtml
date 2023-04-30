@@ -1,0 +1,979 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+     xmlns:p="http://primefaces.org/ui"
+     template="layout/rtemplateBare.xhtml">
+
+<ui:remove>
+ copied-not generated
+ comes from backOffice cartPOS checkout button to process payment
+ each cart item is an order item and linked to a dummy customer as user logon id > customer but order type is pos as opposed to type cart if online cart.
+ This allows a back office user to process POS but can also order online as a customer. POS orders can also be tracked by logon ids.
+ A clickable window shows the cart Items to allow edit or emptying the cart and return
+ By default cash/chq payment option shown. Depending on site setup ie client record 01 for paypal
+ ,record 03 for square card payment options will be shown.
+ Option to print receipt and/or send via email is shown.
+ see cartPOS to add items to backoffice checkout cart for the customers
+ see cartItem for online cart used by customers
+ see checkout for online checkout used by customer for card payment
+</ui:remove>
+
+<f:metadata>
+    <f:viewAction action="#{r3Cart.takeAction()}" />
+    <f:viewParam name="amt" value="#{trexuq277xwwqqhxxxxxcpaymentHome.instance.d1xxzyprlxxxxxxxxxxxamountin}"/>
+    <f:viewAction action="#{trexuq266xwwqqhxxxxxcuinvoiceList.setDisplayAs('PDF')}" />
+
+</f:metadata>
+
+<ui:define name="body">
+<ui:remove>all xx.js needs to be here to avoid js variable not defined</ui:remove>
+ <ui:remove> link to the SqPaymentForm library </ui:remove>
+    <script type="text/javascript" src="https://js.squareup.com/v2/paymentform">
+    </script>
+  <ui:remove> link to the local SqPaymentForm initialization </ui:remove>
+    <script type="text/javascript" src="/js/sqpaymentform.js">
+    </script>
+  <ui:remove> link to the custom styles for SqPaymentForm </ui:remove>
+    <link rel="stylesheet" type="text/css" href="/stylesheet/sqpaymentform.css"></link>
+
+  <ui:remove> Loads android pos app invoke javascript </ui:remove>
+   <script src="/js/open_pos.js"></script>
+
+  <ui:remove>
+   <script src="https://js.stripe.com/terminal/v1/"></script>
+  </ui:remove>
+
+
+
+    <h:form id="r3checkout" styleClass="edit">
+    
+<h:outputStylesheet>
+</h:outputStylesheet>
+ <ui:remove> referer does not always work , is null, use state to pass request.getRequestUrl
+  #{request.getHeader("referer")} state goes as state in IOS or as REQUEST_METADATA in android
+ </ui:remove>
+
+        <input type="hidden" id="CartnpTotalValueJ" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getNetCartedPayTotal('pos')}"
+         />
+        <input type="hidden" id="applicationIdJ" value="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.owner2).getDaxxuzxdssxxxxxxxxxxapiclientid()}"
+         />
+        <input type="hidden" id="currencyCodeJ" value="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.owner2).getK1xxuxxxbvxxxxxxxxxxcurrcode()}"
+         />
+        <input type="hidden" id="stateJ" value="#{request.requestURL}"
+         />
+        <input type="hidden" id="cartOrderJ" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].a0xxuncobvxxxxxxxxxxpurchsno}"
+         />
+        <input type="hidden" id="noteJ" value="#{trexuq277xwwqqhxxxxxcpaymentHome.instance.y2xxuxznbvxxxxxxxxxxnotes}"
+         />
+        <input type="hidden" id="cartO2J" value="#{customIdentity.owner2}"
+         />
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel"  outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+ 		   <h:graphicImage value="/img/Search16.gif" styleClass="pic"/>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['checkoutHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+	</p:toolbar>
+
+
+	<h:panelGroup layout="block">
+
+	<br/>
+            <p:panel rendered="#{!identity.loggedIn}">
+             <h:outputText value=" #{messages['Status']}: #{messages['in']} #{messages['guest']}   " rendered="#{!identity.loggedIn}"/> 
+             <h:graphicImage value="/img/person32.png" styleClass="pic" rendered="#{!identity.loggedIn}"/>
+             <h:outputText value=" #{messages['mode']}.  " rendered="#{!identity.loggedIn}"/> 
+
+             &nbsp;<h:outputText value=" #{messages['ready']} #{messages['for']} #{messages['review']} #{messages['and']} #{messages['checkout']}.  " rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos') and empty r3Cart.guid}"/> 
+             <h:graphicImage value="/img/Artha16.png" styleClass="pic" rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos') and empty r3Cart.guid}"/>
+
+             &nbsp;<h:outputText value="  #{messages['click']} #{messages['on']} #{messages['the']} #{messages['checkout']} #{messages['button']} #{messages['at']} #{messages['bottom']}  #{messages['of']}  #{messages['this']} #{messages['page']} #{messages['for']}  #{messages['payment']}.  " rendered="#{r3Cart.inApproved}"/> 
+             &nbsp;<h:outputText value=" #{messages['ready']} #{messages['for']} #{messages['review']} #{messages['and']} #{messages['secured']} #{messages['payment']}.  " rendered="#{r3Cart.inApproved}"/> 
+             <h:graphicImage value="/img/LogIn16.png" styleClass="pic" rendered="#{r3Cart.inApproved and !r3Cart.inConfirmed}"/>
+
+             &nbsp;<h:outputText value="  #{messages['step']} 2 #{messages['of']} 4 #{messages['done']}, #{messages['click']} #{messages['on']} #{messages['login']} #{messages['checkout']} #{messages['button']} #{messages['at']} #{messages['bottom']}  #{messages['Right']} #{messages['for']}  #{messages['secured']} #{messages['payment']}. " rendered="#{r3Cart.inPayment}"/> 
+             &nbsp;<h:outputText value="  #{messages['there']} #{messages['will']} #{messages['be']} #{messages['option']} #{messages['later']} #{messages['to']} #{messages['come']} #{messages['back']} #{messages['to']} #{messages['this']} #{messages['page']}. " rendered="#{r3Cart.inPayment}"/> 
+                     &nbsp;<h:outputText  value="Note: This is a Paypal test environment, please use demo@3rcomputer.com and password 12345678 to log in and make payments" rendered="#{not empty r3Cart.guid and yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2) != null and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2).getDaxxuzxdssxxxxxxxxxxapiclientid() and yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2).daxxuzxdssxxxxxxxxxxapiclientid.contains('Aag_9BB6b8VOSvkoXtFpiuLlGDHB0FSI_cfyq9GQTmWNLT_NiOOohrpQLMHG')}" />
+                     <h:outputText  value="Note: We are not offering on line payment , but you can place this order on 'payment on delivery/pickup' basis. We will contact you promptly to make arrangements for delivery and payment. " rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2) != null and empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2).getDaxxuzxdssxxxxxxxxxxapiclientid()}" />
+             <ui:remove>
+              in test env mobile was wrapping long test, ig needed add line break as in register.xhtml
+              if not online and not logged in  but unless pickup type item gather extra info like name on top of email
+              jay check how the extra info is saved
+             </ui:remove>
+             <br/><h:panelGroup id="extra" template="layout/edit.xhtml" rendered="#{!identity.loggedIn and yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2) != null and empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2).getDaxxuzxdssxxxxxxxxxxapiclientid() and !fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.equals('PI-D') and r3Cart.inPDApproved }">
+                     <h:graphicImage value="/img/flag_green16.png" styleClass="pic"/>
+                     <h:outputText style=";color:red;" value="#{messages['pickup']} #{messages['item']} #{messages['needs']} #{messages['customer']} #{messages['name']} " />
+             </h:panelGroup>
+             <h:panelGroup id="fname" template="layout/edit.xhtml" rendered="#{!identity.loggedIn and yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2) != null and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2).getDaxxuzxdssxxxxxxxxxxapiclientid() and !fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.equals('PI-D') and r3Cart.inPDApproved}">
+             <h:outputLabel name="#{messages['FirstName']}" for="first">
+             </h:outputLabel>
+        	 <h:inputText id="first"
+                   value="#{yxxxuh566xwwqqwxxxxxuserHome.a0xxukuxbvxxxxxxxxxxid2}"  required="true" >
+                 </h:inputText>
+             </h:panelGroup>
+
+             <h:panelGroup id="lname" template="layout/edit.xhtml" rendered="#{!identity.loggedIn and yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2) != null and empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2).getDaxxuzxdssxxxxxxxxxxapiclientid() and !fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.equals('PI-D') and r3Cart.inPDApproved}">
+             <h:outputLabel style=";color:red;" value="#{messages['LastName']}" for="last">
+             </h:outputLabel>
+        	 <h:inputText id="last"
+                   value="#{yxxxuh566xwwqqwxxxxxuserHome.clientName}"  required="true" >
+             </h:inputText>
+             </h:panelGroup>
+
+            </p:panel>
+            <h4 class="heading">#{messages['POS']} #{messages['Checkout']}
+              <h:graphicImage value="/img/cash-register-48.png" />
+              &#160;<h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() gt 0}">
+              </h:outputText>
+              <h:outputText class="small" value=" #{messages['Ordernumber']} #{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')[0].trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno}" rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')}"/>
+              &nbsp;<h:outputText class="small" value="#{messages['Last']} #{messages['Invoiced']} #{messages['Ordernumber']} #{fpxxfq1a5xwwqqhxxxxxitemList.getConfirmedCartedList('pos')[0].trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno} " rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getConfirmedCartedList('pos')[0].trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno}"/>
+              &nbsp;<h:outputText class="small" value="#{messages['Last']} #{messages['Paid']} #{fpxxfq1a5xwwqqhxxxxxitemList.getPaidCartedList('pos')[0].trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno} " rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getPaidCartedList('pos')[0].trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno}"/>
+            </h4>
+            <br></br>
+            <p:panel toggleable="true" header="#{messages['Customer']} #{jxxxuq201xwwqqhxxxxxcustomerHome.lastjxxxuq201xwwqqhxxxxxcustomerP} #{messages['Cart']} (#{messages['Click']} #{messages['to']} #{messages['View']}/#{messages['Alter']})" switchType="client" collapsed="true"
+             rendered="#{identity.loggedIn and (customIdentity.hasRole('UH') or customIdentity.hasRole('UQ') or customIdentity.hasRole('UW'))}" style="color:red;width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'90%':'100%'};"
+              toggleableHeader="true">
+             <ui:decorate id="jxxxuq201xwwqqhxxxxxcustomerDecorationT" template="layout/edit.xhtml" >
+             <ui:define name="label">#{messages['Customer']} 
+             </ui:define>
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="jxxxuq201xwwqqhxxxxxcustomersm"
+                    rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                      required="true"  disabled="#{trexuq277xwwqqhxxxxxcpaymentHome.picked}" 
+                       label="customer"
+                    requiredMessage="#{messages['Customer']} #{messages['ValueRequired']}"
+                    validator="#{trexuq277xwwqqhxxxxxcpaymentHome.validateAndSelectXxxxxxxxcustomer}" 
+                   value="#{jxxxuq201xwwqqhxxxxxcustomerHome.lastjxxxuq201xwwqqhxxxxxcustomerP}"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{jxxxuq201xwwqqhxxxxxcustomerList.getSuggestList(' ')}" var ="result" itemValue="#{result.a0xxukxxbvxxxxxxxxxxcustomer}" 
+                     itemLabel="#{result.a0xxukxxbvxxxxxxxxxxcustomer}"/>
+             </h:selectOneMenu>
+             </ui:decorate>
+             <p:panel id="cartdetails"  >
+                    <p:dataTable id="CartItemsTable" 
+                       value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')}" var="item"
+                        rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')}">
+
+                        <p:column id="column1" headerText="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?messages['del']:messages['remove']}">
+                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                                    <h:commandButton id="UpdateCartButtonr" 
+                                     action="#{fpxxfq1a5xwwqqhxxxxxitemHome.updateProductsToOrder(item)}" 
+                                     value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?messages['X']:messages['remove']}" />
+                        </p:column>
+                        <h:column id="columncuo">
+                            <f:facet id="CuoFacet" name="header">
+                                <h:outputText id="CuoText" value="#{messages.order}" />
+                            </f:facet>
+                            #{item.trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno} 
+                        </h:column>   
+
+                       <ui:fragment rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+                        <h:column id="columncuodl">
+                            <f:facet id="CuodlFacet" name="header">
+                                <h:outputText id="CuodlText" value="#{messages.line}" />
+                            </f:facet>
+                            #{item.b1xxzo11bvlxxxxxxxxxline} 
+                        </h:column>     
+
+                        <h:column id="column2">
+                            <f:facet id="TitleFacet" name="header">
+                                <h:outputText id="TitleText" value="#{messages.code}" />
+                            </f:facet>
+                            #{item.fpxxfq1a5xwwqqhxxxxxitem.a0xxukixbxxxxxxxxxxxmatcode} 
+                        </h:column>   
+                       </ui:fragment>
+  
+                        <h:column id="column3" >
+                            <f:facet id="ActorFacet" name="header">
+                                <h:outputText id="ActorText" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?messages.descrpt:messages.description}" />
+                            </f:facet>
+                            #{item.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript} 
+                        </h:column>                        
+                        <h:column id="column4">
+                            <f:facet id="PriceFacet" name="header">
+                                <h:outputText id="PriceText" value="#{messages.price}" />
+                            </f:facet>
+                            <h:outputText id="PriceValueText" value="#{item.z5xxzpxravxxxxxxxxxxordprice}" rendered= "#{!item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" >
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+                            <h:outputText id="PriceValueQuote" value="Request Quotation" rendered= "#{item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                        </h:column>   
+                 
+                        <h:column id="column5">
+                            <f:facet id="QuantityFacet" name="header">
+                                <h:outputText id="QuantityText" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?messages.qty:messages.quantity}" />
+                            </f:facet> 
+                             <h:inputText id="QuantityValueText" value="#{item.z3xxeqxxbvnxxxxxxxxxqtyordrd}" size="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?2:6}" readonly="true" />
+                        </h:column> 
+                       <ui:fragment rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+                        <h:column id="columntx1">
+                            <f:facet id="tx1" name="header">
+                                <h:outputText id="tx1Text" value="#{messages.tax}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.zdxxzxz1avxxxxxxxxxxtax1amt}" size="6" readonly="true" />
+                        </h:column>    
+                        <h:column id="columnmsc">
+                            <f:facet id="tx1" name="header">
+                                <h:outputText  value="#{messages.Miscchrgt}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.zcxxzmxxavxxxxxxxxxxmiscchrg}" size="6" readonly="true" />
+                        </h:column>    
+                        <h:column id="columndelv">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages.Delivchrgt}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.zbxxzlxxavxxxxxxxxxxdelivchrg}" size="6" readonly="true" />
+                        </h:column> 
+                       <ui:remove>   
+                        <h:column id="columndisc">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages.Discount}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.zbxxzlxxavxxxxxxxxxxdelivchrg}" size="6" readonly="true" />
+                        </h:column>   
+                       </ui:remove>  
+                        <h:column id="columnlt">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages.Linetotal}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.zgxxzlpxxvxxxxxxxxxxlinetotl}" size="6" readonly="true" >
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                             </h:inputText>
+                        </h:column>  
+
+                    
+                        <h:column id="column6"  >
+                            <f:facet id="ShippingFacet" name="header">
+                                <h:outputText id="ShippingText" value="#{messages.shipping}" />
+                            </f:facet>
+                            <h:outputText id="logic" value="#{item.z9xxtxsolxxxxxxxxxxxshipoption eq 'X' ?' ':(item.z9xxtxsolxxxxxxxxxxxshipoption eq 'R' ?'standard':(item.z9xxtxsolxxxxxxxxxxxshipoption eq 'E' ?'express':(item.z9xxtxsolxxxxxxxxxxxshipoption eq 'P' ?'pickup':'standard')))}" >
+                            </h:outputText>
+                        </h:column>                        
+                        <h:column id="column7">
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText id="StatusText" value="#{messages.status}" />
+                            </f:facet>
+                            #{item.zhxxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid':(item.zhxxzzfxhhxxxxxxxxxxstatusfl eq 32 ? 'shipped': (item.zhxxzzfxhhxxxxxxxxxxstatusfl eq 04 ?'returned':'in cart'))}
+                        </h:column>   
+                </ui:fragment>
+                     
+
+                     
+                    </p:dataTable>
+
+
+                    <h:button id="ContinueShoppingButtonR"
+                                     outcome="/cartPOS.xhtml"  
+                                     value="Return" >
+                     <f:param name="categoryJay" value="0"/>
+                    </h:button>
+
+                    &#160;
+                    <h:commandButton id="ResetCartButton"
+                                     action="#{fpxxfq1a5xwwqqhxxxxxitemHome.emptyProductsToOrder('pos')}"  
+                                     value="#{messages['Empty']} #{messages['Cart']}"  />
+                    &#160;
+                    <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrderSaving('pos').unscaledValue() !=0}">
+                    &nbsp;<h:outputText  value="#{messages.Your} #{messages.saving}"  class="w3-text-light-blue"/>
+                    &nbsp;<h:outputText  value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrderSaving('pos')}">
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                    </h:outputText>
+                    </ui:fragment>
+
+             </p:panel>
+            </p:panel>
+            <p:panel id="emptycart" rendered="#{empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')}">
+                <p>Your cart is empty.</p>
+                    <h:button id="ContinueShoppingButton" outcome="/home.xhtml" value="Home" />
+
+                    <ui:fragment rendered="#{identity.loggedIn and not empty fpxxfq1a5xwwqqhxxxxxitemList.getConfirmedCartedList('pos')[0] }">
+                    <h:outputText  value="#{messages['payment']} #{messages['reference']}  #{trexuq277xwwqqhxxxxxcpaymentHome.instance.a0xxuncpbvxxxxxxxxxxpayment} #{trexuq277xwwqqhxxxxxcpaymentHome.instance.z1xxztprlxxxxxxxxxxxamounttotal}"   />
+                    </ui:fragment>
+                    <br></br>
+            <h:outputText  style=";color:red;" value="#{messages['Checkout']} #{messages['completed']}, #{messages['click']} #{messages['Notification']} / #{messages['History']} #{messages['for']} #{messages['details']}"   rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getConfirmedCartedList('pos')}"/>
+            </p:panel>
+
+
+                 <p:panel style="width: 100%;" rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')}" >
+                        <h:panelGrid id="CostSummary" columns="2">
+                            <h:outputText  value=" " />
+                            <h:outputText  value=" " />
+                            <h:outputText  value="#{messages.BaseAmount}" style="font-size:x-large;"/>
+                            <h:outputText  style="font-size:x-large;" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z7xxzbtxavxxxxxxxxxxbaseamountt}">
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+                            <h:outputText  style="font-size:x-large;" value="#{messages.quantity}" />
+                            <h:outputText  style="font-size:x-large;" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].b5xxztqrlxxxxxxxxxxxqtytotal}">
+                            </h:outputText>
+                            <h:outputText  value="#{messages.shippingCost}" rendered="#{!fn:startsWith(fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')[0].z9xxtxsolxxxxxxxxxxxshipoption,'X')}" />
+                            <h:outputText  value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z6xxzltxavxxxxxxxxxxdelivchrgt}" rendered="#{!fn:startsWith(fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')[0].z9xxtxsolxxxxxxxxxxxshipoption,'X')}">
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+                            <h:outputText id="CartSubtotalText" value="#{messages.checkoutSubtotal}" />
+                            <h:outputText id="CartSubtotalValue" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z7xxzbtxavxxxxxxxxxxbaseamountt.add(fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z6xxzltxavxxxxxxxxxxdelivchrgt)}">
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+                            
+                            <h:outputText id="CartTaxText" value="#{messages.checkoutTax}" />
+                            <h:outputText id="CartTaxValue" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z8xxzxz1avxxxxxxxxxxtax1amtt.
+                                      add(fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z9xxzxz2avxxxxxxxxxxtax2amtt)}">
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+                            
+                            <h:outputText id="CartTotalText" value="#{messages.checkoutTotal}" />
+                            <h:outputText id="CartTotalValue" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z1xxztprlxxxxxxxxxxxamounttotal}">
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+                            <h:outputText   value="#{messages['Notes']}"/>  
+                            <h:inputText  
+                             size="20"
+                             maxlength="60"
+                             value="#{trexuq277xwwqqhxxxxxcpaymentHome.instance.y2xxuxznbvxxxxxxxxxxnotes}">
+                            </h:inputText>
+
+                         <ui:remove>jan02 2019 treat COD as an option in payment not type of item.
+                            rate table will have COD charges similar to shiping charge
+                            <h:outputText id="CartpLTotalText" value="#{messages.less} #{messages.paylaterTotal}"
+                              rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.totalCartedPayLater('pos').unscaledValue() != 0}" />
+
+                            <h:outputText id="CartpLTotalValue" value="#{fpxxfq1a5xwwqqhxxxxxitemList.totalCartedPayLater}"
+                             rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.totalCartedPayLater('pos').unscaledValue() != 0}">
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+
+                            <h:outputText id="CartnpTotalText" style="font-size:x-large;" value="#{messages.net} #{messages.total}"
+                             rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.totalCartedPayLater('pos') != 0}" />
+
+                            <h:outputText id="CartnpTotalValueS" style="font-size:x-large;" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getNetCartedPayTotal('pos')}"
+                             rendered="#{not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.owner2).getJ9xxuxxxbvxxxxxxxxxxcurrsymb()}">
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.owner2).getJ9xxuxxxbvxxxxxxxxxxcurrsymb()}" />
+                            </h:outputText>
+
+                            <h:outputText id="CartnpTotalValueP" style="font-size:x-large;" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getNetCartedPayTotal('pos')}"
+                             rendered="#{empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.owner2).getJ9xxuxxxbvxxxxxxxxxxcurrsymb()}">
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2).getJ9xxuxxxbvxxxxxxxxxxcurrsymb()}" />
+                            </h:outputText>
+                         </ui:remove>
+
+                            <ui:remove>based on locale show in local currency
+                            (1) product price currency is used as charge currency and uses client defaultc and currsymb
+                            (2) customer credit card currency set by customer. customer may get charged extra by customer's card issuing bank
+                            (3) client ie merchant account currency uses client currcode , merchant may pay extra conversion charge 
+                            Note:stripe and Paypal supports multicurrency for customer and merchants
+                            Square supports single currency ie both defaultc and currcode need to be same  
+                            square amount decimal is implicit ie $2.0 is 200 see open_pos.js/openURL function
+                            <h:outputText id="CartprTotalText" value="#{messages.estimated} #{messages.currency} #{messages.conversion}"
+                             rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.totalCartedPayLater('pos') != 0}" />
+                            <h:outputText id="CartprTotalValue" value="#{fpxxfq1a5xwwqqhxxxxxitemList.netConvertedPayTotal}"
+                             rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.totalCartedPayLater('pos') != 0}">
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+                            </ui:remove>
+
+                        </h:panelGrid>
+
+                    <p:panel class="cntInfo" >
+
+        <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:4}">
+
+
+
+                        <ui:remove> shoppingCartBean is named r3Cart </ui:remove>
+
+           <p:panel toggleable="true" toggleableHeader="true" header="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #{messages.CASH} #{messages.OR} #{messages.CHQ} #{messages.OR} #{messages.DRAFT}/#{messages.XFER} #{messages.PAYMENT}" 
+             leftCollapsedIcon="/img/Artha16.png"  leftExpandedIcon="/img/tick16.png" collapsed="true" class="w3-light-grey"
+             rendered="#{identity.loggedIn and (customIdentity.hasRole('UH') or customIdentity.hasRole('UQ') or customIdentity.hasRole('UW'))
+              and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos').size() gt 0}"> 
+
+          <h:panelGrid columns="1">
+             <h6>#{messages['Amount']} #{messages['In']} #{authenticator.currencySymbol}</h6>
+        	 <h:inputText id="amtIn" value="#{trexuq277xwwqqhxxxxxcpaymentHome.instance.d1xxzyprlxxxxxxxxxxxamountin}"  
+                 onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq277xwwqqhxxxxxcpaymentHome.instance.d1xxzyprlxxxxxxxxxxxamountin}}:this.value;"
+                 disabled="false" >
+                 <p:ajax listener = "#{trexuq277xwwqqhxxxxxcpaymentHome.showtemprunt}"  event="keyup" render="matcodeDescriptDecoration,matcodePriceLabelT,matcodeTDecoration,matcodeDecorationmis,matcodeDecorationdelT,matcodeDecorationtax1T,matcodeDecorationtax2T" bypassUpdates="false"/>
+                 <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
+             </h:inputText>
+             <ui:decorate id="amtinlabel" template="layout/edit.xhtml" >
+             <ui:define name="label">Net Payment #{authenticator.currencySymbol}
+             </ui:define>
+        	 <h:inputText id="netP" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z1xxztprlxxxxxxxxxxxamounttotal}"  
+                 disabled="true" >
+                 <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
+             </h:inputText>
+             </ui:decorate>
+   
+           <ui:decorate id="yxxxch601xwwqqhxxxxxaccountDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Account']} 
+            </ui:define>
+                <p:remoteCommand name="yxxxch601xwwqqhxxxxxaccountFunction" process="@all" update="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="yxxxch601xwwqqhxxxxxaccountsm"
+                       rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                    requiredMessage="#{messages['Account']} #{messages['ValueRequired']}"
+                    validator="#{trexuq277xwwqqhxxxxxcpaymentHome.validateAndSelectXxxxxxxxaccount}" 
+                   value="#{yxxxch601xwwqqhxxxxxaccountHome.lastyxxxch601xwwqqhxxxxxaccountP}"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{yxxxch601xwwqqhxxxxxaccountList.getSuggestList('3A3DAI')}" var ="result" itemValue="#{result.a0xxukwxbvxxxxxxxxxxaccount}" 
+                     itemLabel="#{result.a0xxukwxbvxxxxxxxxxxaccount.concat(' ').concat(result.a1xxuzsxbvxxxxxxxxxxdescript)}"/>
+             </h:selectOneMenu>
+           </ui:decorate>
+           <h:outputLabel  for="y2xxuxznbvxxxxxxxxxxnotes" value="#{messages['Notes']}">
+
+           </h:outputLabel>
+
+           <h:inputText id="y2xxuxznbvxxxxxxxxxxnotes" 
+
+                           size="20"
+                      maxlength="60"
+
+                          value="#{trexuq277xwwqqhxxxxxcpaymentHome.instance.y2xxuxznbvxxxxxxxxxxnotes}">
+
+           </h:inputText>
+
+           <h:outputLabel  for="z5xxuxxrbvxxxxxxxxxxpaybyid" value="#{messages['Cheq_id']}/#{messages['Ref_id']}">
+
+           </h:outputLabel>
+
+            <h:inputText id="z5xxuxxrbvxxxxxxxxxxpaybyid" 
+
+                           size="20"
+                      maxlength="20"
+
+                          value="#{trexuq277xwwqqhxxxxxcpaymentHome.instance.z5xxuxxrbvxxxxxxxxxxpaybyid}">
+
+            </h:inputText>
+
+          </h:panelGrid>
+
+
+
+
+             <br/> 
+
+            <ui:remove>  tbd put back  onclick :element ...   </ui:remove>
+            <p:commandButton id="save" class="w3-button w3-blue" 
+                          value="#{messages['Take']} #{messages['Payment']}" status="buttonStatus" update="@form"
+                         action="#{trexuq277xwwqqhxxxxxcpaymentHome.addWithDetailsCod('',fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('pos')[0].trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno)}"
+                       rendered="#{trexuq277xwwqqhxxxxxcpaymentList.entityLessStatusDetailedList(trexuq277xwwqqhxxxxxcpaymentHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() eq 0}">                        
+            </p:commandButton>                                  			  
+
+           <h:commandButton id="delete" 
+                value="#{messages['Delete']} #{messages['Cpayment']}" onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " 
+                action="#{trexuq277xwwqqhxxxxxcpaymentHome.remove()}"
+                rendered="#{trexuq277xwwqqhxxxxxcpaymentHome.managed and !trexuq277xwwqqhxxxxxcpaymentHome.entityDeleted}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Use']} #{messages['List']} #{messages['to']} #{messages['delete']} #{messages['details']} #{messages['records']} #{messages['sametime']},#{messages['but']} #{messages['manually']} #{messages['delete']} #{messages['other']} #{messages['constraints']}"/></span> </p:tooltip> 
+           </h:commandButton>
+
+       <p:messages ajaxRendered="true"  />
+
+
+          </p:panel> 
+
+                
+
+           <p:panel toggleable="true" toggleableHeader="true" header="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #{messages.SQUARE} #{messages.POS} #{messages.PAYMENT}" 
+             leftCollapsedIcon="/img/square-100.jpg"  leftExpandedIcon="/img/tick16.png" expanded="false" class="w3-black"
+             rendered="#{yxxxuh566xwwqqwxxxxxuserHome.userAgentStr.contains('ndroid') and identity.loggedIn and (customIdentity.hasRole('UH') or customIdentity.hasRole('UQ') or customIdentity.hasRole('UW')) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.owner2)}"> 
+
+<ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.userAgentStr.contains('ndroid')}">
+ <ui:remove>document.getElementById("myInput").value
+  link is for test purpose, use button for prod as it builds the values dynamically
+  use ngrok url (ex:ngrok http 8080 which points to local host:8080) if port 8080 detected to test Square POS
+  iphone/android can use ngrok url to connect to local host rather than openshift server
+  on any command window type ngrok http 8080
+  will see https://f2ac96f7.ngrok.io will forward to local host 8080 
+  There should be a locahost entry in hosts and create a site for f2ac96f7.ngrok and url f2ac96f7.ngrok.io 
+  may need to drop io part from owner2 in client record
+  activate using local machine (make sure no entry for f2ac96f7.ngrok.io in hosts)
+  since ngrok dns changes, need to change callbacl url in square developer site  web callback url
+  for online form payment change open_pos.js setting 
+  for ipad callback changes in checkout 
+  may later add f2ac96f7.ngrok.io to hosts to test without ngrok
+ </ui:remove>
+
+  <button onclick="openURL()">
+   #{messages.Take} #{messages.PAYMENT} 
+  </button>
+      <br></br>
+      <ui:remove>openshift paases http at the end ie https>edge>http
+      <h:outputText value="#{messages['HTTPS']} #{messages['needed']}" rendered="#{!request.isSecure()}" />
+      </ui:remove>
+</ui:fragment>
+
+</p:panel> 
+      
+
+ <p:panel toggleable="true" toggleableHeader="true" header="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #{messages.SQUARE} #{messages.POS} #{messages.PAYMENT}" 
+             leftCollapsedIcon="/img/square-100.jpg"  leftExpandedIcon="/img/tick16.png" collapsed="true"
+             rendered="#{(yxxxuh566xwwqqwxxxxxuserHome.userAgentStr.contains('iPad') or yxxxuh566xwwqqwxxxxxuserHome.userAgentStr.contains('iPhone')) 
+              and identity.loggedIn and (customIdentity.hasRole('UH') or customIdentity.hasRole('UQ') or customIdentity.hasRole('UW'))
+               and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.owner2)
+                and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.owner2).dbxxuzxdssxxxxxxxxxxapiclientsecret}"> 
+
+
+<ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.userAgentStr.contains('iPad') or yxxxuh566xwwqqwxxxxxuserHome.userAgentStr.contains('iPhone')}">
+ <ui:remove>
+  On page load 
+   window.location =
+    "square-commerce-v1://payment/create....opens the installed POS App in another window
+    uses the dataparameter including amount,currency,clientId from host site data
+    callback url uses current site page
+    
+ 
+    //callback url is static, must match with dashboard value, pass owner2 via data to cart.takeaction
+    // on this page view action
+    // returns to this master site page and invokes r3cart.takeAction to go back to owner2 checkout page
+    // Replace this value with your application's callback URL, needs https. 
+    // call back is a way to allow provider to make a new request call back and provide the response data
+    // original resonse was just 200 ???
+    // check logic for paypal and shopify
+    //callback_url: "https://"+window.location.host+"/checkoutPOS.wflow?data='data'", must match to dashboard
+ </ui:remove>
+
+<script>
+  //alert("square POS Ios");
+  var dataParameter = {
+    amount_money: {
+      amount:        "#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].z7xxzbtxavxxxxxxxxxxbaseamountt*100}",
+      currency_code: "#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.owner2).getK1xxuxxxbvxxxxxxxxxxcurrcode()}"
+    },
+    callback_url: "https://www.#{customIdentity.owner2}.com/checkoutPOS.wflow",
+    // Replace this value with your application's ID
+    client_id: "#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.owner2).getDaxxuzxdssxxxxxxxxxxapiclientid()}",
+    state:"r3po#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].a0xxuncobvxxxxxxxxxxpurchsno}r3o2#{customIdentity.owner2}r3bk#{request.requestURL}",
+    version: "1.3",
+    notes: "#{trexuq277xwwqqhxxxxxcpaymentHome.instance.y2xxuxznbvxxxxxxxxxxnotes}",
+    options: {
+      supported_tender_types: ["CREDIT_CARD","CASH","OTHER","SQUARE_GIFT_CARD","CARD_ON_FILE"]
+    }
+  };
+  //below should open square pos in a new tab when this page loads, no button needed, 
+  //alert("square-commerce-v1://payment/create?data=" +
+  //  encodeURIComponent(JSON.stringify(dataParameter)));
+  window.location =
+    "square-commerce-v1://payment/create?data=" +
+    encodeURIComponent(JSON.stringify(dataParameter));
+
+</script>
+
+</ui:fragment>
+          </p:panel> 
+
+  <ui:remove>
+ <p:panel toggleable="true" toggleableHeader="true" header="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #{messages.STRIPE} #{messages.POS} #{messages.PAYMENT}" 
+             leftCollapsedIcon="/img/square-100.jpg"  leftExpandedIcon="/img/tick16.png" collapsed="true"
+             rendered="#{(yxxxuh566xwwqqwxxxxxuserHome.userAgentStr.contains('iPad') or yxxxuh566xwwqqwxxxxxuserHome.userAgentStr.contains('iPhone')) 
+              and identity.loggedIn and (customIdentity.hasRole('UH') or customIdentity.hasRole('UQ') or customIdentity.hasRole('UW'))
+               and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('04',customIdentity.owner2)
+                and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('04',customIdentity.owner2).dbxxuzxdssxxxxxxxxxxapiclientsecret}"> 
+
+
+<script>
+function fetchConnectionToken() {
+  // Your backend should call /v1/terminal/connection_tokens and return the JSON response from Stripe
+  return fetch('https://{YOUR_BACKEND_URL}/connection_token', { method: "POST" })
+    .then(response => response.json())
+    .then(data => data.secret);
+}
+</script>
+      <h:outputText value="#{request.protocol} #{messages['found']}, #{messages['HTTPS']} #{messages['needed']}" rendered="#{!fn:containsIgnoreCase(request.protocol,'https')}" />
+
+          </p:panel> 
+  </ui:remove>
+
+
+
+
+
+
+        </h:panelGrid>
+       </p:panel>
+
+         <p:panel>
+
+                       <ui:remove> below handles non Paypal payment vemail gets value from cart order attach. jay Add one more temp email to option </ui:remove>
+                       <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2).getDaxxuzxdssxxxxxxxxxxapiclientid()}" >  
+                        <h:outputText value="#{messages['confirmation']} #{messages['email']} #{messages['will']} #{messages['be']} #{messages['sent']} #{messages['to']} " />
+                         #{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].jxxxuq201xwwqqhxxxxxcustomer.q4xxhxxxbv24xxxxxxxximailaddr}
+                        <ui:decorate id="sclientEmailField" template="layout/edit.xhtml"  >
+                         <ui:define name="label">(#{messages['optional']}) #{messages['extra']} #{messages['copy']} #{messages['to']}</ui:define>
+                         <h:inputText id="semail" required="false" value="#{r3Cart.VEmailAddress2}" size="30"  maxlength="50"/>
+                         <h:outputText value="        "/>
+                        </ui:decorate>
+                        <br></br>
+                        <h:commandButton action="#{r3Cart.salePDRequest()}" value="#{messages['Place_Order']}" class="w3-button w3-blue"
+                           rendered="#{r3Cart.inPDSaleReady and not r3Cart.inPDApproved and not r3Cart.inPDConfirmed }" 
+                           />
+                        <h:commandButton action="#{r3Cart.confirmPDPayment()}" value="#{messages['Confirm_Order']}" class="w3-button w3-blue"
+                           rendered="#{r3Cart.inPDApproved }" />
+             <br/><h:panelGroup id="extrab" template="layout/edit.xhtml" rendered="#{!identity.loggedIn and yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2) != null 
+                         and empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01',customIdentity.owner2).getDaxxuzxdssxxxxxxxxxxapiclientid() and !fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('pos')[0].fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.equals('PI-D') and r3Cart.inPDApproved }">
+                     <h:graphicImage value="/img/flag_green16.png" styleClass="pic"/>
+                     <h:outputText style=";color:red;" value="#{messages['pickup']} #{messages['item']} #{messages['needs']} #{messages['customer']} #{messages['name']}, " />
+                     <h:outputText style=";color:red;" value="#{messages['detail']} #{messages['at']} #{messages['top']}" />
+             </h:panelGroup>
+                       </p:panel>         
+                    </p:panel>
+            <p:panel rendered="#{r3Cart.inApproved and not r3Cart.inConfirmed }">
+             <ui:decorate template="layout/edit.xhtml" > 
+             <ui:define name="label">#{messages['shipment']} #{messages['to']} 
+             </ui:define>
+             </ui:decorate>
+             <ui:decorate id="flN" template="layout/edit.xhtml"  > 
+        	 <h:outputText 
+                  value="#{r3Cart.FName} #{r3Cart.LName}"  >
+             </h:outputText>
+             </ui:decorate>
+
+             <ui:decorate id="custaddrl1" template="layout/edit.xhtml"  > 
+        	 <h:outputText 
+                  value="#{r3Cart.line1}"  >
+             </h:outputText>
+             </ui:decorate>
+             <ui:decorate id="custaddrl2" template="layout/edit.xhtml"  >
+        	 <h:outputText 
+                  value="#{r3Cart.line2}"  readonly="true">
+             </h:outputText>
+             </ui:decorate>
+             <ui:decorate id="city" template="layout/edit.xhtml"  >
+        	 <h:outputText 
+                  value="#{r3Cart.city}"  readonly="true">
+             </h:outputText>
+             </ui:decorate>
+             <ui:decorate id="state" template="layout/edit.xhtml"  >
+        	 <h:outputText 
+                  value="#{r3Cart.state}"  readonly="true">
+             </h:outputText>
+             </ui:decorate>
+             <ui:decorate id="pzcode" template="layout/edit.xhtml"  >
+        	 <h:outputText 
+                  value="#{r3Cart.postalCode}"  readonly="true">
+             </h:outputText>
+             </ui:decorate>
+            </p:panel>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+
+
+                    <p:panel toggleable="true" toggleableHeader="true" style="clear:both;width:35%" header="#{messages['click_if_not_ready_to_purchase_now']} " switchType="client" collapsed="true" rendered="#{!identity.loggedIn}"
+                      leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+                        <h:panelGrid columns="1">
+                        <h:outputText  value="#{messages.cart_selections_cannot_be_saved_when_this_session_ends}" />
+                        <h:outputText  value="#{messages.why_not_save_by_simple_sign_up}" />
+                        </h:panelGrid>
+                        <h:button id="tdonel"  value="#{messages.signup}" rendered="#{not identity.loggedIn and not(request.serverName.startsWith('myorg') or request.serverName.startsWith('mybus'))}"  outcome="/signup.xhtml" >
+                        </h:button>
+                        <h:button id="tdoneld"  value="#{messages.demosignup}" rendered="#{not identity.loggedIn and (request.serverName.startsWith('myorg') or request.serverName.startsWith('mybus'))}"  outcome="/signup.xhtml" >
+                        </h:button>
+                    </p:panel> 
+
+                 </p:panel>
+
+
+
+           &nbsp;<h:outputText  value="#{messages['Give']} #{messages['Change']} #{trexuq277xwwqqhxxxxxcpaymentHome.change==null?'':trexuq277xwwqqhxxxxxcpaymentHome.change.unscaledValue()} " rendered="#{trexuq277xwwqqhxxxxxcpaymentHome.change == null and trexuq277xwwqqhxxxxxcpaymentHome.change.unscaledValue() lt 0}" />
+           &nbsp;<h:outputText  value="#{messages['Take']} #{messages['Due']} #{trexuq277xwwqqhxxxxxcpaymentHome.change==null?'':trexuq277xwwqqhxxxxxcpaymentHome.change.unscaledValue()} " rendered="#{trexuq277xwwqqhxxxxxcpaymentHome.change == null and trexuq277xwwqqhxxxxxcpaymentHome.change.unscaledValue() gt 0}" />
+  
+          <h:button id="ContinueShoppingButtonR2"
+           outcome="/cartPOS.xhtml"  
+           value="Return" >
+                     <f:param name="categoryJay" value="0"/>
+          </h:button>
+
+          &nbsp;<h:outputText style="font-size:large;color:red;" value=" #{messages['Click']} #{messages['Status']}/#{messages['Error']} #{messages['Notification']} " rendered="#{not empty facesContext.maximumSeverity}"/> 
+          <h:panelGroup rendered="#{identity.loggedIn and not empty trexuq277xwwqqhxxxxxcpaymentList.getPaidByTypeList('all',true)}">
+           &nbsp; <h:panelGroup id="b6xxuxxrbv10xxxxxxxxpaykeyDecoration"    >
+             <h:outputLabel  for="b6xxuxxrbv10xxxxxxxxpaytype" value="#{messages['cuinvoice']}">
+             </h:outputLabel>
+             <h:selectOneMenu styleClass="autoCompleteWidth50" value="#{trexuq266xwwqqhxxxxxcuinvoiceHome.instance.a0xxuncibvxxxxxxxxxxinvoice}" required="false" id="b6xxuxxrbv10xxxxxxxxpaytype"
+                rendered="#{trexuq266xwwqqhxxxxxcuinvoiceList.getPaidByTypeList('all',true).size() >0}">
+               <f:selectItems value="#{trexuq266xwwqqhxxxxxcuinvoiceList.getPaidByTypeList('all',true)}"  var="babu"  
+                 itemLabel="#{babu.a0xxuncibvxxxxxxxxxxinvoice}"
+                 itemValue="#{babu.a0xxuncibvxxxxxxxxxxinvoice}" /> 
+             </h:selectOneMenu>
+            </h:panelGroup>
+             &nbsp;<h:commandButton id="ePrint" value="Print"   onclick="this.form.target='_blank'"
+               action="#{trexuq266xwwqqhxxxxxcuinvoiceList.ePrint('PDF',trexuq266xwwqqhxxxxxcuinvoiceHome.instance.a0xxuncibvxxxxxxxxxxinvoice,trexuq266xwwqqhxxxxxcuinvoiceHome.instance.a0xxuncibvxxxxxxxxxxinvoice,false,'cuinvoiceReceipt57Master')}" 
+                rendered="true"/>
+
+             <br></br><h:commandButton id="email" value="Email_to" onclick="this.form.target='_self'" class="w3-btn w3-blue"
+               action="#{trexuq266xwwqqhxxxxxcuinvoiceList.eSend('PEMAIL',trexuq266xwwqqhxxxxxcuinvoiceHome.instance.a0xxuncibvxxxxxxxxxxinvoice,trexuq266xwwqqhxxxxxcuinvoiceHome.instance.a0xxuncibvxxxxxxxxxxinvoice,false,trexuq277xwwqqhxxxxxcpaymentHome.EMailingAddress)}"
+                rendered="true"/>
+
+               <ui:fragment id="ejay"  template="layout/edit.xhtml" 
+                rendered="true">
+               <ui:define name="label">#{messages['emailTo']} 
+               </ui:define>
+               &nbsp;<h:inputText  id="eMailA"
+                          size="35"
+                     maxlength="50"
+                         value="#{trexuq277xwwqqhxxxxxcpaymentHome.EMailingAddress}">
+               </h:inputText>
+               </ui:fragment>
+            </h:panelGroup>
+
+          <br></br>
+          <p:panel toggleable="true" toggleableHeader="true" style="width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'100%':'60%'};"  switchType="client" collapsed="false" 
+           rendered="#{not empty facesContext.maximumSeverity or not empty fpxxfq1a5xwwqqhxxxxxitemList.getConfirmedCartedList('pos')[0] }" header="#{messages['Status']}/#{messages['Error']} #{messages['Notification']}"
+            leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/wdot.png">
+           <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+          </p:panel>
+
+            <p:panel  toggleable="true" toggleableHeader="true" id="cartdetailsHistory"  rendered="#{identity.loggedIn and not r3Cart.inPosMode and not empty fpxxfq1a5xwwqqhxxxxxitemList.getConfirmedCartedList('pos')}"
+              header="#{messages['waiting']} #{messages['shipment']} #{messages['History']}" switchType="client" collapsed="true" 
+              leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+                    <p:dataTable id="CartItemsHistoryTable"
+                                 value="#{fpxxfq1a5xwwqqhxxxxxitemList.getConfirmedCartedList('pos')}" var="item">
+                        <h:column id="column1h">
+                            <f:facet id="CartRemoveFaceth" name="header">
+                                <h:outputText id="CartRemoveTexth" value="#{messages.orderDate}" />
+                            </f:facet>
+                                <h:outputText value="#{item.z6xxcxxxbxxxxxxxxxxxiodate}" >
+                                 <f:convertDateTime  dateStyle="short" timeStyle="short" type="both" />
+                                </h:outputText>
+                        </h:column>
+
+                        <h:column id="column2h">
+                            <f:facet id="TitleFaceth" name="header">
+                                <h:outputText id="TitleTexth" value="#{messages.delvdate}" >
+                                </h:outputText>
+                            </f:facet>
+                                <h:outputText value="#{item.z7xxcxxxbvxxxxxxxxxxidelvdate}" >
+                                 <f:convertDateTime  dateStyle="short" timeStyle="short" type="both" />
+                                </h:outputText>
+
+                        </h:column>     
+                        <h:column id="column2h2">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages['last']} #{messages['payment']} #{messages['date']}" >
+                                </h:outputText>
+                            </f:facet>
+                                <h:outputText value="#{item.zixxcztxlxxxxxxxxxxxstatusfldt}" >
+                                 <f:convertDateTime  dateStyle="medium" timeStyle="medium" type="both" />
+                                </h:outputText>
+                        </h:column>  
+                        <h:column >
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText  value="#{messages.Order_ref}" />
+                            </f:facet>
+                            #{item.trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno}
+                        </h:column>    
+                        <h:column >
+                            <f:facet id="invc" name="header">
+                                <h:outputText  value="#{messages.invoice_ref}" />
+                            </f:facet>
+                            #{trexuq266xwwqqhxxxxxcuinvoiceList.getSidToEntity(item.trexuq244xwwqqhxxxxxcuorders.b4xxuxxrlxxxcxxxxxxxcinvoice).a0xxuncibvxxxxxxxxxxinvoice}
+                        </h:column>    
+                        <h:column >
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText  value="#{messages.Payment_ref}" />
+                            </f:facet>
+                            #{item.trexuq244xwwqqhxxxxxcuorders.ybxxuxxrblxxxxxxxxxxattach}
+                        </h:column>                        
+             <ui:remove> aug31 2018       
+                        <h:column >
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText  value="#{messages.Autorization_ref}" />
+                            </f:facet>
+                            #{item.trexuq244xwwqqhxxxxxcuorders.yexxuznybvxxxxxxxxxxnotes}
+                        </h:column>                        
+             </ui:remove>
+                        <h:column id="column3h">
+                            <f:facet id="ActorFaceth" name="header">
+                                <h:outputText id="ActorTexth" value="#{messages.Item}" />
+                            </f:facet>
+                            #{item.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript} 
+                        </h:column>                        
+                        <h:column id="column4h">
+                            <f:facet id="PriceFaceth" name="header">
+                                <h:outputText id="PriceTexth" value="#{messages.Price}" />
+                            </f:facet>
+                            <h:outputText id="PriceValueTexth" value="#{item.z5xxzpxravxxxxxxxxxxordprice}" rendered= "#{!item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" >
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+                            <h:outputText id="PriceValueQuoteh" value="Request Quotation" rendered= "#{item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                        </h:column>                        
+                        <h:column id="column5h">
+                            <f:facet id="QuantityFaceth" name="header">
+                                <h:outputText id="QuantityTexth" value="#{messages.Quantity}" />
+                            </f:facet>
+                            #{item.z3xxeqxxbvnxxxxxxxxxqtyordrd}
+                        </h:column>                        
+                        <h:column id="column7h">
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText id="StatusTexth" value="#{messages.status}" />
+                            </f:facet>
+                            #{item.trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid':(item.trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 32 ? 'shipped': (item.trexuq244xwwqqhxxxxxcuorders.zcxxzzfxhhxxxxxxxxxxstatusfl eq 04 ?'returned':'other'))}
+                        </h:column>                        
+                    </p:dataTable>
+
+            </p:panel>
+
+            <p:panel toggleable="true" toggleableHeader="true" id="cartdetailsShHistory"  rendered="#{identity.loggedIn and not r3Cart.inPosMode and not empty fpxxfq1a5xwwqqhxxxxxitemList.getShippedCartedList(0)}"
+              header="#{messages['shipment']} #{messages['done']} #{messages['History']}" switchType="client" expanded="false" 
+              leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+                    <p:dataTable id="CartItemsShHistoryTable"
+                                 value="#{fpxxfq1a5xwwqqhxxxxxitemList.getShippedCartedList(0)}" var="item">
+                        <h:column id="column1h">
+                            <f:facet id="CartRemoveFaceth" name="header">
+                                <h:outputText id="CartRemoveTexth" value="#{messages.shipDate}" />
+                            </f:facet>
+                                <h:outputText value="#{item.zexxcxxrlxxxxxxxxxxxshipdatet}" >
+                                 <f:convertDateTime  dateStyle="short" timeStyle="short" type="both" />
+                                </h:outputText>
+                        </h:column>
+
+                        <h:column id="column2h2">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages.statusdate}" >
+                                </h:outputText>
+                            </f:facet>
+                                <h:outputText value="#{item.xznxcztxlxxxxxxxxxxxstatusfldt}" >
+                                 <f:convertDateTime  dateStyle="medium" timeStyle="medium" type="both" />
+                                </h:outputText>
+                        </h:column>  
+                        <h:column >
+                            <f:facet id="ordref" name="header">
+                                <h:outputText  value="#{messages.Order_ref}" />
+                            </f:facet>
+                            #{item.trexuq255xwwqqhxxxxxshipment.trexuq244xwwqqhxxxxxcuorders.a0xxuncobvxxxxxxxxxxpurchsno}
+                        </h:column>    
+                        <h:column >
+                            <f:facet id="invcs" name="header">
+                                <h:outputText  value="#{messages.invoice_ref}" />
+                            </f:facet>
+                            #{trexuq266xwwqqhxxxxxcuinvoiceList.getSidToEntity(item.z6xxuxxrbvxxxxxxxxxxinvoice).a0xxuncibvxxxxxxxxxxinvoice}
+                        </h:column>    
+
+                        <h:column >
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText  value="#{messages.Payment_ref}" />
+                            </f:facet>
+                            #{item.trexuq255xwwqqhxxxxxshipment.trexuq244xwwqqhxxxxxcuorders.ybxxuxxrblxxxxxxxxxxattach}
+                        </h:column>                        
+   
+                        <h:column id="column3h">
+                            <f:facet id="ActorFaceth" name="header">
+                                <h:outputText id="ActorTexth" value="#{messages.Item}" />
+                            </f:facet>
+                            #{item.fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript} 
+                        </h:column>                        
+                        <h:column id="column4h">
+                            <f:facet id="PriceFaceth" name="header">
+                                <h:outputText id="PriceTexth" value="#{messages.Price}" />
+                            </f:facet>
+                            <h:outputText id="PriceValueTexth" value="#{item.fpxxfq1a5xwwqqhxxxxxitem.b8fbzpxxbvxxxxxxxxxxselprice}" rendered= "#{!item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" >
+                                <f:convertNumber type="currency" currencySymbol="#{authenticator.currencySymbol}" />
+                            </h:outputText>
+                            <h:outputText id="PriceValueQuoteh" value="Request Quotation" rendered= "#{item.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}" />
+                        </h:column>                        
+                        <h:column id="column5h">
+                            <f:facet id="QuantityFaceth" name="header">
+                                <h:outputText id="QuantityTexth" value="#{messages.Quantity}" />
+                            </f:facet>
+                            #{item.zaxxztqrlxxxxxxxxxxxqty}
+                        </h:column>                        
+                        <h:column id="column7h">
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText id="StatusTexth" value="#{messages.status}" />
+                            </f:facet>
+                            #{item.zmxxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid':(item.zmxxzzfxhhxxxxxxxxxxstatusfl eq 32 ? 'shipped': (item.zmxxzzfxhhxxxxxxxxxxstatusfl eq 04 ?'returned':'other'))}
+                        </h:column>                        
+                    </p:dataTable>
+
+            </p:panel>
+
+            <p:panel  toggleable="true" toggleableHeader="true" id="cartdetailsPymntHistory"  rendered="#{identity.loggedIn and r3Cart.inPosMode and not empty trexuq277xwwqqhxxxxxcpaymentList.getSuggestList('NC')}"
+              header="#{messages['payment']} #{messages['done']} #{messages['History']}" switchType="client" collapsed="true" 
+              leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+                    <p:dataTable id="CartItemsPymntHistoryTable"
+                                 value="#{trexuq277xwwqqhxxxxxcpaymentList.getSuggestList('NC')}" var="item">
+
+                        <h:column id="column1h">
+                            <f:facet id="CartRemoveFaceth" name="header">
+                                <h:outputText id="CartRemoveTexth" value="#{messages.payment}" />
+                            </f:facet>
+                                <h:outputText value="#{item.a0xxuncpbvxxxxxxxxxxpayment}" >
+                                </h:outputText>
+                        </h:column>
+                        <h:column id="column1h2">
+                            <f:facet id="CartRemoveFaceth" name="header">
+                                <h:outputText id="CartRemoveTexth1" value="#{messages.amount}" />
+                            </f:facet>
+                                <h:outputText value="#{item.z1xxztprlxxxxxxxxxxxamounttotal}" >
+                                </h:outputText>
+                        </h:column>
+
+                        <h:column id="column2h2">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages.statusdate}" >
+                                </h:outputText>
+                            </f:facet>
+                                <h:outputText value="#{item.z9xxcztxlxxxxxxxxxxxstatusfldt}" >
+                                 <f:convertDateTime  dateStyle="medium" timeStyle="medium" type="both" />
+                                </h:outputText>
+                        </h:column>  
+                        <h:column >
+                            <f:facet id="ordref" name="header">
+                                <h:outputText  value="#{messages.paytype}" />
+                            </f:facet>
+                            #{item.b6xxuxxrbv10xxxxxxxxpaytype}
+                        </h:column>    
+                        <h:column >
+                            <f:facet id="invcs" name="header">
+                                <h:outputText  value="#{messages.paybyid}" />
+                            </f:facet>
+                            #{item.z5xxuxxrbvxxxxxxxxxxpaybyid}
+                        </h:column>    
+
+                        <h:column >
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText  value="#{messages.notes}" />
+                            </f:facet>
+                            #{item.y2xxuxznbvxxxxxxxxxxnotes}
+                        </h:column>                        
+   
+                        <h:column id="column7h">
+                            <f:facet id="StatusFacet" name="header">
+                                <h:outputText id="StatusTexth" value="#{messages.status}" />
+                            </f:facet>
+                            #{item.z8xxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid':(item.z8xxzzfxhhxxxxxxxxxxstatusfl eq 32 ? 'shipped': (item.z8xxzzfxhhxxxxxxxxxxstatusfl eq 04 ?'returned':'other'))}
+                        </h:column>                        
+                    </p:dataTable>
+
+            </p:panel>
+
+
+
+
+
+
+	</h:panelGroup>
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+
+ </h:form>
+ 
+</ui:define>
+
+	
+</ui:composition>

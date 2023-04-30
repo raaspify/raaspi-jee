@@ -1,0 +1,554 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="txxxuq932xwwqqhspxxxactivityjobA0xxuobxbxxxxxxxxxxxsid" value="#{txxxuq932xwwqqhspxxxactivityjobHome.txxxuq932xwwqqhspxxxactivityjobA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewAction action="#{txxxuq932xwwqqhspxxxactivityjobHome.restrict()}" />
+
+</f:metadata>
+                       
+<ui:define name="body">
+    <h:form id="txxxuq932xwwqqhspxxxactivityjobSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!txxxuq932xwwqqhspxxxactivityjobHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ActivityjobHelp']!='ActivityjobHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ActivityjobHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+         <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+    
+    <p:panel>
+        <h:panelGrid columns="10">
+        <f:facet name="header">activityjob</f:facet>
+            <ui:decorate id="a0xxunajbvxxxxxxxxxxjobno" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Jobno']}</ui:define>
+
+             #{txxxuq932xwwqqhspxxxactivityjobHome.instance.a0xxunajbvxxxxxxxxxxjobno}
+        </ui:decorate>
+            <ui:decorate id="b2xxcxxrlxxxxxxxxxxxproddatetDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Proddatet']}</ui:define>
+
+            <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.b2xxcxxrlxxxxxxxxxxxproddatet}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="b3xxzqxrlvxxxxxxxxxxqtyallocDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Qtyalloc']}</ui:define>
+
+             <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.b3xxzqxrlvxxxxxxxxxxqtyalloc}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="b4xxuxcobvxxxxxxxxxxpono" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Pono']}</ui:define>
+
+             #{txxxuq932xwwqqhspxxxactivityjobHome.instance.b4xxuxcobvxxxxxxxxxxpono}
+        </ui:decorate>
+            <ui:decorate id="c2xxuxxrbvxxxxxxxxxxvendor" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Vendor']}</ui:define>
+
+             #{txxxuq932xwwqqhspxxxactivityjobHome.instance.c2xxuxxrbvxxxxxxxxxxvendor}
+        </ui:decorate>
+            <ui:decorate id="c3xxuxxrbv17xxxxxxxxtype" template="layout/display.xhtml">
+            <ui:define name="label">#{messages['Type']}</ui:define>
+
+             #{txxxuq932xwwqqhspxxxactivityjobHome.instance.c3xxuxxrbv17xxxxxxxxtype}
+        </ui:decorate>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" switchType="client" collapsede="true"
+     toggleable="true" toggleableHeader="true">
+    <h:panelGrid columns="10">
+            <ui:decorate id="y3xxuxznbvxxxxxxxxxxnotesDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Notes']}</ui:define>
+
+               <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.y3xxuxznbvxxxxxxxxxxnotes}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="y4xxuzdrbvxxxxxxxxxxdocmntDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Docmnt']}</ui:define>
+
+              <h:graphicImage 
+              value="/ImageServletCdi/?table=TXXXUQ932XWWQQHSPXXXACTIVITYJOB&amp;seq=1&amp;qlf=1&amp;id=#{txxxuq932xwwqqhspxxxactivityjobHome.instance.y4xxuzdrbvxxxxxxxxxxdocmnt}&amp;width=50" rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.getBlobdataTypeMime('TXXXUQ932XWWQQHSPXXXACTIVITYJOB',txxxuq932xwwqqhspxxxactivityjobHome.instance.y4xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+              </h:graphicImage> 
+              <h:commandButton value="+" oncomplete="PF('popup').show()" rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.getBlobdataTypeMime('TXXXUQ932XWWQQHSPXXXACTIVITYJOB',txxxuq932xwwqqhspxxxactivityjobHome.instance.y4xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+              </h:commandButton>
+              <h:outputText value="txxxuq932xwwqqhspxxxactivityjobHome.getClobdata({'TXXXUQ932XWWQQHSPXXXACTIVITYJOB',txxxuq932xwwqqhspxxxactivityjobHome.instance.y4xxuzdrbvxxxxxxxxxxdocmnt,1,1,500)}" rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.getBlobdataTypeMime('TXXXUQ932XWWQQHSPXXXACTIVITYJOB',txxxuq932xwwqqhspxxxactivityjobHome.instance.y4xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('t')}" />
+              <h:outputText value="PDF" rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.getBlobdataTypeMime('TXXXUQ932XWWQQHSPXXXACTIVITYJOB',txxxuq932xwwqqhspxxxactivityjobHome.instance.y4xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('pd',pL)}" />
+              <h:outputText value="XLS" rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.getBlobdataTypeMime('TXXXUQ932XWWQQHSPXXXACTIVITYJOB',txxxuq932xwwqqhspxxxactivityjobHome.instance.y4xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('ex',20)}" />
+              <h:outputText value="PPT" rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.getBlobdataTypeMime('TXXXUQ932XWWQQHSPXXXACTIVITYJOB',txxxuq932xwwqqhspxxxactivityjobHome.instance.y4xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('po',19)}" />
+              <p:dialog id="popup" modal="false" autosized="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                              <h:outputLink value="#" onclick="PF.hide()">
+                                 CLOSE X
+                               </h:outputLink>
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF.hide()">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+
+                             <h:graphicImage
+                               value="/ImageServletCdi/?table=TXXXUQ932XWWQQHSPXXXACTIVITYJOB&amp;seq=1&amp;qlf=1&amp;id=#{txxxuq932xwwqqhspxxxactivityjobHome.instance.y4xxuzdrbvxxxxxxxxxxdocmnt}&amp;width=200" rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.getBlobdataTypeMime('TXXXUQ932XWWQQHSPXXXACTIVITYJOB',txxxuq932xwwqqhspxxxactivityjobHome.instance.y4xxuzdrbvxxxxxxxxxxdocmnt,1,1).startsWith('i')}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="PF.hide()"/>
+              </p:dialog>
+
+        </ui:decorate>
+            <ui:decorate id="z1xxzxxrlvxxxxxxxxxxqtyostndDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Qtyostnd']}</ui:define>
+
+             <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.z1xxzxxrlvxxxxxxxxxxqtyostnd}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="z2xxzxxrlvxxxxxxxxxxqtyalstkDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Qtyalstk']}</ui:define>
+
+             <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.z2xxzxxrlvxxxxxxxxxxqtyalstk}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="z3xxzxxrlvxxxxxxxxxxqtyissudDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Qtyissud']}</ui:define>
+
+             <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.z3xxzxxrlvxxxxxxxxxxqtyissud}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="z4xxcztxlxxxxxxxxxxxstatusfldtDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Statusfldt']}</ui:define>
+
+            <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.z4xxcztxlxxxxxxxxxxxstatusfldt}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="z4xxzxxrlvxxxxxxxxxxjobtotlDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Jobtotl']}</ui:define>
+
+             <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.z4xxzxxrlvxxxxxxxxxxjobtotl}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="z5xxzzfxhhxxxxxxxxxxstatusflDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Statusfl']}</ui:define>
+
+              <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 4 ?'returned/rejected':(txxxuq932xwwqqhspxxxactivityjobHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 8 ?'closed':(txxxuq932xwwqqhspxxxactivityjobHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 16 ?'paid/waiting approval':( txxxuq932xwwqqhspxxxactivityjobHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 32 ?'shipped/approved': (txxxuq932xwwqqhspxxxactivityjobHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl eq 64 ?'invoiced/final approved':'new/other'))))}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl" />
+
+        </ui:decorate>
+            <ui:decorate id="z5xxzzprhvxxxxxxxxxxprintmstatDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Printmstat']}</ui:define>
+
+             <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.z5xxzzprhvxxxxxxxxxxprintmstat}" rendered="#{customIdentity.hasRole('EH')}"/>
+             <h:outputText value="XXXXXX" rendered="#{!customIdentity.hasRole('EH')}"/>
+        </ui:decorate>
+            <ui:decorate id="z6xxczqxlhxxxxxxxxxxprinmtfldtDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Prinmtfldt']}</ui:define>
+
+            <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.z6xxczqxlhxxxxxxxxxxprinmtfldt}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="z7xxzzprhvxxxxxxxxxxprintmstatjDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Printmstatj']}</ui:define>
+
+             <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.z7xxzzprhvxxxxxxxxxxprintmstatj}" rendered="#{customIdentity.hasRole('EH')}"/>
+             <h:outputText value="XXXXXX" rendered="#{!customIdentity.hasRole('EH')}"/>
+        </ui:decorate>
+            <ui:decorate id="z8xxczqxlhxxxxxxxxxxprinmtfldtjDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Prinmtfldtj']}</ui:define>
+
+            <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.z8xxczqxlhxxxxxxxxxxprinmtfldtj}">
+                <f:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </ui:decorate>
+            <ui:decorate id="z9xxuxxrbvxxxxxxxxxxmatcodeoutDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Matcodeout']}</ui:define>
+
+               <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.z9xxuxxrbvxxxxxxxxxxmatcodeout}" rendered="true"/>
+        </ui:decorate>
+            <ui:decorate id="zaxxzxxrlvxxxxxxxxxxqtyoutDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Qtyout']}</ui:define>
+
+             <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.zaxxzxxrlvxxxxxxxxxxqtyout}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zbxxutoylhxxxxxxxxxxownerDecoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner']}</ui:define>
+
+             <h:outputText value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.zbxxutoylhxxxxxxxxxxowner}"  rendered="false"/>
+        </ui:decorate>
+            <ui:decorate id="zzxxu2oxxhxxxxxxxxxxowner2Decoration" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Owner2']}</ui:define>
+
+        </ui:decorate>
+   </h:panelGrid>
+   </p:panel>
+        <div style="clear:both"/>
+    </p:panel>
+    <div class="actionButtons">      
+
+        <h:button outcome="/activityjobEdit.xhtml" 
+                    id="edit" 
+                    rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('SH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('IH')||customIdentity.hasRole('IQ') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}"
+                 value="Edit" styleClass="buttonMain"> 
+          <f:param name="from" value="Txxxuq932xwwqqhspxxxactivityjobList"/>
+          <f:param name="txxxuq932xwwqqhspxxxactivityjobA0xxuobxbxxxxxxxxxxxsid" value="#{txxxuq932xwwqqhspxxxactivityjobHome.txxxuq932xwwqqhspxxxactivityjobA0xxuobxbxxxxxxxxxxxsid}"/>
+        </h:button>
+    </div>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="false" rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.managed}"
+     toggleable="true" toggleableHeader="true">
+ <div  style="overflow: auto;width: 850px;height: auto; ">
+
+  <p:tabView switchType="ajax">
+
+    <p:tab title="Parent #{messages['Activity']}">
+    <div class="association" id="fxxxuq188xwwqqhxxxxxactivityParent">
+        
+        <h:outputText value="No activity" 
+                   rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.fxxxuq188xwwqqhxxxxxactivity == null}"/>
+        
+        <p:dataTable var="fxxxuq188xwwqqhxxxxxactivity"  tableStyle="table-layout:auto;"
+                   value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.fxxxuq188xwwqqhxxxxxactivity}" 
+                rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.fxxxuq188xwwqqhxxxxxactivity != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fxxxuq188xwwqqhxxxxxactivityTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewfxxxuq188xwwqqhxxxxxactivity" 
+                     value="View" 
+                      outcome="/activity.xhtml">
+                       <f:param disable="#{empty fxxxuq188xwwqqhxxxxxactivity.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq188xwwqqhxxxxxactivityA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{fxxxuq188xwwqqhxxxxxactivity.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">activitycode</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.a0xxukaxbvxxxxxxxxxxactivitycode}
+            </p:column>
+            <p:column>
+                <f:facet name="header">descript</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.b1xxuszsbvxxxxxxxxxxdescript}
+            </p:column>
+            <p:column>
+                <f:facet name="header">date</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.b2xxcxxrlxxxxxxxxxxxdate}
+            </p:column>
+            <p:column>
+                <f:facet name="header">source1</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.b3xxuxxrbvxxxxxxxxxxsource1}
+            </p:column>
+            <p:column>
+                <f:facet name="header">upccode</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.b4xxuxxrbvxxxxxxxxxxupccode}
+            </p:column>
+            <p:column>
+                <f:facet name="header">cost</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.b5xxzxxrlvxxxxxxxxxxcost}
+            </p:column>
+            <p:column>
+                <f:facet name="header">replcost</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.b6xxzcxrlvxxxxxxxxxxreplcost}
+            </p:column>
+            <p:column>
+                <f:facet name="header">selprice</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.b7xxzpxrlvxxxxxxxxxxselprice}
+            </p:column>
+            <p:column>
+                <f:facet name="header">spricnew</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.b8xxzxxrhhxxsxxxxxxxspricnew}
+            </p:column>
+            <p:column>
+                <f:facet name="header">spriceffdt</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.b9xxcxxrhhxxsxxxxxxxspriceffdt}
+            </p:column>
+            <p:column>
+                <f:facet name="header">shipcode</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.c1xxuxxrbvxxxxxxxxxxshipcode}
+            </p:column>
+            <p:column>
+                <f:facet name="header">qtylevel1</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.c2xxzxxrlvxxxxxxxxxxqtylevel1}
+            </p:column>
+            <p:column>
+                <f:facet name="header">unit</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.c3xxuuxrbv18xxxxxxxxunit}
+            </p:column>
+            <p:column>
+                <f:facet name="header">caseqty</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.c4xxzxxrlvxxxxxxxxxxcaseqty}
+            </p:column>
+            <p:column>
+                <f:facet name="header">type</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.c5xxuxxrbv37xxxxxxxxtype}
+            </p:column>
+            <p:column>
+                <f:facet name="header">tax1</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.c6xxfxz1bvxxxxxxxxxxtax1}
+            </p:column>
+            <p:column>
+                <f:facet name="header">tax2</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.c7xxfxz2bvxxxxxxxxxxtax2}
+            </p:column>
+            <p:column>
+                <f:facet name="header">effdate</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.c8xxcxxrlxxxxxxxxxxxeffdate}
+            </p:column>
+            <p:column>
+                <f:facet name="header">integrset</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.c9xxuwmrbv40xxxxxxxxintegrset}
+            </p:column>
+            <p:column>
+	    	    <f:facet name="header">activity sid</f:facet>
+		    	#{fxxxuq188xwwqqhxxxxxactivity.fxxxuq188xwwqqhxxxxxactivity.a0xxuobxbxxxxxxxxxxxsid}
+            </p:column>
+            <p:column>
+                <f:facet name="header">subcodesn</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.g2xxuxn1lvxxxxxxxxxxsubcodesn}
+            </p:column>
+            <p:column>
+                <f:facet name="header">subcodesn2</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.g2xxuxn2lvxxxxxxxxxxsubcodesn2}
+            </p:column>
+            <p:column>
+                <f:facet name="header">subcodesn3</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.g2xxuxn3lvxxxxxxxxxxsubcodesn3}
+            </p:column>
+            <p:column>
+                <f:facet name="header">docmnt</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.y8xxuzdrbvxxxxxxxxxxdocmnt}
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.z7xxzzfxhhxxxxxxxxxxstatusfl}
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.z8xxcztxlxxxxxxxxxxxstatusfldt}
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                #{fxxxuq188xwwqqhxxxxxactivity.zixxutoxlhxxxxxxxxxxowner}
+            </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+
+    <p:tab title="Parent #{messages['Customer']}">
+    <div class="association" id="jxxxuq201xwwqqhxxxxxcustomerParent">
+        
+        <h:outputText value="No customer" 
+                   rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.jxxxuq201xwwqqhxxxxxcustomer == null}"/>
+        
+        <p:dataTable var="jxxxuq201xwwqqhxxxxxcustomer"  tableStyle="table-layout:auto;"
+                   value="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.jxxxuq201xwwqqhxxxxxcustomer}" 
+                rendered="#{txxxuq932xwwqqhspxxxactivityjobHome.instance.jxxxuq201xwwqqhxxxxxcustomer != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="jxxxuq201xwwqqhxxxxxcustomerTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewjxxxuq201xwwqqhxxxxxcustomer" 
+                     value="View" 
+                      outcome="/customer.xhtml">
+                       <f:param disable="#{empty jxxxuq201xwwqqhxxxxxcustomer.a0xxuobxbxxxxxxxxxxxsid}" name="jxxxuq201xwwqqhxxxxxcustomerA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{jxxxuq201xwwqqhxxxxxcustomer.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">customer</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.a0xxukxxbvxxxxxxxxxxcustomer}
+            </p:column>
+            <p:column>
+                <f:facet name="header">title</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.b1xxuxxxbv21xxxxxxxxtitle}
+            </p:column>
+            <p:column>
+                <f:facet name="header">jobtitle</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.b2xxuxxxbx22xxxxxxxxjobtitle}
+            </p:column>
+            <p:column>
+                <f:facet name="header">lastname</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.c1xxuslnbvixxxxxxxxxlastname}
+            </p:column>
+            <p:column>
+                <f:facet name="header">firstname</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.c2xxu2fnbvixxxxxxxxxfirstname}
+            </p:column>
+            <p:column>
+                <f:facet name="header">middlenam</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.c3xxuxxxbxxxxxxxxxxxmiddlenam}
+            </p:column>
+            <p:column>
+                <f:facet name="header">customerascompanyname</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.d1xxu3cnbvixxxxxxxxxcustomerascompanyname}
+            </p:column>
+            <p:column>
+	    	    <f:facet name="header">company sid</f:facet>
+		    	#{jxxxuq201xwwqqhxxxxxcustomer.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid}
+            </p:column>
+            <p:column>
+                <f:facet name="header">type</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.f1xxuxxxav28xxxxxxxxtype}
+            </p:column>
+            <p:column>
+                <f:facet name="header">integrset</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.f2xxuwmxbv40xxxxxxxxintegrset}
+            </p:column>
+            <p:column>
+	    	    <f:facet name="header">location sid</f:facet>
+		    	#{jxxxuq201xwwqqhxxxxxcustomer.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid}
+            </p:column>
+            <p:column>
+	    	    <f:facet name="header">addressByMailtocode sid</f:facet>
+		    	#{jxxxuq201xwwqqhxxxxxcustomer.fxxxuq111xwwqqhxxxxxaddressByMailtocode.a0xxuobxbxxxxxxxxxxxsid}
+            </p:column>
+            <p:column>
+	    	    <f:facet name="header">addressByShiptocode sid</f:facet>
+		    	#{jxxxuq201xwwqqhxxxxxcustomer.fxxxuq111xwwqqhxxxxxaddressByShiptocode.a0xxuobxbxxxxxxxxxxxsid}
+            </p:column>
+            <p:column>
+                <f:facet name="header">phoneo</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.p1xxh4pobv27xxxxxxxxphoneo}
+            </p:column>
+            <p:column>
+                <f:facet name="header">phoneh</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.p2xxh5phbv27xxxxxxxxphoneh}
+            </p:column>
+            <p:column>
+                <f:facet name="header">phonec</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.p3xxhxxxbv27xxxxxxxxphonec}
+            </p:column>
+            <p:column>
+                <f:facet name="header">phonex</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.p4xxhxxxbx27xxxxxxxxphonex}
+            </p:column>
+            <p:column>
+                <f:facet name="header">lanaddr</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.q1xxhxxxbx19xxxxxxxxlanaddr}
+            </p:column>
+            <p:column>
+                <f:facet name="header">wanaddr</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.q2xxhxxxbx25xxxxxxxxwanaddr}
+            </p:column>
+            <p:column>
+                <f:facet name="header">lmailaddr</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.q3xxhxxxbv44xxxxxxxxlmailaddr}
+            </p:column>
+            <p:column>
+                <f:facet name="header">imailaddr</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.q4xxhxxxbv24xxxxxxxximailaddr}
+            </p:column>
+            <p:column>
+                <f:facet name="header">rmailaddr</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.q5xxuxxxbxxxxxxxxxxxrmailaddr}
+            </p:column>
+            <p:column>
+                <f:facet name="header">intaddr</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.q6xxhxxxbx23xxxxxxxxintaddr}
+            </p:column>
+            <p:column>
+                <f:facet name="header">dob</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.q7xxdxtdbvxxxxxxxxxxdob}
+            </p:column>
+            <p:column>
+                <f:facet name="header">placeofbirth</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.q7xxhxxxbvxxxxxxxxxxplaceofbirth}
+            </p:column>
+            <p:column>
+                <f:facet name="header">inraddr</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.q7xxhxxxbxxxxxxxxxxxinraddr}
+            </p:column>
+            <p:column>
+                <f:facet name="header">age</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.q7xxhxxxlvxxxxxxxxxxage}
+            </p:column>
+            <p:column>
+                <f:facet name="header">sex</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.q7xxtxsebvxxxxxxxxxxsex}
+            </p:column>
+            <p:column>
+                <f:facet name="header">shiplabel</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.r1xxfxxxbexxxxxxxxxxshiplabel}
+            </p:column>
+            <p:column>
+                <f:facet name="header">docmnt</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.ycxxuzdrbvxxxxxxxxxxdocmnt}
+            </p:column>
+            <p:column>
+	    	    <f:facet name="header">account sid</f:facet>
+		    	#{jxxxuq201xwwqqhxxxxxcustomer.yxxxch601xwwqqhxxxxxaccount.a0xxuobxbxxxxxxxxxxxsid}
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.zaxxzzfxhhxxxxxxxxxxstatusfl}
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.zbxxcztxlxxxxxxxxxxxstatusfldt}
+            </p:column>
+            <p:column>
+                <f:facet name="header">owner</f:facet>
+                #{jxxxuq201xwwqqhxxxxxcustomer.zdxxutoxlhxxxxxxxxxxowner}
+            </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <p:tab title="#{messages['Activityjobdetails']}">
+   <div class="association" id="xoxxuq943xwwqqhxxxxxactivityjobdetailsesChildren">
+        
+  <h:outputText value="No activityjobdetailses" 
+                   rendered="#{empty txxxuq932xwwqqhspxxxactivityjobHome.xoxxuq943xwwqqhxxxxxactivityjobdetailses}"/>
+  <p:dataTable value="#{txxxuq932xwwqqhspxxxactivityjobHome.xoxxuq943xwwqqhxxxxxactivityjobdetailses}" 
+                       var="xoxxuq943xwwqqhxxxxxactivityjobdetails" 
+                  rendered="#{not empty txxxuq932xwwqqhspxxxactivityjobHome.xoxxuq943xwwqqhxxxxxactivityjobdetailses}" 
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="xoxxuq943xwwqqhxxxxxactivityjobdetailsesTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="selectxoxxuq943xwwqqhxxxxxactivityjobdetails" 
+                     value="Select" 
+                      outcome="/activityjobdetails.xhtml">
+                    <f:param disable="#{empty xoxxuq943xwwqqhxxxxxactivityjobdetails.a0xxuobxbxxxxxxxxxxxsid}" name="xoxxuq943xwwqqhxxxxxactivityjobdetailsA0xxuobxbxxxxxxxxxxxsid" 
+                            value="#{xoxxuq943xwwqqhxxxxxactivityjobdetails.a0xxuobxbxxxxxxxxxxxsid}"/>
+                    <f:param name="xoxxuq943xwwqqhxxxxxactivityjobdetailsFrom" value="Txxxuq932xwwqqhspxxxactivityjob"/>
+                </h:link>
+            </p:column>
+            <p:column>
+                <f:facet name="header">line</f:facet>
+                <h:outputText value="#{xoxxuq943xwwqqhxxxxxactivityjobdetails.b1xxzo11bvlxxxxxxxxxline}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfl</f:facet>
+                <h:outputText value="#{xoxxuq943xwwqqhxxxxxactivityjobdetails.zaxxzzfxhhxxxxxxxxxxstatusfl}"/>
+            </p:column>
+            <p:column>
+                <f:facet name="header">statusfldt</f:facet>
+                <h:outputText value="#{xoxxuq943xwwqqhxxxxxactivityjobdetails.zbxxcztxlxxxxxxxxxxxstatusfldt}"/>
+            </p:column>
+  </p:dataTable>
+
+   </div>
+    
+    <div class="actionButtons">
+    </div>        
+   </p:tab>
+    </p:tabView>
+</div>        
+</p:panel>
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

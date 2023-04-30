@@ -1,0 +1,742 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="xxxxeh742xwwqqhxxxxxwageearnerauxA0xxuobxbxxxxxxxxxxxsid" value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.xxxxeh742xwwqqhxxxxxwageearnerauxA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="xxxxeh742xwwqqhxxxxxwageearnerauxFrom" value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.xxxxeh742xwwqqhxxxxxwageearnerauxFrom}"/>
+    <f:viewAction action="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.restrict()}" />
+    <f:viewAction action="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Wageearneraux']}</ui:define>
+
+<ui:define name="body">
+<h:form id="xxxxeh742xwwqqhxxxxxwageearneraux" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("xxxxeh742xwwqqhxxxxxwageearneraux:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!xxxxeh742xwwqqhxxxxxwageearnerauxHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['WageearnerauxEditHelp']!='WageearnerauxEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['WageearnerauxEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.managed ? 'Edit' : 'Add'} #{messages['Wageearneraux']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+       <p:tabView switchType="client" >
+           <p:tab title="#{messages['Wageearner']}"
+             rendered="true">
+           <ui:decorate id="xxxxiq711xwwqqhxxxxxwageearnerDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Wageearner']} 
+            </ui:define>
+                <p:remoteCommand name="xxxxiq711xwwqqhxxxxxwageearnerFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="xxxxiq711xwwqqhxxxxxwageearnersm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.validateAndSelectXxxxxxxxwageearnerid}" 
+                   value="#{xxxxiq711xwwqqhxxxxxwageearnerHome.lastxxxxiq711xwwqqhxxxxxwageearnerP}" onchange="xxxxiq711xwwqqhxxxxxwageearnerFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{xxxxiq711xwwqqhxxxxxwageearnerList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   </p:tabView>
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a1xxzo11bvlxxxxxxxxxlineDecoration"    >
+        <h:outputLabel  for="a1xxzo11bvlxxxxxxxxxline" value="#{messages['Line']}">
+      </h:outputLabel>
+                <h:inputText id="a1xxzo11bvlxxxxxxxxxline" 
+                          value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.a1xxzo11bvlxxxxxxxxxline}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b1xxutsxbvxxxxxxxxxxsinDecoration"    >
+        <h:outputLabel  for="b1xxutsxbvxxxxxxxxxxsin" value="#{messages['Sin']}">
+      </h:outputLabel>
+
+         <h:inputText id="b1xxutsxbvxxxxxxxxxxsin" 
+                           size="20"
+                      maxlength="12"
+                          value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.b1xxutsxbvxxxxxxxxxxsin}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z1xxztwllvxxxxxxxxxxwcbytdlDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z1xxztwllvxxxxxxxxxxwcbytdl" value="#{messages['Wcbytdl']}">
+      </h:outputLabel>
+      <h:inputText id="z1xxztwllvxxxxxxxxxxwcbytdl"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z1xxztwllvxxxxxxxxxxwcbytdl}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z1xxztwllvxxxxxxxxxxwcbytdl}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z2xxztwnlvxxxxxxxxxxwcbytdnDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxztwnlvxxxxxxxxxxwcbytdn" value="#{messages['Wcbytdn']}">
+      </h:outputLabel>
+      <h:inputText id="z2xxztwnlvxxxxxxxxxxwcbytdn"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z2xxztwnlvxxxxxxxxxxwcbytdn}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z2xxztwnlvxxxxxxxxxxwcbytdn}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z3xxztellvxxxxxxxxxxinsytdlDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z3xxztellvxxxxxxxxxxinsytdl" value="#{messages['Insytdl']}">
+      </h:outputLabel>
+      <h:inputText id="z3xxztellvxxxxxxxxxxinsytdl"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z3xxztellvxxxxxxxxxxinsytdl}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z3xxztellvxxxxxxxxxxinsytdl}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z4xxztenlvxxxxxxxxxxinsytdnDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z4xxztenlvxxxxxxxxxxinsytdn" value="#{messages['Insytdn']}">
+      </h:outputLabel>
+      <h:inputText id="z4xxztenlvxxxxxxxxxxinsytdn"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z4xxztenlvxxxxxxxxxxinsytdn}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z4xxztenlvxxxxxxxxxxinsytdn}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z5xxztvllvxxxxxxxxxxvacatonylDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z5xxztvllvxxxxxxxxxxvacatonyl" value="#{messages['Vacatonyl']}">
+      </h:outputLabel>
+      <h:inputText id="z5xxztvllvxxxxxxxxxxvacatonyl"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z5xxztvllvxxxxxxxxxxvacatonyl}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z5xxztvllvxxxxxxxxxxvacatonyl}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z6xxztvnlvxxxxxxxxxxvacatonynDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z6xxztvnlvxxxxxxxxxxvacatonyn" value="#{messages['Vacatonyn']}">
+      </h:outputLabel>
+      <h:inputText id="z6xxztvnlvxxxxxxxxxxvacatonyn"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z6xxztvnlvxxxxxxxxxxvacatonyn}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z6xxztvnlvxxxxxxxxxxvacatonyn}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z7xxztpllvxxxxxxxxxxpayytdlDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z7xxztpllvxxxxxxxxxxpayytdl" value="#{messages['Payytdl']}">
+      </h:outputLabel>
+      <h:inputText id="z7xxztpllvxxxxxxxxxxpayytdl"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z7xxztpllvxxxxxxxxxxpayytdl}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z7xxztpllvxxxxxxxxxxpayytdl}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z8xxztfllvxxxxxxxxxxfpensiytlDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z8xxztfllvxxxxxxxxxxfpensiytl" value="#{messages['Fpensiytl']}">
+      </h:outputLabel>
+      <h:inputText id="z8xxztfllvxxxxxxxxxxfpensiytl"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z8xxztfllvxxxxxxxxxxfpensiytl}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z8xxztfllvxxxxxxxxxxfpensiytl}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z9xxztsnlvxxxxxxxxxxppensiytlDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z9xxztsnlvxxxxxxxxxxppensiytl" value="#{messages['Ppensiytl']}">
+      </h:outputLabel>
+      <h:inputText id="z9xxztsnlvxxxxxxxxxxppensiytl"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z9xxztsnlvxxxxxxxxxxppensiytl}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.z9xxztsnlvxxxxxxxxxxppensiytl}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zaxxztxllvxxxxxxxxxxitaxytdlDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zaxxztxllvxxxxxxxxxxitaxytdl" value="#{messages['Itaxytdl']}">
+      </h:outputLabel>
+      <h:inputText id="zaxxztxllvxxxxxxxxxxitaxytdl"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zaxxztxllvxxxxxxxxxxitaxytdl}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zaxxztxllvxxxxxxxxxxitaxytdl}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zbxxztyllvnxxxxxxxxxptaxytdlDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zbxxztyllvnxxxxxxxxxptaxytdl" value="#{messages['Ptaxytdl']}">
+      </h:outputLabel>
+      <h:inputText id="zbxxztyllvnxxxxxxxxxptaxytdl"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zbxxztyllvnxxxxxxxxxptaxytdl}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zbxxztyllvnxxxxxxxxxptaxytdl}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zcxxztpnlvxxxxxxxxxxpayytdnDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zcxxztpnlvxxxxxxxxxxpayytdn" value="#{messages['Payytdn']}">
+      </h:outputLabel>
+      <h:inputText id="zcxxztpnlvxxxxxxxxxxpayytdn"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zcxxztpnlvxxxxxxxxxxpayytdn}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zcxxztpnlvxxxxxxxxxxpayytdn}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zdxxztfnlvxxxxxxxxxxfpensiytnDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zdxxztfnlvxxxxxxxxxxfpensiytn" value="#{messages['Fpensiytn']}">
+      </h:outputLabel>
+      <h:inputText id="zdxxztfnlvxxxxxxxxxxfpensiytn"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zdxxztfnlvxxxxxxxxxxfpensiytn}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zdxxztfnlvxxxxxxxxxxfpensiytn}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zexxztsnlvxxxxxxxxxxppensiytnDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zexxztsnlvxxxxxxxxxxppensiytn" value="#{messages['Ppensiytn']}">
+      </h:outputLabel>
+      <h:inputText id="zexxztsnlvxxxxxxxxxxppensiytn"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zexxztsnlvxxxxxxxxxxppensiytn}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zexxztsnlvxxxxxxxxxxppensiytn}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zfxxztxnlvxxxxxxxxxxitaxytdnDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zfxxztxnlvxxxxxxxxxxitaxytdn" value="#{messages['Itaxytdn']}">
+      </h:outputLabel>
+      <h:inputText id="zfxxztxnlvxxxxxxxxxxitaxytdn"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zfxxztxnlvxxxxxxxxxxitaxytdn}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zfxxztxnlvxxxxxxxxxxitaxytdn}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zgxxztynlvxxxxxxxxxxpatxytdnDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zgxxztynlvxxxxxxxxxxpatxytdn" value="#{messages['Patxytdn']}">
+      </h:outputLabel>
+      <h:inputText id="zgxxztynlvxxxxxxxxxxpatxytdn"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zgxxztynlvxxxxxxxxxxpatxytdn}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zgxxztynlvxxxxxxxxxxpatxytdn}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zhxxzxxxlvxxxxxxxxxxgpayytdlDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zhxxzxxxlvxxxxxxxxxxgpayytdl" value="#{messages['Gpayytdl']}">
+      </h:outputLabel>
+      <h:inputText id="zhxxzxxxlvxxxxxxxxxxgpayytdl"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zhxxzxxxlvxxxxxxxxxxgpayytdl}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zhxxzxxxlvxxxxxxxxxxgpayytdl}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zixxzxxxlvxxxxxxxxxxgpayytdnDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zixxzxxxlvxxxxxxxxxxgpayytdn" value="#{messages['Gpayytdn']}">
+      </h:outputLabel>
+      <h:inputText id="zixxzxxxlvxxxxxxxxxxgpayytdn"  
+         value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zixxzxxxlvxxxxxxxxxxgpayytdn}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zixxzxxxlvxxxxxxxxxxgpayytdn}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zjxxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="zjxxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="zjxxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zjxxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="zkxxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zkxxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="zkxxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zkxxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="zlxxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zlxxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="zlxxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zlxxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.} #{messages['sid']} #{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance. !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.persist()}"
+                       disabled="#{!xxxxeh742xwwqqhxxxxxwageearnerauxHome.wired}"
+                       rendered="#{!xxxxeh742xwwqqhxxxxxwageearnerauxHome.managed  and !xxxxeh742xwwqqhxxxxxwageearnerauxHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.update()}"
+                       rendered="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.managed  and !xxxxeh742xwwqqhxxxxxwageearnerauxHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.update()}"
+                       rendered="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.managed and xxxxeh742xwwqqhxxxxxwageearnerauxHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.remove()}"
+                       rendered="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.managed and !xxxxeh742xwwqqhxxxxxwageearnerauxHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/wageearnerauxEdit.xhtml"
+                       rendered="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{xxxxeh742xwwqqhxxxxxwageearnerauxList.reportName}"/>
+            <f:param name="displayAs" value="#{xxxxeh742xwwqqhxxxxxwageearnerauxList.displayAs}" /> 
+            <h:button outcome="/wageearnerauxList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Wageearneraux']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty xxxxeh742xwwqqhxxxxxwageearnerauxHome.xxxxeh742xwwqqhxxxxxwageearnerauxFrom ? 'home' : xxxxeh742xwwqqhxxxxxwageearnerauxHome.xxxxeh742xwwqqhxxxxxwageearnerauxFrom}.xhtml"
+                rendered="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.managed or xxxxeh742xwwqqhxxxxxwageearnerauxHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty xxxxeh742xwwqqhxxxxxwageearnerauxHome.xxxxeh742xwwqqhxxxxxwageearnerauxFrom ? 'home' : xxxxeh742xwwqqhxxxxxwageearnerauxHome.xxxxeh742xwwqqhxxxxxwageearnerauxFrom}.xhtml"
+                rendered="#{!xxxxeh742xwwqqhxxxxxwageearnerauxHome.managed and !xxxxeh742xwwqqhxxxxxwageearnerauxHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="true" rendered="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" toggleable="true" toggleableHeader="true">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+  <p:tabView switchType="ajax">
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Wageearner']}">
+    <div class="association" id="xxxxiq711xwwqqhxxxxxwageearnerParent">
+        
+        <h:outputText value="No wageearner" 
+                   rendered="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.xxxxiq711xwwqqhxxxxxwageearner == null}"/>
+        
+        <p:dataTable var="xxxxiq711xwwqqhxxxxxwageearner" tableStyle="table-layout:auto;"
+                   value="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.xxxxiq711xwwqqhxxxxxwageearner}" 
+                rendered="#{xxxxeh742xwwqqhxxxxxwageearnerauxHome.instance.xxxxiq711xwwqqhxxxxxwageearner != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="xxxxiq711xwwqqhxxxxxwageearnerTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewwageearner" 
+                     value="View" 
+                      outcome="/wageearner.xhtml">
+                       <f:param disable="#{empty xxxxiq711xwwqqhxxxxxwageearner.a0xxuobxbxxxxxxxxxxxsid}" name="xxxxiq711xwwqqhxxxxxwageearnerA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{xxxxiq711xwwqqhxxxxxwageearner.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">wageearnerid</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.a0xxukaxbvxxxxxxxxxxwageearnerid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sin</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.b2xxutsxbvxxxxxxxxxxsin}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">birthdt</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.b3xxdtbruxxxxxxxxxxxbirthdt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">fedclaim</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.b4xxztfcuvxxxxxxxxxxfedclaim}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">provclaim</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.b5xxztpcuvxxxxxxxxxxprovclaim}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">payyrfreq</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.b6xxztpfbvxxxxxxxxxxpayyrfreq}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">payperiod</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.b7xxztppbvxxxxxxxxxxpayperiod}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">wcb</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.c1xxftwcbvxxxxxxxxxxwcb}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">emplinsur</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.c2xxfteibvxxxxxxxxxxemplinsur}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">vacretain</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.c3xxftvrbvxxxxxxxxxxvacretain}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">wageunit</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.c4xxutwubvxxxxxxxxxxwageunit}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">wagerate</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.c5xxztwrbvxxxxxxxxxxwagerate}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">otimeunit</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.c6xxutoubvxxxxxxxxxxotimeunit}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">otimerate</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.c7xxztorbvxxxxxxxxxxotimerate}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">wageunits</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.d1xxzrwubvxxxxxxxxxxwageunits}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">otimunits</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.d2xxztosbvxxxxxxxxxxotimunits}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">commission</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.d3xxztcxbvxxxxxxxxxxcommission}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">benefits</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.d4xxztvxbvxxxxxxxxxxbenefits}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">advance</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.e1xxztpabvxxxxxxxxxxadvance}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">pension</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.e2xxztpobvxxxxxxxxxxpension}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">uniondues</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.e3xxztudbvxxxxxxxxxxuniondues}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">medical</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.e4xxztmdbvxxxxxxxxxxmedical}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">employee sid</f:facet>
+		    	  #{xxxxiq711xwwqqhxxxxxwageearner.jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">docmnt</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.y5xxuzdrbvxxxxxxxxxxdocmnt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">ovtimeout</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.z5xxztoabvxxxxxxxxxxovtimeout}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.zjxxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.zkxxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{xxxxiq711xwwqqhxxxxxwageearner.zlxxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

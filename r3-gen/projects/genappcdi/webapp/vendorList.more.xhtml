@@ -1,0 +1,700 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewParam name="jxxxuq300xwwqqhxxxxxvendorA0xxuobxbxxxxxxxxxxxsid" value="#{jxxxuq300xwwqqhxxxxxvendorHome.jxxxuq300xwwqqhxxxxxvendorA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="firstResult"
+                    value="#{jxxxuq300xwwqqhxxxxxvendorList.firstResult}"/>
+    <f:viewParam name="maxResultsVal"
+                    value="#{jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal}"/>
+    <f:viewAction action="#{jxxxuq300xwwqqhxxxxxvendorHome.restrict()}" />
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to list #{messages['Vendor']}</ui:define>
+
+<ui:define name="body">
+    
+    <h:form id="jxxxuq300xwwqqhxxxxxvendorSearch" styleClass="edit">
+<h:outputStylesheet>
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="#{messages['home']}" propagation="end"  outcome="/home.xhtml" />
+             <p:ajaxStatus name="buttonStatus">
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['VendorListHelp']!='VendorListHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['VendorListHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+
+
+
+ <p:panel style="width: 50%;" header="#{messages['Vendor']}- #{messages['List']} #{messages['Search']} #{messages['Result']}, #{messages['click']} #{messages['to']} #{messages['change']} #{messages['search']}  #{messages['criteria']}" switchType="ajax" collapsed="true"
+     toggleable="true" toggleableHeader="true">
+
+<h:panelGrid columns="20">
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['string']} </ui:define>
+  <h:inputText id="searchV" value="#{jxxxuq300xwwqqhxxxxxvendorList.searchVal}"/>
+ </ui:decorate>
+  <h:outputText id="searchVJ" value="#{jxxxuq300xwwqqhxxxxxvendorList.searchValJ}" rendered="#{jxxxuq300xwwqqhxxxxxvendorList.searchVal.isEmpty()}"/>
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label">#{messages['search']} #{messages['date']} #{messages['from']} </ui:define>
+  <h:inputText id="toDay" ph:type="date" value="#{jxxxuq300xwwqqhxxxxxvendorList.searchDate}" >
+  <f:convertDateTime pattern="yyyy-MM-dd"/>  </h:inputText>
+ </ui:decorate>
+ <h:commandButton id="setToday" render="toDay" value="#{messages['set']} #{messages['Today']}"   action="#{jxxxuq300xwwqqhxxxxxvendorList.setSearchDate(jxxxuq300xwwqqhxxxxxvendorHome.currentTime)}" />
+
+ <ui:decorate template="layout/display.xhtml">
+  <ui:define name="label"> #{messages['status']}  </ui:define>
+  <h:panelGrid columns="2" >
+         <h:selectOneMenu value="#{jxxxuq300xwwqqhxxxxxvendorList.searchStatus}"> 
+          <f:selectItem itemLabel="all" itemValue="#{null}"/>
+          <f:selectItem itemLabel="open" itemValue="0"/>
+          <f:selectItem itemLabel="active/ordered" itemValue="1"/>
+           <f:selectItem itemLabel="return" itemValue="4"/>
+          <f:selectItem itemLabel="closed" itemValue="8"/>
+           <f:selectItem itemLabel="paid" itemValue="16"/>
+           <f:selectItem itemLabel="partial/shipped" itemValue="32"/>
+           <f:selectItem itemLabel="printed/final approved" itemValue="512"/>
+           <f:selectItem itemLabel="unsubscribed" itemValue="64"/>
+          <f:selectItem itemLabel="marked" itemValue="128"/>
+          <f:selectItem itemLabel="deleted" itemValue="256"/>
+         </h:selectOneMenu>
+  </h:panelGrid>
+ </ui:decorate>
+</h:panelGrid>
+
+
+
+<h:panelGrid columns="8">
+          <f:facet name="header">#{messages['Search_Range']}
+          </f:facet>   
+          <h:graphicImage value="/img/Resultset_first16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{jxxxuq300xwwqqhxxxxxvendorList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{jxxxuq300xwwqqhxxxxxvendorList.suggest(jxxxuq300xwwqqhxxxxxvendorHome.prefix)}" var="result"
+                     itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            <h:graphicImage value="/img/Resultset_last16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{jxxxuq300xwwqqhxxxxxvendorList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                   <f:selectItems value="#{jxxxuq300xwwqqhxxxxxvendorList.suggest(jxxxuq300xwwqqhxxxxxvendorHome.prefix)}" var="result"
+                    itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+
+</h:panelGrid>
+        <div class="actionButtons">
+            <h:commandButton id="search" render="jxxxuq300xwwqqhxxxxxvendorList,globalMessages" status="buttonStatus" value="#{messages['Search']}" 
+              actionListener="#{jxxxuq300xwwqqhxxxxxvendorList.getFirstResult()}" rendered="#{jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal lt 49}"/>
+            &nbsp;<h:button id="reset" value="#{messages['Reset']}"  includePageParams="false"/>
+        </div>
+
+</p:panel>
+
+    <p:panel>
+
+        <div class="actionButtons">
+             <h:commandButton id="copyallt" value="Copy All Flagged"  action="#{jxxxuq300xwwqqhxxxxxvendorHome.copyAllMarked()}" 
+                rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal lt 49}" status="buttonStatus"/>
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+             <h:commandButton id="deleteallt" value="#{messages['Delete']} #{messages['All']} #{messages['Flagged']}"  action="#{jxxxuq300xwwqqhxxxxxvendorHome.deleteAllFlagged()}"
+              onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal lt 49}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Deletes']} #{messages['detail']} #{messages['records']} #{messages['as-well']},#{messages['but']} #{messages['not']} #{messages['all']} #{messages['constraints']}"/></span> </p:tooltip> 
+             </h:commandButton>
+             <h:commandButton id="updateallt" value="Update All Flagged"  rendered="false" action="#{jxxxuq300xwwqqhxxxxxvendorHome.updateAllFlagged()}" />
+             <h:commandButton id="emailIcal" value="#{messages['email']} #{messages['as']} #{messages['iCalendar']}"  rendered="false" action="#{jxxxuq300xwwqqhxxxxxvendorHome.writeAsIcalText()}"/>
+
+            <h:button outcome="/#{empty jxxxuq300xwwqqhxxxxxvendorFrom ? 'home' : jxxxuq300xwwqqhxxxxxvendorFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+             <ui:remove>  do not render list page once > 50 rows  to avoid excedding max http params </ui:remove>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="maxrows6" value="6 #{messages['rows']}"  action="#{jxxxuq300xwwqqhxxxxxvendorList.setMaxResultsVal(6)}" rendered="#{jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows5" value="50 #{messages['rows']}"  action="#{jxxxuq300xwwqqhxxxxxvendorList.setMaxResultsVal(50)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal lt 49}"/>
+             <h:commandButton id="maxrows1" value="100 #{messages['rows']}"  action="#{jxxxuq300xwwqqhxxxxxvendorList.setMaxResultsVal(100)}" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile and jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal lt 49}"/>
+             <h:outputText value="#{messages['show']}"/>
+             <h:commandButton id="skipC" value="#{messages['skip']} #{messages['columns']}"  action="#{jxxxuq300xwwqqhxxxxxvendorList.setskipColumns(true)}" rendered="#{jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal lt 49}"/>
+             <h:commandButton id="resetC" value="#{messages['reset']} #{messages['columns']}"  action="#{jxxxuq300xwwqqhxxxxxvendorList.setskipColumns(false)}" rendered="#{jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal lt 49}"/>
+
+        </div>
+
+        <f:facet name="header">
+         <h:outputText rendered="#{!(ity.hasRole('VQ') || customIdentity.hasRole('VW'))}" value="Vendor Search Results showing #{empty jxxxuq300xwwqqhxxxxxvendorList.resultList ? 0 : (jxxxuq300xwwqqhxxxxxvendorList.paginated ? jxxxuq300xwwqqhxxxxxvendorList.resultList.size() : jxxxuq300xwwqqhxxxxxvendorList.resultCount)} of #{jxxxuq300xwwqqhxxxxxvendorList.resultCount}"/>
+        </f:facet>
+    <div class="results" id="jxxxuq300xwwqqhxxxxxvendorList" style="overflow-x:auto">
+
+    <h:outputText value="The Vendor search returned no results."
+               rendered="#{empty jxxxuq300xwwqqhxxxxxvendorList.resultList}"/>
+
+
+
+
+    <p:dataTable id="jxxxuq300xwwqqhxxxxxvendorList"  frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%" rows="#{jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal}" scrollRows="6"
+           var="_jxxxuq300xwwqqhxxxxxvendor" selection="#{jxxxuq300xwwqqhxxxxxvendorHome.yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid}" rowKey="#{_jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid}"
+           value="#{jxxxuq300xwwqqhxxxxxvendorList.resultList}"
+           rendered="#{not empty jxxxuq300xwwqqhxxxxxvendorList.resultList}">
+         <p:column headerText="Action">
+            <h:selectBooleanCheckbox id="MarkItCheckbox" value="#{jxxxuq300xwwqqhxxxxxvendorHome.checked[_jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid]}"/>
+            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+            <h:link outcome="/#{empty from ? 'vendor' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+                   propagation="#{empty from ? 'none' : 'default'}"
+                      id="jxxxuq300xwwqqhxxxxxvendorViewId">
+                <f:param name="jxxxuq300xwwqqhxxxxxvendorA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+             <h:link outcome="/vendorEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="jxxxuq300xwwqqhxxxxxvendorEdit1"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') ||customIdentity.hasRole('SH') ||customIdentity.hasRole('EH') 
+                  || (customIdentity.hasRole('VH') ||customIdentity.hasRole('VQ')
+                  and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="jxxxuq300xwwqqhxxxxxvendorA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            <h:commandButton id="Download1" image="/img/arrow_down16.png" rendered="#{empty from and _jxxxuq300xwwqqhxxxxxvendor.ycxxuzdrbvxxxxxxxxxxdocmnt.length() >2}" action="#{jxxxuq300xwwqqhxxxxxvendorHome.downloadThis(_jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </p:column>
+        <p:column rendered = "#{!jxxxuq300xwwqqhxxxxxvendorList.skipColumns}"
+                    headerText="Sid">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid}"  id="a0xxuobxbxxxxxxxxxxxsid" />
+        </p:column>
+        <p:column rendered = "#{!jxxxuq300xwwqqhxxxxxvendorList.skipColumns}"
+                    headerText="Vendor">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxukxxbvxxxxxxxxxxvendor) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.a0xxukxxbvxxxxxxxxxxvendor}"  id="a0xxukxxbvxxxxxxxxxxvendor" rendered="true" />
+        </p:column>
+        <p:column rendered = "#{!jxxxuq300xwwqqhxxxxxvendorList.skipColumns}"
+                    headerText="Title">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b1xxuxxrbv21xxxxxxxxtitle) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.b1xxuxxrbv21xxxxxxxxtitle}"  id="b1xxuxxrbv21xxxxxxxxtitle" />
+        </p:column>
+        <p:column rendered = "#{!jxxxuq300xwwqqhxxxxxvendorList.skipColumns}"
+                    headerText="Jobtitle">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b2xxuxxrbv22xxxxxxxxjobtitle) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.b2xxuxxrbv22xxxxxxxxjobtitle}"  id="b2xxuxxrbv22xxxxxxxxjobtitle" />
+        </p:column>
+        <p:column rendered = "#{!jxxxuq300xwwqqhxxxxxvendorList.skipColumns}"
+                    headerText="Lastname">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b3xxuslnbvxxxxxxxxxxlastname) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.b3xxuslnbvxxxxxxxxxxlastname}"  id="b3xxuslnbvxxxxxxxxxxlastname" />
+        </p:column>
+        <p:column rendered = "#{!jxxxuq300xwwqqhxxxxxvendorList.skipColumns}"
+                    headerText="Firstname">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b4xxu2fnbvxxxxxxxxxxfirstname) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.b4xxu2fnbvxxxxxxxxxxfirstname}"  id="b4xxu2fnbvxxxxxxxxxxfirstname" />
+        </p:column>
+        <p:column rendered = "#{!jxxxuq300xwwqqhxxxxxvendorList.skipColumns}"
+                    headerText="Middlenam">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(b5xxuxxrbvxxxxxxxxxxmiddlenam) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.b5xxuxxrbvxxxxxxxxxxmiddlenam}"  id="b5xxuxxrbvxxxxxxxxxxmiddlenam" />
+        </p:column>
+        <p:column 
+                    headerText="Vendorascompanyname">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(d1xxu3cnbvxxxxxxxxxxvendorascompanyname) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.d1xxu3cnbvxxxxxxxxxxvendorascompanyname}"  id="d1xxu3cnbvxxxxxxxxxxvendorascompanyname" />
+        </p:column>
+        <p:column 
+                    headerText="Company Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  dxxxch1d3xwwqqhxxlxxcompany pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{dxxxch1d3xwwqqhxxlxxcompanyList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Company Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  dxxxch1d3xwwqqhxxlxxcompany pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{dxxxch1d3xwwqqhxxlxxcompanyList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+          <p:column
+                    headerText="Company Details">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer O  dxxxch1d3xwwqqhxxlxxcompany pfS 5 pfE 7 efS 6 efE 8 -->
+            <h:outputText value="#{dxxxch1d3xwwqqhxxlxxcompanyList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+          <p:column
+                    headerText="Company Details">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer O  dxxxch1d3xwwqqhxxlxxcompany pfS 5 pfE 7 efS 6 efE 8 -->
+            <h:outputText value="#{dxxxch1d3xwwqqhxxlxxcompanyList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Location Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fxxxcq144xwwqqhxxxxxlocation pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fxxxcq144xwwqqhxxxxxlocationList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Location Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fxxxcq144xwwqqhxxxxxlocation pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fxxxcq144xwwqqhxxxxxlocationList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.fxxxcq144xwwqqhxxxxxlocation.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Address by mailtocode Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fxxxuq111xwwqqhxxxxxaddressByMailtocode pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fxxxuq111xwwqqhxxxxxaddressList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.fxxxuq111xwwqqhxxxxxaddressByMailtocode.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Address by mailtocode Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fxxxuq111xwwqqhxxxxxaddressByMailtocode pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fxxxuq111xwwqqhxxxxxaddressList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.fxxxuq111xwwqqhxxxxxaddressByMailtocode.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Address by shiptocode Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fxxxuq111xwwqqhxxxxxaddressByShiptocode pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fxxxuq111xwwqqhxxxxxaddressList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.fxxxuq111xwwqqhxxxxxaddressByShiptocode.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Address by shiptocode Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  fxxxuq111xwwqqhxxxxxaddressByShiptocode pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{fxxxuq111xwwqqhxxxxxaddressList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.fxxxuq111xwwqqhxxxxxaddressByShiptocode.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Phoneo">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m1xxh4pobv27xxxxxxxxphoneo) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.m1xxh4pobv27xxxxxxxxphoneo}"  id="m1xxh4pobv27xxxxxxxxphoneo" />
+        </p:column>
+        <p:column 
+                    headerText="Phoneh">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m2xxh5phbv27xxxxxxxxphoneh) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.m2xxh5phbv27xxxxxxxxphoneh}"  id="m2xxh5phbv27xxxxxxxxphoneh" />
+        </p:column>
+        <p:column 
+                    headerText="Phonec">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m3xxhxxrbv27xxxxxxxxphonec) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.m3xxhxxrbv27xxxxxxxxphonec}"  id="m3xxhxxrbv27xxxxxxxxphonec" />
+        </p:column>
+        <p:column 
+                    headerText="Phonex">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(m4xxhxxrbv27xxxxxxxxphonex) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.m4xxhxxrbv27xxxxxxxxphonex}"  id="m4xxhxxrbv27xxxxxxxxphonex" />
+        </p:column>
+        <p:column 
+                    headerText="Lanaddr">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(n1xxhxxrbv19xxxxxxxxlanaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.n1xxhxxrbv19xxxxxxxxlanaddr}"  id="n1xxhxxrbv19xxxxxxxxlanaddr" />
+        </p:column>
+        <p:column 
+                    headerText="Wanaddr">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(n2xxhxxrbv25xxxxxxxxwanaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.n2xxhxxrbv25xxxxxxxxwanaddr}"  id="n2xxhxxrbv25xxxxxxxxwanaddr" />
+        </p:column>
+        <p:column 
+                    headerText="Lmailaddr">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(n3xxhxxrbv44xxxxxxxxlmailaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.n3xxhxxrbv44xxxxxxxxlmailaddr}"  id="n3xxhxxrbv44xxxxxxxxlmailaddr" />
+        </p:column>
+        <p:column 
+                    headerText="Imailaddr">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(n4xxhxxrbv24xxxxxxxximailaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.n4xxhxxrbv24xxxxxxxximailaddr}"  id="n4xxhxxrbv24xxxxxxxximailaddr" />
+        </p:column>
+        <p:column 
+                    headerText="Rmailaddr">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(n5xxuxxrbvxxxxxxxxxxrmailaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.n5xxuxxrbvxxxxxxxxxxrmailaddr}"  id="n5xxuxxrbvxxxxxxxxxxrmailaddr" />
+        </p:column>
+        <p:column 
+                    headerText="Intaddr">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(n6xxuxxrbvxxxxxxxxxxintaddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.n6xxuxxrbvxxxxxxxxxxintaddr}"  id="n6xxuxxrbvxxxxxxxxxxintaddr" />
+        </p:column>
+        <p:column 
+                    headerText="Inraddr">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(n7xxuxxrbvxxxxxxxxxxinraddr) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.n7xxuxxrbvxxxxxxxxxxinraddr}"  id="n7xxuxxrbvxxxxxxxxxxinraddr" />
+        </p:column>
+        <p:column 
+                    headerText="Integrset">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o1xxuwmrbv40xxxxxxxxintegrset) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.o1xxuwmrbv40xxxxxxxxintegrset}"  id="o1xxuwmrbv40xxxxxxxxintegrset" />
+        </p:column>
+        <p:column 
+                    headerText="Contacted">
+          <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.o3xxuxxrbvxxxxxxxxxxcontacted}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Bywho">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o4xxuxxrbvxxxxxxxxxxbywho) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.o4xxuxxrbvxxxxxxxxxxbywho}"  id="o4xxuxxrbvxxxxxxxxxxbywho" />
+        </p:column>
+        <p:column 
+                    headerText="Keywords">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(o5xxuzkybvxxxxxxxxxxkeywords) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.o5xxuzkybvxxxxxxxxxxkeywords}"  id="o5xxuzkybvxxxxxxxxxxkeywords" />
+        </p:column>
+        <p:column 
+                    headerText="Descript">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y0xxuzsxbvxxxxxxxxxxdescript) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.y0xxuzsxbvxxxxxxxxxxdescript}"  id="y0xxuzsxbvxxxxxxxxxxdescript" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Shiplabel">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y4xxfxxrbvxxxxxxxxxxshiplabel) java.lang.Boolean IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.y4xxfxxrbvxxxxxxxxxxshiplabel}"  id="y4xxfxxrbvxxxxxxxxxxshiplabel" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Type">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y5xxuxxrbv29xxxxxxxxtype) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.y5xxuxxrbv29xxxxxxxxtype}"  id="y5xxuxxrbv29xxxxxxxxtype" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Notes">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(y7xxuznxbvxxxxxxxxxxnotes) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.y7xxuznxbvxxxxxxxxxxnotes}"  id="y7xxuznxbvxxxxxxxxxxnotes" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Account Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  yxxxch601xwwqqhxxxxxaccount pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{yxxxch601xwwqqhxxxxxaccountList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.yxxxch601xwwqqhxxxxxaccount.a0xxuobxbxxxxxxxxxxxsid)}" />
+           </p:column>
+        <p:column 
+                    headerText="Account Key">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer S  yxxxch601xwwqqhxxxxxaccount pfS 5 pfE 7 efS 6 efE 8 -->
+           <h:outputText value="#{yxxxch601xwwqqhxxxxxaccountList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.yxxxch601xwwqqhxxxxxaccount.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+          <p:column
+                    headerText="Account Details">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(a0xxuobxbxxxxxxxxxxxsid) java.lang.Integer O  yxxxch601xwwqqhxxxxxaccount pfS 5 pfE 7 efS 6 efE 8 -->
+            <h:outputText value="#{yxxxch601xwwqqhxxxxxaccountList.getKeyValue(_jxxxuq300xwwqqhxxxxxvendor.yxxxch601xwwqqhxxxxxaccount.a0xxuobxbxxxxxxxxxxxsid)}" />
+          </p:column>
+        <p:column 
+                    headerText="Vendtotl">
+          <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.z1xxzvpxlvxxxxxxxxxxvendtotl}"  id="z1xxzvpxlvxxxxxxxxxxvendtotl">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Vendtqty">
+          <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.z2xxzvpxlvxxxxxxxxxxvendtqty}"  id="z2xxzvpxlvxxxxxxxxxxvendtqty">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Venrtotl">
+          <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.z3xxzvrplvxxxxxxxxxxvenrtotl}"  id="z3xxzvrplvxxxxxxxxxxvenrtotl">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Venrtqty">
+          <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.z4xxzvrqlvxxxxxxxxxxvenrtqty}"  id="z4xxzvrqlvxxxxxxxxxxvenrtqty">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Venmtotl">
+          <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.z5xxzvmplvxxxxxxxxxxvenmtotl}"  id="z5xxzvmplvxxxxxxxxxxvenmtotl">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Venddtotl">
+          <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.z6xxzvdplvxxxxxxxxxxvenddtotl}"  id="z6xxzvdplvxxxxxxxxxxvenddtotl">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Lastorder">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z7xxuvlolvxxxxxxxxxxlastorder) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.z7xxuvlolvxxxxxxxxxxlastorder}"  id="z7xxuvlolvxxxxxxxxxxlastorder" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Lastquote">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z7xxuvlqlvxxxxxxxxxxlastquote) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.z7xxuvlqlvxxxxxxxxxxlastquote}"  id="z7xxuvlqlvxxxxxxxxxxlastquote" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Lastinvoic">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(z8xxuvlilvxxxxxxxxxxlastinvoic) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.z8xxuvlilvxxxxxxxxxxlastinvoic}"  id="z8xxuvlilvxxxxxxxxxxlastinvoic" rendered="true"/>
+        </p:column>
+        <p:column 
+                    headerText="Lastpaymq">
+          <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.z9xxzvlplvxxxxxxxxxxlastpaymq}"  id="z9xxzvlplvxxxxxxxxxxlastpaymq">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Printmstat">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zaxxzzprhvxxxxxxxxxxprintmstat) java.lang.Integer IO   pfS 5 pfE 7 efS 6 efE 8 -->
+               <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.zaxxzzprhvxxxxxxxxxxprintmstat}"  id="zaxxzzprhvxxxxxxxxxxprintmstat" rendered="#{customIdentity.hasRole('EH')}"/>
+        </p:column>
+        <p:column 
+                    headerText="Prinmtfldt">
+          <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.zbxxczqxlhxxxxxxxxxxprinmtfldt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Statusfldt">
+          <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.zexxcztxlxxxxxxxxxxxstatusfldt}" >
+              <f:convertDateTime type="both" dateStyle="short"/>
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Totlpaid">
+          <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.zfxxzxxrlvxxxxxxxxxxtotlpaid}"  id="zfxxzxxrlvxxxxxxxxxxtotlpaid">
+              <f:convertNumber currencySymbol="#{authenticator.currencySymbol}" maxFractionDigits="2" type="currency" />
+          </h:inputText>
+        </p:column>
+        <p:column 
+                    headerText="Owner2">
+ <!-- jay util typeInfo org.hibernate.mapping.Property(zzxxu2oxxhxxxxxxxxxxowner2) java.lang.String IO   pfS 5 pfE 7 efS 6 efE 8 -->
+                <h:inputText readonly="true"  value="#{_jxxxuq300xwwqqhxxxxxvendor.zzxxu2oxxhxxxxxxxxxxowner2}"  id="zzxxu2oxxhxxxxxxxxxxowner2" rendered="true"/>
+        </p:column>
+        <p:column 
+            headerText="Action">
+            #{' '}
+             <h:link outcome="/vendorEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="jxxxuq300xwwqqhxxxxxvendorEdit"
+                rendered="#{empty from and (customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('PH') || (customIdentity.hasRole('VH')||customIdentity.hasRole('VQ') and customIdentity.product =='f' and customIdentity.subProduct =='s') )}">
+                <f:param name="jxxxuq300xwwqqhxxxxxvendorA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{_jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+            #{' '}
+            <h:commandButton id="Download" image="/img/arrow_down16.png" rendered="#{empty from and _jxxxuq300xwwqqhxxxxxvendor.ycxxuzdrbvxxxxxxxxxxdocmnt.length() >2}" action="#{jxxxuq300xwwqqhxxxxxvendorHome.downloadThis(_jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid)}"/>
+        </p:column>
+    </p:dataTable>
+    </div>
+    </p:panel>
+    <div class="tableControl">
+        <h:link outcome="/vendorList.more.xhtml"
+            rendered="#{jxxxuq300xwwqqhxxxxxvendorList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+            <f:param name="maxResultsVal"
+                    value="#{jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/vendorList.more.xhtml"
+            rendered="#{jxxxuq300xwwqqhxxxxxvendorList.previousExists}"
+               value="#{messages.left} Previous Page "
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{jxxxuq300xwwqqhxxxxxvendorList.previousFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/vendorList.more.xhtml"
+            rendered="#{jxxxuq300xwwqqhxxxxxvendorList.nextExists}"
+               value=" Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{jxxxuq300xwwqqhxxxxxvendorList.nextFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal}"/>
+        </h:link>
+
+        <h:link outcome="/vendorList.more.xhtml"
+            rendered="#{jxxxuq300xwwqqhxxxxxvendorList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{jxxxuq300xwwqqhxxxxxvendorList.lastFirstResult}"/>
+            <f:param name="maxResultsVal"
+                    value="#{jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal}"/>
+        </h:link>
+
+    </div>
+
+    <div styleClass="actionButtons" >
+        <h:button outcome="/vendorEdit.address.xhtml"
+                    id="create" styleClass="buttonMain" 
+           propagation="none"
+            rendered="#{customIdentity.hasRole('UH')||customIdentity.hasRole('IH')}"
+                 value="#{messages['Create']} #{messages['Vendor']}">
+        </h:button>
+
+
+
+         <h:outputLink value="/clobdataEdit.wflow" 
+                              rendered="#{identity.loggedIn and (customIdentity.hasRole('UQ')||customIdentity.hasRole('UW')||customIdentity.hasRole('UH')||customIdentity.hasRole('IQ')||customIdentity.hasRole('BQ')||customIdentity.hasRole('UH')||customIdentity.hasRole('IH')||customIdentity.hasRole('BH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('SQ')||customIdentity.hasRole('CQ')||customIdentity.hasRole('UH')||customIdentity.hasRole('SH')||customIdentity.hasRole('CH'))
+                                and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                 and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                  and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'
+                               }">#{messages['load']} #{messages['CSV']}
+           <f:param name="fromKey" value="vendor" />
+          <f:param name="qualifier" value="csv" />
+          <f:param name="sequence" value="1" />
+          <f:param name="from" value="Jxxxuq300xwwqqhxxxxxvendorList"/>
+         </h:outputLink>
+          <h:outputLink value="/clobdataEdit.wflow">#{messages['load']} #{messages['address']} #{messages['CSV']} >
+           <f:param name="fromKey" value="address" />
+           <f:param name="qualifier" value="csv" />
+           <f:param name="sequence" value="1" />
+           <f:param name="from" value="Jxxxuq300xwwqqhxxxxxvendorList"/>
+          </h:outputLink>
+
+         <h:commandButton id="importcsv" value="Import"  action="#{jxxxuq300xwwqqhxxxxxvendorHome.importCsvData('vendor','csv',1,90000)}"
+                              rendered="#{identity.loggedIn and (customIdentity.hasRole('UQ')||customIdentity.hasRole('UW')||customIdentity.hasRole('UH')||customIdentity.hasRole('IQ')||customIdentity.hasRole('BQ')||customIdentity.hasRole('UH')||customIdentity.hasRole('IH')||customIdentity.hasRole('BH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('SQ')||customIdentity.hasRole('CQ')||customIdentity.hasRole('UH')||customIdentity.hasRole('SH')||customIdentity.hasRole('CH'))
+                                and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                 and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                  and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'
+                               }">
+          <f:param name="from" value="Jxxxuq300xwwqqhxxxxxvendorList"/>
+         </h:commandButton>
+         <h:commandButton id="delImport" status="buttonStatus" value="Undo Import"  action="#{jxxxuq300xwwqqhxxxxxvendorHome.deleteAllRecentCopied()}" 
+             render="importcsv,globalMessages" 
+                              rendered="#{identity.loggedIn and jxxxuq300xwwqqhxxxxxvendorList.maxResultsVal lt 49 and (customIdentity.hasRole('UQ')||customIdentity.hasRole('UW')||customIdentity.hasRole('UH')||customIdentity.hasRole('IQ')||customIdentity.hasRole('BQ')||customIdentity.hasRole('UH')||customIdentity.hasRole('IH')||customIdentity.hasRole('BH')||customIdentity.hasRole('UQ')||customIdentity.hasRole('SQ')||customIdentity.hasRole('CQ')||customIdentity.hasRole('UH')||customIdentity.hasRole('SH')||customIdentity.hasRole('CH'))
+                                and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'
+                                 and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ol'
+                                  and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='oe'
+                               }">
+             <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="Will remove Recent (upto 5 days) imported data"/></span> </p:tooltip> 
+         </h:commandButton>
+
+          <h:button id="calendarview" value="#{messages['calendar']} #{messages['view']}"  outcome="/vendorFcal.xhtml?faces-redirect=true">
+           <f:param name="from" value="Jxxxuq300xwwqqhxxxxxvendorList"/>
+          </h:button>
+         <h:button outcome="/#{empty jxxxuq300xwwqqhxxxxxvendorFrom ? 'home' : jxxxuq300xwwqqhxxxxxvendorFrom}.xhtml"
+          id="donefy"
+         value="Done"/>&nbsp;
+
+
+       <ui:remove>
+       </ui:remove>
+
+
+
+
+        <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message" id="globalMessagesb"/>
+
+        <br></br> 
+        <h:outputText value="#{messages['import']} #{messages['settings']} #{messages['done']} #{messages['and']} #{messages['ready']} #{messages['to']} #{messages['import']} ?"/>
+         <ui:decorate template="layout/edit.xhtml" >
+         <ui:define name="label">#{messages['complete']}</ui:define>
+	    <h:selectOneRadio value="#{jxxxuq300xwwqqhxxxxxvendorHome.importSet}" >
+				<f:selectItem  
+                         itemLabel="No"
+                         itemValue="N" /> 
+				<f:selectItem  
+                         itemLabel="Yes"
+                         itemValue="Y" /> 
+         </h:selectOneRadio>
+         </ui:decorate>
+
+         <ui:decorate template="layout/edit.xhtml" >
+         <ui:define name="label">#{messages['skip']} #{messages['first']} #{messages['record']}</ui:define>
+	    <h:selectOneRadio value="#{jxxxuq300xwwqqhxxxxxvendorHome.skipRecordOne}" >
+				<f:selectItem  
+                         itemLabel="No"
+                         itemValue="N" /> 
+				<f:selectItem  
+                         itemLabel="Yes"
+                         itemValue="Y" /> 
+         </h:selectOneRadio>
+         </ui:decorate>
+
+         <ui:decorate template="layout/edit.xhtml" >
+         <ui:define name="label">#{messages['delimeter']}</ui:define>
+	    <h:selectOneRadio value="#{jxxxuq300xwwqqhxxxxxvendorHome.delimeterBy}" >
+				<f:selectItem  
+                         itemLabel="Comma"
+                         itemValue="C" /> 
+				<f:selectItem  
+                         itemLabel="Space"
+                         itemValue="S" /> 
+         </h:selectOneRadio>
+         </ui:decorate>
+         <ui:decorate template="layout/edit.xhtml" >
+         <ui:define name="label">#{messages['enclosed']} #{messages['by']}</ui:define>
+	    <h:selectOneRadio value="#{jxxxuq300xwwqqhxxxxxvendorHome.enclosedBy}" >
+				<f:selectItem  
+                         itemLabel="Single Quote"
+                         itemValue="S" /> 
+				<f:selectItem  
+                         itemLabel="Double Quote"
+                         itemValue="D" /> 
+				<f:selectItem  
+                         itemLabel="None"
+                         itemValue="N" /> 
+         </h:selectOneRadio>
+         </ui:decorate>
+         <ui:decorate template="layout/edit.xhtml" >
+         <ui:define name="label">#{messages['line']} #{messages['end']} #{messages['by']}</ui:define>
+	    <h:selectOneRadio value="#{jxxxuq300xwwqqhxxxxxvendorHome.lineBy}" >
+				<f:selectItem  
+                         itemLabel="Semi Colon"
+                         itemValue="S" /> 
+				<f:selectItem  
+                         itemLabel="Back Slash"
+                         itemValue="B" /> 
+				<f:selectItem  
+                         itemLabel="None"
+                         itemValue="N" /> 
+         </h:selectOneRadio>
+         </ui:decorate>
+        <br></br>
+         <h:outputText value="#{messages['Load']} #{messages['csv']} #{messages['data']}"/>
+        <br></br><h:outputText value="#{messages['Import ']} #{messages['data']} #{messages['must']} #{messages['follow']} #{messages['the']} #{messages['template']} #{messages['below']}, #{messages['a']} #{messages['delimeter']} #{messages['still']} #{messages['needed']} #{messages['for']} #{messages['any']} #{messages['missing']} #{messages['data']}. "/>
+        <br></br><h:outputText value="[] #{messages['means']} #{messages['optional']}, #{messages['but']} #{messages['still']} #{messages['needs']} #{messages['delimeter']}"/>
+        <br></br><h:outputText value="#{messages['Template']}: [#{messages['key']}] #{messages['delimeter']} [#{messages['description']}] #{messages['delimeter']} [#{messages['title']}] #{messages['delimeter']} #{messages['namePart1']} #{messages['delimeter']} [#{messages['namePart2']}] #{messages['delimeter']} [#{messages['company']}] #{messages['delimeter']} [#{messages['officePh']}] #{messages['delimeter']} [#{messages['homePh']}] #{messages['delimeter']} [#{messages['cellPh']}] #{messages['delimeter']} [#{messages['email']}] #{messages['delimeter']} [#{messages['Type']}] #{messages['delimeter']}  #{messages['delimeter']} ... #{messages['LineDelimeter']}" />
+        <br></br><h:outputText value="#{messages['Only ']} #{messages['namePart1']} #{messages['is']} #{messages['not']} #{messages['optional']}"/>
+        <br></br><h:outputText value="#{messages['Sample']}: riedstrale-1837063252,,Ms,riedstra,Nancy,,222-333-6666 " />
+        <br></br><br></br>
+        <h:outputText value="#{messages['Address']} #{messages['records']} #{messages['match']} #{messages['to']} #{messages['above']} #{messages['table']}, #{messages['no']} #{messages['address']} #{messages['needs']} #{messages['row']} #{messages['with']} #{messages['delimeters']}" />
+        <br></br><h:outputText value="#{messages['Template']}: [#{messages['key']}] #{messages['delimeter']} [#{messages['addressL1']}] [#{messages['city']}] #{messages['delimeter']} [#{messages['prov/state']}] #{messages['delimeter']} #{messages['postal/zip/pin']} #{messages['delimeter']}   #{messages['delimeter']} ... #{messages['LineDelimeter']}" />
+        <br></br><h:outputText value="#{messages['Only ']} #{messages['addressL1']} #{messages['is']} #{messages['not']} #{messages['optional']}"/>
+         <br></br><h:outputText value="#{messages['Sample']}: ,21 some st,my city,my state,1234567 " />
+
+        <br></br>
+         <h:outputText value="#{messages['Create']} #{messages['csv']} #{messages['data']}"/>
+        <br></br><h:outputText value="#{messages['Use ']} #{messages['one']} #{messages['of']} #{messages['the']} #{messages['options']} #{messages['below']}: "/>
+        <br></br><h:outputText value="#{messages['If']}: #{messages['the']} #{messages['data']} #{messages['exists']} #{messages['in']} #{messages['another']} #{messages['system']}, #{messages['it']} #{messages['may']} #{messages['have']} #{messages['data']} #{messages['export']} #{messages['or']} #{messages['report']} #{messages['producing']} #{messages['CSV']} #{messages['data']}  " />
+        <br></br><h:outputText value="#{messages['For ']} #{messages['example']} #{messages['customIdentity.masterSiteCode']} #{messages['application']} #{messages['has']}  #{messages['report']} #{messages['generation']} #{messages['parameter']} #{messages['display']} #{messages['as']} #{messages['CSV']}, #{messages['which']} #{messages['produces']} #{messages['text']}  #{messages['file']} #{messages['with']} #{messages['comma']} #{messages['delimeted']} #{messages['value']} #{messages['and']} #{messages['downloads']} #{messages['to']} #{messages['your']} #{messages['machine']} #{messages['via']} #{messages['browser']} . "/>
+        <br></br><h:outputText value="#{messages['You']}: #{messages['can']} #{messages['also']} #{messages['mannually']} #{messages['keyin']} #{messages['the']} #{messages['data']} #{messages['and']} #{messages['create']} #{messages['the']} #{messages['CSV']} #{messages['text']} #{messages['file']}  " />
+        <br></br><h:outputText value="#{messages['The']}: #{messages['CSV']} #{messages['data']} #{messages['must']} #{messages['follow']} #{messages['the']} #{messages['template']} #{messages['pattern']} #{messages['shown']} #{messages['above']}, #{messages['delete']} #{messages['records']} #{messages['and']} #{messages['edit']} #{messages['as']} #{messages['needed']}" />
+        <br></br><h:outputText value="#{messages['You']}: #{messages['may']} #{messages['find']} #{messages['opening']} #{messages['and']} #{messages['editing']} #{messages['the']} #{messages['csv']} #{messages['file']} #{messages['using']}, #{messages['say']} #{messages['OpenOffice']} #{messages['or']} #{messages['LibreOffice']} #{messages['or']} #{messages['Microsoft']} #{messages['Office']} #{messages['makes']} #{messages['the']} #{messages['job']} #{messages['easier']}" />
+
+
+<br/>
+    </div>
+            <p:hotkey  actionListener="#{jxxxuq300xwwqqhxxxxxvendorList.getFirstResult()}" bind="return">
+            </p:hotkey>
+
+    <br style="clear: both" />
+ 
+ 
+
+
+ </h:form>
+
+</ui:define>
+
+</ui:composition>

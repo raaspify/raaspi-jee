@@ -1,0 +1,150 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:fb="http://www.facebook.com/2008/fbml"
+                template="layout/rtemplate.xhtml">
+<!-- copied from signup.xhtml.ftl on 3-May-2018 3:48:59 PM
+-->
+<ui:define name="body">
+    <h:messages globalOnly="true" styleClass="message"/>
+   
+ <h:form id="syncdata">
+<h:outputStylesheet>
+</h:outputStylesheet>
+<f:metadata>
+    <f:event type="preRenderView" listener="#{skinBean.setCurrentSkin}" />
+
+</f:metadata>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+<ui:remove>
+/// add a new method in controlusageperiods?
+              <h:outputText value="Business Date Rolled" rendered="#{lxxxeh177xwwqqhxxxxxcontrolusagebyperiodsHome.managed}"/> 
+</ui:remove>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?'left':'right'}">
+         <h:outputText value="Last Signed As " rendered="#{!identity.loggedIn}"/> 
+         <h:outputText value="#{customIdentity.username}"/> 
+         <h:outputText value="#{messages.Today} "/> 
+         <h:outputText value="#{authenticator.getCurrcaldates()}"/> 
+        <h:button id="lbdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml" />
+         <h:outputText id="QueryLabel" value="#{messages.searchTerm}" />
+         <h:inputText id="Query" value="put search here" size="15" />
+         <h:commandButton id="r3Search" action="/home.xhtml"  image="/img/Findblue16.png"
+            value="#{messages.searchButton}" />
+         <h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none"  rendered="#{identity.loggedIn and !customIdentity.product=='s'}"  >
+          <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+         </h:link>
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['installappHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+    
+  <p:accordionPanel switchType="client" itemInactiveLeftIcon="/img/control_add16.png" height="300px">
+   <p:tab title="#{messages.Click} #{messages.And} #{messages.Sync} #{messages.To} #{messages.Pull} #{messages.Permitted} #{messages.Data} #{messages.From} #{messages.Store} " 
+      leftInactiveIcon="/img/control_add16.png" leftActiveIcon="/img/control_remove16.png" > 
+
+   <h:panelGroup>   
+         <h:outputText value="#{messages.Use} #{messages.as} #{messages.needed}, " /> 
+             <h:link id="logInl" 
+               outcome="/login.xhtml" rendered="#{!identity.loggedIn}"
+               value="#{messages['signup']} #{messages['and']} #{messages['login']} "/>
+         <h:outputText value=" #{messages.to} #{messages.access} #{messages.backoffice} #{messages.functions}" /> 
+      
+   <div class="dialog">
+
+   <h:panelGrid id="signupx">
+      <h:panelGrid columns="6">
+      </h:panelGrid>
+      <h:panelGrid columns="4">
+          <ui:decorate id="suserCompanyNameField" template="layout/edit.xhtml">
+            <ui:define name="label">#{messages.store} #{messages.name}</ui:define>
+            <h:inputText id="storeName" required="false" value="#{customIdentity.owner2}"
+              disabled="true" size="25" maxlength="35"/>
+          </ui:decorate>
+      </h:panelGrid>
+          <h:panelGroup>
+            <br></br>
+            <p:commandButton  id="syncdata" styleClass="buttonMain" value="#{messages.Sync} #{messages.Products}"  status="buttonStatus" render="@form"
+                action="#{r3RestClient.syncData()}" />
+            <p:commandButton  id="syncdataC" styleClass="buttonMain" value="#{messages.Sync} #{messages.Customers}"  status="buttonStatus" render="@form"
+                action="#{r3RestClient.syncDataCustomers()}"/>
+            <ui:remove> part of syncdataCustomer and incomplete logic
+            <p:commandButton  id="syncdataA" styleClass="buttonMain" value="#{messages.Sync} #{messages.Customers} #{messages.Addresses}"  status="buttonStatus" render="@form"
+                action="#{r3RestClient.syncDataAddresses()}"/>
+            </ui:remove>
+            <p:commandButton  id="syncdataO" styleClass="buttonMain" value="#{messages.Sync} #{messages.Orders}"  status="buttonStatus" render="@form"
+                action="#{r3RestClient.syncDataOrders()}"/>
+            <p:tooltip target="syncdataO"> <span style="white-space: nowrap"> <h:outputText value="#{messages.last} #{messages.sixty} #{messages.days} #{messages.only}"/></span> </p:tooltip> 
+          
+            <p:commandButton  id="syncdataA" styleClass="buttonMain" value="#{messages.Charge} #{messages.Customers}"  status="buttonStatus" render="@form"
+                action="#{r3RestClient.applicationCharge()}" rendered="#{customIdentity.masterSite}"/>
+
+
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+            <h:button id="lstdone"  value="#{messages.done}" propagation="end" outcome="/home.xhtml" />
+          </h:panelGroup>
+       <h:messages globalOnly="false" styleClass="message" />
+   </h:panelGrid>
+   <h:outputText value="#{messages.Images} #{messages.are} #{messages.not_} #{messages.copied} #{messages.to} #{messages.allow} #{messages.faster} #{messages.sync}, #{messages.original} #{messages.images} #{messages.not_} #{messages.needed} #{messages['for']} #{messages.backoffice} #{messages.functions} " /> 
+   </div>
+   </h:panelGroup> 
+  </p:tab> 
+  <p:tab id="data" header="#{messages.data} #{messages.pulled}  " 
+               leftInactiveIcon="/img/control_add16.png" leftActiveIcon="/img/control_remove16.png" > 
+                <h:panelGroup>
+                    <p:commandButton id="reload1" image="/img/Reload16.png"
+                          value="#{messages['reFresh']}" render="@form" />
+                 <h:outputText value=" #{messages['refresh']}" />
+                </h:panelGroup>
+   <br></br><br></br>
+   #{r3RestClient.outputs}
+   <br></br><br></br>
+   #{'Records'} #{'checked:'} #{r3RestClient.inC},
+   &nbsp;#{'Records'} #{'added:'} #{r3RestClient.adC},
+   &nbsp;#{'Records'} #{'updated:'} #{r3RestClient.updtC}
+   &nbsp;#{'Address'} #{'Records added:'} #{r3RestClient.adA},
+   &nbsp;#{'Address'} #{'Records'} #{'updated:'} #{r3RestClient.updtA},
+   <br/><p:commandButton id="reload2" 
+                          value="#{messages['ReFresh']}" render="@form" />
+   <h:outputText value=" #{messages['to']} #{messages['view']} #{messages['latest']}" />
+
+   
+  </p:tab> 
+
+  </p:accordionPanel> 
+  <ui:fragment >
+  <p:panel id="count" rendered="#{r3RestClient.inC>0}" >
+   <br></br><br></br>
+   #{'Records'} #{'checked:'} #{r3RestClient.inC},
+   &nbsp;#{'Records'} #{'added:'} #{r3RestClient.adC},
+   &nbsp;#{'Records'} #{'updated:'} #{r3RestClient.updtC}
+   &nbsp;#{'Address'} #{'Records added:'} #{r3RestClient.adA},
+   &nbsp;#{'Address'} #{'Records'} #{'updated:'} #{r3RestClient.updtA},
+  </p:panel>
+  </ui:fragment>
+
+                
+
+ </h:form>
+
+
+
+ </ui:define> 
+</ui:composition>
+
+
+

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:p="http://primefaces.org/ui"
+     template="layout/rtemplate.xhtml">
+<ui:remove>
+ copied-not generated
+</ui:remove>
+<f:metadata>
+    <f:viewAction action="#{r3Cart.takeAction()}" />
+    <f:viewParam name="categoryJay" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1}"/>
+
+</f:metadata>
+
+<ui:define name="body">
+
+
+    
+    <h:form id="r3paymentout" styleClass="edit">
+
+
+<h:outputStylesheet>
+.rf-dt-shdr-c {
+    background-color:white;
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+}
+.rf-dt-thd {
+    background-color:#{richSkin.tableSubHeaderBackgroundColor} !important;b
+    background-image: none; !important;
+    color:#{richSkin.tableHeaderTextColor} !important;
+}
+
+</h:outputStylesheet>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel"  outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+ 		   <h:graphicImage value="/img/Search16.gif" styleClass="pic"/>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['checkoutHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+	</p:toolbar>
+       <h:messages globalOnly="true" styleClass="messageM" id="globalMessages"/>
+                        <h:panelGrid id="CostSummary" columns="2">
+                            <h:outputText  value=" " />
+                            <h:outputText  value=" " />
+                            <h:outputText  value="#{messages.Invoice}" />
+                            <h:outputText  value="#{r3Cart.invoiceKey}"
+                             rendered="#{!r3Cart.invoiceKey.isEmpty()}" />
+
+                            <h:outputText  value="#{messages.outstandingAmount}" />
+                            <h:outputText  value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartInvoiceFor(r3Cart.invoiceKey)[0].z2xxzyprlxxxxxxxxxxxamountostndt}"
+                             rendered="#{!r3Cart.invoiceKey.isEmpty()}">
+                                <f:convertNumber type="currency" currencySymbol="$" />
+                            </h:outputText>
+                            <h:outputText id="CartnpTotalText" value="#{messages.net} #{messages.total}"
+                             rendered="#{!r3Cart.invoiceKey.isEmpty()}" />
+                            <h:outputText id="CartnpTotalValue" value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartInvoiceFor(r3Cart.invoiceKey)[0].z1xxztprlxxxxxxxxxxxamounttotal}"
+                             rendered="#{!r3Cart.invoiceKey.isEmpty()}">
+                                <f:convertNumber type="currency" currencySymbol="$" />
+                            </h:outputText>
+
+                        </h:panelGrid>
+      
+                        <br></br><br></br><br></br>
+                        <h:commandButton action="#{r3Cart.payRequest(fpxxfq1a5xwwqqhxxxxxitemList.getFullKey(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1))}" value="#{messages['Paypal_Purchase']}" 
+                           rendered="#{r3Cart.inPaycReady and !r3Cart.inConfirmed }" 
+                           image="img/creditpays.png"/>
+
+                        <ui:remove> below links to Paypal url, cant use command button </ui:remove>
+                        <h:outputLink value="#{r3Cart.approvalUrl}"  rendered="#{r3Cart.inPayment}">
+                         <h:graphicImage alt="PayPal Login" value="https://www.paypalobjects.com/webstatic/en_US/developer/docs/lipp/loginwithpaypalbutton.png"  />
+                        </h:outputLink>
+                        <h:commandButton action="#{r3Cart.confirmPayPayment(fpxxfq1a5xwwqqhxxxxxitemList.getFullKey(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1))}" value="#{messages['Confirm_Payment']}" 
+                           rendered="#{r3Cart.inApproved }" styleClass="buttonMain"/>
+
+                        &nbsp;<h:commandButton action="#{r3Cart.cancelPayPalPayment()}" value="#{messages['Cancel']} #{messages['Paypal_Purchase']}" 
+                           rendered="#{!r3Cart.inPaycReady and !r3Cart.inConfirmed }" 
+                           styleClass="buttonMain"/>
+
+
+            <br></br>
+            <p:panel id="cartdetails"  rendered="#{not empty trexuq266xwwqqhxxxxxcuinvoiceList.getPaymentDueByCustomerList('invoice',true)}">
+                    <p:dataTable id="CartItemsTable" 
+                                 value="#{trexuq266xwwqqhxxxxxcuinvoiceList.getPaymentDueByCustomerList('invoice',true)}" var="item">
+
+                        <h:column id="columncuo">
+                            <f:facet id="CuoFacet" name="header">
+                                <h:outputText id="CuoText" value="#{messages.invoice}" />
+                            </f:facet>
+                            #{item.a0xxuncibvxxxxxxxxxxinvoice} 
+                        </h:column> 
+                        <h:column id="columndelv">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages.total}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.z1xxztprlxxxxxxxxxxxamounttotal}" size="6" readonly="true" />
+                        </h:column>    
+    
+                        <h:column id="columnlt">
+                            <f:facet  name="header">
+                                <h:outputText  value="#{messages.outstanding_amt}" />
+                            </f:facet>
+                             <h:inputText  value="#{item.z2xxzyprlxxxxxxxxxxxamountostndt}" size="6" readonly="true" />
+                        </h:column>  
+
+                    </p:dataTable>
+
+                    <div class="cntInfo" style="${yxxxuh566xwwqqwxxxxxuserHome.mobile?'float:left':'float:left'};background-color:#{richSkin.generalBackgroundColor}">
+                        <!-- shoppingCartBean is named r3Cart -->
+                 <ui:remove> cannot get action to work here
+                       <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getResultList().get(0).getDaxxuzxdssxxxxxxxxxxapiclientid() !=null}" >
+                        <h:commandButton action="#{r3Cart.payRequest(fpxxfq1a5xwwqqhxxxxxitemList.getFullKey(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1)))}" value="#{messages['Paypal_Purchase']}" 
+                           rendered="#{r3Cart.inPaycReady and !r3Cart.inConfirmed }" 
+                           image="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"/>
+                        <ui:remove> below links to Paypal url, cant use command button </ui:remove>
+                        <h:outputLink value="#{r3Cart.approvalUrl}"  rendered="#{r3Cart.inPayment}">
+                         <h:graphicImage alt="PayPal Login" value="https://www.paypalobjects.com/webstatic/en_US/developer/docs/lipp/loginwithpaypalbutton.png"  />
+                        </h:outputLink>
+
+                        <h:commandButton action="#{r3Cart.confirmPayPayment(fpxxfq1a5xwwqqhxxxxxitemList.getFullKey(fpxxfq1a5xwwqqhxxxxxitemHome.instance.b3xxuxxrbvxxxxxxxxxxsource1))}" value="#{messages['Confirm_Payment']}" 
+                           rendered="#{r3Cart.inApproved }" styleClass="buttonMain"/>
+                      </p:panel>
+                  </ui:remove>
+                    <br></br>
+                    <h:button id="ContinueShoppingButtonR"
+                                     outcome="/invoicecart.xhtml"  
+                                     value="Return" >
+                    </h:button>
+
+     
+                    </div>
+
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+            </p:panel>
+
+	    <br/>
+            <h:outputText  value="#{messages.no} #{messages.invoice} #{messages.passed}" 
+             rendered="#{!r3Cart.inPayment and !r3Cart.inApproved and empty trexuq266xwwqqhxxxxxcuinvoiceList.getPaymentDueByCustomerList('invoice',true)}"/>
+            <br></br> 
+            <h:button outcome="/home.xhtml"
+                    id="done"
+                 value="#{messages['Done']}"/>
+
+
+ </h:form>
+
+</ui:define>
+	
+</ui:composition>

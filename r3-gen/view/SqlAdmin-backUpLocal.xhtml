@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:s="http://jboss.org/schema/seam/taglib"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+     xmlns:a="http://richfaces.org/a4j"
+      template="layout/rtemplate.xhtml">
+ 
+<ui:define name="body">
+    <h:form id="qflow" styleClass="edit">
+	<rich:toolbar height="26" itemSeparator="grid">
+<!-- Not Generated but copied  
+SqlAdmin Page
+For initial app deployment manually create genapp schema (seam needs it) and create empty resource_bundle and resource (databaseResourceLoader
+needs them)
+parameters passed: none
+popupPanels: 0
+create tables are used standalone but backup/restore used through logged in menue. create MockUp etc are used standalone to load system
+stock images and text and after create tables.
+todo:add page.xml to enforce login and add to menue
+-->
+	  <rich:toolbarGroup>
+        <s:button id="lbdone" image="./img/Homeblue16.png"  alt="Cancel" value="Cancel" propagation="end"  view="/home.xhtml" />
+	  </rich:toolbarGroup>
+
+	  <rich:toolbarGroup>
+              <s:button id="BackUp"  value="BackUp Data To Local(zip)"  action="#{sqlAdminSupport.backupTenantToLocal()}" />
+	  </rich:toolbarGroup>
+
+	</rich:toolbar>
+
+	    	
+    <h:messages globalOnly="false" styleClass="message" id="globalMessages"/>
+
+
+  </h:form>
+
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with genJasperlabelsreports - A generator for JasperReports Labels -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+		 name="Fxxxuq1ffxwwqqhefxxxserialnumbersAvery5960"
+		 columnCount="3"
+		 printOrder="Horizontal"
+		 orientation="Portrait"
+		 pageWidth="612"
+		 pageHeight="792"
+		 columnWidth="192"
+		 columnSpacing="8"
+		 leftMargin="13"
+		 rightMargin="7"
+		 topMargin="36"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 resourceBundle="messages"
+           whenResourceMissingType="Key">
+	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+
+	<parameter name="DisplayAs" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Report Output as HTML or as PDF]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["PDF"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Start" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Start Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="End" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[End Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MarkedOnes" isForPrompting="true" class="java.lang.Boolean">
+ 		<parameterDescription><![CDATA[Select Marked Records Only]]></parameterDescription>
+      </parameter>
+	<parameter name="INVOICEETC_ID" isForPrompting="false" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Detail]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ForTargetId" isForPrompting="false" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Customer,Vendor etc]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[9999]]></defaultValueExpression>
+	</parameter>
+	<parameter name="owner2Code" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reference" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Reference used in the report as notes or Pono etc]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+
+
+
+
+
+     	<queryString><![CDATA[SELECT
+      serialnumbers.sid AS SERIALNUMBERS_sid,
+      serialnumbers.serialno AS SERIALNUMBERS_serialno,
+      serialnumbers.matcode AS SERIALNUMBERS_matcode,
+      serialnumbers.quanrecd AS SERIALNUMBERS_quanrecd,
+      serialnumbers.vendor AS SERIALNUMBERS_vendor,
+      serialnumbers.location AS SERIALNUMBERS_location,
+      serialnumbers.recvrpt AS SERIALNUMBERS_recvrpt,
+      serialnumbers.infl AS SERIALNUMBERS_infl,
+      serialnumbers.phy AS SERIALNUMBERS_phy,
+      serialnumbers.datetin AS SERIALNUMBERS_datetin,
+      serialnumbers.datetout AS SERIALNUMBERS_datetout,
+      serialnumbers.jobno AS SERIALNUMBERS_jobno,
+      serialnumbers.quanissd AS SERIALNUMBERS_quanissd,
+      serialnumbers.quanrejd AS SERIALNUMBERS_quanrejd,
+      serialnumbers.customer AS SERIALNUMBERS_customer,
+      serialnumbers.altserno AS SERIALNUMBERS_altserno,
+      serialnumbers.selprice AS SERIALNUMBERS_selprice,
+      serialnumbers.physqty AS SERIALNUMBERS_physqty,
+      serialnumbers.cpono AS SERIALNUMBERS_cpono,
+      serialnumbers.customej AS SERIALNUMBERS_customej,
+      serialnumbers.sperson AS SERIALNUMBERS_sperson,
+      serialnumbers.cartonid AS SERIALNUMBERS_cartonid,
+      serialnumbers.cartonpr AS SERIALNUMBERS_cartonpr,
+      serialnumbers.packcode AS SERIALNUMBERS_packcode,
+      serialnumbers.tarecode AS SERIALNUMBERS_tarecode,
+      serialnumbers.shipcode AS SERIALNUMBERS_shipcode,
+      serialnumbers.type AS SERIALNUMBERS_type,
+      serialnumbers.printmstat AS SERIALNUMBERS_printmstat,
+      serialnumbers.prinmtfldt AS SERIALNUMBERS_prinmtfldt,
+      serialnumbers.pono AS SERIALNUMBERS_pono,
+      serialnumbers.scandatet AS SERIALNUMBERS_scandatet,
+      serialnumbers.butt AS SERIALNUMBERS_butt,
+      serialnumbers.statusfl AS SERIALNUMBERS_statusfl,
+      serialnumbers.orgcost AS SERIALNUMBERS_orgcost,
+      serialnumbers.orgpono AS SERIALNUMBERS_orgpono,
+      serialnumbers.orgjobno AS SERIALNUMBERS_orgjobno,
+      serialnumbers.owner AS SERIALNUMBERS_owner,
+      serialnumbers.barserial AS SERIALNUMBERS_barserial,
+      serialnumbers.owner2 AS serialnumbers_owner2
+FROM
+       genapp.serialnumbers serialnumbers  WHERE 
+         (serialnumbers.serialno) >=  $P{Start} AND   (serialnumbers.serialno) <= $P{End} AND
+       serialnumbers.owner2 = $P{owner2Code}  ]]></queryString>
+      <field name="SERIALNUMBERS_SID" class="java.lang.Integer"/>
+
+      <field name="SERIALNUMBERS_SERIALNO" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_MATCODE" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_QUANRECD" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_VENDOR" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_LOCATION" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_RECVRPT" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_INFL" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_PHY" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_DATETIN" class="java.sql.Timestamp"/>
+
+      <field name="SERIALNUMBERS_DATETOUT" class="java.sql.Timestamp"/>
+
+      <field name="SERIALNUMBERS_JOBNO" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_QUANISSD" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_QUANREJD" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_CUSTOMER" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_ALTSERNO" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_SELPRICE" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_PHYSQTY" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_CPONO" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_CUSTOMEJ" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_SPERSON" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_CARTONID" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_CARTONPR" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_PACKCODE" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_TARECODE" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_SHIPCODE" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_TYPE" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_PRINTMSTAT" class="java.lang.Integer"/>
+
+      <field name="SERIALNUMBERS_PRINMTFLDT" class="java.sql.Timestamp"/>
+
+      <field name="SERIALNUMBERS_PONO" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_SCANDATET" class="java.sql.Timestamp"/>
+
+      <field name="SERIALNUMBERS_BUTT" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_STATUSFL" class="java.lang.Integer"/>
+
+      <field name="SERIALNUMBERS_ORGCOST" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_ORGPONO" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_ORGJOBNO" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_OWNER" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_BARSERIAL" class="java.lang.String"/>
+
+      <field name="SERIALNUMBERS_OWNER2" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="72"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="9"
+						y="2"
+						width="138"
+						height="13"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{SERIALNUMBERS_SERIALNO}]]></textFieldExpression>
+				</textField>
+		   	        <componentElement>
+				 <reportElement x="4" y="22" width="187" height="35"/>
+				 <jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="3of9" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{SERIALNUMBERS_SERIALNO}]]></jr:codeExpression>
+				 </jr:barbecue>
+			        </componentElement>
+
+			</band>
+
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>
+
+
+
+
+
+
+
+

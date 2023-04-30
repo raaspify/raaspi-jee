@@ -1,0 +1,117 @@
+<!-- generate reverse eng xml,Create DB, Create tables script and Load tables script -->
+
+<project name="Database creation" default="createTables_HdbSQL" basedir=".">
+   <property name="sql.driver" value="org.hsqldb.jdbcDriver"/>
+   <property name="sql.url" value="jdbc:hsqldb:hsql://localhost:1701"/>
+   <property name="sql.user" value="jaysa overridden by calling program"/>
+   <property name="sql.pass" value=""/>
+   <property name="sql.dbname" value="dbname"/>
+   <property name="sql.tablename" value="tablename"/>
+   <property name="sql.fieldname" value="fieldname"/>
+   <property name="sql.datatype" value="datatype"/>
+
+<!-- create db in case create db and table under one go -->
+   <target name="createDB_HdbSQL">
+      <sql driver="${sql.driver}" 
+           url="${sql.url}" 
+           userid="${sql.user}" 
+           password="${sql.pass}"
+           classpath="C:\jboss-5.1.0.GA\common\lib\hsqldb.jar" >
+
+           CREATE SCHEMA ${sql.dbname} AUTHORIZATION DBA;
+           SET SCHEMA ${sql.dbname};
+
+
+           </sql>
+   </target>
+
+   <target name="createTables_HdbSQL">
+      <sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.pass}"
+                   classpath="C:\jboss-5.1.0.GA\common\lib\hsqldb.jar" >
+
+set schema ${sql.dbname};
+CREATE 
+TABLE 
+${sql.tablename} 
+( 
+${sql.fieldname} 
+${sql.datatype},
+PRIMARY 
+KEY (${sql.fieldname})) 
+
+      </sql>
+   </target>
+
+   <target name="alterTables_HdbSQL">
+      <sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.pass}"
+                   classpath="C:\jboss-5.1.0.GA\common\lib\hsqldb.jar" >
+
+set schema ${sql.dbname};
+ALTER 
+TABLE 
+${sql.tablename}; 
+ADD 
+${sql.fieldname} 
+${sql.datatype} 
+
+      </sql>
+   </target>
+
+
+
+   <target name="customInitializeTables_HdbSQL">
+      <sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.pass}" >
+           <classpath>
+            <pathelement location="C:\jboss-5.1.0.GA\common\lib\hsqldb.jar"/>
+           </classpath>   
+           <transaction src="customInitializeHdb.sql"/>
+      </sql>
+   </target>
+
+
+
+   <target name="createTables_MySQL">
+      <sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.pass}" >
+           <classpath>
+            <pathelement location="mysql-connector-java-3.0.9-stable-bin.jar"/>
+           </classpath>   
+           use sample_project;
+           <transaction src="employees.sql"/>
+           <transaction src="project.sql"/>
+           <transaction src="timetable.sql"/>
+      </sql>
+   </target>
+
+   <target name="dropDB_HdbSQL">
+      <sql driver="${sql.driver}" 
+           url="${sql.url}" 
+           userid="${sql.user}" 
+           password="${sql.pass}"
+           classpath="C:\jboss-5.1.0.GA\common\lib\hsqldb.jar" >
+
+           drop schema ${sql.dbname} cascade;
+
+           </sql>
+   </target>
+
+
+
+   <target name="dropDB_MySQL">
+      <input message="Do you really want to delete this table (y/n)?" validargs="y,n" addproperty="do.delete" /> 
+      <condition property="do.abort"> 
+            <equals arg1="n" arg2="${do.delete}"/> 
+      </condition> 
+      <fail if="do.abort">Build aborted by user.</fail> 
+      <sql driver="${sql.driver}" url="${sql.url}" userid="${sql.user}" password="${sql.pass}" >
+           <classpath>
+            <pathelement location="mysql-connector-java-3.0.9-stable-bin.jar"/>
+           </classpath>  
+           drop database sample_project;
+      </sql>
+   </target>
+
+</project>
+
+
+
+

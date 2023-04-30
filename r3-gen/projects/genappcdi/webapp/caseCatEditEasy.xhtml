@@ -1,0 +1,486 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      template="layout/rtemplate.xhtml">
+
+
+    <ui:remove>
+     uses CI-L1 item for case,suggestion, inquiry category
+     for each case a CI-D item gets created under the CI-L1 and also a cuorder/details. If more notes/attachment then more CI-D under the first CI-D
+    </ui:remove> 
+<f:metadata>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="fpxxfq1a5xwwqqhxxxxxitemFrom" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom}"/>
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemHome.restrict()}" />
+    <f:viewAction action="#{fpxxfq1a5xwwqqhxxxxxitemHome.wire()}" />
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Case']} easy way</ui:define>
+
+<ui:define name="body">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47438939-2', 'raaspi.com');
+  ga('send', 'pageview');
+
+</script>
+<script>
+function myReload() {
+    location.reload(true);
+}
+</script>
+<f:view locale="#{authenticator.locale}"/>
+
+
+ <div id="page">
+    <h:messages globalOnly="true" styleClass="message"/>
+    <h:form  enctype="multipart/form-data">
+  <p:panel toggleable="true" toggleableHeader="true" style="width: 90%;background-color:white;"  header="#{messages['photo']} #{messages['galery']}" switchType="client" collapsed="false" rendered="#{customIdentity.labelView.contains('VM') }"
+        leftCollapsedIcon="/img/control_add16.png" rightCollapsedIcon="/img/Activitygroup16.png" leftExpandedIcon="/img/control_remove16.png">
+          <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="message"/>
+
+    <h:panelGrid columns="1">
+     <p:panel>
+      <h:panelGrid columns="4">
+
+            <h:graphicImage value="/img/Imagefile_256.png" height="50">
+            </h:graphicImage>
+            <h:graphicImage value="/img/Upload_500.png" height="50">
+            </h:graphicImage>
+            <h:graphicImage value="/img/Photos_256.png" height="100">
+            </h:graphicImage>
+            <h:graphicImage value="/img/Search_256.png" height="50">
+            </h:graphicImage>
+      </h:panelGrid>
+     </p:panel>
+
+     
+     <p:panel>
+       <h:panelGroup>
+         <h:panelGroup id="uploadgridR" >
+          <h:panelGrid columns="1" columnClasses="top,top"  rendered = "#{yxxxuq1n1xwwqqqxxxxxblobdataHome.buttonPressed}" >
+                 <o:inputFile id="w8xxuzdrbvxxxxxxxxxxdocmnto" value="#{file.lfiles}" multiple="true" 
+                   accept="image/png,image/jp*,video/*,text/csv,.csv,text/comma-separated-values"/>
+                 <h:commandButton value="Upload" action="#{file.fileUpload('clobblob')}"/>
+         <br />
+         <h:commandButton action="#{fpxxfq1a5xwwqqhxxxxxitemHome.clearUploadData}"
+           value="#{messages['Clear']} #{messages['Uploaded']} #{messages['Data']}"
+         rendered="#{not empty file.data}" />
+         <o:graphicImage value="#{file.data}" dataURI="true" width="100" 
+          rendered="#{not empty file.data}" />
+         <p:panel rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() >2}">
+          #{messages['Saved']}&nbsp;
+          <img alt="image"
+           src="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;height=100" >
+          </img> 
+         </p:panel>
+          </h:panelGrid>
+         </h:panelGroup>
+             &nbsp;&nbsp; <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"   outcome="/home.xhtml" />
+         </h:panelGroup>
+      <p:panel rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getSuggestList('PI-L*').size() gt 0}"> 
+       <c:set var = "mpc" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:10}">
+       </c:set>
+       <c:set var = "dpc" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:10}">
+       </c:set>
+       <c:set var = "dps" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:2}">
+       </c:set>
+
+        <h:panelGrid columns="#{mpc}" id="mainpanel" style="text-align : left;">
+         <h:outputLabel  for="detailI" value=" #{messages['Image']}1 #{messages['Name']} ">
+         </h:outputLabel>
+                 <h:inputText id="detailI" value="#{customIdentity.holdValue}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="20" pt:placeholder="#{messages['picture 1']}"
+                          maxlength="200">
+                 </h:inputText>
+                &nbsp;
+         <h:outputLabel  for="detailI2" value=" #{messages['Image']}2 #{messages['Name']} ">
+         </h:outputLabel>
+                 <h:inputText id="detailI2" value="#{customIdentity.holdValue2}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="20" pt:placeholder="#{messages['picture 2']}"
+                          maxlength="200">
+                 </h:inputText>
+                &nbsp;
+         <h:outputLabel  for="detailI3" value=" #{messages['Image']}3 #{messages['Name']} ">
+         </h:outputLabel>
+                 <h:inputText id="detailI3" value="#{customIdentity.holdValue3}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="20" pt:placeholder="#{messages['picture 3']}"
+                          maxlength="200">
+                 </h:inputText>
+                <br></br>
+         <p:messages ajaxRendered="true"  />
+         <h:outputLabel  for="Album" value=" #{messages['for']} #{messages['Album']} ">
+         </h:outputLabel>
+                 <h:selectOneMenu id="Album" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.valueOverRide}" 
+                  rendered="true">
+                    <f:selectItem itemValue="#{null}" itemLabel="" />
+                    <f:selectItems value="#{fpxxfq1a5xwwqqhxxxxxitemList.getSuggestList('PI-L*')}" var="result"
+                     itemValue="#{result.a0xxukixbxxxxxxxxxxxmatcode}" itemLabel="#{result.b1xxuszsbvxxxxxxxxxxdescript}" />
+                 </h:selectOneMenu>
+
+            <p:commandButton id="save" styleClass="buttonMain" update="@form"
+                          value="#{messages['Save']} " status="buttonStatus" 
+                         action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.persistUpLoadedImageAndItem('PI-D',null)}"
+                       disabled="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.wired}"
+                       rendered="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.managed }">  
+             <p:tooltip > <span style="white-space: nowrap"> <h:outputText   value="#{messages['You']} #{messages['may']} #{messages['upload']} #{messages['upto']} #{messages['3']} #{messages['images']}, #{messages['then']} #{messages['save']} #{messages['for']} #{messages['an']} #{messages['album']}"/></span> </p:tooltip> 
+            </p:commandButton>
+        </h:panelGrid>
+          <ui:fragment rendered="#{empty customIdentity.holdValue and not empty customIdentity.keyValue}" >
+            <br/>
+                  <img alt="." rendered="#{not empty customIdentity.keyValue and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 !='SYSTEM'}"
+                   src="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue}&amp;height=100" >
+                  </img> 
+                  <h:outputText  value="#{customIdentity.keyValue}" />
+
+                             <p:commandButton value="+" rendered="#{not empty customIdentity.keyValue and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 !='SYSTEM'}"
+                              onclick="PF('midpopup2').show()" >
+                             </p:commandButton><br/>
+
+                  <img alt="." rendered="#{not empty customIdentity.keyValue and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 =='SYSTEM' }"
+                   src="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue}&amp;height=100&amp;scope=SYSTEM" >
+                  </img> 
+                             <p:commandButton value="+" rendered="#{not empty customIdentity.keyValue and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 =='SYSTEM' }"
+                              onclick="PF('midpopupS2').show()" >
+                             </p:commandButton><br/>
+
+                            <p:dialog id="midpopup2" widgetVar="midpopup2" modal="false" autosized="true" 
+                                     moveable="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                              <h:outputLink value="#" onclick="#PF('midpopup2').hide(); return false;">
+                                 CLOSE X
+                               </h:outputLink>
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF('midpopup2').hide(); return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue}&amp;height=300" rendered="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a1xxuxxxbv49xxxxxxxxfromkey!= null and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 !='SYSTEM'}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="PF('midpopup').hide(); return false;"/>
+
+                            </p:dialog>
+
+                            <p:dialog id="midpopupS2" widgetVar="midpopupS2" modal="false" autosized="true" 
+                                     moveable="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                              <h:outputLink value="#" onclick="PF('midpopupS2').hide(); return false;">
+                                 CLOSE X
+                               </h:outputLink>
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF('midpopupS2').hide(); return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue}&amp;height=300&amp;scope=SYSTEM" rendered="#{customIdentity.keyValue!= null and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 =='SYSTEM'}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="PF('midpopupS2').hide(); return false;"/>
+
+                            </p:dialog>
+          </ui:fragment>
+
+          <ui:fragment rendered="#{empty customIdentity.holdValue2 and not empty customIdentity.keyValue2}" >
+            <br/>
+                  <img alt="." rendered="#{not empty customIdentity.keyValue2 and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 !='SYSTEM'}"
+                   src="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue2}&amp;height=100" >
+                  </img> 
+                  <h:outputText  value="#{customIdentity.keyValue2}" />
+
+                             <h:commandButton value="+" rendered="#{customIdentity.keyValue2!= null and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 !='SYSTEM'}"
+                              onclick="PF('midpopup2x'.show()" >
+                             </h:commandButton><br/>
+
+                  <img alt="." rendered="#{not empty customIdentity.keyValue2 and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 =='SYSTEM'}"
+                   src="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue2}&amp;height=100&amp;scope=SYSTEM" >
+                  </img> 
+                             <h:commandButton value="+" rendered="#{customIdentity.keyValue2!= null and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 =='SYSTEM' }"
+                               onclick="PF('midpopupS2x').show()" >
+                             </h:commandButton><br/>
+
+                            <p:dialog id="midpopup2x" widgetVar="midpopup2x"  modal="false" autosized="true" 
+                                     moveable="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                              <h:outputLink value="#" onclick="PF('midpopup2x').hide(); return false;">
+                                 CLOSE X
+                               </h:outputLink>
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF('midpopup2x').hide(); return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue2}&amp;height=300" rendered="#{customIdentity.keyValue2!= null and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 !='SYSTEM'}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="PF('midpopup2x').hide(); return false;"/>
+
+                            </p:dialog>
+
+                            <p:dialog id="midpopupS2x" widgetVar="midpopupS2x"  modal="false" autosized="true" 
+                                     moveable="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                              <h:outputLink value="#" onclick="PF('midpopupS2x').hide(); return false;">
+                                 CLOSE X
+                               </h:outputLink>
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF('midpopupS2x').hide(); return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue2}&amp;height=300&amp;scope=SYSTEM" rendered="#{customIdentity.keyValue2!= null and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 =='SYSTEM'}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="PF('midpopupS2x').hide(); return false;"/>
+
+                            </p:dialog>
+          </ui:fragment>
+
+            <br/>
+                 <ui:fragment rendered="#{empty customIdentity.holdValue3 and not empty customIdentity.keyValue3}" >
+                  <img alt="." rendered="#{not empty customIdentity.holdValue3 and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 !='SYSTEM'}"
+                   src="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue3}&amp;height=100" >
+                  </img> 
+                  <h:outputText  value="#{customIdentity.keyValue3}" />
+
+                             <h:commandButton value="+" rendered="#{customIdentity.keyValue3!= null and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 !='SYSTEM'}"
+                              onclick="PF('midpopup3x'.show()" >
+                             </h:commandButton><br/>
+
+                  <img alt="." rendered="#{not empty customIdentity.holdValue3 and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 =='SYSTEM' }"
+                   src="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue3}&amp;height=100&amp;scope=SYSTEM" >
+                  </img> 
+                             <h:commandButton value="+" rendered="#{customIdentity.keyValue3!= null and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 =='SYSTEM' }"
+                              onclick="PF('midpopupS3x'.show()" >
+                             </h:commandButton><br/>
+
+                            <p:dialog id="midpopup3x" widgetVar="midpopup3x" modal="false" autosized="true" 
+                                     moveable="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                              <h:outputLink value="#" onclick="PF('midpopup3x').hide(); return false;">
+                                 CLOSE X
+                               </h:outputLink>
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF('midpopup3x').hide(); return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue3}&amp;height=300" rendered="#{customIdentity.keyValue3!= null and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 !='SYSTEM'}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="PF('midpopup3x').hide(); return false;"/>
+
+                            </p:dialog>
+
+                            <p:dialog id="midpopupS3x" widgetVar="midpopupS3x"  modal="false" autosized="true" 
+                                     moveable="true" resizeable="false">
+                             <f:facet name="header">
+                              <h:outputText value=" " />
+                              <h:outputLink value="#" onclick="PF('midpopupS3x').hide(); return false;">
+                                 CLOSE X
+                               </h:outputLink>
+                             </f:facet>
+                             <f:facet name="controls">
+                              <h:outputLink value="#" onclick="PF('midpopupS3x').hide(); return false;">
+                                 X
+                               </h:outputLink>
+                             </f:facet>
+
+                             <h:graphicImage
+                              value="/ImageServletCdi/?seq=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a3xxexnsbvxxxxxxxxxxsequence}&amp;table=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}&amp;qlf=#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a2xxuxxxbv50xxxxxxxxqualifier}&amp;id=B#{customIdentity.keyValue3}&amp;height=300&amp;scope=SYSTEM" rendered="#{customIdentity.keyValue3!= null and yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.zzxxu2oxxhxxxxxxxxxxowner2 =='SYSTEM'}">
+                             </h:graphicImage> 
+                             <p:commandButton value="-" onclick="PF('midpopupS3x').hide(); return false;"/>
+
+                            </p:dialog>
+                        </ui:fragment>
+
+       </p:panel> 
+       <p:panel> 
+        <h:panelGrid>
+
+         <h:outputLabel  for="albumI" value=" #{messages['Album']} #{messages['Name']} ">
+         </h:outputLabel>
+                 <h:inputText id="albumI" value="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.instance.a0xxukbdlvxxxxxxxxxxfromtable}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="20" pt:placeholder="#{messages['my album']}"
+                          maxlength="200">
+                 </h:inputText>
+                &nbsp;
+            <h:commandButton id="saveSys" styleClass="buttonMain" 
+                          value="#{messages['Save']} #{messages['As']} #{messages['Album']} " status="buttonStatus" 
+                         action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.persistUpLoadedImageAndItem('PI-L1',yxxxuq1n1xwwqqqxxxxxblobdataHome.valueOverRide)}"
+                       disabled="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.wired}"
+                       rendered="#{!yxxxuq1n1xwwqqqxxxxxblobdataHome.managed }">  
+             <p:tooltip > <span style="white-space: nowrap"> <h:outputText   value="#{messages['Upload']} #{messages['image']}, #{messages['then']} #{messages['save']}  #{messages['as']} #{messages['an']} #{messages['album']} #{messages['or']} #{messages['as']} #{messages['photo']} #{messages['gallery']} "/></span> </p:tooltip> 
+            </h:commandButton>  
+              &nbsp;  
+         <h:outputLabel  for="q1" value=" (#{messages['optional']}) #{messages['Challenge']} #{messages['Question']} " rendered="#{(customIdentity.product=='f' and customIdentity.subProduct=='s')}">
+         </h:outputLabel>
+                 <h:inputText id="q1" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.contentVendor}" 
+                   rendered="#{(customIdentity.product=='f' and customIdentity.subProduct=='s')}"
+                          size="20" pt:placeholder="#{messages['my last name']}  or #{messages['password']}"
+                          maxlength="200">
+                 </h:inputText>
+         <h:outputLabel  for="a1" value=" #{messages['Answer']} " rendered="#{(customIdentity.product=='f' and customIdentity.subProduct=='s')}">
+         </h:outputLabel>
+                 <h:inputText id="a1" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.contentTheme}" 
+                   rendered="#{(customIdentity.product=='f' and customIdentity.subProduct=='s')}"
+                          size="20" pt:placeholder="#{messages['smith']}  or #{messages['129']}"
+                          maxlength="200">
+                 </h:inputText>
+            <h:button id="next" styleClass="buttonMain"
+                   value="#{messages['Next']}"
+                    outcome="/imageEditEasy.xhtml"
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed or fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+                    outcome="/ImagesBrowse.xhtml"
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed or fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+                    outcome="/ImagesBrowse.xhtml"
+                rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+                     
+
+
+         </h:panelGrid>
+
+
+       </p:panel> 
+
+         <br></br>
+         <hr/>
+         <div style="width:30%;">
+         <h:outputText  value="#{messages['You']} #{messages['can']} #{messages['drag']} #{messages['and']} #{messages['drop']} #{messages['images']} #{messages['or']} #{messages['copy']}/ #{messages['paste']} #{messages['image']} #{messages['url']} #{messages['in']} #{messages['below']} #{messages['editor']} #{messages['panels']}." />
+         <h:outputText  value="#{messages['Easiest']} #{messages['option']} #{messages['is']} #{messages['to']} #{messages['expand']} #{messages['image']} #{messages['by']} #{messages['clicking']} + #{messages['sign']} #{messages['and']} #{messages['then']} #{messages['scroll']} #{messages['up']} #{messages['open']} #{messages['target']}  #{messages['editor']} #{messages['panel']} #{messages['beside']}  #{messages['the']}  #{messages['image']}." />
+         </div>
+            <h:panelGrid columns="#{dps}">
+              <p:panel>
+               <c:set var = "dpc" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:1}">
+               </c:set>
+               <c:set var = "dpr" value="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:2}">
+               </c:set>
+              </p:panel>
+             
+            <h:panelGrid columns="2">
+             <p:panel>
+               <h:link  value="#{messages['Browse']}/#{messages['Search']}"   outcome="/blobdataSystemList.xhtml" target="_blank" />
+               &nbsp;&nbsp;<h:outputText value = "#{messages['in']} #{messages['shared']} #{messages['Image']} #{messages['gallery']}" style="font-size: small;"/>
+             </p:panel>
+             <p:panel rendered="true">
+                <h:link  value="#{messages['Browse']}/#{messages['Search']}"   outcome="/blobdataList.xhtml" target="_blank" />
+               &nbsp;&nbsp;<h:outputText value = "#{messages['in']} #{customIdentity.owner2} #{messages['Image']} #{messages['gallery']}" style="font-size: small;"/>
+             </p:panel>
+            </h:panelGrid>
+
+            </h:panelGrid>
+            <h:panelGroup id="gmessagesmo">
+                    <h:messages style="color:red" globalOnly="true"/>
+            </h:panelGroup>
+     </p:panel>
+    </h:panelGrid>
+   </p:panel>
+</h:form>
+
+    <h:form >
+
+
+  <p:panel toggleable="true" toggleableHeader="true" style="width: 98%;background-color:white;"  header="#{messages['case']} #{messages['category']}" switchType="client" collapsed="false" rendered="#{customIdentity.labelView.contains('VM') }"
+        leftCollapsedIcon="/img/control_add16.png" rightCollapsedIcon="/img/Activitygroup16.png" leftExpandedIcon="/img/control_remove16.png">
+
+               <h:panelGroup>
+      <div id="gallry" style="width:#{yxxxuh566xwwqqwxxxxxuserHome.mobile || !skinBean.leftShown?'100%;':'85%;'} ">
+          <h:messages globalOnly="true" styleClass="message"/>
+              <h:panelGroup id="topOn">
+               &nbsp;&nbsp; <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"   outcome="/home.xhtml" />
+               <h:panelGrid columns="2">
+                <pe:ckEditor id="hometop" height="200" width="900"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.homeTopTxt}"
+                 toolbar="[['NewPage','Preview','Cut','Copy','Image','Table','HorizontalRule','Iframe','Link','Unlink','Anchor','Paste','PasteText','PasteFromWord','-', 'Scayt'], '/',['Font','FontSize','Bold','Italic','Strike','-','RemoveFormat' ] ,[ 'TextColor','BGColor' ], ['Undo', 'Redo']]">
+                </pe:ckEditor>
+                  </h:panelGrid>
+        <p:panel>
+
+         <h:panelGroup>
+
+         <h:outputLabel  for="detailCB" value=" #{messages['Category']} #{messages['Title']} ">
+         </h:outputLabel>
+                 <h:inputText id="detailCB" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.contentTheme}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="20" pt:placeholder="#{messages['Suggestions/Queries']}"
+                          maxlength="200">
+                 </h:inputText>
+                &nbsp;
+
+            <p:commandButton id="updateSys" styleClass="buttonMain" update="@form"
+                          value="#{messages['Save']} #{messages['as']} #{messages['Category']}" status="buttonStatus"  execute="@form"
+                         action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistTextAndItem('CI-L1',yxxxuq1m1xwwqqqxxxxxclobdataHome.contentTheme)}"
+                       disabled="#{!yxxxuq1m1xwwqqqxxxxxclobdataHome.wired}"
+                       rendered="#{!yxxxuq1m1xwwqqqxxxxxclobdataHome.managed }">  
+            </p:commandButton>
+              <h:button id="next" 
+                   value="#{messages['Next']}"
+                    outcome="/textEditEasy.xhtml"
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed or fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+                    outcome="/ItemsReviewSelect.xhtml"
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed or fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+                    outcome="/ItemsReviewSelect.xhtml"
+                rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+
+         </h:panelGroup>
+        </p:panel>
+
+         </h:panelGroup>
+         <h:panelGroup>
+
+            <h:panelGroup id="gmessagestop">
+                    <h:messages style="color:red" globalOnly="true"/>
+            </h:panelGroup>
+          </h:panelGroup>
+
+ </div>
+                 </h:panelGroup>
+
+  </p:panel>
+    </h:form >
+             
+
+ </div>
+</ui:define>
+
+</ui:composition>

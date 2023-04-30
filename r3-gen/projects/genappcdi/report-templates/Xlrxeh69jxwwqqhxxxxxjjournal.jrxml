@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+ name="Xlrxeh69jxwwqqhxxxxxjjournal"
+ language="java"
+ pageWidth="1200"
+ pageHeight="592"
+ orientation="Landscape"
+ columnWidth="752"
+ leftMargin="20"
+ rightMargin="20"
+ topMargin="20"
+ bottomMargin="20"
+ resourceBundle="messages"
+ whenResourceMissingType="Key">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="10"/>
+	<style name="Title" isDefault="false" fontName="DejaVu Serif" fontSize="18" isBold="true" >
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{FontName}=="DejaVu Serif"]]></conditionExpression>
+			<style fontName="DejaVu Serif" fontSize="24"/>
+		</conditionalStyle>
+	</style>
+	<style name="SubTitle" isDefault="false" forecolor="#666666" fontName="DejaVu Serif" fontSize="18" />
+
+	<style name="Column header" isDefault="false" forecolor="#666666" fontName="DejaVu Serif" fontSize="12" isBold="true" />
+
+	<style name="table">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="tableDataSet" resourceBundle="messages" whenResourceMissingType="Key">
+		<parameter name="DisplayAs_t" class="java.lang.String">
+			<parameterDescription><![CDATA[Report Output as HTML or as PDF]]></parameterDescription>
+			<defaultValueExpression><![CDATA["PDF"]]></defaultValueExpression>
+		</parameter>
+		<parameter name="MarkedOnes_t" class="java.lang.Boolean">
+			<parameterDescription><![CDATA[Select Marked Records Only]]></parameterDescription>
+		</parameter>
+		<parameter name="owner2Code_t" class="java.lang.String">
+			<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+			<defaultValueExpression><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+		</parameter>
+		<parameter name="Start_t" class="java.lang.String">
+			<parameterDescription><![CDATA[Start Record Key value for Select]]></parameterDescription>
+			<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+		</parameter>
+		<parameter name="End_t" class="java.lang.String">
+			<parameterDescription><![CDATA[End Record Key value for Select]]></parameterDescription>
+			<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+		</parameter>
+		<parameter name="SortKey_t" class="java.lang.String">
+			<parameterDescription><![CDATA[Sorting Key value for Select]]></parameterDescription>
+			<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+		</parameter>
+		<parameter name="SortOrder_t" class="java.lang.String">
+			<parameterDescription><![CDATA[Sorting Order value for Select]]></parameterDescription>
+			<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+		</parameter>
+		<parameter name="FontName_t" class="java.lang.String">
+			<parameterDescription><![CDATA[Font Name for Select]]></parameterDescription>
+			<defaultValueExpression><![CDATA["DejaVu Sans"]]></defaultValueExpression>
+		</parameter>
+		<parameter name="CompanyName_t" class="java.lang.String">
+			<parameterDescription><![CDATA[Company Name-to appear in Report]]></parameterDescription>
+			<defaultValueExpression><![CDATA["Raaspi      "]]></defaultValueExpression>
+		</parameter>
+		<parameter name="Status_t" class="java.lang.Integer">
+			<parameterDescription><![CDATA[Record status flag to filter and select]]></parameterDescription>
+			<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+		</parameter>
+
+		        <parameter name="show001" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show002" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show003" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show004" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show005" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show006" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show007" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show008" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show009" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show010" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show011" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show012" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show013" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show014" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show015" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show016" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+		        <parameter name="show017" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		        </parameter>
+
+
+
+
+
+     	<queryString><![CDATA[SELECT
+        jjournal.sid AS jjournal_sid,
+
+        jjournal.xpostdate AS jjournal_xpostdate,
+
+        jjournal.postdate AS jjournal_postdate,
+
+        jjournal.calendardt AS jjournal_calendardt,
+
+        jjournal.jrnltype AS jjournal_jrnltype,
+
+        jjournal.jnlseqb AS jjournal_jnlseqb,
+
+        jjournal.jnlseq AS jjournal_jnlseq,
+
+        jjournal.jnlseqs AS jjournal_jnlseqs,
+
+        jjournal.period AS jjournal_period,
+
+        jjournal.job AS jjournal_job,
+
+        jjournal.debit AS jjournal_debit,
+
+        jjournal.credit AS jjournal_credit,
+
+        jjournal.xreference AS jjournal_xreference,
+
+        jjournal.descript AS jjournal_descript,
+
+        jjournal.statusfl AS jjournal_statusfl,
+
+        jjournal.owner AS jjournal_owner,
+
+        jjournal.owner2 AS jjournal_owner2
+
+
+FROM
+       genapp.jjournal jjournal WHERE 
+       (jjournal.jnlseqs) >=  $P{Start_t} AND   (jjournal.jnlseqs <= $P{End_t}) AND (jjournal.owner2 = $P{owner2Code_t} and (jjournal.statusfl = $P{Status_t} or $P{Status_t} is null) ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
+        <field name="jjournal_sid" class="java.lang.Integer"/>
+      <field name="jjournal_xpostdate" class="java.lang.String"/>
+      <field name="jjournal_postdate" class="java.sql.Timestamp"/>
+      <field name="jjournal_calendardt" class="java.sql.Timestamp"/>
+      <field name="jjournal_jrnltype" class="java.lang.String"/>
+      <field name="jjournal_jnlseqb" class="java.lang.String"/>
+        <field name="jjournal_jnlseq" class="java.lang.Integer"/>
+      <field name="jjournal_jnlseqs" class="java.lang.String"/>
+        <field name="jjournal_period" class="java.lang.Integer"/>
+      <field name="jjournal_job" class="java.lang.String"/>
+      <field name="jjournal_debit" class="java.math.BigDecimal"/>
+      <field name="jjournal_credit" class="java.math.BigDecimal"/>
+      <field name="jjournal_xreference" class="java.lang.String"/>
+      <field name="jjournal_descript" class="java.lang.String"/>
+        <field name="jjournal_statusfl" class="java.lang.Integer"/>
+      <field name="jjournal_owner" class="java.lang.String"/>
+      <field name="jjournal_owner2" class="java.lang.String"/>
+
+	</subDataset>
+
+
+
+
+
+	<parameter name="DisplayAs" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Report Output as HTML or as PDF]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["PDF"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MarkedOnes" isForPrompting="true" class="java.lang.Boolean">
+ 		<parameterDescription><![CDATA[Select Marked Records Only]]></parameterDescription>
+      </parameter>
+	<parameter name="owner2Code" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Start" class="java.lang.String">
+		<parameterDescription><![CDATA[Start Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="End" class="java.lang.String">
+		<parameterDescription><![CDATA[End Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+		<parameter name="SortKey" class="java.lang.String">
+			<parameterDescription><![CDATA[Sorting Key value for Select]]></parameterDescription>
+			<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+		</parameter>
+		<parameter name="SortOrder" class="java.lang.String">
+			<parameterDescription><![CDATA[Sorting Order value for Select]]></parameterDescription>
+			<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+		</parameter>
+		<parameter name="FontName" class="java.lang.String">
+			<parameterDescription><![CDATA[Font Name for Select]]></parameterDescription>
+			<defaultValueExpression><![CDATA["DejaVu Sans"]]></defaultValueExpression>
+		</parameter>
+		<parameter name="CompanyName" class="java.lang.String">
+			<parameterDescription><![CDATA[Company Name-to appear in Report]]></parameterDescription>
+			<defaultValueExpression><![CDATA["Raaspi      "]]></defaultValueExpression>
+		</parameter>
+		<parameter name="Status" class="java.lang.Integer">
+			<parameterDescription><![CDATA[Record Status flag]]></parameterDescription>
+			<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+		</parameter>
+
+		<parameter name="show001" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show002" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show003" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show004" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show005" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show006" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show007" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show008" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show009" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show010" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show011" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show012" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show013" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show014" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show015" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show016" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+		<parameter name="show017" isForPrompting="false" class="java.lang.Boolean">
+			<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+		</parameter>
+
+
+     	<queryString><![CDATA[SELECT
+        jjournal.sid AS jjournal_sid,
+
+        jjournal.xpostdate AS jjournal_xpostdate,
+
+        jjournal.postdate AS jjournal_postdate,
+
+        jjournal.calendardt AS jjournal_calendardt,
+
+        jjournal.jrnltype AS jjournal_jrnltype,
+
+        jjournal.jnlseqb AS jjournal_jnlseqb,
+
+        jjournal.jnlseq AS jjournal_jnlseq,
+
+        jjournal.jnlseqs AS jjournal_jnlseqs,
+
+        jjournal.period AS jjournal_period,
+
+        jjournal.job AS jjournal_job,
+
+        jjournal.debit AS jjournal_debit,
+
+        jjournal.credit AS jjournal_credit,
+
+        jjournal.xreference AS jjournal_xreference,
+
+        jjournal.descript AS jjournal_descript,
+
+        jjournal.statusfl AS jjournal_statusfl,
+
+        jjournal.owner AS jjournal_owner,
+
+        jjournal.owner2 AS jjournal_owner2
+
+
+FROM
+       genapp.jjournal jjournal WHERE 
+       (jjournal.jnlseqs) >=  $P{Start} AND   (jjournal.jnlseqs <= $P{End}) AND jjournal.owner2 = $P{owner2Code} order by cast($P{SortKey} as varchar(32)) $P!{SortOrder}]]></queryString>
+   
+        <field name="jjournal_sid" class="java.lang.Integer"/>
+      <field name="jjournal_xpostdate" class="java.lang.String"/>
+      <field name="jjournal_postdate" class="java.sql.Timestamp"/>
+      <field name="jjournal_calendardt" class="java.sql.Timestamp"/>
+      <field name="jjournal_jrnltype" class="java.lang.String"/>
+      <field name="jjournal_jnlseqb" class="java.lang.String"/>
+        <field name="jjournal_jnlseq" class="java.lang.Integer"/>
+      <field name="jjournal_jnlseqs" class="java.lang.String"/>
+        <field name="jjournal_period" class="java.lang.Integer"/>
+      <field name="jjournal_job" class="java.lang.String"/>
+      <field name="jjournal_debit" class="java.math.BigDecimal"/>
+      <field name="jjournal_credit" class="java.math.BigDecimal"/>
+      <field name="jjournal_xreference" class="java.lang.String"/>
+      <field name="jjournal_descript" class="java.lang.String"/>
+        <field name="jjournal_statusfl" class="java.lang.Integer"/>
+      <field name="jjournal_owner" class="java.lang.String"/>
+      <field name="jjournal_owner2" class="java.lang.String"/>
+
+
+
+
+
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="194" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="1199" height="92" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+			</rectangle>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement  style="Title" 
+						x="120"
+						y="19"
+						width="234"
+						height="22"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement  textAlignment="Right" markup="styled">
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$R{Jjournal}]]></textFieldExpression>
+				</textField>
+			<staticText>
+				<reportElement style="Title" x="520" y="19" width="130" height="32"/>
+				<textElement>
+				</textElement>
+				<text><![CDATA[Report]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="960" y="4" width="142" height="46" forecolor="#FFFFFF" backcolor="#FFFFFF"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
+
+			<textField>
+				<reportElement style="SubTitle" x="5" y="46" width="336" height="22"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{CompanyName}]]></textFieldExpression>
+			</textField>
+
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="453" y="51" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+
+
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="80" width="752" height="60"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tableDataSet">
+						<datasetParameter name="DisplayAs_t">
+							<datasetParameterExpression><![CDATA[$P{DisplayAs}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="MarkedOnes_t">
+							<datasetParameterExpression><![CDATA[$P{MarkedOnes}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="owner2Code_t">
+							<datasetParameterExpression><![CDATA[$P{owner2Code}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="Start_t">
+							<datasetParameterExpression><![CDATA[$P{Start}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="End_t">
+							<datasetParameterExpression><![CDATA[$P{End}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SortKey_t">
+							<datasetParameterExpression><![CDATA[$P{SortKey}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="SortOrder_t">
+							<datasetParameterExpression><![CDATA[$P{SortOrder}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="FontName_t">
+							<datasetParameterExpression><![CDATA[$P{FontName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="CompanyName_t">
+							<datasetParameterExpression><![CDATA[$P{CompanyName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="Status_t">
+							<datasetParameterExpression><![CDATA[$P{Status}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show001">
+							<datasetParameterExpression><![CDATA[$P{show001}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show002">
+							<datasetParameterExpression><![CDATA[$P{show002}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show003">
+							<datasetParameterExpression><![CDATA[$P{show003}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show004">
+							<datasetParameterExpression><![CDATA[$P{show004}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show005">
+							<datasetParameterExpression><![CDATA[$P{show005}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show006">
+							<datasetParameterExpression><![CDATA[$P{show006}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show007">
+							<datasetParameterExpression><![CDATA[$P{show007}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show008">
+							<datasetParameterExpression><![CDATA[$P{show008}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show009">
+							<datasetParameterExpression><![CDATA[$P{show009}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show010">
+							<datasetParameterExpression><![CDATA[$P{show010}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show011">
+							<datasetParameterExpression><![CDATA[$P{show011}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show012">
+							<datasetParameterExpression><![CDATA[$P{show012}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show013">
+							<datasetParameterExpression><![CDATA[$P{show013}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show014">
+							<datasetParameterExpression><![CDATA[$P{show014}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show015">
+							<datasetParameterExpression><![CDATA[$P{show015}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show016">
+							<datasetParameterExpression><![CDATA[$P{show016}]]></datasetParameterExpression>
+						</datasetParameter>
+
+						<datasetParameter name="show017">
+							<datasetParameterExpression><![CDATA[$P{show017}]]></datasetParameterExpression>
+						</datasetParameter>
+
+
+
+
+
+										<datasetParameter name="REPORT_RESOURCE_BUNDLE">
+											<datasetParameterExpression><![CDATA[$P{REPORT_RESOURCE_BUNDLE}]]></datasetParameterExpression>
+										</datasetParameter>
+
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+
+					<jr:column width="40">
+					  <printWhenExpression><![CDATA[$P{show001}]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Sid"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="40" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.Integer"><![CDATA[$F{jjournal_sid}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="50">
+					  <printWhenExpression><![CDATA[true]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Xpostdate"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.String"><![CDATA[$F{jjournal_xpostdate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="45">
+					  <printWhenExpression><![CDATA[true]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="45" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Postdate"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="45" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.sql.Timestamp"><![CDATA[$F{jjournal_postdate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="45">
+					  <printWhenExpression><![CDATA[$P{show004}]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="45" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Calendardt"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="45" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.sql.Timestamp"><![CDATA[$F{jjournal_calendardt}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="50">
+					  <printWhenExpression><![CDATA[true]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Jrnltype"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.String"><![CDATA[$F{jjournal_jrnltype}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="50">
+					  <printWhenExpression><![CDATA[true]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Jnlseqb"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.String"><![CDATA[$F{jjournal_jnlseqb}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="40">
+					  <printWhenExpression><![CDATA[true]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Jnlseq"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="40" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.Integer"><![CDATA[$F{jjournal_jnlseq}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="50">
+					  <printWhenExpression><![CDATA[true]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Jnlseqs"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.String"><![CDATA[$F{jjournal_jnlseqs}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="40">
+					  <printWhenExpression><![CDATA[$P{show009}]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Period"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="40" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.Integer"><![CDATA[$F{jjournal_period}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="50">
+					  <printWhenExpression><![CDATA[$P{show010}]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Job"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.String"><![CDATA[$F{jjournal_job}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="40">
+					  <printWhenExpression><![CDATA[$P{show011}]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Debit"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="40" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{jjournal_debit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="40">
+					  <printWhenExpression><![CDATA[$P{show012}]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Credit"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="40" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{jjournal_credit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="50">
+					  <printWhenExpression><![CDATA[$P{show013}]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Xreference"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.String"><![CDATA[$F{jjournal_xreference}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="50">
+					  <printWhenExpression><![CDATA[$P{show014}]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Descript"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.String"><![CDATA[$F{jjournal_descript}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="40">
+					  <printWhenExpression><![CDATA[$P{show015}]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Statusfl"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="40" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.Integer"><![CDATA[$F{jjournal_statusfl}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="50">
+					  <printWhenExpression><![CDATA[$P{show016}]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Owner"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.String"><![CDATA[$F{jjournal_owner}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+					<jr:column width="50">
+					  <printWhenExpression><![CDATA[$P{show017}]]></printWhenExpression>
+						<jr:columnHeader style="table_CH" height="25" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="25">
+								</reportElement>
+								<textElement/>
+				                       <textFieldExpression   class="java.lang.String"><![CDATA["Owner2"]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="15">
+								</reportElement>
+								<textElement/>
+				                      <textFieldExpression   class="java.lang.String"><![CDATA[$F{jjournal_owner2}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+
+
+				</jr:table>
+			</componentElement>
+		</band>
+	</title>
+	<columnFooter>
+		<band height="56">
+			<staticText>
+				<reportElement  x="0" y="0" width="99" height="20" uuid="5ae4662c-7ed7-456f-aaed-7a8e074a73cc"/>
+				<text><![CDATA[Record count]]></text>
+			</staticText>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</band>
+	</columnFooter>
+		<pageFooter>
+			<band height="27"  isSplitAllowed="true" >
+
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement style="Column header"
+						x="325"
+						y="4"
+						width="170"
+						height="19"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement   style="Column header"
+						x="499"
+						y="4"
+						width="36"
+						height="19"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="3"
+						width="1140"
+						height="0"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="line"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement  style="Column header"
+						x="1"
+						y="6"
+						width="209"
+						height="19"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageFooter>
+
+</jasperReport>

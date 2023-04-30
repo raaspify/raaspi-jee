@@ -1,0 +1,329 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplateMockUpPreview.xhtml">
+<!-- Not Generated uses special menu ie via menuMockUpPreview and rtemplateMockUpPreview to call about-1P instead of about-1
+     about-1P shows -C only if no -M ie will show preview change if available ie still complete page content 
+     its more like Home page ie displays content rather than homeMockUp which allows content to be changed 
+     jun072018 added -M 
+     can be used for both old and simpler way of build pages because if no content it wont show
+     but added existing but not used footer-1 part (site map purpose) 
+     homeMockUpThemePreview is based on this and uses theme contents stored in gallery (SYSTEM) -M values
+     vendor creates and stores these -M contents for different themes.
+     whereas here it uses the site preview -M values and if ok user can use a button to publish (which button?)
+     In homePageEditor,under ALL section user 
+-->
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"/>
+<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT"/>
+
+<ui:define name="body">
+    <h:form id="homeForm">
+<h:outputStylesheet>
+
+
+
+</h:outputStylesheet>
+<script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  var aid;
+   //alert(window.location.href);
+  if (window.location.href.indexOf(".l3r") > -1) {
+   aid = "1493497040950348";
+  } else {
+   aid = "462928240562239";
+  }
+   //alert(aid);
+  FB.init({
+    appId      : aid,
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.4' // use version 2.2
+  });
+
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      onFbLogin(response.id, response.email, response.name, response.first_name, response.last_name, response.gender);
+      document.getElementById('status').innerHTML = 'Welcome Facebook User '+response.name ;
+      //final response to user will come from server
+    });
+  }
+  function Logout() {
+  FB.logout(function () { document.location.reload(); });
+   document.getElementById('status').innerHTML = 'Logged out of Facebook' ;
+  }
+</script>
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{skinBean.setCurrentSkin}" />
+</f:metadata>
+               <h:outputText value="#{messages.preview} #{messages.window} - #{messages.close} #{messages.when} #{messages.done}"/>
+
+
+    <p:toolbar height="26" itemSeparator="grid" >
+	  <p:toolbarGroup location="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?'left':'right'}">
+              <h:outputText value="#{customIdentity.username}" rendered="#{identity.loggedIn }"/> 
+              <h:outputLink value="#" id="settings" rendered ="#{identity.loggedIn}" onClick="PF('changePWPanel').show()">
+               <h:outputText value="#{messages.prefs_change_password}" onKey="PF('show').click()"/>
+              </h:outputLink>
+              <h:link id="logoutfb" onclick="Logout();" value="Logout(FB)" rendered="#{!identity.loggedIn and yxxxuh566xwwqqwxxxxxuserHome.fbUid != null }"/>
+              <h:link id="logout" onclick="Logout();" action="#{identity.logout()}" value="Logout" rendered="#{identity.loggedIn}"/>
+              <h:outputText value="#{messages.Today} "/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+              <h:inputText id="Query" value="#{fpxxfq1a5xwwqqhxxxxxitemList.searchPattern}" size="15" >
+              </h:inputText>
+              <h:commandButton id="r3Search" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('s')}"  image="/img/Findblue16.png"
+               value="#{messages.searchButton}" rendered="#{!(customIdentity.product=='f' and customIdentity.subProduct=='b')}">
+                 <p:tooltip id="searchTip" attached="true" for="r3Search" >
+                 <h:outputText value="#{messages.search_tip}" />
+                 </p:tooltip>
+              </h:commandButton>
+              <h:commandButton id="r3Search2" action="#{fpxxfq1a5xwwqqhxxxxxitemList.getSearchedList('b')}"  image="/img/Findblue16.png"
+               value="#{messages.searchButton}" rendered="#{(customIdentity.product=='f' and customIdentity.subProduct=='b')}" />
+              <h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0 }"  >
+               <h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+              </h:link>
+              <h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0}">
+              </h:outputText>
+              <h:outputText value="[#{messages['empty']}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() == 0}"/>
+	      <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  style="font-size: large;"  cols="70" rows="10" readonly="true"  value="#{messages['homeHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+
+    </p:toolbar>
+    <h:messages globalOnly="true" styleClass="message"/>
+<h:button value="#{messages['done']} "  outcome="/home.xhtml" />&nbsp;<h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home"  outcome="/home.xhtml" />
+<br></br>
+    <ui:remove>
+     Allow upto 3 graphics top seq 0,1 and FTR seq 0(rendered by if text present why? got removed to be added asis)
+      100% float left or asis centre (future)
+      100%  float centre or asis
+      100% float left or asis
+    </ui:remove>
+    <p:panel styleClass="midtop" >
+     <p:panel toggleable="true" style="width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'100%':'100%'};"  switchType="client" expanded="true" 
+       leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+              <h:outputText styleClass="midtoph" escape="false" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','HDR',0,1200)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','HDR',0,1200) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','HDR',0,1200) ==null)}"/>
+              <h:outputText styleClass="midtoph" escape="false" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','HDR',0,1200)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','HDR',0,1200) !=null)}"/>
+
+               <h:graphicImage id="midimg"  styleClass="midtopi" alt="Press Reset to load Images " style="width: 100%;float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;"
+                value="/ImageServletCdi/?seq=0&amp;id=A3R-MID-TOP-C&amp;width=700"
+                rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-MID-TOP-C','PIC',0) !=null and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-MID-TOP-M','PIC',0) ==null)}">
+               </h:graphicImage> 
+               <h:graphicImage id="midimg2"  styleClass="midtopi" alt="Press Reset to load Images " style="width: 100%;float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;"
+                value="/ImageServletCdi/?seq=0&amp;id=A3R-MID-TOP-M&amp;width=700"
+                rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-MID-TOP-M','PIC',0) !=null)}">
+               </h:graphicImage> 
+
+              <h:outputText styleClass="midtoph" escape="false" value="&lt;/a&gt;" 
+                rendered="#{identity.loggedIn  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','HDR',0,1200) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','HDR',0,1200) ==null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','HDR',0,1200).contains('a  href=' ))}"/>
+              <h:outputText styleClass="midtoph" escape="false" value="&lt;/a&gt;" 
+                rendered="#{identity.loggedIn  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','HDR',0,1200) !=null  and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','HDR',0,1200).contains('a  href=' ))}"/>
+
+              <h:outputText styleClass="midtopt" escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','TXT',0,12000)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','TXT',0,12000) !='' and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','TXT',0,12000) =='')}"/>
+              <h:outputText styleClass="midtopt" escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','TXT',0,12000)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','TXT',0,12000) !='')}"/>
+     </p:panel> 
+
+     <p:panel styleClass="midtop" rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','VID',0,12000) !=null)}">
+      <p:panel toggleable="true" toggleableHeader="true"  style="width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'100%':'100%'};"  switchType="client" expanded="true" rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','VID',0,12000) !=null)}"
+       leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+       <h:panelGroup>
+        <h:panelGroup rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','VID',0,12000)} !=null and #{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','VID',0,12000) == null}">
+         <iframe width="854" height="480" src="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-C','VID',0,12000)}" frameborder="0" allowfullscreen="true"></iframe>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','VID',0,12000)} !=null}">
+         <iframe width="854" height="480" src="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-TOP-M','VID',0,12000)}" frameborder="0" allowfullscreen="true"></iframe>
+        </h:panelGroup>
+       </h:panelGroup>
+      </p:panel> 
+     </p:panel>
+
+     <p:panel toggleable="true" toggleableHeader="true"  style="width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'100%':'100%'};"  switchType="client" expanded="true" 
+       leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+              <h:outputText styleClass="midtoph" escape="false" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-C','HDR',0,1200)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-C','HDR',0,1200) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-M','HDR',0,1200) ==null)}"/>
+              <h:outputText styleClass="midtoph" escape="false" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-M','HDR',0,1200)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-M','HDR',0,1200) !=null)}"/>
+
+              <h:graphicImage style="width: 100%;float:left;;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;"
+              value="/ImageServletCdi/?seq=0&amp;id=A3R-MID-FTR-C&amp;width=700" 
+                rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-MID-FTR-C','PIC',0) !=null and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-MID-FTR-M','PIC',0) ==null)}">
+              </h:graphicImage>
+              <h:graphicImage style="width: 100%;float:left;;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;"
+              value="/ImageServletCdi/?seq=0&amp;id=A3R-MID-FTR-M&amp;width=700" 
+                rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-MID-FTR-M','PIC',0) !=null)}">
+              </h:graphicImage>
+
+              <h:outputText styleClass="midtoph" escape="false" value="&lt;/a&gt;" 
+                rendered="#{identity.loggedIn  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-C','HDR',0,1200) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-M','HDR',0,1200) ==null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-C','HDR',0,1200).contains('a  href=' ))}"/>
+              <h:outputText styleClass="midtoph" escape="false" value="&lt;/a&gt;" 
+                rendered="#{identity.loggedIn  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-M','HDR',0,1200) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-M','HDR',0,1200).contains('a  href=' ))}"/>
+
+              <h:outputText styleClass="midtopt" escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-C','TXT',0,12000)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-C','TXT',0,12000) !='' and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-M','TXT',0,12000) !='')}"/>
+              <h:outputText styleClass="midtopt" escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-M','TXT',0,12000)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MID-FTR-M','TXT',0,12000) !='')}"/>
+     </p:panel> 
+     <p:panel toggleable="true" toggleableHeader="true"  style="width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'100%':'100%'};"  switchType="client" expanded="true" 
+       leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+              <h:outputText styleClass="midtoph" escape="false" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-C','HDR',0,1200)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-C','HDR',0,1200) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-M','HDR',0,1200) ==null)}"/>
+              <h:outputText styleClass="midtoph" escape="false" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-M','HDR',0,1200)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-M','HDR',0,1200) !=null)}"/>
+
+              <h:graphicImage style="width: 100%;float:left;;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;"
+              value="/ImageServletCdi/?seq=0&amp;id=A3R-FOOTER-1-C&amp;width=700" 
+                rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-FOOTER-1-C','PIC',0) !=null and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-FOOTER-1-M','PIC',0) ==null)}">
+              </h:graphicImage>
+              <h:graphicImage style="width: 100%;float:left;;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;"
+              value="/ImageServletCdi/?seq=0&amp;id=A3R-FOOTER-1-M&amp;width=700" 
+                rendered="#{(yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-FOOTER-1-M','PIC',0) !=null)}">
+              </h:graphicImage>
+
+              <h:outputText styleClass="midtoph" escape="false" value="&lt;/a&gt;" 
+                rendered="#{identity.loggedIn  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-C','HDR',0,1200) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-M','HDR',0,1200) ==null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-C','HDR',0,1200).contains('a  href=' ))}"/>
+              <h:outputText styleClass="midtoph" escape="false" value="&lt;/a&gt;" 
+                rendered="#{identity.loggedIn  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-M','HDR',0,1200) !=null and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-M','HDR',0,1200).contains('a  href=' ))}"/>
+
+              <h:outputText styleClass="midtopt" escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-C','TXT',0,12000)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-C','TXT',0,12000) !='' and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-M','TXT',0,12000) !='')}"/>
+              <h:outputText styleClass="midtopt" escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-M','TXT',0,12000)}" 
+                rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-FOOTER-1-M','TXT',0,12000) !='')}"/>
+     </p:panel> 
+
+    </p:panel>
+      <p:hotkey id="keyReturn" key="return" onkeydown="PF('homeForm:loginb').click()" enabledInInput="true"/>
+      <p:hotkey id="keyCTRLR" key="ctrl+r" onkeydown="PF('homeForm:registerLink').click()" enabledInInput="true"/>
+
+</h:form>
+
+
+
+
+
+<h:form  >
+
+ <p:dialog id="changePWPanel" modal="true" width="360" height="300" show="#{yxxxuh566xwwqqwxxxxxuserHome.changePasswordError}" rendered="#{identity.loggedIn}"
+                    domElementAttachment="parent">
+  <f:facet name="header"><h:outputText value="#{messages.chngpswd}"/></f:facet>
+  <f:facet name="controls">
+   <h:form>
+    <p:commandButton onclick="PF('changePWPanel').hide()" type="image" image="/img/Cancel16.png"/>
+
+   </h:form>
+  </f:facet>
+    <h:panelGrid >
+      <f:facet name="header"><h:outputText value="#{messages.chngpswd_directive}"/></f:facet>
+      <ui:decorate id="changePWUserIdField" template="layout/edit.xhtml">
+            <div class="dialog">
+                <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
+                    <h:outputLabel for="password">New Password</h:outputLabel>
+				<h:inputSecret id="password" value="#{yxxxuh566xwwqqwxxxxxuserHome.resetPassword}" required="true"/>
+			
+                    <h:outputLabel for="verify">ReType New Password</h:outputLabel>
+				<h:inputSecret id="verify" value="#{yxxxuh566xwwqqwxxxxxuserHome.verify}" required="true"/>
+                </h:panelGrid>
+            </div>
+      </ui:decorate>
+
+    </h:panelGrid>
+        <p:commandButton type="button" id="changePWCommand" action="#{yxxxuh566xwwqqwxxxxxuserHome.changePassword}"
+        value="#{messages.prefs_change_password}" render="changePWPanel"  execute="changePWPanel"
+        oncomplete="#{facesContext.maximumSeverity.ordinal != 0}?PF('changePWPanel').show():PF('changePWPanel').show()"
+         status="buttonStatus" />
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <p:commandButton type="button" id="chDoneButton" value="#{messages.done}" 
+     render="changePWPanel" execute="changePWPanel"
+     oncomplete="PF('changePWPanel').hide();"/>
+       <h:messages globalOnly="false" styleClass="message" id="globalMessages"/>
+    <p:message for="changePWCommand">
+      <f:facet name="errorMarker"><h:graphicImage value="/img/error.gif"/></f:facet>
+    </p:message>
+
+
+ </p:dialog>
+</h:form>
+
+
+
+
+
+</ui:define> 
+</ui:composition>
+

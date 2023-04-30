@@ -1,0 +1,375 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="yxxxch621xwwqqhxxxxxacperiodA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxch621xwwqqhxxxxxacperiodHome.yxxxch621xwwqqhxxxxxacperiodA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="yxxxch621xwwqqhxxxxxacperiodFrom" value="#{yxxxch621xwwqqhxxxxxacperiodHome.yxxxch621xwwqqhxxxxxacperiodFrom}"/>
+    <f:viewAction action="#{yxxxch621xwwqqhxxxxxacperiodHome.restrict()}" />
+    <f:viewAction action="#{yxxxch621xwwqqhxxxxxacperiodHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Acperiod']}</ui:define>
+
+<ui:define name="body">
+<h:form id="yxxxch621xwwqqhxxxxxacperiod" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("yxxxch621xwwqqhxxxxxacperiod:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!yxxxch621xwwqqhxxxxxacperiodHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{yxxxch621xwwqqhxxxxxacperiodHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['AcperiodEditHelp']!='AcperiodEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['AcperiodEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{yxxxch621xwwqqhxxxxxacperiodHome.managed ? 'Edit' : 'Add'} #{messages['Acperiod']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a0xxukwpbv47xxxxxxxxrowidDecoration"    >
+        <h:outputLabel  for="a0xxukwpbv47xxxxxxxxrowid" value="#{messages['Rowid']}">
+      </h:outputLabel>
+ 
+               <h:selectOneMenu style="width:250px;"  value="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.a0xxukwpbv47xxxxxxxxrowid}" required="false" id="a0xxukwpbv47xxxxxxxxrowid">
+               <f:ajax  render="a0xxukwpbv47xxxxxxxxrowidI" bypassUpdates="false"/>
+                                <f:selectItem itemValue="01" itemLabel="01" />
+                               </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a1xxuxwpbv47xxxxxxxxcurrperiodDecoration"    >
+        <h:outputLabel  for="a1xxuxwpbv47xxxxxxxxcurrperiod" value="#{messages['Currperiod']}">
+      </h:outputLabel>
+ 
+               <h:selectOneMenu style="width:250px;"  value="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.a1xxuxwpbv47xxxxxxxxcurrperiod}" required="false" id="a1xxuxwpbv47xxxxxxxxcurrperiod">
+               <f:ajax  render="a1xxuxwpbv47xxxxxxxxcurrperiodI" bypassUpdates="false"/>
+                                <f:selectItem itemValue="01" itemLabel="01" />
+                               </h:selectOneMenu>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b1xxuxzsbvxxxxxxxxxxdescriptDecoration"    >
+        <h:outputLabel  for="b1xxuxzsbvxxxxxxxxxxdescript" value="#{messages['Descript']}">
+      </h:outputLabel>
+
+         <h:inputText id="b1xxuxzsbvxxxxxxxxxxdescript" 
+                           size="32"
+                      maxlength="120"
+                          value="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.b1xxuxzsbvxxxxxxxxxxdescript}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+             <h:panelGroup id="b2xxdwerbvxxxxxxxxxxcurrbusdateDecoration"    >
+        <h:outputLabel  for="b2xxdwerbvxxxxxxxxxxcurrbusdate" value="#{messages['Currbusdate']}">
+      </h:outputLabel>
+     <p:datePicker id="b2xxdwerbvxxxxxxxxxxcurrbusdate" 
+
+                          value="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.b2xxdwerbvxxxxxxxxxxcurrbusdate}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+             <h:panelGroup id="b3xxdwerbvxxxxxxxxxxcurrcaldateDecoration"    >
+        <h:outputLabel  for="b3xxdwerbvxxxxxxxxxxcurrcaldate" value="#{messages['Currcaldate']}">
+      </h:outputLabel>
+     <p:datePicker id="b3xxdwerbvxxxxxxxxxxcurrcaldate" 
+
+                          value="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.b3xxdwerbvxxxxxxxxxxcurrcaldate}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+             <h:panelGroup id="b4xxdwerbvxxxxxxxxxxcurrlocaldateDecoration"    >
+        <h:outputLabel  for="b4xxdwerbvxxxxxxxxxxcurrlocaldate" value="#{messages['Currlocaldate']}">
+      </h:outputLabel>
+     <p:datePicker id="b4xxdwerbvxxxxxxxxxxcurrlocaldate" 
+
+                          value="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.b4xxdwerbvxxxxxxxxxxcurrlocaldate}" >
+                </p:datePicker>
+            </h:panelGroup>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="2">
+
+            <h:panelGroup id="y3xxuznxbvxxxxxxxxxxnotesDecoration"  rendered="true">
+       <h:outputLabel  for="y3xxuznxbvxxxxxxxxxxnotesed" value="#{messages['Notes']}">
+      </h:outputLabel>
+         <h:panelGrid>
+                <pe:ckEditor id="y3xxuznxbvxxxxxxxxxxnotesed" height="50" width="100%"  value="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.y3xxuznxbvxxxxxxxxxxnotes}"
+                 toolbar="[['NewPage','Preview','Cut','Copy','Image','Table','HorizontalRule','Iframe','Link','Unlink','Anchor','Paste','PasteText','PasteFromWord','-', 'Scayt'], '/',['Font','FontSize','Bold','Italic','Strike','-','RemoveFormat' ] ,[ 'TextColor','BGColor' ], ['Undo', 'Redo']]">
+                </pe:ckEditor>
+         </h:panelGrid>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z1xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z1xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="z1xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z2xxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="z2xxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.z2xxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z3xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z3xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="z3xxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.z3xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{yxxxch621xwwqqhxxxxxacperiodHome.instance.a0xxukwpbv47xxxxxxxxrowid} #{messages['sid']} #{yxxxch621xwwqqhxxxxxacperiodHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{yxxxch621xwwqqhxxxxxacperiodHome.instance.a0xxukwpbv47xxxxxxxxrowid !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{yxxxch621xwwqqhxxxxxacperiodHome.persist()}"
+                       disabled="#{!yxxxch621xwwqqhxxxxxacperiodHome.wired}"
+                       rendered="#{!yxxxch621xwwqqhxxxxxacperiodHome.managed  and !yxxxch621xwwqqhxxxxxacperiodHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{yxxxch621xwwqqhxxxxxacperiodHome.update()}"
+                       rendered="#{yxxxch621xwwqqhxxxxxacperiodHome.managed  and !yxxxch621xwwqqhxxxxxacperiodHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{yxxxch621xwwqqhxxxxxacperiodHome.update()}"
+                       rendered="#{yxxxch621xwwqqhxxxxxacperiodHome.managed and yxxxch621xwwqqhxxxxxacperiodHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{yxxxch621xwwqqhxxxxxacperiodHome.remove()}"
+                       rendered="#{yxxxch621xwwqqhxxxxxacperiodHome.managed and !yxxxch621xwwqqhxxxxxacperiodHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/acperiodEdit.xhtml"
+                       rendered="#{yxxxch621xwwqqhxxxxxacperiodHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{yxxxch621xwwqqhxxxxxacperiodHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{yxxxch621xwwqqhxxxxxacperiodHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{yxxxch621xwwqqhxxxxxacperiodList.reportName}"/>
+            <f:param name="displayAs" value="#{yxxxch621xwwqqhxxxxxacperiodList.displayAs}" /> 
+            <h:button outcome="/acperiodList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Acperiod']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty yxxxch621xwwqqhxxxxxacperiodHome.yxxxch621xwwqqhxxxxxacperiodFrom ? 'home' : yxxxch621xwwqqhxxxxxacperiodHome.yxxxch621xwwqqhxxxxxacperiodFrom}.xhtml"
+                rendered="#{yxxxch621xwwqqhxxxxxacperiodHome.managed or yxxxch621xwwqqhxxxxxacperiodHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty yxxxch621xwwqqhxxxxxacperiodHome.yxxxch621xwwqqhxxxxxacperiodFrom ? 'home' : yxxxch621xwwqqhxxxxxacperiodHome.yxxxch621xwwqqhxxxxxacperiodFrom}.xhtml"
+                rendered="#{!yxxxch621xwwqqhxxxxxacperiodHome.managed and !yxxxch621xwwqqhxxxxxacperiodHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

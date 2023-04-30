@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>  
+    <ui:remove>
+     This template is used for back office admin pages and not for end user facing pages. 
+     Unlike end user facing rtemplate-ui which needs to be more flexible and less structiured to suit different 
+     end user needs, this one is more structured by including jsf ui:includes like menu or leftpop or footer.
+     Backoffice pages are function oriented and easier to maintain and kept at standard look by using ui:includes.
+     Both templates are content based ie actual html content are kept in pre-defined text/clob records with
+     keys like A3r-MENU-C,A3R-LOGO-C,A3R-PRODUCT-1-C,A3R-TOP-BKGR-C,A3R-FOOTER-1-C etc.    
+     template has ui:insert name=xx which can be replaced by using ui:define for the same name. Example
+     ui:insert name="body" and using <ui:define name="body">......</ui:define> in pages usung the template
+     each page should have its own content for better SEO indexing
+     for generated pages , use el expressions to customize ie read from client data
+     for non-genrated hard code but still make use of el expressions to customize  
+       well known one's url can be included using href see below fonts-awsome, bootstrap
+     addon section added in view template to add html content and buttons to access addon beans method
+
+    </ui:remove> 
+    <title><ui:insert name="title"/></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="stylesheet/3rcustom.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheet/jssocials.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheet/jssocials-theme-minima.css" rel="stylesheet" type="text/css" />
+    <link href="stylesheet/3rw.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="stylesheet/footer-basic-centered.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Exo+2"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,700"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Tangerine"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Monoton"/>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico"/>
+    <link href='./stylesheet/fullcalendar.css' rel='stylesheet' />
+    <link href='./stylesheet/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <meta name="keywords"
+     content="trial,cloud,ecommerce,workflow,raaspi.com,raaspi,bar code,low cost,automation,alumni,association,business,manufacturing,apllication,turnkey"/>
+    <meta name="alias" content="http://genapp-raaspi.b9ad.pro-us-east-1.openshiftapps.com/"/>
+    <meta name="owner" content="#{customIdentity.owner2}"/>
+    <meta name="description" content="#{skinBean.metaDescript()}"/>
+    <meta name="robots" content="index,follow"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/> 
+    <meta name="google-signin-scope" content="profile email"/>
+    <meta name="google-signin-client_id" content="430148632909-ge32b89fs0jr3l48crp5lmn2nl16fkrq.apps.googleusercontent.com"/>
+   <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TEMPL-C','TXT',0,48000)}" 
+        rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TEMPL-C','TXT',0,48000) !=null}"  >
+   </h:outputText>       
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47438939-2', 'raaspi.com');
+  ga('send', 'pageview');
+
+</script>
+<script>
+function myReload() {
+    location.reload(true);
+}
+</script>
+
+<script type="text/javascript" src="./js/3rw.js">
+</script>
+
+<f:view locale="#{authenticator==null ?'en,US':(authenticator.locale==null?'en,US':authenticator.locale)}"/>
+
+</h:head>
+
+<h:body>
+ <p:growl id="messages" showDetail="true" sticky="true"/>
+ <p:idleMonitor timeout="#{session.getMaxInactiveInterval()*1000-300000}">
+   <p:ajax event="active" listener="#{customIdentity.onActive}" update="messages"/>
+ </p:idleMonitor>
+ <div id="page">
+             <ui:remove> gradient shown if (1)TOP-BKGR-C TXT ie fade in/out area 2 under menue is empty
+               and (2) no TOP-BKGR-C-PIC (above menue).
+               above menue 3R-TOP-MOST-C seq 0 , 3R-TOP-MOST-C seq 1 with fading Pic shown via css 
+              there is logic to make fade in/out area 1 3R-TOP-LEFT ,3R-BKGR- under menue clickable to a link
+             </ui:remove>
+      <div id="parent">
+    <p:panel styleClass="toptop" rendered="#{!identity.loggedIn and request.requestURI.contains('home.')
+                                      and authenticator.homePageclickCount lt 2}">
+            <div>
+             <h:panelGroup rendered="#{!identity.loggedIn and yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-BKGR-C','TXT',0,1200) ==null and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','B3R-TOP-BKGR-C','PIC',0) ==null  and yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdataType('blobdata','B3R-TOP-BKGR-C','PIC',1)==null and request.requestURI.contains('home.')}" >
+              <div id="hdrbkdiv"  style="background: linear-gradient(to bottom, #{a4jSkin.headerBackgroundColor} 0%, #{a4jSkin.headerGradientColor} 100%);">
+              </div>
+             </h:panelGroup>
+            </div>
+
+     <p:panel toggleable="true"  style="width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'100%':'100%'};"  switchType="client" collapsed="false" 
+       rendered="#{!identity.loggedIn}" id="asishdrbkimgx"
+       leftCollapsedIcon="/img/wdot.png" leftExpandedIcon="/img/wdot.png">
+
+              <h:outputText styleClass="midtopt" escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-MOST-C','TXT',0,4096000)}" 
+                rendered="#{!identity.loggedIn and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-MOST-C','TXT',0,12000) !='')}"/>
+     </p:panel > 
+     <ui:remove>seq 1 is called TOP-MOSTF </ui:remove>
+     <p:panel toggleable="true"  style="width: #{yxxxuh566xwwqqwxxxxxuserHome.mobile?'100%':'100%'};"  switchType="client" collapsed="false" 
+       rendered="#{!identity.loggedIn}" id="asishdrbkimgxx"
+       leftCollapsedIcon="/img/wdot.png" leftExpandedIcon="/img/wdot.png">
+              <h:outputText styleClass="midtopt" escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-MOST-C','TXT',1,4096000)}" 
+                rendered="#{!identity.loggedIn and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-MOST-C','TXT',1,12000) !='')}"/>
+     </p:panel > 
+
+    </p:panel>
+
+            <ui:remove>MMMMM menue area MMMMMM</ui:remove>
+            <div>
+               <ui:remove>
+                may30 2018 , html menu shown below if 3R-MENU TXT exists, dropdown menu is suppressed in menu.xhtml if 3R-MENU exists
+                mar 30 2019. mobile menu not suppressed, for now suppress html for mobile until logic added for
+                             3R-MENU-MOBILE. HTML menu fonts are too big for mobile. drop down supports separate fonts for mobile
+                dec12 2019 brought back html menu
+               </ui:remove>
+
+             <h:outputText  escape="false" style="color:#{fn:contains(skinBean.skint,'Grey')?'white;':';'}" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','TXT',0,12000)}" 
+                rendered="#{!identity.loggedIn and !yxxxuh566xwwqqwxxxxxuserHome.mobile and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-C','TXT',0,1200) !=null) }">
+             </h:outputText>       
+
+             <h:panelGroup id="alwaysRendered">
+              <h:panelGroup rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile }">
+               <ui:include src="menu.mobile.xhtml">
+                <ui:param name="projectName" value="genapp"/>
+               </ui:include>
+              </h:panelGroup>
+              <ui:remove> menu.xhtml not rendered if html menu non empty </ui:remove>
+              <h:panelGroup rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}">  
+               <ui:include src="menu.xhtml">
+                <ui:param name="projectName" value="genapp"/>
+               </ui:include>  
+              </h:panelGroup>  
+             </h:panelGroup>
+            </div>
+
+            <ui:remove>BBBBBB Below menue area , also see rtemplateHomePageEdtr for Mid BBBBBB</ui:remove>
+
+            <div style=";position:relative;">
+             <ui:remove>jquery fadeout includes specific headers ,id header for text,asishdrbkimg,2 and noasishdrbkimg,2 
+              fadetophdr0,1 nofadetophdr0,1 and fadetoptxt0,1 nofadetoptxt0,1
+              may need to use class instead of id , if inside a form 
+              use HDRM and TXTM for mobile content. mar 18 2019 ids asisxxx are not used anymore, only id="header" used
+              fadingHeader includes clobdata A3R-TOP-LEFT-C hdr,hdrm(mobile),txt,txtm and A3R-TOP-BKGR-C txt,txtm
+              oct27 2019 hdrtxt2 style margins to stop covering left panel and search input field
+             </ui:remove>
+             <h:panelGrid  id="header" columns="2" rendered="#{!identity.loggedIn and request.requestURI.contains('home.') }">
+                <h:graphicImage id="hdrimg"   alt=""     
+                 value="/ImageServletCdi/?seq=1&amp;id=B3R-TOP-LEFT-C&amp;width=0" rendered="#{!identity.loggedIn and (yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','B3R-TOP-LEFT-C','PIC',1) !=null)}">
+                </h:graphicImage> 
+                <h:panelGroup id="hdrtxt2" style="margin-left:10%;margin-top:2%;text-align: center;" >
+                 <h:outputText escape="false"  style="color:#{fn:contains(skinBean.skint,'Grey')?'white;':';'}" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-LEFT-C','HDR',0,12000)}" 
+                  rendered="#{!identity.loggedIn and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-LEFT-C','HDR',0,120) !=null)}"/>
+
+
+                 <h:outputText escape="false"  style="color:#{fn:contains(skinBean.skint,'Grey')?'white;':';'}" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-LEFT-C','TXT',0,4096000)}" 
+                  rendered="#{!identity.loggedIn  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-LEFT-C','TXT',0,1200) !='')}"/>
+
+
+                 <h:outputText escape="false"  style="color:#{fn:contains(skinBean.skint,'Grey')?'white;':';'}" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-BKGR-C','TXT',0,4096000)}" 
+                  rendered="#{!identity.loggedIn  and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-BKGR-C','TXT',0,1200) !='')}"/>
+
+                 <h:outputText escape="false" style="color:#{fn:contains(skinBean.skint,'Grey')?'white;':';'}" value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-BKGR-C','TXTM',0,200)}" 
+                  rendered="#{!identity.loggedIn  and yxxxuh566xwwqqwxxxxxuserHome.mobile and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-TOP-BKGR-C','TXTM',0,200) !='')}"/>
+
+                </h:panelGroup>
+             </h:panelGrid>
+             </div>
+      </div>
+             <ui:remove>
+              browser screen resolution nowadays 1366wide 768 heigh css @media uses min width 768 and max width 991
+              top-bkgr image if not logged in and not login or signup page to show form data, not if mobile but blue color 
+                             if type is asisxx and home page, then bkimg can be upto 510 wide ?? why and 720 high 
+                             if asisxx and seq 1 or 2 then along with hdr and hdr text will fadeout after 15 secs or 
+                             after clicked. If no asis then seqs 1 or 2 are ignored and asis can be used as needed
+                             Seq 1(top) and then 2 if asisxx are shown and fade out if not logged in    
+                             Seq 0 is used if 1 is missing but allways shown if not logged in
+                             so allways need seq 0 but can add 1/asis and 2/asis for initial effect
+                             actual type if any is added after asis thus it can be asis or asisjpg and genHome
+                             has fade jquery script for style and 3rcustom.css has style defined 
+                             and this template has the images
+               line break
+               top-bkgr hdr         not supported now except for click link
+               top-left Image(logo) " also for mobile
+               top-left hdr "  seq 0       120 px also for mobile but becomes multi line
+               top-left txt "  seq 0       1200 px also for mobile but max 200px and qualifier is TXTM
+              *menu (menu.xhtml) varies based on logged in or not / menu.mobile.xhtml based on userhome.mobile(userAgentStr)
+               (leftpop.xhtml)/div left render is used to hide this if mobile or hideLeft if non mobile. Style below
+                                               is used to make width 0 
+                *left-top Text        (upper fade out)
+                *top-bkgr-txt         (lower fade out)
+                panelMenu (item,customer etc) if logged in
+                panelItemBrowseMenu (Items and Images) both logged in or not, if entries exis
+                leftpop popup a panel(whatdoido) if not logged in
+                fb-like (fb-like style gives margin)
+                fb-share-button (names must be exact)
+                fb-send
+               (ui:define name=body) home.xhtml, itembrowse.xhtml etc)/right div
+                home.xhtml
+                *mid-top txt , if not logged in 
+                *mid-ftr txt, if not logged in 
+
+               
+              *footer (site map via clob 3r-sitempap and sitemapservletcdi)
+              * means supported via site homepages and homeotherpages editor
+              note: style was added here in .xhtml because el to use skin in 3rcustom.css did not work because of being static 
+               
+              if mobile then revise leftpop to leftpop.mobile and make it like hamburger menu and include mainly
+               panelMenu functions to be used in back office but suppress main menu
+              until a solution is found for left height same as right we put white as background color instead of
+               #{a4jSkin.tableSubfooterBackgroundColor}
+             </ui:remove>
+             <div id="left" style="background-color:white; width:#{yxxxuh566xwwqqwxxxxxuserHome.mobile || !skinBean.leftShown?'0%;':'15%;'} ">
+                    <ui:include src="leftpop.xhtml" />
+             </div>
+             <div id="right" style="background-color:white; width:#{yxxxuh566xwwqqwxxxxxuserHome.mobile || !skinBean.leftShown?'100%;':'85%;'} ">
+                     
+		      <ui:insert name="body"/>
+             </div>
+             <ui:remove>Addon vendor provides content as addon-xxx.csv (xxx is page url ie cartPOS as #{request.requestURL})
+               and imported into WEB-INF\resources and loaded for addon content like a button invoking addon method
+             </ui:remove>
+             <h:outputText  escape="false"  value="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ADDON-C',fn:substring(view.viewId,1,fn:length(view.viewId)-6),0,48000)}" 
+              rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ADDON-C',fn:substring(view.viewId,1,fn:length(view.viewId)-6),0,48000) !=null}"  >
+             </h:outputText>   
+
+	        <div id="footer" style="background-color:#{a4jSkin.headerGradientColor};">
+		      <ui:include src="footer.xhtml"/>
+	        </div>
+ </div>
+<script>
+//alert (window.location);needs to be at bottom
+// any html element with style class slide will have slide effect with 5secs interval
+// this js provides slide effect by hiding/displaying. Css class like w3-animate-fading is indepedent but can be mixed
+w3.slideshow(".slide",5000);
+</script>
+<script>
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+</h:body>
+</html>

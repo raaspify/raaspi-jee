@@ -1,0 +1,833 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="fxxxuq1ffxwwqqhefxxxserialnumbersA0xxuobxbxxxxxxxxxxxsid" value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.fxxxuq1ffxwwqqhefxxxserialnumbersA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="fxxxuq1ffxwwqqhefxxxserialnumbersFrom" value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.fxxxuq1ffxwwqqhefxxxserialnumbersFrom}"/>
+    <f:viewAction action="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.restrict()}" />
+    <f:viewAction action="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.wire()}" />
+     <f:viewAction action="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.getInstance().setA0xxukxxbvxxxxxxxxxxserialno('0')}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Serialnumbers']}</ui:define>
+
+<ui:define name="body">
+<h:form id="fxxxuq1ffxwwqqhefxxxserialnumbers" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("fxxxuq1ffxwwqqhefxxxserialnumbers:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['SerialnumbersEditHelp']!='SerialnumbersEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['SerialnumbersEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed ? 'Edit' : 'Add'} #{messages['Serialnumbers']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a0xxukxxbvxxxxxxxxxxserialnoDecoration"    >
+        <h:outputLabel  for="a0xxukxxbvxxxxxxxxxxserialno" value="#{messages['Serialno']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxukxxbvxxxxxxxxxxserialno" 
+           validator="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.validateKeyDuplicateSerialno}" 
+                       label="serialno"
+                        required="true"
+                           size="20"
+                      maxlength="25"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.a0xxukxxbvxxxxxxxxxxserialno}">
+
+         </h:inputText>
+            <p:tooltip  target="a0xxukxxbvxxxxxxxxxxserialno"> <span style="white-space: nowrap"> <h:outputText value="Enter Value here"/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b1xxuxxrbvxxxxxxxxxxmatcodeDecoration"    >
+        <h:outputLabel  for="b1xxuxxrbvxxxxxxxxxxmatcode" value="#{messages['Matcode']}">
+      </h:outputLabel>
+
+         <h:inputText id="b1xxuxxrbvxxxxxxxxxxmatcode" 
+                           size="20"
+                      maxlength="32"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.b1xxuxxrbvxxxxxxxxxxmatcode}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="b2xxcxqrlxxxxxxxxxxxquanrecdDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b2xxcxqrlxxxxxxxxxxxquanrecd" value="#{messages['Quanrecd']}">
+      </h:outputLabel>
+      <h:inputText id="b2xxcxqrlxxxxxxxxxxxquanrecd"  
+         value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.b2xxcxqrlxxxxxxxxxxxquanrecd}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.b2xxcxqrlxxxxxxxxxxxquanrecd}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b3xxuxxrbvxxxxxxxxxxvendorDecoration"    >
+        <h:outputLabel  for="b3xxuxxrbvxxxxxxxxxxvendor" value="#{messages['Vendor']}">
+      </h:outputLabel>
+
+         <h:inputText id="b3xxuxxrbvxxxxxxxxxxvendor" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.b3xxuxxrbvxxxxxxxxxxvendor}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b4xxuxxrbvlxxxxxxxxxlocationDecoration"    >
+        <h:outputLabel  for="b4xxuxxrbvlxxxxxxxxxlocation" value="#{messages['Location']}">
+      </h:outputLabel>
+
+         <h:inputText id="b4xxuxxrbvlxxxxxxxxxlocation" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.b4xxuxxrbvlxxxxxxxxxlocation}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b5xxuxxrbvxxxxxxxxxxrecvrptDecoration"    >
+        <h:outputLabel  for="b5xxuxxrbvxxxxxxxxxxrecvrpt" value="#{messages['Recvrpt']}">
+      </h:outputLabel>
+
+         <h:inputText id="b5xxuxxrbvxxxxxxxxxxrecvrpt" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.b5xxuxxrbvxxxxxxxxxxrecvrpt}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b6xxfxxxbvxxxxxxxxxxinflDecoration"    >
+        <h:outputLabel  for="b6xxfxxxbvxxxxxxxxxxinfl" value="#{messages['Infl']}">
+      </h:outputLabel>
+                <h:selectBooleanCheckbox id="b6xxfxxxbvxxxxxxxxxxinfl"
+                                      value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.b6xxfxxxbvxxxxxxxxxxinfl}">
+                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value</ui:remove>
+                   <f:ajax  render="b6xxfxxxbvxxxxxxxxxxinfl" bypassUpdates="false"/>
+                 </h:selectBooleanCheckbox>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b7xxfxxxbvxxxxxxxxxxphyDecoration"    >
+        <h:outputLabel  for="b7xxfxxxbvxxxxxxxxxxphy" value="#{messages['Phy']}">
+      </h:outputLabel>
+                <h:selectBooleanCheckbox id="b7xxfxxxbvxxxxxxxxxxphy"
+                                      value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.b7xxfxxxbvxxxxxxxxxxphy}">
+                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value</ui:remove>
+                   <f:ajax  render="b7xxfxxxbvxxxxxxxxxxphy" bypassUpdates="false"/>
+                 </h:selectBooleanCheckbox>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="b8xxcxxrlxxxxxxxxxxxdatetinDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b8xxcxxrlxxxxxxxxxxxdatetin" value="#{messages['Datetin']}">
+      </h:outputLabel>
+     <p:datePicker id="b8xxcxxrlxxxxxxxxxxxdatetin" 
+
+                          showTime="true" value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.b8xxcxxrlxxxxxxxxxxxdatetin}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="b9xxcxxrlxxxxxxxxxxxdatetoutDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="b9xxcxxrlxxxxxxxxxxxdatetout" value="#{messages['Datetout']}">
+      </h:outputLabel>
+     <p:datePicker id="b9xxcxxrlxxxxxxxxxxxdatetout" 
+
+                          showTime="true" value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.b9xxcxxrlxxxxxxxxxxxdatetout}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="2">
+
+             <h:panelGroup id="c1xxuxxrbvxxxxxxxxxxjobnoDecoration"    >
+        <h:outputLabel  for="c1xxuxxrbvxxxxxxxxxxjobno" value="#{messages['Jobno']}">
+      </h:outputLabel>
+
+         <h:inputText id="c1xxuxxrbvxxxxxxxxxxjobno" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.c1xxuxxrbvxxxxxxxxxxjobno}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="c4xxcxqrlxxxxxxxxxxxquanissdDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="c4xxcxqrlxxxxxxxxxxxquanissd" value="#{messages['Quanissd']}">
+      </h:outputLabel>
+      <h:inputText id="c4xxcxqrlxxxxxxxxxxxquanissd"  
+         value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.c4xxcxqrlxxxxxxxxxxxquanissd}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.c4xxcxqrlxxxxxxxxxxxquanissd}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="d1xxcxqrlxxxxxxxxxxxquanrejdDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="d1xxcxqrlxxxxxxxxxxxquanrejd" value="#{messages['Quanrejd']}">
+      </h:outputLabel>
+      <h:inputText id="d1xxcxqrlxxxxxxxxxxxquanrejd"  
+         value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.d1xxcxqrlxxxxxxxxxxxquanrejd}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.d1xxcxqrlxxxxxxxxxxxquanrejd}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="d2xxuxxrbvxxxxxxxxxxcustomerDecoration"    >
+        <h:outputLabel  for="d2xxuxxrbvxxxxxxxxxxcustomer" value="#{messages['Customer']}">
+      </h:outputLabel>
+
+         <h:inputText id="d2xxuxxrbvxxxxxxxxxxcustomer" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.d2xxuxxrbvxxxxxxxxxxcustomer}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="d3xxuxxrbvxxxxxxxxxxaltsernoDecoration"    >
+        <h:outputLabel  for="d3xxuxxrbvxxxxxxxxxxaltserno" value="#{messages['Altserno']}">
+      </h:outputLabel>
+
+         <h:inputText id="d3xxuxxrbvxxxxxxxxxxaltserno" 
+                           size="20"
+                      maxlength="25"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.d3xxuxxrbvxxxxxxxxxxaltserno}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="d4xxcxxrlxxxxxxxxxxxselpriceDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="d4xxcxxrlxxxxxxxxxxxselprice" value="#{messages['Selprice']}">
+      </h:outputLabel>
+      <h:inputText id="d4xxcxxrlxxxxxxxxxxxselprice"  
+         value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.d4xxcxxrlxxxxxxxxxxxselprice}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.d4xxcxxrlxxxxxxxxxxxselprice}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="d5xxcxqrlxxxxxxxxxxxphysqtyDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="d5xxcxqrlxxxxxxxxxxxphysqty" value="#{messages['Physqty']}">
+      </h:outputLabel>
+      <h:inputText id="d5xxcxqrlxxxxxxxxxxxphysqty"  
+         value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.d5xxcxqrlxxxxxxxxxxxphysqty}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.d5xxcxqrlxxxxxxxxxxxphysqty}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y3xxuxxrbvxxxxxxxxxxcponoDecoration"  rendered="true">
+        <h:outputLabel  for="y3xxuxxrbvxxxxxxxxxxcpono" value="#{messages['Cpono']}">
+      </h:outputLabel>
+
+         <h:inputText id="y3xxuxxrbvxxxxxxxxxxcpono" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.y3xxuxxrbvxxxxxxxxxxcpono}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y4xxuxxrbvxxxxxxxxxxcustomejDecoration"  rendered="true">
+        <h:outputLabel  for="y4xxuxxrbvxxxxxxxxxxcustomej" value="#{messages['Customej']}">
+      </h:outputLabel>
+
+         <h:inputText id="y4xxuxxrbvxxxxxxxxxxcustomej" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.y4xxuxxrbvxxxxxxxxxxcustomej}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y6xxuxxrbvxxxxxxxxxxspersonDecoration"  rendered="true">
+        <h:outputLabel  for="y6xxuxxrbvxxxxxxxxxxsperson" value="#{messages['Sperson']}">
+      </h:outputLabel>
+
+         <h:inputText id="y6xxuxxrbvxxxxxxxxxxsperson" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.y6xxuxxrbvxxxxxxxxxxsperson}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y7xxuxxrbvxxxxxxxxxxcartonidDecoration"  rendered="true">
+        <h:outputLabel  for="y7xxuxxrbvxxxxxxxxxxcartonid" value="#{messages['Cartonid']}">
+      </h:outputLabel>
+
+         <h:inputText id="y7xxuxxrbvxxxxxxxxxxcartonid" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.y7xxuxxrbvxxxxxxxxxxcartonid}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y8xxfxxxbvxxxxxxxxxxcartonprDecoration"  rendered="true">
+        <h:outputLabel  for="y8xxfxxxbvxxxxxxxxxxcartonpr" value="#{messages['Cartonpr']}">
+      </h:outputLabel>
+                <h:selectBooleanCheckbox id="y8xxfxxxbvxxxxxxxxxxcartonpr"
+                                      value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.y8xxfxxxbvxxxxxxxxxxcartonpr}">
+                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value</ui:remove>
+                   <f:ajax  render="y8xxfxxxbvxxxxxxxxxxcartonpr" bypassUpdates="false"/>
+                 </h:selectBooleanCheckbox>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y9xxuxxrbvxxxxxxxxxxpackcodeDecoration"  rendered="true">
+        <h:outputLabel  for="y9xxuxxrbvxxxxxxxxxxpackcode" value="#{messages['Packcode']}">
+      </h:outputLabel>
+
+         <h:inputText id="y9xxuxxrbvxxxxxxxxxxpackcode" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.y9xxuxxrbvxxxxxxxxxxpackcode}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="yaxxuxxrbvxxxxxxxxxxtarecodeDecoration"  rendered="true">
+        <h:outputLabel  for="yaxxuxxrbvxxxxxxxxxxtarecode" value="#{messages['Tarecode']}">
+      </h:outputLabel>
+
+         <h:inputText id="yaxxuxxrbvxxxxxxxxxxtarecode" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.yaxxuxxrbvxxxxxxxxxxtarecode}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="ybxxuxxrbvxxxxxxxxxxshipcodeDecoration"  rendered="true">
+        <h:outputLabel  for="ybxxuxxrbvxxxxxxxxxxshipcode" value="#{messages['Shipcode']}">
+      </h:outputLabel>
+
+         <h:inputText id="ybxxuxxrbvxxxxxxxxxxshipcode" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.ybxxuxxrbvxxxxxxxxxxshipcode}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="ycxxuxxrbvxxxxxxxxxxtypeDecoration"  rendered="true">
+        <h:outputLabel  for="ycxxuxxrbvxxxxxxxxxxtype" value="#{messages['Type']}">
+      </h:outputLabel>
+
+         <h:inputText id="ycxxuxxrbvxxxxxxxxxxtype" 
+                           size="20"
+                      maxlength="12"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.ycxxuxxrbvxxxxxxxxxxtype}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z1xxzzprhvxxxxxxxxxxprintmstatDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z1xxzzprhvxxxxxxxxxxprintmstat" value="#{messages['Printmstat']}">
+      </h:outputLabel>
+                <h:inputText id="z1xxzzprhvxxxxxxxxxxprintmstat" 
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.z1xxzzprhvxxxxxxxxxxprintmstat}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z2xxczqxlhxxxxxxxxxxprinmtfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxczqxlhxxxxxxxxxxprinmtfldt" value="#{messages['Prinmtfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="z2xxczqxlhxxxxxxxxxxprinmtfldt" 
+
+                          showTime="true" value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.z2xxczqxlhxxxxxxxxxxprinmtfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z3xxuxxrbvxxxxxxxxxxponoDecoration"  rendered="true">
+        <h:outputLabel  for="z3xxuxxrbvxxxxxxxxxxpono" value="#{messages['Pono']}">
+      </h:outputLabel>
+
+         <h:inputText id="z3xxuxxrbvxxxxxxxxxxpono" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.z3xxuxxrbvxxxxxxxxxxpono}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z4xxcxxrlxxxxxxxxxxxscandatetDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z4xxcxxrlxxxxxxxxxxxscandatet" value="#{messages['Scandatet']}">
+      </h:outputLabel>
+     <p:datePicker id="z4xxcxxrlxxxxxxxxxxxscandatet" 
+
+                          showTime="true" value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.z4xxcxxrlxxxxxxxxxxxscandatet}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z5xxuxxrbvxxxxxxxxxxbuttDecoration"  rendered="true">
+        <h:outputLabel  for="z5xxuxxrbvxxxxxxxxxxbutt" value="#{messages['Butt']}">
+      </h:outputLabel>
+
+         <h:inputText id="z5xxuxxrbvxxxxxxxxxxbutt" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.z5xxuxxrbvxxxxxxxxxxbutt}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z6xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z6xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="z6xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.z6xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z7xxzcxrlxxxxxxxxxxxorgcostDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z7xxzcxrlxxxxxxxxxxxorgcost" value="#{messages['Orgcost']}">
+      </h:outputLabel>
+      <h:inputText id="z7xxzcxrlxxxxxxxxxxxorgcost"  
+         value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.z7xxzcxrlxxxxxxxxxxxorgcost}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.z7xxzcxrlxxxxxxxxxxxorgcost}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z8xxuxxrbvxxxxxxxxxxorgponoDecoration"  rendered="true">
+        <h:outputLabel  for="z8xxuxxrbvxxxxxxxxxxorgpono" value="#{messages['Orgpono']}">
+      </h:outputLabel>
+
+         <h:inputText id="z8xxuxxrbvxxxxxxxxxxorgpono" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.z8xxuxxrbvxxxxxxxxxxorgpono}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z9xxuxxrbvxxxxxxxxxxorgjobnoDecoration"  rendered="true">
+        <h:outputLabel  for="z9xxuxxrbvxxxxxxxxxxorgjobno" value="#{messages['Orgjobno']}">
+      </h:outputLabel>
+
+         <h:inputText id="z9xxuxxrbvxxxxxxxxxxorgjobno" 
+                           size="20"
+                      maxlength="20"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.z9xxuxxrbvxxxxxxxxxxorgjobno}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zaxxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zaxxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="zaxxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.zaxxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zbxxuxxrbvxxxxxxxxxxbarserialDecoration"  rendered="true">
+        <h:outputLabel  for="zbxxuxxrbvxxxxxxxxxxbarserial" value="#{messages['Barserial']}">
+      </h:outputLabel>
+
+         <h:inputText id="zbxxuxxrbvxxxxxxxxxxbarserial" 
+                           size="20"
+                      maxlength="30"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.zbxxuxxrbvxxxxxxxxxxbarserial}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.a0xxukxxbvxxxxxxxxxxserialno} #{messages['sid']} #{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.a0xxukxxbvxxxxxxxxxxserialno !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+           
+            <p:commandButton id="genser" 
+                          value="#{messages['generate']} #{messages['serial']} #{messages['numbers']}" styleClass="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed?'':'buttonMain'}" 
+                         action="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.generateSerials('','',28)}" status="buttonStatus" update="@form"
+                       disabled="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed}"
+                       rendered="#{(!fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed or fxxxuq1ffxwwqqhefxxxserialnumbersHome.moreActive) and !fxxxuq1ffxwwqqhefxxxserialnumbersHome.entityDeleted}">  
+                        
+            </p:commandButton>   
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.update()}"
+                       rendered="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed  and !fxxxuq1ffxwwqqhefxxxserialnumbersHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.update()}"
+                       rendered="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed and fxxxuq1ffxwwqqhefxxxserialnumbersHome.entityUpdated}"/>
+  
+
+           <h:commandButton id="delete" 
+                         value="#{messages['Delete']} #{messages['Serialnumbers']}" onclick="if (! confirm('Really delete ?') ) { return false;}; return true; " 
+                         action="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.remove()}"
+                        rendered="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed and !fxxxuq1ffxwwqqhefxxxserialnumbersHome.entityDeleted}">
+               <p:tooltip > <span style="white-space: nowrap"> <h:outputText value="#{messages['Use']} #{messages['List']} #{messages['to']} #{messages['delete']} #{messages['details']} #{messages['records']} #{messages['sametime']},#{messages['but']} #{messages['manually']} #{messages['delete']} #{messages['other']} #{messages['constraints']}"/></span> </p:tooltip> 
+           </h:commandButton>
+
+            <h:button id="new" styleClass="buttonMain" 
+             value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/serialnumbersEdit.xhtml"
+                rendered="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed}"/>
+
+
+
+
+
+            <f:param name="reportName" value="#{fxxxuq1ffxwwqqhefxxxserialnumbersList.reportName}"/>
+            <f:param name="displayAs" value="#{fxxxuq1ffxwwqqhefxxxserialnumbersList.displayAs}" /> 
+            <h:button outcome="/serialnumbersList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Serialnumbers']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty fxxxuq1ffxwwqqhefxxxserialnumbersHome.fxxxuq1ffxwwqqhefxxxserialnumbersFrom ? 'home' : fxxxuq1ffxwwqqhefxxxserialnumbersHome.fxxxuq1ffxwwqqhefxxxserialnumbersFrom}.xhtml"
+                rendered="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed or fxxxuq1ffxwwqqhefxxxserialnumbersHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty fxxxuq1ffxwwqqhefxxxserialnumbersHome.fxxxuq1ffxwwqqhefxxxserialnumbersFrom ? 'home' : fxxxuq1ffxwwqqhefxxxserialnumbersHome.fxxxuq1ffxwwqqhefxxxserialnumbersFrom}.xhtml"
+                rendered="#{!fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed and !fxxxuq1ffxwwqqhefxxxserialnumbersHome.entityDeleted}"/>
+
+             <br></br>  
+             <ui:fragment rendered="#{(customIdentity.product == 'e' and customIdentity.subProduct == 'f')}">
+              <h:outputText value="#{messages['Use']} #{messages['serialized']} #{messages['inventory']} #{messages['only']} #{messages['for']} #{messages['special']} #{messages['need']}, #{messages['like']} #{messages['material']} #{messages['usage']} #{messages['or']} #{messages['for']} #{messages['say']} #{messages['defence']} #{messages['contract']}.  " /> 
+              <br></br><h:outputText value="#{messages['Unlike']} #{messages['regular']} #{messages['inventory']}, #{messages['each']} #{messages['physical']} #{messages['item']} #{messages['for']} #{messages['a']} #{messages['product']} #{messages['will']} #{messages['have']} #{messages['its']} #{messages['own']} #{messages['serialnumber']}.  " /> 
+              <br></br><hr></hr>
+              <h:outputText value="#{messages['Last']} #{messages['Serial']} #{messages['Generated']}: #{fxxxuq1ffxwwqqhefxxxserialnumbersList.getSuggestList('s').size() gt 0?fxxxuq1ffxwwqqhefxxxserialnumbersList.getSuggestList('s').get(fxxxuq1ffxwwqqhefxxxserialnumbersList.getSuggestList('s').size()-1).a0xxukxxbvxxxxxxxxxxserialno:'none'}"/>
+              <br></br><h:outputText value="#{messages['Generate']} #{messages['Serial']} #{messages['number']} #{messages['creates']} #{messages['next']} #{messages['set']} #{messages['of']} #{messages['28']} #{messages['labels']}  #{messages['type']} #{messages['s']}" /> 
+              <br></br><h:outputText value="#{messages['Then']} #{messages['use']} #{messages['Mailings']}- #{messages['Labels']}- #{messages['Serialnumbers']} #{messages['to']} #{messages['print']}, #{messages['barcoded']} #{messages['labels']}." />
+              <br></br>
+              <h:outputText value="#{messages['At']} #{messages['Vshipmen']} #{messages['receive']}, #{messages['enter']} #{messages['material']} #{messages['weight']}/#{messages['length']}/#{messages['etc']} #{messages['as']} #{messages['quantity']}, #{messages['if']} #{messages['serial']} #{messages['number']} #{messages['field']} #{messages['value']} #{messages['is']} #{messages['keyedIn']} #{messages['or']} #{messages['scanned']}."/>
+              <br></br><h:outputText value="#{messages['Item']} #{messages['count']} #{messages['quantity']} #{messages['will']} #{messages['be']} #{messages['impicit']} #{messages['as']} #{messages['one']}." />
+              <br></br>
+              <h:outputText value="#{messages['Then']} #{messages['at']} #{messages['ItemProcessingJob']} #{messages['create']}, #{messages['enter']} #{messages['serialnumber']} #{messages['to']} #{messages['track']} #{messages['consumption']}."/>
+             </ui:fragment>
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

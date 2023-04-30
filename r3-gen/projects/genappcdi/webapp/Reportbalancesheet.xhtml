@@ -1,0 +1,334 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+ 
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewAction action="#{yxxxch601xwwqqhxxxxxaccountHome.restrict()}" />
+</f:metadata>
+                       
+<ui:define name="body">
+    <h:form id="yxxxch601xwwqqhxxxxxaccountReport" styleClass="edit">
+     <h:outputStylesheet>
+     </h:outputStylesheet>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:commandButton id="printb" value="Print"  action="#{yxxxch601xwwqqhxxxxxaccountList.print}" image="/img/Print16.gif" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end" view="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="!#{messages['reportbalancesheetHelp']}=null">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['reportbalancesheetHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+         <p:panel toggleable="true" toggleableHeader="true" style="width: 20%;" header="#{messages['Account']} Reports using default parameters          (Use the Browser back button after viewing or have multiple browser windows open)  " switchType="ajax" expanded="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+           <h:panelGrid columns="1">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.reportName']}</ui:define>
+                <h:selectOneMenu id="reportName" value="#{yxxxch601xwwqqhxxxxxaccountList.reportName}">
+                 <f:selectItem id="ritem1" itemLabel="Balance Sheet" itemValue="fiBalancesheetreport" />
+                </h:selectOneMenu> 
+
+            </ui:decorate>
+           </h:panelGrid>
+
+        </p:panel>
+         <p:panel toggleable="true" toggleableHeader="true" style="width: 30%;" header="Click to show Report details parameters" switchType="ajax" expanded="false"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+
+       <h:panelGrid columns="2">
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.displayAs']}</ui:define>
+                <h:selectOneMenu id="displayAs" value="#{yxxxch601xwwqqhxxxxxaccountList.displayAs}">
+                 <f:selectItem id="ditem1" itemLabel="PDF" itemValue="PDF" />
+                 <f:selectItem id="ditem2" itemLabel="HTML" itemValue="HTML" />
+                 <f:selectItem id="ditem3" itemLabel="CSV" itemValue="CSV" />
+                 <f:selectItem id="ditem4" itemLabel="EXCEL" itemValue="EXCEL" />
+                </h:selectOneMenu> 
+            </ui:decorate>
+        </h:panelGrid>
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.markedOnes']}</ui:define>
+                <h:inputText id="markedOnes" value="#{yxxxch601xwwqqhxxxxxaccountList.markedOnes}"/>
+            </ui:decorate>
+        </h:panelGrid>
+       </h:panelGrid>
+       <h:panelGrid columns="2">
+
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['report.targetId']}</ui:define>
+                <h:selectOneMenu id="targetId" value="#{yxxxch601xwwqqhxxxxxaccountList.targetId}">
+                 <f:selectItem id="titem1" itemLabel="None" itemValue="None" />
+                 <f:selectItem id="titem2" itemLabel="DownLoad" itemValue="DownLoad" />
+                 <f:selectItem id="titem3" itemLabel="Archive" itemValue="Archive" />
+                </h:selectOneMenu> 
+            </ui:decorate>
+        </h:panelGrid>
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['sortBy']}</ui:define>
+                <h:selectOneMenu id="oby" value="#{yxxxch601xwwqqhxxxxxaccountList.sortKey}">
+                 <f:selectItem id="oitem1" itemLabel="record id " itemValue="sid" />
+                  <f:selectItem id="oitem2" itemLabel="KeyField" itemValue="customer" />
+                </h:selectOneMenu> 
+            </ui:decorate>
+        </h:panelGrid>
+       </h:panelGrid>
+       <h:panelGrid columns="3">
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['sortOrder']}</ui:define>
+                <h:selectOneMenu id="so" value="#{yxxxch601xwwqqhxxxxxaccountList.sortOrder}">
+                 <f:selectItem id="soitem1" itemLabel="Ascending" itemValue="Asc" />
+                 <f:selectItem id="soitem2" itemLabel="Descending" itemValue="Desc" />
+                </h:selectOneMenu> 
+            </ui:decorate>
+        </h:panelGrid>
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['font']}</ui:define>
+                <h:selectOneMenu id="fo" value="#{yxxxch601xwwqqhxxxxxaccountList.fontName}">
+                 <ui:remove>
+                 <f:selectItem id="foitem1" itemLabel="DejaVu Sans" itemValue="DejaVu Sans" />
+                 </ui:remove>
+                 <f:selectItem id="foitem2" itemLabel="DejaVu Serif" itemValue="DejaVu Serif" />
+                 <ui:remove>
+                 <f:selectItem id="foitem3" itemLabel="DejaVu Sans Mono" itemValue="DejaVu Sans Mono" />
+                 </ui:remove>
+                </h:selectOneMenu> 
+            </ui:decorate>
+        </h:panelGrid>
+        <h:panelGrid columns="2">
+            <ui:decorate template="layout/display.xhtml">
+                <ui:define name="label">#{messages['YearEnd']}</ui:define>
+                <h:inputText value="#{yxxxch601xwwqqhxxxxxaccountList.FYearEndS}"/>
+            </ui:decorate>
+        </h:panelGrid>
+       </h:panelGrid>
+       </p:panel>
+        <div class="actionButtons">
+         <h:panelGrid columns="8">      
+            <h:commandButton id="report" value="Generate Report"  styleClass="buttonMain" onclick="this.form.target='_blank'"  action="#{yxxxch601xwwqqhxxxxxaccountList.rollnPrint}"/>
+
+        <h:button outcome="/#{empty yxxxch601xwwqqhxxxxxaccountFrom ? 'home' : yxxxch601xwwqqhxxxxxaccountFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+            <f:param name="reportName" value="#{yxxxch601xwwqqhxxxxxaccountList.reportName}"/>
+            <f:param name="displayAs" value="#{yxxxch601xwwqqhxxxxxaccountList.displayAs}" /> 
+            #{messages['Start']}&nbsp;<h:graphicImage value="/img/report_start16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{yxxxch601xwwqqhxxxxxaccountList.start}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                  <f:selectItems value="#{yxxxch601xwwqqhxxxxxaccountList.suggest(yxxxch601xwwqqhxxxxxaccountHome.prefix)}" var="result"
+                   itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+            #{messages['End']}&nbsp;<h:graphicImage value="/img/report_stop16.png" />
+            <h:panelGrid columns="2">
+                 <h:selectOneMenu  value="#{yxxxch601xwwqqhxxxxxaccountList.end}" 
+                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+                  <f:selectItem itemValue="#{null}" itemLabel="" />
+                  <f:selectItems value="#{yxxxch601xwwqqhxxxxxaccountList.suggest(yxxxch601xwwqqhxxxxxaccountHome.prefix)}" var="result"
+                   itemValue="#{result}" itemLabel="#{result}" />
+                 </h:selectOneMenu>
+            </h:panelGrid>
+         </h:panelGrid>      
+        </div>
+        
+    
+    <p:panel>
+        <f:facet name="header">Account List</f:facet>
+    <div class="results" id="yxxxch601xwwqqhxxxxxaccountList">
+
+    <h:outputText value="No yxxxch601xwwqqhxxxxxaccount exists" 
+               rendered="#{empty yxxxch601xwwqqhxxxxxaccountList.resultList}"/>
+               
+    <p:dataTable id="yxxxch601xwwqqhxxxxxaccountList" frozenColumns="2" resizableColumns="true" tableStyle="table-layout:auto;"  scrollable="false" scrollWidth="100%"
+                var="yxxxch601xwwqqhxxxxxaccount"
+              value="#{yxxxch601xwwqqhxxxxxaccountList.resultList}" 
+           rendered="#{not empty yxxxch601xwwqqhxxxxxaccountList.resultList}">
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="account #{yxxxch601xwwqqhxxxxxaccountList.order=='a0xxukwxbvxxxxxxxxxxaccount asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='a0xxukwxbvxxxxxxxxxxaccount desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='a0xxukwxbvxxxxxxxxxxaccount asc' ? 'a0xxukwxbvxxxxxxxxxxaccount desc' : 'a0xxukwxbvxxxxxxxxxxaccount asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.a0xxukwxbvxxxxxxxxxxaccount}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="descript #{yxxxch601xwwqqhxxxxxaccountList.order=='a1xxuzsxbvxxxxxxxxxxdescript asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='a1xxuzsxbvxxxxxxxxxxdescript desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='a1xxuzsxbvxxxxxxxxxxdescript asc' ? 'a1xxuzsxbvxxxxxxxxxxdescript desc' : 'a1xxuzsxbvxxxxxxxxxxdescript asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.a1xxuzsxbvxxxxxxxxxxdescript}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="category #{yxxxch601xwwqqhxxxxxaccountList.order=='b1xxuwgxbv01xxxxxxxxcategory asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='b1xxuwgxbv01xxxxxxxxcategory desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='b1xxuwgxbv01xxxxxxxxcategory asc' ? 'b1xxuwgxbv01xxxxxxxxcategory desc' : 'b1xxuwgxbv01xxxxxxxxcategory asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.b1xxuwgxbv01xxxxxxxxcategory}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="type #{yxxxch601xwwqqhxxxxxaccountList.order=='b2xxuwtxbv02xxxxxxxxtype asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='b2xxuwtxbv02xxxxxxxxtype desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='b2xxuwtxbv02xxxxxxxxtype asc' ? 'b2xxuwtxbv02xxxxxxxxtype desc' : 'b2xxuwtxbv02xxxxxxxxtype asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.b2xxuwtxbv02xxxxxxxxtype}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="budget #{yxxxch601xwwqqhxxxxxaccountList.order=='b3xxzwbxbvxxxxxxxxxxbudget asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='b3xxzwbxbvxxxxxxxxxxbudget desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='b3xxzwbxbvxxxxxxxxxxbudget asc' ? 'b3xxzwbxbvxxxxxxxxxxbudget desc' : 'b3xxzwbxbvxxxxxxxxxxbudget asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.b3xxzwbxbvxxxxxxxxxxbudget}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="currency #{yxxxch601xwwqqhxxxxxaccountList.order=='b4xxuwuxbv34xxxxxxxxcurrency asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='b4xxuwuxbv34xxxxxxxxcurrency desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='b4xxuwuxbv34xxxxxxxxcurrency asc' ? 'b4xxuwuxbv34xxxxxxxxcurrency desc' : 'b4xxuwuxbv34xxxxxxxxcurrency asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.b4xxuwuxbv34xxxxxxxxcurrency}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="actual #{yxxxch601xwwqqhxxxxxaccountList.order=='b4xxzwaxlvxxxxxxxxxxactual asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='b4xxzwaxlvxxxxxxxxxxactual desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='b4xxzwaxlvxxxxxxxxxxactual asc' ? 'b4xxzwaxlvxxxxxxxxxxactual desc' : 'b4xxzwaxlvxxxxxxxxxxactual asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.b4xxzwaxlvxxxxxxxxxxactual}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="company sid #{yxxxch601xwwqqhxxxxxaccountList.order=='dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid asc' ? 'dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid desc' : 'dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.dxxxch1d3xwwqqhxxlxxcompany.a0xxuobxbxxxxxxxxxxxsid}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="department sid #{yxxxch601xwwqqhxxxxxaccountList.order=='fxxxch122xhhxqhxxlxxdepartment.a0xxuobxbxxxxxxxxxxxsid asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='fxxxch122xhhxqhxxlxxdepartment.a0xxuobxbxxxxxxxxxxxsid desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='fxxxch122xhhxqhxxlxxdepartment.a0xxuobxbxxxxxxxxxxxsid asc' ? 'fxxxch122xhhxqhxxlxxdepartment.a0xxuobxbxxxxxxxxxxxsid desc' : 'fxxxch122xhhxqhxxlxxdepartment.a0xxuobxbxxxxxxxxxxxsid asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.fxxxch122xhhxqhxxlxxdepartment.a0xxuobxbxxxxxxxxxxxsid}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="division sid #{yxxxch601xwwqqhxxxxxaccountList.order=='fxxxch133xhhxqhxxlxxdivision.a0xxuobxbxxxxxxxxxxxsid asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='fxxxch133xhhxqhxxlxxdivision.a0xxuobxbxxxxxxxxxxxsid desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='fxxxch133xhhxqhxxlxxdivision.a0xxuobxbxxxxxxxxxxxsid asc' ? 'fxxxch133xhhxqhxxlxxdivision.a0xxuobxbxxxxxxxxxxxsid desc' : 'fxxxch133xhhxqhxxlxxdivision.a0xxuobxbxxxxxxxxxxxsid asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.fxxxch133xhhxqhxxlxxdivision.a0xxuobxbxxxxxxxxxxxsid}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="statusfl #{yxxxch601xwwqqhxxxxxaccountList.order=='z5xxzzfxhhxxxxxxxxxxstatusfl asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='z5xxzzfxhhxxxxxxxxxxstatusfl desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='z5xxzzfxhhxxxxxxxxxxstatusfl asc' ? 'z5xxzzfxhhxxxxxxxxxxstatusfl desc' : 'z5xxzzfxhhxxxxxxxxxxstatusfl asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.z5xxzzfxhhxxxxxxxxxxstatusfl}
+        </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:link styleClass="columnHeader"
+                             value="statusfldt #{yxxxch601xwwqqhxxxxxaccountList.order=='z6xxcztxlxxxxxxxxxxxstatusfldt asc' ? messages.down : ( yxxxch601xwwqqhxxxxxaccountList.order=='z6xxcztxlxxxxxxxxxxxstatusfldt desc' ? messages.up : '' )}">
+                    <f:param name="order" value="#{yxxxch601xwwqqhxxxxxaccountList.order=='z6xxcztxlxxxxxxxxxxxstatusfldt asc' ? 'z6xxcztxlxxxxxxxxxxxstatusfldt desc' : 'z6xxcztxlxxxxxxxxxxxstatusfldt asc'}"/>
+                </h:link>
+            </f:facet>
+            #{yxxxch601xwwqqhxxxxxaccount.z6xxcztxlxxxxxxxxxxxstatusfldt}
+        </p:column>
+        <p:column>
+            <f:facet name="header">action</f:facet>
+            <h:link view="/#{empty from ? 'Yxxxch601xwwqqhxxxxxaccount' : from}.xhtml" 
+                   value="Select" 
+                      id="yxxxch601xwwqqhxxxxxaccount">
+                <f:param name="yxxxch601xwwqqhxxxxxaccountA0xxuobxbxxxxxxxxxxxsid" 
+                        value="#{yxxxch601xwwqqhxxxxxaccount.a0xxuobxbxxxxxxxxxxxsid}"/>
+            </h:link>
+        </p:column>
+    </p:dataTable>
+
+    </div>
+    </p:panel>
+    
+    <div class="tableControl">
+      
+        <h:link view="/Reportbalancesheet.xhtml" 
+            rendered="#{yxxxch601xwwqqhxxxxxaccountList.previousExists}" 
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </h:link>
+        
+        <h:link view="/Reportbalancesheet.xhtml" 
+            rendered="#{yxxxch601xwwqqhxxxxxaccountList.previousExists}" 
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult" 
+                    value="#{yxxxch601xwwqqhxxxxxaccountList.previousFirstResult}"/>
+        </h:link>
+        
+        <h:link view="/Reportbalancesheet.xhtml" 
+            rendered="#{yxxxch601xwwqqhxxxxxaccountList.nextExists}" 
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult" 
+                    value="#{yxxxch601xwwqqhxxxxxaccountList.nextFirstResult}"/>
+        </h:link>
+        
+        <h:link view="/Reportbalancesheet.xhtml" 
+            rendered="#{yxxxch601xwwqqhxxxxxaccountList.nextExists}" 
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult" 
+                    value="#{yxxxch601xwwqqhxxxxxaccountList.lastFirstResult}"/>
+        </h:link>
+        
+    </div>
+    
+    </h:form>
+    
+</ui:define>
+
+</ui:composition>
+

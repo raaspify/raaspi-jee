@@ -1,0 +1,183 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:c="http://java.sun.com/jsp/jstl/core"
+                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                 template="layout/rtemplateUi.xhtml">
+<f:metadata>
+    <f:viewAction action="#{yxxxuh566xwwqqwxxxxxuserHome.setA0xxukuxbvxxxxxxxxxxid2('')}" />
+    <f:viewAction action="#{yxxxuh566xwwqqwxxxxxuserHome.setClientName('')}" />
+    <f:viewAction action="#{yxxxuh566xwwqqwxxxxxuserHome.setCompanyName('')}" />
+    <f:viewAction action="#{yxxxuh566xwwqqwxxxxxuserHome.setClientName('')}" />
+
+</f:metadata>
+
+<ui:define name="body">
+              <ui:remove> now includes demosignup as well 
+              </ui:remove>
+<!--                          toolbar                                     -->
+
+<h:form id="Signup_">    
+<script >
+function myCopy() {
+ var semail = document.getElementById('Signup_:semail');
+ if(semail.value){
+  //alert("Email value  entered: "+semail.value);
+ }else{
+  alert("Email value  not entered");
+  return;
+ }
+ if(document.getElementById('Signup_:slogonIdT')){
+  var slogonIdT = document.getElementById('Signup_:slogonIdT');
+ }
+
+  slogonIdT.value = semail.value;
+ //alert("slogonV"+slogonIdT.value);
+
+   }
+</script>
+
+      <div class = "btn-toolbar justify-content-between" role = "toolbar">
+         <div class = "btn-group ">
+              <h:outputText value="#{messages.common_notify}" style="font-size: medium;color: red"  /> 
+              <h:outputText value="#{messages.site_notify}" style="font-size: medium;color: red"/> 
+              <h:outputText value="#{messages.backOffice_notify}" rendered="#{identity.loggedIn}" style="font-size: medium;color: red"/> 
+
+         </div>
+         <div class = "btn-group ">
+              <h:outputText value="#{customIdentity.username}" rendered="#{identity.loggedIn }"/> 
+              <h:outputText value="&#160;&#160;"/>
+              <!-- Button to Open the Modal -->
+              <ui:fragment rendered="#{identity.loggedIn}">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                #{messages.prefs_change_password}
+              </button>
+              </ui:fragment>
+              <h:outputText value="&#160;&#160;"/>
+              <ui:remove> show fb only logout for situations where only fb login happened but not identiy login 
+              </ui:remove>
+              <h:link id="logoutfb" onclick="if (! confirm('Logout ?') ) { return false;}; Logout();return true;" value="Logout(FB)" rendered="#{!identity.loggedIn and customIdentity.smUid != null }"/>
+              <h:commandButton class="btn btn-primary" id="logout" onclick="Logout();" action="#{customIdentity.logout()}" value="Logout" rendered="#{identity.loggedIn}"/>
+
+              <h:outputText value="#{messages.Today} "/> 
+              &#160;<h:outputText value="#{authenticator.currcaldates}"/> 
+              &nbsp;<h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  outcome="/home.xhtml" rendered="#{!yxxxuh566xwwqqwxxxxxuserHome.mobile}"/>
+
+              &#160;<h:link id="Cart" outcome="/checkout.xhtml" value="Cart" propagation="none"  rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0 }"  >
+               <h:graphicImage value="/img/Cart32.png" />
+              </h:link>
+              &#160;<h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()}]" rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0}">
+              </h:outputText>
+              <h:outputText value="[#{messages['empty']}]" rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() == 0}"/>
+         </div>
+      </div>
+      <br></br>
+      <h:messages globalOnly="false" style = "color:red;margin:8px;" styleClass="message" id="globalMessages"/>
+    
+   <ui:fragment rendered ="#{( !(request.serverName.startsWith('mybusiness') or request.serverName.startsWith('myorg') or request.serverName.startsWith('mycustommade')) and not identity.loggedIn )}">     
+     <div id="signupx" style="width:40%;" >
+      <div class="form-group">
+            #{messages.login_email}
+            <h:inputText id="semail" class="form-control" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid}" size="30" 
+             pt:placeholder="email@xyz.com" maxlength="50"/>
+      </div>
+      <div class="form-group">
+            #{messages.Firstname}
+            <h:inputText id="userFirstName2" class="form-control" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.a0xxukuxbvxxxxxxxxxxid2}" pt:placeholder="john" size="12" maxlength="20">
+            </h:inputText>
+      </div>
+      <div class="form-group">
+            #{messages.Lastname}
+            <h:inputText id="suserlastName" class="form-control" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientName}" size="17" pt:placeholder="smith"  maxlength="30"/>
+      </div>
+      <div class="form-group">
+            #{messages.companyname} (#{messages.optional}
+            <h:inputText id="susercompanyName" required="false" value="#{yxxxuh566xwwqqwxxxxxuserHome.companyName}" size="17" pt:placeholder="Abc Rentals" maxlength="30"/>
+      </div>
+
+      <div class="form-group">
+            #{messages['Logonid']}
+            <h:inputText id="slogonIdT" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.instance.a0xxukuxbvxxxxxxxxxxid}" size="17" pt:placeholder="smithj or smithj@xyx.com" maxlength="30"/>
+            <button id="button" onclick="myCopy();return false;">#{messages['Copy']} #{messages['Email']} #{messages['ID']}</button>
+      </div>
+      <ui:remove>
+            <h:selectBooleanCheckbox id="agreedToTerms" value="#yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"/>
+      </ui:remove>
+          <div class="form-group">
+            <ui:fragment rendered="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-SIGNUP_NOTICE-1-C','HDR',0,12000)}">
+             <h:outputText value="#{messages.agree_to_terms}" />
+
+               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#termsOfUse">
+                <h:outputText value=" #{messages['read']}"/>
+               </button>
+            </ui:fragment> 
+
+            &nbsp;<h:commandButton  id="signupButton" class="btn btn-primary" value="#{messages.signup}"  status="buttonStatus" render="signupx"
+                action="#{yxxxuh566xwwqqwxxxxxuserHome.doSignup()}"/>
+            &nbsp;<h:button id="lstdone"  value="#{messages.done}" propagation="end" outcome="/home.xhtml" />
+          </div>
+   </div>
+   </ui:fragment>
+   <ui:fragment rendered ="#{ ( (request.serverName.startsWith('mybusiness') or request.serverName.startsWith('myorg') or request.serverName.startsWith('mycustommade')) and not identity.loggedIn )}">    
+     <div id="signupd" style="width:40%;" >
+      <div class="form-group">
+            #{messages.login_email}
+            <h:inputText id="semaild" class="form-control" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid}" size="30" 
+             pt:placeholder="email@xyz.com" maxlength="50"/>
+      </div>
+      <div class="form-group">
+      <ui:remove>
+            <h:selectBooleanCheckbox id="agreedToTerms" value="#yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"/>
+      </ui:remove>
+            <ui:fragment rendered="#{not empty yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-SIGNUP_NOTICE-1-C','HDR',0,12000)}">
+             <h:outputText value="#{messages.agree_to_terms}" />
+               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#termsOfUse">
+                <h:outputText value=" #{messages['read']}"/>
+               </button>
+            </ui:fragment>
+            &nbsp;<h:commandButton  id="signupButtond" class="btn btn-primary" value="#{messages.signup}(demo)"  status="buttonStatus" render="signupx"
+                action="#{yxxxuh566xwwqqwxxxxxuserHome.doDemoSignup()}"/>
+            &nbsp;<h:button id="lstdoned2"  value="#{messages.done}" propagation="end" outcome="/home.xhtml" />
+      </div>
+    </div>
+   </ui:fragment>
+
+
+</h:form>
+
+ <div class="modal" id="termsOfUse">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">#{messages.terms_of_use}</h4>
+        <button type="button" class="close" data-dismiss="modal">&#215;</button>
+      </div>
+
+      <!-- Modal body -->
+
+      <div class="modal-body">
+       <ui:include src="signupTerms.xhtml"/>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+   </div>
+  </div>
+
+ </div>
+
+
+
+ </ui:define> 
+</ui:composition>
+
+
+

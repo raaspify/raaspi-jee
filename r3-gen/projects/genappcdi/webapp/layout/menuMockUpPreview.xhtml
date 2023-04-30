@@ -1,0 +1,354 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+                  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                  xmlns:p="http://primefaces.org/ui">
+
+	<style>
+	.pic {
+		margin-bottom: -4px;
+		margin-right: 2px;
+	}
+	</style>
+
+	<h:form>
+<h:outputStylesheet>
+
+</h:outputStylesheet>
+
+		<p:toolbar style="height:#{skinBean.menuFontSize}" rendered="#{identity.loggedIn and (yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-M','TXT',0,1200) == null or yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-MENU-M','TXT',0,1200).length() == 0)}">
+			<p:menubar mode="ajax" style="background-color:#{fn:contains(skinBean.skint,'Grey')?'black;':';'} height:#{skinBean.menuFontSize} ">
+
+				<f:facet name="label"> 
+					<h:panelGroup id="margin">
+						<h:outputText  style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;" value="    "/>
+					</h:panelGroup>
+				</f:facet>
+			</p:menubar>
+
+			<p:menubar mode="ajax" style="background-color:#{fn:contains(skinBean.skint,'Grey')?'black;':';'} height:#{skinBean.menuFontSize} ">
+
+				<f:facet name="label"> 
+					<h:panelGroup id="qsp">
+						<h:graphicImage value="/img/QuickStart16.png" styleClass="pic" rendered="#{skinBean.iconShown}"/>
+						<h:outputText  style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;" value="#{messages['menutab.QuickStart_M']}"/>
+                                                 <p:tooltip id="qs" attached="true" for="qsp" >
+                                                  <h:outputText value="#{messages.quickstart_tip}"/>
+                                                 </p:tooltip>
+					</h:panelGroup>
+				</f:facet>
+				<p:menuitem mode="ajax" label="#{messages.Shopping_Items}" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.itemBrowseList.size() != 0 and skinBean.iconShown}"
+					action="/ItemDetailsBrowse.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" label="#{messages.Shopping_Items}" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.itemBrowseList.size() != 0 }"
+					action="/ItemDetailsBrowse.xhtml?faces-redirect=true"   />
+				<p:menuitem mode="ajax" label="#{messages['Issue']}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.issueBrowseList.size() != 0 and skinBean.iconShown}"
+					action="/IssueDetailsBrowse.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" label="#{messages['Issue']}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.issueBrowseList.size() != 0 }"
+					action="/IssueDetailsBrowse.xhtml?faces-redirect=true"   />
+				<p:menuitem mode="ajax" label="#{messages.find} #{messages.sponsors}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList.size() != 0) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  )) and skinBean.iconShown}"
+					action="/ItemDetailsGetQuote.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" label="#{messages.find} #{messages.sponsors}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemDetailsFeesList.size() != 0) and (!identity.loggedIn or (identity.loggedIn and !customIdentity.hasRole('PH')  )) }"
+					action="/ItemDetailsGetQuote.xhtml?faces-redirect=true"   />
+
+				<p:menuitem mode="ajax" label="#{messages.select} #{messages.sponsor} #{messages.offers}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemSearchByParameterList !=null  and fpxxfq1a5xwwqqhxxxxxitemList.itemSearchByParameterList.size() != 0) and (identity.loggedIn and !customIdentity.hasRole('PH') ) and skinBean.iconShown}"
+					action="/ItemDetailsPaidSelect.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" label="#{messages.select} #{messages.sponsor} #{messages.offers}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa' and fpxxfq1a5xwwqqhxxxxxitemList.itemSearchByParameterList !=null  and fpxxfq1a5xwwqqhxxxxxitemList.itemSearchByParameterList.size() != 0) and (identity.loggedIn and !customIdentity.hasRole('PH') ) }"
+					action="/ItemDetailsPaidSelect.xhtml?faces-redirect=true"   />
+
+				<p:menuitem mode="ajax" label="#{messages.check} #{messages.approval} #{messages.status} " rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa') and fpxxfq1a5xwwqqhxxxxxitemList.getApprovedRejectedCartedList('basket').size() != 0 and identity.loggedIn and customIdentity.hasRole('VH') and skinBean.iconShown}"
+					action="/cbasketin.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" label="#{messages.check} #{messages.approval} #{messages.status} " rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa') and fpxxfq1a5xwwqqhxxxxxitemList.getApprovedRejectedCartedList('basket').size() != 0 and identity.loggedIn and customIdentity.hasRole('VH') }"
+					action="/cbasketin.xhtml?faces-redirect=true"   />
+
+				<p:menuitem mode="ajax" label="#{messages.check} #{messages.status} " rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa') and fpxxfq1a5xwwqqhxxxxxitemList.getVendorApprovedRejectedCartedList('basket').size() != 0 and identity.loggedIn and customIdentity.hasRole('PH') and skinBean.iconShown}"
+					action="/vbasketin.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" label="#{messages.check} #{messages.status} " rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa') and fpxxfq1a5xwwqqhxxxxxitemList.getVendorApprovedRejectedCartedList('basket').size() != 0 and identity.loggedIn and customIdentity.hasRole('PH') }"
+					action="/vbasketin.xhtml?faces-redirect=true"   />
+
+				<p:menuitem mode="ajax" label="#{messages.check} #{messages.status} " rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa') and fpxxfq1a5xwwqqhxxxxxitemList.getApprovedRejectedCartedList('basket').size() != 0 and identity.loggedIn and customIdentity.hasRole('UH') and skinBean.iconShown}"
+					action="/basketin.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" label="#{messages.check} #{messages.status} " rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='sa') and fpxxfq1a5xwwqqhxxxxxitemList.getApprovedRejectedCartedList('basket').size() != 0 and identity.loggedIn and customIdentity.hasRole('UH') }"
+					action="/basketin.xhtml?faces-redirect=true"   />
+
+
+				<p:menuitem mode="ajax" label="#{messages.Image_browse}" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.imageBrowseList.size() != 0 and skinBean.iconShown}"
+					action="/ImageDetailsBrowse.xhtml?faces-redirect=true" icon="/img/Photos16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" label="#{messages.Image_browse}" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.imageBrowseList.size() != 0 }"
+					action="/ImageDetailsBrowse.xhtml?faces-redirect=true"   />
+
+				<p:menuitem mode="ajax" label="#{messages['menutab.AddListReport.LogIn']}"
+					action="/login.xhtml?faces-redirect=true" icon="/img/LogIn16.png" iconClass="pic" rendered="#{not identity.loggedIn and skinBean.iconShown}" />
+				<p:menuitem mode="ajax" label="#{messages['menutab.AddListReport.LogIn']}"
+					action="/login.xhtml?faces-redirect=true"  rendered="#{not identity.loggedIn }" />
+
+				<p:menuitem mode="ajax"  icon="/img/LogOut16.png" rendered="#{identity.loggedIn and skinBean.iconShown}">
+                                 <h:commandButton id="Logoutic" action="#{identity.logout}" value="Logout"
+                                  onclick="if (! confirm('Logout ?') ) { return false;}; Logout();return true; " />
+			       </p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{identity.loggedIn }">
+                                 <h:commandButton id="Logout" action="#{identity.logout}" value="Logout"
+                                  onclick="if (! confirm('Logout ?') ) { return false;}; Logout();return true; " />
+			      </p:menuitem>
+<ui:remove> not shown to visitors
+                     <p:menuitem mode="ajax" label="#{messages['QuickStartFlow']}"
+                              rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')) and skinBean.iconShown}"
+					action="/Quick.xhtml?faces-redirect=true" icon="/img/QuickStartFlow16.png">
+			     </p:menuitem>
+                     <p:menuitem mode="ajax" label="#{messages['QuickStartFlow']}"
+                              rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')) }"
+					action="/Quick.xhtml?faces-redirect=true" >
+			     </p:menuitem>
+                     <p:menuitem mode="ajax" label="#{messages['QuickFinancial']}"
+                              rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')) and skinBean.iconShown}"
+					action="/QuickFinancial.xhtml?faces-redirect=true" icon="/img/QuickFinancial16.png">
+			     </p:menuitem>
+                     <p:menuitem mode="ajax" label="#{messages['QuickFinancial']}"
+                              rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')) }"
+					action="/QuickFinancial.xhtml?faces-redirect=true" >
+			     </p:menuitem>
+                     <p:menuitem mode="ajax" label="#{messages['MyDashboard']}"
+                              rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')) and skinBean.iconShown}"
+					action="/MyDashboard.xhtml?faces-redirect=true" icon="/img/Clobdata16.png">
+			     </p:menuitem>
+                     <p:menuitem mode="ajax" label="#{messages['MyDashboard']}"
+                              rendered="#{(customIdentity.hasRole('UH')||customIdentity.hasRole('UQ')) }"
+					action="/MyDashboard.xhtml?faces-redirect=true" >
+			     </p:menuitem>
+</ui:remove>
+			</p:menubar>
+
+
+			<p:menubar  rendered="true" style="background-color:#{fn:contains(skinBean.skint,'Grey')?'black;':';'} height:#{skinBean.menuFontSize} " >
+
+				<f:facet name="label"> 
+					<h:panelGroup>
+						<h:outputText value="#{messages['menutab.Products_M']}" style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;"
+                                                  rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-1-M','TXT',0,1200) !=null)}"/>
+						<h:outputText value="#{messages['menutab.Products']}" style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;"
+                                                  rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-1-M','TXT',0,1200) ==null)}"/>
+					</h:panelGroup>
+				</f:facet>
+				<p:menuitem mode="ajax" label="#{messages['Item']}" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.itemBrowseList.size() != 0 and skinBean.iconShown}"
+					action="/ItemDetailsBrowse.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" label="#{messages['Item']}" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.itemBrowseList.size() != 0 }"
+					action="/ItemDetailsBrowse.xhtml?faces-redirect=true"   />
+				<p:menuitem mode="ajax" label="#{messages['Issue']}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.itemBrowseList.size() != 0 and skinBean.iconShown}"
+					action="/IssueDetailsBrowse.xhtml?faces-redirect=true" icon="/img/Item16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" label="#{messages['Issue']}" rendered="#{(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.itemBrowseList.size() != 0 }"
+					action="/IssueDetailsBrowse.xhtml?faces-redirect=true"   />
+				<p:menuitem mode="ajax" label="#{messages.Image_browse}" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.imageBrowseList.size() != 0 and skinBean.iconShown}"
+					action="/ImageDetailsBrowse.xhtml?faces-redirect=true" icon="/img/Photos16.png" iconClass="pic"  />
+				<p:menuitem mode="ajax" label="#{messages.Image_browse}" rendered="#{!(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode=='fb') and fpxxfq1a5xwwqqhxxxxxitemList.imageBrowseList.size() != 0 }"
+					action="/ImageDetailsBrowse.xhtml?faces-redirect=true"   />
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-1-M','TXT',0,1200) !=null)}"
+					action="/Product-1P.xhtml?faces-redirect=true" icon="/img/Package16.png" iconClass="pic"  >
+                                        <h:outputText escape="false" value="#{messages['Products_1_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-1-M','TXT',0,1200) ==null) }"
+					action="/Product-1P.xhtml?faces-redirect=true"   >
+                                        <h:outputText escape="false" value="#{messages['Products_1']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-2-M','TXT',0,1200) !=null)}"
+					action="/Product-2P.xhtml?faces-redirect=true" icon="/img/Package16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['Products_2_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-2-M','TXT',0,1200) ==null)}"
+					action="/Product-2P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['Products_2']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-3-M','TXT',0,1200) !=null) }"
+					action="/Product-3P.xhtml?faces-redirect=true" icon="/img/Package16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['Products_3_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-PRODUCT-3-M','TXT',0,1200) ==null) }"
+					action="/Product-3P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['Products_3']}" />
+				</p:menuitem>
+			</p:menubar>
+
+			<p:menubar  rendered="true" style="background-color:#{fn:contains(skinBean.skint,'Grey')?'black;':';'} height:#{skinBean.menuFontSize} ">
+
+				<f:facet name="label"> 
+					<h:panelGroup>
+						<h:outputText value="#{messages['menutab.News_M']}" style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;"
+                                                 rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-1-M','TXT',0,1200) !=null) }"/>
+						<h:outputText value="#{messages['menutab.News']}" style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;"
+                                                 rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-1-M','TXT',0,1200) ==null) }"/>
+					</h:panelGroup>
+				</f:facet>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-1-M','TXT',0,1200) !=null) }"
+					action="/News-1P.xhtml?faces-redirect=true" icon="/img/News16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['News_1_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-1-M','TXT',0,1200) ==null) }"
+					action="/News-1P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['News_1']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-2-M','TXT',0,1200) !=null) and skinBean.iconShown}"
+					action="/News-2P.xhtml?faces-redirect=true" icon="/img/News16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['News_2_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-2-M','TXT',0,1200) ==null) }"
+					action="/News-2P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['News_2']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-3-M','TXT',0,1200) !=null) and skinBean.iconShown}"
+					action="/News-3P.xhtml?faces-redirect=true" icon="/img/News16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['News_3_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-NEWS-3-M','TXT',0,1200) ==null) }"
+					action="/News-3P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['News_3']}" />
+				</p:menuitem>
+			</p:menubar>
+
+			<p:menubar  rendered="#{fxxxuq89bxwwqqhxxxxxscheduleList.nextSchedule('FP') !=null }" style="background-color:#{fn:contains(skinBean.skint,'Grey')?'black;':';'} height:#{skinBean.menuFontSize} ">
+
+				<f:facet name="label"> 
+					<h:panelGroup>
+						<h:outputText value="#{messages['menutab.Calendar']}" style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;"/>
+					</h:panelGroup>
+				</f:facet>
+				<p:menuitem mode="ajax" label="#{messages['events']}" 
+					action="/clientFcal.xhtml?faces-redirect=true" icon="/img/calendar_view_day16.png" iconClass="pic"  />
+
+				<p:menuitem mode="ajax" label="#{messages['events']}" rendered="#{fxxxuq89bxwwqqhxxxxxscheduleList.nextSchedule('FP') !=null and !skinBean.iconShown }"
+					action="/clientFcal.xhtml?faces-redirect=true"   />
+			</p:menubar>
+
+
+
+
+			<p:menubar  rendered="true" style="background-color:#{fn:contains(skinBean.skint,'Grey')?'black;':';'} height:#{skinBean.menuFontSize} ">
+
+				<f:facet name="label"> 
+					<h:panelGroup>
+						<h:outputText value="#{messages['menutab.About_M']}" style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;"
+                                                  rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-1-M','TXT',0,1200) !=null) }"/>
+						<h:outputText value="#{messages['menutab.About']}" style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;"
+                                                  rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-1-M','TXT',0,1200) ==null) }"/>
+					</h:panelGroup>
+				</f:facet>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-1-M','TXT',0,1200) !=null) }"
+					action="/About-1P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['About_1_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-1-M','TXT',0,1200) ==null) }"
+					action="/About-1P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['About_1']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-2-M','TXT',0,1200) !=null) }"
+					action="/About-2P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['About_2_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-2-M','TXT',0,1200) ==null) and skinBean.iconShown}"
+					action="/About-2P.xhtml?faces-redirect=true" icon="/img/About16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['About_2']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-3-M','TXT',0,1200) !=null) }"
+					action="/About-3P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['About_3_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-ABOUT-3-M','TXT',0,1200) ==null) and skinBean.iconShown}"
+					action="/About-3P.xhtml?faces-redirect=true" icon="/img/About16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['About_3']}" />
+				</p:menuitem>
+			</p:menubar>
+
+			<p:menubar  rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-C','TXT',0,1200) !=null}" style="background-color:#{fn:contains(skinBean.skint,'Grey')?'black;':';'} height:#{skinBean.menuFontSize} ">
+
+				<f:facet name="label"> 
+					<h:panelGroup>
+						<h:outputText value="#{messages['menutab.Resellers_M']}" style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;"
+                                                   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-M','TXT',0,1200) !=null)}"/>
+						<h:outputText value="#{messages['menutab.Resellers']}" style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;"
+                                                   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-M','TXT',0,1200) ==null)}"/>
+					</h:panelGroup>
+				</f:facet>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-M','TXT',0,1200) !=null) and skinBean.iconShown}"
+					action="/Resellers-1P.xhtml?faces-redirect=true" icon="/img/Vendor16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['Resellers_1_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-M','TXT',0,1200) ==null) }"
+					action="/Resellers-1P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['Resellers_1']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-2-M','TXT',0,1200) !=null) and skinBean.iconShown}"
+					action="/Resellers-2P.xhtml?faces-redirect=true" icon="/img/Vendor16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['Resellers_2_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-2-M','TXT',0,1200) ==null) }"
+					action="/Resellers-2P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['Resellers_2']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-3-M','TXT',0,1200) !=null) and skinBean.iconShown}"
+					action="/Resellers-3P.xhtml?faces-redirect=true" icon="/img/Vendor16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['Resellers_3_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-3-M','TXT',0,1200) ==null) }"
+					action="/Resellers-3P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['Resellers_3']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"  rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-M','TXT',0,1200) !=null and skinBean.iconShown}"
+					action="/ResellerHelpReferenceManual.xhtml?faces-redirect=true" icon="/img/News16.png" iconClass="pic"  >
+                             <h:outputText  value="#{messages['reseller']} #{messages['reference']} #{messages['manual']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"  rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-RESELLERS-1-M','TXT',0,1200) ==null }"
+					action="/ResellerHelpReferenceManual.xhtml?faces-redirect=true"   >
+                             <h:outputText  value="#{messages['reseller']} #{messages['reference']} #{messages['manual']}" />
+				</p:menuitem>
+			</p:menubar>
+
+			<p:menubar  style="background-color:#{fn:contains(skinBean.skint,'Grey')?'black;':';'} height:#{skinBean.menuFontSize} ">
+
+				<f:facet name="label"> 
+					<h:panelGroup>
+						<h:outputText value="#{messages['menutab.ContactUs_M']}" style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;"
+                                                 rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-1-M','TXT',0,1200) !=null)}"/>
+						<h:outputText value="#{messages['menutab.ContactUs']}" style="font-size: #{skinBean.menuFontSize} !important;font: #{skinBean.menuFont} !important;"
+                                                 rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-1-M','TXT',0,1200) ==null)}"/>
+					</h:panelGroup>
+				</f:facet>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-1-M','TXT',0,1200) !=null) and skinBean.iconShown}"
+					action="/ContactUs-1P.xhtml?faces-redirect=true" icon="/img/Vendor16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['ContactUs_1_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-1-M','TXT',0,1200) ==null) }"
+					action="/ContactUs-1P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['ContactUs_1']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-2-M','TXT',0,1200) !=null) and skinBean.iconShown}"
+					action="/ContactUs-2P.xhtml?faces-redirect=true" icon="/img/Vendor16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['ContactUs_2_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-2-M','TXT',0,1200) ==null) }"
+					action="/ContactUs-2P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['ContactUs_2']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-3-M','TXT',0,1200) !=null) and skinBean.iconShown}"
+					action="/ContactUs-3P.xhtml?faces-redirect=true" icon="/img/Vendor16.png" iconClass="pic"  >
+                             <h:outputText escape="false" value="#{messages['ContactUs_3_M']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"   rendered="#{(yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-3-M','TXT',0,1200) ==null) }"
+					action="/ContactUs-3P.xhtml?faces-redirect=true"   >
+                             <h:outputText escape="false" value="#{messages['ContactUs_3']}" />
+				</p:menuitem>
+				<p:menuitem mode="ajax"  rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.getClobdata('clobdata','A3R-CONTACTUS-1-M','TXT',0,1200) !=null and skinBean.iconShown}"
+					action="/ResellerHelpReferenceManual.xhtml?faces-redirect=true" icon="/img/News16.png" iconClass="pic"  >
+                             <h:outputText  value="#{messages['reseller']} #{messages['reference']} #{messages['manual']}" />
+				</p:menuitem>
+			</p:menubar>
+
+
+
+       </p:toolbar>
+
+	</h:form>
+</ui:composition>
+
+
+
+
+

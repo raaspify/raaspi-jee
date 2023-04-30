@@ -1,0 +1,655 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="dxxxuq2drxwwqqhfxxxxresourcedetailsA0xxuobxbxxxxxxxxxxxsid" value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.dxxxuq2drxwwqqhfxxxxresourcedetailsA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="dxxxuq2drxwwqqhfxxxxresourcedetailsFrom" value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.dxxxuq2drxwwqqhfxxxxresourcedetailsFrom}"/>
+    <f:viewAction action="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.restrict()}" />
+    <f:viewAction action="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Resourcedetails']}</ui:define>
+
+<ui:define name="body">
+<h:form id="dxxxuq2drxwwqqhfxxxxresourcedetails" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("dxxxuq2drxwwqqhfxxxxresourcedetails:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!dxxxuq2drxwwqqhfxxxxresourcedetailsHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ResourcedetailsEditHelp']!='ResourcedetailsEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ResourcedetailsEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.managed ? 'Edit' : 'Add'} #{messages['Resourcedetails']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+       <p:tabView switchType="client" >
+           <p:tab title="#{messages['Task']}"
+             rendered="true">
+           <ui:decorate id="fxxxuq1kkxwwqqhfxxxxtaskDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Task']} 
+            </ui:define>
+                <p:remoteCommand name="fxxxuq1kkxwwqqhfxxxxtaskFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="fxxxuq1kkxwwqqhfxxxxtasksm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.validateAndSelectXxxxxxxxtaskid}" 
+                   value="#{fxxxuq1kkxwwqqhfxxxxtaskHome.lastfxxxuq1kkxwwqqhfxxxxtaskP}" onchange="fxxxuq1kkxwwqqhfxxxxtaskFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{fxxxuq1kkxwwqqhfxxxxtaskList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+           <p:tab title="#{messages['Groupmembers']}"
+             rendered="true">
+           <ui:decorate id="jxxxuq54exwwqqhxxxxxgroupmembersDecorationT" template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Groupmembers']} 
+            </ui:define>
+                <p:remoteCommand name="jxxxuq54exwwqqhxxxxxgroupmembersFunction" proces="@all" />
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="jxxxuq54exwwqqhxxxxxgroupmemberssm"
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                   required="false"
+                    validator="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.validateAndSelectXxxxxxxxmemberid}" 
+                   value="#{jxxxuq54exwwqqhxxxxxgroupmembersHome.lastjxxxuq54exwwqqhxxxxxgroupmembersP}" onchange="jxxxuq54exwwqqhxxxxxgroupmembersFunction()"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{jxxxuq54exwwqqhxxxxxgroupmembersList.suggest(' ')}" var ="result" itemValue="#{result}" 
+                     itemLabel="#{result}"/>
+             </h:selectOneMenu>
+
+
+           </ui:decorate>
+             <br/> 
+             </p:tab>
+
+
+
+
+
+
+   </p:tabView>
+      <p:panel>
+         <ui:decorate id="l1" template="layout/edit.xhtml">
+          <ui:define name="label">Address Line1 
+          </ui:define>
+          <h:inputText id="fxxxuq1ggxwwqqhxxxxxmembersgroupaddrl1" 
+                          size="35"
+                     maxlength="35"
+                         value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.addrL1}">
+          </h:inputText>
+         </ui:decorate>
+         <ui:decorate id="l2" template="layout/edit.xhtml">
+          <ui:define name="label">Address Line2 
+          </ui:define>
+          <h:inputText id="fxxxuq1ggxwwqqhxxxxxmembersgroupaddrl2" 
+                          size="35"
+                     maxlength="35"
+                         value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.addrL2}">
+          </h:inputText>
+         </ui:decorate>
+         <ui:decorate id="city" template="layout/edit.xhtml">
+          <ui:define name="label">City 
+          </ui:define>
+             <h:panelGrid columns="2">
+             <h:selectOneMenu  value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.city}" 
+              rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+              <f:ajax  render="fxxxuq1ggxwwqqhxxxxxmembersgroupCityI" bypassUpdates="false"/>
+              <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItem itemValue="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','11').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','11').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
+	      <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('xx',11)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+             </h:selectOneMenu>
+             <h:inputText id="fxxxuq1ggxwwqqhxxxxxmembersgroupCityI" value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.city}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="32"
+                          maxlength="200">
+             </h:inputText>
+             </h:panelGrid>
+         </ui:decorate>
+         <ui:decorate id="prov" template="layout/edit.xhtml">
+          <ui:define name="label">#{messages['Provnstate']} 
+          </ui:define>
+             <h:panelGrid columns="2">
+             <h:selectOneMenu  value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.provstate}" 
+              rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+              <f:ajax  render="fxxxuq1ggxwwqqhxxxxxmembersgroupprovstateI" bypassUpdates="false"/>
+              <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItem itemValue="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
+	      <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('xx',12)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+             </h:selectOneMenu>
+             <h:inputText id="fxxxuq1ggxwwqqhxxxxxmembersgroupprovstateI" value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.provstate}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="32"
+                          maxlength="200">
+             </h:inputText>
+             </h:panelGrid>
+         </ui:decorate>
+         <ui:decorate id="pz" template="layout/edit.xhtml">
+          <ui:define name="label">#{messages['Pzcode']} 
+          </ui:define>
+             <h:panelGrid columns="2">
+             <h:selectOneMenu  value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.pzcode}" 
+              rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+              <f:ajax  render="fxxxuq1ggxwwqqhxxxxxmembersgrouppzcodeI" bypassUpdates="false"/>
+              <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItem itemValue="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','14').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','14').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
+	      <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('xx',14)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+             </h:selectOneMenu>
+             <h:inputText id="fxxxuq1ggxwwqqhxxxxxmembersgrouppzcodeI" value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.pzcode}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="32"
+                          maxlength="200">
+             </h:inputText>
+             </h:panelGrid>
+         </ui:decorate>
+         <ui:decorate id="cntry" template="layout/edit.xhtml">
+          <ui:define name="label">#{messages['Country']} 
+          </ui:define>
+             <h:panelGrid columns="2">
+             <h:selectOneMenu  value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.country}" 
+              rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
+              <f:ajax  render="fxxxuq1ggxwwqqhxxxxxmembersgroupcountryI" bypassUpdates="false"/>
+              <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItem itemValue="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','13').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="#{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','13').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
+	      <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('xx',13)}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+             </h:selectOneMenu>
+             <h:inputText id="fxxxuq1ggxwwqqhxxxxxmembersgroupcountryI" value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.country}" 
+                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                          size="32"
+                          maxlength="200">
+             </h:inputText>
+             </h:panelGrid>
+         </ui:decorate>
+          </p:panel>
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b1xxzk11bvlxxxxxxxxxresourcenumberDecoration"    >
+        <h:outputLabel  for="b1xxzk11bvlxxxxxxxxxresourcenumber" value="#{messages['Resourcenumber']}">
+      </h:outputLabel>
+                <h:inputText id="b1xxzk11bvlxxxxxxxxxresourcenumber" 
+                          value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.b1xxzk11bvlxxxxxxxxxresourcenumber}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z5xxzxxxavxxxxxxxxxxusagepercentDecoration"  rendered="true">
+        <h:outputLabel  for="z5xxzxxxavxxxxxxxxxxusagepercent" value="#{messages['Usagepercent']}">
+      </h:outputLabel>
+      <h:inputText id="z5xxzxxxavxxxxxxxxxxusagepercent"  
+         value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.z5xxzxxxavxxxxxxxxxxusagepercent}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.z5xxzxxxavxxxxxxxxxxusagepercent}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zaxxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="zaxxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="zaxxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.zaxxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="zbxxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zbxxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="zbxxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.zbxxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="zcxxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zcxxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="zcxxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.zcxxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.b1xxzk11bvlxxxxxxxxxresourcenumber} #{messages['sid']} #{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.b1xxzk11bvlxxxxxxxxxresourcenumber !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.persist()}"
+                       disabled="#{!dxxxuq2drxwwqqhfxxxxresourcedetailsHome.wired}"
+                       rendered="#{!dxxxuq2drxwwqqhfxxxxresourcedetailsHome.managed  and !dxxxuq2drxwwqqhfxxxxresourcedetailsHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.update()}"
+                       rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.managed  and !dxxxuq2drxwwqqhfxxxxresourcedetailsHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.update()}"
+                       rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.managed and dxxxuq2drxwwqqhfxxxxresourcedetailsHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.remove()}"
+                       rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.managed and !dxxxuq2drxwwqqhfxxxxresourcedetailsHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/resourcedetailsEdit.address.xhtml"
+                       rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsList.reportName}"/>
+            <f:param name="displayAs" value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsList.displayAs}" /> 
+            <h:button outcome="/resourcedetailsList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Resourcedetails']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty dxxxuq2drxwwqqhfxxxxresourcedetailsHome.dxxxuq2drxwwqqhfxxxxresourcedetailsFrom ? 'home' : dxxxuq2drxwwqqhfxxxxresourcedetailsHome.dxxxuq2drxwwqqhfxxxxresourcedetailsFrom}.xhtml"
+                rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.managed or dxxxuq2drxwwqqhfxxxxresourcedetailsHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty dxxxuq2drxwwqqhfxxxxresourcedetailsHome.dxxxuq2drxwwqqhfxxxxresourcedetailsFrom ? 'home' : dxxxuq2drxwwqqhfxxxxresourcedetailsHome.dxxxuq2drxwwqqhfxxxxresourcedetailsFrom}.xhtml"
+                rendered="#{!dxxxuq2drxwwqqhfxxxxresourcedetailsHome.managed and !dxxxuq2drxwwqqhfxxxxresourcedetailsHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+<p:panel header="#{messages['NavigationToggle']}" switchType="server" collapsed="true" rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png" toggleable="true" toggleableHeader="true">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+  <p:tabView switchType="ajax">
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Membersgroup']}">
+    <div class="association" id="fxxxuq1ggxwwqqhxxxxxmembersgroupParent">
+        
+        <h:outputText value="No membersgroup" 
+                   rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.fxxxuq1ggxwwqqhxxxxxmembersgroup == null}"/>
+        
+        <p:dataTable var="fxxxuq1ggxwwqqhxxxxxmembersgroup" tableStyle="table-layout:auto;"
+                   value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.fxxxuq1ggxwwqqhxxxxxmembersgroup}" 
+                rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.fxxxuq1ggxwwqqhxxxxxmembersgroup != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fxxxuq1ggxwwqqhxxxxxmembersgroupTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewmembersgroup" 
+                     value="View" 
+                      outcome="/membersgroup.xhtml">
+                       <f:param disable="#{empty fxxxuq1ggxwwqqhxxxxxmembersgroup.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq1ggxwwqqhxxxxxmembersgroupA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{fxxxuq1ggxwwqqhxxxxxmembersgroup.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">groupid</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.a0xxukxxbvxxxxxxxxxxgroupid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.b1xxuszsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">mode</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.b2xxfxxxbvxxxxxxxxxxmode}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.z1xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.z2xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{fxxxuq1ggxwwqqhxxxxxmembersgroup.z3xxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Task']}">
+    <div class="association" id="fxxxuq1kkxwwqqhfxxxxtaskParent">
+        
+        <h:outputText value="No task" 
+                   rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.fxxxuq1kkxwwqqhfxxxxtask == null}"/>
+        
+        <p:dataTable var="fxxxuq1kkxwwqqhfxxxxtask" tableStyle="table-layout:auto;"
+                   value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.fxxxuq1kkxwwqqhfxxxxtask}" 
+                rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.fxxxuq1kkxwwqqhfxxxxtask != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fxxxuq1kkxwwqqhfxxxxtaskTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewtask" 
+                     value="View" 
+                      outcome="/task.xhtml">
+                       <f:param disable="#{empty fxxxuq1kkxwwqqhfxxxxtask.a0xxuobxbxxxxxxxxxxxsid}" name="fxxxuq1kkxwwqqhfxxxxtaskA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{fxxxuq1kkxwwqqhfxxxxtask.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">taskid</f:facet>
+                   #{fxxxuq1kkxwwqqhfxxxxtask.a0xxuktpbvxxxxxxxxxxtaskid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{fxxxuq1kkxwwqqhfxxxxtask.a1xxuszsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">eststart</f:facet>
+                   #{fxxxuq1kkxwwqqhfxxxxtask.b1xxcxxrbxxxxxxxxxxxeststart}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">calcstart</f:facet>
+                   #{fxxxuq1kkxwwqqhfxxxxtask.b1xxcxxrlxxxxxxxxxxxcalcstart}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">estend</f:facet>
+                   #{fxxxuq1kkxwwqqhfxxxxtask.b2xxcxxrbxxxxxxxxxxxestend}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">subqty</f:facet>
+                   #{fxxxuq1kkxwwqqhfxxxxtask.b3xxzqxxavxxxxxxxxxxsubqty}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">activity sid</f:facet>
+		    	  #{fxxxuq1kkxwwqqhfxxxxtask.fxxxuq188xwwqqhxxxxxactivity.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">membersgroup sid</f:facet>
+		    	  #{fxxxuq1kkxwwqqhfxxxxtask.fxxxuq1ggxwwqqhxxxxxmembersgroup.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">groupmembers sid</f:facet>
+		    	  #{fxxxuq1kkxwwqqhfxxxxtask.jxxxuq54exwwqqhxxxxxgroupmembers.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{fxxxuq1kkxwwqqhfxxxxtask.zaxxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{fxxxuq1kkxwwqqhfxxxxtask.zbxxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{fxxxuq1kkxwwqqhfxxxxtask.zcxxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+   <ui:remove > addres gives lazy loading error, needs more checking</ui:remove>
+    <p:tab title="#{messages['Groupmembers']}">
+    <div class="association" id="jxxxuq54exwwqqhxxxxxgroupmembersParent">
+        
+        <h:outputText value="No groupmembers" 
+                   rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.jxxxuq54exwwqqhxxxxxgroupmembers == null}"/>
+        
+        <p:dataTable var="jxxxuq54exwwqqhxxxxxgroupmembers" tableStyle="table-layout:auto;"
+                   value="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.jxxxuq54exwwqqhxxxxxgroupmembers}" 
+                rendered="#{dxxxuq2drxwwqqhfxxxxresourcedetailsHome.instance.jxxxuq54exwwqqhxxxxxgroupmembers != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="jxxxuq54exwwqqhxxxxxgroupmembersTable">
+            <p:column>
+                <f:facet name="header">action</f:facet>
+                <h:link id="viewgroupmembers" 
+                     value="View" 
+                      outcome="/groupmembers.xhtml">
+                       <f:param disable="#{empty jxxxuq54exwwqqhxxxxxgroupmembers.a0xxuobxbxxxxxxxxxxxsid}" name="jxxxuq54exwwqqhxxxxxgroupmembersA0xxuobxbxxxxxxxxxxxsid" 
+                           value="#{jxxxuq54exwwqqhxxxxxgroupmembers.a0xxuobxbxxxxxxxxxxxsid}"/>
+                </h:link>
+            </p:column>
+                 <p:column>
+                  <f:facet name="header">memberid</f:facet>
+                   #{jxxxuq54exwwqqhxxxxxgroupmembers.b1xxukgmbvxxxxxxxxxxmemberid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">descript</f:facet>
+                   #{jxxxuq54exwwqqhxxxxxgroupmembers.b2xxuxzsbvxxxxxxxxxxdescript}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">sourcetype</f:facet>
+                   #{jxxxuq54exwwqqhxxxxxgroupmembers.b3xxuzyxbv46xxxxxxxxsourcetype}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">item sid</f:facet>
+		    	  #{jxxxuq54exwwqqhxxxxxgroupmembers.fpxxfq1a5xwwqqhxxxxxitem.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">machine sid</f:facet>
+		    	  #{jxxxuq54exwwqqhxxxxxgroupmembers.fpxxuq9eexwwqqhefxxxmachine.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">activity sid</f:facet>
+		    	  #{jxxxuq54exwwqqhxxxxxgroupmembers.fxxxuq188xwwqqhxxxxxactivity.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">membersgroup sid</f:facet>
+		    	  #{jxxxuq54exwwqqhxxxxxgroupmembers.fxxxuq1ggxwwqqhxxxxxmembersgroup.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">employee sid</f:facet>
+		    	  #{jxxxuq54exwwqqhxxxxxgroupmembers.jxxxbh400xwwqqhxxxxxemployee.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">customer sid</f:facet>
+		    	  #{jxxxuq54exwwqqhxxxxxgroupmembers.jxxxuq201xwwqqhxxxxxcustomer.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+	    	       <f:facet name="header">vendor sid</f:facet>
+		    	  #{jxxxuq54exwwqqhxxxxxgroupmembers.jxxxuq300xwwqqhxxxxxvendor.a0xxuobxbxxxxxxxxxxxsid}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfl</f:facet>
+                   #{jxxxuq54exwwqqhxxxxxgroupmembers.z1xxzzfxhhxxxxxxxxxxstatusfl}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">statusfldt</f:facet>
+                   #{jxxxuq54exwwqqhxxxxxgroupmembers.z2xxcztxlxxxxxxxxxxxstatusfldt}
+                 </p:column>
+                 <p:column>
+                  <f:facet name="header">owner</f:facet>
+                   #{jxxxuq54exwwqqhxxxxxgroupmembers.z3xxutoxlhxxxxxxxxxxowner}
+                 </p:column>
+        </p:dataTable>
+    </div>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

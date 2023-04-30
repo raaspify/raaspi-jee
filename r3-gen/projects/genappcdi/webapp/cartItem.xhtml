@@ -1,0 +1,437 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="layout/rtemplateUi.xhtml">
+
+<ui:remove>
+    This page comes from either itemDetailsbrowse to add  an Item to shopping cart by visitor. There is cartPOS .xhtml to handle POS transactions. 
+</ui:remove>
+<f:metadata>
+    <f:viewParam name="categoryJay" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid}"/>
+
+
+</f:metadata>
+<!-- Not Generated   -->
+<ui:define name="title">#{messages['cartItem_page_title']}</ui:define>
+<ui:define name="body">
+
+
+<style>
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 1em;
+    font-size: 3vw;
+    color: #FFD600;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+
+
+</style>
+
+    <h:form id="cartItem" styleClass="edit">
+
+
+  <!-- Navigation part of template  -->
+
+  <!-- Page Content -->
+  <div class="container">
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages0"/>
+
+    <div class="row">
+
+      <div class="col-lg-3">
+        <h1 class="my-4">#{messages['Shopping']} #{messages['Cart']}</h1>
+         <h:graphicImage alt="no picture"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
+                               value="/ImageServletCdi/?seq=1&amp;id=#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=90" 
+                               style=";max-height:150px;max-width:200px;">
+         </h:graphicImage>
+         <br></br><h:link value="#{messages['More']} #{messages['images']}" outcome="/ImagesBrowse.xhtml" target="_blank" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,1,2) != null}">
+                <f:param name="poSid" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt}" />
+                <f:param name="catsubJay" value="-1" />
+         </h:link>
+         <br></br><h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b1xxuszsbvxxxxxxxxxxdescript}"  class="text-info"  maxlength="30" disabled="true" />
+         <br></br><h:outputText class="text-warning" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w7xxuznxbvxxxxxxxxxxnotes}"  style="text-align: left;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.w7xxuznxbvxxxxxxxxxxnotes)}"  >
+         </h:outputText><br></br>
+         <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.equals('SI-D')}"> 
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantSizeText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),0,9)}"  style="text-align: left;font-weight: bold;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantSizeText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),9,18)}"  style="text-align: left;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantColourText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),0,9)}"  style="text-align: left;font-weight: bold;color:tomato;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantColourText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),9,18)}"  style="text-align: left;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+        
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantMaterialText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),0,9)}"  style="text-align: left;font-weight: bold;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantMaterialText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),9,18)}"  style="text-align: left;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantBrandText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),0,9)}"  style="text-align: left;font-weight: bold;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+                             <h:outputText value="#{fn:substring(fpxxfq1a5xwwqqhxxxxxitemList.itemVariantBrandText(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid),9,18)}"  style="text-align: left;" rendered= "#{not empty(fpxxfq1a5xwwqqhxxxxxitemHome.instance.g2xxuxn2bvxxxxxxxxxxsubcodesn2)}"  >
+                             </h:outputText>
+         </ui:fragment>
+                           <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c2fbcxxrehxxsxxxxxxxspriceffdt.time le session.lastAccessedTime and fpxxfq1a5xwwqqhxxxxxitemHome.instance.h1xxcxxrbxxxxxxxxxxxeffdate.time gt session.lastAccessedTime}">
+                           <h:panelGrid columns="4"> 
+                            <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c1xxzxxxbhxxsxxxxxxxspricnew}"  style="text-align: left;" rendered= "#{!fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                            <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b8fbzpxxbvxxxxxxxxxxselprice}"  style="text-align: left;text-decoration: line-through" rendered= "#{!fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                           </h:panelGrid> 
+                           </ui:fragment>
+
+                           <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.h1xxcxxrbxxxxxxxxxxxeffdate.time le session.lastAccessedTime}" >
+                           <h:panelGrid columns="4"> 
+                            <h:outputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.b8fbzpxxbvxxxxxxxxxxselprice}"  style="text-align: left;" rendered= "#{!fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}"  >
+                                <f:convertNumber type="currency" currencySymbol="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].y2xxuxxxbvxxxxxxxxxxkeyorder}" />
+                            </h:outputText>
+                           </h:panelGrid> 
+                           </ui:fragment>
+                           <ui:fragment rendered="#{yxxxuq591xwwqqhxxxxxrate1fList.getSuggestList('DC').size() > 0
+                                        and !fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
+                                        and yxxxuq591xwwqqhxxxxxrate1fList.getCouponCodeExists(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid)}">                           
+                           <h:panelGrid columns="4"> 
+                            <h:outputText value="#{messages['Coupon']} #{messages['code']}"  style="text-align: left;"  />
+                            <h:inputText value="#{fpxxfq1a5xwwqqhxxxxxitemHome.couponCode}"  style="text-align: left;"  >
+                            </h:inputText>
+                           </h:panelGrid> 
+                           </ui:fragment>
+
+                           <h:panelGrid columns="4"> 
+                            <h:inputText  
+                             value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.tempQuantity}" minValue="1" maxValue="999"
+                             rendered= "#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('SI-') and !fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('SI-L')}"
+                              pt:type="number" class="form-control"
+                             step="1">
+                            </h:inputText>
+
+                           </h:panelGrid> 
+                            <ui:fragment rendered= "#{!identity.loggedIn and empty fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() }">
+                             <br></br>
+                            </ui:fragment>
+
+                            <h:commandButton id="AddToCart" class="btn btn-primary"  rendered= "#{!fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)') 
+                             and fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity gt 0 
+                              and (fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()==null 
+                               or fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()>=0)}"
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrder(fpxxfq1a5xwwqqhxxxxxitemHome.instance,fpxxfq1a5xwwqqhxxxxxitemHome.instance.tempQuantity,'cart')}" 
+                                 value="#{messages['Confirm']} #{messages['To']} #{messages['Cart']}">
+                              <f:param name="categoryJay" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid}" />
+                            </h:commandButton>
+                             <ui:fragment rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}">
+                              <h:commandButton id="save" class="btn btn-primary" 
+                               value="#{messages['Request']} #{messages['quote']}" status="buttonStatus" render="@form"
+                               action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToQuote(fpxxfq1a5xwwqqhxxxxxitemHome.instance,fpxxfq1a5xwwqqhxxxxxitemHome.instance.tempQuantity,'cart')}"
+                               >                        
+                              </h:commandButton>   
+                              <h:outputText value="Or Login and Request Quotation"  />
+                             </ui:fragment>
+
+
+
+                            <ui:fragment rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()>0}">
+                             <br></br>
+                            </ui:fragment>
+
+                            <h:outputText  style="color:red;" rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()>0}"
+                                 value="#{messages['Last']} #{messages['item']} #{messages['Confirmed']}: ">
+                            </h:outputText><br></br>
+                            <ui:remove>current order holds the last item, while order details hold each item</ui:remove>
+                            <h:outputText class="text-info" rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()>0 and fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('cart').size()>0}"
+                                 value="#{fpxxfq1a5xwwqqhxxxxxitemList.getCurrentCartOrder('cart').get(0).fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript}">
+                            </h:outputText>
+                            <br></br>
+              <h:panelGrid columns="5" >
+               <h:button outcome="/ItemDetailsBrowse.xhtml" rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()>0}"
+                 id="more1" class="btn btn-secondary"
+                 value="#{messages['Next']} #{messages['item']}">
+               </h:button>
+               &nbsp;<h:button id="Cartb33P" outcome="/checkout.xhtml" value="#{messages['Checkout']}" class="btn btn-primary"
+                rendered= "#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()>0}">
+               &nbsp;&nbsp;<h:graphicImage value="/img/Cart32.png" styleClass="pic"/>
+               </h:button>
+               <h:outputText value="[#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()}]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0}">
+               </h:outputText>
+               <h:outputText value="#{messages['Cart']} [Empty]" rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() == null}"/>
+               </h:panelGrid>
+
+              <!-- Button to Open the Modal -->
+              <ui:fragment rendered="#{!identity.loggedIn  and (customIdentity.imailaddr == null or customIdentity.imailaddr.isEmpty())  }">
+              <div class="alert alert-info alert-dismissible">
+               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+               <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-REVIEWS','HDR',30,'',30).size() gt 0}">    
+               <strong>#{messages['Welcome!']}!</strong> #{messages['You']} are in guest mode now. To Confirm to Cart or to Submit Review, please select
+               </ui:fragment>
+               <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-REVIEWS','HDR',30,'',30).size() le 0}">    
+               <strong>#{messages['Welcome!']}!</strong> #{messages['You']} are in guest mode now. To Allow Checkout, please select
+               </ui:fragment>
+
+               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" data-backdrop="false">
+                #{messages['Options']} 
+               </button>
+              </div>
+              </ui:fragment>
+    <br></br>
+    <div class="actionButtons">    
+        <h:button outcome="/home.xhtml"
+                    id="done"
+                 value="#{messages['Done']}"/>
+        &nbsp;<h:button outcome="/ItemDetailsBrowse.xhtml"
+                    id="more"
+                 value="#{messages['Next']} #{messages['item']}"/>
+
+    </div>
+
+ 
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+
+      </div>
+      <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() != null}">
+      <!-- /.col-lg-3 -->
+      <div class="col-lg-9">
+        <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-SUMMARY','HDR',0,'',0).size() gt 0}">
+        <div class="card mt-4">
+          <div class="card-body">
+            <h:outputText  escape="off" class="card-title" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-SUMMARY','HDR',0,'',0).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+              rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-SUMMARY','HDR',0,'',0).size() gt 0}">
+            </h:outputText>
+
+      <c:set var="splitNumbers" value="#{fn:split(fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid).g2xxuxn1bvxxxxxxxxxxsubcodesn,' ')}" />
+      <c:set var="cats" value="#{fn:split(fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid).g2xxuxn2bvxxxxxxxxxxsubcodesn2,' ')}" />
+      <h:panelGrid columns="16">
+        <h:outputText  escape="true" value="#{splitNumbers[0]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;<h:outputText  escape="true" value="#{splitNumbers[1]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;<h:outputText  escape="true" value="#{splitNumbers[2]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;<h:outputText  escape="true" value="#{splitNumbers[3]}"  class="w3-tag w3-round w3-light-grey "  />
+        &nbsp;&nbsp;&nbsp;&nbsp;<h:outputText  escape="true" value="#{cats[0]}"  class="w3-tag w3-round w3-blue "  />
+        &nbsp;<h:outputText  escape="true" value="#{cats[1]}"  class="w3-tag w3-round w3-light-blue "  />
+      </h:panelGrid>
+      &nbsp;<h5>#{fpxxfq1a5xwwqqhxxxxxitemList.getSidToEntity(fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemA0xxuobxbxxxxxxxxxxxsid).b1xxuszsbvxxxxxxxxxxdescript}</h5>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,'',0).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',0,'',0).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',1,'',1).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',1,'',1).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',2,'',2).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',2,'',2).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',3,'',3).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',3,'',3).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',4,'',4).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',4,'',4).size() gt 0}">
+            </h:outputText>
+          </div>
+
+        </div>
+        </ui:fragment>
+        <!-- /.card -->
+        <div class="card card-outline-secondary my-4">
+          <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-SPECIFICATIONS','HDR',10,'',10).size() gt 0}">
+          <div class="card-header">
+            <h:outputText  escape="off" class="card-title" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-SPECIFICATIONS','HDR',10,'',10).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+              rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-SPECIFICATIONS','HDR',10,'',10).size() gt 0}">
+            </h:outputText>
+          </div>
+          <div class="card-body">
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',10,'',10).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',10,'',10).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',11,'',11).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',11,'',11).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',12,'',12).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',12,'',12).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',13,'',13).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',13,'',13).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',14,'',14).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',14,'',14).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',15,'',15).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',15,'',15).size() gt 0}">
+            </h:outputText>
+          </div>
+          </ui:fragment>
+
+          <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-REVIEWS','HDR',30,'',30).size() gt 0}">
+          <div class="card-header">
+            <h:outputText  escape="off" class="card-title" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-REVIEWS','HDR',30,'',30).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+              rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM','APRODUCT-REVIEWS','HDR',30,'',30).size() gt 0}">
+            </h:outputText>
+          </div>
+          <div class="card-body">
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',40,'',40).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',40,'',40).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',39,'',39).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',39,'',39).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',38,'',38).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',38,'',38).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',37,'',37).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',37,'',37).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',36,'',36).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',36,'',36).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',35,'',35).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',35,'',35).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',34,'',34).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',34,'',34).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',33,'',33).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',33,'',33).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',32,'',32).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',32,'',32).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',31,'',31).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',31,'',31).size() gt 0}">
+            </h:outputText>
+            <h:outputText  escape="off" class="card-text" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',30,'',30).get(0).b1xxuzaxbvxxxxxxxxxxdata}"
+             rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getAllResultListSeqs('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT',30,'',30).size() gt 0}">
+            </h:outputText>
+
+
+            <ui:fragment rendered="#{not empty fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt and (identity.loggedIn or not empty customIdentity.imailaddr)}">
+            <h:inputTextarea styleClass="form-control" id="tEdit" 
+              cols="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?30:80}" 
+              rows="3"
+            value="#{customIdentity.holdValue2}"/>
+            <div class="row">
+             <div>
+              <h:commandButton id="reviewS" class="btn btn-success" value ="#{messages['Submit']} #{messages['Review']}" 
+                onclick="let spinner = document.getElementById('review');spinner.style.visibility = 'visible';"  
+                action="#{yxxxuq1m1xwwqqqxxxxxclobdataHome.persistUpdateClobData('FPXXFQ1A5XWWQQHXXXXXITEM',fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt,'TXT','txt',-30,'','',customIdentity.holdValue2,'')}" >
+               <span id="review" class="spinner-border spinner-border-sm text-muted" style="visibility: hidden"></span>
+              </h:commandButton>
+              <ui:fragment rendered="#{yxxxuh566xwwqqwxxxxxuserHome.mobile}">
+               <br></br>
+              </ui:fragment>
+              #{messages['Your']} #{messages['Rating']}&nbsp;&nbsp;
+              <input type="button" id="ratingVal" name="ratingVal" value="#{empty customIdentity.holdValue?'None':customIdentity.holdValue}"/>
+              &nbsp;
+             </div>
+             <div class="rating">
+              <input type="radio" name="rating" value="5" id="5"/><label for="5">☆</label>
+              <input type="radio" name="rating" value="4" id="4"/><label for="4">☆</label>
+              <input type="radio" name="rating" value="3" id="3"/><label for="3">☆</label>
+              <input type="radio" name="rating" value="2" id="2"/><label for="2">☆</label>
+              <input type="radio" name="rating" value="1" id="1"/><label for="1">☆</label>
+             </div>
+            </div>
+           </ui:fragment>
+
+          </div>
+          </ui:fragment>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col-lg-9 -->
+      </ui:fragment>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+  <!-- rating -->
+
+
+<!-- The Modal -->
+<ui:fragment rendered="#{!identity.loggedIn or (customIdentity.imailaddr.isEmpty() and fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size() gt 0)}">
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">#{messages['Options']}</h4>
+        <button type="button" class="close" data-dismiss="modal">&#215;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+ 
+       #{messages['For']} frequent purchases, we recommend 
+               <h:link value="#{messages['menutab.AddListReport.LogIn']}" outcome="/login.xhtml" rendered="#{not identity.loggedIn}"/>
+
+       <br></br>
+       But you also have the option to continue by entering your email id.
+       <br></br>
+       <div >
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <h:inputText required="false" id="emailE" value="#{customIdentity.imailaddr}" size="25" rendered="true" pt:placeholder="Email"/>
+   
+        <h:commandButton class="btn btn-primary" id="changePWCommand" action="#{fpxxfq1a5xwwqqhxxxxxitemHome.validateEmail(customIdentity.imailaddr)}"
+         value="#{messages['Confirm']}">
+         <f:ajax execute="@form" render="@form" /> 
+        </h:commandButton>
+
+       </div>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div> 
+</ui:fragment>
+<ui:remove> form within a form needed to save email, why</ui:remove>
+ </h:form>
+
+
+</ui:define>
+
+</ui:composition>
+

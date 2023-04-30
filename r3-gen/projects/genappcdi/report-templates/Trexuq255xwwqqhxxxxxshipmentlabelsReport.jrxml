@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with genJasperlabelsreports - A generator for JasperReports Labels -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+		 name="Trexuq255xwwqqhxxxxxshipmentAvery5960"
+		 columnCount="3"
+		 printOrder="Horizontal"
+		 orientation="Portrait"
+		 pageWidth="612"
+		 pageHeight="792"
+		 columnWidth="192"
+		 columnSpacing="8"
+		 leftMargin="13"
+		 rightMargin="7"
+		 topMargin="36"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 resourceBundle="messages"
+           whenResourceMissingType="Key">
+	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+
+	<parameter name="DisplayAs" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Report Output as HTML or as PDF]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["PDF"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Start" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Start Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="End" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[End Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MarkedOnes" isForPrompting="true" class="java.lang.Boolean">
+ 		<parameterDescription><![CDATA[Select Marked Records Only]]></parameterDescription>
+      </parameter>
+	<parameter name="INVOICEETC_ID" isForPrompting="false" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Detail]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ForTargetId" isForPrompting="false" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Customer,Vendor etc]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[9999]]></defaultValueExpression>
+	</parameter>
+	<parameter name="owner2Code" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reference" isForPrompting="true" class="java.lang.String">
+		<parameterDescription><![CDATA[Reference used in the report as notes or Pono etc]]></parameterDescription>
+		<defaultValueExpression ><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+
+
+
+
+
+     	<queryString><![CDATA[SELECT
+      shipment.sid AS SHIPMENT_sid,
+      shipment.shipcode AS SHIPMENT_shipcode,
+      shipment.pono AS SHIPMENT_pono,
+      shipment.type AS SHIPMENT_type,
+      shipment.shipdatet AS SHIPMENT_shipdatet,
+      shipment.billtosameasshipto AS SHIPMENT_billtosameasshipto,
+      shipment.matcode AS shipment_MATCODE,
+      shipment.billtocode AS shipment_BILLTOCODE,
+      shipment.shiptocode AS shipment_SHIPTOCODE,
+      shipment.customer AS shipment_CUSTOMER,
+      shipment.carrier AS shipment_CARRIER,
+      shipment.shipper AS shipment_SHIPPER,
+      shipment.cpono AS shipment_CPONO,
+      shipment.invoice AS shipment_INVOICE,
+      shipment.packno AS SHIPMENT_packno,
+      shipment.tareno AS SHIPMENT_tareno,
+      shipment.notes AS SHIPMENT_notes,
+      shipment.amounttotal AS SHIPMENT_amounttotal,
+      shipment.amountostndt AS SHIPMENT_amountostndt,
+      shipment.qtytotal AS SHIPMENT_qtytotal,
+      shipment.qtyostndt AS SHIPMENT_qtyostndt,
+      shipment.shipdateta AS SHIPMENT_shipdateta,
+      shipment.statusfl AS SHIPMENT_statusfl,
+      shipment.statusfldt AS SHIPMENT_statusfldt,
+      shipment.serialno AS SHIPMENT_serialno,
+      shipment.printmstat AS SHIPMENT_printmstat,
+      shipment.prinmtfldt AS SHIPMENT_prinmtfldt,
+      shipment.owner AS SHIPMENT_owner,
+      shipment.barshipcod AS SHIPMENT_barshipcod,
+      shipment.owner2 AS shipment_owner2,
+      address.addrl1 AS address_addrl1,
+      address.addrl2 AS address_addrl2,
+      address.city AS address_city,
+      address.provnstate AS address_provnstate,
+      address.country AS address_country,
+      address.pzcode AS address_pzcode
+
+FROM
+       genapp.shipment shipment left join genapp.address address on 
+        shipment.mailtocode=address.sid left join genapp.address address on 
+        shipment.mailtocode=address.sid WHERE 
+         (shipment.shipcode) >=  $P{Start} AND   (shipment.shipcode) <= $P{End} AND
+       shipment.owner2 = $P{owner2Code}]]></queryString>
+      <field name="SHIPMENT_SID" class="java.lang.Integer"/>
+
+      <field name="SHIPMENT_SHIPCODE" class="java.lang.String"/>
+
+      <field name="SHIPMENT_PONO" class="java.lang.Integer"/>
+
+      <field name="SHIPMENT_TYPE" class="java.lang.String"/>
+
+      <field name="SHIPMENT_SHIPDATET" class="java.sql.Timestamp"/>
+
+      <field name="SHIPMENT_BILLTOSAMEASSHIPTO" class="java.lang.String"/>
+
+
+      <field name="SHIPMENT_MATCODE" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="SHIPMENT_BILLTOCODE" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="SHIPMENT_SHIPTOCODE" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="SHIPMENT_CUSTOMER" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="SHIPMENT_CARRIER" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="SHIPMENT_SHIPPER" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="SHIPMENT_CPONO" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+      <field name="SHIPMENT_INVOICE" class="java.lang.Integer"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+      <field name="SHIPMENT_PACKNO" class="java.lang.String"/>
+
+
+      <field name="SHIPMENT_TARENO" class="java.lang.String"/>
+
+      <field name="SHIPMENT_NOTES" class="java.lang.String"/>
+
+      <field name="SHIPMENT_AMOUNTTOTAL" class="java.lang.String"/>
+
+      <field name="SHIPMENT_AMOUNTOSTNDT" class="java.lang.String"/>
+
+      <field name="SHIPMENT_QTYTOTAL" class="java.lang.String"/>
+
+      <field name="SHIPMENT_QTYOSTNDT" class="java.lang.String"/>
+
+      <field name="SHIPMENT_SHIPDATETA" class="java.sql.Timestamp"/>
+
+      <field name="SHIPMENT_STATUSFL" class="java.lang.Integer"/>
+
+      <field name="SHIPMENT_STATUSFLDT" class="java.sql.Timestamp"/>
+
+      <field name="SHIPMENT_SERIALNO" class="java.lang.String"/>
+
+      <field name="SHIPMENT_PRINTMSTAT" class="java.lang.Integer"/>
+
+      <field name="SHIPMENT_PRINMTFLDT" class="java.sql.Timestamp"/>
+
+      <field name="SHIPMENT_OWNER" class="java.lang.String"/>
+
+      <field name="SHIPMENT_BARSHIPCOD" class="java.lang.String"/>
+
+      <field name="SHIPMENT_OWNER2" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="72"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="9"
+						y="2"
+						width="138"
+						height="13"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="9"
+						y="15"
+						width="182"
+						height="26"
+						key="textField-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font fontName="DejaVu Serif"  size="8" isBold="false"/>
+					</textElement>
+				</textField>
+
+
+			</band>
+
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>
+
+
+
+
+
+
+
+

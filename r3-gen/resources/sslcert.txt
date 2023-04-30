@@ -1,0 +1,40 @@
+ref http://cloudhostingsource.com/setup-ssl-certificate-openshift/
+http://www.openssl.org/docs/apps/req.html#EXAMPLES
+
+
+step 1: order ssl certificate from sat namecheap.com or /www.cheapsslshop.com
+
+step 2: activate ssl cert
+use putty to login to mystuffp
+cd ~/app-root/data
+openssl genrsa -des3 -out appName.key 2048 -->to generate key appName is mystuffp
+openssl req -new -key appName.key -out appName.csr to generate CSR (Certificate Signing Request)
+
+You will be prompted to enter the some of the following information in order to generate the private key and CSR pair off the web server:
+
+    Organization Name 3r computer systems
+    Country Code canada
+    State or Province on
+    Common Name *.3recommerce.com san *.3rcomputer.com
+    mail Address mail@3rcomputer.com
+
+cat myApp.csr to display csr
+
+-----BEGIN CERTIFICATE REQUEST----- 
+...encrypted text... 
+-----END CERTIFICATE REQUEST-----
+
+Copy the entire block, including the BEGIN and END lines and paste it into where the CSR is requested on the website where you purchased the SSL.
+
+cat myApp.key
+save it as myApp.key on your computer. Later, you will need to add this key file together with the SSL certificate for your domain to your application. 
+
+Install SSL Certificate
+
+get
+
+    SSL certificated
+    the private key used to generate the CSR
+    the passphrase you used when generating your private key.
+
+Edit the alias (custom domain) you want to add the SSL certificate to. Under “SSL Certificate”, reference the following and click “Save”

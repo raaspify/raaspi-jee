@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Trexuq277xwwqqhxxxxxcpayment" pageWidth="140" pageHeight="900" whenNoDataType="NoDataSection" columnWidth="132" leftMargin="5" rightMargin="3" topMargin="20" bottomMargin="20" resourceBundle="messages" whenResourceMissingType="Key" uuid="b335f531-4c68-4d6a-91fd-6d7ce7f6d327">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="genapp"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="DisplayAs" class="java.lang.String">
+		<parameterDescription><![CDATA[Report Output as HTML or as PDF]]></parameterDescription>
+		<defaultValueExpression><![CDATA["PDF"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Start" class="java.lang.String">
+		<parameterDescription><![CDATA[Start Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="End" class="java.lang.String">
+		<parameterDescription><![CDATA[End Record Key value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA["      "]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Status" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Status flag value for Select]]></parameterDescription>
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MarkedOnes" class="java.lang.Boolean">
+		<parameterDescription><![CDATA[Select Marked Records Only]]></parameterDescription>
+	</parameter>
+	<parameter name="INVOICEETC_ID" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Detail]]></parameterDescription>
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ForTargetId" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[Key Value To Connect Master To Customer,Vendor etc]]></parameterDescription>
+		<defaultValueExpression><![CDATA[9999]]></defaultValueExpression>
+	</parameter>
+	<parameter name="owner2Code" class="java.lang.String">
+		<parameterDescription><![CDATA[Account Domain like xxx.com]]></parameterDescription>
+		<defaultValueExpression><![CDATA["myflow-3rcomp.rhcloud.com"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subreportPath" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA[SubReport class absolute path]]></parameterDescription>
+		<defaultValueExpression ><![CDATA["."]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+      cpayment."sid" AS CPAYMENT_sid,
+
+      cpayment."payment" AS CPAYMENT_payment,
+
+      cpayment."matcode" AS CPAYMENT_matcode,
+
+      cpayment."discount" AS CPAYMENT_discount,
+
+      cpayment."tax1amtt" AS CPAYMENT_tax1amtt,
+
+      cpayment."tax2amtt" AS CPAYMENT_tax2amtt,
+
+      cpayment."paytype" AS CPAYMENT_paytype,
+
+      cpayment."cheqdate" AS CPAYMENT_cheqdate,
+
+      cpayment."paymentduedate" AS CPAYMENT_paymentduedate,
+
+      cpayment."postingperiod" AS CPAYMENT_postingperiod,
+
+      cpayment."currency" AS CPAYMENT_currency,
+
+      cpayment."amountin" AS CPAYMENT_amountin,
+
+      cpayment."convrate" AS CPAYMENT_convrate,
+
+      cpayment."integrset" AS CPAYMENT_integrset,
+
+
+      cpayment."customer" AS cpayment_CUSTOMER,
+
+      cpayment."cinvoice" AS cpayment_CINVOICE,
+
+
+      cpayment."notes" AS CPAYMENT_notes,
+
+      cpayment."tax3amtt" AS CPAYMENT_tax3amtt,
+
+
+      cpayment."account" AS cpayment_ACCOUNT,
+      cpayment."amounttotal" AS CPAYMENT_amounttotal,
+
+      cpayment."amountostndt" AS CPAYMENT_amountostndt,
+
+      cpayment."qtytotal" AS CPAYMENT_qtytotal,
+
+      cpayment."qtyostndt" AS CPAYMENT_qtyostndt,
+
+      cpayment."paybyid" AS CPAYMENT_paybyid,
+
+      cpayment."paybydate" AS CPAYMENT_paybydate,
+
+      cpayment."baseamountt" AS CPAYMENT_baseamountt,
+
+      cpayment."delivchrgt" AS CPAYMENT_delivchrgt,
+
+      cpayment."locamountt" AS CPAYMENT_locamountt,
+
+      cpayment."miscchrgt" AS CPAYMENT_miscchrgt,
+
+      cpayment."statusfl" AS CPAYMENT_statusfl,
+
+      cpayment."statusfldt" AS CPAYMENT_statusfldt,
+
+      cpayment."owner" AS CPAYMENT_owner,
+
+      cpayment."owner2" AS cpayment_owner2
+
+
+FROM
+       "genapp"."cpayment" cpayment WHERE 
+         (cpayment."payment") >=  $P{Start} AND   (cpayment."payment") <= $P{End} AND (cpayment."statusfl" = $P{Status} or $P{Status} is null) AND cpayment."owner2" = $P{owner2Code}]]>
+	</queryString>
+	<field name="CPAYMENT_SID" class="java.lang.Integer"/>
+	<field name="CPAYMENT_PAYMENT" class="java.lang.String"/>
+	<field name="CPAYMENT_MATCODE" class="java.lang.Integer"/>
+	<field name="CPAYMENT_DISCOUNT" class="java.lang.String"/>
+	<field name="CPAYMENT_TAX1AMTT" class="java.lang.String"/>
+	<field name="CPAYMENT_TAX2AMTT" class="java.lang.String"/>
+	<field name="CPAYMENT_PAYTYPE" class="java.lang.String"/>
+	<field name="CPAYMENT_CHEQDATE" class="java.sql.Timestamp"/>
+	<field name="CPAYMENT_PAYMENTDUEDATE" class="java.sql.Timestamp"/>
+	<field name="CPAYMENT_POSTINGPERIOD" class="java.lang.Integer"/>
+	<field name="CPAYMENT_CURRENCY" class="java.lang.String"/>
+	<field name="CPAYMENT_AMOUNTIN" class="java.lang.String"/>
+	<field name="CPAYMENT_CONVRATE" class="java.lang.String"/>
+	<field name="CPAYMENT_INTEGRSET" class="java.lang.String"/>
+	<field name="CPAYMENT_CUSTOMER" class="java.lang.Integer"/>
+	<field name="CPAYMENT_CINVOICE" class="java.lang.Integer"/>
+	<field name="CPAYMENT_NOTES" class="java.lang.String"/>
+	<field name="CPAYMENT_TAX3AMTT" class="java.lang.String"/>
+	<field name="CPAYMENT_ACCOUNT" class="java.lang.Integer"/>
+	<field name="CPAYMENT_AMOUNTTOTAL" class="java.lang.String"/>
+	<field name="CPAYMENT_AMOUNTOSTNDT" class="java.lang.String"/>
+	<field name="CPAYMENT_QTYTOTAL" class="java.lang.String"/>
+	<field name="CPAYMENT_QTYOSTNDT" class="java.lang.String"/>
+	<field name="CPAYMENT_PAYBYID" class="java.lang.String"/>
+	<field name="CPAYMENT_PAYBYDATE" class="java.sql.Timestamp"/>
+	<field name="CPAYMENT_BASEAMOUNTT" class="java.lang.String"/>
+	<field name="CPAYMENT_DELIVCHRGT" class="java.lang.String"/>
+	<field name="CPAYMENT_LOCAMOUNTT" class="java.lang.String"/>
+	<field name="CPAYMENT_MISCCHRGT" class="java.lang.String"/>
+	<field name="CPAYMENT_STATUSFL" class="java.lang.Integer"/>
+	<field name="CPAYMENT_STATUSFLDT" class="java.sql.Timestamp"/>
+	<field name="CPAYMENT_OWNER" class="java.lang.String"/>
+	<field name="CPAYMENT_OWNER2" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="21" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="256" splitType="Stretch">
+			<textField pattern="yyyyMMMdd">
+				<reportElement x="3" y="110" width="97" height="20" uuid="bf1c3b3c-7ac9-42e8-b2e1-d4e9deec6a6a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CPAYMENT_PAYMENTDUEDATE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement key="textField" x="3" y="130" width="90" height="22" uuid="3f7e3a1c-337a-4d27-afc5-9d66fc4df659"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$R{Cpayment}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="152" width="100" height="23" uuid="d06b21cd-c1b8-44d7-a873-4f21858a2134"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CPAYMENT_PAYMENT}]]></textFieldExpression>
+			</textField>
+			<line direction="BottomUp">
+				<reportElement key="line" mode="Opaque" x="0" y="9" width="120" height="1" forecolor="#000000" backcolor="#FFFFFF" uuid="aad95a22-1351-41c7-810d-e0f4924c4518"/>
+			</line>
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-2" x="0" y="9" width="120" height="41" uuid="d669381d-b514-4871-8a79-93a8661ce451"/>
+				<subreportParameter name="owner2Code">
+					<subreportParameterExpression><![CDATA[$P{owner2Code}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subreportPath}+"/clientReceipt57Master_SubReport1.jasper"]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement x="0" y="110" width="120" height="1" uuid="fcb687ee-85ed-4368-bfd2-757bb2e00403"/>
+			</line>
+			<componentElement>
+				<reportElement x="3" y="176" width="117" height="29" uuid="7778e0e0-e3f4-4f16-a538-e4940874cc27"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Codabar" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA[$F{CPAYMENT_PAYMENT}.trim().replaceAll("\\D+","");]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="205" width="109" height="20" uuid="ded0c157-31f4-47df-b552-55e055a94ee0"/>
+				<textFieldExpression><![CDATA[$R{reference}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="226" width="120" height="20" uuid="cdfafc84-9aa1-4cab-ae82-fc3ddaed2c01"/>
+				<textFieldExpression><![CDATA[($F{CPAYMENT_NOTES}.length() > 7 && $F{CPAYMENT_NOTES}.contains("<p>"))?$F{CPAYMENT_NOTES}.substring(3,$F{CPAYMENT_NOTES}.length()-4):$F{CPAYMENT_NOTES}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="196" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-1" x="-2" y="100" width="122" height="96" uuid="b05dae40-7fc9-4296-a859-e4846dedb236"/>
+				<subreportParameter name="INVOICEETC_ID">
+					<subreportParameterExpression><![CDATA[$F{CPAYMENT_SID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="owner2Code">
+					<subreportParameterExpression><![CDATA[$P{owner2Code}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subreportPath}+"/cpaymentReceipt57Master_SubReport0.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="true">
+				<reportElement key="subreport-3" x="3" y="10" width="117" height="79" uuid="d55f1e38-5912-4ce8-8fd3-8a1bd257c779"/>
+				<subreportParameter name="ForTargetId">
+					<subreportParameterExpression><![CDATA[$F{CPAYMENT_CUSTOMER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="owner2Code">
+					<subreportParameterExpression><![CDATA[$P{owner2Code}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subreportPath}+"/customerReceipt57Master_SubReport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="3c10b516-6cc3-4ddc-a62b-0e674147d10a"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totals]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="20" width="120" height="20" uuid="0215797c-fe5d-43a5-8644-4b65e778dded"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CPAYMENT_AMOUNTTOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="27" splitType="Stretch">
+			<line>
+				<reportElement key="line" mode="Opaque" x="0" y="0" width="120" height="1" forecolor="#000000" backcolor="#FFFFFF" uuid="b704bea1-c0aa-4652-bd98-f69c40efcf16"/>
+			</line>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement key="textField" x="1" y="6" width="119" height="19" forecolor="#000000" backcolor="#FFFFFF" uuid="3c68d01b-5afe-4b7e-bcd5-b207f955aa16"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

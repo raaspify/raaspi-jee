@@ -1,0 +1,264 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:rich="http://richfaces.org/rich"
+                template="layout/rtemplate.xhtml">
+<ui:remove>
+ do not put any {messages['server']}, causes jdbc call when no connection and exception
+</ui:remove>
+<ui:define name="title">#{customIdentity.owner2} webpage to count #{messages['Item']} stocks</ui:define>
+
+<ui:define name="body">
+<h:form id="itemserial" styleClass="edit">
+
+<h:outputStylesheet>
+.autoCompleteWidth50 {
+    width:200px !important;
+}
+  .rf-au-lst-scrl {
+    width:200px !important;
+    height:200px;
+    max-height: 300px;
+    min-height: 100px;
+}
+.rf-fu-btn-cnt-add{
+ display: block; height: 40px;width: 200px;
+ }
+
+.autoCompletePopupHieght {
+    width:200px !important;
+}
+
+.rf-tb {
+    background-color:#{a4jSkin.tableSubHeaderBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+
+}
+.rf-cp-hdr {
+    background-color:#{a4jSkin.additionalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.rf-insp-dec {
+ background-color:white
+}
+.rf-insp-inc {
+ background-color:white
+}
+.rf-edt-c {
+    height: 40px !important;
+}
+.rf-edt-hdr {
+    background-color:#{a4jSkin.generalBackgroundColor} !important;
+    background-image: none; !important;
+    color:#{a4jSkin.tableHeaderTextColor} !important;
+    border-color:none;
+}
+.buttonMain {
+margin:5px; height: 30px;font-weight: bold;color:#{a4jSkin.hoverLinkColor}; border-radius: 10px; !important;font-size: 16px;
+}
+
+.rf-insp{
+font-size: 25px;
+vertical-align:center;!important;
+} 
+
+.rf-insp-inp{
+text-align:middle;!important;
+} 
+
+.rf-insp-dec{
+background-image: url('../img/control_remove16.png'); !important;
+height: 40px;
+width: 25px;
+} 
+
+.rf-insp-inc{
+background-image: url('../img/control_add16.png'); !important;
+height: 40px;
+width: 25px;} 
+
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+
+	<rich:toolbar height="26" itemSeparator="grid">
+	  <rich:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
+              <h:outputText value="#{messages['Change']} #{messages['done']}-#{fpxxfq1a5xwwqqhxxxxxitemHome.getCurrentTime()}"
+                style="color:green;"
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.changeDone}">
+               <f:convertDateTime   type="time" />
+              </h:outputText>
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ItemEditHelp']!='ItemEditHelp'}">
+             <rich:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemEditHelp']}"/></span> </rich:tooltip> 
+             </h:graphicImage>
+	  </rich:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</rich:toolbar>
+
+
+ <rich:panel>
+      <h:panelGrid columns="1">
+          <br></br><br></br>
+          <br></br><br></br>
+           <ui:decorate template="layout/edit.xhtml" >
+            <ui:define name="label">#{messages['Scan']} #{messages['Serial_number']} 
+            </ui:define>
+
+             <h:inputText id="itemI" required="false" value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.a0xxukxxbvxxxxxxxxxxserialno}" 
+                       requiredMessage="#{messages['Item']} #{messages['Value']} #{messages['Required']}"
+                       validator="#{fpxxfq1a5xwwqqhxxxxxitemHome.validateAndSelectXxxxxxxxmatcode}" 
+                        pt:autofocus="true"
+
+             >
+             </h:inputText>
+           </ui:decorate>
+           <ui:decorate template="layout/edit.xhtml" >
+            #{messages['Select']} #{messages['Item']} #{messages['Serial_number']}
+             <h:selectOneMenu styleClass="autoCompleteWidth50" 
+                   required="true"  
+                       label="item"
+                       rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
+                    requiredMessage="#{messages['Item']} #{messages['ValueRequired']}"
+                   value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.valueOverRide}"
+             >   
+               <f:selectItem itemValue="#{null}" itemLabel="" />
+              <f:selectItems 
+                     value="#{fxxxuq1ffxwwqqhefxxxserialnumbersList.getSuggestList('s')}" var ="result" itemValue="#{result.a0xxukxxbvxxxxxxxxxxserialno}" 
+                     itemLabel="#{result.b1xxuxxrbvxxxxxxxxxxmatcode}-#{result.a0xxukxxbvxxxxxxxxxxserialno}"/>
+             </h:selectOneMenu>
+           </ui:decorate>
+
+          <br></br><br></br>
+         <ui:decorate template="layout/edit.xhtml" >
+          <h:outputLabel  for="phy" value="#{messages['Quantity']} #{messages['Count']}">
+          </h:outputLabel>
+          <rich:inputNumberSpinner  id="phy"
+            value="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.instance.d5xxcxxrlxxxxxxxxxxxphysqty}" minValue="1"
+                   inputSize="3"
+                   step="1">
+          </rich:inputNumberSpinner>
+         </ui:decorate>
+      </h:panelGrid>
+          <br></br><br></br>
+          <br></br><br></br>
+
+<div class="actionButtons">
+             <a4j:status name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </a4j:status>
+    <ui:remove>removed 89 schedule because one schedule one detail, nov20 2018 added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       may07 2018 allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+            #{messages['Scanned']} #{messages['Item']}
+            <a4j:commandButton id="saveE" styleClass="buttonMain" 
+                          value="#{messages['Scan']}/#{messages['Change']} #{messages['Quantity']}" status="buttonStatus" render="@form"
+                         action="#{fpxxfq1a5xwwqqhxxxxxitemHome.itemCount(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode,' ',fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity,'s')}"
+                       disabled="#{!fpxxfq1a5xwwqqhxxxxxitemHome.wired}"
+                       rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed  and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}">  
+             <rich:tooltip target="save"> <span style="white-space: nowrap"> <h:outputText value="Create if needed, Reset quantity to new value"/></span> </rich:tooltip> 
+            </a4j:commandButton>   
+          
+            <a4j:commandButton id="addE" styleClass="buttonMain" 
+                          value="#{messages['Add']} #{messages['Quantity']}" status="buttonStatus" render="@form"
+                         action="#{fpxxfq1a5xwwqqhxxxxxitemHome.itemCount(fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxukixbxxxxxxxxxxxmatcode,' ',fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity,'s')}"
+                       disabled="#{!fpxxfq1a5xwwqqhxxxxxitemHome.wired}"
+                       rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed  and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}">  
+             <rich:tooltip target="add"> <span style="white-space: nowrap"> <h:outputText value="Create if needed, Add quantity to existing value"/></span> </rich:tooltip> 
+            </a4j:commandButton>   
+
+            <br></br><br></br>
+            #{messages['Selected']} #{messages['Item']}
+            <a4j:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Scan']}/#{messages['Change']} #{messages['Quantity']}" status="buttonStatus" render="@form"
+                         action="#{fpxxfq1a5xwwqqhxxxxxitemHome.itemCount(fpxxfq1a5xwwqqhxxxxxitemHome.valueOverRide,' ',fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity,'s')}"
+                       disabled="#{!fpxxfq1a5xwwqqhxxxxxitemHome.wired}"
+                       rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed  and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}">  
+             <rich:tooltip target="save"> <span style="white-space: nowrap"> <h:outputText value="Create if needed, Reset quantity to new value"/></span> </rich:tooltip> 
+            </a4j:commandButton>   
+          
+            <a4j:commandButton id="add" styleClass="buttonMain" 
+                          value="#{messages['Add']} #{messages['Quantity']}" status="buttonStatus" render="@form"
+                         action="#{fpxxfq1a5xwwqqhxxxxxitemHome.itemCount(fpxxfq1a5xwwqqhxxxxxitemHome.valueOverRide,' ',fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity,'s')}"
+                       disabled="#{!fpxxfq1a5xwwqqhxxxxxitemHome.wired}"
+                       rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed  and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}">  
+             <rich:tooltip target="add"> <span style="white-space: nowrap"> <h:outputText value="Create if needed, Add quantity to existing value"/></span> </rich:tooltip> 
+            </a4j:commandButton>   
+
+            <br></br>
+            <h:button id="new" styleClass="buttonMain" 
+                   value="#{messages['Next']}"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/scan.xhtml"
+                       rendered="#{fxxxuq1ffxwwqqhefxxxserialnumbersHome.managed}"/>
+                 
+            <rich:hotKey  onkeydown="#{rich:element('save')}.click();return false;" preventDefault="true" enabledInInput="true" key="return">
+            </rich:hotKey>
+            <rich:hotKey  onkeydown="#{rich:element('update')}.click();return false;" preventDefault="true" enabledInInput="true" key="ctrl+u">
+            </rich:hotKey>
+
+
+
+
+            <f:param name="reportName" value="#{fpxxfq1a5xwwqqhxxxxxitemList.reportName}"/>
+            <f:param name="displayAs" value="#{fpxxfq1a5xwwqqhxxxxxitemList.displayAs}" /> 
+            <h:button outcome="/itemList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Item']}">
+            </h:button>    
+
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom ? 'home' : fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom}.xhtml"
+
+                rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.managed or fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom ? 'home' : fpxxfq1a5xwwqqhxxxxxitemHome.fpxxfq1a5xwwqqhxxxxxitemFrom}.xhtml"
+                rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed and !fpxxfq1a5xwwqqhxxxxxitemHome.entityDeleted}"/>
+
+
+
+
+
+</div>
+         <rich:messages ajaxRendered="true"  />
+    
+</rich:panel>
+</h:form>
+
+        
+</ui:define> 
+</ui:composition>

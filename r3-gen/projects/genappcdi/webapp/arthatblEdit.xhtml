@@ -1,0 +1,457 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="xxxxih722xwwqqhxxxxxarthatblA0xxuobxbxxxxxxxxxxxsid" value="#{xxxxih722xwwqqhxxxxxarthatblHome.xxxxih722xwwqqhxxxxxarthatblA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="xxxxih722xwwqqhxxxxxarthatblFrom" value="#{xxxxih722xwwqqhxxxxxarthatblHome.xxxxih722xwwqqhxxxxxarthatblFrom}"/>
+    <f:viewAction action="#{xxxxih722xwwqqhxxxxxarthatblHome.restrict()}" />
+    <f:viewAction action="#{xxxxih722xwwqqhxxxxxarthatblHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Arthatbl']}</ui:define>
+
+<ui:define name="body">
+<h:form id="xxxxih722xwwqqhxxxxxarthatbl" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("xxxxih722xwwqqhxxxxxarthatbl:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!xxxxih722xwwqqhxxxxxarthatblHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{xxxxih722xwwqqhxxxxxarthatblHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ArthatblEditHelp']!='ArthatblEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ArthatblEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{xxxxih722xwwqqhxxxxxarthatblHome.managed ? 'Edit' : 'Add'} #{messages['Arthatbl']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a0xxukwvbvtxxxxxxxxxusageDecoration"    >
+        <h:outputLabel  for="a0xxukwvbvtxxxxxxxxxusage" value="#{messages['Usage']}">
+      </h:outputLabel>
+
+         <h:inputText id="a0xxukwvbvtxxxxxxxxxusage" 
+           validator="#{xxxxih722xwwqqhxxxxxarthatblHome.validateKeyDuplicateUsage}" 
+                       label="usage"
+                        required="true"
+                           size="20"
+                      maxlength="32"
+                          value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.a0xxukwvbvtxxxxxxxxxusage}">
+
+         </h:inputText>
+            <p:tooltip  target="a0xxukwvbvtxxxxxxxxxusage"> <span style="white-space: nowrap"> <h:outputText value="Enter Value here"/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b1xxzwvwbvxxxxxxxxxxwcbpercntDecoration"    >
+        <h:outputLabel  for="b1xxzwvwbvxxxxxxxxxxwcbpercnt" value="#{messages['Wcbpercnt']}">
+      </h:outputLabel>
+      <h:inputText id="b1xxzwvwbvxxxxxxxxxxwcbpercnt"  
+         value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b1xxzwvwbvxxxxxxxxxxwcbpercnt}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b1xxzwvwbvxxxxxxxxxxwcbpercnt}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b2xxzwvibvxxxxxxxxxxinsfactorDecoration"    >
+        <h:outputLabel  for="b2xxzwvibvxxxxxxxxxxinsfactor" value="#{messages['Insfactor']}">
+      </h:outputLabel>
+      <h:inputText id="b2xxzwvibvxxxxxxxxxxinsfactor"  
+         value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b2xxzwvibvxxxxxxxxxxinsfactor}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b2xxzwvibvxxxxxxxxxxinsfactor}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b3xxzwvvbvxxxxxxxxxxvacatonrateDecoration"    >
+        <h:outputLabel  for="b3xxzwvvbvxxxxxxxxxxvacatonrate" value="#{messages['Vacatonrate']}">
+      </h:outputLabel>
+      <h:inputText id="b3xxzwvvbvxxxxxxxxxxvacatonrate"  
+         value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b3xxzwvvbvxxxxxxxxxxvacatonrate}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b3xxzwvvbvxxxxxxxxxxvacatonrate}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b4xxzwvpbvmxxxxxxxxxpensionmaxDecoration"    >
+        <h:outputLabel  for="b4xxzwvpbvmxxxxxxxxxpensionmax" value="#{messages['Pensionmax']}">
+      </h:outputLabel>
+      <h:inputText id="b4xxzwvpbvmxxxxxxxxxpensionmax"  
+         value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b4xxzwvpbvmxxxxxxxxxpensionmax}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b4xxzwvpbvmxxxxxxxxxpensionmax}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b5xxzwvwbvmxxxxxxxxxwcbmaxDecoration"    >
+        <h:outputLabel  for="b5xxzwvwbvmxxxxxxxxxwcbmax" value="#{messages['Wcbmax']}">
+      </h:outputLabel>
+      <h:inputText id="b5xxzwvwbvmxxxxxxxxxwcbmax"  
+         value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b5xxzwvwbvmxxxxxxxxxwcbmax}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b5xxzwvwbvmxxxxxxxxxwcbmax}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b6xxzwvibvmxxxxxxxxxinsmaxDecoration"    >
+        <h:outputLabel  for="b6xxzwvibvmxxxxxxxxxinsmax" value="#{messages['Insmax']}">
+      </h:outputLabel>
+      <h:inputText id="b6xxzwvibvmxxxxxxxxxinsmax"  
+         value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b6xxzwvibvmxxxxxxxxxinsmax}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b6xxzwvibvmxxxxxxxxxinsmax}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b7xxzwvibv0xxxxxxxxxitaxlv0rateDecoration"    >
+        <h:outputLabel  for="b7xxzwvibv0xxxxxxxxxitaxlv0rate" value="#{messages['Itaxlv0rate']}">
+      </h:outputLabel>
+      <h:inputText id="b7xxzwvibv0xxxxxxxxxitaxlv0rate"  
+         value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b7xxzwvibv0xxxxxxxxxitaxlv0rate}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b7xxzwvibv0xxxxxxxxxitaxlv0rate}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b8xxzwvibv1xxxxxxxxxitaxlv1rateDecoration"    >
+        <h:outputLabel  for="b8xxzwvibv1xxxxxxxxxitaxlv1rate" value="#{messages['Itaxlv1rate']}">
+      </h:outputLabel>
+      <h:inputText id="b8xxzwvibv1xxxxxxxxxitaxlv1rate"  
+         value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b8xxzwvibv1xxxxxxxxxitaxlv1rate}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b8xxzwvibv1xxxxxxxxxitaxlv1rate}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b9xxzwvibv2xxxxxxxxxitaxlv2rateDecoration"    >
+        <h:outputLabel  for="b9xxzwvibv2xxxxxxxxxitaxlv2rate" value="#{messages['Itaxlv2rate']}">
+      </h:outputLabel>
+      <h:inputText id="b9xxzwvibv2xxxxxxxxxitaxlv2rate"  
+         value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b9xxzwvibv2xxxxxxxxxitaxlv2rate}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxih722xwwqqhxxxxxarthatblHome.instance.b9xxzwvibv2xxxxxxxxxitaxlv2rate}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y1xxzwvibv3xxxxxxxxxitaxlv3rateDecoration"  rendered="true">
+        <h:outputLabel  for="y1xxzwvibv3xxxxxxxxxitaxlv3rate" value="#{messages['Itaxlv3rate']}">
+      </h:outputLabel>
+      <h:inputText id="y1xxzwvibv3xxxxxxxxxitaxlv3rate"  
+         value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.y1xxzwvibv3xxxxxxxxxitaxlv3rate}"
+          onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xxxxih722xwwqqhxxxxxarthatblHome.instance.y1xxzwvibv3xxxxxxxxxitaxlv3rate}:this.value;"
+      size="21">
+     </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="2">
+
+            <h:panelGroup id="y2xxuznxbvxxxxxxxxxxnotesDecoration"  rendered="true">
+       <h:outputLabel  for="y2xxuznxbvxxxxxxxxxxnotesed" value="#{messages['Notes']}">
+      </h:outputLabel>
+         <h:panelGrid>
+                <pe:ckEditor id="y2xxuznxbvxxxxxxxxxxnotesed" height="50" width="100%"  value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.y2xxuznxbvxxxxxxxxxxnotes}"
+                 toolbar="[['NewPage','Preview','Cut','Copy','Image','Table','HorizontalRule','Iframe','Link','Unlink','Anchor','Paste','PasteText','PasteFromWord','-', 'Scayt'], '/',['Font','FontSize','Bold','Italic','Strike','-','RemoveFormat' ] ,[ 'TextColor','BGColor' ], ['Undo', 'Redo']]">
+                </pe:ckEditor>
+         </h:panelGrid>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z1xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z1xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="z1xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z2xxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="z2xxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.z2xxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z3xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z3xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="z3xxutoxlhxxxxxxxxxxowner" 
+                           size="20"
+                      maxlength="40"
+                          value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.z3xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="20"
+                      maxlength="40"
+                          value="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{xxxxih722xwwqqhxxxxxarthatblHome.instance.a0xxukwvbvtxxxxxxxxxusage} #{messages['sid']} #{xxxxih722xwwqqhxxxxxarthatblHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{xxxxih722xwwqqhxxxxxarthatblHome.instance.a0xxukwvbvtxxxxxxxxxusage !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{xxxxih722xwwqqhxxxxxarthatblHome.persist()}"
+                       disabled="#{!xxxxih722xwwqqhxxxxxarthatblHome.wired}"
+                       rendered="#{!xxxxih722xwwqqhxxxxxarthatblHome.managed  and !xxxxih722xwwqqhxxxxxarthatblHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{xxxxih722xwwqqhxxxxxarthatblHome.update()}"
+                       rendered="#{xxxxih722xwwqqhxxxxxarthatblHome.managed  and !xxxxih722xwwqqhxxxxxarthatblHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{xxxxih722xwwqqhxxxxxarthatblHome.update()}"
+                       rendered="#{xxxxih722xwwqqhxxxxxarthatblHome.managed and xxxxih722xwwqqhxxxxxarthatblHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{xxxxih722xwwqqhxxxxxarthatblHome.remove()}"
+                       rendered="#{xxxxih722xwwqqhxxxxxarthatblHome.managed and !xxxxih722xwwqqhxxxxxarthatblHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/arthatblEdit.xhtml"
+                       rendered="#{xxxxih722xwwqqhxxxxxarthatblHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{xxxxih722xwwqqhxxxxxarthatblHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{xxxxih722xwwqqhxxxxxarthatblHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{xxxxih722xwwqqhxxxxxarthatblList.reportName}"/>
+            <f:param name="displayAs" value="#{xxxxih722xwwqqhxxxxxarthatblList.displayAs}" /> 
+            <h:button outcome="/arthatblList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Arthatbl']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty xxxxih722xwwqqhxxxxxarthatblHome.xxxxih722xwwqqhxxxxxarthatblFrom ? 'home' : xxxxih722xwwqqhxxxxxarthatblHome.xxxxih722xwwqqhxxxxxarthatblFrom}.xhtml"
+                rendered="#{xxxxih722xwwqqhxxxxxarthatblHome.managed or xxxxih722xwwqqhxxxxxarthatblHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty xxxxih722xwwqqhxxxxxarthatblHome.xxxxih722xwwqqhxxxxxarthatblFrom ? 'home' : xxxxih722xwwqqhxxxxxarthatblHome.xxxxih722xwwqqhxxxxxarthatblFrom}.xhtml"
+                rendered="#{!xxxxih722xwwqqhxxxxxarthatblHome.managed and !xxxxih722xwwqqhxxxxxarthatblHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

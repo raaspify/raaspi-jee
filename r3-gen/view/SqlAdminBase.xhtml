@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      template="layout/rtemplate.xhtml">
+ 
+<ui:define name="body">
+    <h:form id="qflow" styleClass="edit">
+<!-- Not Generated but copied  -->
+<ui:remove>
+SqlAdmin Page
+Postgresql has a precreated default database named postgres, which we use.
+For initial app deployment manually create genapp schema (seam needs it) and create empty resource_bundle and resource (databaseResourceLoader
+needs them)
+DROP SCHEMA genapp cascade; (only if schema already exists and we dont want the data like in developmenmt)
+CREATE SCHEMA genapp AUTHORIZATION postgres;
+CREATE  TABLE IF NOT EXISTS  genapp.RESOURCE_BUNDLE (  SID SERIAL,NAME varchar(50),LANGUAGE varchar(2),COUNTRY varchar(2),VARIANT varchar(2),  STATUSFL  INT,  STATUSFLDT  TIMESTAMP,  OWNER  varchar(40),  OWNER2  varchar(40), PRIMARY  KEY(  SID));
+CREATE  TABLE IF NOT EXISTS  genapp.RESOURCE (  SID SERIAL, _KEY  varchar(50) ,  _VALUE varchar(2555),  RESOURCEBUNDLE  INT  not null,  STATUSFL  INT,  STATUSFLDT  TIMESTAMP,  OWNER  varchar(40),  OWNER2  varchar(40),  PRIMARY  KEY(  SID), FOREIGN  KEY  (  RESOURCEBUNDLE)  REFERENCES genapp.RESOURCE_BUNDLE  (  SID) );
+then
+create tables etc ie follow menu left to right in SqlAdminBase.xhtml ie raaspi.l3recommerce.com:8080/SqlAdminBase.wflow
+use SqlAdmin.xhtml once the site is up
+parameters passed: none
+popupPanels: 0
+create tables are used standalone but backup/restore used through logged in menue. create MockUp etc are used standalone to load system
+stock images and text and after create tables.
+todo:cannot login yet so cannot add page.xml to enforce login and add to menue. Either remove from ear or put some password
+note-sometimes like if database is empty and gets created from reveng.xml, numeric(14,2) becomes (14,0), create tables again via sqladmin
+</ui:remove>
+	<rich:toolbar height="26" itemSeparator="grid">
+	  <rich:toolbarGroup>
+        <h:button id="lbdone" image="./img/Homeblue16.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml" />
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup>
+              <h:button id="BackUp"  value="BackUp Data"  action="#{sqlAdminSupport.backupTenant()}" />
+	  </rich:toolbarGroup>
+
+	  <rich:toolbarGroup>
+              <h:button id="Restore"  value="Restore Data"  action="#{sqlAdminSupport.restoreTenant()}" />
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup>
+              <h:button id="CleanUp"  value="CleanUp Data"  action="#{sqlAdminSupport.cleanUpUnlinked()}" />
+	  </rich:toolbarGroup>
+	</rich:toolbar>
+
+	<rich:toolbar height="26" itemSeparator="grid">
+	  <rich:toolbarGroup>
+        <h:button id="lbdone2" image="./img/Homeblue16.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml" />
+	  </rich:toolbarGroup>
+
+	  <rich:toolbarGroup>
+              <h:commandButton id="Create"  value="Create Tables"  action="#{sqlAdminSupport.createTables()}" />
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup>
+              <h:commandButton id="MImages"  value="Create System Images_1"  action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.copyDefaultsToSYSTEM_1()}" />
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup>
+              <h:commandButton id="MImages2"  value="Create System Images_2"  action="#{yxxxuq1n1xwwqqqxxxxxblobdataHome.copyDefaultsToSYSTEM_2()}" />
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup>
+              <h:commandButton id="MMessages"  value="Create System Messages"  action="#{yxxxuq1r1xwwqqhxxxxxresourceHome.copyDefaultMessagesToSYSTEM()}" />
+	  </rich:toolbarGroup>
+	  <rich:toolbarGroup>
+              <h:commandButton id="Create_b"   value="Create Tables_b"  action="#{sqlAdminSupport.createTables_b()}" />
+              <h:commandButton id="Create_c"   value="Create Tables_c"  action="#{sqlAdminSupport.createTables_c()}" />
+	  </rich:toolbarGroup>
+	</rich:toolbar>
+    <h:messages globalOnly="false" styleClass="message" id="globalMessages"/>
+
+
+	    	
+
+
+  </h:form>
+
+
+</ui:define>
+
+</ui:composition>

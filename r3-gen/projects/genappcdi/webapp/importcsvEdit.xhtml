@@ -1,0 +1,1431 @@
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="yrxxch5b1xhhxxhxxxxximportcsvA0xxuobxbxxxxxxxxxxxsid" value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="yrxxch5b1xhhxxhxxxxximportcsvFrom" value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvFrom}"/>
+    <f:viewAction action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.restrict()}" />
+    <f:viewAction action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.wire()}" />
+
+
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Importcsv']}</ui:define>
+
+<ui:define name="body">
+<h:form id="yrxxch5b1xhhxxhxxxxximportcsv" styleClass="edit" enctype="multipart/form-data">
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+    <script>
+     window.onload = function(){
+      document.getElementById("yrxxch5b1xhhxxhxxxxximportcsv:itemquantityx1").value = "1.0";
+     }
+    </script>
+
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!yrxxch5b1xhhxxhxxxxximportcsvHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ImportcsvEditHelp']!='ImportcsvEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ImportcsvEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+      <ui:remove>
+       <h:messages globalOnly="true" style = "color:red;margin:8px;" styleClass="messageM" id="globalMessages"/>
+      </ui:remove>
+	</p:toolbar>
+
+        <p:panel>
+
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed ? 'Edit' : 'Add'} #{messages['Importcsv']}</f:facet>
+
+
+        <ui:remove>
+         <p:messages ajaxRendered="true"  />
+        </ui:remove>
+  <p:growl id="messages" showDetail="true" sticky="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</h:panelGrid>
+
+        <h:panelGrid columns="4">
+
+
+          <h:outputText value="" />
+
+
+
+
+
+
+                </h:panelGrid>
+               </p:panel>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{messages['Once']} #{messages['row']} #{messages['value']} #{messages['entered']}, #{messages['you']} #{messages['can']} #{messages['enter']} #{messages['column']} #{messages['values']} #{messages['below']} #{messages['and']} #{messages['save']}, #{messages['but']} #{messages['easier']} #{messages['option']} #{messages['is']} #{messages['to']} #{messages['save']} #{messages['rows']} #{messages['and']} #{messages['then']} #{messages['use']} #{messages['assign']} #{messages['column']} #{messages['link']} #{messages['in']} #{messages['List']} #{messages['Import']} #{messages['Csv']} 
+               <p:panel>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h:outputText value="#{messages['row']} #{messages['th']} #{messages['reserved']} #{messages['for']} #{messages['Table']} #{messages['column']} #{messages['names']} #{messages['for']} #{messages['mapping']}" />
+                <h:panelGrid columns="200">
+
+             <h:panelGroup id="a1xxuxhrbvoxxxxxxxxxtablenmDecoration"    >
+        <h:outputLabel  for="a1xxuxhrbvoxxxxxxxxxtablenm" value="#{messages['Tablenm']}">
+      </h:outputLabel>
+
+         <h:inputText id="a1xxuxhrbvoxxxxxxxxxtablenm" 
+                           size="8"
+                      maxlength="60"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.a1xxuxhrbvoxxxxxxxxxtablenm}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="a2xxukcxbvxxxxxxxxxxrowDecoration"    >
+        <h:outputLabel  for="a2xxukcxbvxxxxxxxxxxrow" value="#{messages['Row']}">
+      </h:outputLabel>
+
+         <h:inputText id="a2xxukcxbvxxxxxxxxxxrow" 
+           validator="#{yrxxch5b1xhhxxhxxxxximportcsvHome.validateKeyDuplicateRow}" 
+                       label="row"
+                        required="true"
+                           size="8"
+                      maxlength="2"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.a2xxukcxbvxxxxxxxxxxrow}">
+
+         </h:inputText>
+            <p:tooltip  target="a2xxukcxbvxxxxxxxxxxrow"> <span style="white-space: nowrap"> <h:outputText value="Enter Value here"/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b1xxuo01bvxxxxxxxxxxcolumn01Decoration"    >
+        <h:outputLabel  for="b1xxuo01bvxxxxxxxxxxcolumn01" value="#{messages['Column01']}">
+      </h:outputLabel>
+
+         <h:inputText id="b1xxuo01bvxxxxxxxxxxcolumn01" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.b1xxuo01bvxxxxxxxxxxcolumn01}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b4xxuo02bvxxxxxxxxxxcolumn02Decoration"    >
+        <h:outputLabel  for="b4xxuo02bvxxxxxxxxxxcolumn02" value="#{messages['Column02']}">
+      </h:outputLabel>
+
+         <h:inputText id="b4xxuo02bvxxxxxxxxxxcolumn02" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.b4xxuo02bvxxxxxxxxxxcolumn02}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="b7xxuo03bvxxxxxxxxxxcolumn03Decoration"    >
+        <h:outputLabel  for="b7xxuo03bvxxxxxxxxxxcolumn03" value="#{messages['Column03']}">
+      </h:outputLabel>
+
+         <h:inputText id="b7xxuo03bvxxxxxxxxxxcolumn03" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.b7xxuo03bvxxxxxxxxxxcolumn03}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c1xxuo04bvxxxxxxxxxxcolumn04Decoration"    >
+        <h:outputLabel  for="c1xxuo04bvxxxxxxxxxxcolumn04" value="#{messages['Column04']}">
+      </h:outputLabel>
+
+         <h:inputText id="c1xxuo04bvxxxxxxxxxxcolumn04" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.c1xxuo04bvxxxxxxxxxxcolumn04}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c4xxuo05bvxxxxxxxxxxcolumn05Decoration"    >
+        <h:outputLabel  for="c4xxuo05bvxxxxxxxxxxcolumn05" value="#{messages['Column05']}">
+      </h:outputLabel>
+
+         <h:inputText id="c4xxuo05bvxxxxxxxxxxcolumn05" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.c4xxuo05bvxxxxxxxxxxcolumn05}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="c7xxuo06bvxxxxxxxxxxcolumn06Decoration"    >
+        <h:outputLabel  for="c7xxuo06bvxxxxxxxxxxcolumn06" value="#{messages['Column06']}">
+      </h:outputLabel>
+
+         <h:inputText id="c7xxuo06bvxxxxxxxxxxcolumn06" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.c7xxuo06bvxxxxxxxxxxcolumn06}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="d1xxuo07bvxxxxxxxxxxcolumn07Decoration"    >
+        <h:outputLabel  for="d1xxuo07bvxxxxxxxxxxcolumn07" value="#{messages['Column07']}">
+      </h:outputLabel>
+
+         <h:inputText id="d1xxuo07bvxxxxxxxxxxcolumn07" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.d1xxuo07bvxxxxxxxxxxcolumn07}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="d4xxuo08bvxxxxxxxxxxcolumn08Decoration"    >
+        <h:outputLabel  for="d4xxuo08bvxxxxxxxxxxcolumn08" value="#{messages['Column08']}">
+      </h:outputLabel>
+
+         <h:inputText id="d4xxuo08bvxxxxxxxxxxcolumn08" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.d4xxuo08bvxxxxxxxxxxcolumn08}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="d7xxuo09bvxxxxxxxxxxcolumn09Decoration"    >
+        <h:outputLabel  for="d7xxuo09bvxxxxxxxxxxcolumn09" value="#{messages['Column09']}">
+      </h:outputLabel>
+
+         <h:inputText id="d7xxuo09bvxxxxxxxxxxcolumn09" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.d7xxuo09bvxxxxxxxxxxcolumn09}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="e1xxuo10bvxxxxxxxxxxcolumn10Decoration"    >
+        <h:outputLabel  for="e1xxuo10bvxxxxxxxxxxcolumn10" value="#{messages['Column10']}">
+      </h:outputLabel>
+
+         <h:inputText id="e1xxuo10bvxxxxxxxxxxcolumn10" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.e1xxuo10bvxxxxxxxxxxcolumn10}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="e4xxuo11bvxxxxxxxxxxcolumn11Decoration"    >
+        <h:outputLabel  for="e4xxuo11bvxxxxxxxxxxcolumn11" value="#{messages['Column11']}">
+      </h:outputLabel>
+
+         <h:inputText id="e4xxuo11bvxxxxxxxxxxcolumn11" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.e4xxuo11bvxxxxxxxxxxcolumn11}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="e7xxuo12bvxxxxxxxxxxcolumn12Decoration"    >
+        <h:outputLabel  for="e7xxuo12bvxxxxxxxxxxcolumn12" value="#{messages['Column12']}">
+      </h:outputLabel>
+
+         <h:inputText id="e7xxuo12bvxxxxxxxxxxcolumn12" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.e7xxuo12bvxxxxxxxxxxcolumn12}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f1xxuo13bvxxxxxxxxxxcolumn13Decoration"    >
+        <h:outputLabel  for="f1xxuo13bvxxxxxxxxxxcolumn13" value="#{messages['Column13']}">
+      </h:outputLabel>
+
+         <h:inputText id="f1xxuo13bvxxxxxxxxxxcolumn13" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.f1xxuo13bvxxxxxxxxxxcolumn13}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f4xxuo14bvxxxxxxxxxxcolumn14Decoration"    >
+        <h:outputLabel  for="f4xxuo14bvxxxxxxxxxxcolumn14" value="#{messages['Column14']}">
+      </h:outputLabel>
+
+         <h:inputText id="f4xxuo14bvxxxxxxxxxxcolumn14" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.f4xxuo14bvxxxxxxxxxxcolumn14}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="f7xxuo15bvxxxxxxxxxxcolumn15Decoration"    >
+        <h:outputLabel  for="f7xxuo15bvxxxxxxxxxxcolumn15" value="#{messages['Column15']}">
+      </h:outputLabel>
+
+         <h:inputText id="f7xxuo15bvxxxxxxxxxxcolumn15" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.f7xxuo15bvxxxxxxxxxxcolumn15}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="g1xxuo16bvxxxxxxxxxxcolumn16Decoration"    >
+        <h:outputLabel  for="g1xxuo16bvxxxxxxxxxxcolumn16" value="#{messages['Column16']}">
+      </h:outputLabel>
+
+         <h:inputText id="g1xxuo16bvxxxxxxxxxxcolumn16" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.g1xxuo16bvxxxxxxxxxxcolumn16}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="g4xxuo17bvxxxxxxxxxxcolumn17Decoration"    >
+        <h:outputLabel  for="g4xxuo17bvxxxxxxxxxxcolumn17" value="#{messages['Column17']}">
+      </h:outputLabel>
+
+         <h:inputText id="g4xxuo17bvxxxxxxxxxxcolumn17" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.g4xxuo17bvxxxxxxxxxxcolumn17}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="g7xxuo18bvxxxxxxxxxxcolumn18Decoration"    >
+        <h:outputLabel  for="g7xxuo18bvxxxxxxxxxxcolumn18" value="#{messages['Column18']}">
+      </h:outputLabel>
+
+         <h:inputText id="g7xxuo18bvxxxxxxxxxxcolumn18" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.g7xxuo18bvxxxxxxxxxxcolumn18}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="h1xxuo19bvxxxxxxxxxxcolumn19Decoration"    >
+        <h:outputLabel  for="h1xxuo19bvxxxxxxxxxxcolumn19" value="#{messages['Column19']}">
+      </h:outputLabel>
+
+         <h:inputText id="h1xxuo19bvxxxxxxxxxxcolumn19" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.h1xxuo19bvxxxxxxxxxxcolumn19}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="h4xxuo20bvxxxxxxxxxxcolumn20Decoration"    >
+        <h:outputLabel  for="h4xxuo20bvxxxxxxxxxxcolumn20" value="#{messages['Column20']}">
+      </h:outputLabel>
+
+         <h:inputText id="h4xxuo20bvxxxxxxxxxxcolumn20" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.h4xxuo20bvxxxxxxxxxxcolumn20}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="h7xxuo21bvxxxxxxxxxxcolumn21Decoration"    >
+        <h:outputLabel  for="h7xxuo21bvxxxxxxxxxxcolumn21" value="#{messages['Column21']}">
+      </h:outputLabel>
+
+         <h:inputText id="h7xxuo21bvxxxxxxxxxxcolumn21" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.h7xxuo21bvxxxxxxxxxxcolumn21}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="i1xxuo22bvxxxxxxxxxxcolumn22Decoration"    >
+        <h:outputLabel  for="i1xxuo22bvxxxxxxxxxxcolumn22" value="#{messages['Column22']}">
+      </h:outputLabel>
+
+         <h:inputText id="i1xxuo22bvxxxxxxxxxxcolumn22" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.i1xxuo22bvxxxxxxxxxxcolumn22}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="i4xxuo23bvxxxxxxxxxxcolumn23Decoration"    >
+        <h:outputLabel  for="i4xxuo23bvxxxxxxxxxxcolumn23" value="#{messages['Column23']}">
+      </h:outputLabel>
+
+         <h:inputText id="i4xxuo23bvxxxxxxxxxxcolumn23" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.i4xxuo23bvxxxxxxxxxxcolumn23}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="i7xxuo24bvxxxxxxxxxxcolumn24Decoration"    >
+        <h:outputLabel  for="i7xxuo24bvxxxxxxxxxxcolumn24" value="#{messages['Column24']}">
+      </h:outputLabel>
+
+         <h:inputText id="i7xxuo24bvxxxxxxxxxxcolumn24" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.i7xxuo24bvxxxxxxxxxxcolumn24}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="j1xxuo25bvxxxxxxxxxxcolumn25Decoration"    >
+        <h:outputLabel  for="j1xxuo25bvxxxxxxxxxxcolumn25" value="#{messages['Column25']}">
+      </h:outputLabel>
+
+         <h:inputText id="j1xxuo25bvxxxxxxxxxxcolumn25" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.j1xxuo25bvxxxxxxxxxxcolumn25}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="j4xxuo26bvxxxxxxxxxxcolumn26Decoration"    >
+        <h:outputLabel  for="j4xxuo26bvxxxxxxxxxxcolumn26" value="#{messages['Column26']}">
+      </h:outputLabel>
+
+         <h:inputText id="j4xxuo26bvxxxxxxxxxxcolumn26" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.j4xxuo26bvxxxxxxxxxxcolumn26}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="j7xxuo27bvxxxxxxxxxxcolumn27Decoration"    >
+        <h:outputLabel  for="j7xxuo27bvxxxxxxxxxxcolumn27" value="#{messages['Column27']}">
+      </h:outputLabel>
+
+         <h:inputText id="j7xxuo27bvxxxxxxxxxxcolumn27" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.j7xxuo27bvxxxxxxxxxxcolumn27}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="k1xxuo28bvxxxxxxxxxxcolumn28Decoration"    >
+        <h:outputLabel  for="k1xxuo28bvxxxxxxxxxxcolumn28" value="#{messages['Column28']}">
+      </h:outputLabel>
+
+         <h:inputText id="k1xxuo28bvxxxxxxxxxxcolumn28" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.k1xxuo28bvxxxxxxxxxxcolumn28}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="k4xxuo29bvxxxxxxxxxxcolumn29Decoration"    >
+        <h:outputLabel  for="k4xxuo29bvxxxxxxxxxxcolumn29" value="#{messages['Column29']}">
+      </h:outputLabel>
+
+         <h:inputText id="k4xxuo29bvxxxxxxxxxxcolumn29" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.k4xxuo29bvxxxxxxxxxxcolumn29}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="k7xxuo30bvxxxxxxxxxxcolumn30Decoration"    >
+        <h:outputLabel  for="k7xxuo30bvxxxxxxxxxxcolumn30" value="#{messages['Column30']}">
+      </h:outputLabel>
+
+         <h:inputText id="k7xxuo30bvxxxxxxxxxxcolumn30" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.k7xxuo30bvxxxxxxxxxxcolumn30}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="l1xxuo31bvxxxxxxxxxxcolumn31Decoration"    >
+        <h:outputLabel  for="l1xxuo31bvxxxxxxxxxxcolumn31" value="#{messages['Column31']}">
+      </h:outputLabel>
+
+         <h:inputText id="l1xxuo31bvxxxxxxxxxxcolumn31" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.l1xxuo31bvxxxxxxxxxxcolumn31}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="l4xxuo32bvxxxxxxxxxxcolumn32Decoration"    >
+        <h:outputLabel  for="l4xxuo32bvxxxxxxxxxxcolumn32" value="#{messages['Column32']}">
+      </h:outputLabel>
+
+         <h:inputText id="l4xxuo32bvxxxxxxxxxxcolumn32" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.l4xxuo32bvxxxxxxxxxxcolumn32}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="l7xxuo33bvxxxxxxxxxxcolumn33Decoration"    >
+        <h:outputLabel  for="l7xxuo33bvxxxxxxxxxxcolumn33" value="#{messages['Column33']}">
+      </h:outputLabel>
+
+         <h:inputText id="l7xxuo33bvxxxxxxxxxxcolumn33" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.l7xxuo33bvxxxxxxxxxxcolumn33}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="m1xxuo34bvxxxxxxxxxxcolumn34Decoration"    >
+        <h:outputLabel  for="m1xxuo34bvxxxxxxxxxxcolumn34" value="#{messages['Column34']}">
+      </h:outputLabel>
+
+         <h:inputText id="m1xxuo34bvxxxxxxxxxxcolumn34" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.m1xxuo34bvxxxxxxxxxxcolumn34}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="m4xxuo35bvxxxxxxxxxxcolumn35Decoration"    >
+        <h:outputLabel  for="m4xxuo35bvxxxxxxxxxxcolumn35" value="#{messages['Column35']}">
+      </h:outputLabel>
+
+         <h:inputText id="m4xxuo35bvxxxxxxxxxxcolumn35" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.m4xxuo35bvxxxxxxxxxxcolumn35}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="m7xxuo36bvxxxxxxxxxxcolumn36Decoration"    >
+        <h:outputLabel  for="m7xxuo36bvxxxxxxxxxxcolumn36" value="#{messages['Column36']}">
+      </h:outputLabel>
+
+         <h:inputText id="m7xxuo36bvxxxxxxxxxxcolumn36" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.m7xxuo36bvxxxxxxxxxxcolumn36}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="n1xxuo37bvxxxxxxxxxxcolumn37Decoration"    >
+        <h:outputLabel  for="n1xxuo37bvxxxxxxxxxxcolumn37" value="#{messages['Column37']}">
+      </h:outputLabel>
+
+         <h:inputText id="n1xxuo37bvxxxxxxxxxxcolumn37" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.n1xxuo37bvxxxxxxxxxxcolumn37}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="n4xxuo38bvxxxxxxxxxxcolumn38Decoration"    >
+        <h:outputLabel  for="n4xxuo38bvxxxxxxxxxxcolumn38" value="#{messages['Column38']}">
+      </h:outputLabel>
+
+         <h:inputText id="n4xxuo38bvxxxxxxxxxxcolumn38" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.n4xxuo38bvxxxxxxxxxxcolumn38}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="n7xxuo39bvxxxxxxxxxxcolumn39Decoration"    >
+        <h:outputLabel  for="n7xxuo39bvxxxxxxxxxxcolumn39" value="#{messages['Column39']}">
+      </h:outputLabel>
+
+         <h:inputText id="n7xxuo39bvxxxxxxxxxxcolumn39" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.n7xxuo39bvxxxxxxxxxxcolumn39}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="o1xxuo40bvxxxxxxxxxxcolumn40Decoration"    >
+        <h:outputLabel  for="o1xxuo40bvxxxxxxxxxxcolumn40" value="#{messages['Column40']}">
+      </h:outputLabel>
+
+         <h:inputText id="o1xxuo40bvxxxxxxxxxxcolumn40" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.o1xxuo40bvxxxxxxxxxxcolumn40}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="o4xxuo41bvxxxxxxxxxxcolumn41Decoration"    >
+        <h:outputLabel  for="o4xxuo41bvxxxxxxxxxxcolumn41" value="#{messages['Column41']}">
+      </h:outputLabel>
+
+         <h:inputText id="o4xxuo41bvxxxxxxxxxxcolumn41" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.o4xxuo41bvxxxxxxxxxxcolumn41}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="o7xxuo42bvxxxxxxxxxxcolumn42Decoration"    >
+        <h:outputLabel  for="o7xxuo42bvxxxxxxxxxxcolumn42" value="#{messages['Column42']}">
+      </h:outputLabel>
+
+         <h:inputText id="o7xxuo42bvxxxxxxxxxxcolumn42" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.o7xxuo42bvxxxxxxxxxxcolumn42}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="p1xxuo43bvxxxxxxxxxxcolumn43Decoration"    >
+        <h:outputLabel  for="p1xxuo43bvxxxxxxxxxxcolumn43" value="#{messages['Column43']}">
+      </h:outputLabel>
+
+         <h:inputText id="p1xxuo43bvxxxxxxxxxxcolumn43" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.p1xxuo43bvxxxxxxxxxxcolumn43}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="p4xxuo44bvxxxxxxxxxxcolumn44Decoration"    >
+        <h:outputLabel  for="p4xxuo44bvxxxxxxxxxxcolumn44" value="#{messages['Column44']}">
+      </h:outputLabel>
+
+         <h:inputText id="p4xxuo44bvxxxxxxxxxxcolumn44" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.p4xxuo44bvxxxxxxxxxxcolumn44}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="p7xxuo45bvxxxxxxxxxxcolumn45Decoration"    >
+        <h:outputLabel  for="p7xxuo45bvxxxxxxxxxxcolumn45" value="#{messages['Column45']}">
+      </h:outputLabel>
+
+         <h:inputText id="p7xxuo45bvxxxxxxxxxxcolumn45" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.p7xxuo45bvxxxxxxxxxxcolumn45}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="q1xxuo46bvxxxxxxxxxxcolumn46Decoration"    >
+        <h:outputLabel  for="q1xxuo46bvxxxxxxxxxxcolumn46" value="#{messages['Column46']}">
+      </h:outputLabel>
+
+         <h:inputText id="q1xxuo46bvxxxxxxxxxxcolumn46" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.q1xxuo46bvxxxxxxxxxxcolumn46}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="q4xxuo47bvxxxxxxxxxxcolumn47Decoration"    >
+        <h:outputLabel  for="q4xxuo47bvxxxxxxxxxxcolumn47" value="#{messages['Column47']}">
+      </h:outputLabel>
+
+         <h:inputText id="q4xxuo47bvxxxxxxxxxxcolumn47" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.q4xxuo47bvxxxxxxxxxxcolumn47}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="q7xxuo48bvxxxxxxxxxxcolumn48Decoration"    >
+        <h:outputLabel  for="q7xxuo48bvxxxxxxxxxxcolumn48" value="#{messages['Column48']}">
+      </h:outputLabel>
+
+         <h:inputText id="q7xxuo48bvxxxxxxxxxxcolumn48" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.q7xxuo48bvxxxxxxxxxxcolumn48}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="r1xxuo49bvxxxxxxxxxxcolumn49Decoration"    >
+        <h:outputLabel  for="r1xxuo49bvxxxxxxxxxxcolumn49" value="#{messages['Column49']}">
+      </h:outputLabel>
+
+         <h:inputText id="r1xxuo49bvxxxxxxxxxxcolumn49" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.r1xxuo49bvxxxxxxxxxxcolumn49}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="r4xxuo50bvxxxxxxxxxxcolumn50Decoration"    >
+        <h:outputLabel  for="r4xxuo50bvxxxxxxxxxxcolumn50" value="#{messages['Column50']}">
+      </h:outputLabel>
+
+         <h:inputText id="r4xxuo50bvxxxxxxxxxxcolumn50" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.r4xxuo50bvxxxxxxxxxxcolumn50}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="r7xxuo51bvxxxxxxxxxxcolumn51Decoration"    >
+        <h:outputLabel  for="r7xxuo51bvxxxxxxxxxxcolumn51" value="#{messages['Column51']}">
+      </h:outputLabel>
+
+         <h:inputText id="r7xxuo51bvxxxxxxxxxxcolumn51" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.r7xxuo51bvxxxxxxxxxxcolumn51}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="s1xxuo52bvxxxxxxxxxxcolumn52Decoration"    >
+        <h:outputLabel  for="s1xxuo52bvxxxxxxxxxxcolumn52" value="#{messages['Column52']}">
+      </h:outputLabel>
+
+         <h:inputText id="s1xxuo52bvxxxxxxxxxxcolumn52" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.s1xxuo52bvxxxxxxxxxxcolumn52}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="s4xxuo53bvxxxxxxxxxxcolumn53Decoration"    >
+        <h:outputLabel  for="s4xxuo53bvxxxxxxxxxxcolumn53" value="#{messages['Column53']}">
+      </h:outputLabel>
+
+         <h:inputText id="s4xxuo53bvxxxxxxxxxxcolumn53" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.s4xxuo53bvxxxxxxxxxxcolumn53}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="s7xxuo54bvxxxxxxxxxxcolumn54Decoration"    >
+        <h:outputLabel  for="s7xxuo54bvxxxxxxxxxxcolumn54" value="#{messages['Column54']}">
+      </h:outputLabel>
+
+         <h:inputText id="s7xxuo54bvxxxxxxxxxxcolumn54" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.s7xxuo54bvxxxxxxxxxxcolumn54}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="t1xxuo55bvxxxxxxxxxxcolumn55Decoration"    >
+        <h:outputLabel  for="t1xxuo55bvxxxxxxxxxxcolumn55" value="#{messages['Column55']}">
+      </h:outputLabel>
+
+         <h:inputText id="t1xxuo55bvxxxxxxxxxxcolumn55" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.t1xxuo55bvxxxxxxxxxxcolumn55}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="t4xxuo56bvxxxxxxxxxxcolumn56Decoration"    >
+        <h:outputLabel  for="t4xxuo56bvxxxxxxxxxxcolumn56" value="#{messages['Column56']}">
+      </h:outputLabel>
+
+         <h:inputText id="t4xxuo56bvxxxxxxxxxxcolumn56" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.t4xxuo56bvxxxxxxxxxxcolumn56}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="t7xxuo57bvxxxxxxxxxxcolumn57Decoration"    >
+        <h:outputLabel  for="t7xxuo57bvxxxxxxxxxxcolumn57" value="#{messages['Column57']}">
+      </h:outputLabel>
+
+         <h:inputText id="t7xxuo57bvxxxxxxxxxxcolumn57" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.t7xxuo57bvxxxxxxxxxxcolumn57}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="u1xxuo58bvxxxxxxxxxxcolumn58Decoration"    >
+        <h:outputLabel  for="u1xxuo58bvxxxxxxxxxxcolumn58" value="#{messages['Column58']}">
+      </h:outputLabel>
+
+         <h:inputText id="u1xxuo58bvxxxxxxxxxxcolumn58" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.u1xxuo58bvxxxxxxxxxxcolumn58}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="u4xxuo59bvxxxxxxxxxxcolumn59Decoration"    >
+        <h:outputLabel  for="u4xxuo59bvxxxxxxxxxxcolumn59" value="#{messages['Column59']}">
+      </h:outputLabel>
+
+         <h:inputText id="u4xxuo59bvxxxxxxxxxxcolumn59" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.u4xxuo59bvxxxxxxxxxxcolumn59}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="u7xxuo60bvxxxxxxxxxxcolumn60Decoration"    >
+        <h:outputLabel  for="u7xxuo60bvxxxxxxxxxxcolumn60" value="#{messages['Column60']}">
+      </h:outputLabel>
+
+         <h:inputText id="u7xxuo60bvxxxxxxxxxxcolumn60" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.u7xxuo60bvxxxxxxxxxxcolumn60}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="v1xxuo61bvxxxxxxxxxxcolumn61Decoration"    >
+        <h:outputLabel  for="v1xxuo61bvxxxxxxxxxxcolumn61" value="#{messages['Column61']}">
+      </h:outputLabel>
+
+         <h:inputText id="v1xxuo61bvxxxxxxxxxxcolumn61" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.v1xxuo61bvxxxxxxxxxxcolumn61}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="v4xxuo62bvxxxxxxxxxxcolumn62Decoration"    >
+        <h:outputLabel  for="v4xxuo62bvxxxxxxxxxxcolumn62" value="#{messages['Column62']}">
+      </h:outputLabel>
+
+         <h:inputText id="v4xxuo62bvxxxxxxxxxxcolumn62" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.v4xxuo62bvxxxxxxxxxxcolumn62}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="v7xxuo63bvxxxxxxxxxxcolumn63Decoration"    >
+        <h:outputLabel  for="v7xxuo63bvxxxxxxxxxxcolumn63" value="#{messages['Column63']}">
+      </h:outputLabel>
+
+         <h:inputText id="v7xxuo63bvxxxxxxxxxxcolumn63" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.v7xxuo63bvxxxxxxxxxxcolumn63}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="w1xxuo64bvxxxxxxxxxxcolumn64Decoration"    >
+        <h:outputLabel  for="w1xxuo64bvxxxxxxxxxxcolumn64" value="#{messages['Column64']}">
+      </h:outputLabel>
+
+         <h:inputText id="w1xxuo64bvxxxxxxxxxxcolumn64" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.w1xxuo64bvxxxxxxxxxxcolumn64}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+             <h:panelGroup id="w4xxuo65bvxxxxxxxxxxcolumn65Decoration"    >
+        <h:outputLabel  for="w4xxuo65bvxxxxxxxxxxcolumn65" value="#{messages['Column65']}">
+      </h:outputLabel>
+
+         <h:inputText id="w4xxuo65bvxxxxxxxxxxcolumn65" 
+                           size="8"
+                      maxlength="159"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.w4xxuo65bvxxxxxxxxxxcolumn65}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+   <h:panelGrid columns="4">
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="y9xxuznxbvxxxxxxxxxxnotesDecoration"  rendered="true">
+       <h:outputLabel  for="y9xxuznxbvxxxxxxxxxxnotesed" value="#{messages['Notes']}">
+      </h:outputLabel>
+         <h:panelGrid>
+         <pe:ckEditor id="y9xxuznxbvxxxxxxxxxxnotesed" height="50" width="250"  value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.y9xxuznxbvxxxxxxxxxxnotes}"
+                 toolbar="[['NewPage','Preview','Cut','Copy','Image','Table','HorizontalRule','Iframe','Link','Unlink','Anchor','Paste','PasteText','PasteFromWord','-', 'Scayt'], '/',['Font','FontSize','Bold','Italic','Strike','-','RemoveFormat' ] ,[ 'TextColor','BGColor' ], ['Undo', 'Redo']]">
+         </pe:ckEditor>
+         </h:panelGrid>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="z1xxzzfxhhxxxxxxxxxxstatusflDecoration"  rendered="#{customIdentity.hasRole('EH')}">
+        <h:outputLabel  for="z1xxzzfxhhxxxxxxxxxxstatusfl" value="#{messages['Statusfl']}">
+      </h:outputLabel>
+                <h:inputText id="z1xxzzfxhhxxxxxxxxxxstatusfl" 
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl}"
+                           size="21">
+                </h:inputText>
+            </h:panelGroup>
+
+
+                </h:panelGrid>
+              <h:panelGrid columns="1">
+
+            <h:panelGroup id="z2xxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z2xxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+      </h:outputLabel>
+     <p:datePicker id="z2xxcztxlxxxxxxxxxxxstatusfldt" 
+
+                          showTime="true" value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.z2xxcztxlxxxxxxxxxxxstatusfldt}" >
+                </p:datePicker>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="4">
+
+            <h:panelGroup id="z3xxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="z3xxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+      </h:outputLabel>
+
+         <h:inputText id="z3xxutoxlhxxxxxxxxxxowner" 
+                           size="8"
+                      maxlength="40"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.z3xxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+            </h:panelGroup>
+
+
+              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
+                switch back to 8 or 2 columns depending on where it came from  -->
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+        <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+      </h:outputLabel>
+
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+                           size="8"
+                      maxlength="40"
+                          value="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+            </h:panelGroup>
+   </h:panelGrid>
+   </p:panel>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                #{messages['required']} #{messages['fields']} 
+            </div>
+             <h:outputText value="#{messages['Key']} #{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.a2xxukcxbvxxxxxxxxxxrow} #{messages['sid']} #{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.a0xxuobxbxxxxxxxxxxxsid}" 
+               rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.instance.a2xxukcxbvxxxxxxxxxxrow !=''}"/> 
+
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail,  added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.persist()}"
+                       disabled="#{!yrxxch5b1xhhxxhxxxxximportcsvHome.wired}"
+                       rendered="#{!yrxxch5b1xhhxxhxxxxximportcsvHome.managed  and !yrxxch5b1xhhxxhxxxxximportcsvHome.entityDeleted and !customIdentity.hasRole('PH')}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.update()}"
+                       rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed  and !yrxxch5b1xhhxxhxxxxximportcsvHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.update()}"
+                       rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed and yrxxch5b1xhhxxhxxxxximportcsvHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.remove()}"
+                       rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed and !yrxxch5b1xhhxxhxxxxximportcsvHome.entityDeleted}"/>
+
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/importcsvEdit.xhtml"
+                       rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed}"/>
+                 
+
+            <p:hotkey  action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{yrxxch5b1xhhxxhxxxxximportcsvHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{yrxxch5b1xhhxxhxxxxximportcsvList.reportName}"/>
+            <f:param name="displayAs" value="#{yrxxch5b1xhhxxhxxxxximportcsvList.displayAs}" /> 
+            <h:button outcome="/importcsvList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Importcsv']}">
+            </h:button>  
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvFrom ? 'home' : yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvFrom}.xhtml"
+                rendered="#{yrxxch5b1xhhxxhxxxxximportcsvHome.managed or yrxxch5b1xhhxxhxxxxximportcsvHome.entityDeleted}"/>
+
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvFrom ? 'home' : yrxxch5b1xhhxxhxxxxximportcsvHome.yrxxch5b1xhhxxhxxxxximportcsvFrom}.xhtml"
+                rendered="#{!yrxxch5b1xhhxxhxxxxximportcsvHome.managed and !yrxxch5b1xhhxxhxxxxximportcsvHome.entityDeleted}"/>
+
+
+
+
+
+
+
+
+</div>
+</p:panel>
+      <ui:remove>
+       <p:messages ajaxRendered="true"  />
+      </ui:remove>
+
+
+<p:panel>
+
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+

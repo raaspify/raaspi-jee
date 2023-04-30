@@ -1,0 +1,59 @@
+        <subsystem xmlns="urn:jboss:domain:datasources:4.0">
+            <datasources>
+                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
+                    <driver>h2</driver>
+                    <security>
+                        <user-name>sa</user-name>
+                        <password>sa</password>
+                    </security>
+                </datasource>
+                <!-- 
+                <datasource jndi-name="java:jboss/datasources/RaaspiSQLDS" pool-name="RaaspiSQLDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:hsqldb:file:./data/h</connection-url>
+                    <driver>org.hsqldb.jdbcDriver</driver>
+                    <security>
+                        <user-name>sa</user-name>
+                        <password></password>
+                    </security>
+                </datasource>
+
+                -->
+                <!--                 -->
+                <datasource jta="true" jndi-name="java:/RaaspiSQLDS" pool-name="RaaspiSQLDS" enabled="true" use-ccm="true" statistics-enabled="true">
+                    <connection-url>jdbc:postgresql://localhost:5433/postgres</connection-url>
+                    <driver-class>org.postgresql.Driver</driver-class>
+                    <driver>postgresql-42.2.1.jar</driver>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>100</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>postgres</user-name>
+                        <password>poknife001</password>
+                    </security>
+                    <validation>
+                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker"/>
+                        <background-validation>true</background-validation>
+                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter"/>
+                    </validation>
+                    <timeout>
+                        <idle-timeout-minutes>1</idle-timeout-minutes>
+                    </timeout>
+                </datasource>
+                <drivers>
+                    <driver name="h2" module="com.h2database.h2">
+                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+                    </driver>
+                <!--    
+                    <driver name="hsqldb" module="org.hsqldb.jdbcDriver">
+                    </driver>
+
+                -->
+                    <driver name="postgresql" module="org.postgresql.Driver">
+                        <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
+                    </driver>
+                </drivers>
+            </datasources>
+        </subsystem>

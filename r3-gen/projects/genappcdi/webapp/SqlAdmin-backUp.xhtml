@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="layout/rtemplate.xhtml">
+<f:metadata>
+    <f:viewAction action="#{yxxxch601xwwqqhxxxxxaccountHome.restrict()}" />
+</f:metadata>
+ 
+<ui:define name="body">
+    <h:form id="qflow" styleClass="edit">
+	<p:toolbar height="26" itemSeparator="grid">
+<!-- Not Generated but copied  
+SqlAdmin Page
+For initial app deployment manually create genapp schema (seam needs it) and create empty resource_bundle and resource (databaseResourceLoader
+needs them)
+parameters passed: none
+popupPanels: 0
+create tables are used standalone but backup/restore used through logged in menue. create MockUp etc are used standalone to load system
+stock images and text and after create tables.
+todo:add page.xml to enforce login and add to menue
+-->
+	  <p:toolbarGroup>
+        <h:button id="lbdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+
+
+	</p:toolbar>
+        <p:panel>
+              <h:outputText  value="#{messages['last']} #{messages['backup']} #{messages['date']} #{sqlAdminSupport.lastBupDate}" 
+               rendered="#{sqlAdminSupport.lastBupDate ne null}"/>
+              <h:outputText  value=" (#{messages['gmt']} #{messages['time']} #{messages['yy-mm-ddhhmm']})" rendered="#{sqlAdminSupport.lastBupDate ne null}"/>
+
+              <br></br>
+              <h:commandButton id="BackUp"  value="BackUp Data (Changes Only)"  action="#{sqlAdminSupport.backupTenant()}" />
+              <h:outputText  value="#{messages['faster']}, #{messages['copies']} #{messages['changed']} #{messages['records']} #{messages['only']}" 
+               rendered="#{sqlAdminSupport.lastBupDate ne null}"/>
+              <br></br>
+              <h:commandButton id="FbackUp"  value="BackUp Data (All)"  action="#{sqlAdminSupport.fullBackupTenant()}" />
+              <h:outputText  value="#{messages['copies']} #{messages['all']} #{messages['records']}, #{messages['use']}, #{messages['if']} #{messages['changed']} #{messages['only']} #{messages['fails']}" 
+               rendered="#{sqlAdminSupport.lastBupDate ne null}"/>
+
+              <br></br><br></br><br></br>
+              &nbsp;<h:outputText  value="#{messages['last']} #{messages['system']} #{messages['taken']} #{messages['daily']} #{messages['backup']} #{messages['date']} #{sqlAdminSupport.systemLastBupDate}" 
+               rendered="#{sqlAdminSupport.systemLastBupDate ne null}"/>
+
+              <br></br><br></br><br></br>
+              &nbsp;<h:outputText  value="#{messages['if']} #{messages['any']} #{messages['error']} #{messages['including']} #{messages['constrain']} #{messages['violation']}, #{messages['may']} #{messages['need']} #{messages['to']} #{messages['delete']} / #{messages['correct']} #{messages['some']} #{messages['records']} #{messages['and']} #{messages['try']} #{messages['again']} " 
+               rendered="#{sqlAdminSupport.systemLastBupDate ne null}"/>
+              <br></br><br></br><br></br>
+              <h:commandButton value="#{messages['RestoreData']}"
+                rendered="#{(customIdentity.hasRole('UH')) }"
+		action="/SqlAdmin-restore.xhtml?faces-redirect=true" icon="/img/Clobdata16.png">
+	     </h:commandButton>
+             &nbsp;&nbsp;<h:button value="#{messages['Done']} "  outcome="/home.xhtml" />
+
+
+
+        </p:panel>
+
+	    	
+    <h:messages globalOnly="false" styleClass="message" id="globalMessages"/>
+    <ui:remove>cannot delete because of constrain. It seems might as well use backup table, put client/confug table
+     in closed ie status 8. Make changes and if nededed restore
+    <hr></hr><hr></hr>
+             <h4>#{messages['Select']} #{messages['Table']}</h4>
+             <h:panelGrid columns="2">
+             <h:selectOneMenu  value="#{yxxxch5a1xhhxxhxxxxxtruefalseList.selectedClass}" 
+              rendered="true">
+	      <f:selectItems value="#{yxxxch5a1xhhxxhxxxxxtruefalseList.getClassNames('all')}"   /> 
+             </h:selectOneMenu>
+             </h:panelGrid>
+
+              <h:commandButton id="BackUpTbl"  value="BackUp Table"  action="#{sqlSupport.backupTable(yxxxch5a1xhhxxhxxxxxtruefalseList.selectedClass)}" />
+              <h:outputText  value="#{messages['Only']} #{messages['Selected']} #{messages['Table']} #{messages['records']} #{messages['affected']}" 
+               rendered="true"/>
+              <br></br>
+              <h:commandButton value="#{messages['Restore Table']}"
+                rendered="#{(customIdentity.hasRole('UH')) }"
+		action="#{sqlSupport.restoreTable(yxxxch5a1xhhxxhxxxxxtruefalseList.selectedClass)}">
+	     </h:commandButton>
+
+    </ui:remove>
+
+
+  </h:form>
+
+
+</ui:define>
+
+</ui:composition>

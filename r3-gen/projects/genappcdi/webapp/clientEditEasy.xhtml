@@ -1,0 +1,1114 @@
+
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="layout/rtemplate.xhtml">
+   <ui:remove>s:defaultAction removed, eqv p:defaultCommand
+     s:hasRole removed replaced w true look into calling a method
+     instead of page.xml use f:template,f:viewparam
+   </ui:remove>
+<f:metadata>
+    <f:viewParam name="yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid}"/>
+    <f:viewParam name="yxxxch522xhhxxhxxxxxclientFrom" value="#{yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientFrom}"/>
+    <f:viewAction action="#{yxxxch522xhhxxhxxxxxclientHome.restrict()}" />
+    <f:viewAction action="#{yxxxch522xhhxxhxxxxxclientHome.wire()}" />
+</f:metadata>
+<ui:define name="title">#{customIdentity.owner2} webpage to add new #{messages['Client']} or edit easy way</ui:define>
+
+<ui:define name="body">
+<h:form id="yxxxch522xhhxxhxxxxxclient" styleClass="edit">
+<h:outputStylesheet>
+
+</h:outputStylesheet>
+    <script type="text/javascript" src="./js/eval.js"></script>
+    <script type="text/javascript" src="./js/fillValue.js"></script>
+    <script type="text/javascript"> var jay='#{messages['Continue_with_zero_amount']}';var jay2='#{messages['use_offsetting_entry_button_first']}';</script>
+    <script>
+     function goBack(n) {
+     window.history.go(n);return false;
+     }
+    </script>
+	<p:toolbar height="26" itemSeparator="grid">
+	  <p:toolbarGroup>
+              <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!yxxxch522xhhxxhxxxxxclientHome.managed}" outcome="/home.xhtml" />
+	  </p:toolbarGroup>
+	  <p:toolbarGroup>
+              <h:button id="tdoneh" image="./img/home_24.png"  alt="Home" value="Home" propagation="end"  rendered="#{yxxxch522xhhxxhxxxxxclientHome.managed}" outcome="/home.xhtml" />
+              <h:outputText value="#{messages['Change']} #{messages['done']}-#{yxxxch522xhhxxhxxxxxclientHome.getCurrentTime()}"
+                style="color:green;"
+                rendered="#{yxxxch522xhhxxhxxxxxclientHome.changeDone}">
+               <f:convertDateTime   type="time" />
+              </h:outputText>
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+              <h:outputText value="#{customIdentity.username}"/> 
+              <h:outputText value="#{authenticator.currcaldates}"/> 
+	  </p:toolbarGroup>
+	  <p:toolbarGroup location="right">
+		   <h:graphicImage id="Helpt" value="/img/help.gif" styleClass="pic" rendered="#{messages['ClientEditHelp']!='ClientEditHelp'}">
+             <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ClientEditHelp']}"/></span> </p:tooltip> 
+             </h:graphicImage>
+	  </p:toolbarGroup>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
+	</p:toolbar>
+
+        <p:panel>
+             <h:outputText value="#{messages['To']} #{messages['edit']} #{messages['un-common']} #{messages['fields']} #{messages['please']} #{messages['use']} #{messages['the']} #{messages['full']} #{messages['link']} " rendered="true"/> 
+              &nbsp;&nbsp;<h:link id="config" styleClass="buttonMain"
+               outcome="/clientEdit.xhtml" rendered="#{customIdentity.hasRole('UH') or customIdentity.hasRole('UQ') }"
+               style="font-size: x-large;color:blue;" value="#{messages.Full} #{messages.configur} / #{messages.setup}">
+                <f:param name="yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid"
+                        value="#{yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid==null?0:yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid}"/>
+              </h:link>
+
+        <h:panelGrid columns="2">
+            <f:facet name="header">#{messages['Easy']} #{yxxxch522xhhxxhxxxxxclientHome.managed ? 'Edit' : 'Add'} #{messages['for']}</f:facet>
+            <h:outputText style="color:blue;" value="#{messages['configure']} #{messages['Paypal']} #{messages['payment']} #{messages['integration']} / #{messages['Outgoing']} #{messages['Email']} and #{messages['Others']}" rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='01'}"/> 
+            <h:outputText style="color:blue;" value="#{messages['configure']} #{messages['Shopify']} #{messages['integration']}, #{messages['Id']} and #{messages['secret']} " rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='02'}"/> 
+            <h:outputText style="color:blue;" value="#{messages['configure']} #{messages['Square']} #{messages['payment']} #{messages['integration']} , #{messages['Id']} and #{messages['secret']}, #{messages['Chrome']} #{messages['browser']} #{messages['needed']}" rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='03'}"/> 
+            <h:outputText style="color:blue;" value="#{messages['configure']} #{messages['Stripe']} #{messages['payment']} #{messages['integration']} , #{messages['Id']} and #{messages['secret']}" rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='04'}"/> 
+            <h:outputText style="color:blue;" value="#{messages['configure']} #{messages['Google']} #{messages['Mail']} #{messages['Server']} #{messages['integration']} , #{messages['by']} #{messages['clicking']} #{messages['Allow']} #{messages[customIdentity.masterSiteCode]} #{messages['to']} #{messages['setup']} #{messages['Gmail']} #{messages['SMTP']}" rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='07' and !customIdentity.masterSite}"/> 
+            <h:outputText style="color:blue;" value="#{messages['configure']} #{messages['Google']} #{messages['Mail']} #{messages['Server']} #{messages['integration']} , #{messages['by']} #{messages['entering']} #{messages['or']} #{messages['ensuring']} #{messages['valid']} #{messages['Id']} / #{messages['secret']} " rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='07' and customIdentity.masterSite}"/> 
+            <br></br><h:outputText style="color:blue;" value="#{messages['Once']} #{messages['you']} #{messages['see']} #{messages['new']} #{messages['Client']} #{messages['Edit']} #{messages['Page']}, #{messages['Exit']}. #{messages['Manage']} #{messages[customIdentity.masterSiteCode]} #{messages['Api']} #{messages['access']} #{messages['should']} #{messages['be']} #{messages['used']} #{messages['rarely']}, #{messages['if']} #{messages['needed']}" rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='07' and !customIdentity.masterSite}"/> 
+            &nbsp;&nbsp;<h:outputText style="color:red;" value="#{messages['confidential']} #{messages['fields']} #{messages['are']} #{messages['shown']} #{messages['to']} #{messages['Admin']}/#{messages['Manager']} #{messages['only']}" /> 
+
+         <p:messages ajaxRendered="true"  />
+
+
+
+
+
+
+
+</h:panelGrid>
+        <h:panelGrid columns="6">
+
+
+          <h:outputText value="" />
+
+            <h:panelGroup id="a0xxukxxbvxxxxxxxxxxclientversionDecoration"    >
+       <h:outputLabel  for="a0xxukxxbvxxxxxxxxxxclientversion" value="#{messages['Clientversion']}">
+
+      </h:outputLabel>
+         <h:inputText id="a0xxukxxbvxxxxxxxxxxclientversion" 
+           validator="#{yxxxch522xhhxxhxxxxxclientHome.validateKeyDuplicateClientversion}" 
+
+                       label="clientversion"
+                        required="true"
+                           size="20"
+                      maxlength="5"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion}">
+
+         </h:inputText>
+
+            <p:tooltip  for="a0xxukxxbvxxxxxxxxxxclientversion"> <span style="white-space: nowrap"> <h:outputText value="Enter Value here"/></span> </p:tooltip> 
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="b1xxuisxlvxxxxxxxxxxserialnumDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+       <h:outputLabel  for="b1xxuisxlvxxxxxxxxxxserialnum" value="#{messages['Serialnum']}">
+
+      </h:outputLabel>
+         <h:inputText id="b1xxuisxlvxxxxxxxxxxserialnum" 
+
+                           size="20"
+                      maxlength="15"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.b1xxuisxlvxxxxxxxxxxserialnum}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="b2xxuzcxbvxxxxxxxxxxenterprisecompanynaDecoration"    >
+       <h:outputLabel  for="b2xxuzcxbvxxxxxxxxxxenterprisecompanyna" value="#{messages['Enterprisecompanyna']}">
+
+      </h:outputLabel>
+         <h:inputText id="b2xxuzcxbvxxxxxxxxxxenterprisecompanyna" 
+
+                           size="20"
+                      maxlength="35"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.b2xxuzcxbvxxxxxxxxxxenterprisecompanyna}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+            <h:panelGroup id="daxxuzxdssxxxxxxxxxxapiclientidDecoration"  rendered="#{customIdentity.hasRole('SH') or (customIdentity.hasRole('UH') and (customIdentity.username.contains('manager') or customIdentity.username.contains('admin'))) and !(customIdentity.restrict1=='D')}">
+       <h:outputLabel  for="daxxuzxdssxxxxxxxxxxapiclientid" value="#{messages['Apiclientid']}(#{messages['Paypal']})"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='01'}">
+      </h:outputLabel>
+       <h:outputLabel  for="daxxuzxdssxxxxxxxxxxapiclientid" value="#{messages['Apiclientid']}(#{messages['Shopify']})"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='02'}">
+      </h:outputLabel>
+       <h:outputLabel  for="daxxuzxdssxxxxxxxxxxapiclientid" value="#{messages['Apiclientid']}(#{messages['Square']})"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='03'}">
+      </h:outputLabel>
+       <h:outputLabel  for="daxxuzxdssxxxxxxxxxxapiclientid" value="#{messages['Apiclientid']}(#{messages['Stripe']})"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='04'}">
+      </h:outputLabel>
+       <h:outputLabel  for="daxxuzxdssxxxxxxxxxxapiclientid" value="#{messages['Apiclientid']}(#{messages['Google']} #{messages['Refresh']} #{messages['Token']})"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='07' and
+           !(customIdentity.masterSite)}">
+      </h:outputLabel>
+       <h:outputLabel  for="daxxuzxdssxxxxxxxxxxapiclientid" value="#{messages['Apiclientid']}(#{messages['Google']} #{messages['Api']})"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='07' and
+           (customIdentity.masterSite)}">
+      </h:outputLabel>
+       <h:outputLabel  for="daxxuzxdssxxxxxxxxxxapiclientid" value="#{messages['Apiclientid']}(#{messages['Openshift']} #{messages['Api']} #{messages['id']})"
+         rendered="#{(yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='08' or
+                       yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='09' or
+                       yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='10') and
+           (customIdentity.masterSite)}">
+
+       </h:outputLabel>
+
+
+         <h:inputText id="daxxuzxdssxxxxxxxxxxapiclientid" 
+
+                           size="32"
+                      maxlength="260"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.daxxuzxdssxxxxxxxxxxapiclientid}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+
+      <h:panelGroup id="dbxxuzxdssxxxxxxxxxxapiclientsecretDecoration"  rendered="#{customIdentity.hasRole('SH') or (customIdentity.hasRole('UH') and (customIdentity.username.contains('manager') or customIdentity.username.contains('admin'))) and !(customIdentity.restrict1=='D')}">
+
+       <h:outputLabel  for="dbxxuzxdssxxxxxxxxxxapiclientsecret" value="#{messages['Apiclientsecret']}"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='01'}">
+       </h:outputLabel>
+       <h:outputLabel  for="dbxxuzxdssxxxxxxxxxxapiclientsecret" value="#{messages['Apiclientsecret']}"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='02'}">
+       </h:outputLabel>
+       <h:outputLabel  for="dbxxuzxdssxxxxxxxxxxapiclientsecret" value="#{messages['Apiclientsecret']}"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='03'}">
+       </h:outputLabel>
+       <h:outputLabel  for="dbxxuzxdssxxxxxxxxxxapiclientsecret" value="#{messages['Apiclientsecret']}"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='04'}">
+       </h:outputLabel>
+
+       <h:outputLabel  for="dbxxuzxdssxxxxxxxxxxapiclientsecret" value="#{messages['Apiclientsecret']}(#{messages['Google']} #{messages['Access']} #{messages['Token']})"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='07' and
+           !(customIdentity.masterSite)}">
+
+       </h:outputLabel>
+       <h:outputLabel  for="dbxxuzxdssxxxxxxxxxxapiclientsecret" value="#{messages['Apiclientsecret']}(#{messages['Google']} #{messages['Api']} #{messages['Secret']})"
+         rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='07' and
+           (customIdentity.masterSite)}">
+
+       </h:outputLabel>
+
+       <h:outputLabel  for="dbxxuzxdssxxxxxxxxxxapiclientsecret" value="#{messages['Apiclientsecret']}(#{messages['Openshift']} #{messages['Api']} #{messages['Secret']})"
+         rendered="#{(yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='08' or
+                       yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='09' or
+                       yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='10') and
+           (customIdentity.masterSite)}">
+
+       </h:outputLabel>
+
+
+         <h:inputTextarea id="dbxxuzxdssxxxxxxxxxxapiclientsecret" 
+                               cols="60"
+                               rows="3"
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.dbxxuzxdssxxxxxxxxxxapiclientsecret}">
+
+         </h:inputTextarea>
+
+      </h:panelGroup>
+
+        </h:panelGrid>
+
+     <ui:fragment rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion =='01'}">      
+
+        <h:panelGrid columns="4">
+     <ui:fragment rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion !='07'}">      
+
+      <h:panelGroup id="zbxxuxxxbvxxxxxxxxxxsmatcodeDecoration"  rendered="#{customIdentity.hasRole('SH') or (customIdentity.hasRole('UH') and (customIdentity.username.contains('manager') or customIdentity.username.contains('admin'))) and !(customIdentity.restrict1=='D')}">
+       <h:outputLabel  for="zbxxuxxxbvxxxxxxxxxxsmatcode" value="#{messages['Merchant']} #{messages['Location']}">
+
+       </h:outputLabel>
+         <h:inputText id="zbxxuxxxbvxxxxxxxxxxsmatcode"  
+                     pt:placeholder="To test, put sandbox/blank value "
+                           size="25"
+                      maxlength="20"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.zbxxuxxxbvxxxxxxxxxxsmatcode}">
+
+         </h:inputText>
+      </h:panelGroup>
+     </ui:fragment>
+
+       <h:outputText value="#{messages['Once']} #{messages['emails']} #{messages['working']}, #{messages['only']} #{messages['change']} #{messages['smtp']} #{messages['mailRelay_off']} #{messages['to']} #{messages['change']} #{messages['mode']}. "/> 
+
+       <br></br> <br></br>
+
+            <h:panelGroup id="l6xxzxxrbvxxxxxxxxxxaltselenDecoration"    >
+       <h:outputLabel  for="l6xxzxxrbvxxxxxxxxxxaltselen" value=" #{messages['smtp']} #{messages['port']}">
+
+       </h:outputLabel>
+                <h:inputText id="l6xxzxxrbvxxxxxxxxxxaltselen" 
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.l6xxzxxrbvxxxxxxxxxxaltselen}"
+                           size="21">
+                </h:inputText>
+     </h:panelGroup>
+
+      <h:panelGroup id="o9xxfxxxbvxxxxxxxxxxbeepsouDecoration"    >
+       <h:outputLabel  for="o9xxfxxxbvxxxxxxxxxxbeepsou" value=" #{messages['smtp']} #{messages['authentication']}">
+
+      </h:outputLabel>
+                <h:selectBooleanCheckbox id="o9xxfxxxbvxxxxxxxxxxbeepsou"
+                                      value="#{yxxxch522xhhxxhxxxxxclientHome.instance.o9xxfxxxbvxxxxxxxxxxbeepsou}">
+                 </h:selectBooleanCheckbox>
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="p1xxfxxxbvxxxxxxxxxxconfirmDecoration"    >
+       <h:outputLabel  for="p1xxfxxxbvxxxxxxxxxxconfirm" value=" #{messages['smtp']} #{messages['mailRelay_off']}">
+
+      </h:outputLabel>
+                <h:selectBooleanCheckbox id="p1xxfxxxbvxxxxxxxxxxconfirm"
+                                      value="#{yxxxch522xhhxxhxxxxxclientHome.instance.p1xxfxxxbvxxxxxxxxxxconfirm}">
+                 </h:selectBooleanCheckbox>
+            </h:panelGroup>
+
+            <h:panelGroup id="p2xxfxxxbvxxxxxxxxxxlinefeedDecoration"    >
+       <h:outputLabel  for="p2xxfxxxbvxxxxxxxxxxlinefeed" value=" #{messages['smtp']} #{messages['tsl']}">
+
+      </h:outputLabel>
+                <h:selectBooleanCheckbox id="p2xxfxxxbvxxxxxxxxxxlinefeed"
+                                      value="#{yxxxch522xhhxxhxxxxxclientHome.instance.p2xxfxxxbvxxxxxxxxxxlinefeed}">
+                 </h:selectBooleanCheckbox>
+            </h:panelGroup>
+              <br></br>       <br></br>
+
+
+            <h:panelGroup id="z8xxuxxxbvxxxxxxxxxxpop3serverDecoration"  rendered="true">
+       <h:outputLabel  for="z8xxuxxxbvxxxxxxxxxxpop3server" value=" #{messages['Pop3server']}">
+
+      </h:outputLabel>
+         <h:inputText id="z8xxuxxxbvxxxxxxxxxxpop3server" 
+
+                           size="20"
+                      maxlength="30"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.z8xxuxxxbvxxxxxxxxxxpop3server}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+            <h:panelGroup id="z8xxuxxxbvxxxxxxxxxxsmtpserverDecoration"  rendered="true">
+       <h:outputLabel  for="z8xxuxxxbvxxxxxxxxxxsmtpserver" value=" #{messages['Smtpserver']}">
+
+      </h:outputLabel>
+         <h:inputText id="z8xxuxxxbvxxxxxxxxxxsmtpserver" 
+
+                           size="20"
+                      maxlength="30"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.z8xxuxxxbvxxxxxxxxxxsmtpserver}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+       <br></br>       <br></br>
+
+            <h:panelGroup id="z9xxuxxxbvxxxxxxxxxxpop3userDecoration"  rendered="true">
+       <h:outputLabel  for="z9xxuxxxbvxxxxxxxxxxpop3user" value=" #{messages['Pop3user']}">
+
+      </h:outputLabel>
+         <h:inputText id="z9xxuxxxbvxxxxxxxxxxpop3user" 
+
+                           size="20"
+                      maxlength="35"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.z9xxuxxxbvxxxxxxxxxxpop3user}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="z9xxuxxxbvxxxxxxxxxxsmtpuserDecoration"  rendered="true">
+       <h:outputLabel  for="z9xxuxxxbvxxxxxxxxxxsmtpuser" value=" #{messages['Smtpuser']}">
+
+      </h:outputLabel>
+         <h:inputText id="z9xxuxxxbvxxxxxxxxxxsmtpuser" 
+
+                           size="20"
+                      maxlength="35"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.z9xxuxxxbvxxxxxxxxxxsmtpuser}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+            <h:panelGroup id="zaxxuxxxssxxxxxxxxxxpop3passDecoration"  rendered="#{customIdentity.hasRole('SH') or (customIdentity.hasRole('UH') and (customIdentity.username.contains('manager') or customIdentity.username.contains('admin'))) and !(customIdentity.restrict1=='D')}">
+       <h:outputLabel  for="zaxxuxxxssxxxxxxxxxxpop3pass" value=" #{messages['Pop3pass']}">
+
+      </h:outputLabel>
+         <h:inputText id="zaxxuxxxssxxxxxxxxxxpop3pass" 
+
+                           size="20"
+                      maxlength="20"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.zaxxuxxxssxxxxxxxxxxpop3pass}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="zaxxuxxxbvxxxxxxxxxxsmtppassDecoration"  rendered="#{customIdentity.hasRole('SH') or (customIdentity.hasRole('UH') and (customIdentity.username.contains('manager') or customIdentity.username.contains('admin'))) and !(customIdentity.restrict1=='D')}">
+       <h:outputLabel  for="zaxxuxxxssxxxxxxxxxxsmtppass" value=" #{messages['Smtppass']}">
+
+      </h:outputLabel>
+         <h:inputText id="zaxxuxxxssxxxxxxxxxxsmtppass" 
+
+                           size="20"
+                      maxlength="20"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.zaxxuxxxssxxxxxxxxxxsmtppass}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+                </h:panelGrid>
+             <br></br> <h:panelGrid columns="4">
+
+            <h:panelGroup id="v6xxuxz1bvxxxxxxxxxxtax1codeDecoration"    >
+       <h:outputLabel  for="v6xxuxz1bvxxxxxxxxxxtax1code" value="#{messages['Tax1']} #{messages['registration']} #{messages['number']}">
+
+      </h:outputLabel>
+         <h:inputText id="v6xxuxz1bvxxxxxxxxxxtax1code" 
+
+                           size="20"
+                      maxlength="25"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.v6xxuxz1bvxxxxxxxxxxtax1code}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="v7xxuxz2bvxxxxxxxxxxtax2codeDecoration"    >
+       <h:outputLabel  for="v7xxuxz2bvxxxxxxxxxxtax2code" value="#{messages['Tax2']} #{messages['registration']} #{messages['number']}">
+
+      </h:outputLabel>
+         <h:inputText id="v7xxuxz2bvxxxxxxxxxxtax2code" 
+
+                           size="20"
+                      maxlength="25"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.v7xxuxz2bvxxxxxxxxxxtax2code}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="v8xxuxz3bvxxxxxxxxxxtax3codeDecoration"    >
+       <h:outputLabel  for="v8xxuxz3bvxxxxxxxxxxtax3code" value="#{messages['Tax3']} #{messages['registration']} #{messages['number']}">
+
+      </h:outputLabel>
+         <h:inputText id="v8xxuxz3bvxxxxxxxxxxtax3code" 
+
+                           size="20"
+                      maxlength="25"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.v8xxuxz3bvxxxxxxxxxxtax3code}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+            <h:panelGroup id="zfxxcztxlxxxxxxxxxxxstatusfldtDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+       <h:outputLabel  for="zfxxcztxlxxxxxxxxxxxstatusfldt" value="#{messages['Statusfldt']}">
+
+      </h:outputLabel>
+    				<p:calendar id="zfxxcztxlxxxxxxxxxxxstatusfldt"
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.zfxxcztxlxxxxxxxxxxxstatusfldt}" datePattern="MM/dd/yyyy hh:mm a" >
+                   </p:calendar>
+
+            </h:panelGroup>
+
+
+                 </h:panelGrid>
+
+                  <h:panelGrid columns="4">
+       <h:outputText style="color:red;" value="#{messages['Taxes']} #{messages['will']} #{messages['apply']}, #{messages['only']} #{messages['if']} #{messages['number']} #{messages['not']} #{messages['blank']}. "/> 
+       <h:outputText value="#{messages['Tax']} #{messages['rates']} #{messages['are']} #{messages['set']} #{messages['in']} #{messages['options']} #{messages['table']}"/> 
+       &nbsp;<h:link value="#{messages['List']} #{messages['options']}"  outcome="/optionsList.xhtml" target="_blank"/>
+
+            <h:panelGroup id="zgxxuznxbvxxxxxxxxxxnotesDecoration"  rendered="true">
+       <h:outputLabel  for="zgxxuznxbvxxxxxxxxxxnotesed" value="#{messages['Notes']}">
+
+      </h:outputLabel>
+         <h:panelGrid>
+         <p:textEditor id="zgxxuznxbvxxxxxxxxxxnotesed" height="40" width="250" secure="false" value="#{yxxxch522xhhxxhxxxxxclientHome.instance.zgxxuznxbvxxxxxxxxxxnotes}">  
+         </p:textEditor>
+         </h:panelGrid>
+            </h:panelGroup>
+
+            <h:panelGroup id="migrateg"  rendered="#{customIdentity.hasRole('SH') or (customIdentity.hasRole('UH') and (customIdentity.username.contains('manager') or customIdentity.username.contains('admin'))) and !(customIdentity.restrict1=='D')}">
+       <h:outputLabel  for="migratec" value="#{messages['Migrate']} #{messages['counter']}">
+
+      </h:outputLabel>
+         <h:inputText id="migratec" 
+
+                           size="20"
+                      maxlength="20"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.p3xxzxxrbvxxxxxxxxxxrefbaradj}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+
+
+            <h:panelGroup id="zhxxutoxlhxxxxxxxxxxownerDecoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+       <h:outputLabel  for="zhxxutoxlhxxxxxxxxxxowner" value="#{messages['Owner']}">
+
+      </h:outputLabel>
+         <h:inputText id="zhxxutoxlhxxxxxxxxxxowner" 
+
+                           size="20"
+                      maxlength="40"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.zhxxutoxlhxxxxxxxxxxowner}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="zzxxu2oxxhxxxxxxxxxxowner2Decoration"  rendered="#{customIdentity.hasRole('SH') or customIdentity.hasRole('EH')?true:false}">
+       <h:outputLabel  for="zzxxu2oxxhxxxxxxxxxxowner2" value="#{messages['Owner2']}">
+
+      </h:outputLabel>
+         <h:inputText id="zzxxu2oxxhxxxxxxxxxxowner2" 
+
+                           size="20"
+                      maxlength="40"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.zzxxu2oxxhxxxxxxxxxxowner2}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+   </h:panelGrid>
+
+             <br></br> <h:panelGrid columns="4">
+
+            <h:panelGroup id="currencyItem"    >
+       <h:outputLabel  for="defaultc" value="#{messages['Item']} #{messages['currency']} #{messages['code']}">
+
+      </h:outputLabel>
+         <h:inputText id="defaultc" 
+
+                           size="5"
+                      maxlength="10"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.y8xxuxxxbvxxxxxxxxxxdefaultc}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+
+
+
+            <h:panelGroup id="symbItem"    >
+       <h:outputLabel  for="keyorder" value="#{messages['Item']} #{messages['currency']} #{messages['symbol']}">
+
+      </h:outputLabel>
+         <h:inputText id="keyorder" 
+
+                           size="5"
+                      maxlength="10"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.y2xxuxxxbvxxxxxxxxxxkeyorder}">
+
+         </h:inputText>
+
+            </h:panelGroup>
+
+
+      </h:panelGrid>
+
+             <br></br> <h:panelGrid columns="4">
+
+
+            <h:panelGroup id="z3xxfxxxbvxxxxxxxxxxlistbuildvDecoration"  rendered="#{customIdentity.hasRole('UH')}">
+        <h:outputLabel  for="z3xxfxxxbvxxxxxxxxxxlistbuildv" value="#{messages['Show']} #{messages['Supported']} #{messages['by']}">
+
+      </h:outputLabel>
+                <h:selectBooleanCheckbox id="z3xxfxxxbvxxxxxxxxxxlistbuildv"
+                                      value="#{yxxxch522xhhxxhxxxxxclientHome.instance.z3xxfxxxbvxxxxxxxxxxlistbuildv}">
+                   <ui:remove>may27 2020 allow supported by </ui:remove>
+                   <p:ajax  render="z3xxfxxxbvxxxxxxxxxxlistbuildv" bypassUpdates="false"/>
+                 </h:selectBooleanCheckbox>
+            </h:panelGroup>
+
+
+
+
+       <h:panelGroup id="x1xxuxxxbvxxxxxxxxxxashostidDecoration"  rendered="#{customIdentity.hasRole('UH')}">
+        <h:outputLabel  for="x1xxuxxxbvxxxxxxxxxxashostid" value="#{messages['Supported']} #{messages['by']}- #{messages['website']} #{messages['hostname']}">
+        </h:outputLabel>
+
+         <h:inputText id="x1xxuxxxbvxxxxxxxxxxashostid"
+
+                           size="20"
+                      maxlength="35"
+
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.x1xxuxxxbvxxxxxxxxxxashostid}">
+
+         </h:inputText>
+
+        </h:panelGroup>
+
+
+
+      </h:panelGrid>
+
+
+
+     </ui:fragment>
+
+
+     <ui:fragment rendered="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion !='07'}">      
+
+      <h:panelGrid columns="6">
+       <h:panelGroup id="CurrencyMerchant"    >
+        <h:outputLabel  for="currcode" value="#{messages['Merchant']} #{messages['payment']} #{messages['currency']} #{messages['code']}">
+        </h:outputLabel>
+        <h:inputText id="currcode" 
+                           size="5"
+                      maxlength="10"
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.k1xxuxxxbvxxxxxxxxxxcurrcode}">
+         </h:inputText>
+        </h:panelGroup>
+        <h:panelGroup id="SymbMerchant"  >
+         <h:outputLabel  for="currsymb" value="#{messages['Merchant']} #{messages['payment']} #{messages['currency']} #{messages['symbol']} ">
+
+         </h:outputLabel>
+    				<h:inputText id="currsymb"
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.j9xxuxxxbvxxxxxxxxxxcurrsymb}"  >
+                                </h:inputText>
+       </h:panelGroup>
+       </h:panelGrid>
+      <h:panelGrid columns="4">
+       #{messages['Item']} #{messages['currency']} -> #{messages['Merchant']} #{messages['currency']} (#{messages['use']} 130 #{messages['for']} 1.30 )
+       <h:panelGroup id="CurrencyConv"    >
+        <h:outputLabel  for="convrate" value="#{messages['Conversion']} #{messages['rate']} ">
+        </h:outputLabel>
+        <h:inputText id="convrate" 
+                           size="5"
+                      maxlength="10"
+                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.p4xxzxxrbvxxxxxxxxxxshibaradj}">
+         </h:inputText>
+        </h:panelGroup>
+
+       </h:panelGrid>
+     </ui:fragment>
+
+<br></br>
+
+        
+            <div style="clear:both">
+                <span class="required">*</span> 
+                required fields
+            </div>
+            
+                
+<div class="actionButtons">
+             <p:ajaxStatus name="buttonStatus" >
+              <f:facet name="start">
+               <h:graphicImage value="./img/ajax-loader16.gif" />
+              </f:facet>
+             </p:ajaxStatus>
+    <ui:remove>removed 89 schedule because one schedule one detail, nov20 2018 added va after fixing report to show vendor</ui:remove>
+                       <ui:remove>
+                       may07 2018 allow record 2(shopify id/secret),3
+                       disabled="true"
+                       </ui:remove>
+
+            <p:commandButton id="save" styleClass="buttonMain" 
+                          value="#{messages['Save']}" status="buttonStatus" update="@form"
+                         action="#{yxxxch522xhhxxhxxxxxclientHome.persist()}"
+                       disabled="#{!yxxxch522xhhxxhxxxxxclientHome.wired}"
+                       rendered="#{!yxxxch522xhhxxhxxxxxclientHome.managed  and !yxxxch522xhhxxhxxxxxclientHome.entityDeleted}">  
+                        
+            </p:commandButton>   
+          
+            <p:commandButton id="update" styleClass="buttonMain" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form"
+                         action="#{yxxxch522xhhxxhxxxxxclientHome.update()}"
+                       rendered="#{yxxxch522xhhxxhxxxxxclientHome.managed  and !yxxxch522xhhxxhxxxxxclientHome.entityUpdated}"/>
+                        			  
+            <p:commandButton id="update2" 
+                          value="#{messages['More_Updates']}" status="buttonStatus" update="@form"
+                         action="#{yxxxch522xhhxxhxxxxxclientHome.update()}"
+                       rendered="#{yxxxch522xhhxxhxxxxxclientHome.managed and yxxxch522xhhxxhxxxxxclientHome.entityUpdated}"/>
+                        			  
+            <h:commandButton id="delete" 
+                          value="#{messages['delete']}" 
+                         action="#{yxxxch522xhhxxhxxxxxclientHome.remove()}"
+                       rendered="#{yxxxch522xhhxxhxxxxxclientHome.managed and !yxxxch522xhhxxhxxxxxclientHome.entityDeleted}"/>
+            <h:button id="new" styleClass="buttonMain" 
+                   value="New"
+             propagation="begin"
+             includePageParams="false" 
+                    outcome="/clientEdit.xhtml"
+                       rendered="false"/>
+           <ui:remove> unlike gmail,square does not allow 2 redirect values. So it will go to prod</ui:remove>
+           <ui:fragment rendered="#{!(customIdentity.masterSite)}">
+            <ui:fragment rendered="#{!(request.serverPort=='8080') and yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='03'}">
+             <a href="https://squareup.com/oauth2/authorize?client_id=#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.masterSiteCode).daxxuzxdssxxxxxxxxxxapiclientid}&amp;scope=PAYMENTS_WRITE PAYMENTS_WRITE_IN_PERSON&amp;state=#{request.requestURL}">#{messages['Allow']} #{messages[customIdentity.masterSiteCode]} #{messages['to']} #{messages['setup']} #{messages['Square']} #{messages['payment']}</a>
+            </ui:fragment>
+            <ui:fragment rendered="#{request.serverPort=='8080' and yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='03'}">
+             <a href="https://squareup.com/oauth2/authorize?client_id=#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('03',customIdentity.masterSiteCode).daxxuzxdssxxxxxxxxxxapiclientid}&amp;scope=PAYMENTS_WRITE PAYMENTS_WRITE_IN_PERSON;state=#{request.requestURL}">#{messages['Allow']} #{messages[customIdentity.masterSiteCode]} #{messages['to']} #{messages['setup']} #{messages['Square']} #{messages['payment']}</a>
+            </ui:fragment>
+            <ui:fragment rendered="#{!(request.serverPort=='8080') and yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='07'}">
+             <a href="https://accounts.google.com/o/oauth2/auth?client_id=#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('07',customIdentity.masterSiteCode).daxxuzxdssxxxxxxxxxxapiclientid}&amp;redirect_uri=https://www.#{customIdentity.masterSiteCode}.com/installAppGmail.wflow&amp;response_type=code&amp;scope=https%3A%2F%2Fmail.google.com%2F&amp;state=#{request.requestURL}&amp;access_type=offline">#{messages['Allow']} #{messages['customIdentity.masterSiteCode}']} #{messages['to']} #{messages['setup']} #{messages['Gmail']} #{messages['SMTP']}</a>
+            </ui:fragment>
+            <ui:fragment rendered="#{request.serverPort=='8080' and yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='07'}">
+             <a href="https://accounts.google.com/o/oauth2/auth?client_id=#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('07',customIdentity.masterSiteCode).daxxuzxdssxxxxxxxxxxapiclientid}&amp;redirect_uri=http://customIdentity.masterSiteCode.customIdentity.masterSiteCode.com:8080/installAppGmail.wflow&amp;response_type=code&amp;scope=https%3A%2F%2Fmail.google.com%2F&amp;state=#{request.requestURL}&amp;access_type=offline">#{messages['Allow']} #{messages[customIdentity.masterSiteCode]} #{messages['to']} #{messages['setup']} #{messages['Gmail']} #{messages['SMTP']}</a>
+            </ui:fragment>
+           </ui:fragment>
+            <ui:remove>
+            scope="https://www.googleapis.com/auth/gmail.send";     https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.send            
+            https://accounts.google.com/o/oauth2/auth?client_id=364545978226.apps.googleusercontent.com&amp;amp;redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&amp;&amp;response_type=code&amp;scope=https%3A%2F%2Fmail.google.com%2F            
+
+            https://www.googleapis.com/oauth2/v4/token
+
+                String request = "client_id="+ URLEncoder.encode(oauthClientId, "UTF-8")
+                        +"&amp;client_secret="+URLEncoder.encode(oauthSecret, "UTF-8")
+                        +"&amp;refresh_token="+URLEncoder.encode(refreshToken, "UTF-8")
+                        +"&amp;grant_type=refresh_token";
+                HttpURLConnection conn = (HttpURLConnection) new URL(TOKEN_URL).openConnection();
+                response from google jan04
+                ?code=4/vAHojvAdDa4HofDvyLRfpDhSvisb8pzES12nZ8DoMViDC01gQBtGAFNDRS3x2Xdvs1aFtp_DpaBn0rOkEAzdIzw&amp;scope=https://mail.google.com/
+            </ui:remove>
+
+            <p:hotkey  action="#{yxxxch522xhhxxhxxxxxclientHome.persist()}" bind="return">
+            </p:hotkey>
+            <p:hotkey  action="#{yxxxch522xhhxxhxxxxxclientHome.update()}" bind="ctrl+u">
+            </p:hotkey>
+
+
+
+
+            <f:param name="reportName" value="#{yxxxch522xhhxxhxxxxxclientList.reportName}"/>
+            <f:param name="displayAs" value="#{yxxxch522xhhxxhxxxxxclientList.displayAs}" /> 
+            <h:button outcome="/clientList.xhtml" id="list" styleClass="buttonMain" 
+              propagation="none"
+                 value="#{messages['List']} #{messages['Client']}">
+            </h:button>    
+
+            <h:button id="done" 
+                   value="#{messages['Done']}"
+             propagation="end"
+                    outcome="/#{empty yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientFrom ? 'home' : yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientFrom}.xhtml"
+
+                rendered="#{yxxxch522xhhxxhxxxxxclientHome.managed or yxxxch522xhhxxhxxxxxclientHome.entityDeleted}"/>
+            
+            <h:button id="cancel" 
+                   value="#{messages['Cancel']}"
+             propagation="end"
+                    outcome="/#{empty yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientFrom ? 'home' : yxxxch522xhhxxhxxxxxclientHome.yxxxch522xhhxxhxxxxxclientFrom}.xhtml"
+                rendered="#{!yxxxch522xhhxxhxxxxxclientHome.managed and !yxxxch522xhhxxhxxxxxclientHome.entityDeleted}"/>
+
+
+
+      <h:outputText value="     "/>
+      <h:outputText value="#{messages['theme']}"/>
+      <h:selectOneMenu value="#{yxxxch522xhhxxhxxxxxclientHome.clientSkin}">
+       <f:selectItems value="#{skinBean.skinsList}"  var="babu"  
+                         itemLabel="#{babu.key}"
+                         itemValue="#{babu.value}" /> 
+      </h:selectOneMenu>
+
+            <h:commandButton id="setTheme" 
+                          value="#{messages['set']} #{messages['theme']}" 
+                         action="#{yxxxch522xhhxxhxxxxxclientHome.setClientTheme()}"/>
+     <ui:fragment rendered="#{!(customIdentity.masterSite)}">
+      <br></br>
+            <ui:fragment rendered="#{!(request.serverPort=='8080') and yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='07'}">
+             <a target="_blank" href="https://myaccount.google.com/permissions?pli=1">#{messages['Manage']} #{messages[customIdentity.masterSiteCode]} #{messages['Api']} #{messages['access']}/#{messages['new']} #{messages['refresh']} #{messages['token']}</a>
+            </ui:fragment>
+            <ui:fragment rendered="#{request.serverPort=='8080' and yxxxch522xhhxxhxxxxxclientHome.instance.a0xxukxxbvxxxxxxxxxxclientversion=='07'}">
+             <a target="_blank" href="https://myaccount.google.com/permissions?pli=1">#{messages['Manage']} #{messages[customIdentity.masterSiteCode]} #{messages['Api']} #{messages['access']}/#{messages['new']} #{messages['refresh']} #{messages['token']}</a>
+            </ui:fragment>
+     </ui:fragment>
+
+</div>
+</p:panel>
+       <p:messages ajaxRendered="true"  />
+
+
+<p:panel>
+
+
+<p:panel header="#{messages['NavigationToggle']}" toggleable="true" toggleableHeader="true" collapsed="false" rendered="#{yxxxch522xhhxxhxxxxxclientHome.managed}"
+     leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
+<div  style="overflow: auto;width: 850px;height: auto; ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <p:tabView switchType="ajax">
+     <p:tab title="#{messages['User']}">
+        <div class="association" id="yxxxuh566xwwqqwxxxxxusersChildren">
+        
+            <h:outputText value="No users" 
+                       rendered="#{empty yxxxch522xhhxxhxxxxxclientHome.yxxxuh566xwwqqwxxxxxusers}"/>
+        
+            <p:dataTable value="#{yxxxch522xhhxxhxxxxxclientHome.yxxxuh566xwwqqwxxxxxusers}" tableStyle="table-layout:auto;"
+                           var="yxxxuh566xwwqqwxxxxxuser" 
+                      rendered="#{not empty yxxxch522xhhxxhxxxxxclientHome.yxxxuh566xwwqqwxxxxxusers}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="yxxxuh566xwwqqwxxxxxusersTable">
+                <p:column>
+                    <f:facet name="header">action</f:facet>
+                    <h:link outcome="/user.xhtml" 
+                              id="selectyxxxuh566xwwqqwxxxxxuser" 
+                           value="Select"
+                     propagation="none">
+                        <f:param disable="#{empty yxxxuh566xwwqqwxxxxxuser.a0xxuobxbxxxxxxxxxxxsid}" name="yxxxuh566xwwqqwxxxxxuserA0xxuobxbxxxxxxxxxxxsid" 
+                                value="#{yxxxuh566xwwqqwxxxxxuser.a0xxuobxbxxxxxxxxxxxsid}"/>
+                        <f:param name="yxxxuh566xwwqqwxxxxxuserFrom" value="Yxxxch522xhhxxhxxxxxclient"/>
+                    </h:link>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">id</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.a0xxukuxbvxxxxxxxxxxid}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">otherid</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c1xxuxxxbvxxxxxxxxxxotherid}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">alevel</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c2xxuxuaiv38xxxxxxxxalevel}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">blevel</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c3xxuxubiv39xxxxxxxxblevel}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">currpw</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c4xxuxupivxxxxxxxxxxcurrpw}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">expiry</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c5xxcxxxbvxxxxxxxxxxexpiry}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">oldpw</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c6xxuxuoivxxxxxxxxxxoldpw}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">temporarypassword</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c7xxfxxxivxxxxxxxxxxtemporarypassword}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">passwordhash</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c8xxuxxxbvxxxxxxxxxxpasswordhash}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">activationkey</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c9xxuxxxbvxxxxxxxxxxactivationkey}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">signature</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.e4xxuznrbvxxxxxxxxxxsignature}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">docmnt</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.y8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfl</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.z1xxzzfxhhxxxxxxxxxxstatusfl}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfldt</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.z2xxcztxlxxxxxxxxxxxstatusfldt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">owner</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.z5xxutoxlhxxxxxxxxxxowner}"/>
+                </p:column>
+            </p:dataTable>
+        
+        </div>
+          
+        <f:subview rendered="#{yxxxch522xhhxxhxxxxxclientHome.managed}" id="yxxxuh566xwwqqwxxxxxusers">
+        <div class="actionButtons">
+            <h:button id="addyxxxuh566xwwqqwxxxxxuser" 
+                   value="Add user"
+                    outcome="/userEdit.xhtml"
+                    propagation="none">
+                 <f:param disable="#{empty yxxxch522xhhxxhxxxxxclientHome.instance.a0xxuobxbxxxxxxxxxxxsid}"  name="yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid" 
+                         value="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+                   <f:param name="yxxxuh566xwwqqwxxxxxuserFrom" value="Yxxxch522xhhxxhxxxxxclientEdit" />
+            </h:button>
+        </div>
+        </f:subview>
+    </p:tab>
+ </p:tabView>
+</div>
+</p:panel>
+</p:panel>
+</h:form>
+
+</ui:define>
+
+</ui:composition>
+
+
