@@ -58,12 +58,23 @@ import java.io.InputStream;
 
 
 
-
-//R3restClient vs ShopifyBean not clear but seems like
-//R3RestClient will become generic and ShopifyBean is done to quickly implement Shopify rest support
-//sample curl commands are in raaspi.docs/deployear
-//curl  http://mybusinessp.lraaspi.com:8080/signup.wflow
-//curl --user-agent "bot" http://mybusinessp.lraaspi.com:8080/signup.wflow
+/**
+* meant for Shopify and uses jax-rs apis
+* there are 4 rest supporting module
+* (1)shoppingCartBean is a restClient meant for payPal and uses paypal restClient apis(why does it have rest jar?)
+* (2)R3RestClient is also a restClient but meant for Shopify and uses jax-rs apis
+* (3)xxxPie/BarCharts uses javaScript based rest client to call 3r xxxEntityServices
+* (4)xxxEntityService beans not client but server rest services and called by rest clients
+*
+* raaspi       client record 01 has paypal  id/secret
+*     02 has shopify id/secret for a specific app  like raasbackoffice
+* Once App is installed via raaspi install App menue
+* xxbackoffice client record 01 has paypal  id/secret (if needed)
+* xxbackoffice "      "      02 has shopify oauth token for an app and store combination. no clientId just token
+* xx means say raaspifybackoffice or another shopify store backoffice site
+*
+* @author 3r Computer Systems
+*/
 
 @Named("r3RestClient")
 @SessionScoped //if basic auth
@@ -82,15 +93,6 @@ import java.io.InputStream;
 // accessCode needs to be exchanged for accessToken by asking Shopify with admin rest api
 //   /admin/oauth/access_token
 // once access token is obtained authenticated rest api reqs are done by including header X-Shopify-Access-Token: {access_token}
-/***
-raaspi       client record 01 has paypal  id/secret
-"            "      "      02 has shopify id/secret for a specific app  like raasbackoffice
-Once App is installed via raaspi install App menue
-xxbackoffice client record 01 has paypal  id/secret (if needed)
-xxbackoffice "      "      02 has shopify oauth token for an app and store combination. no clientId just token
-xx means say raaspifybackoffice or another shopify store backoffice site
-*/
-//dnsimple fpa2AyVxZneEHApFbDznVNhz3Wbx2Qau
 
 public class R3RestClient implements java.io.Serializable{
      private Logger log = Logger.getLogger(R3RestClient.class.getCanonicalName());

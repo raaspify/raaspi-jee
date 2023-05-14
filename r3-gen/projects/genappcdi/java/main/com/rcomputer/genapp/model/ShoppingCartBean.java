@@ -92,24 +92,31 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
+/**
+* This supports shopping cart actions like payments for cards like Paypal, Square.
+* comes here from checkout.xhtml for online purchase and payment or checkoutPOS.xhtml for in person purchase and payment. 
+* pages invoke appropriate methods via view action calling takeAction or directly calling a method here.
+*
+*   saleRequest() method called by checkout.xhtml paypal checkout buttn and call paypal api. cuorders already exists
+*   invoke paypal login page express payment request via  checkout.xhtml link button value approvalUrl / login to paypal
+*   paypal invokes makePayPalPayment method via f:viewAction in checkout.xhtml and takeAction method here to capture shipping info
+*   and to show confirmpayment button
+*   confirmPayment method called by checkout.xhtml payment execution request via payment module execute method
+*     calls itemHome.updateProductsToShip to create invoice against which shipment to be done
+* 
+*   Note:There is confirmPayPayment which calls updateInvoicesToPay to update existing invoice
+* there are 4 rest supporting module
+* (1)shoppingCartBean is a restClient meant for payPal and uses paypal restClient apis(why does it have rest jar?)
+* (2)R3RestClient is also a restClient but meant for Shopify and uses jax-rs apis
+* (3)xxxPie/BarCharts uses javaScript based rest client to call 3r xxxEntityServices
+* (4)xxxEntityService beans not client but server rest services and called by rest clients
+*
+* @author 3r Computer Systems
+*/
 @Named("r3Cart")
 @SessionScoped
 //@Transactional  removed was causing resourceloading issue You cannot set autocommit during a managed transaction
 
-//there are 4 rest supporting module
-//(1)shoppingCartBean is a restClient meant for payPal and uses paypal restClient apis(why does it have rest jar?)
-//(2)R3RestClient is also a restClient but meant for Shopify and uses jax-rs apis
-//(3)xxxPie/BarCharts uses javaScript based rest client to call 3r xxxEntityServices
-//(4)xxxEntityService beans not client but server rest services and called by rest clients
-// (1) saleRequest() method called by checkout.xhtml paypal checkout buttn and call paypal api. cuorders already exists
-// (2) invoke paypal login page express payment request via  checkout.xhtml link button value approvalUrl / login to paypal
-// (2b)paypal invokes makePayPalPayment method via f:viewAction in checkout.xhtml and takeAction method here to capture shipping info
-//  and to show confirmpayment button
-// (3) confirmPayment method called by checkout.xhtml payment execution request via payment module execute method
-//    calls itemHome.updateProductsToShip to create invoice against which shipment to be done
-//
-//  Note:There is confirmPayPayment which calls updateInvoicesToPay to update existing invoice
 
 public class ShoppingCartBean implements java.io.Serializable{
    private Logger log = Logger.getLogger(ShoppingCartBean.class.getCanonicalName());

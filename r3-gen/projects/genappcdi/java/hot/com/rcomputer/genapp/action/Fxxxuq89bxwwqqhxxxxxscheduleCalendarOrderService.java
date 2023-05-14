@@ -21,8 +21,15 @@ import java.util.UUID;
 
 
 /**
- * @author 3r computer Systems
- */
+* This gets calendar data for orders 
+* there are 4 rest supporting module
+* (1)shoppingCartBean is a restClient meant for payPal and uses paypal restClient apis(why does it have rest jar?)
+* (2)R3RestClient is also a restClient but meant for Shopify and uses jax-rs apis
+* (3)xxxPie/BarCharts uses javaScript based rest client to call 3r xxxEntityServices
+* (4)xxxEntityService beans not client but server rest services and called by rest clients
+*
+* @author 3r computer Systems
+*/
 @Named("fxxxuq89bxwwqqhxxxxxscheduleCalendarOrderService")
 @Path("/scheduleo")
 public class Fxxxuq89bxwwqqhxxxxxscheduleCalendarOrderService 
