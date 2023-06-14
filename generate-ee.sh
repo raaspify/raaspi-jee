@@ -1,1 +1,1 @@
-sh mvn clean generate-sources -Dproduct=-ee
+mvn clean generate-sources -Dproduct=-ee
