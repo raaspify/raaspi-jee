@@ -1,1 +1,1 @@
-sh mvn clean generate-sources 
+mvn clean generate-sources 
