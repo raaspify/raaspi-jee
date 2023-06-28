@@ -14,7 +14,8 @@
     <property file="build-r3deploy-${profile}.properties"/>
    <echo> build-r3ui.xml start -----</echo>   
   <!-- Will be set if user didn't specify -Denv=xxx from the command line -->
-  <!-- value set in properties.file will override it and value set in command line will override both -->
+  <!-- tatget.ant is a property defined in pom.xml and its value is passed here as ${tatget.ant}.
+        value set in properties.file will override it and value set in command line will override both -->
     <condition property="target" value="${target.ant}" else="tomee-hsldb">
         <isset property="${target.ant}"/>
     </condition>
@@ -24,7 +25,6 @@
     <condition property="product" value="${product.ant}" else="ee">
         <isset property="${product.ant}"/>
     </condition>
-
     <echo> project.name = "${project.name}"</echo>   
     <echo> target = "${target}"</echo>   
     <echo> as = "${as}"</echo>   
@@ -143,24 +143,36 @@
     <target name="compile" depends="init"
         description="Compile the Java source code"
         unless="eclipse.running">
-    <echo>build.classpath ${build.classpath}</echo>
+    <condition property="exName" value="javac.exe">
+     <os family="windows" />
+    </condition>
+    
+    <condition property="exName" value="javac">
+        <os family="unix" />
+    </condition>
+    <echo>init build.classpath ${build.classpath}</echo>
+    <echo> exName ${exName}                      </echo> 
+    <echo> build.classpath ${build.classpath} </echo>
    <!-- Will be set if user didn't specify -Denv=xxx from the command line -->
   <!-- value set in properties.file will override it and value set in command line will override both -->
 
    <echo> target came from maven( ant has  target target.ant target.maven) = ${target} ${target.ant} ${target.maven}</echo>
     <echo> as came from maven( ant has  as.ant) = ${as} ${as.ant} ${as.naven}</echo>
-    <echo> myname  = ${myname} ${myname.ant} ${myname.naven}</echo>
+    <echo> myname  = ${myname} ${myname.ant} ${myname.naven} java_home ${JAVA_HOME} java.homej ${java.homej} ant java.home ${java.home} jar.dir ${jar.dir}</echo>
 
         <javac classpathref="build.classpath"  
             destdir="${jar.dir}"
             debug="${javac.debug}"
             deprecation="${javac.deprecation}"
+            fork="yes"
+            executable="${java.homej}/bin/${exName}"
             nowarn="on">
             <src path="${src.model.dir}"/>
         </javac>
       <!-- no need if generate sources 
             <src path="${src.action.dir}"/>
       -->
+    <!-- maven uses maven dir/bin/mvn to define JAVA_HOME , if needed change it to match JAVA_HOME env value -->
     </target>
 
     <target name="copyclasses" depends="init"

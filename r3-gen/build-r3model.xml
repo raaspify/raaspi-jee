@@ -45,6 +45,10 @@
     <condition property="r3.cmd" value="${cmd.prefix}r3" else="ant">
         <equals arg1="${r3-gen.properties}" arg2="${r3-gen.dir}/build-r3gen.properties"/>
     </condition>
+    <property name ="java.homej" value="${maven.java.homej}"/>
+   <echo> ant property name java.homej  and its value set as ${maven.java.homej} </echo>
+   <echo> ant property name java.homej value is  ${java.homej} </echo>
+
 
     <property file="${r3-gen.properties}"/>
     <echo> prop file = "${r3-gen.properties}"</echo>
@@ -860,6 +864,7 @@
         <echo message=" invoke build-r3ui target '${project.jar.target}'"/> 
         <ant antfile="${project.home}/build-r3ui.xml" target="${project.jar.target}" inheritall="false">
          <property name="project.name" value="${project.name}"/>
+         <property name ="java.homej" value="${maven.java.homej}"/>
         </ant>
 
         <echo message=" creating  *.assigns from ${templates.dir}/view/gen-assigns.ftl   in ${templates.dir}/view/assigns"></echo>

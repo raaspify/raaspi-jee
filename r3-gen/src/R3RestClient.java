@@ -3901,11 +3901,13 @@ public class R3RestClient implements java.io.Serializable{
      }
 
     @Transactional
-    //called by installorAuth ie shopify install
+    //called by installorAuth ie shopify install from shopify app
     // There is logic here to compare the token sent by shopify (it can change if merchant changes scope or uninstall
     // the app and then install again) and if differs stores the new token value in client record 02 column apiclientsecret
     // So there is no separate method to create/store a new token value, just uninstall and reinstall
     // data at raaspi end stays the same
+    //@see doRegister in userHomefor createSite under master site, doMastersite for creating master site in userHome
+    
     public void doQuickRegister() {
 
             Yxxxch522xhhxxhxxxxxclient client01=null;

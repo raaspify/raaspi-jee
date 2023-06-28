@@ -1563,11 +1563,11 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
       log.info(" checkCreateTables-DB Name "+ productName+ "- creating schema,tables,tables_b and tables_c");
       if(productName.contains("HSQL")){
        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-        FacesMessage.SEVERITY_INFO,"After site create is done, please login using id manager and password manager or admin with pw admin. ",""));
+        FacesMessage.SEVERITY_INFO,"After site create is done, please login using id manager and password manager or admin with password admin. ",""));
        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
         FacesMessage.SEVERITY_WARN,"Temporary passwords will EXPIRE in 48 hrs. Please change the employee and client email id if mail@"+owner2Code+".com is not a working one. ",""));
        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-        FacesMessage.SEVERITY_WARN,"Reset or change password commands will send passwords via email. ",""));
+        FacesMessage.SEVERITY_WARN,"Reset or change password commands will send passwords via email and you will not see it, if email id is invalid . ",""));
 
        sqlAdminSupport.createSchema("","","");//product hql,schema genapp,owner sa
        sqlAdminSupport.createTables("","");//schema,owner

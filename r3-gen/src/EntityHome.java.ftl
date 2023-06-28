@@ -2677,7 +2677,9 @@ public  class ${entityName}Home implements Serializable
 
 </#if>
 
-    
+/**
+* method pre-initializes entities and gets invoked via jsf f:viewAction  
+*/    
     public void wire()
     {
 // ManyToOne will capture the Foreign Key Fields and the foreign Entity Name
@@ -2873,6 +2875,13 @@ public  class ${entityName}Home implements Serializable
 public Map<Integer, Boolean> getChecked() {  
 return checked;  
 }  
+
+/**
+* method is used to check the numeric status field value and return a descriptive value
+* @param status
+* int value
+* @return a String value 
+*/    
 
     public String describeStatus(int status){
     if (status==0){
@@ -3157,7 +3166,7 @@ return checked;
     /**
     * The following method is proxy for file.fileUpload to allow using 
     * requestScoped for raaspi file class
-    * @see file class
+    * @see "file class"
     * 
     */
 
@@ -3173,7 +3182,7 @@ return checked;
     * @param args none bur flag restentity is set to true
     * @return String set by persist
     * @exception None 
-    * @see persist()
+    * @see "persist()"
     * 
     */
 
@@ -3209,7 +3218,7 @@ return checked;
 * or in case 3R-TOP-BKGR -1 means use color instead of any image
 * qualifier 1 if shopping items. Non shopping or not related to items can have qualifier PIC etc.
 *@param none, values passed through variables
-*@see extended_persist
+*@see "extended_persist"
 */
     public String persist() {
 
@@ -3859,7 +3868,8 @@ return checked;
            this.instance.set${customerEntityName?cap_first}(${customerEntityName});
           }
           else{          
-          /** setup encrypted password when creating new user similar to reset password or register or signup   not sure where used*/    
+          /** setup encrypted password when creating new user similar to reset password or register or signup   not sure where used
+          */    
             if (inCreateUser){   
              setupPassword();
             }
@@ -5490,7 +5500,7 @@ List<${userproflEntityName?cap_first}> results =  entityManager
    *  tempqty (ord etc qty) to detail qty
    *  after that persist calls persistrunt to add up for totals and then cuinvoiceposting for the detail
    *   persist has logic to update metrix for related entities
-   *@see addProductsToOrder used by shopping cart add and extended_persist to convert from quote ot order etc
+   *@see "addProductsToOrder used by shopping cart add and extended_persist to convert from quote ot order etc"
    */
 
     public void addWithDetails() {
@@ -5665,13 +5675,14 @@ List<${userproflEntityName?cap_first}> results =  entityManager
  </#if> 
 
 <#if  menuAttributesp2 == "9C" >
+/**
+* needs logic to replace the following because processdetails/attributes do not have same model as other master/detail      
+* will mimic addProductsToOrder logic, if validation fails do not continue
+* comes from save and no related entities like quote/order/invoice, for which use convert button which calls      // extended_persist 
+* diff versions of cartpersist method exists depending on the entity 
+* calls cartpersist (used for both cart order as well as for back office transactions)  which has most of the logic
+*/
     public void addWithDetails() {
-     // needs logic to replace the following because processdetails/attributes do not have same model as other master/detail      
-     // will mimic addProductsToOrder logic, if validation fails do not continue
-     // comes from save and no related entities like quote/order/invoice, for which use convert button which calls      // extended_persist 
-     // diff versions of cartpersist method exists depending on the entity 
-     // calls cartpersist (used for both cart order as well as for back office transactions)  which has most of the logic
-     // 
        if (!bcontinue){
              bcontinue=true;
              return;
@@ -5751,8 +5762,8 @@ List<${userproflEntityName?cap_first}> results =  entityManager
         || entityFunction == "vo" || entityFunction == "vi" || ids?substring(6,8)=="vp" || entityFunction == "sh" || entityFunction == "sv"
         || entityFunction == "eo"  >
  /**
- initalizes totals and the loops through active (non -1 status) details for the parent sid and adds to get totals
-  but unlike setParentTotalsFromDetails this method updates parent with new totals
+ * initalizes totals and the loops through active (non -1 status) details for the parent sid and adds to get totals
+ *  but unlike setParentTotalsFromDetails this method updates parent with new totals
 */
 
     // details for parent sid too many problems keeping up with totals, so force it from details from db
@@ -6130,8 +6141,8 @@ List<${userproflEntityName?cap_first}> results =  entityManager
     /**
     * used by xxEdit.xhtml for updating multiple items for master entities which have details, example order,invoice,glentries
     * mimics ItemHome updateProductsToOrder method (used for shopping cart) logic to handle multiItems
-    *@see addWithDetails used by xxEdit to add new, or update or add detail
-    *@see updateProductsToOrder used by shopping cart add
+    *@see "addWithDetails used by xxEdit to add new, or update or add detail"
+    *@see "updateProductsToOrder used by shopping cart add"
     *add logic to adjust invoice, payment details and paypal etc payment due ie either credit or adjust hold
     */
     public String updateDetailsAll() {
@@ -8231,7 +8242,7 @@ may need to put account update here check gUpdate
     * @param arg contentTheme 
     * @return void 
     * @exception None 
-    * @see fpxxfq1a5xwwqqhxxxxxitemHome.exportCsvData where a theme is used 
+    * @see "fpxxfq1a5xwwqqhxxxxxitemHome.exportCsvData where a theme is used "
     * 
     */
 	public void setContentThemeAndVendor(String contentTheme) {
@@ -8282,7 +8293,7 @@ may need to put account update here check gUpdate
     * @param arg contentTheme is the external URL not theme
     * @return void but the method updates preview pages like mid-top, news etc
     * @exception None 
-    * @see setContentThemeAndVendor where a theme is used 
+    * @see "setContentThemeAndVendor where a theme is used "
     * 
     * select <img tags from landing page , download img as blob, replace img src to blob
     * and save/update the page content as clob mid-top. ie url page content becomes home page
@@ -8652,7 +8663,7 @@ may need to put account update here check gUpdate
     * @param arg contentTheme is the external URL not theme
     * @return void but the method updates preview pages like mid-top, news etc
     * @exception None 
-    * @see setContentThemeAndVendor where a theme is used 
+    * @see "setContentThemeAndVendor where a theme is used "
     * 
     * select <img tags from landing page , download img as blob, replace img src to blob
     * and save/update the page content as clob mid-top. ie url page content becomes home page
@@ -10773,7 +10784,7 @@ may need to put account update here check gUpdate
     *  getSuggestListThemeVendor and getSuggestListTheme methods are used in homeOtherPagesEdtr to set which vendor, which theme
     * @return "" String type
     * @exception none here but handled in called methods 
-    * @see 
+    * @see "persist"
     */
 
     public String persistOthersAsSystem(String key) {
@@ -10838,7 +10849,7 @@ may need to put account update here check gUpdate
     *  getSuggestListThemeVendor and getSuggestListTheme methods are used in homeOtherPagesEdtr to set which vendor, which theme
     * @return "" String type
     * @exception none here but handled in called methods 
-    * @see 
+    * @see "persist()"
     */
 
 
@@ -12177,7 +12188,7 @@ may need to put account update here check gUpdate
     * @param args -option one is to pass clob key  
     * @return none void type
     * @exception None.
-    * @see 
+    * @see " "
     * in the table called options, column called value will have filter value which will dictate whether it will be hidden,visible or 
     * to use the specified value rather than value in column called options
     * to hide a value in column called options for say activity entity put h=1a. to hide for both item and activity put value= h=1a,18
@@ -12248,7 +12259,7 @@ may need to put account update here check gUpdate
     * @param args -4 first 3 are key related and last is size. They are used based on the table
     * @return none 
     * @exception io errors and validation and messages are given
-    * @see importCsvData for customer/vendor/employee/item/address
+    * @see "importCsvData for customer/vendor/employee/item/address"
     */
 
 
@@ -13502,8 +13513,8 @@ may need to put account update here check gUpdate
     * fromKey page sections,qualifier theme name
     * @return none void type
     * @exception file I/O and validation. Logged or error messages.
-    * @see exportCsvData for Item
-    *@see preLoadThemes() if file.java
+    * @see "exportCsvData for Item"
+    *@see "preLoadThemes() if file.java"
     */
 
  public void exportItemClobCsvData(String scope,String themeCategory,String fromTable,String fromKey,String qualifier,int keySequence,String owner,String owner2Code) {
@@ -13721,8 +13732,8 @@ may need to put account update here check gUpdate
     * fromKey page sections,qualifier theme name
     * @return none void type
     * @exception file I/O and validation. Logged or error messages.
-    * @see exportCsvData for clob and blob
-    * @see preLoadThemes() in file.java
+    * @see "exportCsvData for clob and blob"
+    * @see "preLoadThemes() in file.java"
     */
   public void exportCsvData(String themeGallery,String keyQualifier,String itemType,String subCodesn,String owner,String owner2Code) {
         // themeGallery,keyQualifier csv  subCodesn 'TH'
@@ -13905,7 +13916,7 @@ may need to put account update here check gUpdate
     * @return none 
     * @exception io errors and validation and messages are given
     * csv file needs to be recent to avoid old data  
-    * @see importCsvData for Account and also for item,customer etc
+    * @see "importCsvData for Account and also for item,customer etc"
     */
         //
 	public void importThemeCsvData(byte[] fileContent,String fileName) {
@@ -14322,7 +14333,7 @@ may need to put account update here check gUpdate
     * @return none 
     * @exception io errors and validation and messages are given
     * csv file needs to be recent 
-    * @see importCsvData for Account
+    * @see "importCsvData for Account"
     */
 
 	public void importCsvData(String keyWPrefix,String keyQualifier,int keySequence,int size) {
@@ -14852,7 +14863,7 @@ may need to put account update here check gUpdate
     *          -> PersistRunT prepares Totals for persist -> actual persist of parent and then detail instance
     *      loop back for each item to be copied
     *
-    *@see R3RestClient SyncData where series of order data comes as json values    
+    *@see "R3RestClient SyncData where series of order data comes as json values    "
     */
 
     <#if entityFunction == "cq" || entityFunction == "co" || entityFunction == "ci" || ids?substring(6,8)=="cp" || entityFunction == "vq"  || entityFunction == "vo" || entityFunction == "vi" || ids?substring(6,8)=="vp"
@@ -28375,7 +28386,7 @@ public void deleteAllHidden() {
     * @param 5 args String table,keyWPrefix,String keyQualifier,int keySequence,int size
     * @return String
     * @exception No Record Exists
-    * @see getClobdata(String theme,String vendor,String table,String keyWPrefix,String keyQualifier,int keySequence,int size) for theme content
+    * @see "getClobdata(String theme,String vendor,String table,String keyWPrefix,String keyQualifier,int keySequence,int size) for theme content"
     * 
     */
 
@@ -28443,7 +28454,7 @@ public void deleteAllHidden() {
     * theme comes from session variable value skinBean.previewTh
     * @return byte[] image stream
     * @exception No Record Exists
-    * @see getClobdata(String table,String keyWPrefix,String keyQualifier,int keySequence,int size) for non theme content
+    * @see "getClobdata(String table,String keyWPrefix,String keyQualifier,int keySequence,int size) for non theme content"
     * 
     */
 
@@ -31233,7 +31244,7 @@ public void deleteAllHidden() {
     * @param args tenant client record
     * @return none
     * @exception jdbc error or email error
-    * @see class r3RestClient openAuthorize(),view sqlAdmin, doMasterSite()
+    * @see "class r3RestClient openAuthorize(),view sqlAdmin, doMasterSite()"
     * 
     */
 
@@ -31575,7 +31586,7 @@ public void deleteAllHidden() {
     * admin and manager records,
     * @return void
     * @exception mainly persist related 
-    * @see doRegister()
+    * @see "doRegister() for creating site under master Site, doQuickRegister in r3RestClient for shopify backOffice site "
     */
 
     @Transactional
@@ -31716,7 +31727,7 @@ public void deleteAllHidden() {
               FacesMessage.SEVERITY_INFO,bundle.getString("Set")+ " "+bundle.getString("as")+ " "+bundle.getString("master")+" "+bundle.getString("site"),""));
              //cannot inject need to find a way to refresh databaseResourceLoader.reLoadBundle("en",owner2Code);// messages need to be refreshed
              FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-              FacesMessage.SEVERITY_INFO,bundle.getString("Please")+ " "+bundle.getString("stop/start")+ " "+bundle.getString("the")+" "+bundle.getString("Server")+" "+bundle.getString("to")+" "+bundle.getString("load")+" "+bundle.getString("menu")+" / "+bundle.getString("field")+" "+bundle.getString("labels")+" "+bundle.getString("from")+" "+bundle.getString("database"),""));
+              FacesMessage.SEVERITY_INFO,bundle.getString("Please")+ " "+bundle.getString("stop(CNTRL-C)/start")+ " "+bundle.getString("the")+" "+bundle.getString("Server")+" "+bundle.getString("to")+" "+bundle.getString("load")+" "+bundle.getString("menu")+" / "+bundle.getString("field")+" "+bundle.getString("labels")+" "+bundle.getString("from")+" "+bundle.getString("database"),""));
              //in this session customIdentity already initialized and values were null, so set the masterSite values now
              //after this session customIdentity will can from masterSite client record
              customIdentity.setMasterSiteCode(owner2Code);
@@ -32154,12 +32165,16 @@ public void deleteAllHidden() {
     }
 
     @Transactional
-    // comes here via f:viewAction 
-    //may come here because of new incoming email and processed by sendgrid site 
-    // need to add logic to validate post data and process email data
-    // type 1 for customer,2 vendor, 3 employee
-    // it is assumed hacker wont be able to guess the combination of keycode and sid. risk and impact is low
-
+    /**
+    * method is used to unsubcribe from mailing  
+    * comes here via f:viewAction 
+    * may come here because of new incoming email and processed by sendgrid site 
+    * need to add logic to validate post data and process email data
+    * @return void
+    * @param type 1 for customer,2 vendor, 3 employee
+    * it is assumed hacker wont be able to guess the combination of keycode and sid. risk and impact is low
+    * @exception no record found
+    */ 
     public void doUnsc(String keyCode,Integer unsc,int type) {
         switch (type){
          case 1:
@@ -32171,7 +32186,7 @@ public void deleteAllHidden() {
             unc = (${customerEntityName?cap_first}) q.getSingleResult();
             unc.setZaxxzzfxhhxxxxxxxxxxstatusfl(unc.getZaxxzzfxhhxxxxxxxxxxstatusfl() | mnoMail );
             unc.setZbxxcztxlxxxxxxxxxxxstatusfldt(Calendar.getInstance().getTime());
-	       ${customerEntityName}Home.setInstance(unc);
+            ${customerEntityName}Home.setInstance(unc);
             ${customerEntityName}Home.persist();
           } catch (javax.persistence.NoResultException nre) {
            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -32217,11 +32232,16 @@ public void deleteAllHidden() {
     }
 
     @Transactional
-    // comes here via f:viewAction 
-    //may come here because of new incoming email and processed by sendgrid site 
-    // need to add logic to validate post data and process email data
-    // type 1 for customer,2 vendor, 3 employee
-    // it is assumed hacker wont be able to guess the combination of keycode and sid. risk and impact is low
+    /**
+    * method is used to subcribe to mailing  
+    * comes here via f:viewAction 
+    * may come here because of new incoming email and processed by sendgrid site 
+    * need to add logic to validate post data and process email data
+    * @return void
+    * @param type 1 for customer,2 vendor, 3 employee
+    * it is assumed hacker wont be able to guess the combination of keycode and sid. risk and impact is low
+    * @exception no record found
+    */ 
 
     public void dosc(String keyCode,Integer unsc,int type) {
         switch (type){
@@ -32234,7 +32254,7 @@ public void deleteAllHidden() {
             unc = (${customerEntityName?cap_first}) q.getSingleResult();
             unc.setZaxxzzfxhhxxxxxxxxxxstatusfl(unc.getZaxxzzfxhhxxxxxxxxxxstatusfl() & _mnoMail );
             unc.setZbxxcztxlxxxxxxxxxxxstatusfldt(Calendar.getInstance().getTime());
-	    ${customerEntityName}Home.setInstance(unc);
+           ${customerEntityName}Home.setInstance(unc);
             ${customerEntityName}Home.persist();
           } catch (javax.persistence.NoResultException nre) {
            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -32250,7 +32270,7 @@ public void deleteAllHidden() {
             unv = (${vendorEntityName?cap_first}) q.getSingleResult();
             unv.setZdxxzzfxhhxxxxxxxxxxstatusfl(unv.getZdxxzzfxhhxxxxxxxxxxstatusfl() & _mnoMail );
             unv.setZexxcztxlxxxxxxxxxxxstatusfldt(Calendar.getInstance().getTime());
-	       ${vendorEntityName}Home.setInstance(unv);
+            ${vendorEntityName}Home.setInstance(unv);
             ${vendorEntityName}Home.persist();
           } catch (javax.persistence.NoResultException nre) {
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -32267,7 +32287,7 @@ public void deleteAllHidden() {
             une = (${employeeEntityName?cap_first}) q.getSingleResult();
             une.setZexxzzfxhhxxxxxxxxxxstatusfl(une.getZexxzzfxhhxxxxxxxxxxstatusfl() & _mnoMail );
             une.setZfxxcztxlxxxxxxxxxxxstatusfldt(Calendar.getInstance().getTime());
-	       ${employeeEntityName}Home.setInstance(une);
+            ${employeeEntityName}Home.setInstance(une);
             ${employeeEntityName}Home.persist();
           } catch (javax.persistence.NoResultException nre) {
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -32280,10 +32300,16 @@ public void deleteAllHidden() {
 
 
     @Transactional
-    // comes here via f:viewAction  entry
-    //may come here because of new site and client registration ie admin,manager or new SignUp or new Demo User
-    // doSignUp and doRegister and doDemo all sends activation link via EMail and on receive will invoke doActivate 
-    // which finds the user which has activation pending and process it
+    /**
+    * method is used to activate new user after signup or create site  
+    * comes here via f:viewAction 
+    * may come here because of new site and client registration ie admin,manager or new SignUp or new Demo User
+    * doSignUp and doRegister and doDemo all sends activation link via EMail and on receive will invoke doActivate 
+    * which finds the user which has activation pending and process it
+    * @return void
+    * @param none
+    * @exception no record found
+    */ 
 
     public void doActivate(String activationKey) {
         Query q = entityManager.createQuery("select cc from ${userEntityName?cap_first} cc where cc.c9xxuxxxbvxxxxxxxxxxactivationkey=:activationKey");
@@ -32301,20 +32327,18 @@ public void deleteAllHidden() {
            if (!activatedUser.getA0xxukuxbvxxxxxxxxxxid().equals("admin")) {
             return;
            }
-
-		 ${userEntityName?cap_first} the2ndUser  = new ${userEntityName?cap_first}();
-		 try {
-			the2ndUser = (${userEntityName?cap_first}) entityManager
-					.createQuery(
-							"select cc from ${userEntityName?cap_first} cc where cc.a0xxukuxbvxxxxxxxxxxid='manager' AND cc.z1xxzzfxhhxxxxxxxxxxstatusfl=:statusfl and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by cc.a0xxuobxbxxxxxxxxxxxsid asc")
-					.setParameter("statusfl", mpartial).setParameter(
-							"owner2", owner2Code).getSingleResult();
+          ${userEntityName?cap_first} the2ndUser  = new ${userEntityName?cap_first}();
+          try {
+                 the2ndUser = (${userEntityName?cap_first}) entityManager
+	.createQuery(
+	"select cc from ${userEntityName?cap_first} cc where cc.a0xxukuxbvxxxxxxxxxxid='manager' AND cc.z1xxzzfxhhxxxxxxxxxxstatusfl=:statusfl and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by cc.a0xxuobxbxxxxxxxxxxxsid asc")
+	.setParameter("statusfl", mpartial).setParameter(
+	"owner2", owner2Code).getSingleResult();
                 if (the2ndUser != null) {
                  the2ndUser.setC9xxuxxxbvxxxxxxxxxxactivationkey(null);
                  the2ndUser.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mactive);
                 }
-
-		} catch (NoResultException ignore) {
+            } catch (NoResultException ignore) {
 		}
                 try {
                  // now send an email to manager re steps to setup site but needs to setup userhome instance
@@ -32322,7 +32346,7 @@ public void deleteAllHidden() {
                  ${userEntityName}Home.setInstance(activatedUser);
                  Emailsend("/siteSetupSteps.xhtml","to you explaining site set up steps");
                 } catch (Exception zzz) {
-		    log.severe(" siteSetupSteps Send eMail failed: " + zzz.getMessage());
+	    log.severe(" siteSetupSteps Send eMail failed: " + zzz.getMessage());
                 }
 
 
@@ -32369,11 +32393,22 @@ public void deleteAllHidden() {
 
 		}
 	}
+/**
+*  used to send emails and called by master and other sites for admin functions like site activation, pw reset
+* 1. if mailRelayoff  in client version/record 01 has checkmark blank (default) , then gather mailRelay (05 record) smtp server/port/etc information ,
+* 2. if mailRelayoff has checkMark on, then gather site (01 record) smtp server/port/etc information
+* 3. Then gather gmail server information, if record 07 has information
+* 4  If valid gMail info then use it, otherwise use mailRelay or site smtp depending on mailRelayOff checkbox.
+* 5. As redundancy, mailRelay will be tried if other options fail 
+* in case of activations, there are two owner2/clients involved one is new client and raaspi
+* allways use the url to resolve since for a new client email will be sent from master site
+" @see "xxxcustomerlist emailRender method used by all sites to send emails and txns email"
+* @see "createClientRecord01 for record01 and 05"
+*/ 
         public Void emailRender(String content) throws MessagingException, IOException{
          // in case of activations, there are two owner2/clients involved one is new client and raaspi
          // allways use the url to resolve since for a new client email will be sent from raaspi
          // called by raaspi and other sites for admin functions like site activation, pw reset
-         //@see list emailRender method used by all sites to send emails and txns email
          String bodyj="";//
          String smtpOwner=owner2Code;
          // check if master site, a subdomain serverName can also include master site name 
@@ -32390,21 +32425,33 @@ public void deleteAllHidden() {
          /// templates will replace subject and body only
 
          String fromName = this.owner2Code;//can be overridden 
-         String fromAddress = "via@3rcomputer.com"; // if mailRelay otherwise smtpuser say mail@raaspi.com  or xxx@gmail.com
+         String fromAddress = " ";//override this with xxx.yyyy.com where yyyy.com is registered with sendgrid or mail relay server
+         if(!mailRelayOff){
+          fromAddress ="via@"+customIdentity.getMasterSiteUrl(); // via@3rcomputer.com if mailRelay otherwise smtpuser say mail@raaspi.com  or xxx@gmail.com
+         }else{
+          fromAddress=this.getClientEmail();//useremployee/client email
+         }
+         String fromAddress05=fromAddress;
+         String siteAddress05="";// if site uses email address using another domain name
          // re fromAddress, if mailrelayOff  domain name should match smtp host, otherwise you may get spam or phising warning
          // client/employee record further down holds email address, if mailRelay, smtp smtp host is 3rcomputer
          //do not change clientEmail as it contains passwords for activation.fmt
          String replyToName = "No Reply";// implies system generated email
-         String replyToAddress = "no-reply@3rcomputer.com";
+         String replyToAddress ="no-reply@" +customIdentity.getMasterSiteUrl(); //no-reply@3rcomputer.com
+         String replyToAddresso5=replyToAddress;
          String toName = ""; //specify in case stmt as needed, clientEmail holds passwords if activation.fmt
          String toAddress ="";// specify in case stmt
          String ccName = "support";
-         String ccAddress = "support@3rcomputer.com";
+         String ccAddress = "support@"+customIdentity.getMasterSiteUrl();
          // remove hardcoding , store in client record 01
+         String host05="smtp.sendgrid.net";
          String host="smtp.sendgrid.net";
+         int port05=587;
          int port=587;//465 is used for ssl only, which is replaced by tls. 587 is used by both tls and non ssl
+         String userName05="apikey";
          String userName="apikey";
-         String password="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";
+         String password05="SG.BxxxxxxxxxxyyyyyiBg";//manually enter in client record 05
+         String password="SG.BxxxxxxxxxxyyyyyiBg";//manually enter in client records
          boolean auth=true;
          String auth_mechanisms="LOGIN PLAIN DIGEST-MD5 NTLM";
          //gmail use XOAUTH2 , if null auth will use id/password, if XOAUTH2 then email as id/access token 
@@ -32418,23 +32465,22 @@ public void deleteAllHidden() {
          //envelop_from_address is used for bounce reply ie for invalid address or spam detection, like a package return address as in postoffice
          //fromAddress shows the actual email from address and either that or if present replyToAddres is where email reply will goto, like the sender of a package as in postoffice
          // most of the time they are are same but can be different if needed  
-         String ENVELOPE_FROM_ADDRESS = "support@3rcomputer.com";//override and make this same as fromAddress in case stmt
+         String ENVELOPE_FROM_ADDRESS = "support@"+customIdentity.getMasterSiteUrl(); //support@3rcomputer.com, override and make this same as fromAddress in case stmt
          // let the actual client see what got bounced rather than support@3rcomputer
          // jay needs testing before changing envelope from Address, may conflict with dkim record
          //SessionConfig mailConfig = TestMailConfigs.standardConfig();//TestMailConfigs.java
          try {
                  ${clientEntityName?cap_first} client =(${clientEntityName?cap_first}) entityManager
-					.createQuery(
-							"select cc from ${clientEntityName?cap_first} cc where cc.${clientClientversion} = :nKeyName and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by cc.a0xxuobxbxxxxxxxxxxxsid asc")
-					.setParameter("nKeyName","01")
-					.setParameter("owner2", smtpOwner)
-					.getSingleResult();
-		      if (client == null) {
+	.createQuery(
+	"select cc from ${clientEntityName?cap_first} cc where cc.${clientClientversion} = :nKeyName and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by cc.a0xxuobxbxxxxxxxxxxxsid asc")
+	.setParameter("nKeyName","01")
+	.setParameter("owner2", smtpOwner)
+	.getSingleResult();
+                  if (client == null) {
                        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-                                     FacesMessage.SEVERITY_ERROR,bundle.getString("create") +" "+bundle.getString("site") +" "+smtpOwner+" "+bundle.getString("first"),""));
-
+                        FacesMessage.SEVERITY_ERROR,bundle.getString("create") +" "+bundle.getString("site") +" "+smtpOwner+" "+bundle.getString("first"),""));
                        return null ;
-                      }
+                  }
 
                       if(client.getY1xxuxxxbvxxxxxxxxxxrootdir()!=null && !client.getY1xxuxxxbvxxxxxxxxxxrootdir().isEmpty()){
                        fromName = client.getY1xxuxxxbvxxxxxxxxxxrootdir();//rootdir holds smtp email send fromname (default owner2)
@@ -32445,7 +32491,43 @@ public void deleteAllHidden() {
                         mailRelayOff=false;
                       }
                       if(!mailRelayOff){
-                       //add logic here to read default values from client record 02 SMTP etc to allow non sendgrid
+                       //means mailRelayOn,added logic here to read default values from client record 05 for default smtp relay server like sendgrid
+                       ${clientEntityName?cap_first} client05 =null;
+                       try {
+                              client05 =(${clientEntityName?cap_first}) entityManager
+		.createQuery(
+		"select cc from ${clientEntityName?cap_first} cc where cc.${clientClientversion} = :nKeyName and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by cc.a0xxuobxbxxxxxxxxxxxsid asc")
+		.setParameter("nKeyName","05")
+		.setParameter("owner2", owner2Code)
+		.getSingleResult();
+                             if(client05 !=null ){
+                              host=client05.getZ8xxuxxxbvxxxxxxxxxxsmtpserver();//exmpl smtp.sendgrid.net
+                              port=client05.getL6xxzxxrbvxxxxxxxxxxaltselen();//use 587 as default
+                              if (port==0){
+                               port=587;
+                              }
+                              fromAddress=client05.getD5xxuxxrbvxxxxxxxxxxrmailaddr();//exmpl mail@raaspi.com 
+                              fromAddress05=fromAddress;
+                              siteAddress05=client05.getD4xxhxxrbv24xxxxxxxximailaddr();//exmpl mail@raaspi.com 
+                              userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
+                              userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
+                              userName05=userName;
+                              password=client05.getDbxxuzxdssxxxxxxxxxxapiclientsecret();//access token
+                              password05=password;
+                              if(password == null || password.isEmpty() || password.equals("SG.BxxxxxxxxxxyyyyyiBg") ){
+                               smtpError=true; //both record 01 and 05 checked
+                               FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+                                FacesMessage.SEVERITY_INFO,bundle.getString("MailRelay")+" "+host+" "+bundle.getString("smtp")+" "+bundle.getString("password")+" / "+bundle.getString("ApiSecret")+" "+bundle.getString("information") +" "+bundle.getString("invalid"),""));
+                               bcontinue=false;
+                               return null;
+                              }
+                             }
+                        } catch (Exception exc) {
+                               FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+                                FacesMessage.SEVERITY_INFO,bundle.getString("Client") +" "+bundle.getString("record")+" "+bundle.getString("05")+" "+bundle.getString("for")+" "+bundle.getString("mailRelay") +" "+bundle.getString("missing"),""));
+                               bcontinue=false;
+                               return null;
+                        }
                       }else{
                        if(client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver()!=null && !client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().isEmpty()){
                         host=client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver();
@@ -32561,7 +32643,7 @@ public void deleteAllHidden() {
          }
          //below common for raaspi and others
          SessionConfig mailConfig = TestMailConfigs.standardConfig(host,port,userName,password,auth,ssl,auth_mechanisms);
-         String messageId = "jay@3rcomputer.com";
+         String messageId = "id@"+customIdentity.getMasterSiteUrl(); //jay@3rcomputer.com
          String resourceName="";  
   
  
@@ -32575,7 +32657,13 @@ public void deleteAllHidden() {
             fromAddress=userName;// smtpuser mail@raaspi.com (raaspi)or jaymitra@3rcomputer.com (3rcomputer) valid email and dom part matches
             replyToAddress=fromAddress;//otherwise gmail puts via??
          }else{
-            fromAddress="via@3rcomputer.com";// assuming 3rcomputer smtp (privateemail)  is used for mailrelay (sendgrid)
+            //relay being used , via@xxx needs to be specified and site may not have its own domain email . They need to be specified in client record 05 field 
+            fromAddress=fromAddress05;// via@3rcomputer.com, assuming 3rcomputer smtp (privateemail)  is used for mailrelay (sendgrid)
+            if(siteAddress05 != null && !siteAddress05.isEmpty()){
+             ENVELOPE_FROM_ADDRESS =siteAddress05;
+             toName =siteAddress05;
+             toAddress =siteAddress05;
+            }
          }
 
          switch (content) {
@@ -32623,8 +32711,8 @@ public void deleteAllHidden() {
            resourceName="getactivation.fmt";
            break;
           case "/activationSetup.xhtml":
-           toName = "support@3rcomputer.com";//alias will send to jaymitra@3rcomputer.com
-           toAddress = "support@3rcomputer.com";
+           toName = "support@"+customIdentity.getMasterSiteUrl(); //support@3rcomputer.com, alias will send to jaymitra@3rcomputer.com
+           toAddress = "support@"+customIdentity.getMasterSiteUrl(); //support@3rcomputer.com
            subjectTemplate=this.instance.getZzxxu2oxxhxxxxxxxxxxowner2()+" -- server side Create Site Setup steps ";
            resourceName="activationSetup.fmt";
            break;
@@ -32705,9 +32793,10 @@ public void deleteAllHidden() {
         }
 
         }catch(Exception ex){
- 	    log.severe("Error in sending email"+ ex);//continue
-            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-             FacesMessage.SEVERITY_ERROR,bundle.getString("Email") +" "+bundle.getString("send")+" "+bundle.getString("failed") ,""));
+         bcontinue=false;
+         log.severe("Error in sending email"+ ex);//continue
+         FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+         FacesMessage.SEVERITY_ERROR,bundle.getString("Email") +" "+bundle.getString("send")+" "+bundle.getString("failed") ,""));
           String cause="";
           if(ex.getCause() !=null && ex.getCause().getCause()!=null){
            cause=ex.getCause().getCause().getMessage();
@@ -32738,10 +32827,10 @@ public void deleteAllHidden() {
          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
           FacesMessage.SEVERITY_ERROR,bundle.getString("Alternate")+" "+bundle.getString("Email") +" "+bundle.getString("send")+" "+bundle.getString("being")+" "+bundle.getString("tried") ,""));
          mailRelayOff=false;
-         host="smtp.sendgrid.net";
-         port=587;//465 is used for ssl only, which is replaced by tls. 587 is used by both tls and non ssl
-         userName="apikey";
-         password="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";
+         host=host05; //smtp.sendgrid.net
+         port=port05;//587, 465 is used for ssl only, which is replaced by tls. 587 is used by both tls and non ssl
+         userName=userName05; //apikey
+         password=password05;//SG.xxxxg
          auth=true;
          ssl=false;
          mailConfig = TestMailConfigs.standardConfig(host,port,userName,password,auth,ssl,auth_mechanisms);
@@ -33674,7 +33763,7 @@ public void deleteAllHidden() {
     * @param args two. new site name,eMail 
     * @return boolean true or false, if error
     * @exception None 
-    * @see createclientregister() which will get depecated by this
+    * @see "createclientregister() which will get depecated by this"
     * 
     */
     @Transactional
@@ -33790,10 +33879,16 @@ public void deleteAllHidden() {
       yxxxch522xhhxxhxxxxxclientHome.persist(owner2Code);//client record 01 created
 
       this.instance.setYxxxch522xhhxxhxxxxxclient(yxxxch522xhhxxhxxxxxclient);
-      // create record 05 to hold ??
+      // create record 05 to hold sendgrid or default mail relay api id/secret to avoid hardcoding in source code
       yxxxch522xhhxxhxxxxxclientHome.clearInstance();
       yxxxch522xhhxxhxxxxxclient=yxxxch522xhhxxhxxxxxclientHome.getInstance();
       yxxxch522xhhxxhxxxxxclient.setA0xxukxxbvxxxxxxxxxxclientversion("05");
+      yxxxch522xhhxxhxxxxxclient.setDbxxuzxdssxxxxxxxxxxapiclientsecret("SG.BxxxxxxxxxxyyyyyiBg");
+      yxxxch522xhhxxhxxxxxclient.setZ8xxuxxxbvxxxxxxxxxxsmtpserver("smtp.sendgrid.net");
+      yxxxch522xhhxxhxxxxxclient.setZ9xxuxxxbvxxxxxxxxxxsmtpuser("apikey");
+      yxxxch522xhhxxhxxxxxclient.setD5xxuxxrbvxxxxxxxxxxrmailaddr(customIdentity.getMasterSiteEmail());
+      yxxxch522xhhxxhxxxxxclient.setDaxxuzxdssxxxxxxxxxxapiclientid("VxxxxxxA");
+      yxxxch522xhhxxhxxxxxclient.setL6xxzxxrbvxxxxxxxxxxaltselen(587);
       yxxxch522xhhxxhxxxxxclientHome.persist(owner2Code);
 
       // update coupon as closed ie being used
@@ -33960,10 +34055,16 @@ public void deleteAllHidden() {
       ${clientEntityName}Home.persist(owner2Code);//record 01 created
 
       this.instance.set${clientEntityName?cap_first}(${clientEntityName});
-      // create record 05 to hold ???
+      // create record 05 to hold sendgrid or default mail relay api id/secret to avoid hardcoding it source code
       yxxxch522xhhxxhxxxxxclientHome.clearInstance();
       yxxxch522xhhxxhxxxxxclient=yxxxch522xhhxxhxxxxxclientHome.getInstance();
       yxxxch522xhhxxhxxxxxclient.setA0xxukxxbvxxxxxxxxxxclientversion("05");
+      yxxxch522xhhxxhxxxxxclient.setDbxxuzxdssxxxxxxxxxxapiclientsecret("SG.BxxxxxxxxxxyyyyyiBg");
+      yxxxch522xhhxxhxxxxxclient.setZ8xxuxxxbvxxxxxxxxxxsmtpserver("smtp.sendgrid.net");
+      yxxxch522xhhxxhxxxxxclient.setZ9xxuxxxbvxxxxxxxxxxsmtpuser("apikey");
+      yxxxch522xhhxxhxxxxxclient.setD5xxuxxrbvxxxxxxxxxxrmailaddr(customIdentity.getMasterSiteEmail());
+      yxxxch522xhhxxhxxxxxclient.setDaxxuzxdssxxxxxxxxxxapiclientid("VxxxxxxA");
+      yxxxch522xhhxxhxxxxxclient.setL6xxzxxrbvxxxxxxxxxxaltselen(587);
       yxxxch522xhhxxhxxxxxclientHome.persist(owner2Code);
 
     }
@@ -49051,7 +49152,7 @@ public String generateCoupons(int howMany,String prefix){
     * calls addProductToTrial if type trial or addProductToOrder for other types
     * @param arg2-2 quantity, type(trial or others)
     * sid from item selected comes overRideValue and calling sidToEntity   
-    * @see addProductToOrder
+    * @see "addProductToOrder"
 */
 
     public String addProductToOrderParam(BigDecimal quantity,String type) {
@@ -49087,7 +49188,7 @@ public String generateCoupons(int howMany,String prefix){
     *  allows backoffice to open case on behalf of customers and assign case to employee
     * @param args -3 item,quantity, type cart,basket or cartInvoice. cart covers both cart and cart(pos) 
     * At this point if order type is cart then term is blank because payment/deliv option not chosen yet
-    * @see addProductToOrderParam
+    * @see "addProductToOrderParam"
 */
     public void addProductToOrder(${itemEntityName?cap_first} product, BigDecimal quantity,String type) {
                  // moved on top to allow query without email/login
@@ -52974,8 +53075,8 @@ public String generateCoupons(int howMany,String prefix){
     * the Persistence Context if the id is defined. Otherwise a new instance is 
     * created.
     * 
-    * @see #find()
-    * @see #createInstance() at top of this source
+    * @see "#find()"
+    * @see "#createInstance() at top of this source"
     */
    protected void initInstance()
    {
@@ -53006,8 +53107,8 @@ public String generateCoupons(int howMany,String prefix){
     * {@link javax.faces.application.FacesMessage} is added and a transaction 
     * success event raised.
     * 
-    * @see Home#updatedMessage()
-    * @see Home#raiseAfterTransactionSuccessEvent()
+    * @see "Home#updatedMessage()"
+    * @see "Home#raiseAfterTransactionSuccessEvent()"
     * 
     * @return "updated" if the update is successful
     */
@@ -53055,8 +53156,8 @@ public String generateCoupons(int howMany,String prefix){
     * {@link javax.faces.application.FacesMessage } is added and a transaction 
     * success event raised.
     * 
-    * @see Home#createdMessage()
-    * @see Home#raiseAfterTransactionSuccessEvent()
+    * @see "Home#createdMessage()"
+    * @see "Home#raiseAfterTransactionSuccessEvent()"
     * 
     * @return "persisted" if the persist is successful
     */
@@ -53092,8 +53193,8 @@ public String generateCoupons(int howMany,String prefix){
     * {@link javax.faces.application.FacesMessage} is added and a transaction 
     * success event raised.
     * 
-    * @see Home#deletedMessage()
-    * @see Home#raiseAfterTransactionSuccessEvent()
+    * @see "Home#deletedMessage()"
+    * @see "Home#raiseAfterTransactionSuccessEvent()"
     * 
     * @return "removed" if the remove is successful
     */

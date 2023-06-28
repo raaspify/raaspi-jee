@@ -2705,50 +2705,64 @@ protected String getCountEjbql()
         }
 
     }
+/**
+*  used to send emails and called by send() and previewSend or from cart/txn esend to send txn and regular emails
+* 1. if mailRelayoff  in client version/record 01 has checkmark blank (default) , then gather mailRelay (05 record) smtp server/port/etc information ,
+* 2. if mailRelayoff has checkMark on, then gather site (01 record) smtp server/port/etc information
+* 3. Then gather gmail server information, if record 07 has information
+* 4  If valid gMail info then use it, otherwise use mailRelay or site smtp depending on mailRelayOff checkbox.
+* 5. As redundancy, mailRelay will be tried if other options fail 
+* for flag e we can use variable mailingAddress to override toAddress,name and client email as cc (add as an option via client flag)
+* for flag x we dont override, x-smtpi header has the email addresses and client email gets a copy as a real toAddress
+* default can stay, its better to overide with clientEmail , also ebasketin will override it, icalsend uses mailingAddress(??)  
+* templates will replace subject and body only
+* header("X-SMTPAPI",headers) for m:header name="X-SMTPAPI" value="#{nxxxiha4rxwwqqhxxxxxgenfieldsList.headers}" 
+* headers xml string of all to: addresses
+" @see "xxxcustomerhome emailRender method to send admin type emails"
+* @see "createClientRecord01 for record01 and 05"
+*/ 
+
       public Void emailRender(String content,String flag) throws MessagingException, IOException{
-         /// called by send() and previewSend or from cart/txn esend to send txn and regular emails
-         /// for flag e we can use variable mailingAddress to override toAddress,name and client email as cc (add as an option via client flag)
-         /// for flag x we dont override, x-smtpi header has the email addresses and client email gets a copy as a real toAddress
-         ///  default can stay, its better to overide with clientEmail , also ebasketin will override it, icalsend uses mailingAddress(??)  
-         /// templates will replace subject and body only
-         /// header("X-SMTPAPI",headers) for m:header name="X-SMTPAPI" value="#{nxxxiha4rxwwqqhxxxxxgenfieldsList.headers}" 
-         /// headers xml string of all to: addresses
-         //@see home emailRender to send admin type emails
          String fromName = this.owner2Code;//site name
-         String fromAddress = "support@3rcomputer.com";//do not override this other than xx@3rcomputer.com to avoid spam or phising warning
+         String fromAddress = " ";//override this with xxx.yyyy.com where yyyy.com is registered with sendgrid or mail relay server
+         String siteAddress05="";// if site uses email address using another domain name
+         // to avoid spam or phising warning.
          // mail relay is done using @3rcomputer.com mail service, so fromAddress should match domain name
          //esend() already put value in clientEMail
          //fromAddress=clientEMail;
          if(!mailRelayOff){
-          fromAddress="via@3rcomputer.com";
+          fromAddress ="via@"+customIdentity.getMasterSiteUrl(); // via@3rcomputer.com if mailRelay otherwise smtpuser say mail@raaspi.com  or xxx@gmail.com
          }else{
           fromAddress=getClientEMail();//useremployee/client email
          }
          String replyToName = "No Reply";
-         String replyToAddress = "no-reply@3rcomputer.com";
+         String replyToAddress ="no-reply@" +customIdentity.getMasterSiteUrl(); //no-reply@3rcomputer.com
          // stack forum says replyTo can be diff from from domain name, so use logon id user email , can create a user with no-reply email
          // for replyTo try using clientEMail which is employee email or client email sept05 check for empty
          replyToName= " ";
          if(!clientEMail.isEmpty()){
           replyToAddress=clientEMail;
          }
-         String toName = " ";
-         String toAddress = "support@3rcomputer.com";
- 
+         String toName = "support ";
+         String toAddress = "support@"+customIdentity.getMasterSiteUrl(); //support@3rcomputer.com
          String ccName = "ratna";
          String ccAddress = ""; 
 
          String htmlBody = "<html><body><b>Hello</b> World!</body></html>";
          String textBody = "This is a Text Body!";
 
-         String ENVELOPE_FROM_ADDRESS = "support@3rcomputer.com";
+         String ENVELOPE_FROM_ADDRESS = "support@"+customIdentity.getMasterSiteUrl();//support@3rcomputer.com
 
          //SessionConfig mailConfig = TestMailConfigs.standardConfig();
-         String messageId = "jay@3rcomputer.com";
+         String messageId = "id@"+customIdentity.getMasterSiteUrl(); //jay@3rcomputer.com
+         String host05="smtp.sendgrid.net";
          String host="smtp.sendgrid.net";
+         int port05=587;
          int port=587;//465 is used for ssl only, which is replaced by tls. 587 is used by both tls and non ssl
+         String userName05="apikey";
          String userName="apikey";
-         String password="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";
+         String password05="SG.BxxxxxxxxxxyyyyyiBg";//manually enter in client record 05
+         String password="SG.BxxxxxxxxxxyyyyyiBg";//manually enter in client records
          boolean auth=true;
          String auth_mechanisms="LOGIN PLAIN DIGEST-MD5 NTLM";
          //gmail use XOAUTH2 , if null auth will use id/password, if XOAUTH2 then email as id/access token 
@@ -2762,11 +2776,11 @@ protected String getCountEjbql()
          try {
           //Yxxxch522xhhxxhxxxxxclient client=yxxxch522xhhxxhxxxxxclientList.getKeyToEntity("01"); needs inject
           Yxxxch522xhhxxhxxxxxclient client =(Yxxxch522xhhxxhxxxxxclient) entityManager
-					.createQuery(
-							"select cc from Yxxxch522xhhxxhxxxxxclient cc where cc.a0xxukxxbvxxxxxxxxxxclientversion = :nKeyName and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2")
-					.setParameter("nKeyName","01")
-					.setParameter("owner2", owner2Code)
-					.getSingleResult();
+	.createQuery(
+	"select cc from Yxxxch522xhhxxhxxxxxclient cc where cc.a0xxukxxbvxxxxxxxxxxclientversion = :nKeyName and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2")
+	.setParameter("nKeyName","01")
+	.setParameter("owner2", owner2Code)
+	.getSingleResult();
 
           if (client == null) {
                        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -2780,8 +2794,37 @@ protected String getCountEjbql()
                         mailRelayOff=false;
                       }
                       if(!mailRelayOff){
-                       //sendgrid host,userName, password already set as default
-                       //jay add logic to use version 08 client record to avoid hard coding and any mail relay
+                       //means mailRelayOn,added logic here to read default values from client record 05 for default smtp relay server like sendgrid
+                       Yxxxch522xhhxxhxxxxxclient client05 =null;
+                       try {
+                              client05 =(Yxxxch522xhhxxhxxxxxclient) entityManager
+		.createQuery(
+		"select cc from Yxxxch522xhhxxhxxxxxclient cc where cc.a0xxukxxbvxxxxxxxxxxclientversion = :nKeyName and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by cc.a0xxuobxbxxxxxxxxxxxsid asc")
+		.setParameter("nKeyName","05")
+		.setParameter("owner2", owner2Code)
+		.getSingleResult();
+                             if(client05 !=null){
+                              fromAddress=client05.getD5xxuxxrbvxxxxxxxxxxrmailaddr();//show in o5 quick edit, need to match the sender info setup in mailrelay server
+                              siteAddress05=client05.getD4xxhxxrbv24xxxxxxxximailaddr();//exmpl mail@raaspi.com 
+                              host=client05.getZ8xxuxxxbvxxxxxxxxxxsmtpserver();//exmpl smtp.sendgrid.net
+                              userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
+                              userName05=userName;
+                              password=client05.getDbxxuzxdssxxxxxxxxxxapiclientsecret();//access token
+                              password05=password;
+                              if(password == null || password.isEmpty() || password.equals("SG.BxxxxxxxxxxyyyyyiBg") ){
+                               smtpError=true; //both record 01 and 05 checked
+                               FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+                                FacesMessage.SEVERITY_INFO,bundle.getString("MailRelay") +" "+host+" "+bundle.getString("smtp")+" "+bundle.getString("password")+" / "+bundle.getString("ApiSecret")+" "+bundle.getString("information") +" "+bundle.getString("invalid"),""));
+                               bcontinue=false;
+                               return null;
+                              }
+                             }
+                        } catch (Exception exc) {
+                               FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+                                FacesMessage.SEVERITY_INFO,bundle.getString("Client") +" "+bundle.getString("record")+" "+bundle.getString("05")+" "+bundle.getString("for")+" "+bundle.getString("mailRelay") +" "+bundle.getString("missing"),""));
+                               bcontinue=false;
+                               return null;
+                        }
                       }else{
                        if(client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver()!=null && !client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().isEmpty()){
                         host=client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver();
@@ -2913,6 +2956,11 @@ protected String getCountEjbql()
                    FacesMessage.SEVERITY_WARN,bundle.getString("Sender") +" "+bundle.getString("email")+" "+bundle.getString("address")+" "+bundle.getString("should")+" "+bundle.getString("be")+" "+bundle.getString("changed")+" "+bundle.getString("to")+" "+bundle.getString("avoid")+" "+bundle.getString("warning"),""));
           }
           */
+         }else{
+            //relay being used , via@xxx needs to be specified and site may not have its own domain email . They need to be specified in client record 05 field 
+            if(siteAddress05 != null && !siteAddress05.isEmpty()){
+             ENVELOPE_FROM_ADDRESS=siteAddress05;
+            }
          }
 
          
@@ -2928,7 +2976,7 @@ protected String getCountEjbql()
          String useTemplate="genfieldsMailingContent.fmt";
          toName = this.eMailFirstName+" "+this.eMailLastName;
          //this needs to be a valid format but not used. headers have real to:list
-         toAddress = "support@3rcomputer.com";
+         //override default value using pickList
          subjectTemplate=this.mailingSubject;
          boolean anyAtt=false;
          MailMessage mm =null;
@@ -3027,7 +3075,7 @@ protected String getCountEjbql()
           subjectTemplate=this.mailingSubject;
           // added ! to use sender's email, not default
           if(!getClientEMail().isEmpty() && !mailingAddress.isEmpty()){
-           toAddress=mailingAddress;// should not be empty if then default is support@3rcomputer.com
+           toAddress=mailingAddress;// should not be empty if empty  then default is support@customIdentity.getMasterSiteUrl()
           }///  value in e1mailAddress including coming from ebasketin gets added to xsmtpi header toAddress
           //if(!e1mailAddress.isEmpty()){
            //toAddress=e1mailAddress;
@@ -3342,6 +3390,7 @@ protected String getCountEjbql()
            //FacesMessage.SEVERITY_INFO,bundle.getString("email")+" "+bundle.getString("send")+" "+bundle.getString("for")+" "+ eMailTo,""));
 
     } catch (Exception e) {
+         bcontinue=false;
          log.severe("Error sending mail"+ e);
          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                                      FacesMessage.SEVERITY_INFO,bundle.getString("email")+" "+bundle.getString("sent")+" "+bundle.getString("failed"),""));

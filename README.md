@@ -7,10 +7,10 @@ To use RAASPI as a product, please refer to this repository releases and downloa
 For quick non production tryouts, select release tomee-hsqldb named raaspi-tomee-hsqldb. For production we recommend release tomee-psqldb named raaspi-tomee-psqldb or release wildfly-psqldb named raaspi-wildfly-psqldb.
 
 ## Enhance or modify the product
-If you are a developer and interested in contributiong to RAASPI for further development or make changes for your own usage, please read on.  
+If you are a developer and interested in contributing to RAASPI for further development or make changes for your own usage, please read on.  
 RAASPI source code is generated from freemarker templates and predefined models for many of the business applications including Small Business, ERP, Manufacturing, Agency, Clubs & Associations, Event Organizers. 
 
-Raaspi github repository is slightly different from a typical java project repository. Raaspi source is generated from templates and from datatables, so the developers should not work with and modify the generated source, as it will be overwritten. The repository directories src or view under r3-gen holds the templates and  directories like java, webapp under r3-gen/projects holds the final source.
+Raaspi github repository is slightly different from a typical java project repository. Raaspi source is generated from templates and from data tables, so the developers should not work with and modify the generated source, as it will be overwritten. The repository directories src or view under r3-gen holds the templates and  directories like java, webapp under r3-gen/projects holds the final source.
 
 So the development for Rasspi is a two step process-first modify templates and then generate source. Advantage is reusing logic and maintaining less code.
 github repository has a dir r3-gen which holds the templates in src dir, view dir and supporting resources in resources dir. Generated source goes into projects/genappcdi dir.
@@ -23,7 +23,7 @@ Then it generates action classes containing business logic and reports etc using
 The above command needs all the data base tables to be available so that it can create the model classes.
 There are generate.bat, generate.sh and generate-ee.bat,generate-ee.sh for convenience. The -ee produces scaled down RAASPI product and meant for Ecommerce only.   
 ### Details:
-Steps 1 to 4 are needed once, at the begining. Once done
+Steps 1 to 4 are needed once, at the beginning. Once done
 Step 1. Install postgresql locally.
 Step 2. Download fatajar, run.bat or run.sh from assets under release 2 named raaspi-tomee-psqldb
 Step 3. Create a dir say C:\genapp-tomee-psqldb-run-fatjar and copy the fatjar and run file into the dir. Modify run file to match postgresql settings.
@@ -35,10 +35,13 @@ Step 6. Once the schema and the tables exist, run generate.bat or sh generate.sh
 the output is in r3-gen\projects\genappcdi and structured in a way 
 to be copied and used as input to standard maven project build source dirs ie java, resources and webapp.
 It also produces report-templates dir to hold jasper report templates ie jrxml files.
-
 Any non app but Runtime config files are held in r3-gen\resources dir, examples being tomee or wildfly dir. 
 Along with the generated source files, these config files will be used to produce the application binaries.
-See separate repoositories like genapp-mvn-tomee-hsqldb-make-fatjar for more information.
+
+So from r3-gen\projects\genappcdi directory copy the sub directories java,resources,webapp and report-templates.
+Depending on the appServer, copy subdirectory tomee or wildfly for the needed configuration files to target src\main subdirectory.
+
+See separate repositories like genapp-mvn-tomee-hsqldb-make-fatjar for more information.
 
 The following gives detailed steps to produce javaDoc for the generated RAASPI java source.
 windows
@@ -62,7 +65,7 @@ If you think about it, most of the business functions follow a pattern The patte
 and someone like a Customer will buy or use it. And there are established process to carry out these buying and selling operations.
 We also need Employee who runs the operation or business.
 The pattern we just described applies to many applications. This pattern applies equally for a retailer who sells some merchandise as well as to an event
-organizer who sells event tickets. Even a bug or issues tracking system fllows the same pattern.
+organizer who sells event tickets. Even a bug or issues tracking system follows the same pattern.
 RAASPI utilizes this concept and generates the necessary code for a ready to use application using the following algorithm.
 
 ### RAASPI application generation algorithm: 
@@ -70,7 +73,7 @@ RAASPI utilizes this concept and generates the necessary code for a ready to use
  r3-gen-reveng.xml  under the resources dir has prefixes for the table and column names to control the code generation.
 2. Define templates for the logic as well as for the views. We will be using freemarker templates ie files ending with .ftl but other alternatives can be used.
 3. Define resources including javascripts, images, style sheets etc.
-4. Use maven and ant task to utilize hibernate reverse engineering process, which will take in the model definations, resources and the templates and ouput the
+4. Use maven and ant task to utilize hibernate reverse engineering process, which will take in the model definations, resources and the templates and output the
  target code language and view definitions. We will be using java and .xhml and .xml configuration files. 
 5. There is a final step to take the source and configuration files and other supporting files to create the binary meant for different run environment. 
  Examples Tomee or Wildfly Appserver and postgresql or hsqldb.
