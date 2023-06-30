@@ -19,7 +19,7 @@ import com.rcomputer.genapp.action.SimpleMailConfig;
 
 /**
  * 
- * @author Cody Lerum
+ * original author Cody Lerum
  * 
  */
 public class TestMailConfigs {
@@ -28,13 +28,13 @@ public class TestMailConfigs {
         final SimpleMailConfig mailConfig = new SimpleMailConfig();
         mailConfig.setServerHost(host);
         //mailConfig.setServerHost("smtp.sendgrid.net");
-        //mailConfig.setServerPort(465); feb 08 2018
+        //mailConfig.setServerPort(465); f
         mailConfig.setServerPort(port);
         //mailConfig.setServerPort(587);
         mailConfig.setUsername(userName);
         //mailConfig.setUsername("apikey");
         mailConfig.setPassword(password);
-        //mailConfig.setPassword("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");
+        //mailConfig.setPassword("SG.B**Bg");
         mailConfig.setAuth(auth);
         mailConfig.setAuth_mechanisms(auth_mechanisms);
         //mailConfig.setAuth(true);

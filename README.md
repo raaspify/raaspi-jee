@@ -17,42 +17,40 @@ github repository has a dir r3-gen which holds the templates in src dir, view di
 
 The following gives detailed steps to generate RAASPI source.
 ### Summary:
-The generation process uses hibernate reverse engineering and needs postgresql database and tables and freemarker based templates.
-The mvn command to generate source is mvn clean generate-sources. This first generates model classes using r3-reveng.xml and database tables.
+The generation process **step1** uses hibernate reverse engineering and needs postgresql database and tables and freemarker based templates .
+For **step 2**, the mvn command to generate source is mvn clean generate-sources. This first generates model classes using r3-reveng.xml and database tables.
 Then it generates action classes containing business logic and reports etc using freemarker templates and the model classes.
 The above command needs all the data base tables to be available so that it can create the model classes.
 There are generate.bat, generate.sh and generate-ee.bat,generate-ee.sh for convenience. The -ee produces scaled down RAASPI product and meant for Ecommerce only.   
+
 ### Details:
-Steps 1 to 4 are needed once, at the beginning. Once done
-Step 1. Install postgresql locally.
-Step 2. Download fatajar, run.bat or run.sh from assets under release 2 named raaspi-tomee-psqldb
-Step 3. Create a dir say C:\genapp-tomee-psqldb-run-fatjar and copy the fatjar and run file into the dir. Modify run file to match postgresql settings.
-Step 4. execute run file to invoke ROOT-exec.jar and RAASPI App will come up and then use localhost:8080 on a browser.
+Steps 1 to 4 below, are needed once, at the beginning. They are needed to make sure tables exist and model pojos are created using reveng.xml and the tables.
+Step 1. Install postgresql locally. 
+Step 2. Download fatajar, run.bat or run.sh from assets under release 2 named raaspi-tomee-psqldb  
+Step 3. Create a dir say C:\genapp-tomee-psqldb-run-fatjar and copy the fatjar and run file into the dir. Modify run file to match postgresql settings.  
+Step 4. execute run file to invoke ROOT-exec.jar and RAASPI App will come up and then use localhost:8080 on a browser.  
  It will detect it is a new installation and will create a schema called genapp and many tables under it. 
 Step 5. Optionally, change the templates
 
 Step 6. Once the schema and the tables exist, run generate.bat or sh generate.sh to invoke mvn clean generate-sources. This generates sources from templates and using r3-reveng.xml
 the output is in r3-gen\projects\genappcdi and structured in a way 
 to be copied and used as input to standard maven project build source dirs ie java, resources and webapp.
+For generate to work, r3-gen/build-r3gen.properties file connection values must match the local postgresql connection values.  
 It also produces report-templates dir to hold jasper report templates ie jrxml files.
 Any non app but Runtime config files are held in r3-gen\resources dir, examples being tomee or wildfly dir. 
 Along with the generated source files, these config files will be used to produce the application binaries.
 
-So from r3-gen\projects\genappcdi directory copy the sub directories java,resources,webapp and report-templates.
-Depending on the appServer, copy subdirectory tomee or wildfly for the needed configuration files to target src\main subdirectory.
 
-See separate repositories like genapp-mvn-tomee-hsqldb-make-fatjar for more information.
-
-The following gives detailed steps to produce javaDoc for the generated RAASPI java source.
-windows
-Generate file list:
+The following gives detailed steps to produce javaDoc for the generated RAASPI java source.  
+windows  
+Generate file list:  
 cd C:\genapp-mvn-create-fatjar-source\r3-gen\projects\genappcdi\java
 
 dir /s /b *.java > file.lst
 
 Generate javadoc: in dir javadocs
 cd C:\genapp-mvn-create-fatjar-source\r3-gen\projects\genappcdi\java
-if file.list exists
+if file.list exists  
 
 javadoc -d javadocs -author -version -nonavbar  @file.lst
 

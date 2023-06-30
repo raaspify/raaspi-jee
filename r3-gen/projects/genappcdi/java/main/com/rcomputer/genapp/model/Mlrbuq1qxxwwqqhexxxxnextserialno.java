@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 27-Jun-2023 8:43:30 PM by Hibernate Tools 4.0.0
+// Generated 30-Jun-2023 1:54:00 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
