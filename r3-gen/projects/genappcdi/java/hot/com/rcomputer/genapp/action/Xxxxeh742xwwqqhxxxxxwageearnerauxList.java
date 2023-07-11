@@ -2589,7 +2589,7 @@ protected String getCountEjbql()
                               host=client05.getZ8xxuxxxbvxxxxxxxxxxsmtpserver();//exmpl smtp.sendgrid.net
                               userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
                               userName05=userName;
-                              password=client05.getDbxxuzxdssxxxxxxxxxxapiclientsecret();//access token
+                              password=client05.getDbxxuzxdssxxxxxxxxxxapiclientsecret().trim();//access token
                               password05=password;
                               if(password == null || password.isEmpty() || password.equals("SG.BxxxxxxxxxxyyyyyiBg") ){
                                smtpError=true; //both record 01 and 05 checked
@@ -2621,7 +2621,7 @@ protected String getCountEjbql()
                            FacesMessage.SEVERITY_INFO,bundle.getString("client") +" "+bundle.getString("smtp")+" "+bundle.getString("userName")+" "+bundle.getString("information") +" "+bundle.getString("missing"),""));
                        }
                        if(client.getZaxxuxxxssxxxxxxxxxxsmtppass()!=null && !client.getZaxxuxxxssxxxxxxxxxxsmtppass().isEmpty()){
-                        password=client.getZaxxuxxxssxxxxxxxxxxsmtppass();
+                        password=client.getZaxxuxxxssxxxxxxxxxxsmtppass().trim();
                        }else{
                          //smtpError=true; check record 07 then act
                          //FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -2677,13 +2677,13 @@ protected String getCountEjbql()
           if(client !=null && client.getDaxxuzxdssxxxxxxxxxxapiclientid() !=null && !client.getDaxxuzxdssxxxxxxxxxxapiclientid().isEmpty()
               && client.getDbxxuzxdssxxxxxxxxxxapiclientsecret() !=null && !client.getDbxxuzxdssxxxxxxxxxxapiclientsecret().isEmpty()){
            auth_mechanisms="XOAUTH2";//gmail smtp
-           password=client.getDbxxuzxdssxxxxxxxxxxapiclientsecret();//access token
+           password=client.getDbxxuzxdssxxxxxxxxxxapiclientsecret().trim();//access token
            //check if token expired and refresh if needed
            calendar.getTime();
            calendare.setTime(client.getZfxxcztxlxxxxxxxxxxxstatusfldt());
            calendare.add(Calendar.MINUTE, 59);
            if(calendare.before(calendar)){
-            password=r3RestClient.getAccessTokenGMail(client.getDaxxuzxdssxxxxxxxxxxapiclientid(),"refresh_token",owner2Code );
+            password=r3RestClient.getAccessTokenGMail(client.getDaxxuzxdssxxxxxxxxxxapiclientid().trim(),"refresh_token",owner2Code );
            }      
            if(password == null || password.isEmpty()){
             smtpError=true; //both record 01 and 07 checked
@@ -2773,6 +2773,9 @@ protected String getCountEjbql()
          //emailingContent for emailing and attaching report as receipt 
           toName="";// mailingAddress set by esend using mailTo, headers are empty todo allow multilingual
           toAddress=mailingAddress;
+          if(siteAddress05 !=null && !siteAddress05.isEmpty()){
+           toAddress=siteAddress05;// avoid invalid email addr ie no email addr for site domain
+          }
           useTemplate="wageearnerauxeMailingContent.fmt";
          // esend from cart/transaction can be any of pdf/html/csv etc. If html, add report html text 
          // at end of bodyHtml
@@ -2857,6 +2860,9 @@ protected String getCountEjbql()
           if(!getClientEMail().isEmpty() && !mailingAddress.isEmpty()){
            toAddress=mailingAddress;// should not be empty if empty  then default is support@customIdentity.getMasterSiteUrl()
           }///  value in e1mailAddress including coming from ebasketin gets added to xsmtpi header toAddress
+          if(siteAddress05 !=null && !siteAddress05.isEmpty()){
+           toAddress=siteAddress05;// avoid invalid email addr ie no email addr for site domain
+          }
           //if(!e1mailAddress.isEmpty()){
            //toAddress=e1mailAddress;
           //}
@@ -2874,6 +2880,9 @@ protected String getCountEjbql()
              toAddress=e1mailAddress+", "+mailInfoTo; // added onetime e1mailAddr
             }else{
              toAddress=mailInfoTo;  
+             if(siteAddress05 !=null && !siteAddress05.isEmpty()){
+              toAddress=siteAddress05;// avoid invalid email addr ie no email addr for site domain
+             }
             }
             String[] myData = toAddress.split(", ");
             for (String s: myData) {
@@ -3036,7 +3045,7 @@ protected String getCountEjbql()
          // send again using new token is there subcode for expired or check token expiry?
          if(cause.contains("334")){
           
-          password=r3RestClient.getAccessTokenGMail(client.getDaxxuzxdssxxxxxxxxxxapiclientid(),"refresh_token",owner2Code );
+          password=r3RestClient.getAccessTokenGMail(client.getDaxxuzxdssxxxxxxxxxxapiclientid().trim(),"refresh_token",owner2Code );
           FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
            FacesMessage.SEVERITY_INFO,bundle.getString("Oauth")+" "+ bundle.getString("accessToken")+" "+bundle.getString("failure")+", ",""));
           FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
