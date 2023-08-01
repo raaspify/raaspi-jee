@@ -3082,8 +3082,8 @@ protected String getCountEjbql()
                              if(client05 !=null){
                               fromAddress=client05.getD5xxuxxrbvxxxxxxxxxxrmailaddr();//show in o5 quick edit, need to match the sender info setup in mailrelay server
                               siteAddress05=client05.getD4xxhxxrbv24xxxxxxxximailaddr();//exmpl mail@raaspi.com 
-                              host=client05.getZ8xxuxxxbvxxxxxxxxxxsmtpserver();//exmpl smtp.sendgrid.net
-                              userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
+                              host=client05.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().trim();//exmpl smtp.sendgrid.net
+                              userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser().trim();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
                               userName05=userName;
                               password=client05.getDbxxuzxdssxxxxxxxxxxapiclientsecret().trim();//access token
                               password05=password;
@@ -3103,14 +3103,14 @@ protected String getCountEjbql()
                         }
                       }else{
                        if(client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver()!=null && !client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().isEmpty()){
-                        host=client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver();
+                        host=client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().trim();
                        }else{
                          smtpError=true;
                          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                            FacesMessage.SEVERITY_INFO,bundle.getString("client") +" "+bundle.getString("smtp")+" "+bundle.getString("host")+" "+bundle.getString("information") +" "+bundle.getString("missing"),""));
                        }
                        if(client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser()!=null && !client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser().isEmpty()){
-                        userName=client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();
+                        userName=client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser().trim();
                        }else{
                          smtpError=true;
                          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -3222,7 +3222,7 @@ protected String getCountEjbql()
           if(fromAddress.contains("doNotReply@")){
            fromAddress="doNotReply@"+smtpDomain;
            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-              FacesMessage.SEVERITY_INFO, bundle.getString("select cc from")+" "+bundle.getString("email")+" "+bundle.getString("address")+" "+bundle.getString("defaulting")+" "+bundle.getString("to")+" "+fromAddress+", "+bundle.getString("ensure")+" "+bundle.getString("it")+" "+bundle.getString("exists"),""));
+              FacesMessage.SEVERITY_INFO, bundle.getString("from")+" "+bundle.getString("email")+" "+bundle.getString("address")+" "+bundle.getString("defaulting")+" "+bundle.getString("to")+" "+fromAddress+", "+bundle.getString("ensure")+" "+bundle.getString("it")+" "+bundle.getString("exists"),""));
           }else{
                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                    FacesMessage.SEVERITY_WARN,bundle.getString("select cc from_address") +" "+fromAddress+", "+bundle.getString("domain") +" "+bundle.getString("not")+" "+bundle.getString("matching")+" "+bundle.getString("smtp")+" "+bundle.getString("server")+" "+bundle.getString("domain")+" "+smtpDomain,""));
@@ -3265,7 +3265,7 @@ protected String getCountEjbql()
          // esend from cart/transaction can be any of pdf/html/csv etc atleast pdf or html
          //if html then it can be embedded (preferred) not as attachment
          if(flag.equals("e")){
-         subjectTemplate=bundle.getString("Transaction")+" "+bundle.getString("Receipt")+" "+bundle.getString("select cc from")+" "+owner2Code;
+         subjectTemplate=bundle.getString("Transaction")+" "+bundle.getString("Receipt")+" "+bundle.getString("from")+" "+owner2Code;
          //emailingContent for emailing and attaching report as receipt 
           toName="";// mailingAddress set by esend using mailTo, headers are empty todo allow multilingual
           toAddress=mailingAddress;

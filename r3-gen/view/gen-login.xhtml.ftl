@@ -131,9 +131,18 @@ its on the main menu
                 <div class="actionButtons">
                  <h:commandButton styleClass="btn btn-primary ;" rendered="${'#'}{!identity.loggedIn}" id="loginb"  value="Login" action="${'#'}{customIdentity.login}"/>
                  &nbsp;<h:button id="ltdone"  value="Cancel" propagation="end" outcome="/home.xhtml" />
-
-                 <h:commandButton id="resendAct" value="Resend Activation " action="${'#'}{yxxxuh566xwwqqwxxxxxuserHome.doResendActivationEmail()}"
-                  rendered = "${'#'}{yxxxuh566xwwqqwxxxxxuserHome}.activationPending}" />
+                 <br></br>
+                 <ui:fragment rendered ="${'#'}{yxxxuh566xwwqqwxxxxxuserList.userAuthNotMailedCount() gt 0}">     
+                  <div id="loginx" style="width:40%;" >
+                   <div class="form-group">
+                    ${'#'}{messages.signup_email}
+                    <h:inputText id="semail" class="form-control"  value="${'#'}{yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid}" size="30" 
+                     pt:placeholder="email@xyz.com" maxlength="50"/>
+                   <h:commandButton id="resendAct" value="Resend Activation " action="${'#'}{yxxxuh566xwwqqwxxxxxuserHome.doResendActivationEmail('signIn',yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid)}"
+                    rendered = "${'#'}{yxxxuh566xwwqqwxxxxxuserList.userAuthNotMailedCount() gt 0}" />
+                   </div>
+                  </div>
+                 </ui:fragment>
                 </div>
                 <div>
                 <br/>

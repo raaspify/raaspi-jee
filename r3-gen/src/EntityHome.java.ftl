@@ -3834,17 +3834,17 @@ return checked;
        <#if (userHomeCandidate = "Y")>   
         if (inSignupAndCreateUser){
           if(signupas.equals("C")){
-	   createCustomerAddressSignup();
+           createCustomerAddressSignup();
            this.instance.set${customerEntityName?cap_first}(${customerEntityName});
           }else{
            if(signupas.equals("V")){
-	    createVendorAddressSignup();
+            createVendorAddressSignup();
             this.instance.set${vendorEntityName?cap_first}(${vendorEntityName});
            }else{
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
              FacesMessage.SEVERITY_ERROR,signupas+" "+bundle.getString("signup")+" "+bundle.getString("as")+" "+bundle.getString("invalid"),""));
                   bcontinue=false;
-		  return null;
+                 return null;
            }
           } 
         }
@@ -3856,7 +3856,7 @@ return checked;
             //copyDefaultsToOwner2(); causing connection timeout, so moved to emailreadytoactivate method which is later called by SqlAdmin
             // be careful about owner2code since doregister invoked persist(owner2code) not persist()
            } 
-	      createClientRegister();
+            createClientRegister();
          }
          else{
           if (inDemoSignupAndCreateUser){
@@ -4760,6 +4760,10 @@ return checked;
                 <#else>
                   Iterator<File> itr = ${blobdataEntityName}Home.getFiles().iterator();
                 </#if>
+                if (this.instance.getA0xxukcdlvxxxxxxxxxxfromtable().equals("clobdata") && !itr.hasNext() ){
+                  superdotpersist();// mail-draft etc
+                  return "persisted";               
+                }
                 Integer attachment=0;
                 if (itr.hasNext() ){
                  while (itr.hasNext()) {
@@ -30222,10 +30226,10 @@ public void deleteAllHidden() {
        public String getClientFullUrlName() {
           // change clientFullUrlName as well to be in sync
          if(clientFullUrlName != null && clientFullUrlName.isEmpty()){
-         if(urlName.contains(customIdentity.getMasterSiteCode())){
-          this.setClientFullUrlName(this.clientApplicationName+"."+customIdentity.getMasterSiteCode());
-         }
-         // this.setClientFullUrlName(this.clientApplicationName+"."+urlName); is it same as above? compare??
+          if(urlName.contains(customIdentity.getMasterSiteCode())){
+           this.setClientFullUrlName(this.clientApplicationName+"."+customIdentity.getMasterSiteCode());
+          }
+          // this.setClientFullUrlName(this.clientApplicationName+"."+urlName); is it same as above? compare??
          }else{
           //if fullUrlName has value dont change it to default
          }
@@ -30446,6 +30450,13 @@ public void deleteAllHidden() {
 			//		ERROR, "reset_failed_unknown");
 		}
 	}
+    /***
+    * comes from ??.xhtml for 
+    * 2 parameters item code,couponCode and client sid
+    * for trial the coupon code must contain trial in it and for yearly it should contaib renew
+    * The logic below needs a little change to handle renew (tbd)  
+    */
+
     public boolean doResendActivationEmail(String type,String otherId) {
      //the email content and xhtml are different based on demosignup/signup/site activation
     // add logic to allow new email in case old email was wrong or mail failed and if pending resend email
@@ -30510,6 +30521,7 @@ public void deleteAllHidden() {
               } 
             String newUserLink = activationLink + ((activationLink.indexOf("?") != -1) ? "&act=" : "?act=") + user.getC9xxuxxxbvxxxxxxxxxxactivationkey();
             setNewUserLink(newUserLink);
+            this.setInstance(user);// later override if needed
             if (type.equals("signIn")){
              this.setClientEmail(user.getC1xxuxxxbvxxxxxxxxxxotherid() );
              this.instance.setC6xxuxuoivxxxxxxxxxxoldpw(user.getC6xxuxuoivxxxxxxxxxxoldpw());
@@ -30563,9 +30575,9 @@ public void deleteAllHidden() {
     // add logic to check in user table if admin ids activation key is not null for owner2 same as this servername
         List<${userEntityName?cap_first}> results  =  entityManager
  	.createQuery(
- 	"select cc from ${userEntityName?cap_first} cc where cc.c1xxuxxxbvxxxxxxxxxxotherid = :username and cc.c2xxuxuaiv38xxxxxxxxalevel = :alevel and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2  and cc.a0xxukuxbvxxxxxxxxxxid=:userid ")
- 	.setParameter("username", otherId).setParameter("alevel", "U")
- 	.setParameter("owner2", owner2Code).setParameter("userid", this.instance.getA0xxukuxbvxxxxxxxxxxid())
+ 	"select cc from ${userEntityName?cap_first} cc where cc.c1xxuxxxbvxxxxxxxxxxotherid = :useremail and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 ")
+ 	.setParameter("useremail", otherId)
+ 	.setParameter("owner2", owner2Code)
  	.getResultList();
           if(results.isEmpty()){
                    return false;
@@ -30706,7 +30718,7 @@ public void deleteAllHidden() {
            if (fbUid != null){
             this.setInstance(user);
             //currentPW is a non null field
-	    this.instance.setC4xxuxupivxxxxxxxxxxcurrpw("dummyfbPW");
+            this.instance.setC4xxuxupivxxxxxxxxxxcurrpw("dummyfbPW");
            }else{
             this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mopen);
             this.instance.setC7xxfxxxivxxxxxxxxxxtemporarypassword(true);
@@ -30767,10 +30779,10 @@ public void deleteAllHidden() {
             if(ownerCode.length() > 40){
              ownerCode=ownerCode.substring(ownerCode.length()-40);
             } 
-	    this.instance.set${ownerField?cap_first}(ownerCode);
+            this.instance.set${ownerField?cap_first}(ownerCode);
 
-            this.persist();
             if (fbUid != null){
+             this.persist();
              return;
             } 
             // send the activation email ... as part of this transaction
@@ -30787,11 +30799,14 @@ public void deleteAllHidden() {
               } 
             String newUserLink = activationLink + ((activationLink.indexOf("?") != -1) ? "&act=" : "?act=") + savedActivationKey;
             savedActivationKey="";
-		 setNewUserLink(newUserLink);
+            setNewUserLink(newUserLink);
             if (smtpEnabled) {
                 try {
-                   Emailsend("/activationSignUp.xhtml");
-
+                   Emailsend("/activationSignUp.xhtml");//emailSend will call emailRender and emailRender will try alternate email if setup
+                   if(bcontinue){
+                    this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mnoMail);// mail worked no resend mail needed
+                    this.persist();
+                   }
                 } catch (Exception zzz) {
                  FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                   FacesMessage.SEVERITY_ERROR,"${componentName} "+bundle.getString("send") +" "+bundle.getString("email") +" "+bundle.getString("failed")+" "+zzz.getMessage(),""));
@@ -30823,12 +30838,12 @@ public void deleteAllHidden() {
                  //${customerEntityName}Home.remove();    
                  //entityManager.flush();
                 try {
-	         user = (${userEntityName?cap_first}) entityManager
- 					.createQuery(
- 							"select cc from ${userEntityName?cap_first} cc where cc.a0xxukuxbvxxxxxxxxxxid = :userid and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 ")
- 					.setParameter("userid", customIdentity.getOwner().substring(0,customIdentity.getOwner().length()-3))
- 					.setParameter("owner2", owner2Code)
- 					.getSingleResult();
+	     user = (${userEntityName?cap_first}) entityManager
+                       .createQuery(
+                         "select cc from ${userEntityName?cap_first} cc where cc.a0xxukuxbvxxxxxxxxxxid = :userid and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 ")
+                          .setParameter("userid", customIdentity.getOwner().substring(0,customIdentity.getOwner().length()-3))
+                          .setParameter("owner2", owner2Code)
+                           .getSingleResult();
                  if (user != null){
                     this.setInstance(user); 
                     // this.remove();
@@ -30866,12 +30881,14 @@ public void deleteAllHidden() {
 
             // NOTE: we don't return the Exception message back to the newUser
             // because it may reveal too much information to a hacker
-		 log.severe( exc.getMessage());
-                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-                                     FacesMessage.SEVERITY_ERROR,bundle.getString("error") +" "+bundle.getString("in")+" "+bundle.getString("signup"),""));
+            log.severe( exc.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+              FacesMessage.SEVERITY_ERROR,bundle.getString("error") +" "+bundle.getString("in")+" "+bundle.getString("signup"),""));
 
         }
     }
+
+
     /**
            This is doDemoSignUp which also creates user(U) but allows them to do back office functions in demo sites
             Demo user has restriction D to limit changing their own records. Because they are User(U) they have employee record
@@ -31024,7 +31041,10 @@ public void deleteAllHidden() {
             if (smtpEnabled) {
                 try {
                    Emailsend("/activationDemo.xhtml");
-
+                   if(bcontinue){
+                    this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mnoMail);// mail worked no resend mail needed
+                    this.persist();
+                   }
                 } catch (Exception zzz) {
                   FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                                      FacesMessage.SEVERITY_ERROR,"${componentName} "+bundle.getString("send")+" "+bundle.getString("email")+" "+bundle.getString("failed"),""));
@@ -31088,6 +31108,11 @@ public void deleteAllHidden() {
 
         boolean smtpEnabled = true;
             String owner2Client=clientRow.getZzxxu2oxxhxxxxxxxxxxowner2();
+            if(urlPort ==8080){
+             newUserLink=clientRow.getD6xxuxxrbvxxxxxxxxxxintaddr()+":8080";// intaddr also saved in customIdentity as mastersiteUrl
+            }else{
+             newUserLink=clientRow.getD6xxuxxrbvxxxxxxxxxxintaddr();// intaddr also saved in customIdentity as mastersiteUrl
+            }
 
 
             if (smtpEnabled) {
@@ -31108,7 +31133,7 @@ public void deleteAllHidden() {
                      // not allowed
                   return;
                  }
-		 setNewUserLink(newUserLink);
+                 setNewUserLink(newUserLink);
 
                  Emailsend("/subscribed.xhtml");//
 
@@ -31126,9 +31151,13 @@ public void deleteAllHidden() {
 
     public void eMailNoactivity(${clientEntityName?cap_first} clientRow) {
         boolean smtpEnabled = true;
+  
             String owner2Client=clientRow.getZzxxu2oxxhxxxxxxxxxxowner2();
-
-
+            if(urlPort ==8080){
+             newUserLink=clientRow.getD6xxuxxrbvxxxxxxxxxxintaddr()+":8080";// intaddr also saved in customIdentity as mastersiteUrl
+            }else{
+             newUserLink=clientRow.getD6xxuxxrbvxxxxxxxxxxintaddr();// intaddr also saved in customIdentity as mastersiteUrl
+            }
             if (smtpEnabled) {
                 try {
                  ${userEntityName?cap_first} ${userEntityName} =(${userEntityName?cap_first}) entityManager
@@ -31146,8 +31175,7 @@ public void deleteAllHidden() {
                      // not allowed
                   return;
                  }
-		 setNewUserLink(newUserLink);
-
+                 setNewUserLink(newUserLink);
                  Emailsend("/noactivity.xhtml");
 
                 } catch (Exception zzz) {
@@ -31350,9 +31378,9 @@ public void deleteAllHidden() {
                  ${userEntityName}Home.setInstance(${userEntityName});
                  this.setClientEmail(this.instance.getC1xxuxxxbvxxxxxxxxxxotherid() );
                  if(urlPort ==8080){
-                  newUserLink = "http://"+clientFullUrlName+":8080/login.wflow";
+                  newUserLink = clientFullUrlName+":8080/login.wflow";
                  }else{
-                  newUserLink = "http://"+clientFullUrlName+"/login.wflow";
+                  newUserLink = clientFullUrlName+"/login.wflow";
                  } 
                  newUserLink2 =sdf.format(clientRow.getF8xxcxxxlvxxxxxxxxxxlicenseend());
                  
@@ -31413,9 +31441,9 @@ public void deleteAllHidden() {
               // send the activation email ... as part of this transaction
               String activationLink="";
               if(urlPort ==8080){
-               activationLink = "http://"+clientFullUrlName+":8080/login.wflow";
+               activationLink = clientFullUrlName+":8080/login.wflow";
               }else{
-               activationLink = "http://"+clientFullUrlName+"/login.wflow";
+               activationLink = clientFullUrlName+"/login.wflow";
               } 
                            ${userEntityName} =(${userEntityName?cap_first}) entityManager
 					.createQuery(
@@ -31641,7 +31669,8 @@ public void deleteAllHidden() {
             this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mactive);
             this.instance.setC7xxfxxxivxxxxxxxxxxtemporarypassword(true);
             this.setClientEmail(email);
-            this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mpartial);
+            //this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mpartial);
+            this.instance.setC1xxuxxxbvxxxxxxxxxxotherid(this.getClientEmail());
             this.instance.setA0xxukuxbvxxxxxxxxxxid("admin");
             this.instance.setC9xxuxxxbvxxxxxxxxxxactivationkey(null);
             savedPassword=PasswordSupport.tempPassword();
@@ -31672,7 +31701,7 @@ public void deleteAllHidden() {
             this.instance.setC1xxuxxxbvxxxxxxxxxxotherid(this.getClientEmail());
             this.instance.setC7xxfxxxivxxxxxxxxxxtemporarypassword(true);
             this.instance.setC9xxuxxxbvxxxxxxxxxxactivationkey(null);
-            this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mpartial);
+            this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mactive);
             this.instance.setA0xxukuxbvxxxxxxxxxxid("manager");
             this.instance.setC4xxuxupivxxxxxxxxxxcurrpw(PasswordSupport.tempPassword());
             this.instance.setC4xxuxupivxxxxxxxxxxcurrpw("manager");//override if mastersite
@@ -31708,7 +31737,7 @@ public void deleteAllHidden() {
                FacesMessage.SEVERITY_ERROR,bundle.getString("error")+ " "+bundle.getString("getting")+ " "+bundle.getString("setup")+ " "+bundle.getString("record"),""));
                return;  
              }
-             client.setF2xxfxxxbvxxxxxxxxxxlooseit(true);
+             client.setF2xxfxxxbvxxxxxxxxxxlooseit(true);//mastersite indicator
              //although client record was already created in createclientRegister(to be depecated by createClientRecord01)
              // not all fields were populated since data did not come via new site create form. We need to put values here
              if(urlName.length() > 35){
@@ -32125,12 +32154,7 @@ public void deleteAllHidden() {
             // form ...
            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
             FacesMessage.SEVERITY_INFO,bundle.getString("Create")+" "+bundle.getString("site")+" "+bundle.getString("completed")+" "+bundle.getString("for")+" "+this.getClientApplicationName()+", "+bundle.getString("check")+" "+bundle.getString("email"),""));
-            if(urlPort !=8080){
-                   externalContext.redirect(masterSiteUrl+"/installAppStatus.wflow?websiteName="+owner2Code+"&websiteFullUrl="+this.getClientFullUrlName());
-            }else{
-                   externalContext.redirect(masterSiteUrl+":8080/installAppStatus.wflow?websiteName="+owner2Code+"&websiteFullUrl="+this.getClientFullUrlName());
-            }
-
+           externalContext.redirect(externalContext.getRequestContextPath()+"/installAppStatus.wflow?websiteName="+owner2Code+"&websiteFullUrl="+this.getClientFullUrlName());
         } catch (Exception exc) {
             try {
             } catch (Exception ignore) {
@@ -32361,23 +32385,23 @@ public void deleteAllHidden() {
 
 
 
-	public void Emailsend(String content) {
+             public void Emailsend(String content) {
                 //content is the xxx.xhtml with mail tags.
                 // called by doregister,doactivation,r3restclient doQuickregister etc. 
                              
                 bcontinue=true;
-		try {
-		 //renderer.render(content);
+                try {
+                 //renderer.render(content);
                  emailRender(content);
                  if(bcontinue){
                   FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                     //FacesMessage.SEVERITY_INFO,bundle.getString("email")+" "+ bundle.getString("sent")+" "+bundle.getString("sucessfully"),""));
-                    FacesMessage.SEVERITY_INFO,bundle.getString("email")+" "+ bundle.getString("sent"),""));
+                    FacesMessage.SEVERITY_INFO,bundle.getString("email")+" "+ bundle.getString("sent")+", "+ bundle.getString("please")+" "+ bundle.getString("check"),""));
                  }else{
                   FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                    FacesMessage.SEVERITY_INFO,bundle.getString("email")+" "+ bundle.getString("send")+" "+bundle.getString("failed"),""));
                  } 
-		} catch (Exception e) {
+                } catch (Exception e) {
                   /* logging/msg for exceptions are in emailrender now
 
                     //FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -32391,8 +32415,8 @@ public void deleteAllHidden() {
                     }
                   */
 
-		}
-	}
+                  }
+               }
 /**
 *  used to send emails and called by master and other sites for admin functions like site activation, pw reset
 * 1. if mailRelayoff  in client version/record 01 has checkmark blank (default) , then gather mailRelay (05 record) smtp server/port/etc information ,
@@ -32452,6 +32476,7 @@ public void deleteAllHidden() {
          String userName="apikey";
          String password05="SG.BxxxxxxxxxxyyyyyiBg";//manually enter in client record 05
          String password="SG.BxxxxxxxxxxyyyyyiBg";//manually enter in client records
+         ${clientEntityName?cap_first} client05 =null;
          boolean auth=true;
          String auth_mechanisms="LOGIN PLAIN DIGEST-MD5 NTLM";
          //gmail use XOAUTH2 , if null auth will use id/password, if XOAUTH2 then email as id/access token 
@@ -32492,7 +32517,7 @@ public void deleteAllHidden() {
                       }
                       if(!mailRelayOff){
                        //means mailRelayOn,added logic here to read default values from client record 05 for default smtp relay server like sendgrid
-                       ${clientEntityName?cap_first} client05 =null;
+                       client05 =null;
                        try {
                               client05 =(${clientEntityName?cap_first}) entityManager
 		.createQuery(
@@ -32501,7 +32526,7 @@ public void deleteAllHidden() {
 		.setParameter("owner2", owner2Code)
 		.getSingleResult();
                              if(client05 !=null ){
-                              host=client05.getZ8xxuxxxbvxxxxxxxxxxsmtpserver();//exmpl smtp.sendgrid.net
+                              host=client05.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().trim();//exmpl smtp.sendgrid.net
                               port=client05.getL6xxzxxrbvxxxxxxxxxxaltselen();//use 587 as default
                               if (port==0){
                                port=587;
@@ -32509,10 +32534,12 @@ public void deleteAllHidden() {
                               fromAddress=client05.getD5xxuxxrbvxxxxxxxxxxrmailaddr();//exmpl mail@raaspi.com 
                               fromAddress05=fromAddress;
                               siteAddress05=client05.getD4xxhxxrbv24xxxxxxxximailaddr();//exmpl mail@raaspi.com 
+                              ccAddress=siteAddress05;
+                              replyToAddress=siteAddress05;
                               userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
                               userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
                               userName05=userName;
-                              password=client05.getDbxxuzxdssxxxxxxxxxxapiclientsecret();//access token
+                              password=client05.getDbxxuzxdssxxxxxxxxxxapiclientsecret().trim();//access token
                               password05=password;
                               if(password == null || password.isEmpty() || password.equals("SG.BxxxxxxxxxxyyyyyiBg") ){
                                smtpError=true; //both record 01 and 05 checked
@@ -32530,7 +32557,7 @@ public void deleteAllHidden() {
                         }
                       }else{
                        if(client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver()!=null && !client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().isEmpty()){
-                        host=client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver();
+                        host=client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().trim();
                         //handle if mailrelayOff false by mistake, add logic in client persist/update
                         // may happen in local machine if virus protection running
                         if(!host.equals("smtp.sendgrid.net")){
@@ -32542,7 +32569,7 @@ public void deleteAllHidden() {
                            FacesMessage.SEVERITY_INFO,bundle.getString("client") +" "+bundle.getString("smtp")+" "+bundle.getString("host")+" "+bundle.getString("information") +" "+bundle.getString("missing"),""));
                        }
                        if(client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser()!=null && !client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser().isEmpty()){
-                        userName=client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();
+                        userName=client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser().trim();
                        }else{
                          smtpError=true;
                          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -32604,7 +32631,7 @@ public void deleteAllHidden() {
            if(client !=null && client.getDaxxuzxdssxxxxxxxxxxapiclientid() !=null && !client.getDaxxuzxdssxxxxxxxxxxapiclientid().isEmpty()
               && client.getDbxxuzxdssxxxxxxxxxxapiclientsecret() !=null && !client.getDbxxuzxdssxxxxxxxxxxapiclientsecret().isEmpty()){
             auth_mechanisms="XOAUTH2";//gmail smtp
-            password=client.getDbxxuzxdssxxxxxxxxxxapiclientsecret();//access token
+            password=client.getDbxxuzxdssxxxxxxxxxxapiclientsecret().trim();//access token
             //check if token expired and refresh if needed
             calendar.getTime();
             calendare.setTime(client.getZfxxcztxlxxxxxxxxxxxstatusfldt());
@@ -32706,7 +32733,7 @@ public void deleteAllHidden() {
            //user records already created for admin and manager,otherid holds entered email 
            toName = this.instance.getC1xxuxxxbvxxxxxxxxxxotherid();
            toAddress = this.instance.getC1xxuxxxbvxxxxxxxxxxotherid();
-           ccAddress="support@raaspi.com";//must match domain name
+           //ccAddress="support@"+customIdentity.getMasterSiteUrl();// send a copy to masterSite
            subjectTemplate=this.instance.getZzxxu2oxxhxxxxxxxxxxowner2()+" - Create Site and Registration";
            resourceName="getactivation.fmt";
            break;
@@ -32822,8 +32849,47 @@ public void deleteAllHidden() {
              bodyj=bodyj+" id: "+this.getLostPasswordUserId()+" tempPW "+this.getResetPassword() ;
         }
 
-        // try sending using mailRelay first then save in clob, need to use revised mailconfig 
-        if(e==null && mailRelayOff==true){
+        // try sending using mailRelay first then save in clob, need to use revised mailconfig ie mailrelay config and password from client05
+        if(e==null && mailRelayOff==true ){
+         //first check if mailrelay is setup
+                       client05 =null;
+                       bcontinue=true;
+                       try {
+                              client05 =(${clientEntityName?cap_first}) entityManager
+		.createQuery(
+		"select cc from ${clientEntityName?cap_first} cc where cc.${clientClientversion} = :nKeyName and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by cc.a0xxuobxbxxxxxxxxxxxsid asc")
+		.setParameter("nKeyName","05")
+		.setParameter("owner2", owner2Code)
+		.getSingleResult();
+                             if(client05 !=null ){
+                              host=client05.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().trim();//exmpl smtp.sendgrid.net
+                              port=client05.getL6xxzxxrbvxxxxxxxxxxaltselen();//use 587 as default
+                              if (port==0){
+                               port=587;
+                              }
+                              fromAddress=client05.getD5xxuxxrbvxxxxxxxxxxrmailaddr();//exmpl mail@raaspi.com 
+                              fromAddress05=fromAddress;
+                              siteAddress05=client05.getD4xxhxxrbv24xxxxxxxximailaddr();//exmpl mail@raaspi.com 
+                              userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
+                              userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
+                              userName05=userName;
+                              password=client05.getDbxxuzxdssxxxxxxxxxxapiclientsecret().trim();//access token
+                              password05=password;
+                              if(password == null || password.isEmpty() || password.equals("SG.BxxxxxxxxxxyyyyyiBg") ){
+                               smtpError=true; //both record 01 and 05 checked
+                               FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+                                FacesMessage.SEVERITY_INFO,bundle.getString("MailRelay")+" "+host+" "+bundle.getString("smtp")+" "+bundle.getString("password")+" / "+bundle.getString("ApiSecret")+" "+bundle.getString("information") +" "+bundle.getString("invalid"),""));
+                               bcontinue=false;
+                               //return null;
+                              }//
+                             }// no mail relay
+                        } catch (Exception exc) {
+                               FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+                                FacesMessage.SEVERITY_INFO,bundle.getString("Client") +" "+bundle.getString("record")+" "+bundle.getString("05")+" "+bundle.getString("for")+" "+bundle.getString("mailRelay") +" "+bundle.getString("missing"),""));
+                               bcontinue=false;
+                               //return null;
+                        }
+        if(bcontinue){
          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
           FacesMessage.SEVERITY_ERROR,bundle.getString("Alternate")+" "+bundle.getString("Email") +" "+bundle.getString("send")+" "+bundle.getString("being")+" "+bundle.getString("tried") ,""));
          mailRelayOff=false;
@@ -32859,10 +32925,9 @@ public void deleteAllHidden() {
             FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
              FacesMessage.SEVERITY_ERROR,bundle.getString("Please")+" "+bundle.getString("try") +" "+bundle.getString("later") ,""));
           bcontinue=false;
-
-
          }
-        }
+        }// end of alternate email setup check
+        }// end alternate email 
         // save in client clobdata, if pwreset extra save in system clobdata
         //do not use e it can be null if failure. for htmlbody save the needed information in text since cannot use freemarker
                 // send can fail/blocked, so keep a copy in clob after send, data is available after send 
@@ -32870,40 +32935,40 @@ public void deleteAllHidden() {
 	         // do not reuse but new seq because unlike MAIL-CONTENT, no control when gets created and overwritten
                  // automatic purge of these and others if date is old
                if(!content.contains("/activationSetup")){// already done by getactivation
-		try {
+                try {
                   yxxxuq1m1xwwqqqxxxxxclobdataHome.clearInstance();
-		  yxxxuq1m1xwwqqqxxxxxclobdata = yxxxuq1m1xwwqqqxxxxxclobdataHome.getInstance();
-		  yxxxuq1m1xwwqqqxxxxxclobdataHome.setInstance(yxxxuq1m1xwwqqqxxxxxclobdata);
-		  yxxxuq1m1xwwqqqxxxxxclobdata.setA0xxukcdlvxxxxxxxxxxfromtable("clobdata");
-		  yxxxuq1m1xwwqqqxxxxxclobdata.setA1xxuxxxbv49xxxxxxxxfromkey("MAIL-SENT");
+                  yxxxuq1m1xwwqqqxxxxxclobdata = yxxxuq1m1xwwqqqxxxxxclobdataHome.getInstance();
+                  yxxxuq1m1xwwqqqxxxxxclobdataHome.setInstance(yxxxuq1m1xwwqqqxxxxxclobdata);
+                  yxxxuq1m1xwwqqqxxxxxclobdata.setA0xxukcdlvxxxxxxxxxxfromtable("clobdata");
+                  yxxxuq1m1xwwqqqxxxxxclobdata.setA1xxuxxxbv49xxxxxxxxfromkey("MAIL-SENT");
                   int jay=  yxxxuq1m1xwwqqqxxxxxclobdataList.getNextSeqAvailable("clobdata","AMAIL-SENT",content.substring(1,content.length()-6),0);
-		  yxxxuq1m1xwwqqqxxxxxclobdata.setA3xxexnsbvxxxxxxxxxxsequence(jay);
-		  yxxxuq1m1xwwqqqxxxxxclobdata.setA2xxuxxxbv50xxxxxxxxqualifier(content.substring(1,content.length()-6));
+                  yxxxuq1m1xwwqqqxxxxxclobdata.setA3xxexnsbvxxxxxxxxxxsequence(jay);
+                 yxxxuq1m1xwwqqqxxxxxclobdata.setA2xxuxxxbv50xxxxxxxxqualifier(content.substring(1,content.length()-6));
                   yxxxuq1m1xwwqqqxxxxxclobdata.setB1xxuzaxbvxxxxxxxxxxdata("to: "+toAddress+" from: "+fromAddress+" subject: "+subjectTemplate+" body: "+bodyj);
                   yxxxuq1m1xwwqqqxxxxxclobdata.setA4xxexxxbvxxxxxxxxxxtype("txt");
                   yxxxuq1m1xwwqqqxxxxxclobdataHome.persist();
                   // newUserLink does not hold activation value at this time, get from user/admin record
                   // better move this log to doQuickRegister/DoRegister as well
-		 log.severe("in case clob not saved,debug code "+ownerCode+"/"+owner2Code+","+resetPassword+" xx:"+lostPasswordUserId);//continue, user need not know
+                 log.severe("in case clob not saved,debug code "+ownerCode+"/"+owner2Code+","+resetPassword+" xx:"+lostPasswordUserId);//continue, user need not know
 
                 }catch (Exception ex){
-		 log.severe("Error saving mail-sent for "+ownerCode+"/"+owner2Code+","+ ex);//continue, user need not know
-		 log.severe("debug code "+ownerCode+"/"+owner2Code+","+resetPassword+" xx:"+lostPasswordUserId);//continue, user need not know
+                 log.severe("Error saving mail-sent for "+ownerCode+"/"+owner2Code+","+ ex);//continue, user need not know
+                 log.severe("debug code "+ownerCode+"/"+owner2Code+","+resetPassword+" xx:"+lostPasswordUserId);//continue, user need not know
                 }
                }
                // create/update a record  like mail-content in raaspi for any other site pw reset, in case site manager gets locked out.
                // unlike above, this saves in SYSTEM
                if(content.contains("/password_reset")){
-		try {
-		 yxxxuq1m1xwwqqqxxxxxclobdata = yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance("clobdata","AMAIL-SENT","pwreset",0);
+                try {
+                 yxxxuq1m1xwwqqqxxxxxclobdata = yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataSystemInstance("clobdata","AMAIL-SENT","pwreset",0);
                  if(yxxxuq1m1xwwqqqxxxxxclobdata == null){   
                   yxxxuq1m1xwwqqqxxxxxclobdataHome.clearInstance();
-		  yxxxuq1m1xwwqqqxxxxxclobdata = yxxxuq1m1xwwqqqxxxxxclobdataHome.getInstance();
-		  yxxxuq1m1xwwqqqxxxxxclobdataHome.setInstance(yxxxuq1m1xwwqqqxxxxxclobdata);
-		  yxxxuq1m1xwwqqqxxxxxclobdata.setA0xxukcdlvxxxxxxxxxxfromtable("clobdata");
-		  yxxxuq1m1xwwqqqxxxxxclobdata.setA1xxuxxxbv49xxxxxxxxfromkey("MAIL-SENT");
-		  yxxxuq1m1xwwqqqxxxxxclobdata.setA3xxexnsbvxxxxxxxxxxsequence(0);
-		  yxxxuq1m1xwwqqqxxxxxclobdata.setA2xxuxxxbv50xxxxxxxxqualifier("pwreset");
+                  yxxxuq1m1xwwqqqxxxxxclobdata = yxxxuq1m1xwwqqqxxxxxclobdataHome.getInstance();
+                  yxxxuq1m1xwwqqqxxxxxclobdataHome.setInstance(yxxxuq1m1xwwqqqxxxxxclobdata);
+                  yxxxuq1m1xwwqqqxxxxxclobdata.setA0xxukcdlvxxxxxxxxxxfromtable("clobdata");
+                  yxxxuq1m1xwwqqqxxxxxclobdata.setA1xxuxxxbv49xxxxxxxxfromkey("MAIL-SENT");
+                  yxxxuq1m1xwwqqqxxxxxclobdata.setA3xxexnsbvxxxxxxxxxxsequence(0);
+                  yxxxuq1m1xwwqqqxxxxxclobdata.setA2xxuxxxbv50xxxxxxxxqualifier("pwreset");
                   yxxxuq1m1xwwqqqxxxxxclobdata.setB1xxuzaxbvxxxxxxxxxxdata("to: "+toAddress+" from: "+fromAddress+" subject: "+subjectTemplate+" body: "+bodyj);
                   yxxxuq1m1xwwqqqxxxxxclobdata.setA4xxexxxbvxxxxxxxxxxtype("txt");
                   yxxxuq1m1xwwqqqxxxxxclobdataHome.persist("SYSTEM");
@@ -32915,7 +32980,7 @@ public void deleteAllHidden() {
                   yxxxuq1m1xwwqqqxxxxxclobdataHome.allowUpdate();
                  }
                 }catch (Exception ex){
-		 log.severe("Error saving mail-sent for pwreset/SYSTEM, "+ ex);//continue, user need not know
+                 log.severe("Error saving mail-sent for pwreset/SYSTEM, "+ ex);//continue, user need not know
                 }
                }
              return null;
@@ -32928,17 +32993,17 @@ public void deleteAllHidden() {
 	public void Emailsend(String content,String msg) {
                 //content is the xxx.xhtml with mail tags
                 // called by doregister,doactivation etc
-		try {
-				//renderer.render(content);
+                             try {
+                               //renderer.render(content);
                                 emailRender(content);
                                 if(!msg.equals("no")){ 
                                  FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                                      FacesMessage.SEVERITY_INFO,bundle.getString("email") +" "+bundle.getString("sent") +" "+bundle.getString("sucessfully")+" "+msg,""));
 
                                 }
-		} catch (Exception e) {
-			//log.severe("Error sending mail "+ e); all exceptiion logging/msg in emailrender now
-                        //FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+                              } catch (Exception e) {
+                               //log.severe("Error sending mail "+ e); all exceptiion logging/msg in emailrender now
+                               //FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                                      //FacesMessage.SEVERITY_ERROR,bundle.getString("email") +" "+bundle.getString("send") +" "+bundle.getString("failed")+" "+e.getMessage(),""));
 
 		}
@@ -36761,7 +36826,7 @@ try   {
 
 
 
-	public String subscribe(String matSidS,String frequency,String owner2C) {
+        public String subscribe(String matSidS,String frequency,String owner2C) {
          // add more logic in takeaction to automate like paynow button
          // in the meantime use sqlAdmin enailSubscribed to sendemail and update expiry date
          // can come from MyDashborad for subscription after trial or from itemdetailsBroewse for any 
@@ -36817,7 +36882,7 @@ try   {
          }catch(Exception ex){
          }
          return null;
- 	}
+        }
 
 
 

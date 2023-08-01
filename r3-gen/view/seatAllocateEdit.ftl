@@ -173,7 +173,7 @@
                     validator="${'#'}{${seatEntityName}Home.validateKeyDuplicateRow}" 
                    value="${'#'}{${seatEntityName}Home.mailingText5}"
              >   
-              <p:ajax  render="seatDecorationT" bypassUpdates="false"/>
+              <p:ajax  update="seatDecorationT" bypassUpdates="false"/>
 
                <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
                <f:selectItem itemValue="001" itemLabel="001" />

@@ -124,10 +124,11 @@ todo:add page.xml to enforce login and add to menue
                         <f:facet name="header">
                             <h:panelGroup>
                              <h:outputText value="#{row.d6xxuxxrbvxxxxxxxxxxintaddr}" style="font-weight:bold" />
-                             <h:outputText value=" #{row.f6xxuxxxlvxxxxxxxxxxlicensetype}"  />
-                             <h:outputText value=" #{messages['Serial#']}"  />
+                             <h:outputText value=" #{row.f6xxuxxxlvxxxxxxxxxxlicensetype}"   rendered="#{!row.f2xxfxxxbvxxxxxxxxxxlooseit}" />
+                             <h:outputText value=" #{messages['Serial#']}"  rendered="#{!row.f2xxfxxxbvxxxxxxxxxxlooseit}" />
+                             <h:outputText value=" #{messages['MasterSite']}"  rendered="#{row.f2xxfxxxbvxxxxxxxxxxlooseit}" />
                              <h:outputText value=" #{row.b1xxuisxlvxxxxxxxxxxserialnum} #{messages['Expired']} " style="color: red;"
-                               rendered="#{row.f8xxcxxxlvxxxxxxxxxxlicenseend le authenticator.currcaldate}"/>
+                               rendered="#{!row.f2xxfxxxbvxxxxxxxxxxlooseit and row.f8xxcxxxlvxxxxxxxxxxlicenseend le authenticator.currcaldate}"/>
                              <h:outputText value=" #{row.b1xxuisxlvxxxxxxxxxxserialnum}" style="color: blue;"
                                rendered="#{row.f8xxcxxxlvxxxxxxxxxxlicenseend gt authenticator.currcaldate}"/>
 
@@ -144,7 +145,10 @@ todo:add page.xml to enforce login and add to menue
                              <h:outputText value="ProductCode" style="font-weight:bold" />
                              <h:outputText value="#{row.g2xxuxpclvxxxxxxxxxxprodcode}"  />
                              <h:outputText value="LicenseType/ending" style="font-weight:bold" />
-                             <h:outputText value="#{row.f6xxuxxxlvxxxxxxxxxxlicensetype} / #{row.f8xxcxxxlvxxxxxxxxxxlicenseend}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl"  />
+                             <h:outputText value="#{row.f6xxuxxxlvxxxxxxxxxxlicensetype} / #{row.f8xxcxxxlvxxxxxxxxxxlicenseend}"  id="zcxxzzfxhhxxxxxxxxxxstatusfl" 
+                                   rendered="#{!row.f2xxfxxxbvxxxxxxxxxxlooseit}" />
+                             <h:outputText value="#{messages['MasterSite']}"  id="zcxxzzfxhhxxxxxxxxxxstatusflm" 
+                                   rendered="#{row.f2xxfxxxbvxxxxxxxxxxlooseit}" />
                              <h:outputText value="Status/Last Activity" style="font-weight:bold" />
                              <h:outputText value="#{row.zexxzzfxhhxxxxxxxxxxstatusfl} / #{row.zfxxcztxlxxxxxxxxxxxstatusfldt}"  />
                             <h:outputText value="Access Code" style="font-weight:bold" />
@@ -154,12 +158,12 @@ todo:add page.xml to enforce login and add to menue
                               value="#{row.w1xxuxxxbvxxxxxxxxxxedipassw}">
                              </h:inputText>
 
-                            <h:commandButton  
+                            <h:commandButton  disabled="#{row.f2xxfxxxbvxxxxxxxxxxlooseit}"
                                  action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailNoactivity(row)}" 
                                  onclick="if (! confirm('Checked site name ?') ) { return false;}; return true; "
                                  value="Email No Activity">
                             </h:commandButton>
-                            <h:commandButton  
+                            <h:commandButton  disabled="#{row.f2xxfxxxbvxxxxxxxxxxlooseit}"
                                  action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailEndOfTrial(row)}" 
                                  onclick="if (! confirm('Checked site name ?') ) { return false;}; return true; "
                                  value="Email EndOfTrial/License">
@@ -169,7 +173,7 @@ todo:add page.xml to enforce login and add to menue
                                  value="Flip_Close">
                             </h:commandButton>
                             <h:commandButton  onclick="if (! confirm('Checked site name, Send Trial/License Ready Email  ?') ) { return false;}; return true; "
-                                 action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailReadyToActivate(row)}" 
+                                 action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailReadyToActivate(row)}"  disabled="#{row.f2xxfxxxbvxxxxxxxxxxlooseit}"
                                  value="EMail Trial/LicenseReady">
                             </h:commandButton>
                             <h:commandButton  onclick="if (! confirm('Checked site name, Really delete ?') ) { return false;}; return true; "
@@ -179,7 +183,7 @@ todo:add page.xml to enforce login and add to menue
 
                             <h:commandButton  onclick="if (! confirm('Really Alter ?') ) { return false;}; return true; "
                                  action="#{sqlAdminSupport.AlterAppName(row.zzxxu2oxxhxxxxxxxxxxowner2,row.x2xxuxxxbvxxxxxxxxxxhdstyle)}" 
-                                 value="Alter App Name To">
+                                 value="#{messages['Alter']} #{messages['Site']} #{messages['Name']} #{messages['To']}" >
                             </h:commandButton>
                             <h:outputText value="New Name" style="font-weight:bold" />
                             <h:inputText  readonly="false"
@@ -189,7 +193,7 @@ todo:add page.xml to enforce login and add to menue
                             </h:inputText>
                             <h:commandButton  onclick="if (! confirm('Really Alter ?') ) { return false;}; return true; "
                                  action="#{sqlAdminSupport.AlterAppNameInBackUp(row.x3xxuxxxbvxxxxxxxxxxmtstyle,row.zzxxu2oxxhxxxxxxxxxxowner2)}" 
-                                 value="Alter App Name in BackUp">
+                                 value="#{messages['Alter']} #{messages['Site']} #{messages['Name']} #{messages['In']} #{messages['Backup']}">
                             </h:commandButton>
                             <p:commandButton value="Refresh"
                               action="#{sqlAdminSupport.getLastBupDate()}"
@@ -198,22 +202,22 @@ todo:add page.xml to enforce login and add to menue
 
                         <h:panelGrid columns="3">
                             <h:commandButton value="email Paid(Mo)" onclick="if (! confirm('Really manually paid ?') ) { return false;}; return true; "
-                              action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailSubscribed(row,'Monthly')}">
+                              action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailSubscribed(row,'Monthly')}" rendered="#{!row.f2xxfxxxbvxxxxxxxxxxlooseit}">
                             </h:commandButton>
                             <h:commandButton value="email Paid(Yr)" onclick="if (! confirm('Really manually paid ?') ) { return false;}; return true; "
-                              action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailSubscribed(row,'Yearly')}">
+                              action="#{yxxxuh566xwwqqwxxxxxuserHome.eMailSubscribed(row,'Yearly')}" rendered="#{!row.f2xxfxxxbvxxxxxxxxxxlooseit}">
                             </h:commandButton>
 
                             <h:commandButton  onclick="if (! confirm('Really Bill ?') ) { return false;}; return true; "
                                  action="#{r3RestClient.applicationCharge('c',row.zzxxu2oxxhxxxxxxxxxxowner2)}" 
                                  value="#{messages['Create']} #{messages['charge']}"
-                                 rendered="#{!(customIdentity.masterSite) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2).dbxxuzxdssxxxxxxxxxxapiclientsecret and !skinBean.iconShown}">
+                                 rendered="#{!(row.f2xxfxxxbvxxxxxxxxxxlooseit) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2).dbxxuzxdssxxxxxxxxxxapiclientsecret and !skinBean.iconShown}">
                             </h:commandButton>
 
                             <h:commandButton  onclick="if (! confirm('Really Activate Charge ?') ) { return false;}; return true; "
                                  action="#{r3RestClient.applicationCharge('a',row.zzxxu2oxxhxxxxxxxxxxowner2)}" 
                                  value="#{messages['Activate']}#{messages['charge']}"
-                                 rendered="#{!(customIdentity.masterSite) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2).dbxxuzxdssxxxxxxxxxxapiclientsecret and !skinBean.iconShown}">
+                                 rendered="#{!(row.f2xxfxxxbvxxxxxxxxxxlooseit) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2) and not empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('02',customIdentity.owner2).dbxxuzxdssxxxxxxxxxxapiclientsecret and !skinBean.iconShown}">
                             </h:commandButton>
                             <h:commandButton  onclick="if (! confirm('Really Create Route ?') ) { return false;}; return true; "
                                  action="#{r3RestClient.openAuthorize('r',row)}" 

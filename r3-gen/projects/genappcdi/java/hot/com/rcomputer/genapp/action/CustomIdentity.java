@@ -99,14 +99,14 @@ public class CustomIdentity implements Serializable{
   private String imailaddr="";
   private BigDecimal discountValue=BigDecimal.ZERO;//set by itemhome addproducttoorder and used in
   private String discountType="";//DC% if percent
-     String currencySymbol="$";
-     String mcurrencySymbol="$";
-     String currencyCode="USD";
-     String mcurrencyCode="CAD";
-     BigDecimal convRate=new BigDecimal("1.0");
-     	private boolean applyTax1 = false;
-	private boolean applyTax2 = false;
-	private boolean applyTax3 = false;
+  String currencySymbol="$";
+  String mcurrencySymbol="$";
+  String currencyCode="USD";
+  String mcurrencyCode="CAD";
+  BigDecimal convRate=new BigDecimal("1.0");
+ private boolean applyTax1 = false;
+ private boolean applyTax2 = false;
+ private boolean applyTax3 = false;
   private String keyValue="";
   private String keyValue2="";
   private String keyValue3="";
@@ -410,7 +410,7 @@ public void setHoldArray(int index,String value)
     public String getMasterSiteUrl(){
       return masterSiteUrl;
     }
-
+   //mastersiteUrl value came from master client record intaddr at postconstruct
     public void setMasterSiteUrl(String masterSiteUrl) {
      this.masterSiteUrl = masterSiteUrl;
     }

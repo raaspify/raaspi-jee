@@ -466,7 +466,7 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
         @Override
         public void authenticate() {
         Locale rbLocale=FacesContext.getCurrentInstance().getViewRoot().getLocale();
-
+        int mstatusfl=0;
         try{
          FacesContext context = FacesContext.getCurrentInstance();
          bundle = context.getApplication().getResourceBundle(context, "messages");
@@ -555,15 +555,10 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
                          client = ${clientEntityName}Home.getDefinedInstance();
                        // first check whether Client Table is locked for Bus Date maintenance , not sure where is the lock logic
                        // remove hard coded property names
-                       int mstatusfl=client.getZexxzzfxhhxxxxxxxxxxstatusfl();
+                       mstatusfl=client.getZexxzzfxhhxxxxxxxxxxstatusfl();
                        if (isBitSet(mstatusfl, _mpartial)){
                         FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                         FacesMessage.SEVERITY_INFO,bundle.getString("system")+" "+bundle.getString("maintenance")+" "+bundle.getString("try")+" "+bundle.getString("later"),""));
-	        return;
-	     }
-                       if (isBitSet(mstatusfl, _mclosed) ){
-                        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-                         FacesMessage.SEVERITY_INFO,bundle.getString("service")+" "+ bundle.getString("decommisoned"),""));
 	        return;
 	     }
                        // update changes the client statusfldate and tracks when last logon for this tenant
@@ -588,6 +583,12 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
                   // and continue under else logic for regular application login with id/pw. 
                  
                   logonId=customIdentity.getOption16().trim();
+                  if (isBitSet(mstatusfl, _mclosed) && !logonId.toLowerCase().contains("manager") ){
+                        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+                         FacesMessage.SEVERITY_INFO,bundle.getString("service")+" "+ bundle.getString("decommisoned"),""));
+	        return;
+                  }
+
                   this.credentials.setUserId(logonId);
                   customIdentity.setOption16(null);
                   customIdentity.setUsername(logonId);

@@ -3219,7 +3219,7 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
 
 			List<${componentName?cap_first}> results =  getEntityManager()
 					.createQuery("select cc from ${componentName?cap_first} cc where cc.a1xxuxxxbv49xxxxxxxxfromkey = :fromKey AND zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by cc.${statusFlagDateField}").setParameter("owner2", owner2Code).
-                setParameter("select cc fromKey", "3R-ATTACHMENT-1-C").getResultList();
+                setParameter("fromKey", "3R-ATTACHMENT-1-C").getResultList();
                 return results.size();
 
      }
@@ -3237,7 +3237,7 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
      public String getAtValue(String key,int keySequence,String atKey){
 			List<${componentName?cap_first}> results =  getEntityManager()
 					.createQuery("select cc from ${componentName?cap_first} cc where cc.a1xxuxxxbv49xxxxxxxxfromkey = :fromKey and a3xxexnsbvxxxxxxxxxxsequence = :sequence AND zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by ${statusFlagDateField}").setParameter("owner2", owner2Code).
-                setParameter("select cc fromKey", key).setParameter("atKey", atKey).setParameter("sequence", keySequence).getResultList();
+                setParameter("fromKey", key).setParameter("atKey", atKey).setParameter("sequence", keySequence).getResultList();
                 if(results.size()>1){
                  FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                                      FacesMessage.SEVERITY_ERROR,bundle.getString("duplicate")+" "+bundle.getString("for")+" "+key+" "+bundle.getString("sequence")+" "+keySequence+" , "+bundle.getString("first")+" "+bundle.getString("one")+" "+bundle.getString("used"), ""));
@@ -3262,7 +3262,7 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
      public Integer getAttachCount(){
       List<${componentName?cap_first}> results =  getEntityManager()
        .createQuery("select cc from ${componentName?cap_first} cc where cc.a1xxuxxxbv49xxxxxxxxfromkey = :fromKey AND zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by  cc.${statusFlagDateField}").setParameter("owner2", owner2Code).
-           setParameter("select cc fromKey", "3R-ATTACHMENT-1-C").getResultList();
+           setParameter("fromKey", "3R-ATTACHMENT-1-C").getResultList();
             return results.size();
      }
 </#if>
@@ -4158,7 +4158,7 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
                         ${componentName}=null;
 			List<${componentName?cap_first}> results =  getEntityManager()
 					.createQuery("select cc from ${componentName?cap_first} cc where cc.a1xxuxxxbv49xxxxxxxxfromkey = :fromKey AND zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by  cc.${statusFlagDateField}").setParameter("owner2", owner2Code).
-                setParameter("select cc fromKey", "3R-ATTACHMENT-1-C").getResultList();
+                setParameter("fromKey", "3R-ATTACHMENT-1-C").getResultList();
                            if(!results.isEmpty()){
                             ${componentName} = results.get(0);
                            }
@@ -4744,7 +4744,7 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
           ${clobdataEntityName}Home.setInstance(yxxxuq1m1xwwqqqxxxxxclobdata);
           ${clobdataEntityName}Home.superdotpersist();
           FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-           FacesMessage.SEVERITY_INFO,bundle.getString("missing")+" "+slobkeyhashM+" "+qualifier+" "+sequence+", "+bundle.getString("clobdata")+" "+bundle.getString("created")+" "+bundle.getString("select cc from")+" "+slobkeyhash,""));
+           FacesMessage.SEVERITY_INFO,bundle.getString("missing")+" "+slobkeyhashM+" "+qualifier+" "+sequence+", "+bundle.getString("clobdata")+" "+bundle.getString("created")+" "+bundle.getString("from")+" "+slobkeyhash,""));
           return yxxxuq1m1xwwqqqxxxxxclobdata;
          }  
          if(results.size() >1){
@@ -4763,7 +4763,7 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
                         ${componentName}=null;
 			List<${componentName?cap_first}> results =  getEntityManager()
 			.createQuery("select cc from ${componentName?cap_first} where  a1xxuxxxbv49xxxxxxxxfromkey = :fromKey AND zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by  cc.${statusFlagDateField}").setParameter("owner2", owner2Code).
-                         setParameter("select cc fromKey", "3R-ATTACHMENT-1-C").getResultList();
+                         setParameter("fromKey", "3R-ATTACHMENT-1-C").getResultList();
                            if(!results.isEmpty()){
                             ${componentName} = results.get(0);
                            }
@@ -4980,26 +4980,29 @@ if found return orderdetail list,can be maultiple match
             }
             <#elseif menuAttributesp2 ="30" && (vcontactEntityName?? && vcontactEntityName?length > eL)>
             vonresults= new ArrayList<${vcontactEntityName?cap_first}>();
-            for(int i=0; i<toDraftSelects.size(); i++){
-	     ${componentName}=this.getKeyToEntity(toDraftSelects.get(i));
-             if(${componentName}.getN4xxhxxrbv24xxxxxxxximailaddr() !=null && ${componentName}.getN4xxhxxrbv24xxxxxxxximailaddr().contains("@")){
-              sresults.add(${componentName});
-              if(contactYN){
-               vonresults2= getVvontactsList(${componentName}.getA0xxuobxbxxxxxxxxxxxsid());
-               if(!vonresults.isEmpty()){
-                vonresults.addAll(vonresults2);
+            if(toDraftSelects !=null){
+             for(int i=0; i<toDraftSelects.size(); i++){
+              ${componentName}=this.getKeyToEntity(toDraftSelects.get(i));
+              if(${componentName}.getN4xxhxxrbv24xxxxxxxximailaddr() !=null && ${componentName}.getN4xxhxxrbv24xxxxxxxximailaddr().contains("@")){
+               sresults.add(${componentName});
+               if(contactYN){
+                vonresults2= getVvontactsList(${componentName}.getA0xxuobxbxxxxxxxxxxxsid());
+                if(!vonresults.isEmpty()){
+                 vonresults.addAll(vonresults2);
+                }
                }
               }
              }
             }
-
             <#elseif menuAttributesp2 ="40">
-            for(int i=0; i<toDraftSelects.size(); i++){
-	     ${componentName}=this.getKeyToEntity(toDraftSelects.get(i));
-             if(${componentName}.getN4xxhxxrbv24xxxxxxxximailaddr() !=null && ${componentName}.getN4xxhxxrbv24xxxxxxxximailaddr().contains("@")){
-              sresults.add(${componentName});
+            if(toDraftSelects !=null){
+             for(int i=0; i<toDraftSelects.size(); i++){
+              ${componentName}=this.getKeyToEntity(toDraftSelects.get(i));
+              if(${componentName}.getN4xxhxxrbv24xxxxxxxximailaddr() !=null && ${componentName}.getN4xxhxxrbv24xxxxxxxximailaddr().contains("@")){
+               sresults.add(${componentName});
+              }
              }
-            }
+           }
             </#if>
             return sresults; 
            }//end group
@@ -14048,7 +14051,7 @@ protected String getCountEjbql()
               try {
                  mailingSubject=${clobdataEntityName}Home.sanitize(mailingSubject);//
                  mailingSource=${clobdataEntityName}Home.sanitize(mailingSource);
-		 ${clobdataEntityName} = ${clobdataEntityName}List.getclobDataInstance("clobdata","AMAIL-DRAFT",ownerCode,0);
+                 ${clobdataEntityName} = ${clobdataEntityName}List.getclobDataInstance("clobdata","AMAIL-DRAFT",ownerCode,0);
                  if(${clobdataEntityName} == null){   
                   ${clobdataEntityName}Home.clearInstance();
 		  ${clobdataEntityName} = ${clobdataEntityName}Home.getInstance();
@@ -14056,7 +14059,7 @@ protected String getCountEjbql()
 		  ${clobdataEntityName}.setA0xxukcdlvxxxxxxxxxxfromtable("clobdata");
 		  ${clobdataEntityName}.setA1xxuxxxbv49xxxxxxxxfromkey("MAIL-DRAFT");
 		  ${clobdataEntityName}.setA3xxexnsbvxxxxxxxxxxsequence(0);
-		  ${clobdataEntityName}.setA2xxuxxxbv50xxxxxxxxqualifier(ownerCode);
+		  ${clobdataEntityName}.setA2xxuxxxbv50xxxxxxxxqualifier(ownerCode);// each user will have own draft
                   ${clobdataEntityName}.set${clobdataentityDataFieldName?cap_first}(mailingSubject+"  "+mailingSource+" sentList: "+mailNameInfo);
                   ${clobdataEntityName}.setA4xxexxxbvxxxxxxxxxxtype("txt");
                   ${clobdataEntityName}Home.persist();
@@ -14086,7 +14089,7 @@ protected String getCountEjbql()
 
 
    public void loadDraft() {
-		 ${clobdataEntityName} = ${clobdataEntityName}List.getclobDataInstance("clobdata","AMAIL-DRAFT",ownerCode,0);
+                 ${clobdataEntityName} = ${clobdataEntityName}List.getclobDataInstance("clobdata","AMAIL-DRAFT",ownerCode,0); // each owner will load own draft
                  if(${clobdataEntityName} == null){   
                   FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                    FacesMessage.SEVERITY_ERROR,bundle.getString("no")+" "+bundle.getString("draft")+" ("+bundle.getString("key")+": "+bundle.getString("MAIL-DRAFT")+") "+" "+bundle.getString("record")+" "+bundle.getString("found")+" "+bundle.getString("in")+" "+bundle.getString("text")+" "+bundle.getString("data"),""));
@@ -14332,6 +14335,13 @@ protected String getCountEjbql()
 
           return;
         }//mailingSize check 
+/* sendgrid email is sent using smtp but curl api end point can also be used. To test API key authentication we can use curl rather than telnet for smtp. 
+curl --request POST \
+--url https://api.sendgrid.com/v3/mail/send \
+--header 'Authorization: Bearer <<YOUR_API_KEY>>' \
+--header 'Content-Type: application/json' \
+--data '{"personalizations":[{"to":[{"email":"john.doe@example.com","name":"John Doe"}],"subject":"Hello, World!"}],"content": [{"type": "text/plain", "value": "Heya!"}],"from":{"email":"sam.smith@example.com","name":"Sam Smith"},"reply_to":{"email":"sam.smith@example.com","name":"Sam Smith"}}'
+*/
     } catch (Exception e) {
          log.severe("Error sending mail"+ e);
          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -14442,10 +14452,10 @@ protected String getCountEjbql()
                              if(client05 !=null){
                               fromAddress=client05.getD5xxuxxrbvxxxxxxxxxxrmailaddr();//show in o5 quick edit, need to match the sender info setup in mailrelay server
                               siteAddress05=client05.getD4xxhxxrbv24xxxxxxxximailaddr();//exmpl mail@raaspi.com 
-                              host=client05.getZ8xxuxxxbvxxxxxxxxxxsmtpserver();//exmpl smtp.sendgrid.net
-                              userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
+                              host=client05.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().trim();//exmpl smtp.sendgrid.net
+                              userName=client05.getZ9xxuxxxbvxxxxxxxxxxsmtpuser().trim();//exmpl apikey if sendgrid. logic may need change to support other mailRelay server 
                               userName05=userName;
-                              password=client05.getDbxxuzxdssxxxxxxxxxxapiclientsecret();//access token
+                              password=client05.getDbxxuzxdssxxxxxxxxxxapiclientsecret().trim();//access token
                               password05=password;
                               if(password == null || password.isEmpty() || password.equals("SG.BxxxxxxxxxxyyyyyiBg") ){
                                smtpError=true; //both record 01 and 05 checked
@@ -14463,21 +14473,21 @@ protected String getCountEjbql()
                         }
                       }else{
                        if(client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver()!=null && !client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().isEmpty()){
-                        host=client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver();
+                        host=client.getZ8xxuxxxbvxxxxxxxxxxsmtpserver().trim();
                        }else{
                          smtpError=true;
                          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                            FacesMessage.SEVERITY_INFO,bundle.getString("client") +" "+bundle.getString("smtp")+" "+bundle.getString("host")+" "+bundle.getString("information") +" "+bundle.getString("missing"),""));
                        }
                        if(client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser()!=null && !client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser().isEmpty()){
-                        userName=client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser();
+                        userName=client.getZ9xxuxxxbvxxxxxxxxxxsmtpuser().trim();
                        }else{
                          smtpError=true;
                          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                            FacesMessage.SEVERITY_INFO,bundle.getString("client") +" "+bundle.getString("smtp")+" "+bundle.getString("userName")+" "+bundle.getString("information") +" "+bundle.getString("missing"),""));
                        }
                        if(client.getZaxxuxxxssxxxxxxxxxxsmtppass()!=null && !client.getZaxxuxxxssxxxxxxxxxxsmtppass().isEmpty()){
-                        password=client.getZaxxuxxxssxxxxxxxxxxsmtppass();
+                        password=client.getZaxxuxxxssxxxxxxxxxxsmtppass().trim();
                        }else{
                          //smtpError=true; check record 07 then act
                          //FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -14533,13 +14543,13 @@ protected String getCountEjbql()
           if(client !=null && client.getDaxxuzxdssxxxxxxxxxxapiclientid() !=null && !client.getDaxxuzxdssxxxxxxxxxxapiclientid().isEmpty()
               && client.getDbxxuzxdssxxxxxxxxxxapiclientsecret() !=null && !client.getDbxxuzxdssxxxxxxxxxxapiclientsecret().isEmpty()){
            auth_mechanisms="XOAUTH2";//gmail smtp
-           password=client.getDbxxuzxdssxxxxxxxxxxapiclientsecret();//access token
+           password=client.getDbxxuzxdssxxxxxxxxxxapiclientsecret().trim();//access token
            //check if token expired and refresh if needed
            calendar.getTime();
            calendare.setTime(client.getZfxxcztxlxxxxxxxxxxxstatusfldt());
            calendare.add(Calendar.MINUTE, 59);
            if(calendare.before(calendar)){
-            password=r3RestClient.getAccessTokenGMail(client.getDaxxuzxdssxxxxxxxxxxapiclientid(),"refresh_token",owner2Code );
+            password=r3RestClient.getAccessTokenGMail(client.getDaxxuzxdssxxxxxxxxxxapiclientid().trim(),"refresh_token",owner2Code );
            }      
            if(password == null || password.isEmpty()){
             smtpError=true; //both record 01 and 07 checked
@@ -14582,7 +14592,7 @@ protected String getCountEjbql()
           if(fromAddress.contains("doNotReply@")){
            fromAddress="doNotReply@"+smtpDomain;
            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-              FacesMessage.SEVERITY_INFO, bundle.getString("select cc from")+" "+bundle.getString("email")+" "+bundle.getString("address")+" "+bundle.getString("defaulting")+" "+bundle.getString("to")+" "+fromAddress+", "+bundle.getString("ensure")+" "+bundle.getString("it")+" "+bundle.getString("exists"),""));
+              FacesMessage.SEVERITY_INFO, bundle.getString("from")+" "+bundle.getString("email")+" "+bundle.getString("address")+" "+bundle.getString("defaulting")+" "+bundle.getString("to")+" "+fromAddress+", "+bundle.getString("ensure")+" "+bundle.getString("it")+" "+bundle.getString("exists"),""));
           }else{
                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                    FacesMessage.SEVERITY_WARN,bundle.getString("select cc from_address") +" "+fromAddress+", "+bundle.getString("domain") +" "+bundle.getString("not")+" "+bundle.getString("matching")+" "+bundle.getString("smtp")+" "+bundle.getString("server")+" "+bundle.getString("domain")+" "+smtpDomain,""));
@@ -14626,25 +14636,28 @@ protected String getCountEjbql()
          //if html then it can be embedded (preferred) not as attachment
          if(flag.equals("e")){
          <#if menuAttributesp2 == "33" >
-         subjectTemplate=bundle.getString("Quotation")+" "+bundle.getString("Request")+" "+bundle.getString("select cc from")+" "+owner2Code;
+         subjectTemplate=bundle.getString("Quotation")+" "+bundle.getString("Request")+" "+bundle.getString("from")+" "+owner2Code;
          <#elseif menuAttributesp2 == "34" >
-         subjectTemplate=bundle.getString("Order")+" "+bundle.getString("Request")+" "+bundle.getString("select cc from")+" "+owner2Code;
+         subjectTemplate=bundle.getString("Order")+" "+bundle.getString("Request")+" "+bundle.getString("from")+" "+owner2Code;
          <#elseif menuAttributesp2 == "37" >
-         subjectTemplate=bundle.getString("Shipment")+" "+bundle.getString("Request")+" "+bundle.getString("select cc from")+" "+owner2Code;
+         subjectTemplate=bundle.getString("Shipment")+" "+bundle.getString("Request")+" "+bundle.getString("from")+" "+owner2Code;
          <#elseif menuAttributesp2 == "3A" >
-         subjectTemplate=bundle.getString("Invoice")+" "+bundle.getString("Confirmation")+" "+bundle.getString("select cc from")+" "+owner2Code;
+         subjectTemplate=bundle.getString("Invoice")+" "+bundle.getString("Confirmation")+" "+bundle.getString("from")+" "+owner2Code;
          <#elseif menuAttributesp2 == "38" >
-         subjectTemplate=bundle.getString("Payment")+" "+bundle.getString("Confirmation")+" "+bundle.getString("select cc from")+" "+owner2Code;
+         subjectTemplate=bundle.getString("Payment")+" "+bundle.getString("Confirmation")+" "+bundle.getString("from")+" "+owner2Code;
          <#elseif menuAttributesp2 == "56" >
-         subjectTemplate=bundle.getString("Follow")+" "+bundle.getString("up")+" "+bundle.getString("select cc from")+" "+owner2Code;
+         subjectTemplate=bundle.getString("Follow")+" "+bundle.getString("up")+" "+bundle.getString("from")+" "+owner2Code;
          <#elseif menuAttributesp2 == "89" >
-         //set in evite subjectTemplate=bundle.getString("Meeting")+" "+bundle.getString("invite")+" "+bundle.getString("select cc from")+" "+owner2Code;
+         //set in evite subjectTemplate=bundle.getString("Meeting")+" "+bundle.getString("invite")+" "+bundle.getString("from")+" "+owner2Code;
          <#else>
-         subjectTemplate=bundle.getString("Transaction")+" "+bundle.getString("Receipt")+" "+bundle.getString("select cc from")+" "+owner2Code;
+         subjectTemplate=bundle.getString("Transaction")+" "+bundle.getString("Receipt")+" "+bundle.getString("from")+" "+owner2Code;
          </#if>
          //emailingContent for emailing and attaching report as receipt 
           toName="";// mailingAddress set by esend using mailTo, headers are empty todo allow multilingual
           toAddress=mailingAddress;
+          if(siteAddress05 !=null && !siteAddress05.isEmpty()){
+           toAddress=siteAddress05;// avoid invalid email addr ie no email addr for site domain
+          }
           useTemplate="${entityName?substring(eL)}eMailingContent.fmt";
          <#if menuAttributesp2 == "56" || menuAttributesp2 == "89">
            if(!mailRelayOff){
@@ -14752,6 +14765,9 @@ protected String getCountEjbql()
           if(!getClientEMail().isEmpty() && !mailingAddress.isEmpty()){
            toAddress=mailingAddress;// should not be empty if empty  then default is support@customIdentity.getMasterSiteUrl()
           }///  value in e1mailAddress including coming from ebasketin gets added to xsmtpi header toAddress
+          if(siteAddress05 !=null && !siteAddress05.isEmpty()){
+           toAddress=siteAddress05;// avoid invalid email addr ie no email addr for site domain
+          }
           //if(!e1mailAddress.isEmpty()){
            //toAddress=e1mailAddress;
           //}
@@ -14769,6 +14785,9 @@ protected String getCountEjbql()
              toAddress=e1mailAddress+", "+mailInfoTo; // added onetime e1mailAddr
             }else{
              toAddress=mailInfoTo;  
+             if(siteAddress05 !=null && !siteAddress05.isEmpty()){
+              toAddress=siteAddress05;// avoid invalid email addr ie no email addr for site domain
+             }
             }
             String[] myData = toAddress.split(", ");
             for (String s: myData) {
@@ -14931,7 +14950,7 @@ protected String getCountEjbql()
          // send again using new token is there subcode for expired or check token expiry?
          if(cause.contains("334")){
           
-          password=r3RestClient.getAccessTokenGMail(client.getDaxxuzxdssxxxxxxxxxxapiclientid(),"refresh_token",owner2Code );
+          password=r3RestClient.getAccessTokenGMail(client.getDaxxuzxdssxxxxxxxxxxapiclientid().trim(),"refresh_token",owner2Code );
           FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
            FacesMessage.SEVERITY_INFO,bundle.getString("Oauth")+" "+ bundle.getString("accessToken")+" "+bundle.getString("failure")+", ",""));
           FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -15754,6 +15773,13 @@ protected String getCountEjbql()
  
 
 	}
+
+     public Integer userAuthNotMailedCount(){
+      List<${userEntityName?cap_first}> results =  getEntityManager()
+       .createQuery("select cc from ${userEntityName?cap_first} cc where cc.z1xxzzfxhhxxxxxxxxxxstatusfl = :partial AND cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by  cc.${statusFlagDateField}").setParameter("owner2", owner2Code).
+           setParameter("partial", mpartial).getResultList();
+            return results.size();
+     }
 
 </#if>
 

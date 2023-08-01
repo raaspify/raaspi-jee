@@ -204,7 +204,7 @@ popupPanels: none
           <ui:decorate id="clientApplicationNameFieldb" template="layout/edit.xhtml">
             <h:inputText id="websiteName" required="true" value="${'#'}{yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName}" size="35" pt:placeholder="AbcRentals" maxlength="35" onclick="this.value='';" onfocus="this.select()"
               class="w3-input" >
-              <f:ajax event="keyup" render="register:full" />
+              <p:ajax event="keyup" update="register:full,register:revised,register:fullurlNamedb" />
             </h:inputText>
           </ui:decorate>
       </h:panelGrid>
@@ -227,7 +227,11 @@ popupPanels: none
             </h:graphicImage>
               <i class="fa fa-cloud" aria-hidden="true" style="color:dark grey">
               </i>
-
+          </ui:decorate>
+          <ui:decorate id="clientFullUrlFieldb" template="layout/edit.xhtml">
+            <h:inputText id="fullurlNamedb"  value="${'#'}{yxxxuh566xwwqqwxxxxxuserHome.clientFullUrlName}" size="60" maxlength="60">
+              <p:ajax event="keyup"  update="register:full,register:fullurlNamedb,register:websiteName" />
+            </h:inputText>
           </ui:decorate>
       </h:panelGrid>
             <h:outputText id="full" value="${'#'}{yxxxuh566xwwqqwxxxxxuserHome.clientFullUrlName}"/>
@@ -267,7 +271,7 @@ popupPanels: none
             <h:commandLink value=" " id="termsOfUseLink" onclick="PF('termsOfUse').show(); return false;">
               <h:outputText value=" ${'#'}{messages['read']}"/>
             </h:commandLink><br/>
-            <p:commandButton id="registerButton" class="w3-btn w3-blue" value ="${'#'}{messages.register}"  status="buttonStatus"  update="registerx"
+            <p:commandButton id="registerButton" class="w3-btn w3-blue" value ="${'#'}{messages.register}"  status="buttonStatus"  update="register:registerx"
                 action="${'#'}{${userEntityName}Home.doRegister('v',${clobdataEntityName}Home.contentTheme)}"/>
              <p:ajaxStatus name="buttonStatus" >
               <f:facet name="start">
