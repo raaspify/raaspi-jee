@@ -472,6 +472,7 @@ public class Fxxxuq8bxxwwqqhxxxxxoutlineList implements Serializable
      private static final String[] RESTRICTIONS = {
 
 
+
         "lower(fxxxuq8bxxwwqqhxxxxxoutline.z1xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{fxxxuq8bxxwwqqhxxxxxoutlineList.ownerCddCode}))",
         "lower(fxxxuq8bxxwwqqhxxxxxoutline.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{fxxxuq8bxxwwqqhxxxxxoutlineList.dataOwner2Code})",
     };

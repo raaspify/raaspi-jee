@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -44,6 +44,8 @@ public class Yxxxuq632xwwqqhxxxxxperioddates implements java.io.Serializable {
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses = new HashSet<Yxxxch65exwwqqhxxxxxglentries>(
 			0);
+	private Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses_1 = new HashSet<Yxxxch65exwwqqhxxxxxglentries>(
+			0);
 
 	public Yxxxuq632xwwqqhxxxxxperioddates() {
 	}
@@ -62,7 +64,8 @@ public class Yxxxuq632xwwqqhxxxxxperioddates implements java.io.Serializable {
 			Date z2xxcztxlxxxxxxxxxxxstatusfldt,
 			String y3xxuxznbvxxxxxxxxxxnotes, String z3xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses) {
+			Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses,
+			Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses_1) {
 		this.a0xxukwpbv47xxxxxxxxperiod = a0xxukwpbv47xxxxxxxxperiod;
 		this.b1xxuszsbvxxxxxxxxxxdescript = b1xxuszsbvxxxxxxxxxxdescript;
 		this.b2xxdwsrbvxxxxxxxxxxstartdate = b2xxdwsrbvxxxxxxxxxxstartdate;
@@ -76,6 +79,7 @@ public class Yxxxuq632xwwqqhxxxxxperioddates implements java.io.Serializable {
 		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.yxxxch65exwwqqhxxxxxglentrieses = yxxxch65exwwqqhxxxxxglentrieses;
+		this.yxxxch65exwwqqhxxxxxglentrieses_1 = yxxxch65exwwqqhxxxxxglentrieses_1;
 	}
 
 	@Id
@@ -220,6 +224,16 @@ public class Yxxxuq632xwwqqhxxxxxperioddates implements java.io.Serializable {
 	public void setYxxxch65exwwqqhxxxxxglentrieses(
 			Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses) {
 		this.yxxxch65exwwqqhxxxxxglentrieses = yxxxch65exwwqqhxxxxxglentrieses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxuq632xwwqqhxxxxxperioddates")
+	public Set<Yxxxch65exwwqqhxxxxxglentries> getYxxxch65exwwqqhxxxxxglentrieses_1() {
+		return this.yxxxch65exwwqqhxxxxxglentrieses_1;
+	}
+
+	public void setYxxxch65exwwqqhxxxxxglentrieses_1(
+			Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses_1) {
+		this.yxxxch65exwwqqhxxxxxglentrieses_1 = yxxxch65exwwqqhxxxxxglentrieses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

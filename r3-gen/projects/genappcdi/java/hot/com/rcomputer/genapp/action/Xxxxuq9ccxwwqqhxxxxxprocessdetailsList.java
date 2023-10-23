@@ -477,6 +477,7 @@ public class Xxxxuq9ccxwwqqhxxxxxprocessdetailsList implements Serializable
 
 
 
+
         "lower(xxxxuq9ccxwwqqhxxxxxprocessdetails.z4xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{xxxxuq9ccxwwqqhxxxxxprocessdetailsList.ownerCddCode}))",
         "lower(xxxxuq9ccxwwqqhxxxxxprocessdetails.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{xxxxuq9ccxwwqqhxxxxxprocessdetailsList.dataOwner2Code})",
     };

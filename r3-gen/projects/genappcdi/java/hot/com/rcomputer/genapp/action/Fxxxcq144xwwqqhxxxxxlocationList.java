@@ -487,6 +487,16 @@ public class Fxxxcq144xwwqqhxxxxxlocationList implements Serializable
 
 
 
+
+
+
+
+
+
+
+
+
+
         "lower(fxxxcq144xwwqqhxxxxxlocation.z4xxuznxbvxxxxxxxxxxnotes) like lower( concat(#{fxxxcq144xwwqqhxxxxxlocationList.fxxxcq144xwwqqhxxxxxlocation.z4xxuznxbvxxxxxxxxxxnotes},'%'))",
         "lower(fxxxcq144xwwqqhxxxxxlocation.z5xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{fxxxcq144xwwqqhxxxxxlocationList.ownerCddCode}))",
         "lower(fxxxcq144xwwqqhxxxxxlocation.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{fxxxcq144xwwqqhxxxxxlocationList.dataOwner2Code})",

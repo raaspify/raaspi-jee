@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -53,6 +53,10 @@ public class Jxxxuq54exwwqqhxxxxxgroupmembers implements java.io.Serializable {
 			0);
 	private Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks = new HashSet<Fxxxuq1kkxwwqqhfxxxxtask>(
 			0);
+	private Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses_1 = new HashSet<Dxxxuq2drxwwqqhfxxxxresourcedetails>(
+			0);
+	private Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks_1 = new HashSet<Fxxxuq1kkxwwqqhfxxxxtask>(
+			0);
 
 	public Jxxxuq54exwwqqhxxxxxgroupmembers() {
 	}
@@ -82,7 +86,9 @@ public class Jxxxuq54exwwqqhxxxxxgroupmembers implements java.io.Serializable {
 			String z3xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
 			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses,
-			Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks) {
+			Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks,
+			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses_1,
+			Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks_1) {
 		this.jxxxbh400xwwqqhxxxxxemployee = jxxxbh400xwwqqhxxxxxemployee;
 		this.fxxxuq188xwwqqhxxxxxactivity = fxxxuq188xwwqqhxxxxxactivity;
 		this.jxxxuq201xwwqqhxxxxxcustomer = jxxxuq201xwwqqhxxxxxcustomer;
@@ -102,6 +108,8 @@ public class Jxxxuq54exwwqqhxxxxxgroupmembers implements java.io.Serializable {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.dxxxuq2drxwwqqhfxxxxresourcedetailses = dxxxuq2drxwwqqhfxxxxresourcedetailses;
 		this.fxxxuq1kkxwwqqhfxxxxtasks = fxxxuq1kkxwwqqhfxxxxtasks;
+		this.dxxxuq2drxwwqqhfxxxxresourcedetailses_1 = dxxxuq2drxwwqqhfxxxxresourcedetailses_1;
+		this.fxxxuq1kkxwwqqhfxxxxtasks_1 = fxxxuq1kkxwwqqhfxxxxtasks_1;
 	}
 
 	@Id
@@ -316,6 +324,26 @@ public class Jxxxuq54exwwqqhxxxxxgroupmembers implements java.io.Serializable {
 	public void setFxxxuq1kkxwwqqhfxxxxtasks(
 			Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks) {
 		this.fxxxuq1kkxwwqqhfxxxxtasks = fxxxuq1kkxwwqqhfxxxxtasks;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq54exwwqqhxxxxxgroupmembers")
+	public Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> getDxxxuq2drxwwqqhfxxxxresourcedetailses_1() {
+		return this.dxxxuq2drxwwqqhfxxxxresourcedetailses_1;
+	}
+
+	public void setDxxxuq2drxwwqqhfxxxxresourcedetailses_1(
+			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses_1) {
+		this.dxxxuq2drxwwqqhfxxxxresourcedetailses_1 = dxxxuq2drxwwqqhfxxxxresourcedetailses_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq54exwwqqhxxxxxgroupmembers")
+	public Set<Fxxxuq1kkxwwqqhfxxxxtask> getFxxxuq1kkxwwqqhfxxxxtasks_1() {
+		return this.fxxxuq1kkxwwqqhfxxxxtasks_1;
+	}
+
+	public void setFxxxuq1kkxwwqqhfxxxxtasks_1(
+			Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks_1) {
+		this.fxxxuq1kkxwwqqhfxxxxtasks_1 = fxxxuq1kkxwwqqhfxxxxtasks_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

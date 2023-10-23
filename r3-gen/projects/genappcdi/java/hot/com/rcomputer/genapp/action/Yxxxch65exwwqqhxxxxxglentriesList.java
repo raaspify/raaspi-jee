@@ -474,6 +474,7 @@ public class Yxxxch65exwwqqhxxxxxglentriesList implements Serializable
         "lower(yxxxch65exwwqqhxxxxxglentries.b1xxuzsxbvxxxxxxxxxxdescript) like lower( concat(#{yxxxch65exwwqqhxxxxxglentriesList.yxxxch65exwwqqhxxxxxglentries.b1xxuzsxbvxxxxxxxxxxdescript},'%'))",
         "lower(yxxxch65exwwqqhxxxxxglentries.b3xxuxxrbvxxxxxxxxxxrefcode) like lower( concat(#{yxxxch65exwwqqhxxxxxglentriesList.yxxxch65exwwqqhxxxxxglentries.b3xxuxxrbvxxxxxxxxxxrefcode},'%'))",
 
+
         "lower(yxxxch65exwwqqhxxxxxglentries.y8xxuznxbvxxxxxxxxxxnotes) like lower( concat(#{yxxxch65exwwqqhxxxxxglentriesList.yxxxch65exwwqqhxxxxxglentries.y8xxuznxbvxxxxxxxxxxnotes},'%'))",
 
 

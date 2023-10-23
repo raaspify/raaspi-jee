@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -116,9 +116,9 @@ public class Yxxxuq591xwwqqhxxxxxrate1f implements java.io.Serializable {
 		this.b1xxuxxrbvxxxxxxxxxxprodtype = b1xxuxxrbvxxxxxxxxxxprodtype;
 	}
 
-	@Column(name = "stepname", nullable = false, length = 25)
+	@Column(name = "stepname", nullable = false, length = 32)
 	@NotNull
-	@Size(max = 25)
+	@Size(max = 32)
 	public String getB2xxuxxrbv51xxxxxxxxstepname() {
 		return this.b2xxuxxrbv51xxxxxxxxstepname;
 	}
@@ -167,8 +167,8 @@ public class Yxxxuq591xwwqqhxxxxxrate1f implements java.io.Serializable {
 		this.h2xxcxxrbvxxxxxxxxxxenddate = h2xxcxxrbvxxxxxxxxxxenddate;
 	}
 
-	@Column(name = "incentive", length = 25)
-	@Size(max = 25)
+	@Column(name = "incentive", length = 32)
+	@Size(max = 32)
 	public String getH3xxuxxrbvxxxxxxxxxxincentive() {
 		return this.h3xxuxxrbvxxxxxxxxxxincentive;
 	}

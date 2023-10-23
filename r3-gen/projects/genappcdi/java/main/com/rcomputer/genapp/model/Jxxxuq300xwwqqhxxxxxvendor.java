@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -82,45 +82,85 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 	private String zhxxutoxlhxxxxxxxxxxowner;
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private String ycxxuzdrbvxxxxxxxxxxdocmnt;
-	private Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes = new HashSet<Trexuq333xwwqqhxxxxxvenquote>(
-			0);
 	private Set<Trexuq344xwwqqhxxxxxvendorders> trexuq344xwwqqhxxxxxvendorderses = new HashSet<Trexuq344xwwqqhxxxxxvendorders>(
 			0);
-	private Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments = new HashSet<Trexuq388xwwqqhxxxxxvpayment>(
-			0);
 	private Set<Xoxxuq454xwwqqhxxxxxemplodetails> xoxxuq454xwwqqhxxxxxemplodetailses = new HashSet<Xoxxuq454xwwqqhxxxxxemplodetails>(
-			0);
-	private Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses = new HashSet<Jxxxuq54exwwqqhxxxxxgroupmembers>(
-			0);
-	private Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens = new HashSet<Trexuq377xwwqqhxxxxxvshipmen>(
 			0);
 	private Set<Xoxxuq2a4xwwqqhxxxxxcuidetails> xoxxuq2a4xwwqqhxxxxxcuidetailses = new HashSet<Xoxxuq2a4xwwqqhxxxxxcuidetails>(
 			0);
 	private Set<Trxxuq9aaxwwqqhefxxxjobassignment> trxxuq9aaxwwqqhefxxxjobassignments = new HashSet<Trxxuq9aaxwwqqhefxxxjobassignment>(
 			0);
-	private Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses = new HashSet<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails>(
-			0);
-	private Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses = new HashSet<Xoxxuq3b4xwwqqhxxxxxvendpdetails>(
-			0);
 	private Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules = new HashSet<Fxxxuq89bxwwqqhxxxxxschedule>(
 			0);
-	private Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> xoxxuq2b4xwwqqhxxxxxcuodetailses = new HashSet<Xoxxuq2b4xwwqqhxxxxxcuodetails>(
+	private Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses = new HashSet<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails>(
+			0);
+	private Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1 = new HashSet<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails>(
 			0);
 	private Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontacts = new HashSet<Jxxxuq31bxwwqqhxxxxxvcontact>(
 			0);
-	private Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers = new HashSet<Yxxxuh566xwwqqwxxxxxuser>(
+	private Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses = new HashSet<Xoxxuq3b4xwwqqhxxxxxvendpdetails>(
 			0);
-	private Set<Txxxuq366xwwqqhxxxxxvenartha> txxxuq366xwwqqhxxxxxvenarthas = new HashSet<Txxxuq366xwwqqhxxxxxvenartha>(
+	private Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes = new HashSet<Trexuq333xwwqqhxxxxxvenquote>(
+			0);
+	private Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers = new HashSet<Yxxxuh566xwwqqwxxxxxuser>(
 			0);
 	private Set<Xorxeh8cexwwqqhxxxxxscheduledetails> xorxeh8cexwwqqhxxxxxscheduledetailses = new HashSet<Xorxeh8cexwwqqhxxxxxscheduledetails>(
 			0);
 	private Set<Trexuq3a6xwwqqhxxxxxvinvoice> trexuq3a6xwwqqhxxxxxvinvoices = new HashSet<Trexuq3a6xwwqqhxxxxxvinvoice>(
 			0);
+	private Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers_1 = new HashSet<Yxxxuh566xwwqqwxxxxxuser>(
+			0);
 	private Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForCarrier = new HashSet<Trexuq255xwwqqhxxxxxshipment>(
+			0);
+	private Set<Xorxeh8cexwwqqhxxxxxscheduledetails> xorxeh8cexwwqqhxxxxxscheduledetailses_1 = new HashSet<Xorxeh8cexwwqqhxxxxxscheduledetails>(
+			0);
+	private Set<Xoxxuq2a4xwwqqhxxxxxcuidetails> xoxxuq2a4xwwqqhxxxxxcuidetailses_1 = new HashSet<Xoxxuq2a4xwwqqhxxxxxcuidetails>(
+			0);
+	private Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShipper = new HashSet<Trexuq255xwwqqhxxxxxshipment>(
+			0);
+	private Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes_1 = new HashSet<Trexuq333xwwqqhxxxxxvenquote>(
+			0);
+	private Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments = new HashSet<Trexuq388xwwqqhxxxxxvpayment>(
 			0);
 	private Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses = new HashSet<Xoxxuq2c4xwwqqhxxxxxcuqdetails>(
 			0);
-	private Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShipper = new HashSet<Trexuq255xwwqqhxxxxxshipment>(
+	private Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses = new HashSet<Jxxxuq54exwwqqhxxxxxgroupmembers>(
+			0);
+	private Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens = new HashSet<Trexuq377xwwqqhxxxxxvshipmen>(
+			0);
+	private Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses_1 = new HashSet<Xoxxuq3b4xwwqqhxxxxxvendpdetails>(
+			0);
+	private Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShipper_1 = new HashSet<Trexuq255xwwqqhxxxxxshipment>(
+			0);
+	private Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules_1 = new HashSet<Fxxxuq89bxwwqqhxxxxxschedule>(
+			0);
+	private Set<Xoxxuq454xwwqqhxxxxxemplodetails> xoxxuq454xwwqqhxxxxxemplodetailses_1 = new HashSet<Xoxxuq454xwwqqhxxxxxemplodetails>(
+			0);
+	private Set<Txxxuq366xwwqqhxxxxxvenartha> txxxuq366xwwqqhxxxxxvenarthas = new HashSet<Txxxuq366xwwqqhxxxxxvenartha>(
+			0);
+	private Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses_1 = new HashSet<Jxxxuq54exwwqqhxxxxxgroupmembers>(
+			0);
+	private Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> xoxxuq2b4xwwqqhxxxxxcuodetailses = new HashSet<Xoxxuq2b4xwwqqhxxxxxcuodetails>(
+			0);
+	private Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontacts_1 = new HashSet<Jxxxuq31bxwwqqhxxxxxvcontact>(
+			0);
+	private Set<Txxxuq366xwwqqhxxxxxvenartha> txxxuq366xwwqqhxxxxxvenarthas_1 = new HashSet<Txxxuq366xwwqqhxxxxxvenartha>(
+			0);
+	private Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens_1 = new HashSet<Trexuq377xwwqqhxxxxxvshipmen>(
+			0);
+	private Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> xoxxuq2b4xwwqqhxxxxxcuodetailses_1 = new HashSet<Xoxxuq2b4xwwqqhxxxxxcuodetails>(
+			0);
+	private Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForCarrier_1 = new HashSet<Trexuq255xwwqqhxxxxxshipment>(
+			0);
+	private Set<Trxxuq9aaxwwqqhefxxxjobassignment> trxxuq9aaxwwqqhefxxxjobassignments_1 = new HashSet<Trxxuq9aaxwwqqhefxxxjobassignment>(
+			0);
+	private Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments_1 = new HashSet<Trexuq388xwwqqhxxxxxvpayment>(
+			0);
+	private Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses_1 = new HashSet<Xoxxuq2c4xwwqqhxxxxxcuqdetails>(
+			0);
+	private Set<Trexuq344xwwqqhxxxxxvendorders> trexuq344xwwqqhxxxxxvendorderses_1 = new HashSet<Trexuq344xwwqqhxxxxxvendorders>(
+			0);
+	private Set<Trexuq3a6xwwqqhxxxxxvinvoice> trexuq3a6xwwqqhxxxxxvinvoices_1 = new HashSet<Trexuq3a6xwwqqhxxxxxvinvoice>(
 			0);
 
 	public Jxxxuq300xwwqqhxxxxxvendor() {
@@ -179,26 +219,46 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 			String zhxxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
 			String ycxxuzdrbvxxxxxxxxxxdocmnt,
-			Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes,
 			Set<Trexuq344xwwqqhxxxxxvendorders> trexuq344xwwqqhxxxxxvendorderses,
-			Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments,
 			Set<Xoxxuq454xwwqqhxxxxxemplodetails> xoxxuq454xwwqqhxxxxxemplodetailses,
-			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses,
-			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens,
 			Set<Xoxxuq2a4xwwqqhxxxxxcuidetails> xoxxuq2a4xwwqqhxxxxxcuidetailses,
 			Set<Trxxuq9aaxwwqqhefxxxjobassignment> trxxuq9aaxwwqqhefxxxjobassignments,
-			Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses,
-			Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses,
 			Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules,
-			Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> xoxxuq2b4xwwqqhxxxxxcuodetailses,
+			Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses,
+			Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1,
 			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontacts,
+			Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses,
+			Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes,
 			Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers,
-			Set<Txxxuq366xwwqqhxxxxxvenartha> txxxuq366xwwqqhxxxxxvenarthas,
 			Set<Xorxeh8cexwwqqhxxxxxscheduledetails> xorxeh8cexwwqqhxxxxxscheduledetailses,
 			Set<Trexuq3a6xwwqqhxxxxxvinvoice> trexuq3a6xwwqqhxxxxxvinvoices,
+			Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers_1,
 			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForCarrier,
+			Set<Xorxeh8cexwwqqhxxxxxscheduledetails> xorxeh8cexwwqqhxxxxxscheduledetailses_1,
+			Set<Xoxxuq2a4xwwqqhxxxxxcuidetails> xoxxuq2a4xwwqqhxxxxxcuidetailses_1,
+			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShipper,
+			Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes_1,
+			Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments,
 			Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses,
-			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShipper) {
+			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses,
+			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens,
+			Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses_1,
+			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShipper_1,
+			Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules_1,
+			Set<Xoxxuq454xwwqqhxxxxxemplodetails> xoxxuq454xwwqqhxxxxxemplodetailses_1,
+			Set<Txxxuq366xwwqqhxxxxxvenartha> txxxuq366xwwqqhxxxxxvenarthas,
+			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses_1,
+			Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> xoxxuq2b4xwwqqhxxxxxcuodetailses,
+			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontacts_1,
+			Set<Txxxuq366xwwqqhxxxxxvenartha> txxxuq366xwwqqhxxxxxvenarthas_1,
+			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens_1,
+			Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> xoxxuq2b4xwwqqhxxxxxcuodetailses_1,
+			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForCarrier_1,
+			Set<Trxxuq9aaxwwqqhefxxxjobassignment> trxxuq9aaxwwqqhefxxxjobassignments_1,
+			Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments_1,
+			Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses_1,
+			Set<Trexuq344xwwqqhxxxxxvendorders> trexuq344xwwqqhxxxxxvendorderses_1,
+			Set<Trexuq3a6xwwqqhxxxxxvinvoice> trexuq3a6xwwqqhxxxxxvinvoices_1) {
 		this.fxxxcq144xwwqqhxxxxxlocation = fxxxcq144xwwqqhxxxxxlocation;
 		this.fxxxuq111xwwqqhxxxxxaddressByMailtocode = fxxxuq111xwwqqhxxxxxaddressByMailtocode;
 		this.yxxxch601xwwqqhxxxxxaccount = yxxxch601xwwqqhxxxxxaccount;
@@ -248,26 +308,46 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 		this.zhxxutoxlhxxxxxxxxxxowner = zhxxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.ycxxuzdrbvxxxxxxxxxxdocmnt = ycxxuzdrbvxxxxxxxxxxdocmnt;
-		this.trexuq333xwwqqhxxxxxvenquotes = trexuq333xwwqqhxxxxxvenquotes;
 		this.trexuq344xwwqqhxxxxxvendorderses = trexuq344xwwqqhxxxxxvendorderses;
-		this.trexuq388xwwqqhxxxxxvpayments = trexuq388xwwqqhxxxxxvpayments;
 		this.xoxxuq454xwwqqhxxxxxemplodetailses = xoxxuq454xwwqqhxxxxxemplodetailses;
-		this.jxxxuq54exwwqqhxxxxxgroupmemberses = jxxxuq54exwwqqhxxxxxgroupmemberses;
-		this.trexuq377xwwqqhxxxxxvshipmens = trexuq377xwwqqhxxxxxvshipmens;
 		this.xoxxuq2a4xwwqqhxxxxxcuidetailses = xoxxuq2a4xwwqqhxxxxxcuidetailses;
 		this.trxxuq9aaxwwqqhefxxxjobassignments = trxxuq9aaxwwqqhefxxxjobassignments;
-		this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses = xoxxuq9bfxwwqqhexxxxjobassignmentdetailses;
-		this.xoxxuq3b4xwwqqhxxxxxvendpdetailses = xoxxuq3b4xwwqqhxxxxxvendpdetailses;
 		this.fxxxuq89bxwwqqhxxxxxschedules = fxxxuq89bxwwqqhxxxxxschedules;
-		this.xoxxuq2b4xwwqqhxxxxxcuodetailses = xoxxuq2b4xwwqqhxxxxxcuodetailses;
+		this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses = xoxxuq9bfxwwqqhexxxxjobassignmentdetailses;
+		this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1 = xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1;
 		this.jxxxuq31bxwwqqhxxxxxvcontacts = jxxxuq31bxwwqqhxxxxxvcontacts;
+		this.xoxxuq3b4xwwqqhxxxxxvendpdetailses = xoxxuq3b4xwwqqhxxxxxvendpdetailses;
+		this.trexuq333xwwqqhxxxxxvenquotes = trexuq333xwwqqhxxxxxvenquotes;
 		this.yxxxuh566xwwqqwxxxxxusers = yxxxuh566xwwqqwxxxxxusers;
-		this.txxxuq366xwwqqhxxxxxvenarthas = txxxuq366xwwqqhxxxxxvenarthas;
 		this.xorxeh8cexwwqqhxxxxxscheduledetailses = xorxeh8cexwwqqhxxxxxscheduledetailses;
 		this.trexuq3a6xwwqqhxxxxxvinvoices = trexuq3a6xwwqqhxxxxxvinvoices;
+		this.yxxxuh566xwwqqwxxxxxusers_1 = yxxxuh566xwwqqwxxxxxusers_1;
 		this.trexuq255xwwqqhxxxxxshipmentsForCarrier = trexuq255xwwqqhxxxxxshipmentsForCarrier;
-		this.xoxxuq2c4xwwqqhxxxxxcuqdetailses = xoxxuq2c4xwwqqhxxxxxcuqdetailses;
+		this.xorxeh8cexwwqqhxxxxxscheduledetailses_1 = xorxeh8cexwwqqhxxxxxscheduledetailses_1;
+		this.xoxxuq2a4xwwqqhxxxxxcuidetailses_1 = xoxxuq2a4xwwqqhxxxxxcuidetailses_1;
 		this.trexuq255xwwqqhxxxxxshipmentsForShipper = trexuq255xwwqqhxxxxxshipmentsForShipper;
+		this.trexuq333xwwqqhxxxxxvenquotes_1 = trexuq333xwwqqhxxxxxvenquotes_1;
+		this.trexuq388xwwqqhxxxxxvpayments = trexuq388xwwqqhxxxxxvpayments;
+		this.xoxxuq2c4xwwqqhxxxxxcuqdetailses = xoxxuq2c4xwwqqhxxxxxcuqdetailses;
+		this.jxxxuq54exwwqqhxxxxxgroupmemberses = jxxxuq54exwwqqhxxxxxgroupmemberses;
+		this.trexuq377xwwqqhxxxxxvshipmens = trexuq377xwwqqhxxxxxvshipmens;
+		this.xoxxuq3b4xwwqqhxxxxxvendpdetailses_1 = xoxxuq3b4xwwqqhxxxxxvendpdetailses_1;
+		this.trexuq255xwwqqhxxxxxshipmentsForShipper_1 = trexuq255xwwqqhxxxxxshipmentsForShipper_1;
+		this.fxxxuq89bxwwqqhxxxxxschedules_1 = fxxxuq89bxwwqqhxxxxxschedules_1;
+		this.xoxxuq454xwwqqhxxxxxemplodetailses_1 = xoxxuq454xwwqqhxxxxxemplodetailses_1;
+		this.txxxuq366xwwqqhxxxxxvenarthas = txxxuq366xwwqqhxxxxxvenarthas;
+		this.jxxxuq54exwwqqhxxxxxgroupmemberses_1 = jxxxuq54exwwqqhxxxxxgroupmemberses_1;
+		this.xoxxuq2b4xwwqqhxxxxxcuodetailses = xoxxuq2b4xwwqqhxxxxxcuodetailses;
+		this.jxxxuq31bxwwqqhxxxxxvcontacts_1 = jxxxuq31bxwwqqhxxxxxvcontacts_1;
+		this.txxxuq366xwwqqhxxxxxvenarthas_1 = txxxuq366xwwqqhxxxxxvenarthas_1;
+		this.trexuq377xwwqqhxxxxxvshipmens_1 = trexuq377xwwqqhxxxxxvshipmens_1;
+		this.xoxxuq2b4xwwqqhxxxxxcuodetailses_1 = xoxxuq2b4xwwqqhxxxxxcuodetailses_1;
+		this.trexuq255xwwqqhxxxxxshipmentsForCarrier_1 = trexuq255xwwqqhxxxxxshipmentsForCarrier_1;
+		this.trxxuq9aaxwwqqhefxxxjobassignments_1 = trxxuq9aaxwwqqhefxxxjobassignments_1;
+		this.trexuq388xwwqqhxxxxxvpayments_1 = trexuq388xwwqqhxxxxxvpayments_1;
+		this.xoxxuq2c4xwwqqhxxxxxcuqdetailses_1 = xoxxuq2c4xwwqqhxxxxxcuqdetailses_1;
+		this.trexuq344xwwqqhxxxxxvendorderses_1 = trexuq344xwwqqhxxxxxvendorderses_1;
+		this.trexuq3a6xwwqqhxxxxxvinvoices_1 = trexuq3a6xwwqqhxxxxxvinvoices_1;
 	}
 
 	@Id
@@ -520,8 +600,8 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 		this.n3xxhxxrbv44xxxxxxxxlmailaddr = n3xxhxxrbv44xxxxxxxxlmailaddr;
 	}
 
-	@Column(name = "imailaddr", length = 60)
-	@Size(max = 60)
+	@Column(name = "imailaddr", length = 35)
+	@Size(max = 35)
 	@Pattern.List({
 			@Pattern(regexp = "(^$|.+@.+\\..+)", message = "Bad email value"),
 			@Pattern(regexp = "(^$)|(^\\S+$)", message = "email has space character")})
@@ -545,8 +625,8 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 		this.n5xxuxxrbvxxxxxxxxxxrmailaddr = n5xxuxxrbvxxxxxxxxxxrmailaddr;
 	}
 
-	@Column(name = "intaddr", length = 60)
-	@Size(max = 60)
+	@Column(name = "intaddr", length = 35)
+	@Size(max = 35)
 	public String getN6xxuxxrbvxxxxxxxxxxintaddr() {
 		return this.n6xxuxxrbvxxxxxxxxxxintaddr;
 	}
@@ -806,16 +886,6 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
-	public Set<Trexuq333xwwqqhxxxxxvenquote> getTrexuq333xwwqqhxxxxxvenquotes() {
-		return this.trexuq333xwwqqhxxxxxvenquotes;
-	}
-
-	public void setTrexuq333xwwqqhxxxxxvenquotes(
-			Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes) {
-		this.trexuq333xwwqqhxxxxxvenquotes = trexuq333xwwqqhxxxxxvenquotes;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
 	public Set<Trexuq344xwwqqhxxxxxvendorders> getTrexuq344xwwqqhxxxxxvendorderses() {
 		return this.trexuq344xwwqqhxxxxxvendorderses;
 	}
@@ -826,16 +896,6 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
-	public Set<Trexuq388xwwqqhxxxxxvpayment> getTrexuq388xwwqqhxxxxxvpayments() {
-		return this.trexuq388xwwqqhxxxxxvpayments;
-	}
-
-	public void setTrexuq388xwwqqhxxxxxvpayments(
-			Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments) {
-		this.trexuq388xwwqqhxxxxxvpayments = trexuq388xwwqqhxxxxxvpayments;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
 	public Set<Xoxxuq454xwwqqhxxxxxemplodetails> getXoxxuq454xwwqqhxxxxxemplodetailses() {
 		return this.xoxxuq454xwwqqhxxxxxemplodetailses;
 	}
@@ -843,26 +903,6 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 	public void setXoxxuq454xwwqqhxxxxxemplodetailses(
 			Set<Xoxxuq454xwwqqhxxxxxemplodetails> xoxxuq454xwwqqhxxxxxemplodetailses) {
 		this.xoxxuq454xwwqqhxxxxxemplodetailses = xoxxuq454xwwqqhxxxxxemplodetailses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
-	public Set<Jxxxuq54exwwqqhxxxxxgroupmembers> getJxxxuq54exwwqqhxxxxxgroupmemberses() {
-		return this.jxxxuq54exwwqqhxxxxxgroupmemberses;
-	}
-
-	public void setJxxxuq54exwwqqhxxxxxgroupmemberses(
-			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses) {
-		this.jxxxuq54exwwqqhxxxxxgroupmemberses = jxxxuq54exwwqqhxxxxxgroupmemberses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
-	public Set<Trexuq377xwwqqhxxxxxvshipmen> getTrexuq377xwwqqhxxxxxvshipmens() {
-		return this.trexuq377xwwqqhxxxxxvshipmens;
-	}
-
-	public void setTrexuq377xwwqqhxxxxxvshipmens(
-			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens) {
-		this.trexuq377xwwqqhxxxxxvshipmens = trexuq377xwwqqhxxxxxvshipmens;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
@@ -886,26 +926,6 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
-	public Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> getXoxxuq9bfxwwqqhexxxxjobassignmentdetailses() {
-		return this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses;
-	}
-
-	public void setXoxxuq9bfxwwqqhexxxxjobassignmentdetailses(
-			Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses) {
-		this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses = xoxxuq9bfxwwqqhexxxxjobassignmentdetailses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
-	public Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> getXoxxuq3b4xwwqqhxxxxxvendpdetailses() {
-		return this.xoxxuq3b4xwwqqhxxxxxvendpdetailses;
-	}
-
-	public void setXoxxuq3b4xwwqqhxxxxxvendpdetailses(
-			Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses) {
-		this.xoxxuq3b4xwwqqhxxxxxvendpdetailses = xoxxuq3b4xwwqqhxxxxxvendpdetailses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
 	public Set<Fxxxuq89bxwwqqhxxxxxschedule> getFxxxuq89bxwwqqhxxxxxschedules() {
 		return this.fxxxuq89bxwwqqhxxxxxschedules;
 	}
@@ -916,13 +936,23 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
-	public Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> getXoxxuq2b4xwwqqhxxxxxcuodetailses() {
-		return this.xoxxuq2b4xwwqqhxxxxxcuodetailses;
+	public Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> getXoxxuq9bfxwwqqhexxxxjobassignmentdetailses() {
+		return this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses;
 	}
 
-	public void setXoxxuq2b4xwwqqhxxxxxcuodetailses(
-			Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> xoxxuq2b4xwwqqhxxxxxcuodetailses) {
-		this.xoxxuq2b4xwwqqhxxxxxcuodetailses = xoxxuq2b4xwwqqhxxxxxcuodetailses;
+	public void setXoxxuq9bfxwwqqhexxxxjobassignmentdetailses(
+			Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses) {
+		this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses = xoxxuq9bfxwwqqhexxxxjobassignmentdetailses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> getXoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1() {
+		return this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1;
+	}
+
+	public void setXoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1(
+			Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1) {
+		this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1 = xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
@@ -936,6 +966,26 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> getXoxxuq3b4xwwqqhxxxxxvendpdetailses() {
+		return this.xoxxuq3b4xwwqqhxxxxxvendpdetailses;
+	}
+
+	public void setXoxxuq3b4xwwqqhxxxxxvendpdetailses(
+			Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses) {
+		this.xoxxuq3b4xwwqqhxxxxxvendpdetailses = xoxxuq3b4xwwqqhxxxxxvendpdetailses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Trexuq333xwwqqhxxxxxvenquote> getTrexuq333xwwqqhxxxxxvenquotes() {
+		return this.trexuq333xwwqqhxxxxxvenquotes;
+	}
+
+	public void setTrexuq333xwwqqhxxxxxvenquotes(
+			Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes) {
+		this.trexuq333xwwqqhxxxxxvenquotes = trexuq333xwwqqhxxxxxvenquotes;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
 	public Set<Yxxxuh566xwwqqwxxxxxuser> getYxxxuh566xwwqqwxxxxxusers() {
 		return this.yxxxuh566xwwqqwxxxxxusers;
 	}
@@ -943,16 +993,6 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 	public void setYxxxuh566xwwqqwxxxxxusers(
 			Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers) {
 		this.yxxxuh566xwwqqwxxxxxusers = yxxxuh566xwwqqwxxxxxusers;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
-	public Set<Txxxuq366xwwqqhxxxxxvenartha> getTxxxuq366xwwqqhxxxxxvenarthas() {
-		return this.txxxuq366xwwqqhxxxxxvenarthas;
-	}
-
-	public void setTxxxuq366xwwqqhxxxxxvenarthas(
-			Set<Txxxuq366xwwqqhxxxxxvenartha> txxxuq366xwwqqhxxxxxvenarthas) {
-		this.txxxuq366xwwqqhxxxxxvenarthas = txxxuq366xwwqqhxxxxxvenarthas;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
@@ -975,6 +1015,16 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 		this.trexuq3a6xwwqqhxxxxxvinvoices = trexuq3a6xwwqqhxxxxxvinvoices;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Yxxxuh566xwwqqwxxxxxuser> getYxxxuh566xwwqqwxxxxxusers_1() {
+		return this.yxxxuh566xwwqqwxxxxxusers_1;
+	}
+
+	public void setYxxxuh566xwwqqwxxxxxusers_1(
+			Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers_1) {
+		this.yxxxuh566xwwqqwxxxxxusers_1 = yxxxuh566xwwqqwxxxxxusers_1;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendorByCarrier")
 	public Set<Trexuq255xwwqqhxxxxxshipment> getTrexuq255xwwqqhxxxxxshipmentsForCarrier() {
 		return this.trexuq255xwwqqhxxxxxshipmentsForCarrier;
@@ -983,6 +1033,56 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 	public void setTrexuq255xwwqqhxxxxxshipmentsForCarrier(
 			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForCarrier) {
 		this.trexuq255xwwqqhxxxxxshipmentsForCarrier = trexuq255xwwqqhxxxxxshipmentsForCarrier;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Xorxeh8cexwwqqhxxxxxscheduledetails> getXorxeh8cexwwqqhxxxxxscheduledetailses_1() {
+		return this.xorxeh8cexwwqqhxxxxxscheduledetailses_1;
+	}
+
+	public void setXorxeh8cexwwqqhxxxxxscheduledetailses_1(
+			Set<Xorxeh8cexwwqqhxxxxxscheduledetails> xorxeh8cexwwqqhxxxxxscheduledetailses_1) {
+		this.xorxeh8cexwwqqhxxxxxscheduledetailses_1 = xorxeh8cexwwqqhxxxxxscheduledetailses_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Xoxxuq2a4xwwqqhxxxxxcuidetails> getXoxxuq2a4xwwqqhxxxxxcuidetailses_1() {
+		return this.xoxxuq2a4xwwqqhxxxxxcuidetailses_1;
+	}
+
+	public void setXoxxuq2a4xwwqqhxxxxxcuidetailses_1(
+			Set<Xoxxuq2a4xwwqqhxxxxxcuidetails> xoxxuq2a4xwwqqhxxxxxcuidetailses_1) {
+		this.xoxxuq2a4xwwqqhxxxxxcuidetailses_1 = xoxxuq2a4xwwqqhxxxxxcuidetailses_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendorByShipper")
+	public Set<Trexuq255xwwqqhxxxxxshipment> getTrexuq255xwwqqhxxxxxshipmentsForShipper() {
+		return this.trexuq255xwwqqhxxxxxshipmentsForShipper;
+	}
+
+	public void setTrexuq255xwwqqhxxxxxshipmentsForShipper(
+			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShipper) {
+		this.trexuq255xwwqqhxxxxxshipmentsForShipper = trexuq255xwwqqhxxxxxshipmentsForShipper;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Trexuq333xwwqqhxxxxxvenquote> getTrexuq333xwwqqhxxxxxvenquotes_1() {
+		return this.trexuq333xwwqqhxxxxxvenquotes_1;
+	}
+
+	public void setTrexuq333xwwqqhxxxxxvenquotes_1(
+			Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes_1) {
+		this.trexuq333xwwqqhxxxxxvenquotes_1 = trexuq333xwwqqhxxxxxvenquotes_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Trexuq388xwwqqhxxxxxvpayment> getTrexuq388xwwqqhxxxxxvpayments() {
+		return this.trexuq388xwwqqhxxxxxvpayments;
+	}
+
+	public void setTrexuq388xwwqqhxxxxxvpayments(
+			Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments) {
+		this.trexuq388xwwqqhxxxxxvpayments = trexuq388xwwqqhxxxxxvpayments;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
@@ -995,14 +1095,194 @@ public class Jxxxuq300xwwqqhxxxxxvendor implements java.io.Serializable {
 		this.xoxxuq2c4xwwqqhxxxxxcuqdetailses = xoxxuq2c4xwwqqhxxxxxcuqdetailses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendorByShipper")
-	public Set<Trexuq255xwwqqhxxxxxshipment> getTrexuq255xwwqqhxxxxxshipmentsForShipper() {
-		return this.trexuq255xwwqqhxxxxxshipmentsForShipper;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Jxxxuq54exwwqqhxxxxxgroupmembers> getJxxxuq54exwwqqhxxxxxgroupmemberses() {
+		return this.jxxxuq54exwwqqhxxxxxgroupmemberses;
 	}
 
-	public void setTrexuq255xwwqqhxxxxxshipmentsForShipper(
-			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShipper) {
-		this.trexuq255xwwqqhxxxxxshipmentsForShipper = trexuq255xwwqqhxxxxxshipmentsForShipper;
+	public void setJxxxuq54exwwqqhxxxxxgroupmemberses(
+			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses) {
+		this.jxxxuq54exwwqqhxxxxxgroupmemberses = jxxxuq54exwwqqhxxxxxgroupmemberses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Trexuq377xwwqqhxxxxxvshipmen> getTrexuq377xwwqqhxxxxxvshipmens() {
+		return this.trexuq377xwwqqhxxxxxvshipmens;
+	}
+
+	public void setTrexuq377xwwqqhxxxxxvshipmens(
+			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens) {
+		this.trexuq377xwwqqhxxxxxvshipmens = trexuq377xwwqqhxxxxxvshipmens;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> getXoxxuq3b4xwwqqhxxxxxvendpdetailses_1() {
+		return this.xoxxuq3b4xwwqqhxxxxxvendpdetailses_1;
+	}
+
+	public void setXoxxuq3b4xwwqqhxxxxxvendpdetailses_1(
+			Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses_1) {
+		this.xoxxuq3b4xwwqqhxxxxxvendpdetailses_1 = xoxxuq3b4xwwqqhxxxxxvendpdetailses_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendorByShipper")
+	public Set<Trexuq255xwwqqhxxxxxshipment> getTrexuq255xwwqqhxxxxxshipmentsForShipper_1() {
+		return this.trexuq255xwwqqhxxxxxshipmentsForShipper_1;
+	}
+
+	public void setTrexuq255xwwqqhxxxxxshipmentsForShipper_1(
+			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShipper_1) {
+		this.trexuq255xwwqqhxxxxxshipmentsForShipper_1 = trexuq255xwwqqhxxxxxshipmentsForShipper_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Fxxxuq89bxwwqqhxxxxxschedule> getFxxxuq89bxwwqqhxxxxxschedules_1() {
+		return this.fxxxuq89bxwwqqhxxxxxschedules_1;
+	}
+
+	public void setFxxxuq89bxwwqqhxxxxxschedules_1(
+			Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules_1) {
+		this.fxxxuq89bxwwqqhxxxxxschedules_1 = fxxxuq89bxwwqqhxxxxxschedules_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Xoxxuq454xwwqqhxxxxxemplodetails> getXoxxuq454xwwqqhxxxxxemplodetailses_1() {
+		return this.xoxxuq454xwwqqhxxxxxemplodetailses_1;
+	}
+
+	public void setXoxxuq454xwwqqhxxxxxemplodetailses_1(
+			Set<Xoxxuq454xwwqqhxxxxxemplodetails> xoxxuq454xwwqqhxxxxxemplodetailses_1) {
+		this.xoxxuq454xwwqqhxxxxxemplodetailses_1 = xoxxuq454xwwqqhxxxxxemplodetailses_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Txxxuq366xwwqqhxxxxxvenartha> getTxxxuq366xwwqqhxxxxxvenarthas() {
+		return this.txxxuq366xwwqqhxxxxxvenarthas;
+	}
+
+	public void setTxxxuq366xwwqqhxxxxxvenarthas(
+			Set<Txxxuq366xwwqqhxxxxxvenartha> txxxuq366xwwqqhxxxxxvenarthas) {
+		this.txxxuq366xwwqqhxxxxxvenarthas = txxxuq366xwwqqhxxxxxvenarthas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Jxxxuq54exwwqqhxxxxxgroupmembers> getJxxxuq54exwwqqhxxxxxgroupmemberses_1() {
+		return this.jxxxuq54exwwqqhxxxxxgroupmemberses_1;
+	}
+
+	public void setJxxxuq54exwwqqhxxxxxgroupmemberses_1(
+			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses_1) {
+		this.jxxxuq54exwwqqhxxxxxgroupmemberses_1 = jxxxuq54exwwqqhxxxxxgroupmemberses_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> getXoxxuq2b4xwwqqhxxxxxcuodetailses() {
+		return this.xoxxuq2b4xwwqqhxxxxxcuodetailses;
+	}
+
+	public void setXoxxuq2b4xwwqqhxxxxxcuodetailses(
+			Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> xoxxuq2b4xwwqqhxxxxxcuodetailses) {
+		this.xoxxuq2b4xwwqqhxxxxxcuodetailses = xoxxuq2b4xwwqqhxxxxxcuodetailses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Jxxxuq31bxwwqqhxxxxxvcontact> getJxxxuq31bxwwqqhxxxxxvcontacts_1() {
+		return this.jxxxuq31bxwwqqhxxxxxvcontacts_1;
+	}
+
+	public void setJxxxuq31bxwwqqhxxxxxvcontacts_1(
+			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontacts_1) {
+		this.jxxxuq31bxwwqqhxxxxxvcontacts_1 = jxxxuq31bxwwqqhxxxxxvcontacts_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Txxxuq366xwwqqhxxxxxvenartha> getTxxxuq366xwwqqhxxxxxvenarthas_1() {
+		return this.txxxuq366xwwqqhxxxxxvenarthas_1;
+	}
+
+	public void setTxxxuq366xwwqqhxxxxxvenarthas_1(
+			Set<Txxxuq366xwwqqhxxxxxvenartha> txxxuq366xwwqqhxxxxxvenarthas_1) {
+		this.txxxuq366xwwqqhxxxxxvenarthas_1 = txxxuq366xwwqqhxxxxxvenarthas_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Trexuq377xwwqqhxxxxxvshipmen> getTrexuq377xwwqqhxxxxxvshipmens_1() {
+		return this.trexuq377xwwqqhxxxxxvshipmens_1;
+	}
+
+	public void setTrexuq377xwwqqhxxxxxvshipmens_1(
+			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens_1) {
+		this.trexuq377xwwqqhxxxxxvshipmens_1 = trexuq377xwwqqhxxxxxvshipmens_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> getXoxxuq2b4xwwqqhxxxxxcuodetailses_1() {
+		return this.xoxxuq2b4xwwqqhxxxxxcuodetailses_1;
+	}
+
+	public void setXoxxuq2b4xwwqqhxxxxxcuodetailses_1(
+			Set<Xoxxuq2b4xwwqqhxxxxxcuodetails> xoxxuq2b4xwwqqhxxxxxcuodetailses_1) {
+		this.xoxxuq2b4xwwqqhxxxxxcuodetailses_1 = xoxxuq2b4xwwqqhxxxxxcuodetailses_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendorByCarrier")
+	public Set<Trexuq255xwwqqhxxxxxshipment> getTrexuq255xwwqqhxxxxxshipmentsForCarrier_1() {
+		return this.trexuq255xwwqqhxxxxxshipmentsForCarrier_1;
+	}
+
+	public void setTrexuq255xwwqqhxxxxxshipmentsForCarrier_1(
+			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForCarrier_1) {
+		this.trexuq255xwwqqhxxxxxshipmentsForCarrier_1 = trexuq255xwwqqhxxxxxshipmentsForCarrier_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Trxxuq9aaxwwqqhefxxxjobassignment> getTrxxuq9aaxwwqqhefxxxjobassignments_1() {
+		return this.trxxuq9aaxwwqqhefxxxjobassignments_1;
+	}
+
+	public void setTrxxuq9aaxwwqqhefxxxjobassignments_1(
+			Set<Trxxuq9aaxwwqqhefxxxjobassignment> trxxuq9aaxwwqqhefxxxjobassignments_1) {
+		this.trxxuq9aaxwwqqhefxxxjobassignments_1 = trxxuq9aaxwwqqhefxxxjobassignments_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Trexuq388xwwqqhxxxxxvpayment> getTrexuq388xwwqqhxxxxxvpayments_1() {
+		return this.trexuq388xwwqqhxxxxxvpayments_1;
+	}
+
+	public void setTrexuq388xwwqqhxxxxxvpayments_1(
+			Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments_1) {
+		this.trexuq388xwwqqhxxxxxvpayments_1 = trexuq388xwwqqhxxxxxvpayments_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> getXoxxuq2c4xwwqqhxxxxxcuqdetailses_1() {
+		return this.xoxxuq2c4xwwqqhxxxxxcuqdetailses_1;
+	}
+
+	public void setXoxxuq2c4xwwqqhxxxxxcuqdetailses_1(
+			Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses_1) {
+		this.xoxxuq2c4xwwqqhxxxxxcuqdetailses_1 = xoxxuq2c4xwwqqhxxxxxcuqdetailses_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Trexuq344xwwqqhxxxxxvendorders> getTrexuq344xwwqqhxxxxxvendorderses_1() {
+		return this.trexuq344xwwqqhxxxxxvendorderses_1;
+	}
+
+	public void setTrexuq344xwwqqhxxxxxvendorderses_1(
+			Set<Trexuq344xwwqqhxxxxxvendorders> trexuq344xwwqqhxxxxxvendorderses_1) {
+		this.trexuq344xwwqqhxxxxxvendorderses_1 = trexuq344xwwqqhxxxxxvendorderses_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq300xwwqqhxxxxxvendor")
+	public Set<Trexuq3a6xwwqqhxxxxxvinvoice> getTrexuq3a6xwwqqhxxxxxvinvoices_1() {
+		return this.trexuq3a6xwwqqhxxxxxvinvoices_1;
+	}
+
+	public void setTrexuq3a6xwwqqhxxxxxvinvoices_1(
+			Set<Trexuq3a6xwwqqhxxxxxvinvoice> trexuq3a6xwwqqhxxxxxvinvoices_1) {
+		this.trexuq3a6xwwqqhxxxxxvinvoices_1 = trexuq3a6xwwqqhxxxxxvinvoices_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

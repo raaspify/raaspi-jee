@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -42,9 +42,9 @@ public class Xorxeh66exwwqqhxxxxxgentriesdetails
 	private BigDecimal c5xxzxxxbvxxxxxxxxxxlinetotl;
 	private String y8xxuznxbvxxxxxxxxxxnotes;
 	private Integer z1xxzzfxhhxxxxxxxxxxstatusfl;
-	private Date z2xxcztxlxxxxxxxxxxxstatusfldt;
 	private String z2xxutoxlhxxxxxxxxxxowner;
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
+	private Date z2xxcztxlxxxxxxxxxxxstatusfldt;
 
 	public Xorxeh66exwwqqhxxxxxgentriesdetails() {
 	}
@@ -64,8 +64,9 @@ public class Xorxeh66exwwqqhxxxxxgentriesdetails
 			BigDecimal c5xxzxxxbvxxxxxxxxxxlinetotl,
 			String y8xxuznxbvxxxxxxxxxxnotes,
 			Integer z1xxzzfxhhxxxxxxxxxxstatusfl,
-			Date z2xxcztxlxxxxxxxxxxxstatusfldt,
-			String z2xxutoxlhxxxxxxxxxxowner, String zzxxu2oxxhxxxxxxxxxxowner2) {
+			String z2xxutoxlhxxxxxxxxxxowner,
+			String zzxxu2oxxhxxxxxxxxxxowner2,
+			Date z2xxcztxlxxxxxxxxxxxstatusfldt) {
 		this.yxxxch65exwwqqhxxxxxglentries = yxxxch65exwwqqhxxxxxglentries;
 		this.yxxxch601xwwqqhxxxxxaccount = yxxxch601xwwqqhxxxxxaccount;
 		this.b1xxzo11bvlxxxxxxxxxline = b1xxzo11bvlxxxxxxxxxline;
@@ -76,9 +77,9 @@ public class Xorxeh66exwwqqhxxxxxgentriesdetails
 		this.c5xxzxxxbvxxxxxxxxxxlinetotl = c5xxzxxxbvxxxxxxxxxxlinetotl;
 		this.y8xxuznxbvxxxxxxxxxxnotes = y8xxuznxbvxxxxxxxxxxnotes;
 		this.z1xxzzfxhhxxxxxxxxxxstatusfl = z1xxzzfxhhxxxxxxxxxxstatusfl;
-		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
 		this.z2xxutoxlhxxxxxxxxxxowner = z2xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
+		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
 	}
 
 	@Id
@@ -194,17 +195,6 @@ public class Xorxeh66exwwqqhxxxxxgentriesdetails
 		this.z1xxzzfxhhxxxxxxxxxxstatusfl = z1xxzzfxhhxxxxxxxxxxstatusfl;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "statusfldt", length = 29)
-	public Date getZ2xxcztxlxxxxxxxxxxxstatusfldt() {
-		return this.z2xxcztxlxxxxxxxxxxxstatusfldt;
-	}
-
-	public void setZ2xxcztxlxxxxxxxxxxxstatusfldt(
-			Date z2xxcztxlxxxxxxxxxxxstatusfldt) {
-		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
-	}
-
 	@Column(name = "owner", length = 40)
 	@Size(max = 40)
 	public String getZ2xxutoxlhxxxxxxxxxxowner() {
@@ -223,6 +213,17 @@ public class Xorxeh66exwwqqhxxxxxgentriesdetails
 
 	public void setZzxxu2oxxhxxxxxxxxxxowner2(String zzxxu2oxxhxxxxxxxxxxowner2) {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "statusfldt", length = 29)
+	public Date getZ2xxcztxlxxxxxxxxxxxstatusfldt() {
+		return this.z2xxcztxlxxxxxxxxxxxstatusfldt;
+	}
+
+	public void setZ2xxcztxlxxxxxxxxxxxstatusfldt(
+			Date z2xxcztxlxxxxxxxxxxxstatusfldt) {
+		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
 	}
 
 	// The following is extra code specified in the hbm.xml files

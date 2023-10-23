@@ -494,9 +494,17 @@ public class Yxxxch601xwwqqhxxxxxaccountList implements Serializable
 
 
 
+
+
+
+
+
+
         "lower(yxxxch601xwwqqhxxxxxaccount.y3xxuwcxbvxxxxxxxxxxchild) like lower( concat(#{yxxxch601xwwqqhxxxxxaccountList.yxxxch601xwwqqhxxxxxaccount.y3xxuwcxbvxxxxxxxxxxchild},'%'))",
         "lower(yxxxch601xwwqqhxxxxxaccount.y4xxzwpxbvxxxxxxxxxxparent) like lower( concat(#{yxxxch601xwwqqhxxxxxaccountList.yxxxch601xwwqqhxxxxxaccount.y4xxzwpxbvxxxxxxxxxxparent},'%'))",
         "lower(yxxxch601xwwqqhxxxxxaccount.y8xxuznxbvxxxxxxxxxxnotes) like lower( concat(#{yxxxch601xwwqqhxxxxxaccountList.yxxxch601xwwqqhxxxxxaccount.y8xxuznxbvxxxxxxxxxxnotes},'%'))",
+
+
 
 
         "lower(yxxxch601xwwqqhxxxxxaccount.z5xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{yxxxch601xwwqqhxxxxxaccountList.ownerCddCode}))",

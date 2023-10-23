@@ -484,6 +484,9 @@ public class Trexuq333xwwqqhxxxxxvenquoteList implements Serializable
 
 
 
+
+
+
         "lower(trexuq333xwwqqhxxxxxvenquote.y2xxuxxrlxxxxxxxxxxxcinvoice) like lower( concat(#{trexuq333xwwqqhxxxxxvenquoteList.trexuq333xwwqqhxxxxxvenquote.y2xxuxxrlxxxxxxxxxxxcinvoice},'%'))",
         "lower(trexuq333xwwqqhxxxxxvenquote.y3xxuxxrlxxxxxxxxxxxjobno) like lower( concat(#{trexuq333xwwqqhxxxxxvenquoteList.trexuq333xwwqqhxxxxxvenquote.y3xxuxxrlxxxxxxxxxxxjobno},'%'))",
         "lower(trexuq333xwwqqhxxxxxvenquote.y4xxuxxrlxxxxxxxxxxxvpono) like lower( concat(#{trexuq333xwwqqhxxxxxvenquoteList.trexuq333xwwqqhxxxxxvenquote.y4xxuxxrlxxxxxxxxxxxvpono},'%'))",

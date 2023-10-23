@@ -474,6 +474,7 @@ public class Yxxxuq632xwwqqhxxxxxperioddatesList implements Serializable
         "lower(yxxxuq632xwwqqhxxxxxperioddates.b1xxuszsbvxxxxxxxxxxdescript) like lower( concat(#{yxxxuq632xwwqqhxxxxxperioddatesList.yxxxuq632xwwqqhxxxxxperioddates.b1xxuszsbvxxxxxxxxxxdescript},'%'))",
         "lower(yxxxuq632xwwqqhxxxxxperioddates.y3xxuxznbvxxxxxxxxxxnotes) like lower( concat(#{yxxxuq632xwwqqhxxxxxperioddatesList.yxxxuq632xwwqqhxxxxxperioddates.y3xxuxznbvxxxxxxxxxxnotes},'%'))",
 
+
         "lower(yxxxuq632xwwqqhxxxxxperioddates.z3xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{yxxxuq632xwwqqhxxxxxperioddatesList.ownerCddCode}))",
         "lower(yxxxuq632xwwqqhxxxxxperioddates.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{yxxxuq632xwwqqhxxxxxperioddatesList.dataOwner2Code})",
     };

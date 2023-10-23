@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -348,8 +348,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.d4xxza0rbvxxxxxxxxxxperiod0 = d4xxza0rbvxxxxxxxxxxperiod0;
 	}
 
-	@Column(name = "period0formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period0formulae", length = 500)
+	@Size(max = 500)
 	public String getD5xxzc0rbxxxxxxxxxxxperiod0formulae() {
 		return this.d5xxzc0rbxxxxxxxxxxxperiod0formulae;
 	}
@@ -390,8 +390,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.e4xxzatrbvxxxxxxxxxxperiodtotals = e4xxzatrbvxxxxxxxxxxperiodtotals;
 	}
 
-	@Column(name = "periodtotalsformulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "periodtotalsformulae", length = 500)
+	@Size(max = 500)
 	public String getE5xxzctrbxxxxxxxxxxxperiodtotalsformulae() {
 		return this.e5xxzctrbxxxxxxxxxxxperiodtotalsformulae;
 	}
@@ -432,8 +432,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.f4xxza1rbvxxxxxxxxxxperiod1 = f4xxza1rbvxxxxxxxxxxperiod1;
 	}
 
-	@Column(name = "period1formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period1formulae", length = 500)
+	@Size(max = 500)
 	public String getF5xxzc1rbxxxxxxxxxxxperiod1formulae() {
 		return this.f5xxzc1rbxxxxxxxxxxxperiod1formulae;
 	}
@@ -474,8 +474,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.g4xxza2rbvxxxxxxxxxxperiod2 = g4xxza2rbvxxxxxxxxxxperiod2;
 	}
 
-	@Column(name = "period2formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period2formulae", length = 500)
+	@Size(max = 500)
 	public String getG5xxzc2rbxxxxxxxxxxxperiod2formulae() {
 		return this.g5xxzc2rbxxxxxxxxxxxperiod2formulae;
 	}
@@ -516,8 +516,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.h4xxza3rbvxxxxxxxxxxperiod3 = h4xxza3rbvxxxxxxxxxxperiod3;
 	}
 
-	@Column(name = "period3formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period3formulae", length = 500)
+	@Size(max = 500)
 	public String getH5xxzc3rbxxxxxxxxxxxperiod3formulae() {
 		return this.h5xxzc3rbxxxxxxxxxxxperiod3formulae;
 	}
@@ -558,8 +558,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.i4xxza4rbvxxxxxxxxxxperiod4 = i4xxza4rbvxxxxxxxxxxperiod4;
 	}
 
-	@Column(name = "period4formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period4formulae", length = 500)
+	@Size(max = 500)
 	public String getI5xxzc4rbxxxxxxxxxxxperiod4formulae() {
 		return this.i5xxzc4rbxxxxxxxxxxxperiod4formulae;
 	}
@@ -600,8 +600,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.j4xxza5rbvxxxxxxxxxxperiod5 = j4xxza5rbvxxxxxxxxxxperiod5;
 	}
 
-	@Column(name = "period5formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period5formulae", length = 500)
+	@Size(max = 500)
 	public String getJ5xxzc5rbxxxxxxxxxxxperiod5formulae() {
 		return this.j5xxzc5rbxxxxxxxxxxxperiod5formulae;
 	}
@@ -642,8 +642,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.k4xxza6rbvxxxxxxxxxxperiod6 = k4xxza6rbvxxxxxxxxxxperiod6;
 	}
 
-	@Column(name = "period6formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period6formulae", length = 500)
+	@Size(max = 500)
 	public String getK5xxzc6rbxxxxxxxxxxxperiod6formulae() {
 		return this.k5xxzc6rbxxxxxxxxxxxperiod6formulae;
 	}
@@ -684,8 +684,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.l4xxza7rbvxxxxxxxxxxperiod7 = l4xxza7rbvxxxxxxxxxxperiod7;
 	}
 
-	@Column(name = "period7formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period7formulae", length = 500)
+	@Size(max = 500)
 	public String getL5xxzc7rbxxxxxxxxxxxperiod7formulae() {
 		return this.l5xxzc7rbxxxxxxxxxxxperiod7formulae;
 	}
@@ -726,8 +726,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.m4xxza8rbvxxxxxxxxxxperiod8 = m4xxza8rbvxxxxxxxxxxperiod8;
 	}
 
-	@Column(name = "period8formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period8formulae", length = 500)
+	@Size(max = 500)
 	public String getM5xxzc8rbxxxxxxxxxxxperiod8formulae() {
 		return this.m5xxzc8rbxxxxxxxxxxxperiod8formulae;
 	}
@@ -768,8 +768,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.n4xxza9rbvxxxxxxxxxxperiod9 = n4xxza9rbvxxxxxxxxxxperiod9;
 	}
 
-	@Column(name = "period9formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period9formulae", length = 500)
+	@Size(max = 500)
 	public String getN5xxzc9rbxxxxxxxxxxxperiod9formulae() {
 		return this.n5xxzc9rbxxxxxxxxxxxperiod9formulae;
 	}
@@ -810,8 +810,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.o4xxzaarbvxxxxxxxxxxperiod10 = o4xxzaarbvxxxxxxxxxxperiod10;
 	}
 
-	@Column(name = "period10formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period10formulae", length = 500)
+	@Size(max = 500)
 	public String getO5xxzcarbxxxxxxxxxxxperiod10formulae() {
 		return this.o5xxzcarbxxxxxxxxxxxperiod10formulae;
 	}
@@ -852,8 +852,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.p4xxzabrbvxxxxxxxxxxperiod11 = p4xxzabrbvxxxxxxxxxxperiod11;
 	}
 
-	@Column(name = "period11formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period11formulae", length = 500)
+	@Size(max = 500)
 	public String getP5xxzcbrbxxxxxxxxxxxperiod11formulae() {
 		return this.p5xxzcbrbxxxxxxxxxxxperiod11formulae;
 	}
@@ -894,8 +894,8 @@ public class Fxxxuq1bhxwwqqhxxxxxusagebyperiods implements java.io.Serializable 
 		this.q4xxzacrbvxxxxxxxxxxperiod12 = q4xxzacrbvxxxxxxxxxxperiod12;
 	}
 
-	@Column(name = "period12formulae", length = 159)
-	@Size(max = 159)
+	@Column(name = "period12formulae", length = 500)
+	@Size(max = 500)
 	public String getQ5xxzccrbxxxxxxxxxxxperiod12formulae() {
 		return this.q5xxzccrbxxxxxxxxxxxperiod12formulae;
 	}

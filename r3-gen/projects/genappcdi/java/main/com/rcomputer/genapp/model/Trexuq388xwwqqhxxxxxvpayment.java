@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -67,6 +67,8 @@ public class Trexuq388xwwqqhxxxxxvpayment implements java.io.Serializable {
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses = new HashSet<Xoxxuq3b4xwwqqhxxxxxvendpdetails>(
 			0);
+	private Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses_1 = new HashSet<Xoxxuq3b4xwwqqhxxxxxvendpdetails>(
+			0);
 
 	public Trexuq388xwwqqhxxxxxvpayment() {
 	}
@@ -107,7 +109,8 @@ public class Trexuq388xwwqqhxxxxxvpayment implements java.io.Serializable {
 			String y2xxuxznbvxxxxxxxxxxnotes,
 			String zcxxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses) {
+			Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses,
+			Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses_1) {
 		this.trexuq3a6xwwqqhxxxxxvinvoice = trexuq3a6xwwqqhxxxxxvinvoice;
 		this.jxxxuq300xwwqqhxxxxxvendor = jxxxuq300xwwqqhxxxxxvendor;
 		this.yxxxch601xwwqqhxxxxxaccount = yxxxch601xwwqqhxxxxxaccount;
@@ -141,6 +144,7 @@ public class Trexuq388xwwqqhxxxxxvpayment implements java.io.Serializable {
 		this.zcxxutoxlhxxxxxxxxxxowner = zcxxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.xoxxuq3b4xwwqqhxxxxxvendpdetailses = xoxxuq3b4xwwqqhxxxxxvendpdetailses;
+		this.xoxxuq3b4xwwqqhxxxxxvendpdetailses_1 = xoxxuq3b4xwwqqhxxxxxvendpdetailses_1;
 	}
 
 	@Id
@@ -495,6 +499,16 @@ public class Trexuq388xwwqqhxxxxxvpayment implements java.io.Serializable {
 	public void setXoxxuq3b4xwwqqhxxxxxvendpdetailses(
 			Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses) {
 		this.xoxxuq3b4xwwqqhxxxxxvendpdetailses = xoxxuq3b4xwwqqhxxxxxvendpdetailses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq388xwwqqhxxxxxvpayment")
+	public Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> getXoxxuq3b4xwwqqhxxxxxvendpdetailses_1() {
+		return this.xoxxuq3b4xwwqqhxxxxxvendpdetailses_1;
+	}
+
+	public void setXoxxuq3b4xwwqqhxxxxxvendpdetailses_1(
+			Set<Xoxxuq3b4xwwqqhxxxxxvendpdetails> xoxxuq3b4xwwqqhxxxxxvendpdetailses_1) {
+		this.xoxxuq3b4xwwqqhxxxxxvendpdetailses_1 = xoxxuq3b4xwwqqhxxxxxvendpdetailses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

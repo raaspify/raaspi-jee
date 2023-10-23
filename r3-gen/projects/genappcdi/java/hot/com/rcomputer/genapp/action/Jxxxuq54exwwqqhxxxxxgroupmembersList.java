@@ -483,6 +483,8 @@ public class Jxxxuq54exwwqqhxxxxxgroupmembersList implements Serializable
 
 
 
+
+
         "lower(jxxxuq54exwwqqhxxxxxgroupmembers.y5xxuzyxbv46xxxxxxxxtype) like lower( concat(#{jxxxuq54exwwqqhxxxxxgroupmembersList.jxxxuq54exwwqqhxxxxxgroupmembers.y5xxuzyxbv46xxxxxxxxtype},'%'))",
         "lower(jxxxuq54exwwqqhxxxxxgroupmembers.y6xxuxxxbvxxxxxxxxxxcurrpw) like lower( concat(#{jxxxuq54exwwqqhxxxxxgroupmembersList.jxxxuq54exwwqqhxxxxxgroupmembers.y6xxuxxxbvxxxxxxxxxxcurrpw},'%'))",
         "lower(jxxxuq54exwwqqhxxxxxgroupmembers.z3xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{jxxxuq54exwwqqhxxxxxgroupmembersList.ownerCddCode}))",

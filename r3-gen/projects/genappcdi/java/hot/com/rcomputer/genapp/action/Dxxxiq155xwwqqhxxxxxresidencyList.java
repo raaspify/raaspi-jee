@@ -476,7 +476,9 @@ public class Dxxxiq155xwwqqhxxxxxresidencyList implements Serializable
         "lower(dxxxiq155xwwqqhxxxxxresidency.c3xxhxxbbv13xxxxxxxxcountryname) like lower( concat(#{dxxxiq155xwwqqhxxxxxresidencyList.dxxxiq155xwwqqhxxxxxresidency.c3xxhxxbbv13xxxxxxxxcountryname},'%'))",
         "lower(dxxxiq155xwwqqhxxxxxresidency.d1xxuszsbvxxxxxxxxxxdescript) like lower( concat(#{dxxxiq155xwwqqhxxxxxresidencyList.dxxxiq155xwwqqhxxxxxresidency.d1xxuszsbvxxxxxxxxxxdescript},'%'))",
 
+
         "lower(dxxxiq155xwwqqhxxxxxresidency.y2xxuznxbvxxxxxxxxxxnotes) like lower( concat(#{dxxxiq155xwwqqhxxxxxresidencyList.dxxxiq155xwwqqhxxxxxresidency.y2xxuznxbvxxxxxxxxxxnotes},'%'))",
+
 
         "lower(dxxxiq155xwwqqhxxxxxresidency.z3xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{dxxxiq155xwwqqhxxxxxresidencyList.ownerCddCode}))",
         "lower(dxxxiq155xwwqqhxxxxxresidency.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{dxxxiq155xwwqqhxxxxxresidencyList.dataOwner2Code})",

@@ -477,6 +477,7 @@ public class Jxxxuq53dxwwqqhxxxxxrollupgroupList implements Serializable
         "lower(jxxxuq53dxwwqqhxxxxxrollupgroup.a4xxuxxxbvxxxxxxxxxxcurrpw) like lower( concat(#{jxxxuq53dxwwqqhxxxxxrollupgroupList.jxxxuq53dxwwqqhxxxxxrollupgroup.a4xxuxxxbvxxxxxxxxxxcurrpw},'%'))",
         "lower(jxxxuq53dxwwqqhxxxxxrollupgroup.b2xxuxxrbvxxxxxxxxxxcurrency) like lower( concat(#{jxxxuq53dxwwqqhxxxxxrollupgroupList.jxxxuq53dxwwqqhxxxxxrollupgroup.b2xxuxxrbvxxxxxxxxxxcurrency},'%'))",
 
+
         "lower(jxxxuq53dxwwqqhxxxxxrollupgroup.y1xxuznxbvxxxxxxxxxxnotes) like lower( concat(#{jxxxuq53dxwwqqhxxxxxrollupgroupList.jxxxuq53dxwwqqhxxxxxrollupgroup.y1xxuznxbvxxxxxxxxxxnotes},'%'))",
         "lower(jxxxuq53dxwwqqhxxxxxrollupgroup.z3xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{jxxxuq53dxwwqqhxxxxxrollupgroupList.ownerCddCode}))",
         "lower(jxxxuq53dxwwqqhxxxxxrollupgroup.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{jxxxuq53dxwwqqhxxxxxrollupgroupList.dataOwner2Code})",

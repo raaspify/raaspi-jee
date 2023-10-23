@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -40,6 +40,8 @@ public class Yxxxuq1l1xwwqqhxxxxxresource_bundle
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Yxxxuq1r1xwwqqhxxxxxresource> yxxxuq1r1xwwqqhxxxxxresources = new HashSet<Yxxxuq1r1xwwqqhxxxxxresource>(
 			0);
+	private Set<Yxxxuq1r1xwwqqhxxxxxresource> yxxxuq1r1xwwqqhxxxxxresources_1 = new HashSet<Yxxxuq1r1xwwqqhxxxxxresource>(
+			0);
 
 	public Yxxxuq1l1xwwqqhxxxxxresource_bundle() {
 	}
@@ -52,7 +54,8 @@ public class Yxxxuq1l1xwwqqhxxxxxresource_bundle
 			Date zjxxcztxlxxxxxxxxxxxstatusfldt,
 			String z3xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Yxxxuq1r1xwwqqhxxxxxresource> yxxxuq1r1xwwqqhxxxxxresources) {
+			Set<Yxxxuq1r1xwwqqhxxxxxresource> yxxxuq1r1xwwqqhxxxxxresources,
+			Set<Yxxxuq1r1xwwqqhxxxxxresource> yxxxuq1r1xwwqqhxxxxxresources_1) {
 		this.a0xxukrdbvxxxxxxxxxxname = a0xxukrdbvxxxxxxxxxxname;
 		this.a1xxuxxxbvxxxxxxxxxxlanguage = a1xxuxxxbvxxxxxxxxxxlanguage;
 		this.a1xxuxxxbvxxxxxxxxxxcountry = a1xxuxxxbvxxxxxxxxxxcountry;
@@ -62,6 +65,7 @@ public class Yxxxuq1l1xwwqqhxxxxxresource_bundle
 		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.yxxxuq1r1xwwqqhxxxxxresources = yxxxuq1r1xwwqqhxxxxxresources;
+		this.yxxxuq1r1xwwqqhxxxxxresources_1 = yxxxuq1r1xwwqqhxxxxxresources_1;
 	}
 
 	@Id
@@ -167,6 +171,16 @@ public class Yxxxuq1l1xwwqqhxxxxxresource_bundle
 	public void setYxxxuq1r1xwwqqhxxxxxresources(
 			Set<Yxxxuq1r1xwwqqhxxxxxresource> yxxxuq1r1xwwqqhxxxxxresources) {
 		this.yxxxuq1r1xwwqqhxxxxxresources = yxxxuq1r1xwwqqhxxxxxresources;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxuq1l1xwwqqhxxxxxresource_bundle")
+	public Set<Yxxxuq1r1xwwqqhxxxxxresource> getYxxxuq1r1xwwqqhxxxxxresources_1() {
+		return this.yxxxuq1r1xwwqqhxxxxxresources_1;
+	}
+
+	public void setYxxxuq1r1xwwqqhxxxxxresources_1(
+			Set<Yxxxuq1r1xwwqqhxxxxxresource> yxxxuq1r1xwwqqhxxxxxresources_1) {
+		this.yxxxuq1r1xwwqqhxxxxxresources_1 = yxxxuq1r1xwwqqhxxxxxresources_1;
 	}
 
 }

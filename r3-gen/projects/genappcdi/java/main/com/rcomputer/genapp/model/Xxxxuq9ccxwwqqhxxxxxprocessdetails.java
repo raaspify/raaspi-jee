@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -53,6 +53,8 @@ public class Xxxxuq9ccxwwqqhxxxxxprocessdetails implements java.io.Serializable 
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Xoxxuq9f4xwwqqhxxxxxprocessattributes> xoxxuq9f4xwwqqhxxxxxprocessattributeses = new HashSet<Xoxxuq9f4xwwqqhxxxxxprocessattributes>(
 			0);
+	private Set<Xoxxuq9f4xwwqqhxxxxxprocessattributes> xoxxuq9f4xwwqqhxxxxxprocessattributeses_1 = new HashSet<Xoxxuq9f4xwwqqhxxxxxprocessattributes>(
+			0);
 
 	public Xxxxuq9ccxwwqqhxxxxxprocessdetails() {
 	}
@@ -79,7 +81,8 @@ public class Xxxxuq9ccxwwqqhxxxxxprocessdetails implements java.io.Serializable 
 			String b9xxuxznbvxxxxxxxxxxnotes,
 			String z4xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Xoxxuq9f4xwwqqhxxxxxprocessattributes> xoxxuq9f4xwwqqhxxxxxprocessattributeses) {
+			Set<Xoxxuq9f4xwwqqhxxxxxprocessattributes> xoxxuq9f4xwwqqhxxxxxprocessattributeses,
+			Set<Xoxxuq9f4xwwqqhxxxxxprocessattributes> xoxxuq9f4xwwqqhxxxxxprocessattributeses_1) {
 		this.trexuq244xwwqqhxxxxxcuorders = trexuq244xwwqqhxxxxxcuorders;
 		this.jxxxuq201xwwqqhxxxxxcustomer = jxxxuq201xwwqqhxxxxxcustomer;
 		this.fpxxfq1a5xwwqqhxxxxxitem = fpxxfq1a5xwwqqhxxxxxitem;
@@ -99,6 +102,7 @@ public class Xxxxuq9ccxwwqqhxxxxxprocessdetails implements java.io.Serializable 
 		this.z4xxutoxlhxxxxxxxxxxowner = z4xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.xoxxuq9f4xwwqqhxxxxxprocessattributeses = xoxxuq9f4xwwqqhxxxxxprocessattributeses;
+		this.xoxxuq9f4xwwqqhxxxxxprocessattributeses_1 = xoxxuq9f4xwwqqhxxxxxprocessattributeses_1;
 	}
 
 	@Id
@@ -304,6 +308,16 @@ public class Xxxxuq9ccxwwqqhxxxxxprocessdetails implements java.io.Serializable 
 	public void setXoxxuq9f4xwwqqhxxxxxprocessattributeses(
 			Set<Xoxxuq9f4xwwqqhxxxxxprocessattributes> xoxxuq9f4xwwqqhxxxxxprocessattributeses) {
 		this.xoxxuq9f4xwwqqhxxxxxprocessattributeses = xoxxuq9f4xwwqqhxxxxxprocessattributeses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "xxxxuq9ccxwwqqhxxxxxprocessdetails")
+	public Set<Xoxxuq9f4xwwqqhxxxxxprocessattributes> getXoxxuq9f4xwwqqhxxxxxprocessattributeses_1() {
+		return this.xoxxuq9f4xwwqqhxxxxxprocessattributeses_1;
+	}
+
+	public void setXoxxuq9f4xwwqqhxxxxxprocessattributeses_1(
+			Set<Xoxxuq9f4xwwqqhxxxxxprocessattributes> xoxxuq9f4xwwqqhxxxxxprocessattributeses_1) {
+		this.xoxxuq9f4xwwqqhxxxxxprocessattributeses_1 = xoxxuq9f4xwwqqhxxxxxprocessattributeses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

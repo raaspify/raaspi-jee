@@ -486,6 +486,7 @@ public class Nxxxiha1rxwwqqhxxxxxgenappList implements Serializable
         "lower(nxxxiha1rxwwqqhxxxxxgenapp.b7xxuxxxbvxxxxxxxxxxrevengdata) like lower( concat(#{nxxxiha1rxwwqqhxxxxxgenappList.nxxxiha1rxwwqqhxxxxxgenapp.b7xxuxxxbvxxxxxxxxxxrevengdata},'%'))",
         "lower(nxxxiha1rxwwqqhxxxxxgenapp.b8xxfxxxbvxxxxxxxxxxappskin) like lower( concat(#{nxxxiha1rxwwqqhxxxxxgenappList.nxxxiha1rxwwqqhxxxxxgenapp.b8xxfxxxbvxxxxxxxxxxappskin},'%'))",
 
+
         "lower(nxxxiha1rxwwqqhxxxxxgenapp.zgxxuxznbvxxxxxxxxxxnotes) like lower( concat(#{nxxxiha1rxwwqqhxxxxxgenappList.nxxxiha1rxwwqqhxxxxxgenapp.zgxxuxznbvxxxxxxxxxxnotes},'%'))",
         "lower(nxxxiha1rxwwqqhxxxxxgenapp.zhxxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{nxxxiha1rxwwqqhxxxxxgenappList.ownerCddCode}))",
         "lower(nxxxiha1rxwwqqhxxxxxgenapp.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{nxxxiha1rxwwqqhxxxxxgenappList.dataOwner2Code})",

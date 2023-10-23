@@ -476,6 +476,9 @@ public class Fxxxch122xhhxqhxxlxxdepartmentList implements Serializable
 
 
 
+
+
+
         "lower(fxxxch122xhhxqhxxlxxdepartment.z4xxuznxbvxxxxxxxxxxnotes) like lower( concat(#{fxxxch122xhhxqhxxlxxdepartmentList.fxxxch122xhhxqhxxlxxdepartment.z4xxuznxbvxxxxxxxxxxnotes},'%'))",
         "lower(fxxxch122xhhxqhxxlxxdepartment.z5xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{fxxxch122xhhxqhxxlxxdepartmentList.ownerCddCode}))",
         "lower(fxxxch122xhhxqhxxlxxdepartment.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{fxxxch122xhhxqhxxlxxdepartmentList.dataOwner2Code})",

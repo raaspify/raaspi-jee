@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -41,9 +41,13 @@ public class Dxxxiq155xwwqqhxxxxxresidency implements java.io.Serializable {
 	private String y2xxuznxbvxxxxxxxxxxnotes;
 	private String z3xxutoxlhxxxxxxxxxxowner;
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
+	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
+			0);
 	private Set<Yxxxiq555xwwqqhxxxxxholiday> yxxxiq555xwwqqhxxxxxholidaies = new HashSet<Yxxxiq555xwwqqhxxxxxholiday>(
 			0);
-	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
+	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees_1 = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
+			0);
+	private Set<Yxxxiq555xwwqqhxxxxxholiday> yxxxiq555xwwqqhxxxxxholidaies_1 = new HashSet<Yxxxiq555xwwqqhxxxxxholiday>(
 			0);
 
 	public Dxxxiq155xwwqqhxxxxxresidency() {
@@ -62,8 +66,10 @@ public class Dxxxiq155xwwqqhxxxxxresidency implements java.io.Serializable {
 			Date z2xxcztxlxxxxxxxxxxxstatusfldt,
 			String y2xxuznxbvxxxxxxxxxxnotes, String z3xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
+			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees,
 			Set<Yxxxiq555xwwqqhxxxxxholiday> yxxxiq555xwwqqhxxxxxholidaies,
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees) {
+			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees_1,
+			Set<Yxxxiq555xwwqqhxxxxxholiday> yxxxiq555xwwqqhxxxxxholidaies_1) {
 		this.a0xxukxxbvxxxxxxxxxxresidency = a0xxukxxbvxxxxxxxxxxresidency;
 		this.d1xxuszsbvxxxxxxxxxxdescript = d1xxuszsbvxxxxxxxxxxdescript;
 		this.c1xxhxxxbv11xxxxxxxxmunicipality = c1xxhxxxbv11xxxxxxxxmunicipality;
@@ -75,8 +81,10 @@ public class Dxxxiq155xwwqqhxxxxxresidency implements java.io.Serializable {
 		this.y2xxuznxbvxxxxxxxxxxnotes = y2xxuznxbvxxxxxxxxxxnotes;
 		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
-		this.yxxxiq555xwwqqhxxxxxholidaies = yxxxiq555xwwqqhxxxxxholidaies;
 		this.jxxxbh400xwwqqhxxxxxemployees = jxxxbh400xwwqqhxxxxxemployees;
+		this.yxxxiq555xwwqqhxxxxxholidaies = yxxxiq555xwwqqhxxxxxholidaies;
+		this.jxxxbh400xwwqqhxxxxxemployees_1 = jxxxbh400xwwqqhxxxxxemployees_1;
+		this.yxxxiq555xwwqqhxxxxxholidaies_1 = yxxxiq555xwwqqhxxxxxholidaies_1;
 	}
 
 	@Id
@@ -208,6 +216,16 @@ public class Dxxxiq155xwwqqhxxxxxresidency implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dxxxiq155xwwqqhxxxxxresidency")
+	public Set<Jxxxbh400xwwqqhxxxxxemployee> getJxxxbh400xwwqqhxxxxxemployees() {
+		return this.jxxxbh400xwwqqhxxxxxemployees;
+	}
+
+	public void setJxxxbh400xwwqqhxxxxxemployees(
+			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees) {
+		this.jxxxbh400xwwqqhxxxxxemployees = jxxxbh400xwwqqhxxxxxemployees;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dxxxiq155xwwqqhxxxxxresidency")
 	public Set<Yxxxiq555xwwqqhxxxxxholiday> getYxxxiq555xwwqqhxxxxxholidaies() {
 		return this.yxxxiq555xwwqqhxxxxxholidaies;
 	}
@@ -218,13 +236,23 @@ public class Dxxxiq155xwwqqhxxxxxresidency implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dxxxiq155xwwqqhxxxxxresidency")
-	public Set<Jxxxbh400xwwqqhxxxxxemployee> getJxxxbh400xwwqqhxxxxxemployees() {
-		return this.jxxxbh400xwwqqhxxxxxemployees;
+	public Set<Jxxxbh400xwwqqhxxxxxemployee> getJxxxbh400xwwqqhxxxxxemployees_1() {
+		return this.jxxxbh400xwwqqhxxxxxemployees_1;
 	}
 
-	public void setJxxxbh400xwwqqhxxxxxemployees(
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees) {
-		this.jxxxbh400xwwqqhxxxxxemployees = jxxxbh400xwwqqhxxxxxemployees;
+	public void setJxxxbh400xwwqqhxxxxxemployees_1(
+			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees_1) {
+		this.jxxxbh400xwwqqhxxxxxemployees_1 = jxxxbh400xwwqqhxxxxxemployees_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dxxxiq155xwwqqhxxxxxresidency")
+	public Set<Yxxxiq555xwwqqhxxxxxholiday> getYxxxiq555xwwqqhxxxxxholidaies_1() {
+		return this.yxxxiq555xwwqqhxxxxxholidaies_1;
+	}
+
+	public void setYxxxiq555xwwqqhxxxxxholidaies_1(
+			Set<Yxxxiq555xwwqqhxxxxxholiday> yxxxiq555xwwqqhxxxxxholidaies_1) {
+		this.yxxxiq555xwwqqhxxxxxholidaies_1 = yxxxiq555xwwqqhxxxxxholidaies_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

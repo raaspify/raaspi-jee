@@ -500,6 +500,30 @@ public class Fxxxuq111xwwqqhxxxxxaddressList implements Serializable
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         "lower(fxxxuq111xwwqqhxxxxxaddress.y1xxub3xexxxxxxxxxxxaddrl3) like lower( concat(#{fxxxuq111xwwqqhxxxxxaddressList.fxxxuq111xwwqqhxxxxxaddress.y1xxub3xexxxxxxxxxxxaddrl3},'%'))",
         "lower(fxxxuq111xwwqqhxxxxxaddress.y2xxuxzsbexxxxxxxxxxdescript) like lower( concat(#{fxxxuq111xwwqqhxxxxxaddressList.fxxxuq111xwwqqhxxxxxaddress.y2xxuxzsbexxxxxxxxxxdescript},'%'))",
         "lower(fxxxuq111xwwqqhxxxxxaddress.y4xxuznybexxxxxxxxxxnotes) like lower( concat(#{fxxxuq111xwwqqhxxxxxaddressList.fxxxuq111xwwqqhxxxxxaddress.y4xxuznybexxxxxxxxxxnotes},'%'))",

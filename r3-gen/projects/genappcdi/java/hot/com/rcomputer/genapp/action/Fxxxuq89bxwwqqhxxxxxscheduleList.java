@@ -525,6 +525,7 @@ public class Fxxxuq89bxwwqqhxxxxxscheduleList implements Serializable
 
 
 
+
         "lower(fxxxuq89bxwwqqhxxxxxschedule.yhxxuznybvxxxxxxxxxxnotes) like lower( concat(#{fxxxuq89bxwwqqhxxxxxscheduleList.fxxxuq89bxwwqqhxxxxxschedule.yhxxuznybvxxxxxxxxxxnotes},'%'))",
         "lower(fxxxuq89bxwwqqhxxxxxschedule.yixxuzdrbvxxxxxxxxxxdocmnt) like lower( concat(#{fxxxuq89bxwwqqhxxxxxscheduleList.fxxxuq89bxwwqqhxxxxxschedule.yixxuzdrbvxxxxxxxxxxdocmnt},'%'))",
         "lower(fxxxuq89bxwwqqhxxxxxschedule.z2xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{fxxxuq89bxwwqqhxxxxxscheduleList.ownerCddCode}))",

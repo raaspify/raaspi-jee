@@ -477,6 +477,8 @@ public class Dxxxuq92bxwwqqhefxxxitemjobList implements Serializable
 
 
 
+
+
         "lower(dxxxuq92bxwwqqhefxxxitemjob.ydxxuznybvxxxxxxxxxxnotes) like lower( concat(#{dxxxuq92bxwwqqhefxxxitemjobList.dxxxuq92bxwwqqhefxxxitemjob.ydxxuznybvxxxxxxxxxxnotes},'%'))",
         "lower(dxxxuq92bxwwqqhefxxxitemjob.yexxuzdrbvxxxxxxxxxxdocmnt) like lower( concat(#{dxxxuq92bxwwqqhefxxxitemjobList.dxxxuq92bxwwqqhefxxxitemjob.yexxuzdrbvxxxxxxxxxxdocmnt},'%'))",
         "lower(dxxxuq92bxwwqqhefxxxitemjob.zbxxuxxrbvxxxxxxxxxxmatcodeout) like lower( concat(#{dxxxuq92bxwwqqhefxxxitemjobList.dxxxuq92bxwwqqhefxxxitemjob.zbxxuxxrbvxxxxxxxxxxmatcodeout},'%'))",

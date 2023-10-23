@@ -474,6 +474,7 @@ public class Fxxxuq166xwwqqhefmxxitembomList implements Serializable
         "lower(fxxxuq166xwwqqhefmxxitembom.a0xxukxxbvxxxxxxxxxxbomcode) like lower( concat(#{fxxxuq166xwwqqhefmxxitembomList.fxxxuq166xwwqqhefmxxitembom.a0xxukxxbvxxxxxxxxxxbomcode},'%'))",
         "lower(fxxxuq166xwwqqhefmxxitembom.b1xxuszsbvxxxxxxxxxxdescript) like lower( concat(#{fxxxuq166xwwqqhefmxxitembomList.fxxxuq166xwwqqhefmxxitembom.b1xxuszsbvxxxxxxxxxxdescript},'%'))",
 
+
         "lower(fxxxuq166xwwqqhefmxxitembom.z3xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{fxxxuq166xwwqqhefmxxitembomList.ownerCddCode}))",
         "lower(fxxxuq166xwwqqhefmxxitembom.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{fxxxuq166xwwqqhefmxxitembomList.dataOwner2Code})",
     };

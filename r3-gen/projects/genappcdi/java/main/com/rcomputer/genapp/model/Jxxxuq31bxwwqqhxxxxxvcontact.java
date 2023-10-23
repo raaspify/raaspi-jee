@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -328,8 +328,8 @@ public class Jxxxuq31bxwwqqhxxxxxvcontact implements java.io.Serializable {
 		this.l3xxhxxrbv44xxxxxxxxlmailaddr = l3xxhxxrbv44xxxxxxxxlmailaddr;
 	}
 
-	@Column(name = "imailaddr", length = 60)
-	@Size(max = 60)
+	@Column(name = "imailaddr", length = 35)
+	@Size(max = 35)
 	@Pattern.List({
 			@Pattern(regexp = "(^$|.+@.+\\..+)", message = "Bad email value"),
 			@Pattern(regexp = "(^$)|(^\\S+$)", message = "email has space character")})
@@ -353,8 +353,8 @@ public class Jxxxuq31bxwwqqhxxxxxvcontact implements java.io.Serializable {
 		this.l5xxhxxrbvxxxxxxxxxxrmailaddr = l5xxhxxrbvxxxxxxxxxxrmailaddr;
 	}
 
-	@Column(name = "intaddr", length = 60)
-	@Size(max = 60)
+	@Column(name = "intaddr", length = 35)
+	@Size(max = 35)
 	public String getL6xxhxxrbv23xxxxxxxxintaddr() {
 		return this.l6xxhxxrbv23xxxxxxxxintaddr;
 	}

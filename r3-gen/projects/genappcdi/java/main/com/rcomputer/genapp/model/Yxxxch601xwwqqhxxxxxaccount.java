@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -78,17 +78,33 @@ public class Yxxxch601xwwqqhxxxxxaccount implements java.io.Serializable {
 			0);
 	private Set<Trexuq277xwwqqhxxxxxcpayment> trexuq277xwwqqhxxxxxcpayments = new HashSet<Trexuq277xwwqqhxxxxxcpayment>(
 			0);
-	private Set<Yxxxch643xwwqqhxxxxxacintegr> yxxxch643xwwqqhxxxxxacintegrs = new HashSet<Yxxxch643xwwqqhxxxxxacintegr>(
-			0);
-	private Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendors = new HashSet<Jxxxuq300xwwqqhxxxxxvendor>(
+	private Set<Xorxeh66exwwqqhxxxxxgentriesdetails> xorxeh66exwwqqhxxxxxgentriesdetailses_1 = new HashSet<Xorxeh66exwwqqhxxxxxgentriesdetails>(
 			0);
 	private Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments = new HashSet<Trexuq388xwwqqhxxxxxvpayment>(
 			0);
+	private Set<Trexuq277xwwqqhxxxxxcpayment> trexuq277xwwqqhxxxxxcpayments_1 = new HashSet<Trexuq277xwwqqhxxxxxcpayment>(
+			0);
 	private Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomers = new HashSet<Jxxxuq201xwwqqhxxxxxcustomer>(
+			0);
+	private Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomers_1 = new HashSet<Jxxxuq201xwwqqhxxxxxcustomer>(
+			0);
+	private Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses = new HashSet<Yxxxch65exwwqqhxxxxxglentries>(
+			0);
+	private Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendors = new HashSet<Jxxxuq300xwwqqhxxxxxvendor>(
+			0);
+	private Set<Yxxxch643xwwqqhxxxxxacintegr> yxxxch643xwwqqhxxxxxacintegrs = new HashSet<Yxxxch643xwwqqhxxxxxacintegr>(
+			0);
+	private Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendors_1 = new HashSet<Jxxxuq300xwwqqhxxxxxvendor>(
+			0);
+	private Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments_1 = new HashSet<Trexuq388xwwqqhxxxxxvpayment>(
 			0);
 	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
 			0);
-	private Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses = new HashSet<Yxxxch65exwwqqhxxxxxglentries>(
+	private Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses_1 = new HashSet<Yxxxch65exwwqqhxxxxxglentries>(
+			0);
+	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees_1 = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
+			0);
+	private Set<Yxxxch643xwwqqhxxxxxacintegr> yxxxch643xwwqqhxxxxxacintegrs_1 = new HashSet<Yxxxch643xwwqqhxxxxxacintegr>(
 			0);
 
 	public Yxxxch601xwwqqhxxxxxaccount() {
@@ -141,12 +157,20 @@ public class Yxxxch601xwwqqhxxxxxaccount implements java.io.Serializable {
 			BigDecimal zoxxzwbtlvxxxxxxxxxxp11t,
 			Set<Xorxeh66exwwqqhxxxxxgentriesdetails> xorxeh66exwwqqhxxxxxgentriesdetailses,
 			Set<Trexuq277xwwqqhxxxxxcpayment> trexuq277xwwqqhxxxxxcpayments,
-			Set<Yxxxch643xwwqqhxxxxxacintegr> yxxxch643xwwqqhxxxxxacintegrs,
-			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendors,
+			Set<Xorxeh66exwwqqhxxxxxgentriesdetails> xorxeh66exwwqqhxxxxxgentriesdetailses_1,
 			Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments,
+			Set<Trexuq277xwwqqhxxxxxcpayment> trexuq277xwwqqhxxxxxcpayments_1,
 			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomers,
+			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomers_1,
+			Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses,
+			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendors,
+			Set<Yxxxch643xwwqqhxxxxxacintegr> yxxxch643xwwqqhxxxxxacintegrs,
+			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendors_1,
+			Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments_1,
 			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees,
-			Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses) {
+			Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses_1,
+			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees_1,
+			Set<Yxxxch643xwwqqhxxxxxacintegr> yxxxch643xwwqqhxxxxxacintegrs_1) {
 		this.fxxxch133xhhxqhxxlxxdivision = fxxxch133xhhxqhxxlxxdivision;
 		this.fxxxch122xhhxqhxxlxxdepartment = fxxxch122xhhxqhxxlxxdepartment;
 		this.dxxxch1d3xwwqqhxxlxxcompany = dxxxch1d3xwwqqhxxlxxcompany;
@@ -190,12 +214,20 @@ public class Yxxxch601xwwqqhxxxxxaccount implements java.io.Serializable {
 		this.zoxxzwbtlvxxxxxxxxxxp11t = zoxxzwbtlvxxxxxxxxxxp11t;
 		this.xorxeh66exwwqqhxxxxxgentriesdetailses = xorxeh66exwwqqhxxxxxgentriesdetailses;
 		this.trexuq277xwwqqhxxxxxcpayments = trexuq277xwwqqhxxxxxcpayments;
-		this.yxxxch643xwwqqhxxxxxacintegrs = yxxxch643xwwqqhxxxxxacintegrs;
-		this.jxxxuq300xwwqqhxxxxxvendors = jxxxuq300xwwqqhxxxxxvendors;
+		this.xorxeh66exwwqqhxxxxxgentriesdetailses_1 = xorxeh66exwwqqhxxxxxgentriesdetailses_1;
 		this.trexuq388xwwqqhxxxxxvpayments = trexuq388xwwqqhxxxxxvpayments;
+		this.trexuq277xwwqqhxxxxxcpayments_1 = trexuq277xwwqqhxxxxxcpayments_1;
 		this.jxxxuq201xwwqqhxxxxxcustomers = jxxxuq201xwwqqhxxxxxcustomers;
-		this.jxxxbh400xwwqqhxxxxxemployees = jxxxbh400xwwqqhxxxxxemployees;
+		this.jxxxuq201xwwqqhxxxxxcustomers_1 = jxxxuq201xwwqqhxxxxxcustomers_1;
 		this.yxxxch65exwwqqhxxxxxglentrieses = yxxxch65exwwqqhxxxxxglentrieses;
+		this.jxxxuq300xwwqqhxxxxxvendors = jxxxuq300xwwqqhxxxxxvendors;
+		this.yxxxch643xwwqqhxxxxxacintegrs = yxxxch643xwwqqhxxxxxacintegrs;
+		this.jxxxuq300xwwqqhxxxxxvendors_1 = jxxxuq300xwwqqhxxxxxvendors_1;
+		this.trexuq388xwwqqhxxxxxvpayments_1 = trexuq388xwwqqhxxxxxvpayments_1;
+		this.jxxxbh400xwwqqhxxxxxemployees = jxxxbh400xwwqqhxxxxxemployees;
+		this.yxxxch65exwwqqhxxxxxglentrieses_1 = yxxxch65exwwqqhxxxxxglentrieses_1;
+		this.jxxxbh400xwwqqhxxxxxemployees_1 = jxxxbh400xwwqqhxxxxxemployees_1;
+		this.yxxxch643xwwqqhxxxxxacintegrs_1 = yxxxch643xwwqqhxxxxxacintegrs_1;
 	}
 
 	@Id
@@ -629,23 +661,13 @@ public class Yxxxch601xwwqqhxxxxxaccount implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
-	public Set<Yxxxch643xwwqqhxxxxxacintegr> getYxxxch643xwwqqhxxxxxacintegrs() {
-		return this.yxxxch643xwwqqhxxxxxacintegrs;
+	public Set<Xorxeh66exwwqqhxxxxxgentriesdetails> getXorxeh66exwwqqhxxxxxgentriesdetailses_1() {
+		return this.xorxeh66exwwqqhxxxxxgentriesdetailses_1;
 	}
 
-	public void setYxxxch643xwwqqhxxxxxacintegrs(
-			Set<Yxxxch643xwwqqhxxxxxacintegr> yxxxch643xwwqqhxxxxxacintegrs) {
-		this.yxxxch643xwwqqhxxxxxacintegrs = yxxxch643xwwqqhxxxxxacintegrs;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
-	public Set<Jxxxuq300xwwqqhxxxxxvendor> getJxxxuq300xwwqqhxxxxxvendors() {
-		return this.jxxxuq300xwwqqhxxxxxvendors;
-	}
-
-	public void setJxxxuq300xwwqqhxxxxxvendors(
-			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendors) {
-		this.jxxxuq300xwwqqhxxxxxvendors = jxxxuq300xwwqqhxxxxxvendors;
+	public void setXorxeh66exwwqqhxxxxxgentriesdetailses_1(
+			Set<Xorxeh66exwwqqhxxxxxgentriesdetails> xorxeh66exwwqqhxxxxxgentriesdetailses_1) {
+		this.xorxeh66exwwqqhxxxxxgentriesdetailses_1 = xorxeh66exwwqqhxxxxxgentriesdetailses_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
@@ -659,6 +681,16 @@ public class Yxxxch601xwwqqhxxxxxaccount implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
+	public Set<Trexuq277xwwqqhxxxxxcpayment> getTrexuq277xwwqqhxxxxxcpayments_1() {
+		return this.trexuq277xwwqqhxxxxxcpayments_1;
+	}
+
+	public void setTrexuq277xwwqqhxxxxxcpayments_1(
+			Set<Trexuq277xwwqqhxxxxxcpayment> trexuq277xwwqqhxxxxxcpayments_1) {
+		this.trexuq277xwwqqhxxxxxcpayments_1 = trexuq277xwwqqhxxxxxcpayments_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
 	public Set<Jxxxuq201xwwqqhxxxxxcustomer> getJxxxuq201xwwqqhxxxxxcustomers() {
 		return this.jxxxuq201xwwqqhxxxxxcustomers;
 	}
@@ -666,6 +698,66 @@ public class Yxxxch601xwwqqhxxxxxaccount implements java.io.Serializable {
 	public void setJxxxuq201xwwqqhxxxxxcustomers(
 			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomers) {
 		this.jxxxuq201xwwqqhxxxxxcustomers = jxxxuq201xwwqqhxxxxxcustomers;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
+	public Set<Jxxxuq201xwwqqhxxxxxcustomer> getJxxxuq201xwwqqhxxxxxcustomers_1() {
+		return this.jxxxuq201xwwqqhxxxxxcustomers_1;
+	}
+
+	public void setJxxxuq201xwwqqhxxxxxcustomers_1(
+			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomers_1) {
+		this.jxxxuq201xwwqqhxxxxxcustomers_1 = jxxxuq201xwwqqhxxxxxcustomers_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
+	public Set<Yxxxch65exwwqqhxxxxxglentries> getYxxxch65exwwqqhxxxxxglentrieses() {
+		return this.yxxxch65exwwqqhxxxxxglentrieses;
+	}
+
+	public void setYxxxch65exwwqqhxxxxxglentrieses(
+			Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses) {
+		this.yxxxch65exwwqqhxxxxxglentrieses = yxxxch65exwwqqhxxxxxglentrieses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
+	public Set<Jxxxuq300xwwqqhxxxxxvendor> getJxxxuq300xwwqqhxxxxxvendors() {
+		return this.jxxxuq300xwwqqhxxxxxvendors;
+	}
+
+	public void setJxxxuq300xwwqqhxxxxxvendors(
+			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendors) {
+		this.jxxxuq300xwwqqhxxxxxvendors = jxxxuq300xwwqqhxxxxxvendors;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
+	public Set<Yxxxch643xwwqqhxxxxxacintegr> getYxxxch643xwwqqhxxxxxacintegrs() {
+		return this.yxxxch643xwwqqhxxxxxacintegrs;
+	}
+
+	public void setYxxxch643xwwqqhxxxxxacintegrs(
+			Set<Yxxxch643xwwqqhxxxxxacintegr> yxxxch643xwwqqhxxxxxacintegrs) {
+		this.yxxxch643xwwqqhxxxxxacintegrs = yxxxch643xwwqqhxxxxxacintegrs;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
+	public Set<Jxxxuq300xwwqqhxxxxxvendor> getJxxxuq300xwwqqhxxxxxvendors_1() {
+		return this.jxxxuq300xwwqqhxxxxxvendors_1;
+	}
+
+	public void setJxxxuq300xwwqqhxxxxxvendors_1(
+			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendors_1) {
+		this.jxxxuq300xwwqqhxxxxxvendors_1 = jxxxuq300xwwqqhxxxxxvendors_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
+	public Set<Trexuq388xwwqqhxxxxxvpayment> getTrexuq388xwwqqhxxxxxvpayments_1() {
+		return this.trexuq388xwwqqhxxxxxvpayments_1;
+	}
+
+	public void setTrexuq388xwwqqhxxxxxvpayments_1(
+			Set<Trexuq388xwwqqhxxxxxvpayment> trexuq388xwwqqhxxxxxvpayments_1) {
+		this.trexuq388xwwqqhxxxxxvpayments_1 = trexuq388xwwqqhxxxxxvpayments_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
@@ -679,13 +771,33 @@ public class Yxxxch601xwwqqhxxxxxaccount implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
-	public Set<Yxxxch65exwwqqhxxxxxglentries> getYxxxch65exwwqqhxxxxxglentrieses() {
-		return this.yxxxch65exwwqqhxxxxxglentrieses;
+	public Set<Yxxxch65exwwqqhxxxxxglentries> getYxxxch65exwwqqhxxxxxglentrieses_1() {
+		return this.yxxxch65exwwqqhxxxxxglentrieses_1;
 	}
 
-	public void setYxxxch65exwwqqhxxxxxglentrieses(
-			Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses) {
-		this.yxxxch65exwwqqhxxxxxglentrieses = yxxxch65exwwqqhxxxxxglentrieses;
+	public void setYxxxch65exwwqqhxxxxxglentrieses_1(
+			Set<Yxxxch65exwwqqhxxxxxglentries> yxxxch65exwwqqhxxxxxglentrieses_1) {
+		this.yxxxch65exwwqqhxxxxxglentrieses_1 = yxxxch65exwwqqhxxxxxglentrieses_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
+	public Set<Jxxxbh400xwwqqhxxxxxemployee> getJxxxbh400xwwqqhxxxxxemployees_1() {
+		return this.jxxxbh400xwwqqhxxxxxemployees_1;
+	}
+
+	public void setJxxxbh400xwwqqhxxxxxemployees_1(
+			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees_1) {
+		this.jxxxbh400xwwqqhxxxxxemployees_1 = jxxxbh400xwwqqhxxxxxemployees_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch601xwwqqhxxxxxaccount")
+	public Set<Yxxxch643xwwqqhxxxxxacintegr> getYxxxch643xwwqqhxxxxxacintegrs_1() {
+		return this.yxxxch643xwwqqhxxxxxacintegrs_1;
+	}
+
+	public void setYxxxch643xwwqqhxxxxxacintegrs_1(
+			Set<Yxxxch643xwwqqhxxxxxacintegr> yxxxch643xwwqqhxxxxxacintegrs_1) {
+		this.yxxxch643xwwqqhxxxxxacintegrs_1 = yxxxch643xwwqqhxxxxxacintegrs_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

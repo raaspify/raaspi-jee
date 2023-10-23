@@ -485,6 +485,10 @@ public class Trexuq266xwwqqhxxxxxcuinvoiceList implements Serializable
 
 
 
+
+
+
+
         "lower(trexuq266xwwqqhxxxxxcuinvoice.y3xxuxxrbvxxxxxxxxxxref1typ) like lower( concat(#{trexuq266xwwqqhxxxxxcuinvoiceList.trexuq266xwwqqhxxxxxcuinvoice.y3xxuxxrbvxxxxxxxxxxref1typ},'%'))",
         "lower(trexuq266xwwqqhxxxxxcuinvoice.y4xxuxxrbvxxxxxxxxxxref1code) like lower( concat(#{trexuq266xwwqqhxxxxxcuinvoiceList.trexuq266xwwqqhxxxxxcuinvoice.y4xxuxxrbvxxxxxxxxxxref1code},'%'))",
         "lower(trexuq266xwwqqhxxxxxcuinvoice.y5xxuxxrblxxxxxxxxxxshipcode) like lower( concat(#{trexuq266xwwqqhxxxxxcuinvoiceList.trexuq266xwwqqhxxxxxcuinvoice.y5xxuxxrblxxxxxxxxxxshipcode},'%'))",

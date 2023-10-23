@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -164,6 +164,10 @@ public class Yxxxch5a1xhhxxhxxxxxtruefalse implements java.io.Serializable {
 	private Boolean a1xxyxxxbvxxxxxxxxxxshow136;
 	private Boolean a1xxyxxxbvxxxxxxxxxxshow137;
 	private Boolean a1xxyxxxbvxxxxxxxxxxshow138;
+	private Integer zixxzzfxhhxxxxxxxxxxstatusfl;
+	private Date zjxxcztxlxxxxxxxxxxxstatusfldt;
+	private String z3xxutoxlhxxxxxxxxxxowner;
+	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Boolean a1xxyxxxbvxxxxxxxxxxshow139;
 	private Boolean a1xxyxxxbvxxxxxxxxxxshow140;
 	private Boolean a1xxyxxxbvxxxxxxxxxxshow141;
@@ -236,10 +240,6 @@ public class Yxxxch5a1xhhxxhxxxxxtruefalse implements java.io.Serializable {
 	private Boolean a1xxyxxxbvxxxxxxxxxxshow208;
 	private Boolean a1xxyxxxbvxxxxxxxxxxshow209;
 	private Boolean a1xxyxxxbvxxxxxxxxxxshow210;
-	private Integer zixxzzfxhhxxxxxxxxxxstatusfl;
-	private Date zjxxcztxlxxxxxxxxxxxstatusfldt;
-	private String z3xxutoxlhxxxxxxxxxxowner;
-	private String zzxxu2oxxhxxxxxxxxxxowner2;
 
 	public Yxxxch5a1xhhxxhxxxxxtruefalse() {
 	}
@@ -384,6 +384,10 @@ public class Yxxxch5a1xhhxxhxxxxxtruefalse implements java.io.Serializable {
 			Boolean a1xxyxxxbvxxxxxxxxxxshow136,
 			Boolean a1xxyxxxbvxxxxxxxxxxshow137,
 			Boolean a1xxyxxxbvxxxxxxxxxxshow138,
+			Integer zixxzzfxhhxxxxxxxxxxstatusfl,
+			Date zjxxcztxlxxxxxxxxxxxstatusfldt,
+			String z3xxutoxlhxxxxxxxxxxowner,
+			String zzxxu2oxxhxxxxxxxxxxowner2,
 			Boolean a1xxyxxxbvxxxxxxxxxxshow139,
 			Boolean a1xxyxxxbvxxxxxxxxxxshow140,
 			Boolean a1xxyxxxbvxxxxxxxxxxshow141,
@@ -455,10 +459,7 @@ public class Yxxxch5a1xhhxxhxxxxxtruefalse implements java.io.Serializable {
 			Boolean a1xxyxxxbvxxxxxxxxxxshow207,
 			Boolean a1xxyxxxbvxxxxxxxxxxshow208,
 			Boolean a1xxyxxxbvxxxxxxxxxxshow209,
-			Boolean a1xxyxxxbvxxxxxxxxxxshow210,
-			Integer zixxzzfxhhxxxxxxxxxxstatusfl,
-			Date zjxxcztxlxxxxxxxxxxxstatusfldt,
-			String z3xxutoxlhxxxxxxxxxxowner, String zzxxu2oxxhxxxxxxxxxxowner2) {
+			Boolean a1xxyxxxbvxxxxxxxxxxshow210) {
 		this.a0xxukrdbvxxxxxxxxxxtablename = a0xxukrdbvxxxxxxxxxxtablename;
 		this.a1xxuxxxbvxxxxxxxxxxqualifier = a1xxuxxxbvxxxxxxxxxxqualifier;
 		this.a1xxyxxxbvxxxxxxxxxxshow001 = a1xxyxxxbvxxxxxxxxxxshow001;
@@ -599,6 +600,10 @@ public class Yxxxch5a1xhhxxhxxxxxtruefalse implements java.io.Serializable {
 		this.a1xxyxxxbvxxxxxxxxxxshow136 = a1xxyxxxbvxxxxxxxxxxshow136;
 		this.a1xxyxxxbvxxxxxxxxxxshow137 = a1xxyxxxbvxxxxxxxxxxshow137;
 		this.a1xxyxxxbvxxxxxxxxxxshow138 = a1xxyxxxbvxxxxxxxxxxshow138;
+		this.zixxzzfxhhxxxxxxxxxxstatusfl = zixxzzfxhhxxxxxxxxxxstatusfl;
+		this.zjxxcztxlxxxxxxxxxxxstatusfldt = zjxxcztxlxxxxxxxxxxxstatusfldt;
+		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
+		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.a1xxyxxxbvxxxxxxxxxxshow139 = a1xxyxxxbvxxxxxxxxxxshow139;
 		this.a1xxyxxxbvxxxxxxxxxxshow140 = a1xxyxxxbvxxxxxxxxxxshow140;
 		this.a1xxyxxxbvxxxxxxxxxxshow141 = a1xxyxxxbvxxxxxxxxxxshow141;
@@ -671,10 +676,6 @@ public class Yxxxch5a1xhhxxhxxxxxtruefalse implements java.io.Serializable {
 		this.a1xxyxxxbvxxxxxxxxxxshow208 = a1xxyxxxbvxxxxxxxxxxshow208;
 		this.a1xxyxxxbvxxxxxxxxxxshow209 = a1xxyxxxbvxxxxxxxxxxshow209;
 		this.a1xxyxxxbvxxxxxxxxxxshow210 = a1xxyxxxbvxxxxxxxxxxshow210;
-		this.zixxzzfxhhxxxxxxxxxxstatusfl = zixxzzfxhhxxxxxxxxxxstatusfl;
-		this.zjxxcztxlxxxxxxxxxxxstatusfldt = zjxxcztxlxxxxxxxxxxxstatusfldt;
-		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
-		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 	}
 
 	@Id
@@ -2090,6 +2091,47 @@ public class Yxxxch5a1xhhxxhxxxxxtruefalse implements java.io.Serializable {
 		this.a1xxyxxxbvxxxxxxxxxxshow138 = a1xxyxxxbvxxxxxxxxxxshow138;
 	}
 
+	@Column(name = "statusfl")
+	public Integer getZixxzzfxhhxxxxxxxxxxstatusfl() {
+		return this.zixxzzfxhhxxxxxxxxxxstatusfl;
+	}
+
+	public void setZixxzzfxhhxxxxxxxxxxstatusfl(
+			Integer zixxzzfxhhxxxxxxxxxxstatusfl) {
+		this.zixxzzfxhhxxxxxxxxxxstatusfl = zixxzzfxhhxxxxxxxxxxstatusfl;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "statusfldt", length = 29)
+	public Date getZjxxcztxlxxxxxxxxxxxstatusfldt() {
+		return this.zjxxcztxlxxxxxxxxxxxstatusfldt;
+	}
+
+	public void setZjxxcztxlxxxxxxxxxxxstatusfldt(
+			Date zjxxcztxlxxxxxxxxxxxstatusfldt) {
+		this.zjxxcztxlxxxxxxxxxxxstatusfldt = zjxxcztxlxxxxxxxxxxxstatusfldt;
+	}
+
+	@Column(name = "owner", length = 40)
+	@Size(max = 40)
+	public String getZ3xxutoxlhxxxxxxxxxxowner() {
+		return this.z3xxutoxlhxxxxxxxxxxowner;
+	}
+
+	public void setZ3xxutoxlhxxxxxxxxxxowner(String z3xxutoxlhxxxxxxxxxxowner) {
+		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
+	}
+
+	@Column(name = "owner2", length = 40)
+	@Size(max = 40)
+	public String getZzxxu2oxxhxxxxxxxxxxowner2() {
+		return this.zzxxu2oxxhxxxxxxxxxxowner2;
+	}
+
+	public void setZzxxu2oxxhxxxxxxxxxxowner2(String zzxxu2oxxhxxxxxxxxxxowner2) {
+		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
+	}
+
 	@Column(name = "show139")
 	public Boolean getA1xxyxxxbvxxxxxxxxxxshow139() {
 		return this.a1xxyxxxbvxxxxxxxxxxshow139;
@@ -2808,47 +2850,6 @@ public class Yxxxch5a1xhhxxhxxxxxtruefalse implements java.io.Serializable {
 	public void setA1xxyxxxbvxxxxxxxxxxshow210(
 			Boolean a1xxyxxxbvxxxxxxxxxxshow210) {
 		this.a1xxyxxxbvxxxxxxxxxxshow210 = a1xxyxxxbvxxxxxxxxxxshow210;
-	}
-
-	@Column(name = "statusfl")
-	public Integer getZixxzzfxhhxxxxxxxxxxstatusfl() {
-		return this.zixxzzfxhhxxxxxxxxxxstatusfl;
-	}
-
-	public void setZixxzzfxhhxxxxxxxxxxstatusfl(
-			Integer zixxzzfxhhxxxxxxxxxxstatusfl) {
-		this.zixxzzfxhhxxxxxxxxxxstatusfl = zixxzzfxhhxxxxxxxxxxstatusfl;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "statusfldt", length = 29)
-	public Date getZjxxcztxlxxxxxxxxxxxstatusfldt() {
-		return this.zjxxcztxlxxxxxxxxxxxstatusfldt;
-	}
-
-	public void setZjxxcztxlxxxxxxxxxxxstatusfldt(
-			Date zjxxcztxlxxxxxxxxxxxstatusfldt) {
-		this.zjxxcztxlxxxxxxxxxxxstatusfldt = zjxxcztxlxxxxxxxxxxxstatusfldt;
-	}
-
-	@Column(name = "owner", length = 40)
-	@Size(max = 40)
-	public String getZ3xxutoxlhxxxxxxxxxxowner() {
-		return this.z3xxutoxlhxxxxxxxxxxowner;
-	}
-
-	public void setZ3xxutoxlhxxxxxxxxxxowner(String z3xxutoxlhxxxxxxxxxxowner) {
-		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
-	}
-
-	@Column(name = "owner2", length = 40)
-	@Size(max = 40)
-	public String getZzxxu2oxxhxxxxxxxxxxowner2() {
-		return this.zzxxu2oxxhxxxxxxxxxxowner2;
-	}
-
-	public void setZzxxu2oxxhxxxxxxxxxxowner2(String zzxxu2oxxhxxxxxxxxxxowner2) {
-		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 	}
 
 }

@@ -479,6 +479,7 @@ public class Nxxxiha3rxwwqqhxxxxxgentableList implements Serializable
         "lower(nxxxiha3rxwwqqhxxxxxgentable.d4xxgxxxbv04xxxxxxxxusagescope) like lower( concat(#{nxxxiha3rxwwqqhxxxxxgentableList.nxxxiha3rxwwqqhxxxxxgentable.d4xxgxxxbv04xxxxxxxxusagescope},'%'))",
 
 
+
         "lower(nxxxiha3rxwwqqhxxxxxgentable.zgxxuxznbvxxxxxxxxxxnotes) like lower( concat(#{nxxxiha3rxwwqqhxxxxxgentableList.nxxxiha3rxwwqqhxxxxxgentable.zgxxuxznbvxxxxxxxxxxnotes},'%'))",
         "lower(nxxxiha3rxwwqqhxxxxxgentable.zhxxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{nxxxiha3rxwwqqhxxxxxgentableList.ownerCddCode}))",
         "lower(nxxxiha3rxwwqqhxxxxxgentable.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{nxxxiha3rxwwqqhxxxxxgentableList.dataOwner2Code})",

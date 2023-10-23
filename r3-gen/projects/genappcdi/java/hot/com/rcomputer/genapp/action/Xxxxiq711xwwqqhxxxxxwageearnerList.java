@@ -476,6 +476,7 @@ public class Xxxxiq711xwwqqhxxxxxwageearnerList implements Serializable
         "lower(xxxxiq711xwwqqhxxxxxwageearner.c6xxutoubvxxxxxxxxxxotimeunit) like lower( concat('%',#{xxxxiq711xwwqqhxxxxxwageearnerList.ownerCddCode}))",
 
 
+
         "lower(xxxxiq711xwwqqhxxxxxwageearner.y4xxuznxbvxxxxxxxxxxnotes) like lower( concat(#{xxxxiq711xwwqqhxxxxxwageearnerList.xxxxiq711xwwqqhxxxxxwageearner.y4xxuznxbvxxxxxxxxxxnotes},'%'))",
         "lower(xxxxiq711xwwqqhxxxxxwageearner.y5xxuzdrbvxxxxxxxxxxdocmnt) like lower( concat(#{xxxxiq711xwwqqhxxxxxwageearnerList.xxxxiq711xwwqqhxxxxxwageearner.y5xxuzdrbvxxxxxxxxxxdocmnt},'%'))",
         "lower(xxxxiq711xwwqqhxxxxxwageearner.zlxxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{xxxxiq711xwwqqhxxxxxwageearnerList.ownerCddCode}))",

@@ -128,7 +128,7 @@ public class SqlAdminSupport implements Serializable {
          }
       }
      } catch (Exception e) {
-        log.severe("Error at customIdentity initialize() "+ e.getMessage());
+        log.severe("Error at SqlAdminSupport initialize() "+ "externalContext: "+externalContext+" url: "+urlName+" error: "+e.getMessage());
      }
     }
 	public byte[] getBlobdata(String table,String keyWPrefix,String keyQualifier,int keySequence,String owner2Code) {

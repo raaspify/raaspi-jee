@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -74,6 +74,8 @@ public class Jxxxuq53dxwwqqhxxxxxrollupgroup implements java.io.Serializable {
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Fxxxuq1bhxwwqqhxxxxxusagebyperiods> fxxxuq1bhxwwqqhxxxxxusagebyperiodses = new HashSet<Fxxxuq1bhxwwqqhxxxxxusagebyperiods>(
 			0);
+	private Set<Fxxxuq1bhxwwqqhxxxxxusagebyperiods> fxxxuq1bhxwwqqhxxxxxusagebyperiodses_1 = new HashSet<Fxxxuq1bhxwwqqhxxxxxusagebyperiods>(
+			0);
 
 	public Jxxxuq53dxwwqqhxxxxxrollupgroup() {
 	}
@@ -123,7 +125,8 @@ public class Jxxxuq53dxwwqqhxxxxxrollupgroup implements java.io.Serializable {
 			Date z2xxcztxlxxxxxxxxxxxstatusfldt,
 			String z3xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Fxxxuq1bhxwwqqhxxxxxusagebyperiods> fxxxuq1bhxwwqqhxxxxxusagebyperiodses) {
+			Set<Fxxxuq1bhxwwqqhxxxxxusagebyperiods> fxxxuq1bhxwwqqhxxxxxusagebyperiodses,
+			Set<Fxxxuq1bhxwwqqhxxxxxusagebyperiods> fxxxuq1bhxwwqqhxxxxxusagebyperiodses_1) {
 		this.a0xxukgxbvxxxxxxxxxxgroupid = a0xxukgxbvxxxxxxxxxxgroupid;
 		this.a2xxuszsbvxxxxxxxxxxdescript = a2xxuszsbvxxxxxxxxxxdescript;
 		this.a3xxuzyxbv46xxxxxxxxtype = a3xxuzyxbv46xxxxxxxxtype;
@@ -166,6 +169,7 @@ public class Jxxxuq53dxwwqqhxxxxxrollupgroup implements java.io.Serializable {
 		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.fxxxuq1bhxwwqqhxxxxxusagebyperiodses = fxxxuq1bhxwwqqhxxxxxusagebyperiodses;
+		this.fxxxuq1bhxwwqqhxxxxxusagebyperiodses_1 = fxxxuq1bhxwwqqhxxxxxusagebyperiodses_1;
 	}
 
 	@Id
@@ -602,6 +606,16 @@ public class Jxxxuq53dxwwqqhxxxxxrollupgroup implements java.io.Serializable {
 	public void setFxxxuq1bhxwwqqhxxxxxusagebyperiodses(
 			Set<Fxxxuq1bhxwwqqhxxxxxusagebyperiods> fxxxuq1bhxwwqqhxxxxxusagebyperiodses) {
 		this.fxxxuq1bhxwwqqhxxxxxusagebyperiodses = fxxxuq1bhxwwqqhxxxxxusagebyperiodses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "jxxxuq53dxwwqqhxxxxxrollupgroup")
+	public Set<Fxxxuq1bhxwwqqhxxxxxusagebyperiods> getFxxxuq1bhxwwqqhxxxxxusagebyperiodses_1() {
+		return this.fxxxuq1bhxwwqqhxxxxxusagebyperiodses_1;
+	}
+
+	public void setFxxxuq1bhxwwqqhxxxxxusagebyperiodses_1(
+			Set<Fxxxuq1bhxwwqqhxxxxxusagebyperiods> fxxxuq1bhxwwqqhxxxxxusagebyperiodses_1) {
+		this.fxxxuq1bhxwwqqhxxxxxusagebyperiodses_1 = fxxxuq1bhxwwqqhxxxxxusagebyperiodses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

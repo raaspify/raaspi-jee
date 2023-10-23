@@ -528,8 +528,12 @@ public class Jxxxuq201xwwqqhxxxxxcustomerList implements Serializable
         "lower(jxxxuq201xwwqqhxxxxxcustomer.d1xxu3cnbvixxxxxxxxxcustomerascompanyname) like lower( concat(#{jxxxuq201xwwqqhxxxxxcustomerList.jxxxuq201xwwqqhxxxxxcustomer.d1xxu3cnbvixxxxxxxxxcustomerascompanyname},'%'))",
 
 
+
         "lower(jxxxuq201xwwqqhxxxxxcustomer.f1xxuxxxav28xxxxxxxxtype) like lower( concat(#{jxxxuq201xwwqqhxxxxxcustomerList.jxxxuq201xwwqqhxxxxxcustomer.f1xxuxxxav28xxxxxxxxtype},'%'))",
         "lower(jxxxuq201xwwqqhxxxxxcustomer.f2xxuwmxbv40xxxxxxxxintegrset) like lower( concat(#{jxxxuq201xwwqqhxxxxxcustomerList.jxxxuq201xwwqqhxxxxxcustomer.f2xxuwmxbv40xxxxxxxxintegrset},'%'))",
+
+
+
 
 
 
@@ -563,6 +567,20 @@ public class Jxxxuq201xwwqqhxxxxxcustomerList implements Serializable
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         "lower(jxxxuq201xwwqqhxxxxxcustomer.y0xxuzsxbvxxxxxxxxxxdescript) like lower( concat(#{jxxxuq201xwwqqhxxxxxcustomerList.jxxxuq201xwwqqhxxxxxcustomer.y0xxuzsxbvxxxxxxxxxxdescript},'%'))",
         "lower(jxxxuq201xwwqqhxxxxxcustomer.y9xxuxz1bv04xxxxxxxxcusttax1) like lower( concat(#{jxxxuq201xwwqqhxxxxxcustomerList.jxxxuq201xwwqqhxxxxxcustomer.y9xxuxz1bv04xxxxxxxxcusttax1},'%'))",
         "lower(jxxxuq201xwwqqhxxxxxcustomer.yaxxuxz2bv05xxxxxxxxcusttax2) like lower( concat(#{jxxxuq201xwwqqhxxxxxcustomerList.jxxxuq201xwwqqhxxxxxcustomer.yaxxuxz2bv05xxxxxxxxcusttax2},'%'))",
@@ -572,6 +590,7 @@ public class Jxxxuq201xwwqqhxxxxxcustomerList implements Serializable
         "lower(jxxxuq201xwwqqhxxxxxcustomer.ygxxuxxybv30xxxxxxxxvia) like lower( concat(#{jxxxuq201xwwqqhxxxxxcustomerList.jxxxuq201xwwqqhxxxxxcustomer.ygxxuxxybv30xxxxxxxxvia},'%'))",
         "lower(jxxxuq201xwwqqhxxxxxcustomer.yhxxuzkybvxxxxxxxxxxkeywords) like lower( concat(#{jxxxuq201xwwqqhxxxxxcustomerList.jxxxuq201xwwqqhxxxxxcustomer.yhxxuzkybvxxxxxxxxxxkeywords},'%'))",
         "lower(jxxxuq201xwwqqhxxxxxcustomer.yixxuznybvxxxxxxxxxxnotes) like lower( concat(#{jxxxuq201xwwqqhxxxxxcustomerList.jxxxuq201xwwqqhxxxxxcustomer.yixxuznybvxxxxxxxxxxnotes},'%'))",
+
 
 
         "lower(jxxxuq201xwwqqhxxxxxcustomer.z5xxutlolexxxxxxxxxxlastorder) like lower( concat(#{jxxxuq201xwwqqhxxxxxcustomerList.jxxxuq201xwwqqhxxxxxcustomer.z5xxutlolexxxxxxxxxxlastorder},'%'))",

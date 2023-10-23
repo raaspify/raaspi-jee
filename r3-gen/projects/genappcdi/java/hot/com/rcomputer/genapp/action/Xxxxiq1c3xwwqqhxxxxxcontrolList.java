@@ -476,6 +476,7 @@ public class Xxxxiq1c3xwwqqhxxxxxcontrolList implements Serializable
         "lower(xxxxiq1c3xwwqqhxxxxxcontrol.b5xxuxznbvxxxxxxxxxxnotes) like lower( concat(#{xxxxiq1c3xwwqqhxxxxxcontrolList.xxxxiq1c3xwwqqhxxxxxcontrol.b5xxuxznbvxxxxxxxxxxnotes},'%'))",
         "lower(xxxxiq1c3xwwqqhxxxxxcontrol.b6xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{xxxxiq1c3xwwqqhxxxxxcontrolList.ownerCddCode}))",
 
+
         "lower(xxxxiq1c3xwwqqhxxxxxcontrol.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{xxxxiq1c3xwwqqhxxxxxcontrolList.dataOwner2Code})",
     };
 

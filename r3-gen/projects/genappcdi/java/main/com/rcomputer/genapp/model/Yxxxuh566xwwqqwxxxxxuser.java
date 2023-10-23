@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -65,6 +65,8 @@ public class Yxxxuh566xwwqqwxxxxxuser implements java.io.Serializable {
 	private String e4xxuznrbvxxxxxxxxxxsignature;
 	private Set<Yxxxch575xwwqqhxxxxxuserprofl> yxxxch575xwwqqhxxxxxuserprofls = new HashSet<Yxxxch575xwwqqhxxxxxuserprofl>(
 			0);
+	private Set<Yxxxch575xwwqqhxxxxxuserprofl> yxxxch575xwwqqhxxxxxuserprofls_1 = new HashSet<Yxxxch575xwwqqhxxxxxuserprofl>(
+			0);
 
 	public Yxxxuh566xwwqqwxxxxxuser() {
 	}
@@ -104,7 +106,8 @@ public class Yxxxuh566xwwqqwxxxxxuser implements java.io.Serializable {
 			String z5xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
 			String e4xxuznrbvxxxxxxxxxxsignature,
-			Set<Yxxxch575xwwqqhxxxxxuserprofl> yxxxch575xwwqqhxxxxxuserprofls) {
+			Set<Yxxxch575xwwqqhxxxxxuserprofl> yxxxch575xwwqqhxxxxxuserprofls,
+			Set<Yxxxch575xwwqqhxxxxxuserprofl> yxxxch575xwwqqhxxxxxuserprofls_1) {
 		this.yxxxch522xhhxxhxxxxxclient = yxxxch522xhhxxhxxxxxclient;
 		this.jxxxuq300xwwqqhxxxxxvendor = jxxxuq300xwwqqhxxxxxvendor;
 		this.jxxxuq201xwwqqhxxxxxcustomer = jxxxuq201xwwqqhxxxxxcustomer;
@@ -137,6 +140,7 @@ public class Yxxxuh566xwwqqwxxxxxuser implements java.io.Serializable {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.e4xxuznrbvxxxxxxxxxxsignature = e4xxuznrbvxxxxxxxxxxsignature;
 		this.yxxxch575xwwqqhxxxxxuserprofls = yxxxch575xwwqqhxxxxxuserprofls;
+		this.yxxxch575xwwqqhxxxxxuserprofls_1 = yxxxch575xwwqqhxxxxxuserprofls_1;
 	}
 
 	@Id
@@ -484,6 +488,16 @@ public class Yxxxuh566xwwqqwxxxxxuser implements java.io.Serializable {
 	public void setYxxxch575xwwqqhxxxxxuserprofls(
 			Set<Yxxxch575xwwqqhxxxxxuserprofl> yxxxch575xwwqqhxxxxxuserprofls) {
 		this.yxxxch575xwwqqhxxxxxuserprofls = yxxxch575xwwqqhxxxxxuserprofls;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxuh566xwwqqwxxxxxuser")
+	public Set<Yxxxch575xwwqqhxxxxxuserprofl> getYxxxch575xwwqqhxxxxxuserprofls_1() {
+		return this.yxxxch575xwwqqhxxxxxuserprofls_1;
+	}
+
+	public void setYxxxch575xwwqqhxxxxxuserprofls_1(
+			Set<Yxxxch575xwwqqhxxxxxuserprofl> yxxxch575xwwqqhxxxxxuserprofls_1) {
+		this.yxxxch575xwwqqhxxxxxuserprofls_1 = yxxxch575xwwqqhxxxxxuserprofls_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

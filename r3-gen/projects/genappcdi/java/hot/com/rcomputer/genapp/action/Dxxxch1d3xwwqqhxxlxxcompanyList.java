@@ -483,6 +483,12 @@ public class Dxxxch1d3xwwqqhxxlxxcompanyList implements Serializable
 
 
 
+
+
+
+
+
+
         "lower(dxxxch1d3xwwqqhxxlxxcompany.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{dxxxch1d3xwwqqhxxlxxcompanyList.dataOwner2Code})",
     };
 

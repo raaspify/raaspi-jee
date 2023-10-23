@@ -475,6 +475,7 @@ public class Yxxxuq1l1xwwqqhxxxxxresource_bundleList implements Serializable
         "lower(yxxxuq1l1xwwqqhxxxxxresource_bundle.a1xxuxxxbvxxxxxxxxxxlanguage) like lower( concat(#{yxxxuq1l1xwwqqhxxxxxresource_bundleList.yxxxuq1l1xwwqqhxxxxxresource_bundle.a1xxuxxxbvxxxxxxxxxxlanguage},'%'))",
         "lower(yxxxuq1l1xwwqqhxxxxxresource_bundle.a1xxuxxxbvxxxxxxxxxxvariant) like lower( concat(#{yxxxuq1l1xwwqqhxxxxxresource_bundleList.yxxxuq1l1xwwqqhxxxxxresource_bundle.a1xxuxxxbvxxxxxxxxxxvariant},'%'))",
 
+
         "lower(yxxxuq1l1xwwqqhxxxxxresource_bundle.z3xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{yxxxuq1l1xwwqqhxxxxxresource_bundleList.ownerCddCode}))",
         "lower(yxxxuq1l1xwwqqhxxxxxresource_bundle.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{yxxxuq1l1xwwqqhxxxxxresource_bundleList.dataOwner2Code})",
     };

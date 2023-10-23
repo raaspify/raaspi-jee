@@ -490,6 +490,8 @@ public class Nxxxiha2rxwwqqhxxxxxgendbList implements Serializable
 
 
 
+
+
         "lower(nxxxiha2rxwwqqhxxxxxgendb.zgxxuxznbvxxxxxxxxxxnotes) like lower( concat(#{nxxxiha2rxwwqqhxxxxxgendbList.nxxxiha2rxwwqqhxxxxxgendb.zgxxuxznbvxxxxxxxxxxnotes},'%'))",
         "lower(nxxxiha2rxwwqqhxxxxxgendb.zhxxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{nxxxiha2rxwwqqhxxxxxgendbList.ownerCddCode}))",
         "lower(nxxxiha2rxwwqqhxxxxxgendb.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{nxxxiha2rxwwqqhxxxxxgendbList.dataOwner2Code})",

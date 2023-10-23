@@ -479,6 +479,7 @@ public class Txxxuq932xwwqqhspxxxactivityjobList implements Serializable
 
 
 
+
         "lower(txxxuq932xwwqqhspxxxactivityjob.y3xxuxznbvxxxxxxxxxxnotes) like lower( concat(#{txxxuq932xwwqqhspxxxactivityjobList.txxxuq932xwwqqhspxxxactivityjob.y3xxuxznbvxxxxxxxxxxnotes},'%'))",
         "lower(txxxuq932xwwqqhspxxxactivityjob.y4xxuzdrbvxxxxxxxxxxdocmnt) like lower( concat(#{txxxuq932xwwqqhspxxxactivityjobList.txxxuq932xwwqqhspxxxactivityjob.y4xxuzdrbvxxxxxxxxxxdocmnt},'%'))",
         "lower(txxxuq932xwwqqhspxxxactivityjob.z9xxuxxrbvxxxxxxxxxxmatcodeout) like lower( concat(#{txxxuq932xwwqqhspxxxactivityjobList.txxxuq932xwwqqhspxxxactivityjob.z9xxuxxrbvxxxxxxxxxxmatcodeout},'%'))",

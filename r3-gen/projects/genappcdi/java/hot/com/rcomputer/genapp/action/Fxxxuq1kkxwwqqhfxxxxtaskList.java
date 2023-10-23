@@ -476,6 +476,7 @@ public class Fxxxuq1kkxwwqqhfxxxxtaskList implements Serializable
 
 
 
+
         "lower(fxxxuq1kkxwwqqhfxxxxtask.zcxxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{fxxxuq1kkxwwqqhfxxxxtaskList.ownerCddCode}))",
         "lower(fxxxuq1kkxwwqqhfxxxxtask.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{fxxxuq1kkxwwqqhfxxxxtaskList.dataOwner2Code})",
     };

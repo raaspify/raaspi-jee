@@ -484,6 +484,7 @@ public class Trxxuq9aaxwwqqhefxxxjobassignmentList implements Serializable
 
 
 
+
         "lower(trxxuq9aaxwwqqhefxxxjobassignment.yaxxuxznbvxxxxxxxxxxnotes) like lower( concat(#{trxxuq9aaxwwqqhefxxxjobassignmentList.trxxuq9aaxwwqqhefxxxjobassignment.yaxxuxznbvxxxxxxxxxxnotes},'%'))",
         "lower(trxxuq9aaxwwqqhefxxxjobassignment.z4xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{trxxuq9aaxwwqqhefxxxjobassignmentList.ownerCddCode}))",
         "lower(trxxuq9aaxwwqqhefxxxjobassignment.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{trxxuq9aaxwwqqhefxxxjobassignmentList.dataOwner2Code})",

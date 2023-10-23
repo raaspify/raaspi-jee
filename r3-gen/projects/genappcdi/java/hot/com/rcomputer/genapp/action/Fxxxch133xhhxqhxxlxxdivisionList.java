@@ -476,6 +476,9 @@ public class Fxxxch133xhhxqhxxlxxdivisionList implements Serializable
 
 
 
+
+
+
         "lower(fxxxch133xhhxqhxxlxxdivision.z5xxuznxbvxxxxxxxxxxnotes) like lower( concat(#{fxxxch133xhhxqhxxlxxdivisionList.fxxxch133xhhxqhxxlxxdivision.z5xxuznxbvxxxxxxxxxxnotes},'%'))",
         "lower(fxxxch133xhhxqhxxlxxdivision.z6xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{fxxxch133xhhxqhxxlxxdivisionList.ownerCddCode}))",
         "lower(fxxxch133xhhxqhxxlxxdivision.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{fxxxch133xhhxqhxxlxxdivisionList.dataOwner2Code})",

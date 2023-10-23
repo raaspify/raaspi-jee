@@ -480,10 +480,14 @@ public class Fpxxuq9eexwwqqhefxxxmachineList implements Serializable
         "lower(fpxxuq9eexwwqqhefxxxmachine.f1xxuxxrbvxxxxxxxxxxaliascode) like lower( concat(#{fpxxuq9eexwwqqhefxxxmachineList.fpxxuq9eexwwqqhefxxxmachine.f1xxuxxrbvxxxxxxxxxxaliascode},'%'))",
 
 
+
         "lower(fpxxuq9eexwwqqhefxxxmachine.g2xxuxn1lvxxxxxxxxxxsubcodesn) like lower( concat(#{fpxxuq9eexwwqqhefxxxmachineList.fpxxuq9eexwwqqhefxxxmachine.g2xxuxn1lvxxxxxxxxxxsubcodesn},'%'))",
         "lower(fpxxuq9eexwwqqhefxxxmachine.g2xxuxn2lvxxxxxxxxxxsubcodesn2) like lower( concat(#{fpxxuq9eexwwqqhefxxxmachineList.fpxxuq9eexwwqqhefxxxmachine.g2xxuxn2lvxxxxxxxxxxsubcodesn2},'%'))",
         "lower(fpxxuq9eexwwqqhefxxxmachine.g2xxuxn3lvxxxxxxxxxxsubcodesn3) like lower( concat(#{fpxxuq9eexwwqqhefxxxmachineList.fpxxuq9eexwwqqhefxxxmachine.g2xxuxn3lvxxxxxxxxxxsubcodesn3},'%'))",
         "lower(fpxxuq9eexwwqqhefxxxmachine.h2xxuwmrbv40xxxxxxxxintegrset) like lower( concat(#{fpxxuq9eexwwqqhefxxxmachineList.fpxxuq9eexwwqqhefxxxmachine.h2xxuwmrbv40xxxxxxxxintegrset},'%'))",
+
+
+
 
 
 

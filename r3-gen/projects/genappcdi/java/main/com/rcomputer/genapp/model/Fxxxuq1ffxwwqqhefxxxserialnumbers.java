@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -160,9 +160,9 @@ public class Fxxxuq1ffxwwqqhefxxxserialnumbers implements java.io.Serializable {
 		this.a0xxuobxbxxxxxxxxxxxsid = a0xxuobxbxxxxxxxxxxxsid;
 	}
 
-	@Column(name = "serialno", nullable = false, length = 25)
+	@Column(name = "serialno", nullable = false, length = 32)
 	@NotNull
-	@Size(max = 25)
+	@Size(max = 32)
 	public String getA0xxukxxbvxxxxxxxxxxserialno() {
 		return this.a0xxukxxbvxxxxxxxxxxserialno;
 	}

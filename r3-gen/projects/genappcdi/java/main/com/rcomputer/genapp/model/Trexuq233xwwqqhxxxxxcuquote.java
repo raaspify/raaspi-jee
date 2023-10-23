@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -72,9 +72,15 @@ public class Trexuq233xwwqqhxxxxxcuquote implements java.io.Serializable {
 	private String ycxxuzdrblxxxxxxxxxxdocmnt;
 	private Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuorderses = new HashSet<Trexuq244xwwqqhxxxxxcuorders>(
 			0);
-	private Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses = new HashSet<Xoxxuq2c4xwwqqhxxxxxcuqdetails>(
+	private Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuorderses_1 = new HashSet<Trexuq244xwwqqhxxxxxcuorders>(
 			0);
 	private Set<Trexuq233xwwqqhxxxxxcuquote> trexuq233xwwqqhxxxxxcuquotes = new HashSet<Trexuq233xwwqqhxxxxxcuquote>(
+			0);
+	private Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses = new HashSet<Xoxxuq2c4xwwqqhxxxxxcuqdetails>(
+			0);
+	private Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses_1 = new HashSet<Xoxxuq2c4xwwqqhxxxxxcuqdetails>(
+			0);
+	private Set<Trexuq233xwwqqhxxxxxcuquote> trexuq233xwwqqhxxxxxcuquotes_1 = new HashSet<Trexuq233xwwqqhxxxxxcuquote>(
 			0);
 
 	public Trexuq233xwwqqhxxxxxcuquote() {
@@ -122,8 +128,11 @@ public class Trexuq233xwwqqhxxxxxcuquote implements java.io.Serializable {
 			String zzxxu2oxxhxxxxxxxxxxowner2,
 			String ycxxuzdrblxxxxxxxxxxdocmnt,
 			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuorderses,
+			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuorderses_1,
+			Set<Trexuq233xwwqqhxxxxxcuquote> trexuq233xwwqqhxxxxxcuquotes,
 			Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses,
-			Set<Trexuq233xwwqqhxxxxxcuquote> trexuq233xwwqqhxxxxxcuquotes) {
+			Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses_1,
+			Set<Trexuq233xwwqqhxxxxxcuquote> trexuq233xwwqqhxxxxxcuquotes_1) {
 		this.trexuq233xwwqqhxxxxxcuquote = trexuq233xwwqqhxxxxxcuquote;
 		this.jxxxbh400xwwqqhxxxxxemployee = jxxxbh400xwwqqhxxxxxemployee;
 		this.jxxxuq201xwwqqhxxxxxcustomer = jxxxuq201xwwqqhxxxxxcustomer;
@@ -162,8 +171,11 @@ public class Trexuq233xwwqqhxxxxxcuquote implements java.io.Serializable {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.ycxxuzdrblxxxxxxxxxxdocmnt = ycxxuzdrblxxxxxxxxxxdocmnt;
 		this.trexuq244xwwqqhxxxxxcuorderses = trexuq244xwwqqhxxxxxcuorderses;
-		this.xoxxuq2c4xwwqqhxxxxxcuqdetailses = xoxxuq2c4xwwqqhxxxxxcuqdetailses;
+		this.trexuq244xwwqqhxxxxxcuorderses_1 = trexuq244xwwqqhxxxxxcuorderses_1;
 		this.trexuq233xwwqqhxxxxxcuquotes = trexuq233xwwqqhxxxxxcuquotes;
+		this.xoxxuq2c4xwwqqhxxxxxcuqdetailses = xoxxuq2c4xwwqqhxxxxxcuqdetailses;
+		this.xoxxuq2c4xwwqqhxxxxxcuqdetailses_1 = xoxxuq2c4xwwqqhxxxxxcuqdetailses_1;
+		this.trexuq233xwwqqhxxxxxcuquotes_1 = trexuq233xwwqqhxxxxxcuquotes_1;
 	}
 
 	@Id
@@ -569,13 +581,13 @@ public class Trexuq233xwwqqhxxxxxcuquote implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq233xwwqqhxxxxxcuquote")
-	public Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> getXoxxuq2c4xwwqqhxxxxxcuqdetailses() {
-		return this.xoxxuq2c4xwwqqhxxxxxcuqdetailses;
+	public Set<Trexuq244xwwqqhxxxxxcuorders> getTrexuq244xwwqqhxxxxxcuorderses_1() {
+		return this.trexuq244xwwqqhxxxxxcuorderses_1;
 	}
 
-	public void setXoxxuq2c4xwwqqhxxxxxcuqdetailses(
-			Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses) {
-		this.xoxxuq2c4xwwqqhxxxxxcuqdetailses = xoxxuq2c4xwwqqhxxxxxcuqdetailses;
+	public void setTrexuq244xwwqqhxxxxxcuorderses_1(
+			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuorderses_1) {
+		this.trexuq244xwwqqhxxxxxcuorderses_1 = trexuq244xwwqqhxxxxxcuorderses_1;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq233xwwqqhxxxxxcuquote")
@@ -586,6 +598,36 @@ public class Trexuq233xwwqqhxxxxxcuquote implements java.io.Serializable {
 	public void setTrexuq233xwwqqhxxxxxcuquotes(
 			Set<Trexuq233xwwqqhxxxxxcuquote> trexuq233xwwqqhxxxxxcuquotes) {
 		this.trexuq233xwwqqhxxxxxcuquotes = trexuq233xwwqqhxxxxxcuquotes;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq233xwwqqhxxxxxcuquote")
+	public Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> getXoxxuq2c4xwwqqhxxxxxcuqdetailses() {
+		return this.xoxxuq2c4xwwqqhxxxxxcuqdetailses;
+	}
+
+	public void setXoxxuq2c4xwwqqhxxxxxcuqdetailses(
+			Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses) {
+		this.xoxxuq2c4xwwqqhxxxxxcuqdetailses = xoxxuq2c4xwwqqhxxxxxcuqdetailses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq233xwwqqhxxxxxcuquote")
+	public Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> getXoxxuq2c4xwwqqhxxxxxcuqdetailses_1() {
+		return this.xoxxuq2c4xwwqqhxxxxxcuqdetailses_1;
+	}
+
+	public void setXoxxuq2c4xwwqqhxxxxxcuqdetailses_1(
+			Set<Xoxxuq2c4xwwqqhxxxxxcuqdetails> xoxxuq2c4xwwqqhxxxxxcuqdetailses_1) {
+		this.xoxxuq2c4xwwqqhxxxxxcuqdetailses_1 = xoxxuq2c4xwwqqhxxxxxcuqdetailses_1;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq233xwwqqhxxxxxcuquote")
+	public Set<Trexuq233xwwqqhxxxxxcuquote> getTrexuq233xwwqqhxxxxxcuquotes_1() {
+		return this.trexuq233xwwqqhxxxxxcuquotes_1;
+	}
+
+	public void setTrexuq233xwwqqhxxxxxcuquotes_1(
+			Set<Trexuq233xwwqqhxxxxxcuquote> trexuq233xwwqqhxxxxxcuquotes_1) {
+		this.trexuq233xwwqqhxxxxxcuquotes_1 = trexuq233xwwqqhxxxxxcuquotes_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

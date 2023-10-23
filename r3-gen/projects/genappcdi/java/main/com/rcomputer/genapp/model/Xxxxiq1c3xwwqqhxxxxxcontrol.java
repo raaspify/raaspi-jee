@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -40,6 +40,8 @@ public class Xxxxiq1c3xwwqqhxxxxxcontrol implements java.io.Serializable {
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Lxxxeh177xwwqqhxxxxxcontrolusagebyperiods> lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses = new HashSet<Lxxxeh177xwwqqhxxxxxcontrolusagebyperiods>(
 			0);
+	private Set<Lxxxeh177xwwqqhxxxxxcontrolusagebyperiods> lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses_1 = new HashSet<Lxxxeh177xwwqqhxxxxxcontrolusagebyperiods>(
+			0);
 
 	public Xxxxiq1c3xwwqqhxxxxxcontrol() {
 	}
@@ -56,7 +58,8 @@ public class Xxxxiq1c3xwwqqhxxxxxcontrol implements java.io.Serializable {
 			String b5xxuxznbvxxxxxxxxxxnotes,
 			String b6xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Lxxxeh177xwwqqhxxxxxcontrolusagebyperiods> lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses) {
+			Set<Lxxxeh177xwwqqhxxxxxcontrolusagebyperiods> lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses,
+			Set<Lxxxeh177xwwqqhxxxxxcontrolusagebyperiods> lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses_1) {
 		this.a0xxukoxbvxxxxxxxxxxcontrolcode = a0xxukoxbvxxxxxxxxxxcontrolcode;
 		this.b1xxuszsbvxxxxxxxxxxdescript = b1xxuszsbvxxxxxxxxxxdescript;
 		this.b2xxuzsxbvxxxxxxxxxxtypeofcontrol = b2xxuzsxbvxxxxxxxxxxtypeofcontrol;
@@ -66,6 +69,7 @@ public class Xxxxiq1c3xwwqqhxxxxxcontrol implements java.io.Serializable {
 		this.b6xxutoxlhxxxxxxxxxxowner = b6xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses = lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses;
+		this.lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses_1 = lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses_1;
 	}
 
 	@Id
@@ -172,6 +176,16 @@ public class Xxxxiq1c3xwwqqhxxxxxcontrol implements java.io.Serializable {
 	public void setLxxxeh177xwwqqhxxxxxcontrolusagebyperiodses(
 			Set<Lxxxeh177xwwqqhxxxxxcontrolusagebyperiods> lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses) {
 		this.lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses = lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "xxxxiq1c3xwwqqhxxxxxcontrol")
+	public Set<Lxxxeh177xwwqqhxxxxxcontrolusagebyperiods> getLxxxeh177xwwqqhxxxxxcontrolusagebyperiodses_1() {
+		return this.lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses_1;
+	}
+
+	public void setLxxxeh177xwwqqhxxxxxcontrolusagebyperiodses_1(
+			Set<Lxxxeh177xwwqqhxxxxxcontrolusagebyperiods> lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses_1) {
+		this.lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses_1 = lxxxeh177xwwqqhxxxxxcontrolusagebyperiodses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

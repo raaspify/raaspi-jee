@@ -31,7 +31,7 @@ import java.util.Locale;
 
 /**
  * @author jay mitra
- * web.xml uses skinbean.skin to set Richfaces skin
+ * authenticator.java sets skin
  * Footer.xml sets the skinbean skin using valuechangelistener and submit() to set UserChosenSkin
  * skint is used by footer (before logon) and skin used by homeMockUp (logged in)  for the current session 
  * home f:event type="preRenderView" listener is used to invoke authenticator setClientChosenSkin which sets the skin and leftShown

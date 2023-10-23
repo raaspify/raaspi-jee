@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -59,6 +59,8 @@ public class Txxxuq932xwwqqhspxxxactivityjob implements java.io.Serializable {
 	private String y4xxuzdrbvxxxxxxxxxxdocmnt;
 	private Set<Xoxxuq943xwwqqhxxxxxactivityjobdetails> xoxxuq943xwwqqhxxxxxactivityjobdetailses = new HashSet<Xoxxuq943xwwqqhxxxxxactivityjobdetails>(
 			0);
+	private Set<Xoxxuq943xwwqqhxxxxxactivityjobdetails> xoxxuq943xwwqqhxxxxxactivityjobdetailses_1 = new HashSet<Xoxxuq943xwwqqhxxxxxactivityjobdetails>(
+			0);
 
 	public Txxxuq932xwwqqhspxxxactivityjob() {
 	}
@@ -91,7 +93,8 @@ public class Txxxuq932xwwqqhspxxxactivityjob implements java.io.Serializable {
 			String zbxxutoylhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
 			String y4xxuzdrbvxxxxxxxxxxdocmnt,
-			Set<Xoxxuq943xwwqqhxxxxxactivityjobdetails> xoxxuq943xwwqqhxxxxxactivityjobdetailses) {
+			Set<Xoxxuq943xwwqqhxxxxxactivityjobdetails> xoxxuq943xwwqqhxxxxxactivityjobdetailses,
+			Set<Xoxxuq943xwwqqhxxxxxactivityjobdetails> xoxxuq943xwwqqhxxxxxactivityjobdetailses_1) {
 		this.jxxxuq201xwwqqhxxxxxcustomer = jxxxuq201xwwqqhxxxxxcustomer;
 		this.fxxxuq188xwwqqhxxxxxactivity = fxxxuq188xwwqqhxxxxxactivity;
 		this.a0xxunajbvxxxxxxxxxxjobno = a0xxunajbvxxxxxxxxxxjobno;
@@ -117,6 +120,7 @@ public class Txxxuq932xwwqqhspxxxactivityjob implements java.io.Serializable {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.y4xxuzdrbvxxxxxxxxxxdocmnt = y4xxuzdrbvxxxxxxxxxxdocmnt;
 		this.xoxxuq943xwwqqhxxxxxactivityjobdetailses = xoxxuq943xwwqqhxxxxxactivityjobdetailses;
+		this.xoxxuq943xwwqqhxxxxxactivityjobdetailses_1 = xoxxuq943xwwqqhxxxxxactivityjobdetailses_1;
 	}
 
 	@Id
@@ -315,8 +319,8 @@ public class Txxxuq932xwwqqhspxxxactivityjob implements java.io.Serializable {
 		this.c3xxuxxrbv17xxxxxxxxtype = c3xxuxxrbv17xxxxxxxxtype;
 	}
 
-	@Column(name = "matcodeout", length = 32)
-	@Size(max = 32)
+	@Column(name = "matcodeout", length = 20)
+	@Size(max = 20)
 	public String getZ9xxuxxrbvxxxxxxxxxxmatcodeout() {
 		return this.z9xxuxxrbvxxxxxxxxxxmatcodeout;
 	}
@@ -384,6 +388,16 @@ public class Txxxuq932xwwqqhspxxxactivityjob implements java.io.Serializable {
 	public void setXoxxuq943xwwqqhxxxxxactivityjobdetailses(
 			Set<Xoxxuq943xwwqqhxxxxxactivityjobdetails> xoxxuq943xwwqqhxxxxxactivityjobdetailses) {
 		this.xoxxuq943xwwqqhxxxxxactivityjobdetailses = xoxxuq943xwwqqhxxxxxactivityjobdetailses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "txxxuq932xwwqqhspxxxactivityjob")
+	public Set<Xoxxuq943xwwqqhxxxxxactivityjobdetails> getXoxxuq943xwwqqhxxxxxactivityjobdetailses_1() {
+		return this.xoxxuq943xwwqqhxxxxxactivityjobdetailses_1;
+	}
+
+	public void setXoxxuq943xwwqqhxxxxxactivityjobdetailses_1(
+			Set<Xoxxuq943xwwqqhxxxxxactivityjobdetails> xoxxuq943xwwqqhxxxxxactivityjobdetailses_1) {
+		this.xoxxuq943xwwqqhxxxxxactivityjobdetailses_1 = xoxxuq943xwwqqhxxxxxactivityjobdetailses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

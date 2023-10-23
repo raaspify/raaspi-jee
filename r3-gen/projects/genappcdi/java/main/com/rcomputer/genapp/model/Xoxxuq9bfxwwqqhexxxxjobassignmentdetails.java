@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -69,8 +69,8 @@ public class Xoxxuq9bfxwwqqhexxxxjobassignmentdetails
 	}
 
 	public Xoxxuq9bfxwwqqhexxxxjobassignmentdetails(
-			Trxxuq9aaxwwqqhefxxxjobassignment trxxuq9aaxwwqqhefxxxjobassignment) {
-		this.trxxuq9aaxwwqqhefxxxjobassignment = trxxuq9aaxwwqqhefxxxjobassignment;
+			Fpxxuq9eexwwqqhefxxxmachine fpxxuq9eexwwqqhefxxxmachine) {
+		this.fpxxuq9eexwwqqhefxxxmachine = fpxxuq9eexwwqqhefxxxmachine;
 	}
 	public Xoxxuq9bfxwwqqhexxxxjobassignmentdetails(
 			Fxxxcq144xwwqqhxxxxxlocation fxxxcq144xwwqqhxxxxxlocation,
@@ -162,7 +162,8 @@ public class Xoxxuq9bfxwwqqhexxxxjobassignmentdetails
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "machine")
+	@JoinColumn(name = "machine", nullable = false)
+	@NotNull
 	public Fpxxuq9eexwwqqhefxxxmachine getFpxxuq9eexwwqqhefxxxmachine() {
 		return this.fpxxuq9eexwwqqhefxxxmachine;
 	}
@@ -195,8 +196,7 @@ public class Xoxxuq9bfxwwqqhexxxxjobassignmentdetails
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "jobassign", nullable = false)
-	@NotNull
+	@JoinColumn(name = "jobassign")
 	public Trxxuq9aaxwwqqhefxxxjobassignment getTrxxuq9aaxwwqqhefxxxjobassignment() {
 		return this.trxxuq9aaxwwqqhefxxxjobassignment;
 	}

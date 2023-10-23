@@ -500,7 +500,10 @@ public class Fpxxfq1a5xwwqqhxxxxxitemList implements Serializable
         "lower(fpxxfq1a5xwwqqhxxxxxitem.c5fbuuxrbv18xxxxxxxxunit) like lower( concat(#{fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.c5fbuuxrbv18xxxxxxxxunit},'%'))",
         "lower(fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype) like lower( concat(#{fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.c6xxusxrbv16xxxxxxxxtype},'%'))",
 
+
         "lower(fpxxfq1a5xwwqqhxxxxxitem.f1xxuxxrbvxxxxxxxxxxaliascode) like lower( concat(#{fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.f1xxuxxrbvxxxxxxxxxxaliascode},'%'))",
+
+
 
 
 
@@ -522,8 +525,30 @@ public class Fpxxfq1a5xwwqqhxxxxxitemList implements Serializable
 
 
 
+
+
+
+
+
+
+
+
+
+
+
         "lower(fpxxfq1a5xwwqqhxxxxxitem.w7xxuznxbvxxxxxxxxxxnotes) like lower( concat(#{fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.w7xxuznxbvxxxxxxxxxxnotes},'%'))",
         "lower(fpxxfq1a5xwwqqhxxxxxitem.w8xxuzdrbvxxxxxxxxxxdocmnt) like lower( concat(#{fpxxfq1a5xwwqqhxxxxxitemList.fpxxfq1a5xwwqqhxxxxxitem.w8xxuzdrbvxxxxxxxxxxdocmnt},'%'))",
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -499,6 +499,7 @@ public class Yxxxuh566xwwqqwxxxxxuserList implements Serializable
         "lower(yxxxuh566xwwqqwxxxxxuser.y8xxuzdrbvxxxxxxxxxxdocmnt) like lower( concat(#{yxxxuh566xwwqqwxxxxxuserList.yxxxuh566xwwqqwxxxxxuser.y8xxuzdrbvxxxxxxxxxxdocmnt},'%'))",
 
 
+
         "lower(yxxxuh566xwwqqwxxxxxuser.z5xxutoxlhxxxxxxxxxxowner) like lower( concat('%',#{yxxxuh566xwwqqwxxxxxuserList.ownerCddCode}))",
         "lower(yxxxuh566xwwqqwxxxxxuser.zzxxu2oxxhxxxxxxxxxxowner2) = lower(#{yxxxuh566xwwqqwxxxxxuserList.dataOwner2Code})",
     };

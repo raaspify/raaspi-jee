@@ -527,6 +527,8 @@ public class Jxxxbh400xwwqqhxxxxxemployeeList implements Serializable
 
 
 
+
+
         "lower(jxxxbh400xwwqqhxxxxxemployee.m1xxh3pobv27xxxxxxxxphoneo) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.m1xxh3pobv27xxxxxxxxphoneo},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.m2xxh4phbv27xxxxxxxxphoneh) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.m2xxh4phbv27xxxxxxxxphoneh},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.m3xxh5pcbv27xxxxxxxxphonec) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.m3xxh5pcbv27xxxxxxxxphonec},'%'))",
@@ -550,12 +552,24 @@ public class Jxxxbh400xwwqqhxxxxxemployeeList implements Serializable
 
 
 
+
+
+
+
+
+
+
+
+
+
         "lower(jxxxbh400xwwqqhxxxxxemployee.y0xxuzsxbvxxxxxxxxxxdescript) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.y0xxuzsxbvxxxxxxxxxxdescript},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.y6xxuz3xxvxxxxxxxxxxcusttax3) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.y6xxuz3xxvxxxxxxxxxxcusttax3},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.y9xxuxxrbvxxxxxxxxxxbywho) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.y9xxuxxrbvxxxxxxxxxxbywho},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.yaxxuzkybvxxxxxxxxxxkeywords) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.yaxxuzkybvxxxxxxxxxxkeywords},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.ybxxuznybvxxxxxxxxxxnotes) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.ybxxuznybvxxxxxxxxxxnotes},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.ycxxuzdrbvxxxxxxxxxxdocmnt) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.ycxxuzdrbvxxxxxxxxxxdocmnt},'%'))",
+
+
 
 
 

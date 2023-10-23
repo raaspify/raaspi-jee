@@ -323,6 +323,7 @@
 
 
 
+
 </h:panelGrid>
 
         <h:panelGrid columns="4">
@@ -364,7 +365,7 @@
 
          <h:inputText id="b1xxuisxlvxxxxxxxxxxserialnum" 
                            size="20"
-                      maxlength="15"
+                      maxlength="60"
                           value="#{yxxxch522xhhxxhxxxxxclientHome.instance.b1xxuisxlvxxxxxxxxxxserialnum}">
 
          </h:inputText>
@@ -844,7 +845,7 @@
 
          <h:inputText id="d8xxuzxdbvxxxxxxxxxxenterprisecompcode" 
                            size="20"
-                      maxlength="40"
+                      maxlength="35"
                           value="#{yxxxch522xhhxxhxxxxxclientHome.instance.d8xxuzxdbvxxxxxxxxxxenterprisecompcode}">
 
          </h:inputText>
@@ -1891,24 +1892,23 @@
             </h:panelGroup>
 
 
-              <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
-                switch back to 8 or 2 columns depending on where it came from  -->
+                </h:panelGrid>
+              <h:panelGrid columns="2">
 
              <h:panelGroup id="m2xxuxxxbvxxxxxxxxxxrepcsizeDecoration"    >
         <h:outputLabel  for="m2xxuxxxbvxxxxxxxxxxrepcsize" value="#{messages['Repcsize']}">
       </h:outputLabel>
-
-         <h:inputText id="m2xxuxxxbvxxxxxxxxxxrepcsize" 
-                           size="20"
-                      maxlength="12"
-                          value="#{yxxxch522xhhxxhxxxxxclientHome.instance.m2xxuxxxbvxxxxxxxxxxrepcsize}">
-
-         </h:inputText>
+                <h:inputTextarea id="m2xxuxxxbvxxxxxxxxxxrepcsize"
+                               cols="80"
+                               rows="3"
+                              value="#{yxxxch522xhhxxhxxxxxclientHome.instance.m2xxuxxxbvxxxxxxxxxxrepcsize}"/>
             </h:panelGroup>
 
 
               <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
                 switch back to 8 or 2 columns depending on where it came from  -->
+                 </h:panelGrid>
+                  <h:panelGrid columns="2">
 
              <h:panelGroup id="m3xxuxxxbvxxxxxxxxxxloccsizeDecoration"    >
         <h:outputLabel  for="m3xxuxxxbvxxxxxxxxxxloccsize" value="#{messages['Loccsize']}">
@@ -3651,6 +3651,7 @@
 
 
 
+
               <!-- begin non component non date non long string, either continue or should end col 1 or 2 &
                 switch back to 8 or 2 columns depending on where it came from  -->
 
@@ -4159,6 +4160,103 @@
             </p:dataTable>
         </div>
         <f:subview rendered="#{yxxxch522xhhxxhxxxxxclientHome.managed}" id="yxxxuh566xwwqqwxxxxxusers">
+        <div class="actionButtons">
+            <h:button id="addyxxxuh566xwwqqwxxxxxuser" 
+                   value="Add user"
+                    outcome="/userEdit.xhtml"
+                    propagation="none">
+                 <f:param disable="#{empty yxxxch522xhhxxhxxxxxclientHome.instance.a0xxuobxbxxxxxxxxxxxsid}"  name="yxxxch522xhhxxhxxxxxclientA0xxuobxbxxxxxxxxxxxsid" 
+                         value="#{yxxxch522xhhxxhxxxxxclientHome.instance.a0xxuobxbxxxxxxxxxxxsid}"/>
+                   <f:param name="yxxxuh566xwwqqwxxxxxuserFrom" value="clientEdit" />
+            </h:button>
+        </div>
+        </f:subview>
+    </p:tab>
+     <p:tab title="#{messages['Users_']}">
+        <div class="association" id="yxxxuh566xwwqqwxxxxxusers_1Children">
+         <ui:remove></ui:remove>
+            <h:outputText value="No users_1" 
+                       rendered="#{empty yxxxch522xhhxxhxxxxxclientHome or empty yxxxch522xhhxxhxxxxxclientHome.yxxxuh566xwwqqwxxxxxusers_1}"/>
+        
+            <p:dataTable value="#{yxxxch522xhhxxhxxxxxclientHome.yxxxuh566xwwqqwxxxxxusers_1}" tableStyle="table-layout:auto;"
+                           var="yxxxuh566xwwqqwxxxxxuser" 
+                      rendered="#{not empty yxxxch522xhhxxhxxxxxclientHome.yxxxuh566xwwqqwxxxxxusers_1}" 
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="yxxxuh566xwwqqwxxxxxusers_1Table">
+                <p:column>
+                    <f:facet name="header">action</f:facet>
+                    <h:link outcome="/user.xhtml" 
+                              id="selectyxxxuh566xwwqqwxxxxxuser" 
+                           value="Select"
+                     propagation="none">
+                        <f:param disable="#{empty yxxxuh566xwwqqwxxxxxuser.a0xxuobxbxxxxxxxxxxxsid}" name="yxxxuh566xwwqqwxxxxxuserA0xxuobxbxxxxxxxxxxxsid" 
+                                value="#{yxxxuh566xwwqqwxxxxxuser.a0xxuobxbxxxxxxxxxxxsid}"/>
+                        <f:param name="yxxxuh566xwwqqwxxxxxuserFrom" value="Yxxxch522xhhxxhxxxxxclient"/>
+                    </h:link>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">id</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.a0xxukuxbvxxxxxxxxxxid}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">otherid</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c1xxuxxxbvxxxxxxxxxxotherid}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">alevel</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c2xxuxuaiv38xxxxxxxxalevel}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">blevel</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c3xxuxubiv39xxxxxxxxblevel}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">currpw</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c4xxuxupivxxxxxxxxxxcurrpw}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">expiry</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c5xxcxxxbvxxxxxxxxxxexpiry}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">oldpw</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c6xxuxuoivxxxxxxxxxxoldpw}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">temporarypassword</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c7xxfxxxivxxxxxxxxxxtemporarypassword}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">passwordhash</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c8xxuxxxbvxxxxxxxxxxpasswordhash}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">activationkey</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.c9xxuxxxbvxxxxxxxxxxactivationkey}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">signature</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.e4xxuznrbvxxxxxxxxxxsignature}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">docmnt</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.y8xxuzdrbvxxxxxxxxxxdocmnt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfl</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.z1xxzzfxhhxxxxxxxxxxstatusfl}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">statusfldt</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.z2xxcztxlxxxxxxxxxxxstatusfldt}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">owner</f:facet>
+                    <h:outputText value="#{yxxxuh566xwwqqwxxxxxuser.z5xxutoxlhxxxxxxxxxxowner}"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+        <f:subview rendered="#{yxxxch522xhhxxhxxxxxclientHome.managed}" id="yxxxuh566xwwqqwxxxxxusers_1">
         <div class="actionButtons">
             <h:button id="addyxxxuh566xwwqqwxxxxxuser" 
                    value="Add user"

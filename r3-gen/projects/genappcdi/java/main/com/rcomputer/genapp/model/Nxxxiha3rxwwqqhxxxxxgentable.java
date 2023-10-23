@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -58,6 +58,8 @@ public class Nxxxiha3rxwwqqhxxxxxgentable implements java.io.Serializable {
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Nxxxiha4rxwwqqhxxxxxgenfields> nxxxiha4rxwwqqhxxxxxgenfieldses = new HashSet<Nxxxiha4rxwwqqhxxxxxgenfields>(
 			0);
+	private Set<Nxxxiha4rxwwqqhxxxxxgenfields> nxxxiha4rxwwqqhxxxxxgenfieldses_1 = new HashSet<Nxxxiha4rxwwqqhxxxxxgenfields>(
+			0);
 
 	public Nxxxiha3rxwwqqhxxxxxgentable() {
 	}
@@ -89,7 +91,8 @@ public class Nxxxiha3rxwwqqhxxxxxgentable implements java.io.Serializable {
 			Date zfxxcztxlxxxxxxxxxxxstatusfldt,
 			String zgxxuxznbvxxxxxxxxxxnotes, String zhxxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Nxxxiha4rxwwqqhxxxxxgenfields> nxxxiha4rxwwqqhxxxxxgenfieldses) {
+			Set<Nxxxiha4rxwwqqhxxxxxgenfields> nxxxiha4rxwwqqhxxxxxgenfieldses,
+			Set<Nxxxiha4rxwwqqhxxxxxgenfields> nxxxiha4rxwwqqhxxxxxgenfieldses_1) {
 		this.nxxxiha2rxwwqqhxxxxxgendb = nxxxiha2rxwwqqhxxxxxgendb;
 		this.a0xxukxxbvxxxxxxxxxxtablename = a0xxukxxbvxxxxxxxxxxtablename;
 		this.a2xxfxxxbvxxxxxxxxxxinaddmenu = a2xxfxxxbvxxxxxxxxxxinaddmenu;
@@ -115,6 +118,7 @@ public class Nxxxiha3rxwwqqhxxxxxgentable implements java.io.Serializable {
 		this.zhxxutoxlhxxxxxxxxxxowner = zhxxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.nxxxiha4rxwwqqhxxxxxgenfieldses = nxxxiha4rxwwqqhxxxxxgenfieldses;
+		this.nxxxiha4rxwwqqhxxxxxgenfieldses_1 = nxxxiha4rxwwqqhxxxxxgenfieldses_1;
 	}
 
 	@Id
@@ -384,6 +388,16 @@ public class Nxxxiha3rxwwqqhxxxxxgentable implements java.io.Serializable {
 	public void setNxxxiha4rxwwqqhxxxxxgenfieldses(
 			Set<Nxxxiha4rxwwqqhxxxxxgenfields> nxxxiha4rxwwqqhxxxxxgenfieldses) {
 		this.nxxxiha4rxwwqqhxxxxxgenfieldses = nxxxiha4rxwwqqhxxxxxgenfieldses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nxxxiha3rxwwqqhxxxxxgentable")
+	public Set<Nxxxiha4rxwwqqhxxxxxgenfields> getNxxxiha4rxwwqqhxxxxxgenfieldses_1() {
+		return this.nxxxiha4rxwwqqhxxxxxgenfieldses_1;
+	}
+
+	public void setNxxxiha4rxwwqqhxxxxxgenfieldses_1(
+			Set<Nxxxiha4rxwwqqhxxxxxgenfields> nxxxiha4rxwwqqhxxxxxgenfieldses_1) {
+		this.nxxxiha4rxwwqqhxxxxxgenfieldses_1 = nxxxiha4rxwwqqhxxxxxgenfieldses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

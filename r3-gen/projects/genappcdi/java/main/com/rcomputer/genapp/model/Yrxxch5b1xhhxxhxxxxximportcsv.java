@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -94,9 +94,9 @@ public class Yrxxch5b1xhhxxhxxxxximportcsv implements java.io.Serializable {
 	private String v7xxuo63bvxxxxxxxxxxcolumn63;
 	private String w1xxuo64bvxxxxxxxxxxcolumn64;
 	private String w4xxuo65bvxxxxxxxxxxcolumn65;
+	private String y9xxuznxbvxxxxxxxxxxnotes;
 	private Integer z1xxzzfxhhxxxxxxxxxxstatusfl;
 	private Date z2xxcztxlxxxxxxxxxxxstatusfldt;
-	private String y9xxuznxbvxxxxxxxxxxnotes;
 	private String z3xxutoxlhxxxxxxxxxxowner;
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 
@@ -173,10 +173,10 @@ public class Yrxxch5b1xhhxxhxxxxximportcsv implements java.io.Serializable {
 			String v7xxuo63bvxxxxxxxxxxcolumn63,
 			String w1xxuo64bvxxxxxxxxxxcolumn64,
 			String w4xxuo65bvxxxxxxxxxxcolumn65,
+			String y9xxuznxbvxxxxxxxxxxnotes,
 			Integer z1xxzzfxhhxxxxxxxxxxstatusfl,
 			Date z2xxcztxlxxxxxxxxxxxstatusfldt,
-			String y9xxuznxbvxxxxxxxxxxnotes, String z3xxutoxlhxxxxxxxxxxowner,
-			String zzxxu2oxxhxxxxxxxxxxowner2) {
+			String z3xxutoxlhxxxxxxxxxxowner, String zzxxu2oxxhxxxxxxxxxxowner2) {
 		this.a1xxuxhrbvoxxxxxxxxxtablenm = a1xxuxhrbvoxxxxxxxxxtablenm;
 		this.a2xxukcxbvxxxxxxxxxxrow = a2xxukcxbvxxxxxxxxxxrow;
 		this.b1xxuo01bvxxxxxxxxxxcolumn01 = b1xxuo01bvxxxxxxxxxxcolumn01;
@@ -244,9 +244,9 @@ public class Yrxxch5b1xhhxxhxxxxximportcsv implements java.io.Serializable {
 		this.v7xxuo63bvxxxxxxxxxxcolumn63 = v7xxuo63bvxxxxxxxxxxcolumn63;
 		this.w1xxuo64bvxxxxxxxxxxcolumn64 = w1xxuo64bvxxxxxxxxxxcolumn64;
 		this.w4xxuo65bvxxxxxxxxxxcolumn65 = w4xxuo65bvxxxxxxxxxxcolumn65;
+		this.y9xxuznxbvxxxxxxxxxxnotes = y9xxuznxbvxxxxxxxxxxnotes;
 		this.z1xxzzfxhhxxxxxxxxxxstatusfl = z1xxzzfxhhxxxxxxxxxxstatusfl;
 		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
-		this.y9xxuznxbvxxxxxxxxxxnotes = y9xxuznxbvxxxxxxxxxxnotes;
 		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 	}
@@ -999,6 +999,16 @@ public class Yrxxch5b1xhhxxhxxxxximportcsv implements java.io.Serializable {
 		this.w4xxuo65bvxxxxxxxxxxcolumn65 = w4xxuo65bvxxxxxxxxxxcolumn65;
 	}
 
+	@Column(name = "notes", length = 60)
+	@Size(max = 60)
+	public String getY9xxuznxbvxxxxxxxxxxnotes() {
+		return this.y9xxuznxbvxxxxxxxxxxnotes;
+	}
+
+	public void setY9xxuznxbvxxxxxxxxxxnotes(String y9xxuznxbvxxxxxxxxxxnotes) {
+		this.y9xxuznxbvxxxxxxxxxxnotes = y9xxuznxbvxxxxxxxxxxnotes;
+	}
+
 	@Column(name = "statusfl")
 	public Integer getZ1xxzzfxhhxxxxxxxxxxstatusfl() {
 		return this.z1xxzzfxhhxxxxxxxxxxstatusfl;
@@ -1018,16 +1028,6 @@ public class Yrxxch5b1xhhxxhxxxxximportcsv implements java.io.Serializable {
 	public void setZ2xxcztxlxxxxxxxxxxxstatusfldt(
 			Date z2xxcztxlxxxxxxxxxxxstatusfldt) {
 		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
-	}
-
-	@Column(name = "notes", length = 60)
-	@Size(max = 60)
-	public String getY9xxuznxbvxxxxxxxxxxnotes() {
-		return this.y9xxuznxbvxxxxxxxxxxnotes;
-	}
-
-	public void setY9xxuznxbvxxxxxxxxxxnotes(String y9xxuznxbvxxxxxxxxxxnotes) {
-		this.y9xxuznxbvxxxxxxxxxxnotes = y9xxuznxbvxxxxxxxxxxnotes;
 	}
 
 	@Column(name = "owner", length = 40)

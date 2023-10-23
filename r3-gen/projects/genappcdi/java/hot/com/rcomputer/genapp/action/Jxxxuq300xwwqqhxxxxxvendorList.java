@@ -533,6 +533,9 @@ public class Jxxxuq300xwwqqhxxxxxvendorList implements Serializable
 
 
 
+
+
+
         "lower(jxxxuq300xwwqqhxxxxxvendor.m1xxh4pobv27xxxxxxxxphoneo) like lower( concat(#{jxxxuq300xwwqqhxxxxxvendorList.jxxxuq300xwwqqhxxxxxvendor.m1xxh4pobv27xxxxxxxxphoneo},'%'))",
         "lower(jxxxuq300xwwqqhxxxxxvendor.m2xxh5phbv27xxxxxxxxphoneh) like lower( concat(#{jxxxuq300xwwqqhxxxxxvendorList.jxxxuq300xwwqqhxxxxxvendor.m2xxh5phbv27xxxxxxxxphoneh},'%'))",
         "lower(jxxxuq300xwwqqhxxxxxvendor.m3xxhxxrbv27xxxxxxxxphonec) like lower( concat(#{jxxxuq300xwwqqhxxxxxvendorList.jxxxuq300xwwqqhxxxxxvendor.m3xxhxxrbv27xxxxxxxxphonec},'%'))",
@@ -563,10 +566,27 @@ public class Jxxxuq300xwwqqhxxxxxvendorList implements Serializable
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         "lower(jxxxuq300xwwqqhxxxxxvendor.y0xxuzsxbvxxxxxxxxxxdescript) like lower( concat(#{jxxxuq300xwwqqhxxxxxvendorList.jxxxuq300xwwqqhxxxxxvendor.y0xxuzsxbvxxxxxxxxxxdescript},'%'))",
         "lower(jxxxuq300xwwqqhxxxxxvendor.y5xxuxxrbv29xxxxxxxxtype) like lower( concat(#{jxxxuq300xwwqqhxxxxxvendorList.jxxxuq300xwwqqhxxxxxvendor.y5xxuxxrbv29xxxxxxxxtype},'%'))",
         "lower(jxxxuq300xwwqqhxxxxxvendor.y7xxuznxbvxxxxxxxxxxnotes) like lower( concat(#{jxxxuq300xwwqqhxxxxxvendorList.jxxxuq300xwwqqhxxxxxvendor.y7xxuznxbvxxxxxxxxxxnotes},'%'))",
         "lower(jxxxuq300xwwqqhxxxxxvendor.ycxxuzdrbvxxxxxxxxxxdocmnt) like lower( concat(#{jxxxuq300xwwqqhxxxxxvendorList.jxxxuq300xwwqqhxxxxxvendor.ycxxuzdrbvxxxxxxxxxxdocmnt},'%'))",
+
 
 
         "lower(jxxxuq300xwwqqhxxxxxvendor.z7xxuvlolvxxxxxxxxxxlastorder) like lower( concat(#{jxxxuq300xwwqqhxxxxxvendorList.jxxxuq300xwwqqhxxxxxvendor.z7xxuvlolvxxxxxxxxxxlastorder},'%'))",

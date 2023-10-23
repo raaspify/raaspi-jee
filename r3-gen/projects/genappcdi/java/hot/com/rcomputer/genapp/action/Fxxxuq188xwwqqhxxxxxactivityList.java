@@ -484,9 +484,15 @@ public class Fxxxuq188xwwqqhxxxxxactivityList implements Serializable
 
 
 
+
+
+
         "lower(fxxxuq188xwwqqhxxxxxactivity.g2xxuxn1lvxxxxxxxxxxsubcodesn) like lower( concat(#{fxxxuq188xwwqqhxxxxxactivityList.fxxxuq188xwwqqhxxxxxactivity.g2xxuxn1lvxxxxxxxxxxsubcodesn},'%'))",
         "lower(fxxxuq188xwwqqhxxxxxactivity.g2xxuxn2lvxxxxxxxxxxsubcodesn2) like lower( concat(#{fxxxuq188xwwqqhxxxxxactivityList.fxxxuq188xwwqqhxxxxxactivity.g2xxuxn2lvxxxxxxxxxxsubcodesn2},'%'))",
         "lower(fxxxuq188xwwqqhxxxxxactivity.g2xxuxn3lvxxxxxxxxxxsubcodesn3) like lower( concat(#{fxxxuq188xwwqqhxxxxxactivityList.fxxxuq188xwwqqhxxxxxactivity.g2xxuxn3lvxxxxxxxxxxsubcodesn3},'%'))",
+
+
+
 
 
 

@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 28-Jul-2023 8:02:11 PM by Hibernate Tools 4.0.0
+// Generated 18-Oct-2023 7:34:42 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -196,26 +196,26 @@ public class Yrxxch511xhhxxhxxxxxoptions implements java.io.Serializable {
 	private String t4xxuo56bvxxxxxxxxxxoptions56;
 	private String t5xxup56bvxxxxxxxxxxpurpose56;
 	private String t6xxuv56bvxxxxxxxxxxvalue56;
-	private String t7xxuo57bvxxxxxxxxxxoptions57;
-	private String t8xxup57bvxxxxxxxxxxpurpose57;
-	private String t9xxuv57bvxxxxxxxxxxvalue57;
-	private String u1xxuo58bvxxxxxxxxxxoptions58;
-	private String u2xxup58bvxxxxxxxxxxpurpose58;
-	private String u3xxuv58bvxxxxxxxxxxvalue58;
-	private String u4xxuo59bvxxxxxxxxxxoptions59;
-	private String u5xxup59bvxxxxxxxxxxpurpose59;
-	private String u6xxuv59bvxxxxxxxxxxvalue59;
-	private String u7xxuo60bvxxxxxxxxxxoptions60;
-	private String u8xxup60bvxxxxxxxxxxpurpose60;
-	private String u9xxuv60bvxxxxxxxxxxvalue60;
-	private String v1xxuo61bvxxxxxxxxxxoptions61;
-	private String v2xxup61bvxxxxxxxxxxpurpose61;
-	private String v3xxuv61bvxxxxxxxxxxvalue61;
 	private Integer z1xxzzfxhhxxxxxxxxxxstatusfl;
 	private Date z2xxcztxlxxxxxxxxxxxstatusfldt;
 	private String y9xxuznxbvxxxxxxxxxxnotes;
 	private String z3xxutoxlhxxxxxxxxxxowner;
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
+	private String t7xxuo57bvxxxxxxxxxxoptions57;
+	private String u1xxuo58bvxxxxxxxxxxoptions58;
+	private String u4xxuo59bvxxxxxxxxxxoptions59;
+	private String u7xxuo60bvxxxxxxxxxxoptions60;
+	private String v1xxuo61bvxxxxxxxxxxoptions61;
+	private String t8xxup57bvxxxxxxxxxxpurpose57;
+	private String u2xxup58bvxxxxxxxxxxpurpose58;
+	private String u5xxup59bvxxxxxxxxxxpurpose59;
+	private String u8xxup60bvxxxxxxxxxxpurpose60;
+	private String v2xxup61bvxxxxxxxxxxpurpose61;
+	private String t9xxuv57bvxxxxxxxxxxvalue57;
+	private String u3xxuv58bvxxxxxxxxxxvalue58;
+	private String u6xxuv59bvxxxxxxxxxxvalue59;
+	private String u9xxuv60bvxxxxxxxxxxvalue60;
+	private String v3xxuv61bvxxxxxxxxxxvalue61;
 
 	public Yrxxch511xhhxxhxxxxxoptions() {
 	}
@@ -392,25 +392,25 @@ public class Yrxxch511xhhxxhxxxxxoptions implements java.io.Serializable {
 			String t4xxuo56bvxxxxxxxxxxoptions56,
 			String t5xxup56bvxxxxxxxxxxpurpose56,
 			String t6xxuv56bvxxxxxxxxxxvalue56,
-			String t7xxuo57bvxxxxxxxxxxoptions57,
-			String t8xxup57bvxxxxxxxxxxpurpose57,
-			String t9xxuv57bvxxxxxxxxxxvalue57,
-			String u1xxuo58bvxxxxxxxxxxoptions58,
-			String u2xxup58bvxxxxxxxxxxpurpose58,
-			String u3xxuv58bvxxxxxxxxxxvalue58,
-			String u4xxuo59bvxxxxxxxxxxoptions59,
-			String u5xxup59bvxxxxxxxxxxpurpose59,
-			String u6xxuv59bvxxxxxxxxxxvalue59,
-			String u7xxuo60bvxxxxxxxxxxoptions60,
-			String u8xxup60bvxxxxxxxxxxpurpose60,
-			String u9xxuv60bvxxxxxxxxxxvalue60,
-			String v1xxuo61bvxxxxxxxxxxoptions61,
-			String v2xxup61bvxxxxxxxxxxpurpose61,
-			String v3xxuv61bvxxxxxxxxxxvalue61,
 			Integer z1xxzzfxhhxxxxxxxxxxstatusfl,
 			Date z2xxcztxlxxxxxxxxxxxstatusfldt,
 			String y9xxuznxbvxxxxxxxxxxnotes, String z3xxutoxlhxxxxxxxxxxowner,
-			String zzxxu2oxxhxxxxxxxxxxowner2) {
+			String zzxxu2oxxhxxxxxxxxxxowner2,
+			String t7xxuo57bvxxxxxxxxxxoptions57,
+			String u1xxuo58bvxxxxxxxxxxoptions58,
+			String u4xxuo59bvxxxxxxxxxxoptions59,
+			String u7xxuo60bvxxxxxxxxxxoptions60,
+			String v1xxuo61bvxxxxxxxxxxoptions61,
+			String t8xxup57bvxxxxxxxxxxpurpose57,
+			String u2xxup58bvxxxxxxxxxxpurpose58,
+			String u5xxup59bvxxxxxxxxxxpurpose59,
+			String u8xxup60bvxxxxxxxxxxpurpose60,
+			String v2xxup61bvxxxxxxxxxxpurpose61,
+			String t9xxuv57bvxxxxxxxxxxvalue57,
+			String u3xxuv58bvxxxxxxxxxxvalue58,
+			String u6xxuv59bvxxxxxxxxxxvalue59,
+			String u9xxuv60bvxxxxxxxxxxvalue60,
+			String v3xxuv61bvxxxxxxxxxxvalue61) {
 		this.a0xxukcxbvxxxxxxxxxxrow = a0xxukcxbvxxxxxxxxxxrow;
 		this.b1xxuo01bvxxxxxxxxxxoptions01 = b1xxuo01bvxxxxxxxxxxoptions01;
 		this.b2xxup01bvxxxxxxxxxxpurpose01 = b2xxup01bvxxxxxxxxxxpurpose01;
@@ -580,26 +580,26 @@ public class Yrxxch511xhhxxhxxxxxoptions implements java.io.Serializable {
 		this.t4xxuo56bvxxxxxxxxxxoptions56 = t4xxuo56bvxxxxxxxxxxoptions56;
 		this.t5xxup56bvxxxxxxxxxxpurpose56 = t5xxup56bvxxxxxxxxxxpurpose56;
 		this.t6xxuv56bvxxxxxxxxxxvalue56 = t6xxuv56bvxxxxxxxxxxvalue56;
-		this.t7xxuo57bvxxxxxxxxxxoptions57 = t7xxuo57bvxxxxxxxxxxoptions57;
-		this.t8xxup57bvxxxxxxxxxxpurpose57 = t8xxup57bvxxxxxxxxxxpurpose57;
-		this.t9xxuv57bvxxxxxxxxxxvalue57 = t9xxuv57bvxxxxxxxxxxvalue57;
-		this.u1xxuo58bvxxxxxxxxxxoptions58 = u1xxuo58bvxxxxxxxxxxoptions58;
-		this.u2xxup58bvxxxxxxxxxxpurpose58 = u2xxup58bvxxxxxxxxxxpurpose58;
-		this.u3xxuv58bvxxxxxxxxxxvalue58 = u3xxuv58bvxxxxxxxxxxvalue58;
-		this.u4xxuo59bvxxxxxxxxxxoptions59 = u4xxuo59bvxxxxxxxxxxoptions59;
-		this.u5xxup59bvxxxxxxxxxxpurpose59 = u5xxup59bvxxxxxxxxxxpurpose59;
-		this.u6xxuv59bvxxxxxxxxxxvalue59 = u6xxuv59bvxxxxxxxxxxvalue59;
-		this.u7xxuo60bvxxxxxxxxxxoptions60 = u7xxuo60bvxxxxxxxxxxoptions60;
-		this.u8xxup60bvxxxxxxxxxxpurpose60 = u8xxup60bvxxxxxxxxxxpurpose60;
-		this.u9xxuv60bvxxxxxxxxxxvalue60 = u9xxuv60bvxxxxxxxxxxvalue60;
-		this.v1xxuo61bvxxxxxxxxxxoptions61 = v1xxuo61bvxxxxxxxxxxoptions61;
-		this.v2xxup61bvxxxxxxxxxxpurpose61 = v2xxup61bvxxxxxxxxxxpurpose61;
-		this.v3xxuv61bvxxxxxxxxxxvalue61 = v3xxuv61bvxxxxxxxxxxvalue61;
 		this.z1xxzzfxhhxxxxxxxxxxstatusfl = z1xxzzfxhhxxxxxxxxxxstatusfl;
 		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
 		this.y9xxuznxbvxxxxxxxxxxnotes = y9xxuznxbvxxxxxxxxxxnotes;
 		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
+		this.t7xxuo57bvxxxxxxxxxxoptions57 = t7xxuo57bvxxxxxxxxxxoptions57;
+		this.u1xxuo58bvxxxxxxxxxxoptions58 = u1xxuo58bvxxxxxxxxxxoptions58;
+		this.u4xxuo59bvxxxxxxxxxxoptions59 = u4xxuo59bvxxxxxxxxxxoptions59;
+		this.u7xxuo60bvxxxxxxxxxxoptions60 = u7xxuo60bvxxxxxxxxxxoptions60;
+		this.v1xxuo61bvxxxxxxxxxxoptions61 = v1xxuo61bvxxxxxxxxxxoptions61;
+		this.t8xxup57bvxxxxxxxxxxpurpose57 = t8xxup57bvxxxxxxxxxxpurpose57;
+		this.u2xxup58bvxxxxxxxxxxpurpose58 = u2xxup58bvxxxxxxxxxxpurpose58;
+		this.u5xxup59bvxxxxxxxxxxpurpose59 = u5xxup59bvxxxxxxxxxxpurpose59;
+		this.u8xxup60bvxxxxxxxxxxpurpose60 = u8xxup60bvxxxxxxxxxxpurpose60;
+		this.v2xxup61bvxxxxxxxxxxpurpose61 = v2xxup61bvxxxxxxxxxxpurpose61;
+		this.t9xxuv57bvxxxxxxxxxxvalue57 = t9xxuv57bvxxxxxxxxxxvalue57;
+		this.u3xxuv58bvxxxxxxxxxxvalue58 = u3xxuv58bvxxxxxxxxxxvalue58;
+		this.u6xxuv59bvxxxxxxxxxxvalue59 = u6xxuv59bvxxxxxxxxxxvalue59;
+		this.u9xxuv60bvxxxxxxxxxxvalue60 = u9xxuv60bvxxxxxxxxxxvalue60;
+		this.v3xxuv61bvxxxxxxxxxxvalue61 = v3xxuv61bvxxxxxxxxxxvalue61;
 	}
 
 	@Id
@@ -2472,171 +2472,6 @@ public class Yrxxch511xhhxxhxxxxxoptions implements java.io.Serializable {
 		this.t6xxuv56bvxxxxxxxxxxvalue56 = t6xxuv56bvxxxxxxxxxxvalue56;
 	}
 
-	@Column(name = "options57", length = 159)
-	@Size(max = 159)
-	public String getT7xxuo57bvxxxxxxxxxxoptions57() {
-		return this.t7xxuo57bvxxxxxxxxxxoptions57;
-	}
-
-	public void setT7xxuo57bvxxxxxxxxxxoptions57(
-			String t7xxuo57bvxxxxxxxxxxoptions57) {
-		this.t7xxuo57bvxxxxxxxxxxoptions57 = t7xxuo57bvxxxxxxxxxxoptions57;
-	}
-
-	@Column(name = "purpose57", length = 159)
-	@Size(max = 159)
-	public String getT8xxup57bvxxxxxxxxxxpurpose57() {
-		return this.t8xxup57bvxxxxxxxxxxpurpose57;
-	}
-
-	public void setT8xxup57bvxxxxxxxxxxpurpose57(
-			String t8xxup57bvxxxxxxxxxxpurpose57) {
-		this.t8xxup57bvxxxxxxxxxxpurpose57 = t8xxup57bvxxxxxxxxxxpurpose57;
-	}
-
-	@Column(name = "value57", length = 159)
-	@Size(max = 159)
-	public String getT9xxuv57bvxxxxxxxxxxvalue57() {
-		return this.t9xxuv57bvxxxxxxxxxxvalue57;
-	}
-
-	public void setT9xxuv57bvxxxxxxxxxxvalue57(
-			String t9xxuv57bvxxxxxxxxxxvalue57) {
-		this.t9xxuv57bvxxxxxxxxxxvalue57 = t9xxuv57bvxxxxxxxxxxvalue57;
-	}
-
-	@Column(name = "options58", length = 159)
-	@Size(max = 159)
-	public String getU1xxuo58bvxxxxxxxxxxoptions58() {
-		return this.u1xxuo58bvxxxxxxxxxxoptions58;
-	}
-
-	public void setU1xxuo58bvxxxxxxxxxxoptions58(
-			String u1xxuo58bvxxxxxxxxxxoptions58) {
-		this.u1xxuo58bvxxxxxxxxxxoptions58 = u1xxuo58bvxxxxxxxxxxoptions58;
-	}
-
-	@Column(name = "purpose58", length = 159)
-	@Size(max = 159)
-	public String getU2xxup58bvxxxxxxxxxxpurpose58() {
-		return this.u2xxup58bvxxxxxxxxxxpurpose58;
-	}
-
-	public void setU2xxup58bvxxxxxxxxxxpurpose58(
-			String u2xxup58bvxxxxxxxxxxpurpose58) {
-		this.u2xxup58bvxxxxxxxxxxpurpose58 = u2xxup58bvxxxxxxxxxxpurpose58;
-	}
-
-	@Column(name = "value58", length = 159)
-	@Size(max = 159)
-	public String getU3xxuv58bvxxxxxxxxxxvalue58() {
-		return this.u3xxuv58bvxxxxxxxxxxvalue58;
-	}
-
-	public void setU3xxuv58bvxxxxxxxxxxvalue58(
-			String u3xxuv58bvxxxxxxxxxxvalue58) {
-		this.u3xxuv58bvxxxxxxxxxxvalue58 = u3xxuv58bvxxxxxxxxxxvalue58;
-	}
-
-	@Column(name = "options59", length = 159)
-	@Size(max = 159)
-	public String getU4xxuo59bvxxxxxxxxxxoptions59() {
-		return this.u4xxuo59bvxxxxxxxxxxoptions59;
-	}
-
-	public void setU4xxuo59bvxxxxxxxxxxoptions59(
-			String u4xxuo59bvxxxxxxxxxxoptions59) {
-		this.u4xxuo59bvxxxxxxxxxxoptions59 = u4xxuo59bvxxxxxxxxxxoptions59;
-	}
-
-	@Column(name = "purpose59", length = 159)
-	@Size(max = 159)
-	public String getU5xxup59bvxxxxxxxxxxpurpose59() {
-		return this.u5xxup59bvxxxxxxxxxxpurpose59;
-	}
-
-	public void setU5xxup59bvxxxxxxxxxxpurpose59(
-			String u5xxup59bvxxxxxxxxxxpurpose59) {
-		this.u5xxup59bvxxxxxxxxxxpurpose59 = u5xxup59bvxxxxxxxxxxpurpose59;
-	}
-
-	@Column(name = "value59", length = 159)
-	@Size(max = 159)
-	public String getU6xxuv59bvxxxxxxxxxxvalue59() {
-		return this.u6xxuv59bvxxxxxxxxxxvalue59;
-	}
-
-	public void setU6xxuv59bvxxxxxxxxxxvalue59(
-			String u6xxuv59bvxxxxxxxxxxvalue59) {
-		this.u6xxuv59bvxxxxxxxxxxvalue59 = u6xxuv59bvxxxxxxxxxxvalue59;
-	}
-
-	@Column(name = "options60", length = 159)
-	@Size(max = 159)
-	public String getU7xxuo60bvxxxxxxxxxxoptions60() {
-		return this.u7xxuo60bvxxxxxxxxxxoptions60;
-	}
-
-	public void setU7xxuo60bvxxxxxxxxxxoptions60(
-			String u7xxuo60bvxxxxxxxxxxoptions60) {
-		this.u7xxuo60bvxxxxxxxxxxoptions60 = u7xxuo60bvxxxxxxxxxxoptions60;
-	}
-
-	@Column(name = "purpose60", length = 159)
-	@Size(max = 159)
-	public String getU8xxup60bvxxxxxxxxxxpurpose60() {
-		return this.u8xxup60bvxxxxxxxxxxpurpose60;
-	}
-
-	public void setU8xxup60bvxxxxxxxxxxpurpose60(
-			String u8xxup60bvxxxxxxxxxxpurpose60) {
-		this.u8xxup60bvxxxxxxxxxxpurpose60 = u8xxup60bvxxxxxxxxxxpurpose60;
-	}
-
-	@Column(name = "value60", length = 159)
-	@Size(max = 159)
-	public String getU9xxuv60bvxxxxxxxxxxvalue60() {
-		return this.u9xxuv60bvxxxxxxxxxxvalue60;
-	}
-
-	public void setU9xxuv60bvxxxxxxxxxxvalue60(
-			String u9xxuv60bvxxxxxxxxxxvalue60) {
-		this.u9xxuv60bvxxxxxxxxxxvalue60 = u9xxuv60bvxxxxxxxxxxvalue60;
-	}
-
-	@Column(name = "options61", length = 159)
-	@Size(max = 159)
-	public String getV1xxuo61bvxxxxxxxxxxoptions61() {
-		return this.v1xxuo61bvxxxxxxxxxxoptions61;
-	}
-
-	public void setV1xxuo61bvxxxxxxxxxxoptions61(
-			String v1xxuo61bvxxxxxxxxxxoptions61) {
-		this.v1xxuo61bvxxxxxxxxxxoptions61 = v1xxuo61bvxxxxxxxxxxoptions61;
-	}
-
-	@Column(name = "purpose61", length = 159)
-	@Size(max = 159)
-	public String getV2xxup61bvxxxxxxxxxxpurpose61() {
-		return this.v2xxup61bvxxxxxxxxxxpurpose61;
-	}
-
-	public void setV2xxup61bvxxxxxxxxxxpurpose61(
-			String v2xxup61bvxxxxxxxxxxpurpose61) {
-		this.v2xxup61bvxxxxxxxxxxpurpose61 = v2xxup61bvxxxxxxxxxxpurpose61;
-	}
-
-	@Column(name = "value61", length = 159)
-	@Size(max = 159)
-	public String getV3xxuv61bvxxxxxxxxxxvalue61() {
-		return this.v3xxuv61bvxxxxxxxxxxvalue61;
-	}
-
-	public void setV3xxuv61bvxxxxxxxxxxvalue61(
-			String v3xxuv61bvxxxxxxxxxxvalue61) {
-		this.v3xxuv61bvxxxxxxxxxxvalue61 = v3xxuv61bvxxxxxxxxxxvalue61;
-	}
-
 	@Column(name = "statusfl")
 	public Integer getZ1xxzzfxhhxxxxxxxxxxstatusfl() {
 		return this.z1xxzzfxhhxxxxxxxxxxstatusfl;
@@ -2686,6 +2521,171 @@ public class Yrxxch511xhhxxhxxxxxoptions implements java.io.Serializable {
 
 	public void setZzxxu2oxxhxxxxxxxxxxowner2(String zzxxu2oxxhxxxxxxxxxxowner2) {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
+	}
+
+	@Column(name = "options57", length = 159)
+	@Size(max = 159)
+	public String getT7xxuo57bvxxxxxxxxxxoptions57() {
+		return this.t7xxuo57bvxxxxxxxxxxoptions57;
+	}
+
+	public void setT7xxuo57bvxxxxxxxxxxoptions57(
+			String t7xxuo57bvxxxxxxxxxxoptions57) {
+		this.t7xxuo57bvxxxxxxxxxxoptions57 = t7xxuo57bvxxxxxxxxxxoptions57;
+	}
+
+	@Column(name = "options58", length = 159)
+	@Size(max = 159)
+	public String getU1xxuo58bvxxxxxxxxxxoptions58() {
+		return this.u1xxuo58bvxxxxxxxxxxoptions58;
+	}
+
+	public void setU1xxuo58bvxxxxxxxxxxoptions58(
+			String u1xxuo58bvxxxxxxxxxxoptions58) {
+		this.u1xxuo58bvxxxxxxxxxxoptions58 = u1xxuo58bvxxxxxxxxxxoptions58;
+	}
+
+	@Column(name = "options59", length = 159)
+	@Size(max = 159)
+	public String getU4xxuo59bvxxxxxxxxxxoptions59() {
+		return this.u4xxuo59bvxxxxxxxxxxoptions59;
+	}
+
+	public void setU4xxuo59bvxxxxxxxxxxoptions59(
+			String u4xxuo59bvxxxxxxxxxxoptions59) {
+		this.u4xxuo59bvxxxxxxxxxxoptions59 = u4xxuo59bvxxxxxxxxxxoptions59;
+	}
+
+	@Column(name = "options60", length = 159)
+	@Size(max = 159)
+	public String getU7xxuo60bvxxxxxxxxxxoptions60() {
+		return this.u7xxuo60bvxxxxxxxxxxoptions60;
+	}
+
+	public void setU7xxuo60bvxxxxxxxxxxoptions60(
+			String u7xxuo60bvxxxxxxxxxxoptions60) {
+		this.u7xxuo60bvxxxxxxxxxxoptions60 = u7xxuo60bvxxxxxxxxxxoptions60;
+	}
+
+	@Column(name = "options61", length = 159)
+	@Size(max = 159)
+	public String getV1xxuo61bvxxxxxxxxxxoptions61() {
+		return this.v1xxuo61bvxxxxxxxxxxoptions61;
+	}
+
+	public void setV1xxuo61bvxxxxxxxxxxoptions61(
+			String v1xxuo61bvxxxxxxxxxxoptions61) {
+		this.v1xxuo61bvxxxxxxxxxxoptions61 = v1xxuo61bvxxxxxxxxxxoptions61;
+	}
+
+	@Column(name = "purpose57", length = 159)
+	@Size(max = 159)
+	public String getT8xxup57bvxxxxxxxxxxpurpose57() {
+		return this.t8xxup57bvxxxxxxxxxxpurpose57;
+	}
+
+	public void setT8xxup57bvxxxxxxxxxxpurpose57(
+			String t8xxup57bvxxxxxxxxxxpurpose57) {
+		this.t8xxup57bvxxxxxxxxxxpurpose57 = t8xxup57bvxxxxxxxxxxpurpose57;
+	}
+
+	@Column(name = "purpose58", length = 159)
+	@Size(max = 159)
+	public String getU2xxup58bvxxxxxxxxxxpurpose58() {
+		return this.u2xxup58bvxxxxxxxxxxpurpose58;
+	}
+
+	public void setU2xxup58bvxxxxxxxxxxpurpose58(
+			String u2xxup58bvxxxxxxxxxxpurpose58) {
+		this.u2xxup58bvxxxxxxxxxxpurpose58 = u2xxup58bvxxxxxxxxxxpurpose58;
+	}
+
+	@Column(name = "purpose59", length = 159)
+	@Size(max = 159)
+	public String getU5xxup59bvxxxxxxxxxxpurpose59() {
+		return this.u5xxup59bvxxxxxxxxxxpurpose59;
+	}
+
+	public void setU5xxup59bvxxxxxxxxxxpurpose59(
+			String u5xxup59bvxxxxxxxxxxpurpose59) {
+		this.u5xxup59bvxxxxxxxxxxpurpose59 = u5xxup59bvxxxxxxxxxxpurpose59;
+	}
+
+	@Column(name = "purpose60", length = 159)
+	@Size(max = 159)
+	public String getU8xxup60bvxxxxxxxxxxpurpose60() {
+		return this.u8xxup60bvxxxxxxxxxxpurpose60;
+	}
+
+	public void setU8xxup60bvxxxxxxxxxxpurpose60(
+			String u8xxup60bvxxxxxxxxxxpurpose60) {
+		this.u8xxup60bvxxxxxxxxxxpurpose60 = u8xxup60bvxxxxxxxxxxpurpose60;
+	}
+
+	@Column(name = "purpose61", length = 159)
+	@Size(max = 159)
+	public String getV2xxup61bvxxxxxxxxxxpurpose61() {
+		return this.v2xxup61bvxxxxxxxxxxpurpose61;
+	}
+
+	public void setV2xxup61bvxxxxxxxxxxpurpose61(
+			String v2xxup61bvxxxxxxxxxxpurpose61) {
+		this.v2xxup61bvxxxxxxxxxxpurpose61 = v2xxup61bvxxxxxxxxxxpurpose61;
+	}
+
+	@Column(name = "value57", length = 159)
+	@Size(max = 159)
+	public String getT9xxuv57bvxxxxxxxxxxvalue57() {
+		return this.t9xxuv57bvxxxxxxxxxxvalue57;
+	}
+
+	public void setT9xxuv57bvxxxxxxxxxxvalue57(
+			String t9xxuv57bvxxxxxxxxxxvalue57) {
+		this.t9xxuv57bvxxxxxxxxxxvalue57 = t9xxuv57bvxxxxxxxxxxvalue57;
+	}
+
+	@Column(name = "value58", length = 159)
+	@Size(max = 159)
+	public String getU3xxuv58bvxxxxxxxxxxvalue58() {
+		return this.u3xxuv58bvxxxxxxxxxxvalue58;
+	}
+
+	public void setU3xxuv58bvxxxxxxxxxxvalue58(
+			String u3xxuv58bvxxxxxxxxxxvalue58) {
+		this.u3xxuv58bvxxxxxxxxxxvalue58 = u3xxuv58bvxxxxxxxxxxvalue58;
+	}
+
+	@Column(name = "value59", length = 159)
+	@Size(max = 159)
+	public String getU6xxuv59bvxxxxxxxxxxvalue59() {
+		return this.u6xxuv59bvxxxxxxxxxxvalue59;
+	}
+
+	public void setU6xxuv59bvxxxxxxxxxxvalue59(
+			String u6xxuv59bvxxxxxxxxxxvalue59) {
+		this.u6xxuv59bvxxxxxxxxxxvalue59 = u6xxuv59bvxxxxxxxxxxvalue59;
+	}
+
+	@Column(name = "value60", length = 159)
+	@Size(max = 159)
+	public String getU9xxuv60bvxxxxxxxxxxvalue60() {
+		return this.u9xxuv60bvxxxxxxxxxxvalue60;
+	}
+
+	public void setU9xxuv60bvxxxxxxxxxxvalue60(
+			String u9xxuv60bvxxxxxxxxxxvalue60) {
+		this.u9xxuv60bvxxxxxxxxxxvalue60 = u9xxuv60bvxxxxxxxxxxvalue60;
+	}
+
+	@Column(name = "value61", length = 159)
+	@Size(max = 159)
+	public String getV3xxuv61bvxxxxxxxxxxvalue61() {
+		return this.v3xxuv61bvxxxxxxxxxxvalue61;
+	}
+
+	public void setV3xxuv61bvxxxxxxxxxxvalue61(
+			String v3xxuv61bvxxxxxxxxxxvalue61) {
+		this.v3xxuv61bvxxxxxxxxxxvalue61 = v3xxuv61bvxxxxxxxxxxvalue61;
 	}
 
 }

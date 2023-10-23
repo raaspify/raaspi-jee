@@ -638,6 +638,7 @@ public class Yxxxch522xhhxxhxxxxxclientList implements Serializable
         "lower(yxxxch522xhhxxhxxxxxclient.y2xxuxxxbvxxxxxxxxxxkeyorder) like lower( concat(#{yxxxch522xhhxxhxxxxxclientList.yxxxch522xhhxxhxxxxxclient.y2xxuxxxbvxxxxxxxxxxkeyorder},'%'))",
         "lower(yxxxch522xhhxxhxxxxxclient.y8xxuxxxbvxxxxxxxxxxdefaultc) like lower( concat(#{yxxxch522xhhxxhxxxxxclientList.yxxxch522xhhxxhxxxxxclient.y8xxuxxxbvxxxxxxxxxxdefaultc},'%'))",
 
+
         "lower(yxxxch522xhhxxhxxxxxclient.z1xxuxxxbvxxxxxxxxxxlastuser) like lower( concat(#{yxxxch522xhhxxhxxxxxclientList.yxxxch522xhhxxhxxxxxclient.z1xxuxxxbvxxxxxxxxxxlastuser},'%'))",
         "lower(yxxxch522xhhxxhxxxxxclient.z8xxuxxxbvxxxxxxxxxxpop3server) like lower( concat(#{yxxxch522xhhxxhxxxxxclientList.yxxxch522xhhxxhxxxxxclient.z8xxuxxxbvxxxxxxxxxxpop3server},'%'))",
         "lower(yxxxch522xhhxxhxxxxxclient.z8xxuxxxbvxxxxxxxxxxsmtpserver) like lower( concat(#{yxxxch522xhhxxhxxxxxclientList.yxxxch522xhhxxhxxxxxclient.z8xxuxxxbvxxxxxxxxxxsmtpserver},'%'))",

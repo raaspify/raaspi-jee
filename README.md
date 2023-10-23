@@ -10,7 +10,7 @@ For quick non production tryouts, select release tomee-hsqldb named raaspi-tomee
 If you are a developer and interested in contributing to RAASPI for further development or make changes for your own usage, please read on.  
 RAASPI source code is generated from freemarker templates and predefined models for many of the business applications including Small Business, ERP, Manufacturing, Agency, Clubs & Associations, Event Organizers. 
 
-Raaspi github repository is slightly different from a typical java project repository. Raaspi source is generated from templates and from data tables, so the developers should not work with and modify the generated source, as it will be overwritten. The repository directories src or view under r3-gen holds the templates andÂ  directories like java, webapp under r3-gen/projects holds the final source.
+Raaspi github repository is slightly different from a typical java project repository. Raaspi source is generated from templates and from data tables, so the developers should not work with and modify the generated source, as it will be overwritten. The repository directories src or view under r3-gen holds the templates and  directories like java, webapp under r3-gen/projects holds the final source.
 
 So the development for Rasspi is a two step process-first modify templates and then generate source. Advantage is reusing logic and maintaining less code.
 github repository has a dir r3-gen which holds the templates in src dir, view dir and supporting resources in resources dir. Generated source goes into projects/genappcdi dir.
