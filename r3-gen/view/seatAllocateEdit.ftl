@@ -1,5 +1,6 @@
 <#assign generateCandidate = "N">  
 <#include "../view/assigns/PositionLength.properties" >
+<#include "../view/assigns/mergedassigns.properties" >
 <#if (pojo.shortName?length > eL)  && seatEntityName??>
  <#assign menuAttributes = pojo.shortName?substring(0,10)?upper_case>
  <#if (menuAttributes?substring(6,8) == '1S') >
@@ -167,13 +168,13 @@
            <ui:decorate id="seatDecorationT" template="layout/edit.xhtml" >
             <ui:define name="label">${'#'}{messages['Seat']} ${'#'}{messages['number']} 
             </ui:define>
-             <h:selectOneMenu styleClass="autoCompleteWidth50" 
+             <h:selectOneMenu styleClass="autoCompleteWidth50" id="selectedN"
                    rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                    required="false"
                     validator="${'#'}{${seatEntityName}Home.validateKeyDuplicateRow}" 
                    value="${'#'}{${seatEntityName}Home.mailingText5}"
              >   
-              <p:ajax  update="seatDecorationT" bypassUpdates="false"/>
+              <p:ajax  update="selectedN" bypassUpdates="false"/>
 
                <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
                <f:selectItem itemValue="001" itemLabel="001" />
@@ -337,11 +338,11 @@
             
                 
 <div class="actionButtons">
-             <p:status name="buttonStatus" >
+             <p:ajaxStatus name="buttonStatus" >
               <f:facet name="start">
                <h:graphicImage value="./img/ajax-loader16.gif" />
               </f:facet>
-             </p:status>
+             </p:ajaxStatus>
     <ui:remove>removed 89 schedule because one schedule one detail, nov20 2018 added va after fixing report to show vendor</ui:remove>
                        <ui:remove>
                        may07 2018 allow record 2(shopify id/secret),3
@@ -350,13 +351,13 @@
 
           
             <p:commandButton id="assign" styleClass="${'#'}{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
-                          value="${'#'}{messages['Assign']}" status="buttonStatus" render="@form"
+                          value="${'#'}{messages['Assign']}" status="buttonStatus" update="@form"
                          action="${'#'}{${seatEntityName}Home.assign(${seatEntityName}Home.last${seatEntityName},${seatEntityName}Home.instance.a2xxukstbvxxxxxxxxxxrow,${seatEntityName}Home.mailingText5,${seatEntityName}Home.mailingText1,${seatEntityName}Home.mailingText2,${seatEntityName}Home.mailingText3,${seatEntityName}Home.mailingText4)}"
                        rendered="true"/>
                         			  
 
             <p:commandButton id="update2" 
-                          value="${'#'}{messages['More_Updates']}" status="buttonStatus" render="@form"
+                          value="${'#'}{messages['More_Updates']}" status="buttonStatus" update="@form"
                          action="${'#'}{${seatEntityName}Home.update()}"
                        rendered="${'#'}{${seatEntityName}Home.managed and ${seatEntityName}Home.entityUpdated}"/>
                         			  
@@ -373,10 +374,10 @@
                        rendered="${'#'}{${seatEntityName}Home.managed}"/>
                  
 
-            <p:hotKey  onkeydown="${'#'}{p:element('save')}.click();return false;" preventDefault="true" enabledInInput="true" key="return">
-            </p:hotKey>
-            <p:hotKey  onkeydown="${'#'}{p:element('update')}.click();return false;" preventDefault="true" enabledInInput="true" key="ctrl+u">
-            </p:hotKey>
+            <p:hotkey  action="${'#'}{fxxxuq1skxwwqqhxxxxxseatHome.persist()}"  bind="return">
+            </p:hotkey>
+            <p:hotkey  action="${'#'}{fxxxuq1skxwwqqhxxxxxseatHome.update()}" bind="ctrl+u">
+            </p:hotkey>
 
 
 

@@ -5285,7 +5285,7 @@ menu tool bar
                                }"
 					outcome="/siteEditEasy.xhtml?faces-redirect=true" icon="/img/Homeblue16.png">
 				   </p:menuitem>
-                        <p:menuitem mode="ajax" value="${'#'}{messages['menue']} / ${'#'}{messages['resource']} ${'#'}{messages['label']} / ${'#'}{messages['SEO']} ${'#'}{messages['customization']}"
+                        <p:menuitem mode="ajax" value="${'#'}{messages['Analytics']} / ${'#'}{messages['menue']}  / ${'#'}{messages['resource']} ${'#'}{messages['label']} / ${'#'}{messages['SEO']} ${'#'}{messages['customization']}"
                               rendered="${'#'}{(customIdentity.hasRole('UH')||customIdentity.hasRole('IH')||customIdentity.hasRole('BH')||customIdentity.hasRole('IH')) ${pRenderString}
                                    and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='es'
                                     and fn:substring(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].g2xxuxpclvxxxxxxxxxxprodcode,0,2)!='ec'

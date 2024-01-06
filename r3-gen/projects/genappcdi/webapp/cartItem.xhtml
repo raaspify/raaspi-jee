@@ -24,6 +24,7 @@
 <ui:define name="body">
 
 
+
 <style>
 .rating {
     display: flex;
@@ -151,12 +152,12 @@
                              <br></br>
                             </ui:fragment>
 
-                            <h:commandButton id="AddToCart" class="btn btn-primary"  rendered= "#{!fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)') 
+                            <h:commandButton id="AddToCart"  rendered= "#{!fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)') 
                              and fpxxfq1a5xwwqqhxxxxxitemHome.instance.b0xxziqxlvxxsaxxxxxxquantity gt 0 
                               and (fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()==null 
                                or fpxxfq1a5xwwqqhxxxxxitemList.getCartedList('cart').size()>=0)}"
                                  action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrder(fpxxfq1a5xwwqqhxxxxxitemHome.instance,fpxxfq1a5xwwqqhxxxxxitemHome.instance.tempQuantity,'cart')}" 
-                                 value="#{messages['Confirm']} #{messages['To']} #{messages['Cart']}">
+                                 value="#{messages['Confirm']} #{messages['To']} #{messages['Cart']}" >
                               <f:param name="categoryJay" value="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.a0xxuobxbxxxxxxxxxxxsid}" />
                             </h:commandButton>
                              <ui:fragment rendered="#{!identity.loggedIn and fpxxfq1a5xwwqqhxxxxxitemHome.instance.c6xxusxrbv16xxxxxxxxtype.contains('(q)')}">
@@ -428,10 +429,21 @@
 </div> 
 </ui:fragment>
 <ui:remove> form within a form needed to save email, why</ui:remove>
+  <script>
+     let date = Date.now();
+     /* 2. Define your event. */
+     function addToCart() {
+     alert('addToCart');
+       gtag('event', 'addTo_Cart', {
+       'time': date,
+       });
+   }
+document.getElementById("cartItem:AddToCart").addEventListener("click", addToCart);
+   </script>
+
  </h:form>
 
 
 </ui:define>
-
 </ui:composition>
 

@@ -61,6 +61,7 @@ import javax.transaction.Transactional;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.enterprise.inject.Instance;
+import javax.faces.event.AjaxBehaviorEvent;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
@@ -18794,6 +18795,15 @@ public BufferedImage rotateClockwise90(String action) {
   public void setMsgValue(String msgValue) {
     this.msgValue = msgValue;
   }
+  private String gtagValue;
+
+  public String getGtagValue() {
+    return gtagValue;
+  }
+
+  public void setGtagValue(String gtagValue) {
+    this.gtagValue = gtagValue;
+  }
 
   public String getNewMsgUse() {
     return newMsgUse;
@@ -18825,7 +18835,7 @@ public BufferedImage rotateClockwise90(String action) {
                // if they change value for messages with owner SYSTEM
               ${resource_bundleEntityName} = ${resource_bundleEntityName}List.getresource_bundleInstance(resource_bundleName);
               this.clearInstance();
-	      ${resourceEntityName}li=this.getInstance(); 
+              ${resourceEntityName}li=this.getInstance(); 
               if (msgValue == null || msgValue.isEmpty()){
                ${resourceEntityName}li.setA1xxuxxxbvxxxxxxxxxxvalue("No Value");
               }
@@ -19534,6 +19544,11 @@ public boolean eMailExists(String eMail){
 </#if>
 
 <#if scheduleStartDateField !=""  >
+                  //lestener method needs event arg
+	public void listenerValidateAndSetseDates(AjaxBehaviorEvent event) {
+                   validateAndSetseDates(); 
+                  }
+
  //jay remove hard coded property values
 	public void validateAndSetseDates() {
 		calendare.setTime(this.instance.getB5gxdxsdbvxxxxxxxxxxsdatet());
@@ -22499,6 +22514,9 @@ For the Foreign key instance, use the variables used in wire() where a getInstan
 </#if>
 
 <#if entityFunction == "cq" || entityFunction == "co" || entityFunction == "ci" || entityFunction == "cp" || entityFunction == "sh"  >
+     public void listenerShowtemprunt(){
+      showtemprunt();
+     }    
      public void showtemprunt(){
       // this method is called by cuordersEdit every time item changes whats the impact on performance ??
       // should the logic be more intelligent and just adjust the item related change in createcdetatail or have separate short logic
@@ -28218,7 +28236,9 @@ public void deleteAllHidden() {
 
 
 
-
+     public void listenerRecalculateTotalThis(){
+       recalculateTotalThis();
+     }
 
     /**
     * The following method recalculates the total for 12 periods by adding each period
@@ -37031,6 +37051,54 @@ try   {
 </#if>
 
 <#if menuAttributesp2 == "1R" >
+   /**
+    * The following method is used for updating Analytics tag id 
+    * called by resourcelabeledtr.xhtml 
+    * @return "" 
+    * @exception none.(tbd try/catch) 
+    * @see 
+    */ 
+
+      public String gaUpdate(){
+       try{
+        this.clearInstance();
+        this.instance=${resourceEntityName}List.getKeyToEntity("gtagid");
+        if(this.instance == null){
+         this.instance = this.getInstance();
+         this.instance.setA0xxukrdbvxxxxxxxxxxkey("gtagid");
+         this.instance.setZ3xxutoxlhxxxxxxxxxxowner(ownerCode);
+         this.instance.setZzxxu2oxxhxxxxxxxxxxowner2("SYSTEM");// so that it shows as message value 
+         if (yxxxuq1l1xwwqqhxxxxxresource_bundle == null) { 
+          yxxxuq1l1xwwqqhxxxxxresource_bundle=yxxxuq1l1xwwqqhxxxxxresource_bundleHome.getInstance();//bundle cannot be null,persist will fail
+         }
+         String resource_bundleName="m"; 
+         yxxxuq1l1xwwqqhxxxxxresource_bundle = yxxxuq1l1xwwqqhxxxxxresource_bundleList.getresource_bundleInstance(resource_bundleName);
+         this.instance.setYxxxuq1l1xwwqqhxxxxxresource_bundle(yxxxuq1l1xwwqqhxxxxxresource_bundle);
+
+        }
+        String oldValue=this.instance.getA1xxuxxxbvxxxxxxxxxxvalue();
+        String newValue=this.getGtagValue().trim();
+        this.instance.setA1xxuxxxbvxxxxxxxxxxvalue(newValue);
+        if(newValue == null || newValue.isEmpty() ){
+         FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+           FacesMessage.SEVERITY_ERROR,bundle.getString("Analytics")+" "+ bundle.getString("Id")+" "+bundle.getString("cannot")+" "+bundle.getString("be")+" "+bundle.getString("empty"),""));
+         return "";
+        }
+        if(!customIdentity.isMasterSite()){
+         this.instance.setZzxxu2oxxhxxxxxxxxxxowner2(owner2Code);//local owner2 entry overrides mastersite/SYSTEM  entry
+        }
+        this.persist();
+        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+           FacesMessage.SEVERITY_ERROR,bundle.getString("Analytics")+" "+ bundle.getString("Id")+" "+oldValue+" "+bundle.getString("updated")+" "+bundle.getString("to")+" "+newValue,""));
+        return "";
+       } catch (Exception e) {
+        log.severe("Cannot update gtag id "+ e.getMessage());
+        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+          FacesMessage.SEVERITY_ERROR,bundle.getString("cannot")+" "+ bundle.getString("update")+" "+bundle.getString("id")+" "+e.getMessage(),""));
+         return "";
+       }
+      }
+
       String resource_bundleName="m"; 
       int deletedCount=0;
      //jay update this logic to delete by language
@@ -51848,6 +51916,9 @@ public String generateCoupons(int howMany,String prefix){
 
 
 <#if menuAttributesp2 == "65" >
+     public void listenerShowNetValue(){
+      showNetValue();
+     }
      public void showNetValue(){
       bcontinue=true;
       //totalBaseAmount is shown as running Net Amount

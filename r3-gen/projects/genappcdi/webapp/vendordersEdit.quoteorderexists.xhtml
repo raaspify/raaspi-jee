@@ -100,7 +100,7 @@
           <ui:define name="label">#{messages['Venquote']} 
           </ui:define>
                 <p:remoteCommand name="trexuq333xwwqqhxxxxxvenquoteFunction" proces="@all" update="@none" />
-                <h:selectOneMenu styleClass="autoCompleteWidth50"  
+                <p:selectOneMenu styleClass="autoCompleteWidth50"  
                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                      required="false" 
                        label="venquote"
@@ -117,10 +117,10 @@
                   result.jxxxuq300xwwqqhxxxxxvendor.b3xxuslnbvxxxxxxxxxxlastname).concat('/').concat(
                    result.jxxxuq300xwwqqhxxxxxvendor.d1xxu3cnbvxxxxxxxxxxvendorascompanyname)}"
                   />
-                </h:selectOneMenu>
+                </p:selectOneMenu>
           </ui:decorate>
           #{messages['Venquote']} [#{messages['closed']}]
-                <h:selectOneMenu styleClass="autoCompleteWidth50"  
+                <p:selectOneMenu styleClass="autoCompleteWidth50"  
                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                      required="false" 
                        label="venquote"
@@ -136,7 +136,7 @@
                   result.jxxxuq300xwwqqhxxxxxvendor.b3xxuslnbvxxxxxxxxxxlastname).concat('/').concat(
                    result.jxxxuq300xwwqqhxxxxxvendor.d1xxu3cnbvxxxxxxxxxxvendorascompanyname)}"
                   />
-                </h:selectOneMenu>
+                </p:selectOneMenu>
           <br/>
           <ui:remove>  added vq-sv to hide qtyord </ui:remove>
 
@@ -255,7 +255,7 @@
       </h:outputLabel>
  
                <h:selectOneMenu style="width:250px;"  value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.c2xxcxxxbv09xxxxxxxxterms}" required="false" id="c2xxcxxxbv09xxxxxxxxterms">
-               <f:ajax  render="c2xxcxxxbv09xxxxxxxxtermsI" bypassUpdates="false"/>
+               <p:ajax  update="c2xxcxxxbv09xxxxxxxxterms" />
                                 <f:selectItem itemValue="#{null}" itemLabel="" />
                                 <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('34',09)}"  var="babu"  
                                  itemLabel="#{babu.key}"
@@ -270,10 +270,12 @@
              <h:panelGroup id="c3xxfxxrbv09xxxxxxxxpriorityDecoration"    >
         <h:outputLabel  for="c3xxfxxrbv09xxxxxxxxpriority" value="#{messages['Priority']}">
       </h:outputLabel>
+
                 <h:selectBooleanCheckbox id="c3xxfxxrbv09xxxxxxxxpriority"
-                                      value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.c3xxfxxrbv09xxxxxxxxpriority}">
-                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value</ui:remove>
-                   <f:ajax  render="c3xxfxxrbv09xxxxxxxxpriority" bypassUpdates="false"/>
+                                      value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.c3xxfxxrbv09xxxxxxxxpriority}" >
+                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value </ui:remove>
+                   <p:ajax  update="c3xxfxxrbv09xxxxxxxxpriority" />
+                   
                  </h:selectBooleanCheckbox>
             </h:panelGroup>
 
@@ -286,7 +288,7 @@
       </h:outputLabel>
  
                <h:selectOneMenu style="width:250px;"  value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.d1xxcxxxbv10xxxxxxxxtype}" required="false" id="d1xxcxxxbv10xxxxxxxxtype">
-               <f:ajax  render="d1xxcxxxbv10xxxxxxxxtypeI" bypassUpdates="false"/>
+               <p:ajax  update="d1xxcxxxbv10xxxxxxxxtype" />
                                 <f:selectItem itemValue="#{null}" itemLabel="" />
                                 <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('34',10)}"  var="babu"  
                                  itemLabel="#{babu.key}"
@@ -320,12 +322,12 @@
             <p:panel header="#{messages['Fields']}" switchType="client" collapsed="!#{!(trexuq344xwwqqhxxxxxvendordersList.entityLessStatusDetailedList(trexuq344xwwqqhxxxxxvendordersHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1)}"
              leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
     <h:outputText value="#{messages['Shipping_Options_Msg']}"/>
-                            <h:selectOneRadio id="logic" value="#{xoxxuq3d4xwwqqhxxxxxvendodetailsHome.instance.z8xxtxsolxxxxxxxxxxxshipoption}" styleClass="radio">
+                            <p:selectOneRadio id="logic" value="#{xoxxuq3d4xwwqqhxxxxxvendodetailsHome.instance.z8xxtxsolxxxxxxxxxxxshipoption}" styleClass="radio">
                              <f:selectItem itemLabel="Pick Up" itemValue="P"/>
                              <f:selectItem itemLabel="Standard Ship" itemValue="S"/>
                              <f:selectItem itemLabel="Express Ship" itemValue="E"/>
                              <f:selectItem itemLabel="Not Applicable" itemValue="X"/>
-                            </h:selectOneRadio>
+                            </p:selectOneRadio>
             </p:panel>
    <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
      leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
@@ -457,14 +459,14 @@
                           value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.ybxxuzdrbvxxxxxxxxxxdocmnt}">
          </h:inputText>
            <p:tooltip for="ybxxuzdrbvxxxxxxxxxxdocmnto"> <span style="white-space: nowrap"> <h:outputText value="Types allowed are: jpg, gif, png, bmp, xml,doc,txt,pdf,xls,mp3,mp4"/></span> </p:tooltip> 
-	    <h:selectOneRadio value="#{trexuq344xwwqqhxxxxxvendordersHome.upLoadPurpose}" required="false" id="ybxxuzdrbvxxxxxxxxxxdocmntd" rendered="#{trexuq344xwwqqhxxxxxvendordersHome.instance.ybxxuzdrbvxxxxxxxxxxdocmnt ne null}">
+	    <p:selectOneRadio value="#{trexuq344xwwqqhxxxxxvendordersHome.upLoadPurpose}" required="false" id="ybxxuzdrbvxxxxxxxxxxdocmntd" rendered="#{trexuq344xwwqqhxxxxxvendordersHome.instance.ybxxuzdrbvxxxxxxxxxxdocmnt ne null}">
              <f:selectItem  
               itemLabel="Add"
               itemValue="ad" /> 
              <f:selectItem  
               itemLabel="Replace"
               itemValue="re" /> 
-           </h:selectOneRadio>
+           </p:selectOneRadio>
              <h:commandLink action="#{fpxxfq1a5xwwqqhxxxxxitemHome.removeImage()}"
                 value="#{messages['Remove']}" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt ne null}" />
                  
@@ -536,8 +538,9 @@
       <h:inputText id="z1xxztprlxxxxxxxxxxxamounttotal"  
          value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.z1xxztprlxxxxxxxxxxxamounttotal}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq344xwwqqhxxxxxvendordersHome.instance.z1xxztprlxxxxxxxxxxxamounttotal}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -550,8 +553,9 @@
       <h:inputText id="z2xxzyprlxxxxxxxxxxxamountostndt"  
          value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.z2xxzyprlxxxxxxxxxxxamountostndt}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq344xwwqqhxxxxxvendordersHome.instance.z2xxzyprlxxxxxxxxxxxamountostndt}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -564,8 +568,9 @@
       <h:inputText id="z3xxztqrlxxxxxxxxxxxqtytotal"  
          value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.z3xxztqrlxxxxxxxxxxxqtytotal}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq344xwwqqhxxxxxvendordersHome.instance.z3xxztqrlxxxxxxxxxxxqtytotal}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -578,8 +583,9 @@
       <h:inputText id="z4xxzyqrlxxxxxxxxxxxqtyostndt"  
          value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.z4xxzyqrlxxxxxxxxxxxqtyostndt}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq344xwwqqhxxxxxvendordersHome.instance.z4xxzyqrlxxxxxxxxxxxqtyostndt}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -591,8 +597,9 @@
       </h:outputLabel>
                 <h:inputText id="z5xxzzfxhhxxxxxxxxxxstatusfl" 
                           value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -619,8 +626,9 @@
       </h:outputLabel>
                 <h:inputText id="z6xxzzprhvxxxxxxxxxxprintmstat" 
                           value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.z6xxzzprhvxxxxxxxxxxprintmstat}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -648,8 +656,9 @@
       <h:inputText id="z7xxzbtxavxxxxxxxxxxbaseamountt"  
          value="#{trexuq344xwwqqhxxxxxvendordersHome.instance.z7xxzbtxavxxxxxxxxxxbaseamountt}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq344xwwqqhxxxxxvendordersHome.instance.z7xxzbtxavxxxxxxxxxxbaseamountt}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -892,7 +901,7 @@
                             <f:facet id="CartRemoveFacet" name="header">
                                 <h:outputText id="CartRemoveText" value="#{messages['removeColumn']}" />
                             </f:facet>
-                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="#{trexuq344xwwqqhxxxxxvendordersHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                            <p:selectBooleanCheckbox id="CartRemoveCheckbox" value="#{trexuq344xwwqqhxxxxxvendordersHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
                         </p:column>
                         <p:column id="columnxxo">
                             <f:facet id="XxoFacet" name="header">
@@ -1051,10 +1060,10 @@
             <h:panelGrid columns="2">
              <ui:decorate template="layout/display.xhtml">
                 <ui:define name="label">#{messages['report.displayAs']}</ui:define>
-                <h:selectOneMenu id="displayAs" value="#{trexuq344xwwqqhxxxxxvendordersList.displayAs}">
+                <p:selectOneMenu id="displayAs" value="#{trexuq344xwwqqhxxxxxvendordersList.displayAs}">
                  <f:selectItem id="ditem2" itemLabel="HTML" itemValue="HTML" />
                  <f:selectItem id="ditem1" itemLabel="PDF" itemValue="PDF" />
-                </h:selectOneMenu> 
+                </p:selectOneMenu> 
              </ui:decorate>
             </h:panelGrid>
              <h:commandButton id="ePrint" value="#{messages['Print']}/#{messages['Preview']} #{messages['report']}"   onclick="this.form.target='_blank'"

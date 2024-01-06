@@ -100,7 +100,7 @@
             <ui:define name="label">#{messages['Account']} 
             </ui:define>
                 <p:remoteCommand name="yxxxch601xwwqqhxxxxxaccountFunction" proces="@all" update="@none" actionListener="#{yxxxch65exwwqqhxxxxxglentriesHome.showNetValue}"/>
-             <h:selectOneMenu styleClass="autoCompleteWidth50" id="yxxxch601xwwqqhxxxxxaccountsm"
+             <p:selectOneMenu styleClass="autoCompleteWidth50" id="yxxxch601xwwqqhxxxxxaccountsm"
                    rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                    required="true" 
                        label="account"
@@ -112,7 +112,7 @@
                      value="#{yxxxch601xwwqqhxxxxxaccountList.getSuggestList(' ')}" var ="result" 
                      itemValue="#{result.a0xxukwxbvxxxxxxxxxxaccount}" 
                      itemLabel="#{result.a0xxukwxbvxxxxxxxxxxaccount.concat('/ ').concat(result.a1xxuzsxbvxxxxxxxxxxdescript)}"/>
-             </h:selectOneMenu>
+             </p:selectOneMenu>
 
 
            </ui:decorate>
@@ -126,7 +126,7 @@
             <ui:define name="label">#{messages['Perioddates']} 
             </ui:define>
                 <p:remoteCommand name="yxxxuq632xwwqqhxxxxxperioddatesFunction" proces="@all" update="@none" actionListener="#{yxxxch65exwwqqhxxxxxglentriesHome.showNetValue}"/>
-             <h:selectOneMenu styleClass="autoCompleteWidth50" id="yxxxuq632xwwqqhxxxxxperioddatessm"
+             <p:selectOneMenu styleClass="autoCompleteWidth50" id="yxxxuq632xwwqqhxxxxxperioddatessm"
                    rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                    required="false"
                     validator="#{yxxxch65exwwqqhxxxxxglentriesHome.validateAndSelectXxxxxxxxperiod}" 
@@ -136,7 +136,7 @@
               <f:selectItems 
                      value="#{yxxxuq632xwwqqhxxxxxperioddatesList.suggest(' ')}" var ="result" itemValue="#{result}" 
                      itemLabel="#{result}"/>
-             </h:selectOneMenu>
+             </p:selectOneMenu>
 
 
            </ui:decorate>
@@ -157,11 +157,11 @@
                  <ui:remove>reusing existing props, del refers to debit and mis refers to credit</ui:remove>
         	 <h:inputText id="debitamtIn" value="#{yxxxch65exwwqqhxxxxxglentriesHome.totaldel}"  
                  onclick="this.value='';if (#{'yxxxch65exwwqqhxxxxxglentries:creditamtIn'}.value != 0.0) {if (! confirm(jay2) ) { return false;}; return true;} " onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xorxeh66exwwqqhxxxxxgentriesdetailsHome.instance.c4xxzxxxbvxxxxxxxxxxdebitamt}}:this.value;"
-                 disabled="false" >
-                 <f:ajax listener = "#{yxxxch65exwwqqhxxxxxglentriesHome.showNetValue}"  event="keyup" render="@all" bypassUpdates="false"/>
+                 disabled="false"  >
+                 <p:ajax listener = "#{yxxxch65exwwqqhxxxxxglentriesHome.showNetValue}"  event="keyup" update="@all" />
                  <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
              </h:inputText>
-                 <p:tooltip for="debitamtIn"> <span style="white-space: nowrap"> <h:outputText value="#{messages['Generally']} #{messages['Dividends']}, #{messages['Expenses']}, #{messages['Assets']}, #{messages['Losses']} #{messages['are']} #{messages['increased']} #{messages['by']} #{messages['Debit']}"/></span> </p:tooltip> 
+                 <p:tooltip for="debitamtInT"> <span style="white-space: nowrap"> <h:outputText value="#{messages['Generally']} #{messages['Dividends']}, #{messages['Expenses']}, #{messages['Assets']}, #{messages['Losses']} #{messages['are']} #{messages['increased']} #{messages['by']} #{messages['Debit']}"/></span> </p:tooltip> 
              </ui:decorate>
              <ui:decorate id="creditAmtlabel" template="layout/edit.xhtml" >
              <ui:define name="label">Credit Amount #{customIdentity.mcurrencySymbol}
@@ -169,7 +169,7 @@
         	 <h:inputText id="creditamtIn" value="#{yxxxch65exwwqqhxxxxxglentriesHome.totalmis}"  
                  onclick="this.value='';if (#{'yxxxch65exwwqqhxxxxxglentries:debitamtIn'}.value != 0.0) {if (! confirm(jay2) ) { return false;}; return true;} " onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xorxeh66exwwqqhxxxxxgentriesdetailsHome.instance.c5xxzxxxbvxxxxxxxxxxcreditamt}}:this.value;"
                  disabled="false" >
-                 <f:ajax listener = "#{yxxxch65exwwqqhxxxxxglentriesHome.showNetValue}"  event="keyup" render="@all" bypassUpdates="false"/>
+                 <p:ajax listener = "#{yxxxch65exwwqqhxxxxxglentriesHome.showNetValue}"  event="keyup" update="@all" />
                  <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
              </h:inputText>
                  <p:tooltip for="creditamtIn"> <span style="white-space: nowrap"> <h:outputText value="#{messages['Generally']} #{messages['Income']}, #{messages['Revenues']}, #{messages['Liabilities']}, #{messages['Equity']} #{messages['are']} #{messages['increased']} #{messages['by']} #{messages['Credit']}"/></span> </p:tooltip> 
@@ -283,8 +283,9 @@
       <h:inputText id="c4xxzxxxbvxxtxxxxxxxtdebitamt"  
          value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.c4xxzxxxbvxxtxxxxxxxtdebitamt}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{yxxxch65exwwqqhxxxxxglentriesHome.instance.c4xxzxxxbvxxtxxxxxxxtdebitamt}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -297,8 +298,9 @@
       <h:inputText id="c5xxzxxxbvxxxxxxxxxxtcreditamt"  
          value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.c5xxzxxxbvxxxxxxxxxxtcreditamt}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{yxxxch65exwwqqhxxxxxglentriesHome.instance.c5xxzxxxbvxxxxxxxxxxtcreditamt}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -316,8 +318,9 @@
       </h:outputLabel>
                 <h:inputText id="y1xxuxexbvxxxxxxxxxxdepcode" 
                           value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.y1xxuxexbvxxxxxxxxxxdepcode}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -329,8 +332,9 @@
       </h:outputLabel>
                 <h:inputText id="y2xxuxoxbvxxxxxxxxxxdivcode" 
                           value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.y2xxuxoxbvxxxxxxxxxxdivcode}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -358,8 +362,9 @@
       </h:outputLabel>
                 <h:inputText id="z1xxzzfxhhxxxxxxxxxxstatusfl" 
                           value="#{yxxxch65exwwqqhxxxxxglentriesHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -427,7 +432,7 @@
                             <f:facet id="CartRemoveFacet" name="header">
                                 <h:outputText id="CartRemoveText" value="#{messages['removeColumn']}" />
                             </f:facet>
-                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="#{yxxxch65exwwqqhxxxxxglentriesHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                            <p:selectBooleanCheckbox id="CartRemoveCheckbox" value="#{yxxxch65exwwqqhxxxxxglentriesHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
                         </p:column>
                         <p:column id="columnxxodl">
                             <f:facet id="XxodlFacet" name="header">

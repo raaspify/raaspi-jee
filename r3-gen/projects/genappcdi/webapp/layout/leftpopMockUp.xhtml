@@ -8,7 +8,6 @@
 <ui:composition>
 <h:form>
 
-<h:panelGroup rendered="true">
 
          <!-- left panel top-1 content can be descript and doc for text and  image/notes for picture/caption from ITEM table only --> 
          <!-- keys are 
@@ -37,15 +36,15 @@
                 rendered="#{customIdentity.labelView.contains('VM')  and (yxxxuq1n1xwwqqqxxxxxblobdataHome.getBlobdata('blobdata','A3R-LEFT-FTR-M','PIC',0) !=null)}">
               </h:graphicImage> 
 
-
-
+</h:form>
+<ui:remove> avoid nested form to avoid not invoking backing bean method. include has h:form and /h:form
+</ui:remove>
     <ui:include src="panelMenuMockUp.xhtml">
         <ui:param name="projectName" value="genapp"/>
     </ui:include>
-<ui:remove>
+<h:form>
     <h:commandButton value="#{messages.left_pop}" onclick="PF('lpopup').show()">
     </h:commandButton>
-</ui:remove>
 
     <p:dialog id="lpopup" modal="false" autosized="true" resizeable="false">
         <f:facet name="header">
@@ -65,7 +64,6 @@
         </p>
 
     </p:dialog>
-</h:panelGroup>
 </h:form>
 </ui:composition>
 

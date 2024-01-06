@@ -41,6 +41,16 @@
         target.value= "";
     }
     </script>
+  <script>
+     let date = Date.now();
+     /* 2. Define your event. */
+     function addToCart() {
+     alert('addToCart');
+       gtag('event', 'addTo_Cart', {
+       'time': date,
+       });
+   }
+   </script>
 <style>
 .dropdown:hover>.dropdown-menu {
   display: block;
@@ -698,9 +708,10 @@
               rendered="#{identity.loggedIn and empty row.h1xxcxxrbxxxxxxxxxxxeffdate}">                        
             </h:outputText>
           </h:panelGrid>
+jay
           <h:link id="AddToCart1I"   rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
             and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring')}"
-            outcome="/cartItem.xhtml" >
+            outcome="/cartItem.xhtml" onlick="addToCart() ;return false">
              <f:param name="categoryJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
            <h:graphicImage rendered="#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH' 
              and fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
@@ -710,9 +721,10 @@
            <h:graphicImage value="/img/item-customer.jpg" class="card-img-top "  style="object-fit: cover;max-height:200px;"
             rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) == null}"/>
           </h:link>
+jay
           <h:commandLink id="AddToCart1M"   rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
             and (row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') or row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))}"
-            action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(1,'trial')}" >
+            action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(1,'trial')}" onclick="alert('hiii')">
             <f:param name="poSid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
            <h:graphicImage rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
             value="/ImageServletCdi/?seq=1&amp;id=#{row.w8xxuzdrbvxxxxxxxxxxdocmnt}&amp;table=FPXXFQ1A5XWWQQHXXXXXITEM&amp;qlf=1&amp;height=0"
@@ -820,7 +832,7 @@
                             <h:link id="AddToCart1" styleClass="btn btn-primary"  rendered= "#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'
                              and (row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
                              and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))}"
-                                 outcome="/cartItem.xhtml" 
+                                 outcome="/cartItem.xhtml" onlick="addToCart()"
                                  value="#{messages['Add']} #{messages['To']} #{messages['Cart']}">
                                 <f:param name="categoryJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
                             </h:link>
@@ -830,7 +842,7 @@
                             </ui:remove>
                             <h:commandLink id="AddToCart1m" styleClass="btn btn-primary"  rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
                              and (row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') )}"
-                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(1,'trial')}" 
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(1,'trial')}"  onlick="addToCart()"
                                   value="#{messages['Start']} #{messages['free']} #{messages['trial']}">
                               <f:param name="poSid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
                             </h:commandLink>
@@ -880,7 +892,7 @@
           </h:panelGrid>
           <h:link id="AddToCart1I"   rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
             and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring')}"
-            outcome="/cartItem.xhtml" >
+            outcome="/cartItem.xhtml"  onlick="addToCart()">
              <f:param name="categoryJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
            <h:graphicImage rendered="#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH' 
              and fpxxfq1a5xwwqqhxxxxxitemHome.getBlobdata('FPXXFQ1A5XWWQQHXXXXXITEM',row.w8xxuzdrbvxxxxxxxxxxdocmnt,1,1) != null}"
@@ -996,7 +1008,7 @@
                             <h:link id="AddToCart1mm" styleClass="btn btn-primary"  rendered= "#{row.fpxxfq1a5xwwqqhxxxxxitem.g2xxuxn1bvxxxxxxxxxxsubcodesn!='TH'
                              and (row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
                              and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') and !row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('recurring'))}"
-                                 outcome="/cartItem.xhtml" 
+                                 outcome="/cartItem.xhtml" onlick="addToCart()"
                                  value="#{messages['Add']} #{messages['To']} #{messages['Cart']}">
                                 <f:param name="categoryJay" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
                             </h:link>
@@ -1006,7 +1018,7 @@
                             </ui:remove>
                             <h:commandLink id="AddToCart1mtt" styleClass="btn btn-primary"  rendered= "#{row.b0xxziqxlvxxsaxxxxxxquantity gt 0 and !row.c6xxusxrbv16xxxxxxxxtype.contains('(q)')
                              and (row.y2xxuxxrbvxxxxxxxxxxmisccode1.contains('trial') )}"
-                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(1,'trial')}" 
+                                 action="#{fpxxfq1a5xwwqqhxxxxxitemHome.addProductToOrderParam(1,'trial')}"  onlick="addToCart()"
                                   value="#{messages['Start']} #{messages['free']} #{messages['trial']}">
                               <f:param name="poSid" value="#{row.a0xxuobxbxxxxxxxxxxxsid}" />
                             </h:commandLink>

@@ -345,7 +345,7 @@
              <h:panelGrid columns="2">
              <h:selectOneMenu  value="${'#'}{yxxxch5a1xhhxxhxxxxxtruefalseList.selectedClass}" 
               rendered="true">
-              <f:ajax  render="gClN" bypassUpdates="false"/>
+              <p:ajax  />
 	      <f:selectItems value="${'#'}{yxxxch5a1xhhxxhxxxxxtruefalseList.getClassNames('all')}"   /> 
              </h:selectOneMenu>
              </h:panelGrid>
@@ -938,6 +938,7 @@ the following copied from entityHome.ftl
      <#-- cont foreign fields, jay entityfunc ${property.name} -->
      <#if property.name?substring(pkS,pkE)=="n" || property.name?substring(pkS,pkE)=="k">
       <#assign pentityFunction = property.name?substring(pefS,pefE)>
+      <#assign keyedKeyName=property.name>
      </#if>
      <#-- jay2 foreign fields entityfunc ${pentityFunction} -->
       <#if pentityFunction=="cp">
@@ -1122,7 +1123,7 @@ the following copied from entityHome.ftl
         <ui:define name="label">${'#'}{messages['${property.name?substring(pL)?cap_first}']} 
         </ui:define>
                 <p:remoteCommand name="${property.name}Function" process="@all" update="@none" />
-                <h:selectOneMenu styleClass="autoCompleteWidth50"  
+                <p:selectOneMenu styleClass="autoCompleteWidth50"  
                  rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                    <#if (pentityFunction=="sh" || pentityFunction=="sv") >
                     <#if property.name?contains('ByBill') || property.name?contains('ByCarrier')  >
@@ -1146,7 +1147,7 @@ the following copied from entityHome.ftl
                  <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
                  <f:selectItems value="${'#'}{${parentName}List.suggest(' ')}" var="result"
                  itemValue="${'#'}{result}" itemLabel="${'#'}{result}" />
-                </h:selectOneMenu>
+                </p:selectOneMenu>
        </ui:decorate>
        <br/>
           <#-- if 20,30,40 put collapsible panel for new address as alternative to using existing address or allow
@@ -1181,7 +1182,7 @@ the following copied from entityHome.ftl
              <h:panelGrid columns="2">
              <h:selectOneMenu  value="${'#'}{${homeName}.city}" 
               rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
-              <f:ajax  render="${property.name}CityI" bypassUpdates="false"/>
+              <f:ajax  render="${property.name}CityI" />
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{${optionsEntityName}List.getUserProfile('01','11').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{${optionsEntityName}List.getUserProfile('01','11').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
 	      <f:selectItems value="${'#'}{${optionsEntityName}List.getoptionsFieldList('xx',11)}"  var="babu"  
@@ -1202,7 +1203,7 @@ the following copied from entityHome.ftl
              <h:panelGrid columns="2">
              <h:selectOneMenu  value="${'#'}{${homeName}.provstate}" 
               rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
-              <f:ajax  render="${property.name}provstateI" bypassUpdates="false"/>
+              <f:ajax  render="${property.name}provstateI" />
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{${optionsEntityName}List.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{${optionsEntityName}List.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
 	      <f:selectItems value="${'#'}{${optionsEntityName}List.getoptionsFieldList('xx',12)}"  var="babu"  
@@ -1223,7 +1224,7 @@ the following copied from entityHome.ftl
              <h:panelGrid columns="2">
              <h:selectOneMenu  value="${'#'}{${homeName}.pzcode}" 
               rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
-              <f:ajax  render="${property.name}pzcodeI" bypassUpdates="false"/>
+              <f:ajax  render="${property.name}pzcodeI" />
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{${optionsEntityName}List.getUserProfile('01','14').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{${optionsEntityName}List.getUserProfile('01','14').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
 	      <f:selectItems value="${'#'}{${optionsEntityName}List.getoptionsFieldList('xx',14)}"  var="babu"  
@@ -1247,7 +1248,7 @@ the following copied from entityHome.ftl
              <h:panelGrid columns="2">
              <h:selectOneMenu  value="${'#'}{${homeName}.country}" 
               rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
-              <f:ajax  render="${property.name}countryI" bypassUpdates="false"/>
+              <f:ajax  render="${property.name}countryI" />
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{${optionsEntityName}List.getUserProfile('01','13').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{${optionsEntityName}List.getUserProfile('01','13').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
 	      <f:selectItems value="${'#'}{${optionsEntityName}List.getoptionsFieldList('xx',13)}"  var="babu"  
@@ -1275,7 +1276,7 @@ the following copied from entityHome.ftl
         <ui:define name="label">${'#'}{messages['${property.name?substring(pL)?cap_first}']} 
         </ui:define>
                 <p:remoteCommand name="${property.name}Function" proces="@all" update="@none" />
-                <h:selectOneMenu styleClass="autoCompleteWidth50"  
+                <p:selectOneMenu styleClass="autoCompleteWidth50"  
                  rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                    <#if (pentityFunction=="sh" || pentityFunction=="sv") >
                     <#if property.name?contains('ByBill') || property.name?contains('ByCarrier')  >
@@ -1299,7 +1300,7 @@ the following copied from entityHome.ftl
                  <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
                  <f:selectItems value="${'#'}{${parentName}List.suggest(' ')}" var="result"
                  itemValue="${'#'}{result}" itemLabel="${'#'}{result}" />
-                </h:selectOneMenu>
+                </p:selectOneMenu>
        </ui:decorate>
        <br/>
        </p:tab>
@@ -1327,7 +1328,7 @@ the following copied from entityHome.ftl
           <ui:define name="label">${'#'}{messages['${property.name?substring(pL)?cap_first}']} 
           </ui:define>
                 <p:remoteCommand name="${property.name}Function" proces="@all" update="@none" />
-                <h:selectOneMenu styleClass="autoCompleteWidth50"  
+                <p:selectOneMenu styleClass="autoCompleteWidth50"  
                  <#if pentityFunction=="cp">
                   rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                  <#else>
@@ -1432,10 +1433,10 @@ the following copied from entityHome.ftl
                    result.${vendorEntityName}.${vendorCompanyName})}"
                  </#if>
                   />
-                </h:selectOneMenu>
+                </p:selectOneMenu>
           </ui:decorate>
           ${'#'}{messages['${property.name?substring(pL)?cap_first}']} [${'#'}{messages['closed']}]
-                <h:selectOneMenu styleClass="autoCompleteWidth50"  
+                <p:selectOneMenu styleClass="autoCompleteWidth50"  
                  rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                     <#if (pentityFunction=="sh" || pentityFunction=="sv") && (parentName?contains('invoice') || property.name?contains('order'))  >
                      required="false"
@@ -1515,7 +1516,7 @@ the following copied from entityHome.ftl
                    result.${vendorEntityName}.${vendorCompanyName})}"
                  </#if>
                   />
-                </h:selectOneMenu>
+                </p:selectOneMenu>
           <br/>
           <ui:remove>  added vq-sv to hide qtyord </ui:remove>
          <#if  menuAttributesFunction == "27" && (property.name=customerEntityName || variation="quoteorderexists") > 
@@ -1528,9 +1529,9 @@ the following copied from entityHome.ftl
                  onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?${'#'}{${customerInvoiceEtcItemDetailsEntityName}Home.instance.z6xxzxxxavxxxxxxxxxxamountin}}:this.value;"
                  disabled="false" >
                  <#if menuAttributesFunction ="1b" >
-                 <f:ajax listener = "${'#'}{${homeName}.recalculateThis}"  event="keyup" render="matcodeDescriptDecoration,matcodePriceLabelT,matcodeTDecoration,matcodeDecorationmis,matcodeDecorationdelT,matcodeDecorationtax1T,matcodeDecorationtax2T" bypassUpdates="false"/>
+                 <p:ajax listener = "${'#'}{${homeName}.recalculateThis}"  event="keyup" update="@form" />
                  <#else>
-                 <f:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="keyup" render="matcodeDescriptDecoration,matcodePriceLabelT,matcodeTDecoration,matcodeDecorationmis,matcodeDecorationdelT,matcodeDecorationtax1T,matcodeDecorationtax2T" bypassUpdates="false"/>
+                 <p:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="keyup" update="@form" />
                  </#if>
                  <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
              </h:inputText>
@@ -1547,7 +1548,7 @@ the following copied from entityHome.ftl
                  onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?${'#'}{${vendorInvoiceEtcItemDetailsEntityName}Home.instance.z6xxzxxxavxxxxxxxxxxamountin}}:this.value;"
                  disabled="false" >
                  <f:convertNumber minFractionDigits="0" maxFractionDigits="2"  />
-                 <f:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="blur" render="matcodeDescriptDecoration,matcodePriceLabelT,matcodeTDecoration,matcodeDecorationmis,matcodeDecorationdelT,matcodeDecorationtax1T,matcodeDecorationtax2T" bypassUpdates="false"/>
+                 <p:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="blur" update="@form" />
              </h:inputText>
              </ui:decorate>
              <#assign brCount=brCount+1>
@@ -1594,7 +1595,7 @@ the following copied from entityHome.ftl
             <ui:define name="label">${'#'}{messages['${property.name?substring(eL)?cap_first}']}AsParent 
             </ui:define>
              <p:remoteCommand name="${property.name}Function" proces="@all" update="@none" />
-             <h:selectOneMenu styleClass="autoCompleteWidth50" 
+             <p:selectOneMenu styleClass="autoCompleteWidth50" 
                    rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                    <#if parentKeyName?substring(0,3) = "id.">
                     validator="${'#'}{${componentName}Home.validateAndSelect${parentKeyName?substring(15)?cap_first}${property.name?substring(pL)}}" 
@@ -1623,7 +1624,7 @@ the following copied from entityHome.ftl
                      itemValue="${'#'}{result}" 
                      itemLabel="${'#'}{result}"/>
                    </#if>
-             </h:selectOneMenu>
+             </p:selectOneMenu>
             <br/>
            </ui:decorate>
           <#if (parentKeyName?length > pL) && menuAttributesFunction =="1a" && (parentKeyName?length > pL)>
@@ -1632,7 +1633,7 @@ the following copied from entityHome.ftl
             <ui:define name="label">${'#'}{messages['category']} ${'#'}{messages['shopping']} 
             </ui:define>
                 <p:remoteCommand name="${property.name}Function" update="@none" />
-             <h:selectOneMenu styleClass="autoCompleteWidth50" 
+             <p:selectOneMenu styleClass="autoCompleteWidth50" 
                    rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                    <#if parentKeyName?substring(0,3) = "id.">
                     validator="${'#'}{${componentName}Home.validateAndSelect${parentKeyName?substring(15)?cap_first}${property.name?substring(pL)}}" 
@@ -1647,14 +1648,14 @@ the following copied from entityHome.ftl
                      value="${'#'}{${parentName}List.getSuggestList('SI-L%')}" var ="result" 
                      itemValue="${'#'}{result.a0xxukixbxxxxxxxxxxxmatcode}" 
                      itemLabel="${'#'}{result.${itemDescript}}" />
-             </h:selectOneMenu>
+             </p:selectOneMenu>
             <br/>
            </ui:decorate>
            <ui:decorate id="${property.name}DecorationI" template="layout/edit.xhtml" >
             <ui:define name="label">${'#'}{messages['category']} ${'#'}{messages['image']} 
             </ui:define>
                 <p:remoteCommand name="${property.name}Function" proces="@all" update="@none" />
-             <h:selectOneMenu styleClass="autoCompleteWidth50" 
+             <p:selectOneMenu styleClass="autoCompleteWidth50" 
                    rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                    <#if parentKeyName?substring(0,3) = "id.">
                     validator="${'#'}{${componentName}Home.validateAndSelect${parentKeyName?substring(15)?cap_first}${property.name?substring(pL)}}" 
@@ -1669,14 +1670,14 @@ the following copied from entityHome.ftl
                      value="${'#'}{${parentName}List.getSuggestList('PI-L*')}" var ="result" 
                      itemValue="${'#'}{result.a0xxukixbxxxxxxxxxxxmatcode}" 
                      itemLabel="${'#'}{result.${itemDescript}}" />
-             </h:selectOneMenu>
+             </p:selectOneMenu>
             <br/>
            </ui:decorate>
            <ui:decorate id="${property.name}DecorationB" template="layout/edit.xhtml" >
             <ui:define name="label">${'#'}{messages['category']} ${'#'}{messages['blog']} 
             </ui:define>
              <p:remoteCommand name="${property.name}Function" proces="@all" update="@none" />
-             <h:selectOneMenu styleClass="autoCompleteWidth50" 
+             <p:selectOneMenu styleClass="autoCompleteWidth50" 
                    rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                    <#if parentKeyName?substring(0,3) = "id.">
                     validator="${'#'}{${componentName}Home.validateAndSelect${parentKeyName?substring(15)?cap_first}${property.name?substring(pL)}}" 
@@ -1691,7 +1692,7 @@ the following copied from entityHome.ftl
                      value="${'#'}{${parentName}List.getSuggestList('BI-L*')}" var ="result" 
                      itemValue="${'#'}{result.a0xxukixbxxxxxxxxxxxmatcode}" 
                      itemLabel="${'#'}{result.${itemDescript}}" />
-             </h:selectOneMenu>
+             </p:selectOneMenu>
             <br/>
            </ui:decorate>
           </#if>
@@ -1709,7 +1710,7 @@ the following copied from entityHome.ftl
            <h:outputText value="${'#'}{messages['Sales']} ${'#'}{messages['Agent']}" />
            <ui:decorate id="${property.name}DecorationT" template="layout/edit.xhtml"  >
             <p:remoteCommand name="${property.name}Function" proces="@all" update="@none" />
-             <h:selectOneMenu styleClass="autoCompleteWidth50" 
+             <p:selectOneMenu styleClass="autoCompleteWidth50" 
                    rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                    value="${'#'}{${parentName}Home.last${parentName}P}"
              >
@@ -1717,7 +1718,7 @@ the following copied from entityHome.ftl
               <f:selectItems 
                      value="${'#'}{${parentName}List.suggest(' ')}" var ="result" itemValue="${'#'}{result}" 
                      itemLabel="${'#'}{result}"/>
-             </h:selectOneMenu>
+             </p:selectOneMenu>
            </ui:decorate>
          <#--not employee for cq etc or sh,sv etc ${property.name}   -->
          <#else>
@@ -1743,7 +1744,7 @@ the following copied from entityHome.ftl
                <#else>
                 <p:remoteCommand name="${property.name}Function" proces="@all" />
                </#if>
-             <h:selectOneMenu styleClass="autoCompleteWidth50" id="${property.name}sm"
+             <p:selectOneMenu styleClass="autoCompleteWidth50" id="${property.name}sm"
                 <#if (pentityFunction=="cq" || pentityFunction=="co" || pentityFunction=="ci" || pentityFunction=="vq" || pentityFunction=="vo" || pentityFunction=="vi" || pentityFunction=="va"
                  || pentityFunction=="eo"  || pentityFunction=="cp"  || pentityFunction=="vp"    ) 
                   || pentityFunction=="sh"  || pentityFunction=="sv" || menuAttributesFunction ="21" || menuAttributesFunction ="31" || menuAttributesFunction ="1h"   > 
@@ -1880,7 +1881,7 @@ the following copied from entityHome.ftl
                      value="${'#'}{${parentName}List.suggest(' ')}" var ="result" itemValue="${'#'}{result}" 
                      itemLabel="${'#'}{result}"/>
                    </#if>
-             </h:selectOneMenu>
+             </p:selectOneMenu>
          <#if  menuAttributesFunction == "27" && (property.name=customerEntityName || variation="quoteorderexists") > 
           <h:panelGroup>
              <ui:decorate id="amtinlabel" template="layout/edit.xhtml" >
@@ -1890,10 +1891,10 @@ the following copied from entityHome.ftl
         	 <h:inputText id="amtIn" value="${'#'}{${customerInvoiceEtcItemDetailsEntityName}Home.instance.z6xxzxxxavxxxxxxxxxxamountin}"  
                  onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?${'#'}{${customerInvoiceEtcItemDetailsEntityName}Home.instance.z6xxzxxxavxxxxxxxxxxamountin}}:this.value;"
                  disabled="false" >
-                 <#if menuAttributesFunction ="1b" >
-                 <f:ajax listener = "${'#'}{${homeName}.recalculateThis}"  event="keyup" render="matcodeDescriptDecoration,matcodePriceLabelT,matcodeTDecoration,matcodeDecorationmis,matcodeDecorationdelT,matcodeDecorationtax1T,matcodeDecorationtax2T" bypassUpdates="false"/>
+                 <#if menuAttributesFunction ="1b">
+                 <p:ajax listener = "${'#'}{${homeName}.recalculateThis}"  event="keyup" update="@form" />
                  <#else>
-                 <f:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="keyup" render="matcodeDescriptDecoration,matcodePriceLabelT,matcodeTDecoration,matcodeDecorationmis,matcodeDecorationdelT,matcodeDecorationtax1T,matcodeDecorationtax2T" bypassUpdates="false"/>
+                 <p:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="keyup" update="@form" />
                  </#if>
                  <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
              </h:inputText>
@@ -1911,7 +1912,7 @@ the following copied from entityHome.ftl
                  onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?${'#'}{${vendorInvoiceEtcItemDetailsEntityName}Home.instance.z6xxzxxxavxxxxxxxxxxamountin}}:this.value;"
                  disabled="false" >
                  <f:convertNumber minFractionDigits="0" maxFractionDigits="2"  />
-                 <f:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="blur" render="matcodeDescriptDecoration,matcodePriceLabelT,matcodeTDecoration,matcodeDecorationmis,matcodeDecorationdelT,matcodeDecorationtax1T,matcodeDecorationtax2T" bypassUpdates="false"/>
+                 <p:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="blur" update="@form" />
              </h:inputText>
              </ui:decorate>
              <#assign brCount=brCount+1>
@@ -1949,13 +1950,13 @@ the following copied from entityHome.ftl
         <ui:define name="label">${'#'}{messages['${property.name?substring(pL)?cap_first}']} 
         </ui:define>
              <p:remoteCommand name="${property.name}Function" proces="@all" update="@none" />
-             <h:selectOneMenu styleClass="autoCompleteWidth50" validator="${'#'}{${componentName}Home.validateAndSelect${parentKeyName?substring(12)?cap_first}${property.name?substring(pL)}}" 
+             <p:selectOneMenu styleClass="autoCompleteWidth50" validator="${'#'}{${componentName}Home.validateAndSelect${parentKeyName?substring(12)?cap_first}${property.name?substring(pL)}}" 
               value="${'#'}{${parentName}Home.last${parentName}P}"
               rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItems value="${'#'}{${parentName}List.suggest(' ')}" var="result"
                itemValue="${'#'}{result}" itemLabel="${'#'}{result}" />
-             </h:selectOneMenu>
+             </p:selectOneMenu>
        </ui:decorate>
          <#list 1..brCount as i>
           <br/> 
@@ -1970,13 +1971,13 @@ the following copied from entityHome.ftl
         <ui:define name="label">${'#'}{messages['${property.name?substring(pL)?cap_first}']} 
         </ui:define>
                 <p:remoteCommand name="${property.name}Function" proces="@all" update="@none" />
-             <h:selectOneMenu styleClass="autoCompleteWidth50" validator="${'#'}{${componentName}Home.validateAndSelect${parentKeyName?substring(15)?cap_first}${property.name?substring(pL)}}" 
+             <p:selectOneMenu styleClass="autoCompleteWidth50" validator="${'#'}{${componentName}Home.validateAndSelect${parentKeyName?substring(15)?cap_first}${property.name?substring(pL)}}" 
               value="${'#'}{${parentName}Home.last${parentName}P}"
               rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItems value="${'#'}{${parentName}List.suggest(' ')}" var="result"
                itemValue="${'#'}{result}" itemLabel="${'#'}{result}" />
-             </h:selectOneMenu>
+             </p:selectOneMenu>
        </ui:decorate>
          <#list 1..brCount as i>
           <br/> 
@@ -2088,7 +2089,7 @@ the following copied from entityHome.ftl
               <ui:decorate id="currencyConv" template="layout/edit.xhtml" >
                <ui:define name="label">${'#'}{messages['Use']} ${'#'}{messages['Merchant']}/${'#'}{messages['Bank']} ${'#'}{messages['currency']} 
                </ui:define>
-               <h:selectBooleanCheckbox id="currencyConvI" value="${'#'}{${componentName}Home.currConv}"/>
+               <p:selectBooleanCheckbox id="currencyConvI" value="${'#'}{${componentName}Home.currConv}"/>
               </ui:decorate>
              </#if>
 
@@ -2121,7 +2122,7 @@ the following copied from entityHome.ftl
                           value="${'#'}{${componentName}Home.instance.${itemEntityName}.tempQuantity}"
                           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?${'#'}{${componentName}Home.instance.${itemEntityName}.tempQuantity}:this.value;"
                            size="21">
-                    <f:ajax event="keyup" render="ztprlxxxxxxxxxxxamounttotalDecoration" bypassUpdates="false"/>
+                    <p:ajax event="keyup" update="ztprlxxxxxxxxxxxamounttotalDecoration" />
                 </h:inputText>
             </ui:decorate>
             <#assign brCount=brCount+1>
@@ -2212,7 +2213,7 @@ the following copied from entityHome.ftl
              <h:panelGrid columns="2">
              <h:selectOneMenu  value="${'#'}{${homeName}.city}" 
               rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
-              <f:ajax  render="${showAddressPName}CityI" bypassUpdates="false"/>
+              <f:ajax  render="${showAddressPName}CityI" />
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{${optionsEntityName}List.getUserProfile('01','11').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{${optionsEntityName}List.getUserProfile('01','11').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
 	      <f:selectItems value="${'#'}{${optionsEntityName}List.getoptionsFieldList('xx',11)}"  var="babu"  
@@ -2233,7 +2234,7 @@ the following copied from entityHome.ftl
              <h:panelGrid columns="2">
              <h:selectOneMenu  value="${'#'}{${homeName}.provstate}" 
               rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
-              <f:ajax  render="${showAddressPName}provstateI" bypassUpdates="false"/>
+              <f:ajax  render="${showAddressPName}provstateI" />
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{${optionsEntityName}List.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{${optionsEntityName}List.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
 	      <f:selectItems value="${'#'}{${optionsEntityName}List.getoptionsFieldList('xx',12)}"  var="babu"  
@@ -2254,7 +2255,7 @@ the following copied from entityHome.ftl
              <h:panelGrid columns="2">
              <h:selectOneMenu  value="${'#'}{${homeName}.pzcode}" 
               rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
-              <f:ajax  render="${showAddressPName}pzcodeI" bypassUpdates="false"/>
+              <f:ajax  render="${showAddressPName}pzcodeI" />
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{${optionsEntityName}List.getUserProfile('01','14').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{${optionsEntityName}List.getUserProfile('01','14').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
 	      <f:selectItems value="${'#'}{${optionsEntityName}List.getoptionsFieldList('xx',14)}"  var="babu"  
@@ -2278,7 +2279,7 @@ the following copied from entityHome.ftl
              <h:panelGrid columns="2">
              <h:selectOneMenu  value="${'#'}{${homeName}.country}" 
               rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}">
-              <f:ajax  render="${showAddressPName}countryI" bypassUpdates="false"/>
+              <f:ajax  render="${showAddressPName}countryI" />
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{${optionsEntityName}List.getUserProfile('01','13').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{${optionsEntityName}List.getUserProfile('01','13').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
 	      <f:selectItems value="${'#'}{${optionsEntityName}List.getoptionsFieldList('xx',13)}"  var="babu"  
@@ -2354,11 +2355,11 @@ the following copied from entityHome.ftl
                  <ui:remove>reusing existing props, del refers to debit and mis refers to credit</ui:remove>
         	 <h:inputText id="debitamtIn" value="${'#'}{${homeName}.totaldel}"  
                  onclick="this.value='';if (${'#'}{'${componentName}:creditamtIn'}.value != 0.0) {if (! confirm(jay2) ) { return false;}; return true;} " onfocus="this.select()" type="text"  onblur="this.value=!this.value?${'#'}{${gentriesDetailsEntityName}Home.instance.c4xxzxxxbvxxxxxxxxxxdebitamt}}:this.value;"
-                 disabled="false" >
-                 <f:ajax listener = "${'#'}{${homeName}.showNetValue}"  event="keyup" render="@all" bypassUpdates="false"/>
+                 disabled="false"  >
+                 <p:ajax listener = "${'#'}{${homeName}.showNetValue}"  event="keyup" update="@all" />
                  <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
              </h:inputText>
-                 <p:tooltip for="debitamtIn"> <span style="white-space: nowrap"> <h:outputText value="${'#'}{messages['Generally']} ${'#'}{messages['Dividends']}, ${'#'}{messages['Expenses']}, ${'#'}{messages['Assets']}, ${'#'}{messages['Losses']} ${'#'}{messages['are']} ${'#'}{messages['increased']} ${'#'}{messages['by']} ${'#'}{messages['Debit']}"/></span> </p:tooltip> 
+                 <p:tooltip for="debitamtInT"> <span style="white-space: nowrap"> <h:outputText value="${'#'}{messages['Generally']} ${'#'}{messages['Dividends']}, ${'#'}{messages['Expenses']}, ${'#'}{messages['Assets']}, ${'#'}{messages['Losses']} ${'#'}{messages['are']} ${'#'}{messages['increased']} ${'#'}{messages['by']} ${'#'}{messages['Debit']}"/></span> </p:tooltip> 
              </ui:decorate>
              <ui:decorate id="creditAmtlabel" template="layout/edit.xhtml" >
              <ui:define name="label">Credit Amount ${'#'}{customIdentity.mcurrencySymbol}
@@ -2366,7 +2367,7 @@ the following copied from entityHome.ftl
         	 <h:inputText id="creditamtIn" value="${'#'}{${homeName}.totalmis}"  
                  onclick="this.value='';if (${'#'}{'${componentName}:debitamtIn'}.value != 0.0) {if (! confirm(jay2) ) { return false;}; return true;} " onfocus="this.select()" type="text"  onblur="this.value=!this.value?${'#'}{${gentriesDetailsEntityName}Home.instance.c5xxzxxxbvxxxxxxxxxxcreditamt}}:this.value;"
                  disabled="false" >
-                 <f:ajax listener = "${'#'}{${homeName}.showNetValue}"  event="keyup" render="@all" bypassUpdates="false"/>
+                 <p:ajax listener = "${'#'}{${homeName}.showNetValue}"  event="keyup" update="@all" />
                  <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
              </h:inputText>
                  <p:tooltip for="creditamtIn"> <span style="white-space: nowrap"> <h:outputText value="${'#'}{messages['Generally']} ${'#'}{messages['Income']}, ${'#'}{messages['Revenues']}, ${'#'}{messages['Liabilities']}, ${'#'}{messages['Equity']} ${'#'}{messages['are']} ${'#'}{messages['increased']} ${'#'}{messages['by']} ${'#'}{messages['Credit']}"/></span> </p:tooltip> 
@@ -2504,20 +2505,20 @@ the following copied from entityHome.ftl
    </#if>
    <#if (pentityFunction=="co" || pentityFunction=="cq")>
     <h:outputText value="${'#'}{messages['Shipping_Options_Msg']}"/>
-                            <h:selectOneRadio id="logic" value="${'#'}{${customerInvoiceEtcItemDetailsEntityName}Home.instance.z9xxtxsolxxxxxxxxxxxshipoption}" styleClass="radio">
+                            <p:selectOneRadio id="logic" value="${'#'}{${customerInvoiceEtcItemDetailsEntityName}Home.instance.z9xxtxsolxxxxxxxxxxxshipoption}" styleClass="radio">
                              <f:selectItem itemLabel="Pick Up" itemValue="P"/>
                              <f:selectItem itemLabel="Standard Ship" itemValue="S"/>
                              <f:selectItem itemLabel="Express Ship" itemValue="E"/>
                              <f:selectItem itemLabel="Not Applicable" itemValue="X"/>
-                            </h:selectOneRadio>
+                            </p:selectOneRadio>
    <#elseif  (pentityFunction=="vo" || pentityFunction=="vq") >
     <h:outputText value="${'#'}{messages['Shipping_Options_Msg']}"/>
-                            <h:selectOneRadio id="logic" value="${'#'}{${vendorInvoiceEtcItemDetailsEntityName}Home.instance.z8xxtxsolxxxxxxxxxxxshipoption}" styleClass="radio">
+                            <p:selectOneRadio id="logic" value="${'#'}{${vendorInvoiceEtcItemDetailsEntityName}Home.instance.z8xxtxsolxxxxxxxxxxxshipoption}" styleClass="radio">
                              <f:selectItem itemLabel="Pick Up" itemValue="P"/>
                              <f:selectItem itemLabel="Standard Ship" itemValue="S"/>
                              <f:selectItem itemLabel="Express Ship" itemValue="E"/>
                              <f:selectItem itemLabel="Not Applicable" itemValue="X"/>
-                            </h:selectOneRadio>
+                            </p:selectOneRadio>
    </#if> 
    <#if pentityFunction=="cq" || pentityFunction=="co" || pentityFunction=="ci" || pentityFunction=="sh" 
             || pentityFunction=="vq" || pentityFunction=="vo" || pentityFunction=="vi" || pentityFunction=="sv" > 
@@ -2691,8 +2692,10 @@ the following copied from entityHome.ftl
                 <span class="required">*</span> 
                 ${'#'}{messages['required']} ${'#'}{messages['fields']} 
             </div>
+            <#if keyedKeyName !="">
              <h:outputText value="${'#'}{messages['Key']} ${'#'}{${homeName}.instance.${keyedKeyName}} ${'#'}{messages['sid']} ${'#'}{${homeName}.instance.a0xxuobxbxxxxxxxxxxxsid}" 
                rendered="${'#'}{${homeName}.instance.${keyedKeyName} !=''}"/> 
+            </#if>
              <#if menuAttributesFunction == "25">
             ${'#'}{trexuq255xwwqqhxxxxxshipmentHome.instance.fxxxuq111xwwqqhxxxxxaddressByBilltocode ==null ? '':fxxxuq111xwwqqhxxxxxaddressList.sidToEnity(trexuq255xwwqqhxxxxxshipmentHome.instance.fxxxuq111xwwqqhxxxxxaddressByBilltocode).a0xxuobxbxxxxxxxxxxxsid}
              </#if> 
@@ -2733,7 +2736,7 @@ the following copied from entityHome.ftl
                             <f:facet id="CartRemoveFacet" name="header">
                                 <h:outputText id="CartRemoveText" value="${'#'}{messages['removeColumn']}" />
                             </f:facet>
-                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="${'#'}{${componentName}Home.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                            <p:selectBooleanCheckbox id="CartRemoveCheckbox" value="${'#'}{${componentName}Home.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
                         </p:column>
 
                         <p:column id="column2">
@@ -2763,7 +2766,7 @@ the following copied from entityHome.ftl
                             <f:facet id="CartRemoveFacet" name="header">
                                 <h:outputText id="CartRemoveText" value="${'#'}{messages['removeColumn']}" />
                             </f:facet>
-                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="${'#'}{${componentName}Home.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                            <p:selectBooleanCheckbox id="CartRemoveCheckbox" value="${'#'}{${componentName}Home.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
                         </p:column>
                         <p:column id="columnxxodl">
                             <f:facet id="XxodlFacet" name="header">
@@ -2833,7 +2836,7 @@ the following copied from entityHome.ftl
                             <f:facet id="CartRemoveFacet" name="header">
                                 <h:outputText id="CartRemoveText" value="${'#'}{messages['removeColumn']}" />
                             </f:facet>
-                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="${'#'}{${componentName}Home.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                            <p:selectBooleanCheckbox id="CartRemoveCheckbox" value="${'#'}{${componentName}Home.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
                         </p:column>
                         <p:column id="columnxxo">
                             <f:facet id="XxoFacet" name="header">
@@ -3046,7 +3049,7 @@ the following copied from entityHome.ftl
                             <f:facet id="CartRemoveFacet" name="header">
                                 <h:outputText id="CartRemoveText" value="${'#'}{messages['removeColumn']}" />
                             </f:facet>
-                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="${'#'}{${componentName}Home.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                            <p:selectBooleanCheckbox id="CartRemoveCheckbox" value="${'#'}{${componentName}Home.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
                         </p:column>
                         <p:column id="columnxxo">
                             <f:facet id="XxoFacet" name="header">
@@ -3094,7 +3097,7 @@ the following copied from entityHome.ftl
                             <f:facet id="CartRemoveFacet" name="header">
                                 <h:outputText id="CartRemoveText" value="${'#'}{messages['removeColumn']}" />
                             </f:facet>
-                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="${'#'}{${componentName}Home.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                            <p:selectBooleanCheckbox id="CartRemoveCheckbox" value="${'#'}{${componentName}Home.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
                         </p:column>
                         <p:column id="columnxxo">
                             <f:facet id="XxoFacet" name="header">
@@ -3668,10 +3671,10 @@ the following copied from entityHome.ftl
             <h:panelGrid columns="2">
              <ui:decorate template="layout/display.xhtml">
                 <ui:define name="label">${'#'}{messages['report.displayAs']}</ui:define>
-                <h:selectOneMenu id="displayAs" value="${'#'}{${listName}.displayAs}">
+                <p:selectOneMenu id="displayAs" value="${'#'}{${listName}.displayAs}">
                  <f:selectItem id="ditem2" itemLabel="HTML" itemValue="HTML" />
                  <f:selectItem id="ditem1" itemLabel="PDF" itemValue="PDF" />
-                </h:selectOneMenu> 
+                </p:selectOneMenu> 
              </ui:decorate>
             </h:panelGrid>
             <#if menuAttributesFunction !="36" > 
@@ -3759,11 +3762,11 @@ the following copied from entityHome.ftl
      <#if menuAttributesFunction ="52" >
       <h:outputText value="     "/>
       <h:outputText value="${'#'}{messages['theme']}"/>
-      <h:selectOneMenu value="${'#'}{${homeName}.clientSkin}">
+      <p:selectOneMenu value="${'#'}{${homeName}.clientSkin}">
        <f:selectItems value="${'#'}{skinBean.skinsList}"  var="babu"  
                          itemLabel="${'#'}{babu.key}"
                          itemValue="${'#'}{babu.value}" /> 
-      </h:selectOneMenu>
+      </p:selectOneMenu>
 
             <h:commandButton id="setTheme" 
                           value="${'#'}{messages['set']} ${'#'}{messages['theme']}" 

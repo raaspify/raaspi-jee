@@ -25,34 +25,13 @@ use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM
 </ui:remove>
                        
 <ui:define name="body">
+    <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
     <h:form  styleClass="edit">
 <h:outputStylesheet>
 
-.rf-edt-c {
-    height: 40px !important;
-}
-.rf-tb {
-    background-color:#{richSkin.tableSubHeaderBackgroundColor} !important;
-    background-image: none; !important;
-    color:#{richSkin.tableHeaderTextColor} !important;
-
-}
-.rf-cp-hdr {
-    background-color:#{richSkin.additionalBackgroundColor} !important;
-    background-image: none; !important;
-    color:#{richSkin.tableHeaderTextColor} !important;
-    border-color:none;
-}
-.rf-edt-hdr {
-    background-color:#{richSkin.generalBackgroundColor} !important;
-    background-image: none; !important;
-    color:#{richSkin.tableHeaderTextColor} !important;
-    border-color:none;
-}
 
 
 </h:outputStylesheet>
-
 	<p:toolbar height="26" itemSeparator="grid">
 	  <p:toolbarGroup>
               <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel" propagation="end"  rendered="#{!fpxxfq1a5xwwqqhxxxxxitemHome.managed}" outcome="/home.xhtml" />
@@ -69,21 +48,40 @@ use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM
              <p:tooltip > <span style="white-space: nowrap"> <h:inputTextarea  cols="70" rows="10" readonly="true"  value="#{messages['ItemHelp']}"/></span> </p:tooltip> 
              </h:graphicImage>
 	  </p:toolbarGroup>
-       <h:messages globalOnly="true" styleClass="message" id="globalMessages"/>
 	</p:toolbar>
+       <h:messages globalOnly="true" styleClass="message" id="globalMessagesb"/>
 
     
      <div class="dialog">
    <h:panelGrid >
-      <panelGroup>
+      <h:panelGroup>
       <h:graphicImage style="float:left;padding-left:.5%;padding-top:.5%;padding-bottom:.5%;padding-right:.5%;" 
         value="/img/Editlog16.png"
          rendered="#{identity.loggedIn}">
       </h:graphicImage> 
       <h:outputText  value="#{messages['Resource']} #{messages['Easy']} #{messages['editor']}"/>
-      </panelGroup>
+      </h:panelGroup>
       </h:panelGrid>
      </div>
+
+  <h3> #{messages['Manage']} #{customIdentity.owner2} #{messages['analytics']} </h3>
+   #{messages['Analytics']} #{messages['Id:']} &nbsp;&nbsp;<h:outputText id="oldVjay" value="#{messages['gtagid']}"/>
+  <ui:decorate template="layout/display.xhtml">
+   <ui:define name="label">#{messages['New']} #{messages['Id']} </ui:define>
+   <h:inputText id="newVjay" value="#{yxxxuq1r1xwwqqhxxxxxresourceHome.gtagValue}"/>
+  </ui:decorate>
+  &nbsp;<p:commandButton id="updatejay" styleClass="#{!trexuq244xwwqqhxxxxxcuordersHome.managed?'button':'buttonMain'}" 
+                          value="#{messages['Update']}" status="buttonStatus" update="@form" 
+                         action="#{yxxxuq1r1xwwqqhxxxxxresourceHome.gaUpdate()}"
+   rendered="true"/>
+            &nbsp;<h:commandButton id="reloadt" 
+                          value="#{messages['stop']} / #{messages['start']} #{messages['appserver']}  #{messages['to']} #{messages['see']} #{messages['the']} #{messages['change']} " 
+                         action="#{databaseResourceLoader.reLoadBundle(yxxxuq1l1xwwqqhxxxxxresource_bundleHome.getLastyxxxuq1l1xwwqqhxxxxxresource_bundleP(),customIdentity.owner2)}"
+                       rendered="#{facesContext.externalContext.context.serverInfo.contains('omcat')}"/>
+<h:commandButton id="reload" 
+                          value="#{messages['load']} / #{messages['refresh']} #{messages['updated']} #{messages['value']} #{messages['to']} #{messages['see']} #{messages['the']} #{messages['change']} " 
+                         action="#{databaseResourceLoader.reLoadBundle(yxxxuq1l1xwwqqhxxxxxresource_bundleHome.getLastyxxxuq1l1xwwqqhxxxxxresource_bundleP(),customIdentity.owner2)}"
+                       rendered="#{!facesContext.externalContext.context.serverInfo.contains('omcat')}"/>
 
 <p:panel>
 
@@ -104,39 +102,22 @@ use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM
  </h:panelGrid>
 
 </p:panel>
-
-   <p:panel toggleable="true" toggleableHeader="true" style="width: 100%;"  header="#{messages['menue']} #{messages['label']}-#{messages['click']} #{messages['on']} #{messages['a']} #{messages['link']} #{messages['to']} #{messages['change']}" switchType="client" collapsed="false" rendered="#{customIdentity.labelView.contains('VM') }"
+</h:form>
+<ui:remove> avoid nested form to avoid not invoking backing bean method. include has h:form and /h:form
+</ui:remove>
+   <p:panel toggleable="true" toggleableHeader="true" style="width: 100%;"  header="#{messages['menue']} #{messages['label']}-#{messages['click']} #{messages['on']} #{messages['a']} #{messages['link']} #{messages['to']} #{messages['change']}" switchType="client" collapsed="true" rendered="#{customIdentity.labelView.contains('VM') }"
         leftCollapsedIcon="/img/control_add16.png" rightCollapsedIcon="/img/Activitygroup16.png" leftExpandedIcon="/img/control_remove16.png">
-
               <ui:include src="/layout/menuMockUp.xhtml">
                <ui:param name="projectName" value="genapp"/>
              </ui:include>
-
              <div id="left" style="background-color:#{richSkin.tableSubfooterBackgroundColor}">
                     <ui:include src="/layout/leftpopMockUp.xhtml" />
              </div>
    </p:panel>
 <br></br>
-<div style="margin-left:20px;margin-top:auto;width:80%;" class="w3-border w3-round-large w3-topbar w3-bottombar">
-        <h3> Manage #{customIdentity.owner2} #{messages['other']} #{messages['labels']} </h3>
-        <h:button outcome="/resourceEdit.xhtml" rendered="#{identity.loggedIn }"
-                    id="iedit2"
-                 value="#{messages['Edit']}(#{messages['resource']} #{messages['value']})">
-        </h:button>
-        <h:button  value="#{messages['site']} #{messages['notification']}" outcome="/resourcelabel.xhtml" >
-          <f:param name="key" value="site_notify" />
-        </h:button>
-        <h:button  value="#{messages['backoffice']} #{messages['notification']}" outcome="/resourcelabel.xhtml" >
-          <f:param name="key" value="backOffice_notify" />
-        </h:button>
-        <h:button  value="#{messages['All']} #{messages['site']} #{messages['notification']}" 
-               rendered="#{customIdentity.masterSite}" outcome="/resourcelabel.xhtml" >
-          <f:param name="key" value="common_notify" />
-        </h:button>
-
-
-
-
+<h:form>
+<p:panel toggleable="true" toggleableHeader="true" style="width: 100%;"  header="#{messages['other']} #{messages['labels']}-#{messages['click']} #{messages['on']} #{messages['a']} #{messages['link']} #{messages['to']} #{messages['change']}" switchType="client" collapsed="true" rendered="#{customIdentity.labelView.contains('VM') }"
+        leftCollapsedIcon="/img/control_add16.png" rightCollapsedIcon="/img/Activitygroup16.png" leftExpandedIcon="/img/control_remove16.png">
         &nbsp;&nbsp;<h:button outcome="/home.xhtml"
                     id="done"
                  value="#{messages['Done']}"/>
@@ -148,7 +129,7 @@ use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM
         <p> key:'News-1_Page_title' value: #{messages['News-1_Page_title']}  </p>
         <p> Shopping Items SEO key:'ItemDetails_page_title' value: #{messages['ItemDetails_page_title']}  </p>
         <p> Page Url xxx SEO key:'xxx_page_title' value: #{messages['xxx_page_title']}  </p>
-        <h:link outcome="/resourceEdit.xhtml" rendered="#{identity.loggedIn }"
+        <h:link outcome="/resourceEdit.xhtml" rendered="#{identity.loggedIn }" target="_blank"
                     id="iedit2l"
                  value="#{messages['Edit']} #{messages['SEO']}">
         </h:link>
@@ -171,8 +152,8 @@ use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM
         <p> #{messages['3R-Click-b-C']} #{messages['3R-Click-b-C']}  via Browser  </p>
         <p> #{messages['3R-Click-e-C']} #{messages['3R-Click-e-C']}  via Email  </p>
         <p> #{messages['3R-Click-m-C']} #{messages['3R-Click-m-C']}  via Mobile  </p>
-        <p> Example HTML Link will be &lt;a  href="https://#{request.serverName}/Click-f.wflow" target="_blank"&gt;For you&lt;/a&gt;  </p>
-        <a href="https://#{request.serverName}/Click-f.wflow" target="_blank">#{messages['campaign']} #{messages['via Facebook']} #{messages['Page']} </a>
+        <p> Example HTML Link will be &lt;a  href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/Click-f.wflow" target="_blank"&gt;For you&lt;/a&gt;  </p>
+        <a href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/Click-f.wflow" target="_blank">#{messages['campaign']} #{messages['via Facebook']} #{messages['Page']} </a>
         &nbsp;&nbsp;<h:link value="#{messages['Upload/Replace']} #{messages['content']} #{messages['for']} #{messages['campaign']} #{messages['via Facebook']} "  outcome="/clobdataEdit.xhtml" target="_blank"
               rendered="#{!customIdentity.hasRole('PH')}">
                 <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-f-C','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-f-C','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
@@ -181,7 +162,7 @@ use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM
                 <f:param name="qualifier" value="TXT"/>
         </h:link>
         <br></br>
-        <a href="https://#{request.serverName}/Click-g.wflow" target="_blank">#{messages['campaign']} #{messages['via Google']} #{messages['Page']} </a>
+        <a href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/Click-g.wflow" target="_blank">#{messages['campaign']} #{messages['via Google']} #{messages['Page']} </a>
         &nbsp;&nbsp;<h:link value="#{messages['Upload/Replace']} #{messages['content']} #{messages['for']} #{messages['campaign']} #{messages['via Google']} "  outcome="/clobdataEdit.xhtml" target="_blank"
               rendered="#{!customIdentity.hasRole('PH')}">
                 <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-g-C','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-g-C','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
@@ -190,7 +171,7 @@ use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM
                 <f:param name="qualifier" value="TXT"/>
                </h:link>
         <br></br>
-        <a href="https://#{request.serverName}/Click-b.wflow" target="_blank">#{messages['campaign']} #{messages['via Browser']} #{messages['Page']} </a>
+        <a href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/Click-b.wflow" target="_blank">#{messages['campaign']} #{messages['via Browser']} #{messages['Page']} </a>
         &nbsp;&nbsp;<h:link value="#{messages['Upload/Replace']} #{messages['content']} #{messages['for']} #{messages['campaign']} #{messages['via Browser']} "  outcome="/clobdataEdit.xhtml" target="_blank"
               rendered="#{!customIdentity.hasRole('PH')}">
                 <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-b-C','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-b-C','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
@@ -199,7 +180,7 @@ use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM
                 <f:param name="qualifier" value="TXT"/>
                </h:link>
         <br></br>
-        <a href="https://#{request.serverName}/Click-e.wflow" target="_blank">#{messages['campaign']} #{messages['via Email']} #{messages['Page']} </a>
+        <a href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/Click-e.wflow" target="_blank">#{messages['campaign']} #{messages['via Email']} #{messages['Page']} </a>
         &nbsp;&nbsp;<h:link value="#{messages['Upload/Replace']} #{messages['content']} #{messages['for']} #{messages['campaign']} #{messages['via Email']} "  outcome="/clobdataEdit.xhtml" target="_blank"
               rendered="#{!customIdentity.hasRole('PH')}">
                 <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-e-C','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-e-C','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
@@ -208,7 +189,7 @@ use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM
                 <f:param name="qualifier" value="TXT"/>
                </h:link>
         <br></br>
-        <a href="https://#{request.serverName}/Click-m.wflow" target="_blank">#{messages['campaign']} #{messages['via Mobile']} #{messages['Page']} </a>
+        <a href="#{request.scheme}://#{request.serverName}:#{request.serverPort}/Click-m.wflow" target="_blank">#{messages['campaign']} #{messages['via Mobile']} #{messages['Page']} </a>
         &nbsp;&nbsp;<h:link value="#{messages['Upload/Replace']} #{messages['content']} #{messages['for']} #{messages['campaign']} #{messages['via Mobile']} "  outcome="/clobdataEdit.xhtml" target="_blank"
               rendered="#{!customIdentity.hasRole('PH')}">
                 <f:param name="yxxxuq1m1xwwqqqxxxxxclobdataA0xxuobxbxxxxxxxxxxxsid" value="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-m-C','TXT','0') eq null?'':yxxxuq1m1xwwqqqxxxxxclobdataList.getclobDataInstance('clobdata','X3R-Click-m-C','TXT','0').getA0xxuobxbxxxxxxxxxxxsid()}"/>
@@ -216,14 +197,7 @@ use f:param and viewparam key fromTable to set value to FPXXFQ1A5XWWQQHXXXXXITEM
                 <f:param name="useSeq" value="0"/>
                 <f:param name="qualifier" value="TXT"/>
                </h:link>
-
-
-
-
-</div>
-
-
-
+</p:panel>
 
 
  </h:form>

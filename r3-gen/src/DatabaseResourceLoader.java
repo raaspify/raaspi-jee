@@ -3,7 +3,7 @@ import com.rcomputer.genapp.model.*;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javax.faces.context.FacesContext; 
+import javax.faces.context.FacesContext;
 import javax.faces.context.ExternalContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,6 +25,15 @@ import javax.naming.NamingException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Field;
 
+/**
+* handleGetObject method below will return a message value for a key
+* if no entry exists in the cache or in data base then the key itself is returned, which means we need not define each message
+* getContents method will load all messages from the database 
+* reloadBundle method reloads/refreshes messages from database
+* comes here from Setup/Messages/labels reload button action or from Sqladmin change googleAnalytics tag option
+* 
+* @author 3r Computer Systems
+*/
 
 
 @Named("databaseResourceLoader")
@@ -34,6 +43,7 @@ public class DatabaseResourceLoader extends ResourceBundle {
        Locale rbLocale;
        private Boolean bcontinue = new Boolean("true");
       private DataSource ds;
+       private Boolean tomeeYN = false;//to allow myfaces vs mojarra jsf or jndi naming
 
     protected static final String BUNDLE_NAME ="m";
     protected static final Control DB_CONTROL = new DBControl();
@@ -48,7 +58,7 @@ public class DatabaseResourceLoader extends ResourceBundle {
        try{
         rbLocale=FacesContext.getCurrentInstance().getViewRoot().getLocale();
 
-        setParent(ResourceBundle.getBundle(BUNDLE_NAME, 
+        setParent(ResourceBundle.getBundle(BUNDLE_NAME,
             locale, DB_CONTROL));
        }catch(Exception e){
           String emsg=e.getMessage();
@@ -86,24 +96,52 @@ public class DatabaseResourceLoader extends ResourceBundle {
         public void reLoadBundle(String bundleName,String owner2Code){
          //menCA, strip off m
          ResourceBundle bundle=null;
+         ExternalContext externalContext = null;
          String lang=bundleName.length()>1?bundleName.substring(1,3):"en";
          String countr="US";
          bundleName="m";
+         String variant="o2";
+        try{
+          FacesContext facesContext = FacesContext.getCurrentInstance();
+          externalContext = facesContext.getExternalContext();
+          ServletContext context = (ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
+          String serverName=context.getServerInfo();//check if tomcat or wildfly. clearCaches is enough, if tomee
+          if(serverName.contains("omcat")){
+            tomeeYN=true;
+          }
+        }catch(Exception e){
+           log.severe("get serverName exception"+" "+e );
+           return;
+        }
+
          try{
-          bundle = ResourceBundle.getBundle(bundleName, new Locale(lang, countr,owner2Code)); 
-          bundle.clearCache();
+          bundle = ResourceBundle.getBundle(bundleName, new Locale(lang, countr,owner2Code));
+          // trying clear all bundles, if not try time to live and reload flag via resourcebundle.clontrol class
+          if(!tomeeYN){
+           bundle.clearCache();
+           log.severe("clearCache done after  koading default bundle name m and locale "+lang+","+countr+","+owner2Code+" " );
+           log.severe("in reloadResourcebundle, TomeeYN "+tomeeYN );
+          }
+          if(tomeeYN){
+           externalContext.redirect(externalContext.getRequestContextPath()+"/home.wflow");
+           return;
+          }
          }catch(Exception e){
           String emsg=e.getMessage();
- 	  log.severe("Ignoring ReloadBundle-getBundle error "+lang+","+countr+","+owner2Code+" "+e );
-
-          //log error
+          if(tomeeYN){
+           log.severe("tomee, so exiting to home page,  ReloadBundle-getBundle/clearcache error "+lang+","+countr+","+owner2Code+" "+e );
+           try{
+            externalContext.redirect(externalContext.getRequestContextPath()+"/home.wflow");
+           }catch(Exception ex){
+           }
+           return;
+          }else{
+           log.severe("Ignoring ReloadBundle-getBundle/clearcache error "+lang+","+countr+","+owner2Code+" "+emsg );
+          }
          }
          try{
-          // ResourceBundle.clearCache(Thread.currentThread().getContextClassLoader());
-
-          //         ApplicationResourceBundle appBundle = ApplicationAssociate.getCurrentInstance().
-          //                         getResourceBundles().get(DatabaseResourceLoader.class.getName());
-
+          //following is mojarra/wildfly specific addition since clearCache does not clear internally cached msgs
+          //for myfaces/tomee above bundle.clearCache() was causing cpu loop
            Class<?> applicationAssociateClass = Class.forName("com.sun.faces.application.ApplicationAssociate");
            Method getCurrentInstance = applicationAssociateClass.getMethod("getCurrentInstance");
            Object applicationAssociate = getCurrentInstance.invoke(null);
@@ -112,12 +150,10 @@ public class DatabaseResourceLoader extends ResourceBundle {
            Object appBundle = resourceBundles.get("messages");
            Map<Locale, ResourceBundle> resources = getFieldValue(appBundle, "resources");
            //Map resources = getFieldValue(appBundle, "resources");
-           resources.clear(); 
+           resources.clear();
          }catch(Exception e){
           String emsg=e.getMessage();
- 	  log.severe("ReloadBundle-clearCashe error "+lang+","+countr+","+owner2Code+" "+e );
-
-          //log error
+          log.severe("ReloadBundle-resources.clear error "+lang+","+countr+","+owner2Code+" "+emsg );
          }
 
         }
@@ -153,7 +189,7 @@ public class DatabaseResourceLoader extends ResourceBundle {
                 throws IllegalAccessException, InstantiationException, IOException {
                         Map<String, Object> configOverrides = new HashMap<String, Object>();
       FacesContext facesContext = FacesContext.getCurrentInstance();
-      if (facesContext !=null){ 
+      if (facesContext !=null){
        ExternalContext externalContext = facesContext.getExternalContext();
        ServletContext context = (ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
 
@@ -176,7 +212,7 @@ public class DatabaseResourceLoader extends ResourceBundle {
                         //log.severe("proemf "+emfproperties);
                         //EntityManagerFactory emf = Persistence.createEntityManagerFactory( "genappcdi" );
                         em=emf.createEntityManager(configOverrides);
-      }//facescontext not null 
+      }//facescontext not null
       Map<String, Object> emproperties = emf.getProperties();
       //log.severe("proem "+emproperties);
       //log.severe("em "+em);
@@ -188,9 +224,9 @@ public class DatabaseResourceLoader extends ResourceBundle {
                     try{
 		     Context ctx = new InitialContext();
                      if(tomeeYN){//jun10 2021
-                      ds = (DataSource) ctx.lookup("java:openejb/Resource/RaaspiSQLDS");  
+                      ds = (DataSource) ctx.lookup("java:openejb/Resource/RaaspiSQLDS");
                      }else{
-                      ds = (DataSource) ctx.lookup("RaaspiSQLDS");   
+                      ds = (DataSource) ctx.lookup("RaaspiSQLDS");
                      }
                     }catch(Exception e){
                      String emsg=e.getMessage();
@@ -203,12 +239,12 @@ public class DatabaseResourceLoader extends ResourceBundle {
 
         /**
          * A simple ListResourceBundle extension to support multilanguages and variants  m/language/US/variant
-           country hardcoded US to make logic simple to support variant 
+           country hardcoded US to make logic simple to support variant
          */
         protected class MyResources extends ListResourceBundle {
            // in footer.xhtml, language and country values are set to SessionMap as mlanguage and mcountry
            // sessionmap not used/not needed ? we set locale now and use it directly to get lang etc
-           // see authenticator,skinbean for 
+           // see authenticator,skinbean for
            // new try FacesContext.getCurrentInstance().getViewRoot().setLocale((Locale) entry.getValue());
            // if cached, wont come here, so dont change language here
 
@@ -236,7 +272,7 @@ public class DatabaseResourceLoader extends ResourceBundle {
                 mvariant=locale.getVariant();// set in authenticator as owner2Code or in future as owner2Code+country
                }else{
                 mvariant="";
-               } 
+               }
                mlocale=new Locale(mlanguage,mcountry,mvariant);
                owner2Code=locale.getVariant();
               }else{
@@ -250,15 +286,15 @@ public class DatabaseResourceLoader extends ResourceBundle {
              //as if no locale
              jayName="m";
             }
-            try{ 
+            try{
                 String urlName=null;
                 int i = 0;
                 List <Yxxxuq1r1xwwqqhxxxxxresource> results=null;
                 if(mlocale.getVariant() !=null && !mlocale.getVariant().isEmpty() ) {
                     results=em.createQuery("select r from Yxxxuq1r1xwwqqhxxxxxresource r  where ((r.yxxxuq1l1xwwqqhxxxxxresource_bundle.a0xxukrdbvxxxxxxxxxxname = :jayNameLn or r.yxxxuq1l1xwwqqhxxxxxresource_bundle.a0xxukrdbvxxxxxxxxxxname = :jayName or r.yxxxuq1l1xwwqqhxxxxxresource_bundle.a0xxukrdbvxxxxxxxxxxname = :jayNameO2 or r.yxxxuq1l1xwwqqhxxxxxresource_bundle.a0xxukrdbvxxxxxxxxxxname = :jayNameOc) and r.zzxxu2oxxhxxxxxxxxxxowner2=:owner2) order by r.a0xxuobxbxxxxxxxxxxxsid asc").setParameter("jayNameLn", "m"+mlocale.getLanguage())
                      .setParameter("jayName", jayName).setParameter("jayNameO2", jayName+"o2").setParameter("jayNameOc", jayName+"oc").setParameter("owner2", owner2Code).getResultList();
-                }else {	  
-                    //only last key is kept so order should be asc to show more recent change ie client change after system           
+                }else {
+                    //only last key is kept so order should be asc to show more recent change ie client change after system
                     results=em.createQuery("select r from Yxxxuq1r1xwwqqhxxxxxresource r  where r.yxxxuq1l1xwwqqhxxxxxresource_bundle.a0xxukrdbvxxxxxxxxxxname = :jayName and (r.zzxxu2oxxhxxxxxxxxxxowner2='SYSTEM') order by r.a0xxuobxbxxxxxxxxxxxsid asc").setParameter("jayName", jayName).getResultList();
                 }
                 Object[][] all = new Object[results.size()][2];

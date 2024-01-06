@@ -91,7 +91,7 @@
      <#else>
                 showTime="true" value="${'#'}{${homeName}.instance.${property.name}.${componentProperty.name}}" 
      </#if>
-                    <f:ajax event="blur,onselect" render="${componentProperty.name}Decoration" bypassUpdates="true"/>
+                    <p:ajax event="blur,onselect" update="${componentProperty.name}Decoration" />
 
     <#elseif propertyType?contains("ime")>
      <p:datePicker id="${property.name}" 
@@ -100,14 +100,14 @@
                        required="true"
      </#if>
                           value="${'#'}{${homeName}.instance.${property.name}.${componentProperty.name}}"/>
-                    <f:ajax event="blur" render="${componentProperty.name}Decoration" bypassUpdates="true"/>
+                    <p:ajax event="blur" update="${componentProperty.name}Decoration" />
     <#elseif propertyType?contains("imestamp")>
      <p:datePicker id="${componentProperty.name}" 
      <#if !column.nullable> 
                        required="true"
      </#if>
                          showTime="true" value="${'#'}{${homeName}.instance.${property.name}.${componentProperty.name}}"/>
-                     <f:ajax event="blur" render="${componentProperty.name}Decoration" bypassUpdates="true"/>
+                     <p:ajax event="blur" update="${componentProperty.name}Decoration" />
     <#elseif propertyType?contains("ecimal")>
                 <h:inputText id="${componentProperty.name}" 
      <#if !column.nullable>
@@ -116,7 +116,7 @@
                           value="${'#'}{${homeName}.instance.${property.name}.${componentProperty.name}}"
                           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?${'#'}{${homeName}.instance.${property.name}.${componentProperty.name}}:this.value;"
                            size="${column.precision+7}">
-                    <f:ajax event="blur" render="${componentProperty.name}Decoration" bypassUpdates="true"/>
+                    <p:ajax event="blur" update="${componentProperty.name}Decoration" />
                 </h:inputText>
     <#elseif propertyType?contains("ecimal")>
                 <h:inputText id="${componentProperty.name}" 
@@ -129,7 +129,7 @@
                           value="${'#'}{${homeName}.instance.${property.name}.${componentProperty.name}}"
                           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?${'#'}{${homeName}.instance.${property.name}.${componentProperty.name}}:this.value;"
                            size="${column.precision+6}">
-                    <f:ajax event="blur" render="${componentProperty.name}Decoration" bypassUpdates="true"/>
+                    <p:ajax event="blur" update="${componentProperty.name}Decoration" />
                 </h:inputText>
     <#elseif propertyType == "java.lang.Boolean" || propertyType == "yes_no" || propertyType == "true_false">
      <#if property.name?substring(4,5) == "y" >
@@ -154,7 +154,7 @@
       </#if>
                                     value="${'#'}{${homeName}.instance.${property.name}.${componentProperty.name}}">
                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value</ui:remove>
-                  <f:ajax  render="${componentProperty.name}" bypassUpdates="false"/>
+                  <p:ajax  update="${componentProperty.name}" />
                  </h:selectBooleanCheckbox>
      </#if>
     <#elseif propertyType?contains("tring") || propertyType?contains("[B")  >
@@ -278,7 +278,7 @@
              <#assign ValueField=genValueField01 >
             </#if>
                       <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${componentProperty.name}}" required="false" id="${componentProperty.name}">
-                       <f:ajax  render="${componentProperty.name}I" bypassUpdates="false"/>
+                       <p:ajax  update="${componentProperty.name}" />
                        <f:selectItems value="${'#'}{${optionsEntityName}List.getoptionsFieldList('${menuAttributesFunction}',${componentProperty.name?substring(10,12)})}"  var="babu"  
                          itemLabel="${'#'}{babu.key}"
                          itemValue="${'#'}{babu.value}" /> 
@@ -494,7 +494,7 @@
              <h:panelGrid columns="2">
              <h:selectOneMenu  value="${'#'}{${homeName}.instance.${componentProperty.name}}"
                    rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
-              <f:ajax  render="${componentProperty.name}I" bypassUpdates="false"/>
+              <p:ajax  update="${componentProperty.name}" />
              >
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{${optionsEntityName}List.getUserProfile('01','${componentProperty.name?substring(10,12)}').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{${optionsEntityName}List.getUserProfile('01','${componentProperty.name?substring(10,12)}').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
@@ -507,7 +507,7 @@
                      value="${'#'}{${optionsEntityName}List.getSuggestList(${homeName}.prefix)}" var ="result" itemValue="${'#'}{result.${OptionField}}" 
                      itemLabel="${'#'}{result.${OptionField}}"/>
               </#if>
-              <f:ajax  render="${componentProperty.name}I" bypassUpdates="false"/>
+              <p:ajax  update="${componentProperty.name}I" />
              <h:inputText id="${componentProperty.name}I" value="${'#'}{${homeName}.instance.${componentProperty.name}}" 
                    rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                           size="${size}"
@@ -526,7 +526,7 @@
             <#else>
                  <#-- trim to strip spaces in email address and others fntrim did not work-->
                  <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${componentProperty.name}}" required="false" id="${componentProperty.name}">
-                  <f:ajax  render="${componentProperty.name}I" bypassUpdates="false"/>
+                  <p:ajax  update="${componentProperty.name}" />
                   <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
                   <f:selectItems value="${'#'}{${optionsEntityName}List.getoptionsFieldList('${menuAttributesFunction}',${componentProperty.name?substring(10,12)})}"  var="babu"  
                          itemLabel="${'#'}{babu.key}"
@@ -573,7 +573,7 @@
                      maxlength="${column.length}"
                          required = "true"
                          value="${'#'}{${homeName}.instance.${property.name}.${componentProperty.name}}">
-                    <f:ajax event="blur" render="${componentProperty.name}Decoration" bypassUpdates="true"/>
+                    <p:ajax event="blur" update="${componentProperty.name}Decoration" />
            </h:inputText>
           <#if keyfromsubkeys=="Y">
           <#else>
@@ -593,9 +593,9 @@
                  immediate="true"
                  validator="${'#'}{${homeName}.validateAndSelect${componentProperty.name?substring(12)?cap_first}}"  >
                  <#if (pentityFunction=="cq" || pentityFunction=="co" || pentityFunction=="ci" || pentityFunction=="cp"  || pentityFunction=="vq" || pentityFunction=="vo" || pentityFunction=="vi" || pentityFunction=="vp" )  > 
-                  <f:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="select" render="${componentProperty.name}Decoration,matcodeDescriptDecoration,matcodePriceLabelT,matcodeTDecoration,matcodeDecorationmis" bypassUpdates="false"}/>
+                  <p:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="select" update="@form" }/>
                  <#else>
-                  <f:ajax event="select" render="${componentProperty.name}Decoration" bypassUpdates="true"/>
+                  <p:ajax event="select" update="${componentProperty.name}Decoration" />
                  </#if>
                 </p:comboBox>
          </#if>
@@ -604,7 +604,7 @@
                           size="${size}"
                      maxlength="${column.length}"
                          value="${'#'}{${homeName}.instance.${property.name}.${componentProperty.name}}"
-                    <f:ajax event="blur" render="${componentProperty.name}Decoration" bypassUpdates="true"/>
+                    <p:ajax event="blur" update="${componentProperty.name}Decoration" />
                </h:inputText>
         </#if>
        </#if>
@@ -624,7 +624,7 @@
        </#if>    
       </#if>
                           value="${'#'}{${homeName}.instance.${property.name}.${componentProperty.name}}">
-                    <f:ajax event="blur" render="${componentProperty.name}Decoration" bypassUpdates="true"/>
+                    <p:ajax event="blur" update="${componentProperty.name}Decoration" />
                 </h:inputText>
     </#if>
     </#if>
@@ -778,14 +778,14 @@
             <h:panelGroup id="${property.name}Decoration"  rendered="false" >
             <#elseif cIndex == 2>
              <h:panelGrid columns="2">
-             <h:selectOneMenu  value="${'#'}{yxxxch5a1xhhxxhxxxxxtruefalseList.selectedQualifier}" 
+             <p:selectOneMenu  value="${'#'}{yxxxch5a1xhhxxhxxxxxtruefalseList.selectedQualifier}" 
               rendered="true">
               <f:selectItem id="item1" itemLabel="default" itemValue="de" />
               <f:selectItem id="item2" itemLabel="demographic(name-address)" itemValue="dg" />
               <f:selectItem id="item3" itemLabel="metrics(quantity)" itemValue="me" />
               <f:selectItem id="item4" itemLabel="adhoc-1" itemValue="a1" />
               <f:selectItem id="item5" itemLabel="adhoc-2" itemValue="a2" />
-            </h:selectOneMenu>
+            </p:selectOneMenu>
              </h:panelGrid>
             <h:panelGroup id="${property.name}Decoration"  rendered="false" >
             <#else>
@@ -829,11 +829,11 @@
        </#if>
     <#elseif menuAttributesFunction ="1a" >
        <#if property.name?substring(pefS,pefE)=="z1"> 
-        <h:outputLabel  for="${property.name}" value="${'#'}{messages['override']} ${'#'}{messages['Tax1']}">
+        <h:outputLabel  for="${property.name}T" value="${'#'}{messages['override']} ${'#'}{messages['Tax1']}">
        <#elseif property.name?substring(pefS,pefE)=="z2"> 
-        <h:outputLabel  for="${property.name}" value="${'#'}{messages['override']} ${'#'}{messages['Tax2']}">
+        <h:outputLabel  for="${property.name}T" value="${'#'}{messages['override']} ${'#'}{messages['Tax2']}">
        <#elseif property.name?substring(pefS,pefE)=="z3"> 
-        <h:outputLabel  for="${property.name}" value="${'#'}{messages['override']} ${'#'}{messages['Tax3']}">
+        <h:outputLabel  for="${property.name}T" value="${'#'}{messages['override']} ${'#'}{messages['Tax3']}">
        <#elseif property.name?substring(6,8) == "sc" || property.name?substring(6,8) == "n1" || property.name?substring(6,8) == "n2" || property.name?substring(6,8) == "n3" >
        <#else>
         <h:outputLabel  for="${property.name}" value="${'#'}{messages['${property.name?substring(pL)?cap_first}']}">
@@ -845,7 +845,7 @@
          showColumnNames starts with index 0 and pints to column after sid, sid is not considered as property ?
          truefalse column/property show001 corresponds to other table showColumnNames index 0 and corresponds to cIndex-3  
          apr27 2020 need to be fixed since report parameter show001 expects sid
-         fix is to leave <h:outputLabel index as is but change <h:selectOneRadio id say show001 but value as show002
+         fix is to leave <h:outputLabel index as is but change <p:selectOneRadio id say show001 but value as show002
     --> 
      <#if menuAttributesFunction ="5a" >
       <#if (cIndex > 2) >
@@ -915,7 +915,7 @@
                <#if menuAttributesFunction =="89">
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                  <p:commandButton id="calRefresh${property.name}" image="/img/Reload16.png"
-                          value="${'#'}{messages.reFresh}" render="@form"
+                          value="${'#'}{messages.reFresh}" update="@form"
                           action="${'#'}{${homeName}.validateAndSetseDates}"/>
                </#if>
    <#elseif propertyType?contains("ime")>
@@ -941,7 +941,7 @@
                <#if menuAttributesFunction =="89">
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                  <p:commandButton id="calRefresh${property.name}" image="/img/Reload16.png"
-                          value="${'#'}{messages.reFresh}" render="@form"
+                          value="${'#'}{messages.reFresh}" update="@form"
                           action="${'#'}{${homeName}.validateAndSetseDates}"/>
                </#if>
    <#elseif propertyType == "timestamp">
@@ -984,7 +984,7 @@
                             onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?${'#'}{${customerInvoiceEtcItemDetailsEntityName}Home.instance.${customerInvoiceEtcItemDetailsMiscelleneousFieldName}}:this.value;"
                             value="${'#'}{${customerInvoiceEtcItemDetailsEntityName}Home.instance.${customerInvoiceEtcItemDetailsMiscelleneousFieldName}}">
                             <ui:remove>
-                            <f:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="select" render="matcodeTDecoration,matcodeDecorationmis" bypassUpdates="false"/>
+                            <p:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="select" update="@form" />
                             </ui:remove> 
                            <#elseif property.name?substring(pefS,pefE)=="z1">
                             disabled="false"
@@ -1050,27 +1050,28 @@
          </#if>
          value="${'#'}{${homeName}.instance.${property.name}}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?${'#'}{${homeName}.instance.${property.name}}:this.value;"
-      size="${column.precision+7}">
+      size="${column.precision+7}" >
        <#if property.name?substring(5,7) == "a1" || property.name?substring(5,7) == "a2" || property.name?substring(5,7) == "a3" || property.name?substring(5,7) == "a4"
                     || property.name?substring(5,7) == "a5" || property.name?substring(5,7) == "a6" || property.name?substring(5,7) == "a7"
                     || property.name?substring(5,7) == "a8"|| property.name?substring(5,7) == "a9"  || property.name?substring(5,7) == "aa"
                     || property.name?substring(5,7) == "ab"|| property.name?substring(5,7) == "ac">
-                  <f:ajax   listener="${'#'}{${homeName}.recalculateTotalThis()}" event="keyup" render="e4xxzatrbvxxxxxxxxxxperiodtotals" bypassUpdates="false"/>
+                  <p:ajax   listener="${'#'}{${homeName}.recalculateTotalThis()}" event="keyup" update="e4xxzatrbvxxxxxxxxxxperiodtotals" />
        <#elseif property.name?substring(5,7) == "b1" || property.name?substring(5,7) == "b2" || property.name?substring(5,7) == "b3" || property.name?substring(5,7) == "b4"
                     || property.name?substring(5,7) == "b5" || property.name?substring(5,7) == "b6" || property.name?substring(5,7) == "b7"
                     || property.name?substring(5,7) == "b8"|| property.name?substring(5,7) == "b9"  || property.name?substring(5,7) == "ba"
                     || property.name?substring(5,7) == "bb"|| property.name?substring(5,7) == "bc" >
-                  <f:ajax   listener="${'#'}{${homeName}.recalculateTotalThis()}" event="keyup" render="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" bypassUpdates="false"/>
+                  <p:ajax   listener="${'#'}{${homeName}.recalculateTotalThis()}" event="keyup" update="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" />
        <#else>
        </#if>
      </h:inputText>
-     <#--mar09 2018 discount -->
+
+     <#--discount -->
      <#if property.name?substring(5,7) == "zi">
 	    <h:selectOneRadio value="${'#'}{${homeName}.discountType}" required="false" id="${property.name}di" rendered="${'#'}{${homeName}.instance.${property.name} ne null}">
-				<f:selectItem  
+                       <f:selectItem  
                          itemLabel="Value"
                          itemValue="va" /> 
-				<f:selectItem  
+                      <f:selectItem  
                          itemLabel="%"
                          itemValue="pe" /> 
          </h:selectOneRadio>
@@ -1132,15 +1133,17 @@
                        label="${property.name?substring(pL)}"
      </#if>
                           value="${'#'}{${homeName}.instance.${property.name}}"
-                           size="${column.precision+2}">
+                           size="${column.precision+2}" >
                    <#if property.name?substring(6,8) == "du">
-                    <f:ajax listener="${'#'}{${homeName}.validateAndSetseDates}"  event="keyup" render="b6xxceedbvxxxxxxxxxxedatetDecoration" bypassUpdates="false"/>
+                    <p:ajax listener="${'#'}{${homeName}.validateAndSetseDates}"  event="keyup" update="b6xxceedbvxxxxxxxxxxedatetDecoration" />
                    <#else>
                    </#if>
                 </h:inputText>
+
     </#if>
    <#elseif propertyType == "java.lang.Boolean" || propertyType == "yes_no" || propertyType == "true_false">
      <#if property.name?substring(4,5) == "y" || property.name?substring(6,8) == "sa" >
+
                 <h:selectOneRadio id="${property.name}"
                  <#if !column.nullable>
                                     required="true"
@@ -1148,7 +1151,7 @@
                  <#if propertyIsId>
                                     disabled="${'#'}{${homeName}.managed}"
                  </#if>
-                                    value="${'#'}{${homeName}.instance.${property.name}}">
+                                    value="${'#'}{${homeName}.instance.${property.name}}" >
                  <#if property.name?substring(6,8) == "sa" >
                   <f:selectItem itemValue="${'#'}{true}" itemLabel="AM" />
                   <f:selectItem itemValue="${'#'}{false}" itemLabel="PM" />
@@ -1157,14 +1160,15 @@
                   <f:selectItem itemValue="${'#'}{false}" itemLabel="No" />
                  </#if>  
                    <#if property.name?substring(5,7) == "wn">
-                    <f:ajax listener = "${'#'}{${homeName}.showtemprunt}" ajaxSingle="true" event="change" render="matcodeDecorationtax2T" bypassUpdates="false"/>
+                    <p:ajax listener = "${'#'}{${homeName}.listenerShowtemprunt}" ajaxSingle="true" event="change" update="matcodeDecorationtax2T" />
                    </#if> 
                    <#if property.name?substring(6,8) == "sa">
                     <#-- jsf radio button event is click but does not seem to ajax -->
-                    <f:ajax   listener="${'#'}{${homeName}.validateAndSetseDates}"   event="click"  render="b5gxdxsdbvxxxxxxxxxxsdatetDecoration,b8xxceedbvxxxxxxxxxxedatetDecoration,b2xxuxsxbvxxxxxxxxxxssdatetDecoration" bypassUpdates="false"/>
+                    <p:ajax   listener="${'#'}{${homeName}.validateAndSetseDates}"   event="click"  update="b5gxdxsdbvxxxxxxxxxxsdatetDecoration,b8xxceedbvxxxxxxxxxxedatetDecoration,b2xxuxsxbvxxxxxxxxxxssdatetDecoration" />
                    </#if> 
-                </h:selectOneRadio>
-     <#else>
+                </h:selectOneRadio> 
+    <#else>
+
                 <h:selectBooleanCheckbox id="${property.name}"
       <#if !column.nullable>
                                    required="true"
@@ -1172,15 +1176,16 @@
       <#if propertyIsId>
                                    disabled="${'#'}{${homeName}.managed}"
       </#if>
-                                      value="${'#'}{${homeName}.instance.${property.name}}">
+                                      value="${'#'}{${homeName}.instance.${property.name}}" >
                    <#if property.name?substring(6,8) == "sa">
-                    <f:ajax   listener="${'#'}{${homeName}.validateAndSetseDates}"   event="change"  render="b5gxdxsdbvxxxxxxxxxxsdatetDecoration,b8xxceedbvxxxxxxxxxxedatetDecoration,b2xxuxsxbvxxxxxxxxxxssdatetDecoration" bypassUpdates="false"/>
+                    <p:ajax   listener="${'#'}{${homeName}.listenerValidateAndSetseDates}"   event="change"  update="b5gxdxsdbvxxxxxxxxxxsdatetDecoration,b8xxceedbvxxxxxxxxxxedatetDecoration,b2xxuxsxbvxxxxxxxxxxssdatetDecoration" />
                    </#if> 
                    <#if property.name?substring(5,7) == "wn">
-                    <f:ajax listener = "${'#'}{${homeName}.showtemprunt}"  event="change" render="matcodeDecorationtax2T" bypassUpdates="false"/>
+                    <p:ajax listener = "${'#'}{${homeName}.listenerShowtemprunt}"  event="change" update="matcodeDecorationtax2T" />
                    </#if> 
-                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value</ui:remove>
-                   <f:ajax  render="${property.name}" bypassUpdates="false"/>
+                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value </ui:remove>
+                   <p:ajax  update="${property.name}" />
+                   
                  </h:selectBooleanCheckbox>
     </#if>
    <#elseif propertyType?contains("tring")>
@@ -1221,14 +1226,14 @@
          </#if>
          <ui:remove>xss attack possible via direct input of html, server santize added using jsoup</ui:remove>
          <ui:remove>jul30 2019 check for mastersite removed to allow for all but for clobdata csv only logic in bean </ui:remove>
-         <h:selectOneRadio value="${'#'}{${homeName}.upLoadPurpose}" required="false" id="${property.name}d" rendered="${'#'}{${homeName}.instance.${property.name}.length() >2}">
+         <p:selectOneRadio value="${'#'}{${homeName}.upLoadPurpose}" required="false" id="${property.name}d" rendered="${'#'}{${homeName}.instance.${property.name}.length() >2}">
           <f:selectItem  
            itemLabel="Add"
            itemValue="ad" /> 
           <f:selectItem  
            itemLabel="Replace"
            itemValue="re" /> 
-         </h:selectOneRadio>
+         </p:selectOneRadio>
          <ui:remove>For now, Item entity only</ui:remove>
          <h:commandLink action="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.removeImage()}"
           value="${'#'}{messages['Remove']}" rendered="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt.length() >2}" />
@@ -1394,7 +1399,7 @@
               <#if menuAttributesFunction ="1m" || menuAttributesFunction ="1n" || menuAttributesFunction ="60" >
                <h:panelGrid columns="2">
                 <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${property.name}}" required="false" id="${property.name}" rendered="${'#'}{!fn:endsWith(${homeName}.instance.${property.name},'-M')}">
-                  <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+                  <p:ajax  update="${property.name}" />
               </#if>
              <#elseif OptionField?contains("50")>
                <h:inputText value= "${'#'}{${homeName}.instance.${property.name}}" disabled="true"
@@ -1403,15 +1408,15 @@
                <h:panelGrid columns="2">
                 <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${property.name}}" required="false" id="${property.name}" 
                     rendered="${'#'}{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a4xxexxxbvxxxxxxxxxxtype!='theme'}">
-                  <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+                  <p:ajax  update="${property.name}" />
               </#if>
              <#elseif OptionField?contains("35") && menuAttributesFunction ="89" >
                 <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${property.name}}" required="false" >
-                  <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+                  <p:ajax  update="${property.name}I" />
              <#else>
                   <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${property.name}}" required="false" id="${property.name}">
              </#if>
-                        <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+                        <p:ajax  update="${property.name}" />
                         <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
                         <#if OptionField?contains("49") && (menuAttributesFunction ="1m" || menuAttributesFunction ="1n") >
                          <f:selectItem itemValue="3R-ATTACHMENT-1-C" itemLabel="${'#'}{messages['You']} ${'#'}{messages['can']} ${'#'}{messages['keyin']} ${'#'}{messages['override']} ${'#'}{messages['value']} ${'#'}{messages['in']} ${'#'}{messages['next']} ${'#'}{messages['box']}" />
@@ -1432,7 +1437,7 @@
                           <p:tooltip>  <span style="white-space: nowrap"> <h:outputText value="${'#'}{messages['Select']} ${'#'}{messages['and']} ${'#'}{messages['use']} ${'#'}{messages['this']} ${'#'}{messages['or']} ${'#'}{messages['select']} ${'#'}{messages['this']} ${'#'}{messages['and']} ${'#'}{messages['then']} ${'#'}{messages['Enter']} ${'#'}{messages['override']} ${'#'}{messages['value']} ${'#'}{messages['in']} ${'#'}{messages['next']} ${'#'}{messages['box']}"/></span> </p:tooltip> 
                          </#if>
                          <#if OptionField?contains("49") && (menuAttributesFunction ="1m" || menuAttributesFunction ="1n")>
-                          <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+                          <p:ajax  update="${property.name}" />
                          </#if>
                   </h:selectOneMenu>
                 <#if (OptionField?contains("49") && (menuAttributesFunction ="1m" || menuAttributesFunction ="1n")) || (OptionField?contains("50") && (menuAttributesFunction ="1m" || menuAttributesFunction ="1n"))>
@@ -1676,11 +1681,11 @@
              <#elseif OptionField?contains("49") >
               <#if menuAttributesFunction ="1m" || menuAttributesFunction ="1n">
                   <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${property.name}}" required="false" id="${property.name}" rendered="${'#'}{!fn:endsWith(${homeName}.instance.${property.name},'-M')}">
-                   <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+                   <p:ajax  update="${property.name}" />
               </#if>
              <#elseif OptionField?contains("35") && menuAttributesFunction ="89" >
                   <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${property.name}}" required="false" >
-                   <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+                   <p:ajax  update="${property.name}I" />
              <#else>
                 <h:selectOneMenu value="${'#'}{${homeName}.instance.${property.name}}" 
                    rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
@@ -1710,7 +1715,9 @@
              <#if OptionField?contains("35") && menuAttributesFunction ="89" >
                           <p:tooltip>  <span style="white-space: nowrap"> <h:outputText value="${'#'}{messages['Select']} ${'#'}{messages['and']} ${'#'}{messages['use']} ${'#'}{messages['this']} ${'#'}{messages['or']} ${'#'}{messages['select']} ${'#'}{messages['this']} ${'#'}{messages['and']} ${'#'}{messages['then']} ${'#'}{messages['Enter']} ${'#'}{messages['override']} ${'#'}{messages['value']} ${'#'}{messages['in']} ${'#'}{messages['next']} ${'#'}{messages['box']}"/></span> </p:tooltip> 
              </#if>
-                 <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+               <ui:remove> dupl?
+                 <p:ajax  update="${property.name}" />
+               </ui:remove>
                 </h:selectOneMenu>
                 <#if OptionField?contains("35") && menuAttributesFunction ="89"  >
                  <br></br>
@@ -1745,7 +1752,7 @@
               <#if menuAttributesFunction ="1m" || menuAttributesFunction ="1n">
                 <h:panelGrid columns="2">
                  <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${property.name}}" required="false" id="${property.name}" rendered="${'#'}{!fn:endsWith(${homeName}.instance.${property.name},'-M')}">
-                   <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+                   <p:ajax  update="${property.name}" />
               </#if>
              <#elseif OptionField?contains("50")>
                <h:inputText value= "${'#'}{${homeName}.instance.${property.name}}" disabled="true"
@@ -1754,15 +1761,15 @@
                <h:panelGrid columns="2">
                <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${property.name}}" required="false" id="${property.name}" 
                   rendered="${'#'}{yxxxuq1m1xwwqqqxxxxxclobdataHome.instance.a4xxexxxbvxxxxxxxxxxtype!='theme'}">
-                  <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+                  <p:ajax  update="${property.name}" />
               </#if>
              <#elseif OptionField?contains("35") && menuAttributesFunction ="89" >
                 <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${property.name}}" required="false" >
-                  <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+                  <p:ajax  update="${property.name}I" />
              <#else>
                <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${property.name}}" required="false" id="${property.name}">
              </#if>
-               <f:ajax  render="${property.name}I" bypassUpdates="false"/>
+               <p:ajax  update="${property.name}" />
                              <#if menuAttributesFunction ="62">
                                 <f:selectItem itemValue="01" itemLabel="01" />
                               <#else>
@@ -1850,14 +1857,14 @@
           <h:panelGroup id="c3fbuxscbvxxxxxxxxxxshipcodeDecoration"  rendered="${'#'}{!(customIdentity.product=='f' and customIdentity.subProduct=='b')}">
            <h:outputLabel  for="c3fbuxscbvxxxxxxxxxxshipcode" value="${'#'}{messages['Shipcode']}">
            </h:outputLabel>
-           <h:selectManyCheckbox value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.instance.checkedData}">
+           <p:selectManyCheckbox value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.instance.checkedData}">
    	    <f:selectItem itemValue="A" itemLabel="All" />
    	    <f:selectItem itemValue="S" itemLabel="Standard" />
    	    <f:selectItem itemValue="E" itemLabel="Express" />
    	    <f:selectItem itemValue="P" itemLabel="PickUp" />
-           </h:selectManyCheckbox>
+           </p:selectManyCheckbox>
          <h:outputText value="size/weight combination category" />
-		  <h:selectOneRadio value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.instance.checkedSize}" required="false" id="c3fbuxscbvxxxxxxxxxxshipcode">
+		  <p:selectOneRadio value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.instance.checkedSize}" required="false" id="c3fbuxscbvxxxxxxxxxxshipcode">
 				<f:selectItem  
                          itemLabel="Free Shipment"
                          itemValue="X" /> 
@@ -1873,7 +1880,7 @@
 				<f:selectItem  
                          itemLabel="Quote"
                          itemValue="Q" /> 
-                 </h:selectOneRadio>
+                 </p:selectOneRadio>
            <#-- sept30 2018 pks,pke (5,6) if key && subkey then schedule todo has sc for schedule
              use the common end panelgroup but sc also means
              shipcode as in item  -->
@@ -1885,13 +1892,13 @@
          <h:outputText value="actual measurements/values/variants" />
             <br></br><h:panelGrid columns="8">
              <h:panelGrid columns="2">
-             <h:selectOneMenu  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.unitLength}" 
+             <p:selectOneMenu  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.unitLength}" 
               rendered="true">
               <f:selectItem itemLabel="cm" itemValue="C" />
               <f:selectItem itemLabel="meter" itemValue="M" />
               <f:selectItem itemLabel="inch" itemValue="I" />
               <f:selectItem itemLabel="foot" itemValue="F" />
-             </h:selectOneMenu>
+             </p:selectOneMenu>
              </h:panelGrid>
             <h:panelGroup  rendered="true">
              <h:outputLabel  for="il" value="${'#'}{messages['Length']}">
@@ -1903,13 +1910,13 @@
              </h:inputText>
             </h:panelGroup>
              <h:panelGrid columns="2">
-             <h:selectOneMenu  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.unitWidth}" 
+             <p:selectOneMenu  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.unitWidth}" 
               rendered="true">
               <f:selectItem itemLabel="cm" itemValue="C" />
               <f:selectItem itemLabel="meter" itemValue="M" />
               <f:selectItem itemLabel="inch" itemValue="I" />
               <f:selectItem itemLabel="foot" itemValue="F" />
-             </h:selectOneMenu>
+             </p:selectOneMenu>
              </h:panelGrid>
             <h:panelGroup  rendered="true">
              <h:outputLabel  for="iw" value="${'#'}{messages['Width']}">
@@ -1921,13 +1928,13 @@
              </h:inputText>
             </h:panelGroup>
              <h:panelGrid columns="2">
-             <h:selectOneMenu  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.unitHeight}" 
+             <p:selectOneMenu  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.unitHeight}" 
               rendered="true">
               <f:selectItem itemLabel="cm" itemValue="C" />
               <f:selectItem itemLabel="meter" itemValue="M" />
               <f:selectItem itemLabel="inch" itemValue="I" />
               <f:selectItem itemLabel="foot" itemValue="F" />
-             </h:selectOneMenu>
+             </p:selectOneMenu>
              </h:panelGrid>
             <h:panelGroup  rendered="true">
              <h:outputLabel  for="ih" value="${'#'}{messages['Height']}">
@@ -1939,13 +1946,13 @@
             </h:inputText>
             </h:panelGroup>
              <h:panelGrid columns="2">
-             <h:selectOneMenu  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.unitWeight}" 
+             <p:selectOneMenu  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.unitWeight}" 
               rendered="true">
               <f:selectItem itemLabel="gm" itemValue="G" />
               <f:selectItem itemLabel="kg" itemValue="K" />
               <f:selectItem itemLabel="lb" itemValue="L" />
               <f:selectItem itemLabel="ton" itemValue="T" />
-             </h:selectOneMenu>
+             </p:selectOneMenu>
              </h:panelGrid>
             <h:panelGroup  rendered="true">
              <h:outputLabel  for="it" value="${'#'}{messages['Weight']}">
@@ -1969,19 +1976,19 @@
 --> 
 		<br></br>
          <h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantSizeL}" required="false" >
-				<f:selectItem  
+                   <f:selectItem  
                          itemLabel="Size"
                          itemValue="Size " /> 
-				<f:selectItem  
+                   <f:selectItem  
                          itemLabel="Type"
                          itemValue="Type" /> 
-				<f:selectItem  
+                  <f:selectItem  
                          itemLabel="Trend"
                          itemValue="Trend" /> 
-				<f:selectItem  
+                  <f:selectItem  
                          itemLabel="Select this/override "
                          itemValue="keyin" /> 
-                   <f:ajax  render="sizeL" bypassUpdates="false"/>
+                   <p:ajax  update="sizeL" />
                    <p:tooltip>  <span style="white-space: nowrap"> <h:outputText value="${'#'}{messages['Select']} ${'#'}{messages['and']} ${'#'}{messages['use']} ${'#'}{messages['or']} ${'#'}{messages['select']} ${'#'}{messages['and']} ${'#'}{messages['then']} ${'#'}{messages['Enter']} ${'#'}{messages['override']} ${'#'}{messages['value']} ${'#'}{messages['in']} ${'#'}{messages['next']} ${'#'}{messages['box']}"/></span> </p:tooltip> 
 
                  </h:selectOneMenu>
@@ -1989,157 +1996,157 @@
                           size="4" maxlength="8">
                  </h:inputText>
             &nbsp;&nbsp;<h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantSize}" required="false" >
-				<f:selectItem  
+                 <f:selectItem  
                          itemLabel="Value"
                          itemValue=" " /> 
-				<f:selectItem  
+                 <f:selectItem  
                          itemLabel="One Size Fits All"
                          itemValue="Fits All" /> 
-				<f:selectItem  
+                <f:selectItem  
                          itemLabel="Small"
                          itemValue="Small   " /> 
-				<f:selectItem  
+               <f:selectItem  
                          itemLabel="Medium"
                          itemValue="Medium  " /> 
-				<f:selectItem  
+               <f:selectItem  
                          itemLabel="Large"
                          itemValue="Large  " /> 
-				<f:selectItem  
+              <f:selectItem  
                          itemLabel="Xtra Large"
                          itemValue="X Large " /> 
-				<f:selectItem  
+              <f:selectItem  
                          itemLabel="Xtra Xtra Large"
                          itemValue="XX Large" /> 
-				<f:selectItem  
+             <f:selectItem  
                          itemLabel="Custom"
                          itemValue="Custom  " /> 
-                   <f:ajax  render="sizeI" bypassUpdates="false"/>
+                   <p:ajax  update="sizeI" />
 
                  </h:selectOneMenu>
                  <h:inputText id="sizeI" value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantSize}" 
                           size="4" maxlength="8">
                  </h:inputText>
-		  &nbsp;&nbsp;&nbsp;&nbsp;<h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantColourL}" required="false" >
-				<f:selectItem  
+                &nbsp;&nbsp;&nbsp;&nbsp;<h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantColourL}" required="false" >
+                    <f:selectItem  
                          itemLabel="Colour"
                          itemValue="Colour" /> 
-				<f:selectItem  
+                    <f:selectItem  
                          itemLabel="Shape"
                          itemValue="Shape  " /> 
-                   <f:ajax  render="colorL" bypassUpdates="false"/>
+                   <p:ajax  update="colorL" />
                  </h:selectOneMenu>
                  <h:inputText id="colorL" value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantColourL}" 
                           size="4" maxlength="8">
                  </h:inputText>
-		  &nbsp;&nbsp;<h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantColour}" required="false" >
-				<f:selectItem  
+  &nbsp;&nbsp;<h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantColour}" required="false" >
+                  <f:selectItem  
                          itemLabel="Value"
                          itemValue=" " /> 
-				<f:selectItem  
+                 <f:selectItem  
                          itemLabel="Varies"
                          itemValue="Varies  " /> 
-				<f:selectItem  
+                 <f:selectItem  
                          itemLabel="White"
                          itemValue="White   " /> 
-				<f:selectItem  
+                 <f:selectItem  
                          itemLabel="Black"
                          itemValue="Black   " /> 
-				<f:selectItem  
+               <f:selectItem  
                          itemLabel="Red"
                          itemValue="Red     " /> 
-				<f:selectItem  
+              <f:selectItem  
                          itemLabel="Yellow"
                          itemValue="Yellow  " /> 
-				<f:selectItem  
+              <f:selectItem  
                          itemLabel="Blue"
                          itemValue="Blue    " /> 
-				<f:selectItem  
+             <f:selectItem  
                          itemLabel="Green"
                          itemValue="Green   " /> 
-				<f:selectItem  
+             <f:selectItem  
                          itemLabel="Custom"
                          itemValue="Custom  " /> 
-                   <f:ajax  render="colorI" bypassUpdates="false"/>
+                   <p:ajax  update="colorI" />
                  </h:selectOneMenu>
                  <h:inputText id="colorI" value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantColour}" 
                           size="4" maxlength="8">
                  </h:inputText>
             </h:panelGrid>
             <br></br><h:panelGrid columns="16">
-		  <h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantMaterialL}" required="false" >
-				<f:selectItem  
+                 <h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantMaterialL}" required="false" >
+                  <f:selectItem  
                          itemLabel="Material"
                          itemValue="Material" /> 
-				<f:selectItem  
+                 <f:selectItem  
                          itemLabel="Origin"
                          itemValue="Origin" /> 
-				<f:selectItem  
+                <f:selectItem  
                          itemLabel="Country"
                          itemValue="Country" /> 
-				<f:selectItem  
+                <f:selectItem  
                          itemLabel="Food"
                          itemValue="Food Typ" /> 
-                   <f:ajax  render="materialL" bypassUpdates="false"/>
+                   <p:ajax  update="materialL" />
                  </h:selectOneMenu>
                  <h:inputText id="materialL" value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantMaterialL}" 
                           size="4" maxlength="8">
                  </h:inputText>
-		  &nbsp;&nbsp;<h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantMaterial}" required="false" >
-				<f:selectItem  
+       &nbsp;&nbsp;<h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantMaterial}" required="false" >
+                    <f:selectItem  
                          itemLabel="Value"
                          itemValue=" " /> 
-				<f:selectItem  
+                  <f:selectItem  
                          itemLabel="Varies"
                          itemValue="Varies  " /> 
-				<f:selectItem  
+                 <f:selectItem  
                          itemLabel="Cotton"
                          itemValue="Cotton  " /> 
-				<f:selectItem  
+                <f:selectItem  
                          itemLabel="Nylon"
                          itemValue="Nylon   " /> 
-				<f:selectItem  
+                <f:selectItem  
                          itemLabel="Wool"
                          itemValue="Wool    " /> 
-				<f:selectItem  
+                <f:selectItem  
                          itemLabel="Polyster"
                          itemValue="Polyster" /> 
-				<f:selectItem  
+                <f:selectItem  
                          itemLabel="Custom"
                          itemValue="Custom  " /> 
-                   <f:ajax  render="materialI" bypassUpdates="false"/>
+                   <p:ajax  update="materialI" />
                  </h:selectOneMenu>
                  <h:inputText id="materialI" value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantMaterial}" 
                           size="4" maxlength="8">
                  </h:inputText>
-		  &nbsp;&nbsp;&nbsp;&nbsp;<h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantBrandL}" required="false" >
-				<f:selectItem  
+  &nbsp;&nbsp;&nbsp;&nbsp;<h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantBrandL}" required="false" >
+                    <f:selectItem  
                          itemLabel="Brand"
                          itemValue="Brand" /> 
-				<f:selectItem  
+                   <f:selectItem  
                          itemLabel="Made By"
                          itemValue="Made By" /> 
-				<f:selectItem  
+                   <f:selectItem  
                          itemLabel="Company"
                          itemValue="Company" /> 
-                   <f:ajax  render="brandL" bypassUpdates="false"/>
+                   <p:ajax  update="brandL" />
                  </h:selectOneMenu>
                  <h:inputText id="brandL" value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantBrandL}" 
                           size="4" maxlength="8">
                  </h:inputText>
-		  &nbsp;&nbsp;<h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantBrand}" required="false" >
-				<f:selectItem  
+  &nbsp;&nbsp;<h:selectOneMenu value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantBrand}" required="false" >
+                  <f:selectItem  
                          itemLabel="Value"
                          itemValue=" " /> 
-				<f:selectItem  
+                 <f:selectItem  
                          itemLabel="House"
                          itemValue="House   " /> 
-				<f:selectItem  
+                 <f:selectItem  
                          itemLabel="No Name"
                          itemValue="No Name " /> 
-				<f:selectItem  
+                 <f:selectItem  
                          itemLabel="Custom"
                          itemValue="Custom  " /> 
-                   <f:ajax  render="brandI" bypassUpdates="false"/>
+                   <p:ajax  update="brandI" />
                  </h:selectOneMenu>
                  <h:inputText id="brandI" value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.itemVariantBrand}" 
                           size="4" maxlength="8">
@@ -2188,14 +2195,14 @@
            <h:panelGroup id="locationi"   rendered="${'#'}{(customIdentity.product=='s' and customIdentity.subProduct=='a')}">
             <h:outputLabel  for="${property.name}" value="${'#'}{messages['for']} ${'#'}{messages.location}"> 
             </h:outputLabel>
-             <h:selectOneMenu  style="width:250px;"  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.instance.y1xxuxxrbvxxxxxxxxxxsource2}" 
+             <p:selectOneMenu  style="width:250px;"  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.instance.y1xxuxxrbvxxxxxxxxxxsource2}" 
               rendered="${'#'}{(customIdentity.product=='s' and customIdentity.subProduct=='a')}">
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','12').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
               <f:selectItems value="${'#'}{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('xx',12)}"  var="babu"  
                 itemLabel="${'#'}{babu.key}"
                 itemValue="${'#'}{babu.value}" /> 
-             </h:selectOneMenu>
+             </p:selectOneMenu>
             <br/>
            </h:panelGroup>
            <h:panelGroup   rendered="${'#'}{(customIdentity.product=='s' and customIdentity.subProduct=='a')}" >
@@ -2203,7 +2210,7 @@
             </h:outputLabel>
              <h:selectOneMenu style="width:250px;"  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.instance.y2xxuxxrbvxxxxxxxxxxmisccode1}" 
               rendered="${'#'}{(customIdentity.product=='s' and customIdentity.subProduct=='a')}">
-              <f:ajax  render="dxxxch1d3xwwqqhxxlxxcompanyprovstateI" bypassUpdates="false"/>
+              <p:ajax  update="dxxxch1d3xwwqqhxxlxxcompanyprovstateI" />
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','52').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','52').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
               <f:selectItems value="${'#'}{yrxxch511xhhxxhxxxxxoptionsList.getSuggestList(${customerEntityName}Home.prefix)}" var="result"
@@ -2215,7 +2222,7 @@
             </h:outputLabel>
              <h:selectOneMenu style="width:250px;"  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.instance.y3xxuxxrbvxxxxxxxxxxmisccode2}" 
               rendered="${'#'}{(customIdentity.product=='s' and customIdentity.subProduct=='a')}">
-              <f:ajax  render="dxxxch1d3xwwqqhxxlxxcompanyprovstateI" bypassUpdates="false"/>
+              <p:ajax  update="dxxxch1d3xwwqqhxxlxxcompanyprovstateI" />
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
               <f:selectItem itemValue="${'#'}{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','53').b1xxuxxrbvxxxxxxxxxxselectvalue}" itemLabel="${'#'}{yrxxch511xhhxxhxxxxxoptionsList.getUserProfile('01','53').b1xxuxxrbvxxxxxxxxxxselectvalue}" />
               <f:selectItems value="${'#'}{yrxxch511xhhxxhxxxxxoptionsList.getSuggestList(${customerEntityName}Home.prefix)}" var="result"
@@ -2226,7 +2233,7 @@
             <h:outputLabel  for="${property.name}" value="${'#'}{messages['test_name']}">  
             </h:outputLabel>
              <h:selectOneMenu style="width:250px;"  value="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.instance.y3xxuxxrbvxxxxxxxxxxmisccode2}"> 
-              <f:ajax  render="dxxxch1d3xwwqqhxxlxxcompanyprovstateI" bypassUpdates="false"/>
+              <p:ajax  update="dxxxch1d3xwwqqhxxlxxcompanyprovstateI" />
               <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
                <f:selectItems value="${'#'}{${rate1fEntityName}List.getSuggestList('LT-')}" var="result"
                itemValue="${'#'}{result.b2xxuxxrbv51xxxxxxxxstepname}" itemLabel="${'#'}{result.b2xxuxxrbv51xxxxxxxxstepname}" />
@@ -2262,7 +2269,7 @@
           </#if>
         <!-- non options continuing -->
         <#elseif property.name?substring(6,8) == "se">
-            <h:selectOneRadio id="${property.name}" value="${'#'}{${homeName}.instance.${property.name}}" required="false">
+            <p:selectOneRadio id="${property.name}" value="${'#'}{${homeName}.instance.${property.name}}" required="false">
               <f:selectItem  
                          itemLabel="Male"
                          itemValue="M" /> 
@@ -2272,15 +2279,15 @@
              <f:selectItem  
                          itemLabel="Other"
                          itemValue="O" /> 
-             </h:selectOneRadio>
+             </p:selectOneRadio>
         <#elseif property.name?substring(6,8) == "wm">
-                <h:selectOneMenu style="width:250px;"  id="${property.name}" value="${'#'}{yxxxch643xwwqqhxxxxxacintegrHome.instance.a2xxukwmbvxxxxxxxxxxmoduleid}">
+                <p:selectOneMenu style="width:250px;"  id="${property.name}" value="${'#'}{yxxxch643xwwqqhxxxxxacintegrHome.instance.a2xxukwmbvxxxxxxxxxxmoduleid}">
                  <f:selectItem id="wm1" itemLabel="Sales(AS)" itemValue="AS" />
                  <f:selectItem id="wm2" itemLabel="Receivable(AR)" itemValue="AR" />
                  <f:selectItem id="wm3" itemLabel="Payable(AP)" itemValue="AP" />
-                </h:selectOneMenu> 
+                </p:selectOneMenu> 
         <#elseif property.name?substring(6,8) == "w8">
-                <h:selectOneMenu style="width:250px;"  id="${property.name}" value="${'#'}{yxxxch643xwwqqhxxxxxacintegrHome.instance.a3xxukw8bvxxxxxxxxxxusagecode}">
+                <p:selectOneMenu style="width:250px;"  id="${property.name}" value="${'#'}{yxxxch643xwwqqhxxxxxacintegrHome.instance.a3xxukw8bvxxxxxxxxxxusagecode}">
                  <f:selectItem id="wu1" itemLabel="Retained Earning(EAR)" itemValue="EAR" />
                  <f:selectItem id="wu2" itemLabel="Inventory Receipt Clearing A/C(IRC)" itemValue="IRC" />
                  <f:selectItem id="wu3" itemLabel="Revenue(CRE)" itemValue="CRE" />
@@ -2303,14 +2310,14 @@
                  <f:selectItem id="wuk" itemLabel="Inventory Asset(CAS)" itemValue="CAS" />
                  <f:selectItem id="wum" itemLabel="Repair/Parts Cost(CEX)" itemValue="CEX" />
                  <f:selectItem id="wun" itemLabel="Tax3 Payable(TX3)" itemValue="TX3" />
-                </h:selectOneMenu> 
+                </p:selectOneMenu> 
         <#elseif property.name?substring(6,8) == "w9">
-                <h:selectOneMenu style="width:250px;"  id="${property.name}" value="${'#'}{yxxxch643xwwqqhxxxxxacintegrHome.instance.a4xxukw9bvxxxxxxxxxxsetsid}">
+                <p:selectOneMenu style="width:250px;"  id="${property.name}" value="${'#'}{yxxxch643xwwqqhxxxxxacintegrHome.instance.a4xxukw9bvxxxxxxxxxxsetsid}">
                  <f:selectItem id="ws1" itemLabel="Default Set" itemValue="DEFAULT" />
                  <f:selectItem id="ws2" itemLabel="Consulting" itemValue="CONSULT" />
                  <f:selectItem id="ws3" itemLabel="Service" itemValue="SERVICE" />
                  <f:selectItem id="ws4" itemLabel="Other" itemValue="OTHER" />
-                </h:selectOneMenu> 
+                </p:selectOneMenu> 
         <#elseif property.name?substring(5,7)=="zd" || property.name?substring(5,7)=="za" || property.name?substring(5,7)=="zb"  >
          <h:inputText id="${property.name}v" 
                    disabled="true"
@@ -2327,14 +2334,14 @@
           <#else> 
            <p:tooltip for="${property.name}o"> <span style="white-space: nowrap"> <h:outputText value="Types allowed are: jpg, gif, png, bmp, xml,doc,txt,pdf,xls,mp3,mp4"/></span> </p:tooltip> 
           </#if>
-	    <h:selectOneRadio value="${'#'}{${homeName}.upLoadPurpose}" required="false" id="${property.name}d" rendered="${'#'}{${homeName}.instance.${property.name} ne null}">
+	    <p:selectOneRadio value="${'#'}{${homeName}.upLoadPurpose}" required="false" id="${property.name}d" rendered="${'#'}{${homeName}.instance.${property.name} ne null}">
              <f:selectItem  
               itemLabel="Add"
               itemValue="ad" /> 
              <f:selectItem  
               itemLabel="Replace"
               itemValue="re" /> 
-           </h:selectOneRadio>
+           </p:selectOneRadio>
              <h:commandLink action="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.removeImage()}"
                 value="${'#'}{messages['Remove']}" rendered="${'#'}{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt ne null}" />
                  
@@ -2396,7 +2403,7 @@
 
         <#else>
      <#if menuAttributesFunction ="1s" && property.name?substring(pkS,pkE)=="k" && seatEntityName??>
-             <h:selectOneMenu style="width:250px;"  id="${property.name}"
+             <p:selectOneMenu style="width:250px;"  id="${property.name}"
                    rendered="${'#'}{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                    required="true"
                     validator="${'#'}{${seatEntityName}Home.validateKeyDuplicateRow}" 
@@ -2453,7 +2460,7 @@
                <f:selectItem itemValue="048" itemLabel="048" />
                <f:selectItem itemValue="049" itemLabel="049" />
                <f:selectItem itemValue="050" itemLabel="050" />
-             </h:selectOneMenu>
+             </p:selectOneMenu>
      <#else>
 
          <#if property.name?substring(5,7) == "c1" || property.name?substring(5,7) == "c2" || property.name?substring(5,7) == "c3" || property.name?substring(5,7) == "c4"
@@ -2608,14 +2615,14 @@
           ${'#'}{messages['Doc3:']}<h:outputText value="${'#'}{fn:substring(${blobdataEntityName}Home.files[2].text,0,50)}"  
            rendered="${'#'}{not empty ${blobdataEntityName}Home.files[2].text}" />
          </p:panel>
-          <h:selectOneRadio value="${'#'}{${homeName}.upLoadPurpose}" required="false" id="${property.name}d" rendered="${'#'}{${homeName}.instance.${property.name} ne null}">
+          <p:selectOneRadio value="${'#'}{${homeName}.upLoadPurpose}" required="false" id="${property.name}d" rendered="${'#'}{${homeName}.instance.${property.name} ne null}">
              <f:selectItem  
               itemLabel="Add"
               itemValue="ad" /> 
              <f:selectItem  
               itemLabel="Replace"
               itemValue="re" /> 
-            </h:selectOneRadio>
+            </p:selectOneRadio>
                  <ui:remove> blobedit,url allows delay to load the image as opposed to previous jsf h:graphicImage </ui:remove>
                  <p:panel rendered="${'#'}{not empty ${componentName}Home.instance.${documentField} and ${blobdataEntityName}Home.instance.zzxxu2oxxhxxxxxxxxxxowner2 !='SYSTEM'}">
                   ${'#'}{messages['Saved']}&nbsp;

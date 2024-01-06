@@ -520,6 +520,12 @@ public void setHoldArray(int index,String value)
     }
   }
 
+/**
+* There are different labelViews
+* VM Visitor menue
+* LM Logged in menue 
+* FM Field labels view not all fully implemented
+*/
   public String getLabelView() {
     return labelView;
   }

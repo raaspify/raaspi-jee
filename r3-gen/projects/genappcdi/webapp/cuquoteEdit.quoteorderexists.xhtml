@@ -99,7 +99,7 @@
           <ui:define name="label">#{messages['Cuquote']} 
           </ui:define>
                 <p:remoteCommand name="trexuq233xwwqqhxxxxxcuquoteFunction" proces="@all" update="@none" />
-                <h:selectOneMenu styleClass="autoCompleteWidth50"  
+                <p:selectOneMenu styleClass="autoCompleteWidth50"  
                   rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                      required="false" 
                        label="cuquote"
@@ -116,10 +116,10 @@
                   result.jxxxuq201xwwqqhxxxxxcustomer.c1xxuslnbvixxxxxxxxxlastname).concat('/').concat(
                    result.jxxxuq201xwwqqhxxxxxcustomer.d1xxu3cnbvixxxxxxxxxcustomerascompanyname)}"
                   />
-                </h:selectOneMenu>
+                </p:selectOneMenu>
           </ui:decorate>
           #{messages['Cuquote']} [#{messages['closed']}]
-                <h:selectOneMenu styleClass="autoCompleteWidth50"  
+                <p:selectOneMenu styleClass="autoCompleteWidth50"  
                  rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                      required="false" 
                        label="cuquote"
@@ -135,7 +135,7 @@
                   result.jxxxuq201xwwqqhxxxxxcustomer.c1xxuslnbvixxxxxxxxxlastname).concat('/').concat(
                    result.jxxxuq201xwwqqhxxxxxcustomer.d1xxu3cnbvixxxxxxxxxcustomerascompanyname)}"
                   />
-                </h:selectOneMenu>
+                </p:selectOneMenu>
           <br/>
           <ui:remove>  added vq-sv to hide qtyord </ui:remove>
 
@@ -244,7 +244,7 @@
       </h:outputLabel>
  
                <h:selectOneMenu style="width:250px;"  value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.b5xxuxxrbl10xxxxxxxxtype}" required="false" id="b5xxuxxrbl10xxxxxxxxtype">
-               <f:ajax  render="b5xxuxxrbl10xxxxxxxxtypeI" bypassUpdates="false"/>
+               <p:ajax  update="b5xxuxxrbl10xxxxxxxxtype" />
                                 <f:selectItem itemValue="#{null}" itemLabel="" />
                                 <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('23',10)}"  var="babu"  
                                  itemLabel="#{babu.key}"
@@ -261,7 +261,7 @@
       </h:outputLabel>
  
                <h:selectOneMenu style="width:250px;"  value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.b6xxuxxrbl09xxxxxxxxterms}" required="false" id="b6xxuxxrbl09xxxxxxxxterms">
-               <f:ajax  render="b6xxuxxrbl09xxxxxxxxtermsI" bypassUpdates="false"/>
+               <p:ajax  update="b6xxuxxrbl09xxxxxxxxterms" />
                                 <f:selectItem itemValue="#{null}" itemLabel="" />
                                 <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('23',09)}"  var="babu"  
                                  itemLabel="#{babu.key}"
@@ -276,10 +276,12 @@
              <h:panelGroup id="b7xxfxxrbvxxxxxxxxxxpriorityDecoration"    >
         <h:outputLabel  for="b7xxfxxrbvxxxxxxxxxxpriority" value="#{messages['Priority']}">
       </h:outputLabel>
+
                 <h:selectBooleanCheckbox id="b7xxfxxrbvxxxxxxxxxxpriority"
-                                      value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.b7xxfxxrbvxxxxxxxxxxpriority}">
-                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value</ui:remove>
-                   <f:ajax  render="b7xxfxxrbvxxxxxxxxxxpriority" bypassUpdates="false"/>
+                                      value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.b7xxfxxrbvxxxxxxxxxxpriority}" >
+                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value </ui:remove>
+                   <p:ajax  update="b7xxfxxrbvxxxxxxxxxxpriority" />
+                   
                  </h:selectBooleanCheckbox>
             </h:panelGroup>
 
@@ -309,12 +311,12 @@
             <p:panel header="#{messages['Fields']}" switchType="client" collapsed="!#{!(trexuq233xwwqqhxxxxxcuquoteList.entityLessStatusDetailedList(trexuq233xwwqqhxxxxxcuquoteHome.instance.a0xxuobxbxxxxxxxxxxxsid,-1).size() ge 1)}"
              leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
     <h:outputText value="#{messages['Shipping_Options_Msg']}"/>
-                            <h:selectOneRadio id="logic" value="#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.z9xxtxsolxxxxxxxxxxxshipoption}" styleClass="radio">
+                            <p:selectOneRadio id="logic" value="#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.z9xxtxsolxxxxxxxxxxxshipoption}" styleClass="radio">
                              <f:selectItem itemLabel="Pick Up" itemValue="P"/>
                              <f:selectItem itemLabel="Standard Ship" itemValue="S"/>
                              <f:selectItem itemLabel="Express Ship" itemValue="E"/>
                              <f:selectItem itemLabel="Not Applicable" itemValue="X"/>
-                            </h:selectOneRadio>
+                            </p:selectOneRadio>
             </p:panel>
    <p:panel header="#{messages['EditToggle']}" toggleable="true" toggleableHeader="true"
      leftCollapsedIcon="/img/control_add16.png" leftExpandedIcon="/img/control_remove16.png">
@@ -348,8 +350,9 @@
       <h:inputText id="y4xxzpxxavxxxxxxxxxxordprice"  
          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.y4xxzpxxavxxxxxxxxxxordprice}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.y4xxzpxxavxxxxxxxxxxordprice}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -409,8 +412,9 @@
       </h:outputLabel>
                 <h:inputText id="y8xxuxxrblxxxxxxxxxxshipcode" 
                           value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.y8xxuxxrblxxxxxxxxxxshipcode}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -473,14 +477,14 @@
                           value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt}">
          </h:inputText>
            <p:tooltip for="ycxxuzdrblxxxxxxxxxxdocmnto"> <span style="white-space: nowrap"> <h:outputText value="Types allowed are: jpg, gif, png, bmp, xml,doc,txt,pdf,xls,mp3,mp4"/></span> </p:tooltip> 
-	    <h:selectOneRadio value="#{trexuq233xwwqqhxxxxxcuquoteHome.upLoadPurpose}" required="false" id="ycxxuzdrblxxxxxxxxxxdocmntd" rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt ne null}">
+	    <p:selectOneRadio value="#{trexuq233xwwqqhxxxxxcuquoteHome.upLoadPurpose}" required="false" id="ycxxuzdrblxxxxxxxxxxdocmntd" rendered="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.ycxxuzdrblxxxxxxxxxxdocmnt ne null}">
              <f:selectItem  
               itemLabel="Add"
               itemValue="ad" /> 
              <f:selectItem  
               itemLabel="Replace"
               itemValue="re" /> 
-           </h:selectOneRadio>
+           </p:selectOneRadio>
              <h:commandLink action="#{fpxxfq1a5xwwqqhxxxxxitemHome.removeImage()}"
                 value="#{messages['Remove']}" rendered="#{fpxxfq1a5xwwqqhxxxxxitemHome.instance.w8xxuzdrbvxxxxxxxxxxdocmnt ne null}" />
                  
@@ -552,8 +556,9 @@
       <h:inputText id="z1xxztprlxxxxxxxxxxxamounttotal"  
          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z1xxztprlxxxxxxxxxxxamounttotal}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z1xxztprlxxxxxxxxxxxamounttotal}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -565,8 +570,9 @@
       </h:outputLabel>
                 <h:inputText id="z2xxuvxrblxxxxxxxxxxvendor" 
                           value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z2xxuvxrblxxxxxxxxxxvendor}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -579,8 +585,9 @@
       <h:inputText id="z2xxzyprlxxxxxxxxxxxamountostndt"  
          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z2xxzyprlxxxxxxxxxxxamountostndt}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z2xxzyprlxxxxxxxxxxxamountostndt}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -593,8 +600,9 @@
       <h:inputText id="z3xxztqrlxxxxxxxxxxxqtytotal"  
          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z3xxztqrlxxxxxxxxxxxqtytotal}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z3xxztqrlxxxxxxxxxxxqtytotal}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -607,8 +615,9 @@
       <h:inputText id="z4xxzyqrlxxxxxxxxxxxqtyostndt"  
          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z4xxzyqrlxxxxxxxxxxxqtyostndt}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z4xxzyqrlxxxxxxxxxxxqtyostndt}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -620,8 +629,9 @@
       </h:outputLabel>
                 <h:inputText id="z5xxzzfxhhxxxxxxxxxxstatusfl" 
                           value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z5xxzzfxhhxxxxxxxxxxstatusfl}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -649,8 +659,9 @@
       <h:inputText id="z7xxzbtxavxxxxxxxxxxbaseamountt"  
          value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z7xxzbtxavxxxxxxxxxxbaseamountt}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z7xxzbtxavxxxxxxxxxxbaseamountt}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -662,8 +673,9 @@
       </h:outputLabel>
                 <h:inputText id="z7xxzzprhvxxxxxxxxxxprintmstat" 
                           value="#{trexuq233xwwqqhxxxxxcuquoteHome.instance.z7xxzzprhvxxxxxxxxxxprintmstat}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -709,7 +721,7 @@
                             onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zcxxzmxxavxxxxxxxxxxmiscchrg}:this.value;"
                             value="#{xoxxuq2c4xwwqqhxxxxxcuqdetailsHome.instance.zcxxzmxxavxxxxxxxxxxmiscchrg}">
                             <ui:remove>
-                            <f:ajax listener = "#{trexuq233xwwqqhxxxxxcuquoteHome.showtemprunt}"  event="select" render="matcodeTDecoration,matcodeDecorationmis" bypassUpdates="false"/>
+                            <p:ajax listener = "#{trexuq233xwwqqhxxxxxcuquoteHome.showtemprunt}"  event="select" update="@form" />
                             </ui:remove> 
          </h:inputText>
             </h:panelGroup>
@@ -929,7 +941,7 @@
                             <f:facet id="CartRemoveFacet" name="header">
                                 <h:outputText id="CartRemoveText" value="#{messages['removeColumn']}" />
                             </f:facet>
-                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="#{trexuq233xwwqqhxxxxxcuquoteHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                            <p:selectBooleanCheckbox id="CartRemoveCheckbox" value="#{trexuq233xwwqqhxxxxxcuquoteHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
                         </p:column>
                         <p:column id="columnxxo">
                             <f:facet id="XxoFacet" name="header">
@@ -1086,10 +1098,10 @@
             <h:panelGrid columns="2">
              <ui:decorate template="layout/display.xhtml">
                 <ui:define name="label">#{messages['report.displayAs']}</ui:define>
-                <h:selectOneMenu id="displayAs" value="#{trexuq233xwwqqhxxxxxcuquoteList.displayAs}">
+                <p:selectOneMenu id="displayAs" value="#{trexuq233xwwqqhxxxxxcuquoteList.displayAs}">
                  <f:selectItem id="ditem2" itemLabel="HTML" itemValue="HTML" />
                  <f:selectItem id="ditem1" itemLabel="PDF" itemValue="PDF" />
-                </h:selectOneMenu> 
+                </p:selectOneMenu> 
              </ui:decorate>
             </h:panelGrid>
              <h:commandButton id="ePrint" value="#{messages['Print']}/#{messages['Preview']} #{messages['report']}"   onclick="this.form.target='_blank'"

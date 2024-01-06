@@ -104,7 +104,7 @@
             <ui:define name="label">#{messages['Vendor']} 
             </ui:define>
                 <p:remoteCommand name="jxxxuq300xwwqqhxxxxxvendorFunction" proces="@all" update="@none" />
-             <h:selectOneMenu styleClass="autoCompleteWidth50" id="jxxxuq300xwwqqhxxxxxvendorsm"
+             <p:selectOneMenu styleClass="autoCompleteWidth50" id="jxxxuq300xwwqqhxxxxxvendorsm"
                    rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                      required="true"  disabled="#{trexuq388xwwqqhxxxxxvpaymentHome.picked}"
                        label="vendor"
@@ -116,7 +116,7 @@
               <f:selectItems 
                      value="#{jxxxuq300xwwqqhxxxxxvendorList.getSuggestList(' ')}" var ="result" itemValue="#{result.a0xxukxxbvxxxxxxxxxxvendor}" 
                      itemLabel="#{(empty result.d1xxu3cnbvxxxxxxxxxxvendorascompanyname?'':result.d1xxu3cnbvxxxxxxxxxxvendorascompanyname).concat(' ').concat(result.b3xxuslnbvxxxxxxxxxxlastname).concat(' ').concat(result.b4xxu2fnbvxxxxxxxxxxfirstname)}"/>
-             </h:selectOneMenu>
+             </p:selectOneMenu>
 
        <h:panelGroup>
              <ui:decorate id="amtinlabel" template="layout/edit.xhtml" >
@@ -126,7 +126,7 @@
                  onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{xoxxuq3b4xwwqqhxxxxxvendpdetailsHome.instance.z6xxzxxxavxxxxxxxxxxamountin}}:this.value;"
                  disabled="false" >
                  <f:convertNumber minFractionDigits="0" maxFractionDigits="2"  />
-                 <f:ajax listener = "#{trexuq388xwwqqhxxxxxvpaymentHome.showtemprunt}"  event="blur" render="matcodeDescriptDecoration,matcodePriceLabelT,matcodeTDecoration,matcodeDecorationmis,matcodeDecorationdelT,matcodeDecorationtax1T,matcodeDecorationtax2T" bypassUpdates="false"/>
+                 <p:ajax listener = "#{trexuq388xwwqqhxxxxxvpaymentHome.showtemprunt}"  event="blur" update="@form" />
              </h:inputText>
              </ui:decorate>
           </h:panelGroup>
@@ -145,7 +145,7 @@
             <ui:define name="label">#{messages['Account']} 
             </ui:define>
                 <p:remoteCommand name="yxxxch601xwwqqhxxxxxaccountFunction" proces="@all" update="@none" />
-             <h:selectOneMenu styleClass="autoCompleteWidth50" id="yxxxch601xwwqqhxxxxxaccountsm"
+             <p:selectOneMenu styleClass="autoCompleteWidth50" id="yxxxch601xwwqqhxxxxxaccountsm"
                        rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                     requiredMessage="#{messages['Account']} #{messages['ValueRequired']}"
                     validator="#{trexuq388xwwqqhxxxxxvpaymentHome.validateAndSelectXxxxxxxxaccount}" 
@@ -155,7 +155,7 @@
               <f:selectItems 
                      value="#{yxxxch601xwwqqhxxxxxaccountList.getSuggestList('3A3DLE')}" var ="result" itemValue="#{result.a0xxukwxbvxxxxxxxxxxaccount}" 
                      itemLabel="#{result.a0xxukwxbvxxxxxxxxxxaccount.concat(' ').concat(result.a1xxuzsxbvxxxxxxxxxxdescript)}"/>
-             </h:selectOneMenu>
+             </p:selectOneMenu>
 
 
            </ui:decorate>
@@ -249,8 +249,9 @@
       <h:inputText id="b3xxztprlxxxxxxxxxxxamounttotal"  
          value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.b3xxztprlxxxxxxxxxxxamounttotal}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq388xwwqqhxxxxxvpaymentHome.instance.b3xxztprlxxxxxxxxxxxamounttotal}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -263,8 +264,9 @@
       <h:inputText id="b4xxzixrbvxxxxxxxxxxdiscount"  
          value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.b4xxzixrbvxxxxxxxxxxdiscount}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq388xwwqqhxxxxxvpaymentHome.instance.b4xxzixrbvxxxxxxxxxxdiscount}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -276,7 +278,7 @@
       </h:outputLabel>
  
                <h:selectOneMenu style="width:250px;"  value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.b5xxuxxrbv10xxxxxxxxpaytype}" required="false" id="b5xxuxxrbv10xxxxxxxxpaytype">
-               <f:ajax  render="b5xxuxxrbv10xxxxxxxxpaytypeI" bypassUpdates="false"/>
+               <p:ajax  update="b5xxuxxrbv10xxxxxxxxpaytype" />
                                 <f:selectItem itemValue="#{null}" itemLabel="" />
                                 <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('38',10)}"  var="babu"  
                                  itemLabel="#{babu.key}"
@@ -324,8 +326,9 @@
       </h:outputLabel>
                 <h:inputText id="c2xxpxeravxxxxxxxxxxpostingperiod" 
                           value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.c2xxpxeravxxxxxxxxxxpostingperiod}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -338,8 +341,9 @@
       <h:inputText id="c2xxzxxrbvxxxxxxxxxxconvrate"  
          value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.c2xxzxxrbvxxxxxxxxxxconvrate}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq388xwwqqhxxxxxvpaymentHome.instance.c2xxzxxrbvxxxxxxxxxxconvrate}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -351,8 +355,9 @@
       </h:outputLabel>
                 <h:inputText id="d1xxudiravxxxxxxxxxxmatcode" 
                           value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.d1xxudiravxxxxxxxxxxmatcode}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -365,8 +370,9 @@
       <h:inputText id="d1xxzyprlxxxxxxxxxxxamountin"  
          value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.d1xxzyprlxxxxxxxxxxxamountin}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq388xwwqqhxxxxxvpaymentHome.instance.d1xxzyprlxxxxxxxxxxxamountin}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -378,7 +384,7 @@
       </h:outputLabel>
  
                <h:selectOneMenu style="width:250px;"  value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.f1xxuwmxbv40xxxxxxxxintegrset}" required="false" id="f1xxuwmxbv40xxxxxxxxintegrset">
-               <f:ajax  render="f1xxuwmxbv40xxxxxxxxintegrsetI" bypassUpdates="false"/>
+               <p:ajax  update="f1xxuwmxbv40xxxxxxxxintegrset" />
                                 <f:selectItem itemValue="#{null}" itemLabel="" />
                                 <f:selectItems value="#{yrxxch511xhhxxhxxxxxoptionsList.getoptionsFieldList('38',40)}"  var="babu"  
                                  itemLabel="#{babu.key}"
@@ -421,8 +427,9 @@
       <h:inputText id="z1xxzyprlxxxxxxxxxxxamountostndt"  
          value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.z1xxzyprlxxxxxxxxxxxamountostndt}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq388xwwqqhxxxxxvpaymentHome.instance.z1xxzyprlxxxxxxxxxxxamountostndt}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -435,8 +442,9 @@
       <h:inputText id="z2xxztqrlxxxxxxxxxxxqtytotal"  
          value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.z2xxztqrlxxxxxxxxxxxqtytotal}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq388xwwqqhxxxxxvpaymentHome.instance.z2xxztqrlxxxxxxxxxxxqtytotal}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -449,8 +457,9 @@
       <h:inputText id="z3xxzyqrlxxxxxxxxxxxqtyostndt"  
          value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.z3xxzyqrlxxxxxxxxxxxqtyostndt}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq388xwwqqhxxxxxvpaymentHome.instance.z3xxzyqrlxxxxxxxxxxxqtyostndt}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -539,8 +548,9 @@
       <h:inputText id="z7xxzbtxavxxxxxxxxxxbaseamountt"  
          value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.z7xxzbtxavxxxxxxxxxxbaseamountt}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq388xwwqqhxxxxxvpaymentHome.instance.z7xxzbtxavxxxxxxxxxxbaseamountt}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -583,8 +593,9 @@
       <h:inputText id="z9xxzxxrbvxxxxxxxxxxlocamount"  
          value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.z9xxzxxrbvxxxxxxxxxxlocamount}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{trexuq388xwwqqhxxxxxvpaymentHome.instance.z9xxzxxrbvxxxxxxxxxxlocamount}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -596,8 +607,9 @@
       </h:outputLabel>
                 <h:inputText id="zaxxzzfxhhxxxxxxxxxxstatusfl" 
                           value="#{trexuq388xwwqqhxxxxxvpaymentHome.instance.zaxxzzfxhhxxxxxxxxxxstatusfl}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
@@ -782,7 +794,7 @@
                             <f:facet id="CartRemoveFacet" name="header">
                                 <h:outputText id="CartRemoveText" value="#{messages['removeColumn']}" />
                             </f:facet>
-                            <h:selectBooleanCheckbox id="CartRemoveCheckbox" value="#{trexuq388xwwqqhxxxxxvpaymentHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
+                            <p:selectBooleanCheckbox id="CartRemoveCheckbox" value="#{trexuq388xwwqqhxxxxxvpaymentHome.checked[item.a0xxuobxbxxxxxxxxxxxsid]}"/>
                         </p:column>
                         <p:column id="columnxxo">
                             <f:facet id="XxoFacet" name="header">
@@ -923,10 +935,10 @@
             <h:panelGrid columns="2">
              <ui:decorate template="layout/display.xhtml">
                 <ui:define name="label">#{messages['report.displayAs']}</ui:define>
-                <h:selectOneMenu id="displayAs" value="#{trexuq388xwwqqhxxxxxvpaymentList.displayAs}">
+                <p:selectOneMenu id="displayAs" value="#{trexuq388xwwqqhxxxxxvpaymentList.displayAs}">
                  <f:selectItem id="ditem2" itemLabel="HTML" itemValue="HTML" />
                  <f:selectItem id="ditem1" itemLabel="PDF" itemValue="PDF" />
-                </h:selectOneMenu> 
+                </p:selectOneMenu> 
              </ui:decorate>
             </h:panelGrid>
              <h:commandButton id="ePrint" value="#{messages['Print']}/#{messages['Preview']} #{messages['report']}"   onclick="this.form.target='_blank'"

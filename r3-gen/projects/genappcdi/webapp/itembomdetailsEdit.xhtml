@@ -93,7 +93,7 @@
             <ui:define name="label">#{messages['Item']} 
             </ui:define>
                 <p:remoteCommand name="fpxxfq1a5xwwqqhxxxxxitemFunction" proces="@all" />
-             <h:selectOneMenu styleClass="autoCompleteWidth50" id="fpxxfq1a5xwwqqhxxxxxitemsm"
+             <p:selectOneMenu styleClass="autoCompleteWidth50" id="fpxxfq1a5xwwqqhxxxxxitemsm"
                    required="true"  
                        label="item"
                        rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
@@ -105,7 +105,7 @@
               <f:selectItems 
                      value="#{fpxxfq1a5xwwqqhxxxxxitemList.getSuggestList(' ')}" var ="result" itemValue="#{result.a0xxukixbxxxxxxxxxxxmatcode}" 
                       itemLabel="#{result.a0xxukixbxxxxxxxxxxxmatcode} (#{result.b8fbzpxxbvxxxxxxxxxxselprice}) /#{result.b1xxuszsbvxxxxxxxxxxdescript}"/>
-             </h:selectOneMenu>
+             </p:selectOneMenu>
 
 
            </ui:decorate>
@@ -118,7 +118,7 @@
             <ui:define name="label">#{messages['Itembom']} 
             </ui:define>
                 <p:remoteCommand name="fxxxuq166xwwqqhefmxxitembomFunction" proces="@all" />
-             <h:selectOneMenu styleClass="autoCompleteWidth50" id="fxxxuq166xwwqqhefmxxitembomsm"
+             <p:selectOneMenu styleClass="autoCompleteWidth50" id="fxxxuq166xwwqqhefmxxitembomsm"
                        rendered="#{!fn:containsIgnoreCase(request.getHeader('User-Agent'), 'Jayfox')}"
                     requiredMessage="#{messages['Itembom']} #{messages['ValueRequired']}"
                     validator="#{fxxxuq1hhxwwqqhefxxxitembomdetailsHome.validateAndSelectXxxxxxxxbomcode}" 
@@ -128,7 +128,7 @@
               <f:selectItems 
                      value="#{fxxxuq166xwwqqhefmxxitembomList.suggest(' ')}" var ="result" itemValue="#{result}" 
                      itemLabel="#{result}"/>
-             </h:selectOneMenu>
+             </p:selectOneMenu>
 
 
            </ui:decorate>
@@ -162,10 +162,12 @@
              <h:panelGroup id="b2xxfxxxbvxxxxxxxxxxmodeDecoration"    >
         <h:outputLabel  for="b2xxfxxxbvxxxxxxxxxxmode" value="#{messages['Mode']}">
       </h:outputLabel>
+
                 <h:selectBooleanCheckbox id="b2xxfxxxbvxxxxxxxxxxmode"
-                                      value="#{fxxxuq1hhxwwqqhefxxxitembomdetailsHome.instance.b2xxfxxxbvxxxxxxxxxxmode}">
-                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value</ui:remove>
-                   <f:ajax  render="b2xxfxxxbvxxxxxxxxxxmode" bypassUpdates="false"/>
+                                      value="#{fxxxuq1hhxwwqqhefxxxitembomdetailsHome.instance.b2xxfxxxbvxxxxxxxxxxmode}" >
+                   <ui:remove>oct27 2019 added ajax to reinvoke setter otherwise page load was initializing value </ui:remove>
+                   <p:ajax  update="b2xxfxxxbvxxxxxxxxxxmode" />
+                   
                  </h:selectBooleanCheckbox>
             </h:panelGroup>
 
@@ -179,8 +181,9 @@
       <h:inputText id="b3xxzqxxavxxxxxxxxxxsubqty"  
          value="#{fxxxuq1hhxwwqqhefxxxitembomdetailsHome.instance.b3xxzqxxavxxxxxxxxxxsubqty}"
           onclick="this.value='';" onfocus="this.select()" type="text"  onblur="this.value=!this.value?#{fxxxuq1hhxwwqqhefxxxitembomdetailsHome.instance.b3xxzqxxavxxxxxxxxxxsubqty}:this.value;"
-      size="21">
+      size="21" >
      </h:inputText>
+
             </h:panelGroup>
 
 
@@ -247,8 +250,9 @@
       </h:outputLabel>
                 <h:inputText id="z1xxzzfxhhxxxxxxxxxxstatusfl" 
                           value="#{fxxxuq1hhxwwqqhefxxxitembomdetailsHome.instance.z1xxzzfxhhxxxxxxxxxxstatusfl}"
-                           size="21">
+                           size="21" >
                 </h:inputText>
+
             </h:panelGroup>
 
 
