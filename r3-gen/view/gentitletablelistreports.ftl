@@ -39,6 +39,7 @@
 
  <#assign propertyns="">
  <#assign useDateKey="">
+ <#assign statusFlagField="">
  <#assign firstTime="Y"> 
  <#assign schema="${default_schema}">
  <#assign keyField = "" >
@@ -276,6 +277,9 @@
      <#if property.name?substring(pfS,pfE)=="ee">
       <#assign useDateKey="Y">
      </#if>
+     <#if property.name?substring(pfS,pfE)=="zf"> 
+      <#assign statusFlagField=property.name>
+     </#if>   
 
   </#if>
  </#if>
@@ -292,16 +296,32 @@ FROM
       </#if>
 <#if useDateKey = "Y">
    <#if keyAutoGen=="Y" >
+       <#if statusFlagField !=""> 
         ${pojo.shortName?substring(eL)?lower_case}.${keyField?substring(pL)?lower_case} >=  $P{Start_t} AND   ${pojo.shortName?substring(eL)?lower_case}.${keyField?substring(pL)?lower_case} <= $P{End_t} AND (${pojo.shortName?substring(eL)?lower_case}.${owner2Field} = $P{owner2Code_t} and (${pojo.shortName?substring(eL)?lower_case}.statusfl = $P{Status_t} or $P{Status_t} is null) ) ]]></queryString>
+       <#else>
+        ${pojo.shortName?substring(eL)?lower_case}.${keyField?substring(pL)?lower_case} >=  $P{Start_t} AND   ${pojo.shortName?substring(eL)?lower_case}.${keyField?substring(pL)?lower_case} <= $P{End_t} AND (${pojo.shortName?substring(eL)?lower_case}.${owner2Field} = $P{owner2Code_t} ]]></queryString>
+       </#if>
    <#else>
-       ${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case} >=  $P{Start_t} AND   ${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case} <= $P{End_t} AND (${pojo.shortName?substring(eL)?lower_case}.${owner2Field} = $P{owner2Code_t} and (${pojo.shortName?substring(eL)?lower_case}.statusfl = $P{Status_t} or $P{Status_t} is null) ) ]]></queryString>
+       <#if statusFlagField !=""> 
+        ${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case} >=  $P{Start_t} AND   ${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case} <= $P{End_t} AND (${pojo.shortName?substring(eL)?lower_case}.${owner2Field} = $P{owner2Code_t} and (${pojo.shortName?substring(eL)?lower_case}.statusfl = $P{Status_t} or $P{Status_t} is null) ) ]]></queryString>
+       <#else>
+        ${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case} >=  $P{Start_t} AND   ${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case} <= $P{End_t} AND (${pojo.shortName?substring(eL)?lower_case}.${owner2Field} = $P{owner2Code_t}  ]]></queryString>
+       </#if>
    </#if>
 <#else>
    <#if keyAutoGen=="Y" && keyField != "" >
-       (${pojo.shortName?substring(eL)?lower_case}.${keyField?substring(pL)?lower_case}) >=  $P{Start_t} AND   (${pojo.shortName?substring(eL)?lower_case}.${keyField?substring(pL)?lower_case} <= $P{End_t}) AND (${pojo.shortName?substring(eL)?lower_case}.${owner2Field} = $P{owner2Code_t} and (${pojo.shortName?substring(eL)?lower_case}.statusfl = $P{Status_t} or $P{Status_t} is null) ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
-   <#else>
-       RTRIM(${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case}) >=  $P{Start_t} AND   RTRIM(${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case} <= $P{End_t} AND (${pojo.shortName?substring(eL)?lower_case}.${owner2Field} = $P{owner2Code_t} and (${pojo.shortName?substring(eL)?lower_case}.statusfl = $P{Status_t} or $P{Status_t} is null) ) )]]></queryString>
-    </#if>
+       <#if statusFlagField !=""> 
+        (${pojo.shortName?substring(eL)?lower_case}.${keyField?substring(pL)?lower_case}) >=  $P{Start_t} AND   (${pojo.shortName?substring(eL)?lower_case}.${keyField?substring(pL)?lower_case} <= $P{End_t}) AND (${pojo.shortName?substring(eL)?lower_case}.${owner2Field} = $P{owner2Code_t} and (${pojo.shortName?substring(eL)?lower_case}.statusfl = $P{Status_t} or $P{Status_t} is null) ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
+        <#else>
+        (${pojo.shortName?substring(eL)?lower_case}.${keyField?substring(pL)?lower_case}) >=  $P{Start_t} AND   (${pojo.shortName?substring(eL)?lower_case}.${keyField?substring(pL)?lower_case} <= $P{End_t}) AND (${pojo.shortName?substring(eL)?lower_case}.${owner2Field} = $P{owner2Code_t}  ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
+       </#if>
+  <#else>
+       <#if statusFlagField !=""> 
+        RTRIM(${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case}) >=  $P{Start_t} AND   RTRIM(${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case} <= $P{End_t} AND (${pojo.shortName?substring(eL)?lower_case}.${owner2Field} = $P{owner2Code_t} and (${pojo.shortName?substring(eL)?lower_case}.statusfl = $P{Status_t} or $P{Status_t} is null) ) )]]></queryString>
+        <#else>
+        RTRIM(${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case}) >=  $P{Start_t} AND   RTRIM(${pojo.shortName?substring(eL)?lower_case}.${ids?substring(pL)?lower_case} <= $P{End_t} AND (${pojo.shortName?substring(eL)?lower_case}.${owner2Field} = $P{owner2Code_t}  ) )]]></queryString>
+       </#if>
+   </#if>
 </#if>
 <#foreach property in pojo.allPropertiesIterator>
 <#if (property.name?length >pL )>
@@ -772,6 +792,10 @@ FROM
     <#if property.name?substring(pfS,pfE)=="ee">
       <#assign useDateKey="Y">
     </#if>
+    <#if property.name?substring(pfS,pfE)=="zf"> 
+      <#assign statusFlagField=property.name>
+    </#if>   
+
 
   </#if>
  </#if>

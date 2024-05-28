@@ -161,21 +161,19 @@
             <h:outputText id="revised" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName}"/>
           </ui:decorate>
       </h:panelGrid>
-      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
           <ui:decorate id="clientApplicationNameFieldb" template="layout/edit.xhtml">
             <h:inputText id="websiteName" required="true" value="#{yxxxuh566xwwqqwxxxxxuserHome.clientApplicationName}" size="35" 
              pt:placeholder="Existing name or a new name" maxlength="35" onclick="this.value='';" onfocus="this.select()"
               class="w3-input" >
-              <p:ajax event="keyup" update="fullurlName,revised,full" />
+              <p:ajax event="keyup" update="jay,revised,full" />
             </h:inputText>
           </ui:decorate>
-      </h:panelGrid>
                 <h:commandButton id="status" class="w3-button w3-teal"
                       value="#{messages.Check} #{messages.clientWebsiteName} #{messages.already} #{messages.exists} #{messages.under} #{messages.RAASPI}? / #{messages.status}  "
                       action="#{yxxxuh566xwwqqwxxxxxuserHome.showInstallStatus()}" target="_blank" >
                 </h:commandButton>
       <br></br>
-      <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
+      <h:panelGrid id="jay" columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?10:10}">
           <ui:decorate id="clientFullUrlField" template="layout/edit.xhtml">
             <ui:define name="label">#{messages.clientFullUrlName}</ui:define>
             <h:outputText value="&#160;&#160;"/>
@@ -195,7 +193,9 @@
           <h:panelGroup>
             <h:selectBooleanCheckbox id="agreedToTerms" value="#{yxxxuh566xwwqqwxxxxxuserHome.agreedToTermsOfUse}"/>
             <h:outputText value="#{messages.agree_to_terms}" escape="false"/>
-             <br/>
+            <h:commandLink value=" " id="termsOfUseLink" onclick="PF('termsOfUse').show(); return false;">
+              <h:outputText value=" #{messages['read']}"/>
+            </h:commandLink><br/>
             <ui:remove> aug21 2020 Besides method params,doRegister running in userHome also uses values set by url parameters/metadata
               like functionGrpup value in userHome from variable.FunctionGroup can be 1 or 1a ie default 14 days or 190 or 1a90 ie 90 days free trial
              </ui:remove>
@@ -223,7 +223,7 @@
 
 <h:form>
 
- <p:popupPanel id="termsOfUse" width="640" height="480" >
+ <p:dialog id="termsOfUse" widgetVar="termsOfUse" width="640" height="480" >
     <h:form>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p:commandButton value="#{messages.close}" onclick="PF('termsOfUse').hide()"/>
     </h:form>
@@ -239,7 +239,7 @@
       <p:commandButton value="#{messages.ok}" onclick="PF('termsOfUse').hide()"/>
     </h:form>
   </h:panelGroup>
- </p:popupPanel>
+ </p:dialog>
 </h:form>
 
 

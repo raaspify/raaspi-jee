@@ -527,8 +527,6 @@ public class Jxxxbh400xwwqqhxxxxxemployeeList implements Serializable
 
 
 
-
-
         "lower(jxxxbh400xwwqqhxxxxxemployee.m1xxh3pobv27xxxxxxxxphoneo) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.m1xxh3pobv27xxxxxxxxphoneo},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.m2xxh4phbv27xxxxxxxxphoneh) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.m2xxh4phbv27xxxxxxxxphoneh},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.m3xxh5pcbv27xxxxxxxxphonec) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.m3xxh5pcbv27xxxxxxxxphonec},'%'))",
@@ -552,24 +550,12 @@ public class Jxxxbh400xwwqqhxxxxxemployeeList implements Serializable
 
 
 
-
-
-
-
-
-
-
-
-
-
         "lower(jxxxbh400xwwqqhxxxxxemployee.y0xxuzsxbvxxxxxxxxxxdescript) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.y0xxuzsxbvxxxxxxxxxxdescript},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.y6xxuz3xxvxxxxxxxxxxcusttax3) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.y6xxuz3xxvxxxxxxxxxxcusttax3},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.y9xxuxxrbvxxxxxxxxxxbywho) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.y9xxuxxrbvxxxxxxxxxxbywho},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.yaxxuzkybvxxxxxxxxxxkeywords) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.yaxxuzkybvxxxxxxxxxxkeywords},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.ybxxuznybvxxxxxxxxxxnotes) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.ybxxuznybvxxxxxxxxxxnotes},'%'))",
         "lower(jxxxbh400xwwqqhxxxxxemployee.ycxxuzdrbvxxxxxxxxxxdocmnt) like lower( concat(#{jxxxbh400xwwqqhxxxxxemployeeList.jxxxbh400xwwqqhxxxxxemployee.ycxxuzdrbvxxxxxxxxxxdocmnt},'%'))",
-
-
 
 
 
@@ -2026,6 +2012,31 @@ public Jxxxbh400xwwqqhxxxxxemployeeList()
       
      }
 
+       /**
+    * The following method added since hql seems to be dropping order by in some queries (perioddates getResultList() )and where order is important
+    * @param args -none
+    * @return List<Yxxxuq632xwwqqhxxxxxperioddates>
+    * @exception to be added
+    * @see getResultList()
+    */
+
+     public List<Jxxxbh400xwwqqhxxxxxemployee> getSortedResultList(){
+            if(getOrderColumn()!=null){
+             lorderColumn=getOrderColumn();
+            }
+            if(getOrderDirection()!=null){
+            lorderDirection=getOrderDirection();
+            }
+            lorder=lorderColumn+" "+lorderDirection;
+            sresults=null;
+            sresults =  getEntityManager()
+             .createQuery(
+               "select cc from Jxxxbh400xwwqqhxxxxxemployee  cc where (cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2  ) order by "+ lorder)
+                 .setParameter("owner2", owner2Code)
+                  .getResultList();
+       return sresults;
+      }
+
 
        /**
     * The following method overrides seam method because setOrder did not work 
@@ -2052,7 +2063,7 @@ public Jxxxbh400xwwqqhxxxxxemployeeList()
       // maxResults may be set by caller or already set as 6
       // search1 ie key property may be empty , getFirst is a method in seam superclass and sets the first record
       // use seq not key seqs for numeric ordering //jayresultList
-
+ 
       // start null seems to make query return null, also null pointer to make lowercase
       if(start == null){
        start=" ";
@@ -2564,8 +2575,8 @@ public Jxxxbh400xwwqqhxxxxxemployeeList()
                 String owner2CodeS="SYSTEM";// test how it behaves
                  prefix="0";
                  if( customIdentity.hasRole("VW") || customIdentity.hasRole("VQ")||customIdentity.hasRole("VH")||customIdentity.hasRole("PH")){
-			return getEntityManager().createQuery(" select cc from Jxxxbh400xwwqqhxxxxxemployee cc where cc.a0xxuktxbvxxxxxxxxxxemployee >=:keyOfEntity AND cc.zexxzzfxhhxxxxxxxxxxstatusfl != :flag AND cc.c6xxusxrbv16xxxxxxxxtype LIKE  :showTypePrefix1  AND (cc.zzxxu2oxxhxxxxxxxxxxowner2=:owner2S) AND cc.zexxutoxlhxxxxxxxxxxowner=:ownerCode order by cc.a0xxuktxbvxxxxxxxxxxemployee")
-        				.setParameter("keyOfEntity", prefix).setParameter("flag", mclosed).setParameter("showTypePrefix1", "BI-L%").setParameter("owner2", owner2Code).setParameter("owner2S", owner2CodeS)
+			return getEntityManager().createQuery(" select cc from Jxxxbh400xwwqqhxxxxxemployee cc where cc.a0xxuktxbvxxxxxxxxxxemployee >=:keyOfEntity AND cc.zexxzzfxhhxxxxxxxxxxstatusfl != :flag AND cc.c6xxusxrbv16xxxxxxxxtype LIKE  :showTypePrefix1  AND (cc.zzxxu2oxxhxxxxxxxxxxowner2=:owner2S)  order by cc.a0xxuktxbvxxxxxxxxxxemployee")
+        				.setParameter("keyOfEntity", prefix).setParameter("flag", mclosed).setParameter("showTypePrefix1", "BI-L%").setParameter("owner2S", owner2CodeS)
 					.getResultList();
                  //NC will come here
                  }else{
@@ -4314,6 +4325,12 @@ curl --request POST \
          // retry with refresh if failed on bad token or expired token then only get a new token using
          // existing refresh token(client site record 07 clientId)
          // send again using new token is there subcode for expired or check token expiry?
+         if(cause.contains("invalid")){
+          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+           FacesMessage.SEVERITY_INFO,bundle.getString("Invalid")+" "+ bundle.getString("email")+" "+bundle.getString("may")+" "+bundle.getString("mean")+" "+bundle.getString("space ")+" "+bundle.getString("at")+" "+bundle.getString("end")+", "+" "+bundle.getString("sender")+" "+bundle.getString("email")+" "+bundle.getString("not")+" "+bundle.getString("smtp")+" "+bundle.getString("user"),""));
+          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+           FacesMessage.SEVERITY_INFO,bundle.getString("client")+" "+ bundle.getString("record")+" "+bundle.getString("05")+" "+bundle.getString("client")+" "+bundle.getString("email ")+" "+bundle.getString("field")+" "+bundle.getString("allows")+" "+bundle.getString("override"),""));
+         } 
          if(cause.contains("334")){
           
           password=r3RestClient.getAccessTokenGMail(client.getDaxxuzxdssxxxxxxxxxxapiclientid().trim(),"refresh_token",owner2Code );
@@ -4783,7 +4800,7 @@ curl --request POST \
 		.setParameter("owner2", owner2Code)
 		.getSingleResult();
 
-         setClientEMail("doNotReply@"+owner2Code+".com"); 
+         setClientEMail("doNotReply@"+owner2Code+customIdentity.getTld()); 
          //can come here as loggedIn or not loggedIn but eMail entered
          if(identity.isLoggedIn()){   
           //All loggedIn has customer record but may not have employee example self signedup 
@@ -4805,7 +4822,7 @@ curl --request POST \
 
          }else{
           if (client.getD4xxhxxrbv24xxxxxxxximailaddr() == null || client.getD4xxhxxrbv24xxxxxxxximailaddr().isEmpty()){
-           setClientEMail("doNotReply@"+owner2Code+".com"); 
+           setClientEMail("doNotReply@"+owner2Code+customIdentity.getTld()); 
            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
             FacesMessage.SEVERITY_WARN,bundle.getString("client")+" "+bundle.getString("email")+" "+bundle.getString("address")+" "+bundle.getString("is")+" "+bundle.getString("missing"),""));
 

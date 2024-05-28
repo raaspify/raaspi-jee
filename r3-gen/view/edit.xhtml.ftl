@@ -1320,7 +1320,7 @@ the following copied from entityHome.ftl
          </#if>
         </#if>
         <#if (parentName?length > pL && parentKeyName?length >eL) && parentKeyName?substring(pefS,pefE) == "cq" ||  parentKeyName?substring(pefS,pefE) == "co" ||  parentKeyName?substring(pefS,pefE) == "ci" ||  parentKeyName?substring(pefS,pefE) == "cp"   ||  parentKeyName?substring(pefS,pefE) == "vq" ||  parentKeyName?substring(pefS,pefE) == "vo" ||  parentKeyName?substring(pefS,pefE) == "vi"  ||  parentKeyName?substring(pefS,pefE) == "sh" ||  parentKeyName?substring(pefS,pefE) == "sv"     > 
-         <#--  do not show non transaction entities like customer etc since they are not relevant for copy n save
+         <#--  do not show non transaction entities like customer etc since they are not relevant for copy n save 
                changed rendered=true to avoid p:panel with empty tab causing xhtml issue  --> 
           <h:outputText value="${'#'}{messages['${parentName?substring(eL)}']} - ${'#'}{messages['no']} ${'#'}{messages['data']} ${'#'}{messages['to']} ${'#'}{messages['select']}" rendered="${'#'}{${parentName}List.getSuggestList('0').isEmpty()}" />
          <p:tab title="${'#'}{messages['${property.name?substring(pL)?cap_first}']}" rendered="true">
@@ -1346,25 +1346,6 @@ the following copied from entityHome.ftl
                    <#else>
                     validator="${'#'}{${componentName}Home.validateAndSelect${parentKeyName?substring(12)?cap_first}}" 
                    </#if>
-                 <#if parentKeyName?substring(pefS,pefE) == "cq" > 
-                   var ="result"   
-                 <#elseif parentKeyName?substring(pefS,pefE) == "co">
-                   var ="result"   
-                 <#elseif parentKeyName?substring(pefS,pefE) == "ci">
-                   var ="result"   
-                 <#elseif parentKeyName?substring(pefS,pefE) == "sh">
-                   var ="result"  layout="table"  
-                 <#elseif parentKeyName?substring(pefS,pefE) == "vq">
-                   var ="result"  
-                 <#elseif parentKeyName?substring(pefS,pefE) == "vo">
-                   var ="result"   
-                 <#elseif parentKeyName?substring(pefS,pefE) == "vi">
-                   var ="result"   
-                 <#elseif parentKeyName?substring(pefS,pefE) == "sv">
-                   var ="result"   
-                 <#else>
-                   var ="result"   
-                 </#if>
                    value="${'#'}{${parentName}Home.last${parentName}P}"
                  > 
                  <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
@@ -1450,25 +1431,6 @@ the following copied from entityHome.ftl
                    <#else>
                     validator="${'#'}{${componentName}Home.validateAndSelect${parentKeyName?substring(12)?cap_first}}" 
                    </#if>
-                 <#if parentKeyName?substring(pefS,pefE) == "cq" > 
-                   var ="result"   
-                 <#elseif parentKeyName?substring(pefS,pefE) == "co">
-                   var ="result"   
-                 <#elseif parentKeyName?substring(pefS,pefE) == "ci">
-                   var ="result"   
-                 <#elseif parentKeyName?substring(pefS,pefE) == "sh">
-                   var ="result"  layout="table"  
-                 <#elseif parentKeyName?substring(pefS,pefE) == "vq">
-                   var ="result"  
-                 <#elseif parentKeyName?substring(pefS,pefE) == "vo">
-                   var ="result"   
-                 <#elseif parentKeyName?substring(pefS,pefE) == "vi">
-                   var ="result"   
-                 <#elseif parentKeyName?substring(pefS,pefE) == "sv">
-                   var ="result"   
-                 <#else>
-                   var ="result"   
-                 </#if>
                    value="${'#'}{${parentName}Home.last${parentName}P}"
                  > 
                  <f:selectItem itemValue="${'#'}{null}" itemLabel="" />
@@ -2359,7 +2321,7 @@ the following copied from entityHome.ftl
                  <p:ajax listener = "${'#'}{${homeName}.showNetValue}"  event="keyup" update="@all" />
                  <f:convertNumber  maxFractionDigits="2" minFractionDigits="0" />
              </h:inputText>
-                 <p:tooltip for="debitamtInT"> <span style="white-space: nowrap"> <h:outputText value="${'#'}{messages['Generally']} ${'#'}{messages['Dividends']}, ${'#'}{messages['Expenses']}, ${'#'}{messages['Assets']}, ${'#'}{messages['Losses']} ${'#'}{messages['are']} ${'#'}{messages['increased']} ${'#'}{messages['by']} ${'#'}{messages['Debit']}"/></span> </p:tooltip> 
+                 <p:tooltip for="debitamtIn"> <span style="white-space: nowrap"> <h:outputText value="${'#'}{messages['Generally']} ${'#'}{messages['Dividends']}, ${'#'}{messages['Expenses']}, ${'#'}{messages['Assets']}, ${'#'}{messages['Losses']} ${'#'}{messages['are']} ${'#'}{messages['increased']} ${'#'}{messages['by']} ${'#'}{messages['Debit']}"/></span> </p:tooltip> 
              </ui:decorate>
              <ui:decorate id="creditAmtlabel" template="layout/edit.xhtml" >
              <ui:define name="label">Credit Amount ${'#'}{customIdentity.mcurrencySymbol}
@@ -2799,7 +2761,7 @@ the following copied from entityHome.ftl
                             <f:facet id="CartRemoveFacet" name="header">
                                 <h:outputText id="CartNotesText" value="${'#'}{messages['notes']}" />
                             </f:facet>
-                            ${'#'}{item.y8xxuznxbvxxxxxxxxxxnotes} 
+                            <h:outputText value="${'#'}{item.y8xxuznxbvxxxxxxxxxxnotes}" /> 
                         </p:column>
 
                     </p:dataTable>
@@ -2808,7 +2770,7 @@ the following copied from entityHome.ftl
                             <f:facet id="CartRemoveFacet" name="header">
                                 <h:outputText id="CartNotesText" value="${'#'}{messages['notes']}" />
                             </f:facet>
-                            ${'#'}{item.y8xxuznxbvxxxxxxxxxxnotes} 
+                            <h:outputText value="${'#'}{item.y8xxuznxbvxxxxxxxxxxnotes}" /> 
                         </p:column>
 
                         <p:column id="column2">
@@ -3762,11 +3724,11 @@ the following copied from entityHome.ftl
      <#if menuAttributesFunction ="52" >
       <h:outputText value="     "/>
       <h:outputText value="${'#'}{messages['theme']}"/>
-      <p:selectOneMenu value="${'#'}{${homeName}.clientSkin}">
+      <h:selectOneMenu value="${'#'}{${homeName}.clientSkin}">
        <f:selectItems value="${'#'}{skinBean.skinsList}"  var="babu"  
                          itemLabel="${'#'}{babu.key}"
                          itemValue="${'#'}{babu.value}" /> 
-      </p:selectOneMenu>
+      </h:selectOneMenu>
 
             <h:commandButton id="setTheme" 
                           value="${'#'}{messages['set']} ${'#'}{messages['theme']}" 

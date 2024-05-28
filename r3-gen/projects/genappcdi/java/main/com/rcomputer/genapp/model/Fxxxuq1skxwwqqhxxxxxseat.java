@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -95,146 +95,146 @@ public class Fxxxuq1skxwwqqhxxxxxseat implements java.io.Serializable {
 	private String crxxxxxxbvxxxxxxxxxxname016;
 	private String csxxxxxxbvxxxxxxxxxxticket016;
 	private String ctxxxxxxbvxxxxxxxxxxpo016;
+	private String cuxxxxxxbvxxxxxxxxxxseat017status;
+	private String cvxxxxxxbvxxxxxxxxxxname017;
+	private String cxxxxxxxbvxxxxxxxxxxticket017;
+	private String cyxxxxxxbvxxxxxxxxxxpo017;
+	private String daxxxxxxbvxxxxxxxxxxseat018status;
+	private String dbxxxxxxbvxxxxxxxxxxname018;
+	private String dcxxxxxxbvxxxxxxxxxxticket018;
+	private String ddxxxxxxbvxxxxxxxxxxpo018;
+	private String dexxxxxxbvxxxxxxxxxxseat019status;
+	private String dfxxxxxxbvxxxxxxxxxxname019;
+	private String dgxxxxxxbvxxxxxxxxxxticket019;
+	private String dhxxxxxxbvxxxxxxxxxxpo019;
+	private String dixxxxxxbvxxxxxxxxxxseat020status;
+	private String djxxxxxxbvxxxxxxxxxxname020;
+	private String dkxxxxxxbvxxxxxxxxxxticket020;
+	private String dlxxxxxxbvxxxxxxxxxxpo020;
+	private String dmxxxxxxbvxxxxxxxxxxseat021status;
+	private String dnxxxxxxbvxxxxxxxxxxname021;
+	private String doxxxxxxbvxxxxxxxxxxticket021;
+	private String dpxxxxxxbvxxxxxxxxxxpo021;
+	private String dqxxxxxxbvxxxxxxxxxxseat022status;
+	private String drxxxxxxbvxxxxxxxxxxname022;
+	private String dsxxxxxxbvxxxxxxxxxxticket022;
+	private String dtxxxxxxbvxxxxxxxxxxpo022;
+	private String duxxxxxxbvxxxxxxxxxxseat023status;
+	private String dvxxxxxxbvxxxxxxxxxxname023;
+	private String dwxxxxxxbvxxxxxxxxxxticket023;
+	private String dxxxxxxxbvxxxxxxxxxxpo023;
+	private String e1xxxxxxbvxxxxxxxxxxseat024status;
+	private String e2xxxxxxbvxxxxxxxxxxname024;
+	private String e3xxxxxxbvxxxxxxxxxxticket024;
+	private String e4xxxxxxbvxxxxxxxxxxpo024;
+	private String eaxxxxxxbvxxxxxxxxxxseat025status;
+	private String ebxxxxxxbvxxxxxxxxxxname025;
+	private String ecxxxxxxbvxxxxxxxxxxticket025;
+	private String edxxxxxxbvxxxxxxxxxxpo025;
+	private String efxxxxxxbvxxxxxxxxxxseat026status;
+	private String egxxxxxxbvxxxxxxxxxxname026;
+	private String ehxxxxxxbvxxxxxxxxxxticket026;
+	private String eixxxxxxbvxxxxxxxxxxpo026;
+	private String ejxxxxxxbvxxxxxxxxxxseat027status;
+	private String ekxxxxxxbvxxxxxxxxxxname027;
+	private String elxxxxxxbvxxxxxxxxxxticket027;
+	private String emxxxxxxbvxxxxxxxxxxpo027;
+	private String enxxxxxxbvxxxxxxxxxxseat028status;
+	private String eoxxxxxxbvxxxxxxxxxxname028;
+	private String epxxxxxxbvxxxxxxxxxxticket028;
+	private String eqxxxxxxbvxxxxxxxxxxpo028;
+	private String erxxxxxxbvxxxxxxxxxxseat029status;
+	private String esxxxxxxbvxxxxxxxxxxname029;
+	private String etxxxxxxbvxxxxxxxxxxticket029;
+	private String euxxxxxxbvxxxxxxxxxxpo029;
+	private String evxxxxxxbvxxxxxxxxxxseat030status;
+	private String ewxxxxxxbvxxxxxxxxxxname030;
+	private String exxxxxxxbvxxxxxxxxxxticket030;
+	private String eyxxxxxxbvxxxxxxxxxxpo030;
+	private String faxxxxxxbvxxxxxxxxxxseat031status;
+	private String fbxxxxxxbvxxxxxxxxxxname031;
+	private String fcxxxxxxbvxxxxxxxxxxticket031;
+	private String fdxxxxxxbvxxxxxxxxxxpo031;
+	private String fexxxxxxbvxxxxxxxxxxseat032status;
+	private String ffxxxxxxbvxxxxxxxxxxname032;
+	private String fgxxxxxxbvxxxxxxxxxxticket032;
+	private String fhxxxxxxbvxxxxxxxxxxpo032;
+	private String fixxxxxxbvxxxxxxxxxxseat033status;
+	private String fjxxxxxxbvxxxxxxxxxxname033;
+	private String fkxxxxxxbvxxxxxxxxxxticket033;
+	private String flxxxxxxbvxxxxxxxxxxpo033;
+	private String fmxxxxxxbvxxxxxxxxxxseat034status;
+	private String fnxxxxxxbvxxxxxxxxxxname034;
+	private String foxxxxxxbvxxxxxxxxxxticket034;
+	private String fpxxxxxxbvxxxxxxxxxxpo034;
+	private String fqxxxxxxbvxxxxxxxxxxseat035status;
+	private String frxxxxxxbvxxxxxxxxxxname035;
+	private String fsxxxxxxbvxxxxxxxxxxticket035;
+	private String ftxxxxxxbvxxxxxxxxxxpo035;
+	private String fuxxxxxxbvxxxxxxxxxxseat036status;
+	private String fvxxxxxxbvxxxxxxxxxxname036;
+	private String fwxxxxxxbvxxxxxxxxxxticket036;
+	private String fxxxxxxxbvxxxxxxxxxxpo036;
+	private String gaxxxxxxbvxxxxxxxxxxseat037status;
+	private String gbxxxxxxbvxxxxxxxxxxname037;
+	private String gcxxxxxxbvxxxxxxxxxxticket037;
+	private String gdxxxxxxbvxxxxxxxxxxpo037;
+	private String gexxxxxxbvxxxxxxxxxxseat038status;
+	private String gfxxxxxxbvxxxxxxxxxxname038;
+	private String ggxxxxxxbvxxxxxxxxxxticket038;
+	private String ghxxxxxxbvxxxxxxxxxxpo038;
+	private String gixxxxxxbvxxxxxxxxxxseat039status;
+	private String gjxxxxxxbvxxxxxxxxxxname039;
+	private String gkxxxxxxbvxxxxxxxxxxticket039;
+	private String glxxxxxxbvxxxxxxxxxxpo039;
+	private String gmxxxxxxbvxxxxxxxxxxseat040status;
+	private String gnxxxxxxbvxxxxxxxxxxname040;
+	private String goxxxxxxbvxxxxxxxxxxticket040;
+	private String gpxxxxxxbvxxxxxxxxxxpo040;
+	private String gqxxxxxxbvxxxxxxxxxxseat041status;
+	private String grxxxxxxbvxxxxxxxxxxname041;
+	private String gsxxxxxxbvxxxxxxxxxxticket041;
+	private String gtxxxxxxbvxxxxxxxxxxpo041;
+	private String guxxxxxxbvxxxxxxxxxxseat042status;
+	private String gvxxxxxxbvxxxxxxxxxxname042;
+	private String gwxxxxxxbvxxxxxxxxxxticket042;
+	private String gxxxxxxxbvxxxxxxxxxxpo042;
+	private String haxxxxxxbvxxxxxxxxxxseat043status;
+	private String hbxxxxxxbvxxxxxxxxxxname043;
+	private String hcxxxxxxbvxxxxxxxxxxticket043;
+	private String hdxxxxxxbvxxxxxxxxxxpo043;
+	private String hexxxxxxbvxxxxxxxxxxseat044status;
+	private String hfxxxxxxbvxxxxxxxxxxname044;
+	private String hgxxxxxxbvxxxxxxxxxxticket044;
+	private String hhxxxxxxbvxxxxxxxxxxpo044;
+	private String hixxxxxxbvxxxxxxxxxxseat045status;
+	private String hjxxxxxxbvxxxxxxxxxxname045;
+	private String hkxxxxxxbvxxxxxxxxxxticket045;
+	private String hlxxxxxxbvxxxxxxxxxxpo045;
+	private String hmxxxxxxbvxxxxxxxxxxseat046status;
+	private String hnxxxxxxbvxxxxxxxxxxname046;
+	private String hoxxxxxxbvxxxxxxxxxxticket046;
+	private String hpxxxxxxbvxxxxxxxxxxpo046;
+	private String hqxxxxxxbvxxxxxxxxxxseat047status;
+	private String hrxxxxxxbvxxxxxxxxxxname047;
+	private String hsxxxxxxbvxxxxxxxxxxticket047;
+	private String htxxxxxxbvxxxxxxxxxxpo047;
+	private String huxxxxxxbvxxxxxxxxxxseat048status;
+	private String hvxxxxxxbvxxxxxxxxxxname048;
+	private String hwxxxxxxbvxxxxxxxxxxticket048;
+	private String hxxxxxxxbvxxxxxxxxxxpo048;
+	private String iaxxxxxxbvxxxxxxxxxxseat049status;
+	private String ibxxxxxxbvxxxxxxxxxxname049;
+	private String icxxxxxxbvxxxxxxxxxxticket049;
+	private String idxxxxxxbvxxxxxxxxxxpo049;
+	private String iexxxxxxbvxxxxxxxxxxseat050status;
+	private String ifxxxxxxbvxxxxxxxxxxname050;
+	private String igxxxxxxbvxxxxxxxxxxticket050;
+	private String ihxxxxxxbvxxxxxxxxxxpo050;
 	private Integer zixxzzfxhhxxxxxxxxxxstatusfl;
 	private Date zjxxcztxlxxxxxxxxxxxstatusfldt;
 	private String z3xxutoxlhxxxxxxxxxxowner;
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
-	private String cuxxxxxxbvxxxxxxxxxxseat017status;
-	private String daxxxxxxbvxxxxxxxxxxseat018status;
-	private String dexxxxxxbvxxxxxxxxxxseat019status;
-	private String dixxxxxxbvxxxxxxxxxxseat020status;
-	private String dmxxxxxxbvxxxxxxxxxxseat021status;
-	private String dqxxxxxxbvxxxxxxxxxxseat022status;
-	private String duxxxxxxbvxxxxxxxxxxseat023status;
-	private String e1xxxxxxbvxxxxxxxxxxseat024status;
-	private String eaxxxxxxbvxxxxxxxxxxseat025status;
-	private String efxxxxxxbvxxxxxxxxxxseat026status;
-	private String ejxxxxxxbvxxxxxxxxxxseat027status;
-	private String enxxxxxxbvxxxxxxxxxxseat028status;
-	private String erxxxxxxbvxxxxxxxxxxseat029status;
-	private String evxxxxxxbvxxxxxxxxxxseat030status;
-	private String faxxxxxxbvxxxxxxxxxxseat031status;
-	private String fexxxxxxbvxxxxxxxxxxseat032status;
-	private String fixxxxxxbvxxxxxxxxxxseat033status;
-	private String fmxxxxxxbvxxxxxxxxxxseat034status;
-	private String fqxxxxxxbvxxxxxxxxxxseat035status;
-	private String fuxxxxxxbvxxxxxxxxxxseat036status;
-	private String gaxxxxxxbvxxxxxxxxxxseat037status;
-	private String gexxxxxxbvxxxxxxxxxxseat038status;
-	private String gixxxxxxbvxxxxxxxxxxseat039status;
-	private String gmxxxxxxbvxxxxxxxxxxseat040status;
-	private String gqxxxxxxbvxxxxxxxxxxseat041status;
-	private String guxxxxxxbvxxxxxxxxxxseat042status;
-	private String haxxxxxxbvxxxxxxxxxxseat043status;
-	private String hexxxxxxbvxxxxxxxxxxseat044status;
-	private String hixxxxxxbvxxxxxxxxxxseat045status;
-	private String hmxxxxxxbvxxxxxxxxxxseat046status;
-	private String hqxxxxxxbvxxxxxxxxxxseat047status;
-	private String huxxxxxxbvxxxxxxxxxxseat048status;
-	private String iaxxxxxxbvxxxxxxxxxxseat049status;
-	private String iexxxxxxbvxxxxxxxxxxseat050status;
-	private String cvxxxxxxbvxxxxxxxxxxname017;
-	private String dbxxxxxxbvxxxxxxxxxxname018;
-	private String dfxxxxxxbvxxxxxxxxxxname019;
-	private String djxxxxxxbvxxxxxxxxxxname020;
-	private String dnxxxxxxbvxxxxxxxxxxname021;
-	private String drxxxxxxbvxxxxxxxxxxname022;
-	private String dvxxxxxxbvxxxxxxxxxxname023;
-	private String e2xxxxxxbvxxxxxxxxxxname024;
-	private String ebxxxxxxbvxxxxxxxxxxname025;
-	private String egxxxxxxbvxxxxxxxxxxname026;
-	private String ekxxxxxxbvxxxxxxxxxxname027;
-	private String eoxxxxxxbvxxxxxxxxxxname028;
-	private String esxxxxxxbvxxxxxxxxxxname029;
-	private String ewxxxxxxbvxxxxxxxxxxname030;
-	private String fbxxxxxxbvxxxxxxxxxxname031;
-	private String ffxxxxxxbvxxxxxxxxxxname032;
-	private String fjxxxxxxbvxxxxxxxxxxname033;
-	private String fnxxxxxxbvxxxxxxxxxxname034;
-	private String frxxxxxxbvxxxxxxxxxxname035;
-	private String fvxxxxxxbvxxxxxxxxxxname036;
-	private String gbxxxxxxbvxxxxxxxxxxname037;
-	private String gfxxxxxxbvxxxxxxxxxxname038;
-	private String gjxxxxxxbvxxxxxxxxxxname039;
-	private String gnxxxxxxbvxxxxxxxxxxname040;
-	private String grxxxxxxbvxxxxxxxxxxname041;
-	private String gvxxxxxxbvxxxxxxxxxxname042;
-	private String hbxxxxxxbvxxxxxxxxxxname043;
-	private String hfxxxxxxbvxxxxxxxxxxname044;
-	private String hjxxxxxxbvxxxxxxxxxxname045;
-	private String hnxxxxxxbvxxxxxxxxxxname046;
-	private String hrxxxxxxbvxxxxxxxxxxname047;
-	private String hvxxxxxxbvxxxxxxxxxxname048;
-	private String ibxxxxxxbvxxxxxxxxxxname049;
-	private String ifxxxxxxbvxxxxxxxxxxname050;
-	private String cxxxxxxxbvxxxxxxxxxxticket017;
-	private String dcxxxxxxbvxxxxxxxxxxticket018;
-	private String dgxxxxxxbvxxxxxxxxxxticket019;
-	private String dkxxxxxxbvxxxxxxxxxxticket020;
-	private String doxxxxxxbvxxxxxxxxxxticket021;
-	private String dsxxxxxxbvxxxxxxxxxxticket022;
-	private String dwxxxxxxbvxxxxxxxxxxticket023;
-	private String e3xxxxxxbvxxxxxxxxxxticket024;
-	private String ecxxxxxxbvxxxxxxxxxxticket025;
-	private String ehxxxxxxbvxxxxxxxxxxticket026;
-	private String elxxxxxxbvxxxxxxxxxxticket027;
-	private String epxxxxxxbvxxxxxxxxxxticket028;
-	private String etxxxxxxbvxxxxxxxxxxticket029;
-	private String exxxxxxxbvxxxxxxxxxxticket030;
-	private String fcxxxxxxbvxxxxxxxxxxticket031;
-	private String fgxxxxxxbvxxxxxxxxxxticket032;
-	private String fkxxxxxxbvxxxxxxxxxxticket033;
-	private String foxxxxxxbvxxxxxxxxxxticket034;
-	private String fsxxxxxxbvxxxxxxxxxxticket035;
-	private String fwxxxxxxbvxxxxxxxxxxticket036;
-	private String gcxxxxxxbvxxxxxxxxxxticket037;
-	private String ggxxxxxxbvxxxxxxxxxxticket038;
-	private String gkxxxxxxbvxxxxxxxxxxticket039;
-	private String goxxxxxxbvxxxxxxxxxxticket040;
-	private String gsxxxxxxbvxxxxxxxxxxticket041;
-	private String gwxxxxxxbvxxxxxxxxxxticket042;
-	private String hcxxxxxxbvxxxxxxxxxxticket043;
-	private String hgxxxxxxbvxxxxxxxxxxticket044;
-	private String hkxxxxxxbvxxxxxxxxxxticket045;
-	private String hoxxxxxxbvxxxxxxxxxxticket046;
-	private String hsxxxxxxbvxxxxxxxxxxticket047;
-	private String hwxxxxxxbvxxxxxxxxxxticket048;
-	private String icxxxxxxbvxxxxxxxxxxticket049;
-	private String igxxxxxxbvxxxxxxxxxxticket050;
-	private String cyxxxxxxbvxxxxxxxxxxpo017;
-	private String ddxxxxxxbvxxxxxxxxxxpo018;
-	private String dhxxxxxxbvxxxxxxxxxxpo019;
-	private String dlxxxxxxbvxxxxxxxxxxpo020;
-	private String dpxxxxxxbvxxxxxxxxxxpo021;
-	private String dtxxxxxxbvxxxxxxxxxxpo022;
-	private String dxxxxxxxbvxxxxxxxxxxpo023;
-	private String e4xxxxxxbvxxxxxxxxxxpo024;
-	private String edxxxxxxbvxxxxxxxxxxpo025;
-	private String eixxxxxxbvxxxxxxxxxxpo026;
-	private String emxxxxxxbvxxxxxxxxxxpo027;
-	private String eqxxxxxxbvxxxxxxxxxxpo028;
-	private String euxxxxxxbvxxxxxxxxxxpo029;
-	private String eyxxxxxxbvxxxxxxxxxxpo030;
-	private String fdxxxxxxbvxxxxxxxxxxpo031;
-	private String fhxxxxxxbvxxxxxxxxxxpo032;
-	private String flxxxxxxbvxxxxxxxxxxpo033;
-	private String fpxxxxxxbvxxxxxxxxxxpo034;
-	private String ftxxxxxxbvxxxxxxxxxxpo035;
-	private String fxxxxxxxbvxxxxxxxxxxpo036;
-	private String gdxxxxxxbvxxxxxxxxxxpo037;
-	private String ghxxxxxxbvxxxxxxxxxxpo038;
-	private String glxxxxxxbvxxxxxxxxxxpo039;
-	private String gpxxxxxxbvxxxxxxxxxxpo040;
-	private String gtxxxxxxbvxxxxxxxxxxpo041;
-	private String gxxxxxxxbvxxxxxxxxxxpo042;
-	private String hdxxxxxxbvxxxxxxxxxxpo043;
-	private String hhxxxxxxbvxxxxxxxxxxpo044;
-	private String hlxxxxxxbvxxxxxxxxxxpo045;
-	private String hpxxxxxxbvxxxxxxxxxxpo046;
-	private String htxxxxxxbvxxxxxxxxxxpo047;
-	private String hxxxxxxxbvxxxxxxxxxxpo048;
-	private String idxxxxxxbvxxxxxxxxxxpo049;
-	private String ihxxxxxxbvxxxxxxxxxxpo050;
 
 	public Fxxxuq1skxwwqqhxxxxxseat() {
 	}
@@ -313,129 +313,145 @@ public class Fxxxuq1skxwwqqhxxxxxseat implements java.io.Serializable {
 			String crxxxxxxbvxxxxxxxxxxname016,
 			String csxxxxxxbvxxxxxxxxxxticket016,
 			String ctxxxxxxbvxxxxxxxxxxpo016,
+			String cuxxxxxxbvxxxxxxxxxxseat017status,
+			String cvxxxxxxbvxxxxxxxxxxname017,
+			String cxxxxxxxbvxxxxxxxxxxticket017,
+			String cyxxxxxxbvxxxxxxxxxxpo017,
+			String daxxxxxxbvxxxxxxxxxxseat018status,
+			String dbxxxxxxbvxxxxxxxxxxname018,
+			String dcxxxxxxbvxxxxxxxxxxticket018,
+			String ddxxxxxxbvxxxxxxxxxxpo018,
+			String dexxxxxxbvxxxxxxxxxxseat019status,
+			String dfxxxxxxbvxxxxxxxxxxname019,
+			String dgxxxxxxbvxxxxxxxxxxticket019,
+			String dhxxxxxxbvxxxxxxxxxxpo019,
+			String dixxxxxxbvxxxxxxxxxxseat020status,
+			String djxxxxxxbvxxxxxxxxxxname020,
+			String dkxxxxxxbvxxxxxxxxxxticket020,
+			String dlxxxxxxbvxxxxxxxxxxpo020,
+			String dmxxxxxxbvxxxxxxxxxxseat021status,
+			String dnxxxxxxbvxxxxxxxxxxname021,
+			String doxxxxxxbvxxxxxxxxxxticket021,
+			String dpxxxxxxbvxxxxxxxxxxpo021,
+			String dqxxxxxxbvxxxxxxxxxxseat022status,
+			String drxxxxxxbvxxxxxxxxxxname022,
+			String dsxxxxxxbvxxxxxxxxxxticket022,
+			String dtxxxxxxbvxxxxxxxxxxpo022,
+			String duxxxxxxbvxxxxxxxxxxseat023status,
+			String dvxxxxxxbvxxxxxxxxxxname023,
+			String dwxxxxxxbvxxxxxxxxxxticket023,
+			String dxxxxxxxbvxxxxxxxxxxpo023,
+			String e1xxxxxxbvxxxxxxxxxxseat024status,
+			String e2xxxxxxbvxxxxxxxxxxname024,
+			String e3xxxxxxbvxxxxxxxxxxticket024,
+			String e4xxxxxxbvxxxxxxxxxxpo024,
+			String eaxxxxxxbvxxxxxxxxxxseat025status,
+			String ebxxxxxxbvxxxxxxxxxxname025,
+			String ecxxxxxxbvxxxxxxxxxxticket025,
+			String edxxxxxxbvxxxxxxxxxxpo025,
+			String efxxxxxxbvxxxxxxxxxxseat026status,
+			String egxxxxxxbvxxxxxxxxxxname026,
+			String ehxxxxxxbvxxxxxxxxxxticket026,
+			String eixxxxxxbvxxxxxxxxxxpo026,
+			String ejxxxxxxbvxxxxxxxxxxseat027status,
+			String ekxxxxxxbvxxxxxxxxxxname027,
+			String elxxxxxxbvxxxxxxxxxxticket027,
+			String emxxxxxxbvxxxxxxxxxxpo027,
+			String enxxxxxxbvxxxxxxxxxxseat028status,
+			String eoxxxxxxbvxxxxxxxxxxname028,
+			String epxxxxxxbvxxxxxxxxxxticket028,
+			String eqxxxxxxbvxxxxxxxxxxpo028,
+			String erxxxxxxbvxxxxxxxxxxseat029status,
+			String esxxxxxxbvxxxxxxxxxxname029,
+			String etxxxxxxbvxxxxxxxxxxticket029,
+			String euxxxxxxbvxxxxxxxxxxpo029,
+			String evxxxxxxbvxxxxxxxxxxseat030status,
+			String ewxxxxxxbvxxxxxxxxxxname030,
+			String exxxxxxxbvxxxxxxxxxxticket030,
+			String eyxxxxxxbvxxxxxxxxxxpo030,
+			String faxxxxxxbvxxxxxxxxxxseat031status,
+			String fbxxxxxxbvxxxxxxxxxxname031,
+			String fcxxxxxxbvxxxxxxxxxxticket031,
+			String fdxxxxxxbvxxxxxxxxxxpo031,
+			String fexxxxxxbvxxxxxxxxxxseat032status,
+			String ffxxxxxxbvxxxxxxxxxxname032,
+			String fgxxxxxxbvxxxxxxxxxxticket032,
+			String fhxxxxxxbvxxxxxxxxxxpo032,
+			String fixxxxxxbvxxxxxxxxxxseat033status,
+			String fjxxxxxxbvxxxxxxxxxxname033,
+			String fkxxxxxxbvxxxxxxxxxxticket033,
+			String flxxxxxxbvxxxxxxxxxxpo033,
+			String fmxxxxxxbvxxxxxxxxxxseat034status,
+			String fnxxxxxxbvxxxxxxxxxxname034,
+			String foxxxxxxbvxxxxxxxxxxticket034,
+			String fpxxxxxxbvxxxxxxxxxxpo034,
+			String fqxxxxxxbvxxxxxxxxxxseat035status,
+			String frxxxxxxbvxxxxxxxxxxname035,
+			String fsxxxxxxbvxxxxxxxxxxticket035,
+			String ftxxxxxxbvxxxxxxxxxxpo035,
+			String fuxxxxxxbvxxxxxxxxxxseat036status,
+			String fvxxxxxxbvxxxxxxxxxxname036,
+			String fwxxxxxxbvxxxxxxxxxxticket036,
+			String fxxxxxxxbvxxxxxxxxxxpo036,
+			String gaxxxxxxbvxxxxxxxxxxseat037status,
+			String gbxxxxxxbvxxxxxxxxxxname037,
+			String gcxxxxxxbvxxxxxxxxxxticket037,
+			String gdxxxxxxbvxxxxxxxxxxpo037,
+			String gexxxxxxbvxxxxxxxxxxseat038status,
+			String gfxxxxxxbvxxxxxxxxxxname038,
+			String ggxxxxxxbvxxxxxxxxxxticket038,
+			String ghxxxxxxbvxxxxxxxxxxpo038,
+			String gixxxxxxbvxxxxxxxxxxseat039status,
+			String gjxxxxxxbvxxxxxxxxxxname039,
+			String gkxxxxxxbvxxxxxxxxxxticket039,
+			String glxxxxxxbvxxxxxxxxxxpo039,
+			String gmxxxxxxbvxxxxxxxxxxseat040status,
+			String gnxxxxxxbvxxxxxxxxxxname040,
+			String goxxxxxxbvxxxxxxxxxxticket040,
+			String gpxxxxxxbvxxxxxxxxxxpo040,
+			String gqxxxxxxbvxxxxxxxxxxseat041status,
+			String grxxxxxxbvxxxxxxxxxxname041,
+			String gsxxxxxxbvxxxxxxxxxxticket041,
+			String gtxxxxxxbvxxxxxxxxxxpo041,
+			String guxxxxxxbvxxxxxxxxxxseat042status,
+			String gvxxxxxxbvxxxxxxxxxxname042,
+			String gwxxxxxxbvxxxxxxxxxxticket042,
+			String gxxxxxxxbvxxxxxxxxxxpo042,
+			String haxxxxxxbvxxxxxxxxxxseat043status,
+			String hbxxxxxxbvxxxxxxxxxxname043,
+			String hcxxxxxxbvxxxxxxxxxxticket043,
+			String hdxxxxxxbvxxxxxxxxxxpo043,
+			String hexxxxxxbvxxxxxxxxxxseat044status,
+			String hfxxxxxxbvxxxxxxxxxxname044,
+			String hgxxxxxxbvxxxxxxxxxxticket044,
+			String hhxxxxxxbvxxxxxxxxxxpo044,
+			String hixxxxxxbvxxxxxxxxxxseat045status,
+			String hjxxxxxxbvxxxxxxxxxxname045,
+			String hkxxxxxxbvxxxxxxxxxxticket045,
+			String hlxxxxxxbvxxxxxxxxxxpo045,
+			String hmxxxxxxbvxxxxxxxxxxseat046status,
+			String hnxxxxxxbvxxxxxxxxxxname046,
+			String hoxxxxxxbvxxxxxxxxxxticket046,
+			String hpxxxxxxbvxxxxxxxxxxpo046,
+			String hqxxxxxxbvxxxxxxxxxxseat047status,
+			String hrxxxxxxbvxxxxxxxxxxname047,
+			String hsxxxxxxbvxxxxxxxxxxticket047,
+			String htxxxxxxbvxxxxxxxxxxpo047,
+			String huxxxxxxbvxxxxxxxxxxseat048status,
+			String hvxxxxxxbvxxxxxxxxxxname048,
+			String hwxxxxxxbvxxxxxxxxxxticket048,
+			String hxxxxxxxbvxxxxxxxxxxpo048,
+			String iaxxxxxxbvxxxxxxxxxxseat049status,
+			String ibxxxxxxbvxxxxxxxxxxname049,
+			String icxxxxxxbvxxxxxxxxxxticket049,
+			String idxxxxxxbvxxxxxxxxxxpo049,
+			String iexxxxxxbvxxxxxxxxxxseat050status,
+			String ifxxxxxxbvxxxxxxxxxxname050,
+			String igxxxxxxbvxxxxxxxxxxticket050,
+			String ihxxxxxxbvxxxxxxxxxxpo050,
 			Integer zixxzzfxhhxxxxxxxxxxstatusfl,
 			Date zjxxcztxlxxxxxxxxxxxstatusfldt,
-			String z3xxutoxlhxxxxxxxxxxowner,
-			String zzxxu2oxxhxxxxxxxxxxowner2,
-			String cuxxxxxxbvxxxxxxxxxxseat017status,
-			String daxxxxxxbvxxxxxxxxxxseat018status,
-			String dexxxxxxbvxxxxxxxxxxseat019status,
-			String dixxxxxxbvxxxxxxxxxxseat020status,
-			String dmxxxxxxbvxxxxxxxxxxseat021status,
-			String dqxxxxxxbvxxxxxxxxxxseat022status,
-			String duxxxxxxbvxxxxxxxxxxseat023status,
-			String e1xxxxxxbvxxxxxxxxxxseat024status,
-			String eaxxxxxxbvxxxxxxxxxxseat025status,
-			String efxxxxxxbvxxxxxxxxxxseat026status,
-			String ejxxxxxxbvxxxxxxxxxxseat027status,
-			String enxxxxxxbvxxxxxxxxxxseat028status,
-			String erxxxxxxbvxxxxxxxxxxseat029status,
-			String evxxxxxxbvxxxxxxxxxxseat030status,
-			String faxxxxxxbvxxxxxxxxxxseat031status,
-			String fexxxxxxbvxxxxxxxxxxseat032status,
-			String fixxxxxxbvxxxxxxxxxxseat033status,
-			String fmxxxxxxbvxxxxxxxxxxseat034status,
-			String fqxxxxxxbvxxxxxxxxxxseat035status,
-			String fuxxxxxxbvxxxxxxxxxxseat036status,
-			String gaxxxxxxbvxxxxxxxxxxseat037status,
-			String gexxxxxxbvxxxxxxxxxxseat038status,
-			String gixxxxxxbvxxxxxxxxxxseat039status,
-			String gmxxxxxxbvxxxxxxxxxxseat040status,
-			String gqxxxxxxbvxxxxxxxxxxseat041status,
-			String guxxxxxxbvxxxxxxxxxxseat042status,
-			String haxxxxxxbvxxxxxxxxxxseat043status,
-			String hexxxxxxbvxxxxxxxxxxseat044status,
-			String hixxxxxxbvxxxxxxxxxxseat045status,
-			String hmxxxxxxbvxxxxxxxxxxseat046status,
-			String hqxxxxxxbvxxxxxxxxxxseat047status,
-			String huxxxxxxbvxxxxxxxxxxseat048status,
-			String iaxxxxxxbvxxxxxxxxxxseat049status,
-			String iexxxxxxbvxxxxxxxxxxseat050status,
-			String cvxxxxxxbvxxxxxxxxxxname017,
-			String dbxxxxxxbvxxxxxxxxxxname018,
-			String dfxxxxxxbvxxxxxxxxxxname019,
-			String djxxxxxxbvxxxxxxxxxxname020,
-			String dnxxxxxxbvxxxxxxxxxxname021,
-			String drxxxxxxbvxxxxxxxxxxname022,
-			String dvxxxxxxbvxxxxxxxxxxname023,
-			String e2xxxxxxbvxxxxxxxxxxname024,
-			String ebxxxxxxbvxxxxxxxxxxname025,
-			String egxxxxxxbvxxxxxxxxxxname026,
-			String ekxxxxxxbvxxxxxxxxxxname027,
-			String eoxxxxxxbvxxxxxxxxxxname028,
-			String esxxxxxxbvxxxxxxxxxxname029,
-			String ewxxxxxxbvxxxxxxxxxxname030,
-			String fbxxxxxxbvxxxxxxxxxxname031,
-			String ffxxxxxxbvxxxxxxxxxxname032,
-			String fjxxxxxxbvxxxxxxxxxxname033,
-			String fnxxxxxxbvxxxxxxxxxxname034,
-			String frxxxxxxbvxxxxxxxxxxname035,
-			String fvxxxxxxbvxxxxxxxxxxname036,
-			String gbxxxxxxbvxxxxxxxxxxname037,
-			String gfxxxxxxbvxxxxxxxxxxname038,
-			String gjxxxxxxbvxxxxxxxxxxname039,
-			String gnxxxxxxbvxxxxxxxxxxname040,
-			String grxxxxxxbvxxxxxxxxxxname041,
-			String gvxxxxxxbvxxxxxxxxxxname042,
-			String hbxxxxxxbvxxxxxxxxxxname043,
-			String hfxxxxxxbvxxxxxxxxxxname044,
-			String hjxxxxxxbvxxxxxxxxxxname045,
-			String hnxxxxxxbvxxxxxxxxxxname046,
-			String hrxxxxxxbvxxxxxxxxxxname047,
-			String hvxxxxxxbvxxxxxxxxxxname048,
-			String ibxxxxxxbvxxxxxxxxxxname049,
-			String ifxxxxxxbvxxxxxxxxxxname050,
-			String cxxxxxxxbvxxxxxxxxxxticket017,
-			String dcxxxxxxbvxxxxxxxxxxticket018,
-			String dgxxxxxxbvxxxxxxxxxxticket019,
-			String dkxxxxxxbvxxxxxxxxxxticket020,
-			String doxxxxxxbvxxxxxxxxxxticket021,
-			String dsxxxxxxbvxxxxxxxxxxticket022,
-			String dwxxxxxxbvxxxxxxxxxxticket023,
-			String e3xxxxxxbvxxxxxxxxxxticket024,
-			String ecxxxxxxbvxxxxxxxxxxticket025,
-			String ehxxxxxxbvxxxxxxxxxxticket026,
-			String elxxxxxxbvxxxxxxxxxxticket027,
-			String epxxxxxxbvxxxxxxxxxxticket028,
-			String etxxxxxxbvxxxxxxxxxxticket029,
-			String exxxxxxxbvxxxxxxxxxxticket030,
-			String fcxxxxxxbvxxxxxxxxxxticket031,
-			String fgxxxxxxbvxxxxxxxxxxticket032,
-			String fkxxxxxxbvxxxxxxxxxxticket033,
-			String foxxxxxxbvxxxxxxxxxxticket034,
-			String fsxxxxxxbvxxxxxxxxxxticket035,
-			String fwxxxxxxbvxxxxxxxxxxticket036,
-			String gcxxxxxxbvxxxxxxxxxxticket037,
-			String ggxxxxxxbvxxxxxxxxxxticket038,
-			String gkxxxxxxbvxxxxxxxxxxticket039,
-			String goxxxxxxbvxxxxxxxxxxticket040,
-			String gsxxxxxxbvxxxxxxxxxxticket041,
-			String gwxxxxxxbvxxxxxxxxxxticket042,
-			String hcxxxxxxbvxxxxxxxxxxticket043,
-			String hgxxxxxxbvxxxxxxxxxxticket044,
-			String hkxxxxxxbvxxxxxxxxxxticket045,
-			String hoxxxxxxbvxxxxxxxxxxticket046,
-			String hsxxxxxxbvxxxxxxxxxxticket047,
-			String hwxxxxxxbvxxxxxxxxxxticket048,
-			String icxxxxxxbvxxxxxxxxxxticket049,
-			String igxxxxxxbvxxxxxxxxxxticket050,
-			String cyxxxxxxbvxxxxxxxxxxpo017, String ddxxxxxxbvxxxxxxxxxxpo018,
-			String dhxxxxxxbvxxxxxxxxxxpo019, String dlxxxxxxbvxxxxxxxxxxpo020,
-			String dpxxxxxxbvxxxxxxxxxxpo021, String dtxxxxxxbvxxxxxxxxxxpo022,
-			String dxxxxxxxbvxxxxxxxxxxpo023, String e4xxxxxxbvxxxxxxxxxxpo024,
-			String edxxxxxxbvxxxxxxxxxxpo025, String eixxxxxxbvxxxxxxxxxxpo026,
-			String emxxxxxxbvxxxxxxxxxxpo027, String eqxxxxxxbvxxxxxxxxxxpo028,
-			String euxxxxxxbvxxxxxxxxxxpo029, String eyxxxxxxbvxxxxxxxxxxpo030,
-			String fdxxxxxxbvxxxxxxxxxxpo031, String fhxxxxxxbvxxxxxxxxxxpo032,
-			String flxxxxxxbvxxxxxxxxxxpo033, String fpxxxxxxbvxxxxxxxxxxpo034,
-			String ftxxxxxxbvxxxxxxxxxxpo035, String fxxxxxxxbvxxxxxxxxxxpo036,
-			String gdxxxxxxbvxxxxxxxxxxpo037, String ghxxxxxxbvxxxxxxxxxxpo038,
-			String glxxxxxxbvxxxxxxxxxxpo039, String gpxxxxxxbvxxxxxxxxxxpo040,
-			String gtxxxxxxbvxxxxxxxxxxpo041, String gxxxxxxxbvxxxxxxxxxxpo042,
-			String hdxxxxxxbvxxxxxxxxxxpo043, String hhxxxxxxbvxxxxxxxxxxpo044,
-			String hlxxxxxxbvxxxxxxxxxxpo045, String hpxxxxxxbvxxxxxxxxxxpo046,
-			String htxxxxxxbvxxxxxxxxxxpo047, String hxxxxxxxbvxxxxxxxxxxpo048,
-			String idxxxxxxbvxxxxxxxxxxpo049, String ihxxxxxxbvxxxxxxxxxxpo050) {
+			String z3xxutoxlhxxxxxxxxxxowner, String zzxxu2oxxhxxxxxxxxxxowner2) {
 		this.fxxxcq144xwwqqhxxxxxlocation = fxxxcq144xwwqqhxxxxxlocation;
 		this.a2xxukstbvxxxxxxxxxxrow = a2xxukstbvxxxxxxxxxxrow;
 		this.a3xxuxxxbvxxxxxxxxxxrowlabel = a3xxuxxxbvxxxxxxxxxxrowlabel;
@@ -503,146 +519,146 @@ public class Fxxxuq1skxwwqqhxxxxxseat implements java.io.Serializable {
 		this.crxxxxxxbvxxxxxxxxxxname016 = crxxxxxxbvxxxxxxxxxxname016;
 		this.csxxxxxxbvxxxxxxxxxxticket016 = csxxxxxxbvxxxxxxxxxxticket016;
 		this.ctxxxxxxbvxxxxxxxxxxpo016 = ctxxxxxxbvxxxxxxxxxxpo016;
+		this.cuxxxxxxbvxxxxxxxxxxseat017status = cuxxxxxxbvxxxxxxxxxxseat017status;
+		this.cvxxxxxxbvxxxxxxxxxxname017 = cvxxxxxxbvxxxxxxxxxxname017;
+		this.cxxxxxxxbvxxxxxxxxxxticket017 = cxxxxxxxbvxxxxxxxxxxticket017;
+		this.cyxxxxxxbvxxxxxxxxxxpo017 = cyxxxxxxbvxxxxxxxxxxpo017;
+		this.daxxxxxxbvxxxxxxxxxxseat018status = daxxxxxxbvxxxxxxxxxxseat018status;
+		this.dbxxxxxxbvxxxxxxxxxxname018 = dbxxxxxxbvxxxxxxxxxxname018;
+		this.dcxxxxxxbvxxxxxxxxxxticket018 = dcxxxxxxbvxxxxxxxxxxticket018;
+		this.ddxxxxxxbvxxxxxxxxxxpo018 = ddxxxxxxbvxxxxxxxxxxpo018;
+		this.dexxxxxxbvxxxxxxxxxxseat019status = dexxxxxxbvxxxxxxxxxxseat019status;
+		this.dfxxxxxxbvxxxxxxxxxxname019 = dfxxxxxxbvxxxxxxxxxxname019;
+		this.dgxxxxxxbvxxxxxxxxxxticket019 = dgxxxxxxbvxxxxxxxxxxticket019;
+		this.dhxxxxxxbvxxxxxxxxxxpo019 = dhxxxxxxbvxxxxxxxxxxpo019;
+		this.dixxxxxxbvxxxxxxxxxxseat020status = dixxxxxxbvxxxxxxxxxxseat020status;
+		this.djxxxxxxbvxxxxxxxxxxname020 = djxxxxxxbvxxxxxxxxxxname020;
+		this.dkxxxxxxbvxxxxxxxxxxticket020 = dkxxxxxxbvxxxxxxxxxxticket020;
+		this.dlxxxxxxbvxxxxxxxxxxpo020 = dlxxxxxxbvxxxxxxxxxxpo020;
+		this.dmxxxxxxbvxxxxxxxxxxseat021status = dmxxxxxxbvxxxxxxxxxxseat021status;
+		this.dnxxxxxxbvxxxxxxxxxxname021 = dnxxxxxxbvxxxxxxxxxxname021;
+		this.doxxxxxxbvxxxxxxxxxxticket021 = doxxxxxxbvxxxxxxxxxxticket021;
+		this.dpxxxxxxbvxxxxxxxxxxpo021 = dpxxxxxxbvxxxxxxxxxxpo021;
+		this.dqxxxxxxbvxxxxxxxxxxseat022status = dqxxxxxxbvxxxxxxxxxxseat022status;
+		this.drxxxxxxbvxxxxxxxxxxname022 = drxxxxxxbvxxxxxxxxxxname022;
+		this.dsxxxxxxbvxxxxxxxxxxticket022 = dsxxxxxxbvxxxxxxxxxxticket022;
+		this.dtxxxxxxbvxxxxxxxxxxpo022 = dtxxxxxxbvxxxxxxxxxxpo022;
+		this.duxxxxxxbvxxxxxxxxxxseat023status = duxxxxxxbvxxxxxxxxxxseat023status;
+		this.dvxxxxxxbvxxxxxxxxxxname023 = dvxxxxxxbvxxxxxxxxxxname023;
+		this.dwxxxxxxbvxxxxxxxxxxticket023 = dwxxxxxxbvxxxxxxxxxxticket023;
+		this.dxxxxxxxbvxxxxxxxxxxpo023 = dxxxxxxxbvxxxxxxxxxxpo023;
+		this.e1xxxxxxbvxxxxxxxxxxseat024status = e1xxxxxxbvxxxxxxxxxxseat024status;
+		this.e2xxxxxxbvxxxxxxxxxxname024 = e2xxxxxxbvxxxxxxxxxxname024;
+		this.e3xxxxxxbvxxxxxxxxxxticket024 = e3xxxxxxbvxxxxxxxxxxticket024;
+		this.e4xxxxxxbvxxxxxxxxxxpo024 = e4xxxxxxbvxxxxxxxxxxpo024;
+		this.eaxxxxxxbvxxxxxxxxxxseat025status = eaxxxxxxbvxxxxxxxxxxseat025status;
+		this.ebxxxxxxbvxxxxxxxxxxname025 = ebxxxxxxbvxxxxxxxxxxname025;
+		this.ecxxxxxxbvxxxxxxxxxxticket025 = ecxxxxxxbvxxxxxxxxxxticket025;
+		this.edxxxxxxbvxxxxxxxxxxpo025 = edxxxxxxbvxxxxxxxxxxpo025;
+		this.efxxxxxxbvxxxxxxxxxxseat026status = efxxxxxxbvxxxxxxxxxxseat026status;
+		this.egxxxxxxbvxxxxxxxxxxname026 = egxxxxxxbvxxxxxxxxxxname026;
+		this.ehxxxxxxbvxxxxxxxxxxticket026 = ehxxxxxxbvxxxxxxxxxxticket026;
+		this.eixxxxxxbvxxxxxxxxxxpo026 = eixxxxxxbvxxxxxxxxxxpo026;
+		this.ejxxxxxxbvxxxxxxxxxxseat027status = ejxxxxxxbvxxxxxxxxxxseat027status;
+		this.ekxxxxxxbvxxxxxxxxxxname027 = ekxxxxxxbvxxxxxxxxxxname027;
+		this.elxxxxxxbvxxxxxxxxxxticket027 = elxxxxxxbvxxxxxxxxxxticket027;
+		this.emxxxxxxbvxxxxxxxxxxpo027 = emxxxxxxbvxxxxxxxxxxpo027;
+		this.enxxxxxxbvxxxxxxxxxxseat028status = enxxxxxxbvxxxxxxxxxxseat028status;
+		this.eoxxxxxxbvxxxxxxxxxxname028 = eoxxxxxxbvxxxxxxxxxxname028;
+		this.epxxxxxxbvxxxxxxxxxxticket028 = epxxxxxxbvxxxxxxxxxxticket028;
+		this.eqxxxxxxbvxxxxxxxxxxpo028 = eqxxxxxxbvxxxxxxxxxxpo028;
+		this.erxxxxxxbvxxxxxxxxxxseat029status = erxxxxxxbvxxxxxxxxxxseat029status;
+		this.esxxxxxxbvxxxxxxxxxxname029 = esxxxxxxbvxxxxxxxxxxname029;
+		this.etxxxxxxbvxxxxxxxxxxticket029 = etxxxxxxbvxxxxxxxxxxticket029;
+		this.euxxxxxxbvxxxxxxxxxxpo029 = euxxxxxxbvxxxxxxxxxxpo029;
+		this.evxxxxxxbvxxxxxxxxxxseat030status = evxxxxxxbvxxxxxxxxxxseat030status;
+		this.ewxxxxxxbvxxxxxxxxxxname030 = ewxxxxxxbvxxxxxxxxxxname030;
+		this.exxxxxxxbvxxxxxxxxxxticket030 = exxxxxxxbvxxxxxxxxxxticket030;
+		this.eyxxxxxxbvxxxxxxxxxxpo030 = eyxxxxxxbvxxxxxxxxxxpo030;
+		this.faxxxxxxbvxxxxxxxxxxseat031status = faxxxxxxbvxxxxxxxxxxseat031status;
+		this.fbxxxxxxbvxxxxxxxxxxname031 = fbxxxxxxbvxxxxxxxxxxname031;
+		this.fcxxxxxxbvxxxxxxxxxxticket031 = fcxxxxxxbvxxxxxxxxxxticket031;
+		this.fdxxxxxxbvxxxxxxxxxxpo031 = fdxxxxxxbvxxxxxxxxxxpo031;
+		this.fexxxxxxbvxxxxxxxxxxseat032status = fexxxxxxbvxxxxxxxxxxseat032status;
+		this.ffxxxxxxbvxxxxxxxxxxname032 = ffxxxxxxbvxxxxxxxxxxname032;
+		this.fgxxxxxxbvxxxxxxxxxxticket032 = fgxxxxxxbvxxxxxxxxxxticket032;
+		this.fhxxxxxxbvxxxxxxxxxxpo032 = fhxxxxxxbvxxxxxxxxxxpo032;
+		this.fixxxxxxbvxxxxxxxxxxseat033status = fixxxxxxbvxxxxxxxxxxseat033status;
+		this.fjxxxxxxbvxxxxxxxxxxname033 = fjxxxxxxbvxxxxxxxxxxname033;
+		this.fkxxxxxxbvxxxxxxxxxxticket033 = fkxxxxxxbvxxxxxxxxxxticket033;
+		this.flxxxxxxbvxxxxxxxxxxpo033 = flxxxxxxbvxxxxxxxxxxpo033;
+		this.fmxxxxxxbvxxxxxxxxxxseat034status = fmxxxxxxbvxxxxxxxxxxseat034status;
+		this.fnxxxxxxbvxxxxxxxxxxname034 = fnxxxxxxbvxxxxxxxxxxname034;
+		this.foxxxxxxbvxxxxxxxxxxticket034 = foxxxxxxbvxxxxxxxxxxticket034;
+		this.fpxxxxxxbvxxxxxxxxxxpo034 = fpxxxxxxbvxxxxxxxxxxpo034;
+		this.fqxxxxxxbvxxxxxxxxxxseat035status = fqxxxxxxbvxxxxxxxxxxseat035status;
+		this.frxxxxxxbvxxxxxxxxxxname035 = frxxxxxxbvxxxxxxxxxxname035;
+		this.fsxxxxxxbvxxxxxxxxxxticket035 = fsxxxxxxbvxxxxxxxxxxticket035;
+		this.ftxxxxxxbvxxxxxxxxxxpo035 = ftxxxxxxbvxxxxxxxxxxpo035;
+		this.fuxxxxxxbvxxxxxxxxxxseat036status = fuxxxxxxbvxxxxxxxxxxseat036status;
+		this.fvxxxxxxbvxxxxxxxxxxname036 = fvxxxxxxbvxxxxxxxxxxname036;
+		this.fwxxxxxxbvxxxxxxxxxxticket036 = fwxxxxxxbvxxxxxxxxxxticket036;
+		this.fxxxxxxxbvxxxxxxxxxxpo036 = fxxxxxxxbvxxxxxxxxxxpo036;
+		this.gaxxxxxxbvxxxxxxxxxxseat037status = gaxxxxxxbvxxxxxxxxxxseat037status;
+		this.gbxxxxxxbvxxxxxxxxxxname037 = gbxxxxxxbvxxxxxxxxxxname037;
+		this.gcxxxxxxbvxxxxxxxxxxticket037 = gcxxxxxxbvxxxxxxxxxxticket037;
+		this.gdxxxxxxbvxxxxxxxxxxpo037 = gdxxxxxxbvxxxxxxxxxxpo037;
+		this.gexxxxxxbvxxxxxxxxxxseat038status = gexxxxxxbvxxxxxxxxxxseat038status;
+		this.gfxxxxxxbvxxxxxxxxxxname038 = gfxxxxxxbvxxxxxxxxxxname038;
+		this.ggxxxxxxbvxxxxxxxxxxticket038 = ggxxxxxxbvxxxxxxxxxxticket038;
+		this.ghxxxxxxbvxxxxxxxxxxpo038 = ghxxxxxxbvxxxxxxxxxxpo038;
+		this.gixxxxxxbvxxxxxxxxxxseat039status = gixxxxxxbvxxxxxxxxxxseat039status;
+		this.gjxxxxxxbvxxxxxxxxxxname039 = gjxxxxxxbvxxxxxxxxxxname039;
+		this.gkxxxxxxbvxxxxxxxxxxticket039 = gkxxxxxxbvxxxxxxxxxxticket039;
+		this.glxxxxxxbvxxxxxxxxxxpo039 = glxxxxxxbvxxxxxxxxxxpo039;
+		this.gmxxxxxxbvxxxxxxxxxxseat040status = gmxxxxxxbvxxxxxxxxxxseat040status;
+		this.gnxxxxxxbvxxxxxxxxxxname040 = gnxxxxxxbvxxxxxxxxxxname040;
+		this.goxxxxxxbvxxxxxxxxxxticket040 = goxxxxxxbvxxxxxxxxxxticket040;
+		this.gpxxxxxxbvxxxxxxxxxxpo040 = gpxxxxxxbvxxxxxxxxxxpo040;
+		this.gqxxxxxxbvxxxxxxxxxxseat041status = gqxxxxxxbvxxxxxxxxxxseat041status;
+		this.grxxxxxxbvxxxxxxxxxxname041 = grxxxxxxbvxxxxxxxxxxname041;
+		this.gsxxxxxxbvxxxxxxxxxxticket041 = gsxxxxxxbvxxxxxxxxxxticket041;
+		this.gtxxxxxxbvxxxxxxxxxxpo041 = gtxxxxxxbvxxxxxxxxxxpo041;
+		this.guxxxxxxbvxxxxxxxxxxseat042status = guxxxxxxbvxxxxxxxxxxseat042status;
+		this.gvxxxxxxbvxxxxxxxxxxname042 = gvxxxxxxbvxxxxxxxxxxname042;
+		this.gwxxxxxxbvxxxxxxxxxxticket042 = gwxxxxxxbvxxxxxxxxxxticket042;
+		this.gxxxxxxxbvxxxxxxxxxxpo042 = gxxxxxxxbvxxxxxxxxxxpo042;
+		this.haxxxxxxbvxxxxxxxxxxseat043status = haxxxxxxbvxxxxxxxxxxseat043status;
+		this.hbxxxxxxbvxxxxxxxxxxname043 = hbxxxxxxbvxxxxxxxxxxname043;
+		this.hcxxxxxxbvxxxxxxxxxxticket043 = hcxxxxxxbvxxxxxxxxxxticket043;
+		this.hdxxxxxxbvxxxxxxxxxxpo043 = hdxxxxxxbvxxxxxxxxxxpo043;
+		this.hexxxxxxbvxxxxxxxxxxseat044status = hexxxxxxbvxxxxxxxxxxseat044status;
+		this.hfxxxxxxbvxxxxxxxxxxname044 = hfxxxxxxbvxxxxxxxxxxname044;
+		this.hgxxxxxxbvxxxxxxxxxxticket044 = hgxxxxxxbvxxxxxxxxxxticket044;
+		this.hhxxxxxxbvxxxxxxxxxxpo044 = hhxxxxxxbvxxxxxxxxxxpo044;
+		this.hixxxxxxbvxxxxxxxxxxseat045status = hixxxxxxbvxxxxxxxxxxseat045status;
+		this.hjxxxxxxbvxxxxxxxxxxname045 = hjxxxxxxbvxxxxxxxxxxname045;
+		this.hkxxxxxxbvxxxxxxxxxxticket045 = hkxxxxxxbvxxxxxxxxxxticket045;
+		this.hlxxxxxxbvxxxxxxxxxxpo045 = hlxxxxxxbvxxxxxxxxxxpo045;
+		this.hmxxxxxxbvxxxxxxxxxxseat046status = hmxxxxxxbvxxxxxxxxxxseat046status;
+		this.hnxxxxxxbvxxxxxxxxxxname046 = hnxxxxxxbvxxxxxxxxxxname046;
+		this.hoxxxxxxbvxxxxxxxxxxticket046 = hoxxxxxxbvxxxxxxxxxxticket046;
+		this.hpxxxxxxbvxxxxxxxxxxpo046 = hpxxxxxxbvxxxxxxxxxxpo046;
+		this.hqxxxxxxbvxxxxxxxxxxseat047status = hqxxxxxxbvxxxxxxxxxxseat047status;
+		this.hrxxxxxxbvxxxxxxxxxxname047 = hrxxxxxxbvxxxxxxxxxxname047;
+		this.hsxxxxxxbvxxxxxxxxxxticket047 = hsxxxxxxbvxxxxxxxxxxticket047;
+		this.htxxxxxxbvxxxxxxxxxxpo047 = htxxxxxxbvxxxxxxxxxxpo047;
+		this.huxxxxxxbvxxxxxxxxxxseat048status = huxxxxxxbvxxxxxxxxxxseat048status;
+		this.hvxxxxxxbvxxxxxxxxxxname048 = hvxxxxxxbvxxxxxxxxxxname048;
+		this.hwxxxxxxbvxxxxxxxxxxticket048 = hwxxxxxxbvxxxxxxxxxxticket048;
+		this.hxxxxxxxbvxxxxxxxxxxpo048 = hxxxxxxxbvxxxxxxxxxxpo048;
+		this.iaxxxxxxbvxxxxxxxxxxseat049status = iaxxxxxxbvxxxxxxxxxxseat049status;
+		this.ibxxxxxxbvxxxxxxxxxxname049 = ibxxxxxxbvxxxxxxxxxxname049;
+		this.icxxxxxxbvxxxxxxxxxxticket049 = icxxxxxxbvxxxxxxxxxxticket049;
+		this.idxxxxxxbvxxxxxxxxxxpo049 = idxxxxxxbvxxxxxxxxxxpo049;
+		this.iexxxxxxbvxxxxxxxxxxseat050status = iexxxxxxbvxxxxxxxxxxseat050status;
+		this.ifxxxxxxbvxxxxxxxxxxname050 = ifxxxxxxbvxxxxxxxxxxname050;
+		this.igxxxxxxbvxxxxxxxxxxticket050 = igxxxxxxbvxxxxxxxxxxticket050;
+		this.ihxxxxxxbvxxxxxxxxxxpo050 = ihxxxxxxbvxxxxxxxxxxpo050;
 		this.zixxzzfxhhxxxxxxxxxxstatusfl = zixxzzfxhhxxxxxxxxxxstatusfl;
 		this.zjxxcztxlxxxxxxxxxxxstatusfldt = zjxxcztxlxxxxxxxxxxxstatusfldt;
 		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
-		this.cuxxxxxxbvxxxxxxxxxxseat017status = cuxxxxxxbvxxxxxxxxxxseat017status;
-		this.daxxxxxxbvxxxxxxxxxxseat018status = daxxxxxxbvxxxxxxxxxxseat018status;
-		this.dexxxxxxbvxxxxxxxxxxseat019status = dexxxxxxbvxxxxxxxxxxseat019status;
-		this.dixxxxxxbvxxxxxxxxxxseat020status = dixxxxxxbvxxxxxxxxxxseat020status;
-		this.dmxxxxxxbvxxxxxxxxxxseat021status = dmxxxxxxbvxxxxxxxxxxseat021status;
-		this.dqxxxxxxbvxxxxxxxxxxseat022status = dqxxxxxxbvxxxxxxxxxxseat022status;
-		this.duxxxxxxbvxxxxxxxxxxseat023status = duxxxxxxbvxxxxxxxxxxseat023status;
-		this.e1xxxxxxbvxxxxxxxxxxseat024status = e1xxxxxxbvxxxxxxxxxxseat024status;
-		this.eaxxxxxxbvxxxxxxxxxxseat025status = eaxxxxxxbvxxxxxxxxxxseat025status;
-		this.efxxxxxxbvxxxxxxxxxxseat026status = efxxxxxxbvxxxxxxxxxxseat026status;
-		this.ejxxxxxxbvxxxxxxxxxxseat027status = ejxxxxxxbvxxxxxxxxxxseat027status;
-		this.enxxxxxxbvxxxxxxxxxxseat028status = enxxxxxxbvxxxxxxxxxxseat028status;
-		this.erxxxxxxbvxxxxxxxxxxseat029status = erxxxxxxbvxxxxxxxxxxseat029status;
-		this.evxxxxxxbvxxxxxxxxxxseat030status = evxxxxxxbvxxxxxxxxxxseat030status;
-		this.faxxxxxxbvxxxxxxxxxxseat031status = faxxxxxxbvxxxxxxxxxxseat031status;
-		this.fexxxxxxbvxxxxxxxxxxseat032status = fexxxxxxbvxxxxxxxxxxseat032status;
-		this.fixxxxxxbvxxxxxxxxxxseat033status = fixxxxxxbvxxxxxxxxxxseat033status;
-		this.fmxxxxxxbvxxxxxxxxxxseat034status = fmxxxxxxbvxxxxxxxxxxseat034status;
-		this.fqxxxxxxbvxxxxxxxxxxseat035status = fqxxxxxxbvxxxxxxxxxxseat035status;
-		this.fuxxxxxxbvxxxxxxxxxxseat036status = fuxxxxxxbvxxxxxxxxxxseat036status;
-		this.gaxxxxxxbvxxxxxxxxxxseat037status = gaxxxxxxbvxxxxxxxxxxseat037status;
-		this.gexxxxxxbvxxxxxxxxxxseat038status = gexxxxxxbvxxxxxxxxxxseat038status;
-		this.gixxxxxxbvxxxxxxxxxxseat039status = gixxxxxxbvxxxxxxxxxxseat039status;
-		this.gmxxxxxxbvxxxxxxxxxxseat040status = gmxxxxxxbvxxxxxxxxxxseat040status;
-		this.gqxxxxxxbvxxxxxxxxxxseat041status = gqxxxxxxbvxxxxxxxxxxseat041status;
-		this.guxxxxxxbvxxxxxxxxxxseat042status = guxxxxxxbvxxxxxxxxxxseat042status;
-		this.haxxxxxxbvxxxxxxxxxxseat043status = haxxxxxxbvxxxxxxxxxxseat043status;
-		this.hexxxxxxbvxxxxxxxxxxseat044status = hexxxxxxbvxxxxxxxxxxseat044status;
-		this.hixxxxxxbvxxxxxxxxxxseat045status = hixxxxxxbvxxxxxxxxxxseat045status;
-		this.hmxxxxxxbvxxxxxxxxxxseat046status = hmxxxxxxbvxxxxxxxxxxseat046status;
-		this.hqxxxxxxbvxxxxxxxxxxseat047status = hqxxxxxxbvxxxxxxxxxxseat047status;
-		this.huxxxxxxbvxxxxxxxxxxseat048status = huxxxxxxbvxxxxxxxxxxseat048status;
-		this.iaxxxxxxbvxxxxxxxxxxseat049status = iaxxxxxxbvxxxxxxxxxxseat049status;
-		this.iexxxxxxbvxxxxxxxxxxseat050status = iexxxxxxbvxxxxxxxxxxseat050status;
-		this.cvxxxxxxbvxxxxxxxxxxname017 = cvxxxxxxbvxxxxxxxxxxname017;
-		this.dbxxxxxxbvxxxxxxxxxxname018 = dbxxxxxxbvxxxxxxxxxxname018;
-		this.dfxxxxxxbvxxxxxxxxxxname019 = dfxxxxxxbvxxxxxxxxxxname019;
-		this.djxxxxxxbvxxxxxxxxxxname020 = djxxxxxxbvxxxxxxxxxxname020;
-		this.dnxxxxxxbvxxxxxxxxxxname021 = dnxxxxxxbvxxxxxxxxxxname021;
-		this.drxxxxxxbvxxxxxxxxxxname022 = drxxxxxxbvxxxxxxxxxxname022;
-		this.dvxxxxxxbvxxxxxxxxxxname023 = dvxxxxxxbvxxxxxxxxxxname023;
-		this.e2xxxxxxbvxxxxxxxxxxname024 = e2xxxxxxbvxxxxxxxxxxname024;
-		this.ebxxxxxxbvxxxxxxxxxxname025 = ebxxxxxxbvxxxxxxxxxxname025;
-		this.egxxxxxxbvxxxxxxxxxxname026 = egxxxxxxbvxxxxxxxxxxname026;
-		this.ekxxxxxxbvxxxxxxxxxxname027 = ekxxxxxxbvxxxxxxxxxxname027;
-		this.eoxxxxxxbvxxxxxxxxxxname028 = eoxxxxxxbvxxxxxxxxxxname028;
-		this.esxxxxxxbvxxxxxxxxxxname029 = esxxxxxxbvxxxxxxxxxxname029;
-		this.ewxxxxxxbvxxxxxxxxxxname030 = ewxxxxxxbvxxxxxxxxxxname030;
-		this.fbxxxxxxbvxxxxxxxxxxname031 = fbxxxxxxbvxxxxxxxxxxname031;
-		this.ffxxxxxxbvxxxxxxxxxxname032 = ffxxxxxxbvxxxxxxxxxxname032;
-		this.fjxxxxxxbvxxxxxxxxxxname033 = fjxxxxxxbvxxxxxxxxxxname033;
-		this.fnxxxxxxbvxxxxxxxxxxname034 = fnxxxxxxbvxxxxxxxxxxname034;
-		this.frxxxxxxbvxxxxxxxxxxname035 = frxxxxxxbvxxxxxxxxxxname035;
-		this.fvxxxxxxbvxxxxxxxxxxname036 = fvxxxxxxbvxxxxxxxxxxname036;
-		this.gbxxxxxxbvxxxxxxxxxxname037 = gbxxxxxxbvxxxxxxxxxxname037;
-		this.gfxxxxxxbvxxxxxxxxxxname038 = gfxxxxxxbvxxxxxxxxxxname038;
-		this.gjxxxxxxbvxxxxxxxxxxname039 = gjxxxxxxbvxxxxxxxxxxname039;
-		this.gnxxxxxxbvxxxxxxxxxxname040 = gnxxxxxxbvxxxxxxxxxxname040;
-		this.grxxxxxxbvxxxxxxxxxxname041 = grxxxxxxbvxxxxxxxxxxname041;
-		this.gvxxxxxxbvxxxxxxxxxxname042 = gvxxxxxxbvxxxxxxxxxxname042;
-		this.hbxxxxxxbvxxxxxxxxxxname043 = hbxxxxxxbvxxxxxxxxxxname043;
-		this.hfxxxxxxbvxxxxxxxxxxname044 = hfxxxxxxbvxxxxxxxxxxname044;
-		this.hjxxxxxxbvxxxxxxxxxxname045 = hjxxxxxxbvxxxxxxxxxxname045;
-		this.hnxxxxxxbvxxxxxxxxxxname046 = hnxxxxxxbvxxxxxxxxxxname046;
-		this.hrxxxxxxbvxxxxxxxxxxname047 = hrxxxxxxbvxxxxxxxxxxname047;
-		this.hvxxxxxxbvxxxxxxxxxxname048 = hvxxxxxxbvxxxxxxxxxxname048;
-		this.ibxxxxxxbvxxxxxxxxxxname049 = ibxxxxxxbvxxxxxxxxxxname049;
-		this.ifxxxxxxbvxxxxxxxxxxname050 = ifxxxxxxbvxxxxxxxxxxname050;
-		this.cxxxxxxxbvxxxxxxxxxxticket017 = cxxxxxxxbvxxxxxxxxxxticket017;
-		this.dcxxxxxxbvxxxxxxxxxxticket018 = dcxxxxxxbvxxxxxxxxxxticket018;
-		this.dgxxxxxxbvxxxxxxxxxxticket019 = dgxxxxxxbvxxxxxxxxxxticket019;
-		this.dkxxxxxxbvxxxxxxxxxxticket020 = dkxxxxxxbvxxxxxxxxxxticket020;
-		this.doxxxxxxbvxxxxxxxxxxticket021 = doxxxxxxbvxxxxxxxxxxticket021;
-		this.dsxxxxxxbvxxxxxxxxxxticket022 = dsxxxxxxbvxxxxxxxxxxticket022;
-		this.dwxxxxxxbvxxxxxxxxxxticket023 = dwxxxxxxbvxxxxxxxxxxticket023;
-		this.e3xxxxxxbvxxxxxxxxxxticket024 = e3xxxxxxbvxxxxxxxxxxticket024;
-		this.ecxxxxxxbvxxxxxxxxxxticket025 = ecxxxxxxbvxxxxxxxxxxticket025;
-		this.ehxxxxxxbvxxxxxxxxxxticket026 = ehxxxxxxbvxxxxxxxxxxticket026;
-		this.elxxxxxxbvxxxxxxxxxxticket027 = elxxxxxxbvxxxxxxxxxxticket027;
-		this.epxxxxxxbvxxxxxxxxxxticket028 = epxxxxxxbvxxxxxxxxxxticket028;
-		this.etxxxxxxbvxxxxxxxxxxticket029 = etxxxxxxbvxxxxxxxxxxticket029;
-		this.exxxxxxxbvxxxxxxxxxxticket030 = exxxxxxxbvxxxxxxxxxxticket030;
-		this.fcxxxxxxbvxxxxxxxxxxticket031 = fcxxxxxxbvxxxxxxxxxxticket031;
-		this.fgxxxxxxbvxxxxxxxxxxticket032 = fgxxxxxxbvxxxxxxxxxxticket032;
-		this.fkxxxxxxbvxxxxxxxxxxticket033 = fkxxxxxxbvxxxxxxxxxxticket033;
-		this.foxxxxxxbvxxxxxxxxxxticket034 = foxxxxxxbvxxxxxxxxxxticket034;
-		this.fsxxxxxxbvxxxxxxxxxxticket035 = fsxxxxxxbvxxxxxxxxxxticket035;
-		this.fwxxxxxxbvxxxxxxxxxxticket036 = fwxxxxxxbvxxxxxxxxxxticket036;
-		this.gcxxxxxxbvxxxxxxxxxxticket037 = gcxxxxxxbvxxxxxxxxxxticket037;
-		this.ggxxxxxxbvxxxxxxxxxxticket038 = ggxxxxxxbvxxxxxxxxxxticket038;
-		this.gkxxxxxxbvxxxxxxxxxxticket039 = gkxxxxxxbvxxxxxxxxxxticket039;
-		this.goxxxxxxbvxxxxxxxxxxticket040 = goxxxxxxbvxxxxxxxxxxticket040;
-		this.gsxxxxxxbvxxxxxxxxxxticket041 = gsxxxxxxbvxxxxxxxxxxticket041;
-		this.gwxxxxxxbvxxxxxxxxxxticket042 = gwxxxxxxbvxxxxxxxxxxticket042;
-		this.hcxxxxxxbvxxxxxxxxxxticket043 = hcxxxxxxbvxxxxxxxxxxticket043;
-		this.hgxxxxxxbvxxxxxxxxxxticket044 = hgxxxxxxbvxxxxxxxxxxticket044;
-		this.hkxxxxxxbvxxxxxxxxxxticket045 = hkxxxxxxbvxxxxxxxxxxticket045;
-		this.hoxxxxxxbvxxxxxxxxxxticket046 = hoxxxxxxbvxxxxxxxxxxticket046;
-		this.hsxxxxxxbvxxxxxxxxxxticket047 = hsxxxxxxbvxxxxxxxxxxticket047;
-		this.hwxxxxxxbvxxxxxxxxxxticket048 = hwxxxxxxbvxxxxxxxxxxticket048;
-		this.icxxxxxxbvxxxxxxxxxxticket049 = icxxxxxxbvxxxxxxxxxxticket049;
-		this.igxxxxxxbvxxxxxxxxxxticket050 = igxxxxxxbvxxxxxxxxxxticket050;
-		this.cyxxxxxxbvxxxxxxxxxxpo017 = cyxxxxxxbvxxxxxxxxxxpo017;
-		this.ddxxxxxxbvxxxxxxxxxxpo018 = ddxxxxxxbvxxxxxxxxxxpo018;
-		this.dhxxxxxxbvxxxxxxxxxxpo019 = dhxxxxxxbvxxxxxxxxxxpo019;
-		this.dlxxxxxxbvxxxxxxxxxxpo020 = dlxxxxxxbvxxxxxxxxxxpo020;
-		this.dpxxxxxxbvxxxxxxxxxxpo021 = dpxxxxxxbvxxxxxxxxxxpo021;
-		this.dtxxxxxxbvxxxxxxxxxxpo022 = dtxxxxxxbvxxxxxxxxxxpo022;
-		this.dxxxxxxxbvxxxxxxxxxxpo023 = dxxxxxxxbvxxxxxxxxxxpo023;
-		this.e4xxxxxxbvxxxxxxxxxxpo024 = e4xxxxxxbvxxxxxxxxxxpo024;
-		this.edxxxxxxbvxxxxxxxxxxpo025 = edxxxxxxbvxxxxxxxxxxpo025;
-		this.eixxxxxxbvxxxxxxxxxxpo026 = eixxxxxxbvxxxxxxxxxxpo026;
-		this.emxxxxxxbvxxxxxxxxxxpo027 = emxxxxxxbvxxxxxxxxxxpo027;
-		this.eqxxxxxxbvxxxxxxxxxxpo028 = eqxxxxxxbvxxxxxxxxxxpo028;
-		this.euxxxxxxbvxxxxxxxxxxpo029 = euxxxxxxbvxxxxxxxxxxpo029;
-		this.eyxxxxxxbvxxxxxxxxxxpo030 = eyxxxxxxbvxxxxxxxxxxpo030;
-		this.fdxxxxxxbvxxxxxxxxxxpo031 = fdxxxxxxbvxxxxxxxxxxpo031;
-		this.fhxxxxxxbvxxxxxxxxxxpo032 = fhxxxxxxbvxxxxxxxxxxpo032;
-		this.flxxxxxxbvxxxxxxxxxxpo033 = flxxxxxxbvxxxxxxxxxxpo033;
-		this.fpxxxxxxbvxxxxxxxxxxpo034 = fpxxxxxxbvxxxxxxxxxxpo034;
-		this.ftxxxxxxbvxxxxxxxxxxpo035 = ftxxxxxxbvxxxxxxxxxxpo035;
-		this.fxxxxxxxbvxxxxxxxxxxpo036 = fxxxxxxxbvxxxxxxxxxxpo036;
-		this.gdxxxxxxbvxxxxxxxxxxpo037 = gdxxxxxxbvxxxxxxxxxxpo037;
-		this.ghxxxxxxbvxxxxxxxxxxpo038 = ghxxxxxxbvxxxxxxxxxxpo038;
-		this.glxxxxxxbvxxxxxxxxxxpo039 = glxxxxxxbvxxxxxxxxxxpo039;
-		this.gpxxxxxxbvxxxxxxxxxxpo040 = gpxxxxxxbvxxxxxxxxxxpo040;
-		this.gtxxxxxxbvxxxxxxxxxxpo041 = gtxxxxxxbvxxxxxxxxxxpo041;
-		this.gxxxxxxxbvxxxxxxxxxxpo042 = gxxxxxxxbvxxxxxxxxxxpo042;
-		this.hdxxxxxxbvxxxxxxxxxxpo043 = hdxxxxxxbvxxxxxxxxxxpo043;
-		this.hhxxxxxxbvxxxxxxxxxxpo044 = hhxxxxxxbvxxxxxxxxxxpo044;
-		this.hlxxxxxxbvxxxxxxxxxxpo045 = hlxxxxxxbvxxxxxxxxxxpo045;
-		this.hpxxxxxxbvxxxxxxxxxxpo046 = hpxxxxxxbvxxxxxxxxxxpo046;
-		this.htxxxxxxbvxxxxxxxxxxpo047 = htxxxxxxbvxxxxxxxxxxpo047;
-		this.hxxxxxxxbvxxxxxxxxxxpo048 = hxxxxxxxbvxxxxxxxxxxpo048;
-		this.idxxxxxxbvxxxxxxxxxxpo049 = idxxxxxxbvxxxxxxxxxxpo049;
-		this.ihxxxxxxbvxxxxxxxxxxpo050 = ihxxxxxxbvxxxxxxxxxxpo050;
 	}
 
 	@Id
@@ -1378,6 +1394,1468 @@ public class Fxxxuq1skxwwqqhxxxxxseat implements java.io.Serializable {
 		this.ctxxxxxxbvxxxxxxxxxxpo016 = ctxxxxxxbvxxxxxxxxxxpo016;
 	}
 
+	@Column(name = "seat017status", length = 1)
+	@Size(max = 1)
+	public String getCuxxxxxxbvxxxxxxxxxxseat017status() {
+		return this.cuxxxxxxbvxxxxxxxxxxseat017status;
+	}
+
+	public void setCuxxxxxxbvxxxxxxxxxxseat017status(
+			String cuxxxxxxbvxxxxxxxxxxseat017status) {
+		this.cuxxxxxxbvxxxxxxxxxxseat017status = cuxxxxxxbvxxxxxxxxxxseat017status;
+	}
+
+	@Column(name = "name017", length = 50)
+	@Size(max = 50)
+	public String getCvxxxxxxbvxxxxxxxxxxname017() {
+		return this.cvxxxxxxbvxxxxxxxxxxname017;
+	}
+
+	public void setCvxxxxxxbvxxxxxxxxxxname017(
+			String cvxxxxxxbvxxxxxxxxxxname017) {
+		this.cvxxxxxxbvxxxxxxxxxxname017 = cvxxxxxxbvxxxxxxxxxxname017;
+	}
+
+	@Column(name = "ticket017", length = 50)
+	@Size(max = 50)
+	public String getCxxxxxxxbvxxxxxxxxxxticket017() {
+		return this.cxxxxxxxbvxxxxxxxxxxticket017;
+	}
+
+	public void setCxxxxxxxbvxxxxxxxxxxticket017(
+			String cxxxxxxxbvxxxxxxxxxxticket017) {
+		this.cxxxxxxxbvxxxxxxxxxxticket017 = cxxxxxxxbvxxxxxxxxxxticket017;
+	}
+
+	@Column(name = "po017", length = 32)
+	@Size(max = 32)
+	public String getCyxxxxxxbvxxxxxxxxxxpo017() {
+		return this.cyxxxxxxbvxxxxxxxxxxpo017;
+	}
+
+	public void setCyxxxxxxbvxxxxxxxxxxpo017(String cyxxxxxxbvxxxxxxxxxxpo017) {
+		this.cyxxxxxxbvxxxxxxxxxxpo017 = cyxxxxxxbvxxxxxxxxxxpo017;
+	}
+
+	@Column(name = "seat018status", length = 1)
+	@Size(max = 1)
+	public String getDaxxxxxxbvxxxxxxxxxxseat018status() {
+		return this.daxxxxxxbvxxxxxxxxxxseat018status;
+	}
+
+	public void setDaxxxxxxbvxxxxxxxxxxseat018status(
+			String daxxxxxxbvxxxxxxxxxxseat018status) {
+		this.daxxxxxxbvxxxxxxxxxxseat018status = daxxxxxxbvxxxxxxxxxxseat018status;
+	}
+
+	@Column(name = "name018", length = 50)
+	@Size(max = 50)
+	public String getDbxxxxxxbvxxxxxxxxxxname018() {
+		return this.dbxxxxxxbvxxxxxxxxxxname018;
+	}
+
+	public void setDbxxxxxxbvxxxxxxxxxxname018(
+			String dbxxxxxxbvxxxxxxxxxxname018) {
+		this.dbxxxxxxbvxxxxxxxxxxname018 = dbxxxxxxbvxxxxxxxxxxname018;
+	}
+
+	@Column(name = "ticket018", length = 50)
+	@Size(max = 50)
+	public String getDcxxxxxxbvxxxxxxxxxxticket018() {
+		return this.dcxxxxxxbvxxxxxxxxxxticket018;
+	}
+
+	public void setDcxxxxxxbvxxxxxxxxxxticket018(
+			String dcxxxxxxbvxxxxxxxxxxticket018) {
+		this.dcxxxxxxbvxxxxxxxxxxticket018 = dcxxxxxxbvxxxxxxxxxxticket018;
+	}
+
+	@Column(name = "po018", length = 32)
+	@Size(max = 32)
+	public String getDdxxxxxxbvxxxxxxxxxxpo018() {
+		return this.ddxxxxxxbvxxxxxxxxxxpo018;
+	}
+
+	public void setDdxxxxxxbvxxxxxxxxxxpo018(String ddxxxxxxbvxxxxxxxxxxpo018) {
+		this.ddxxxxxxbvxxxxxxxxxxpo018 = ddxxxxxxbvxxxxxxxxxxpo018;
+	}
+
+	@Column(name = "seat019status", length = 1)
+	@Size(max = 1)
+	public String getDexxxxxxbvxxxxxxxxxxseat019status() {
+		return this.dexxxxxxbvxxxxxxxxxxseat019status;
+	}
+
+	public void setDexxxxxxbvxxxxxxxxxxseat019status(
+			String dexxxxxxbvxxxxxxxxxxseat019status) {
+		this.dexxxxxxbvxxxxxxxxxxseat019status = dexxxxxxbvxxxxxxxxxxseat019status;
+	}
+
+	@Column(name = "name019", length = 50)
+	@Size(max = 50)
+	public String getDfxxxxxxbvxxxxxxxxxxname019() {
+		return this.dfxxxxxxbvxxxxxxxxxxname019;
+	}
+
+	public void setDfxxxxxxbvxxxxxxxxxxname019(
+			String dfxxxxxxbvxxxxxxxxxxname019) {
+		this.dfxxxxxxbvxxxxxxxxxxname019 = dfxxxxxxbvxxxxxxxxxxname019;
+	}
+
+	@Column(name = "ticket019", length = 50)
+	@Size(max = 50)
+	public String getDgxxxxxxbvxxxxxxxxxxticket019() {
+		return this.dgxxxxxxbvxxxxxxxxxxticket019;
+	}
+
+	public void setDgxxxxxxbvxxxxxxxxxxticket019(
+			String dgxxxxxxbvxxxxxxxxxxticket019) {
+		this.dgxxxxxxbvxxxxxxxxxxticket019 = dgxxxxxxbvxxxxxxxxxxticket019;
+	}
+
+	@Column(name = "po019", length = 32)
+	@Size(max = 32)
+	public String getDhxxxxxxbvxxxxxxxxxxpo019() {
+		return this.dhxxxxxxbvxxxxxxxxxxpo019;
+	}
+
+	public void setDhxxxxxxbvxxxxxxxxxxpo019(String dhxxxxxxbvxxxxxxxxxxpo019) {
+		this.dhxxxxxxbvxxxxxxxxxxpo019 = dhxxxxxxbvxxxxxxxxxxpo019;
+	}
+
+	@Column(name = "seat020status", length = 1)
+	@Size(max = 1)
+	public String getDixxxxxxbvxxxxxxxxxxseat020status() {
+		return this.dixxxxxxbvxxxxxxxxxxseat020status;
+	}
+
+	public void setDixxxxxxbvxxxxxxxxxxseat020status(
+			String dixxxxxxbvxxxxxxxxxxseat020status) {
+		this.dixxxxxxbvxxxxxxxxxxseat020status = dixxxxxxbvxxxxxxxxxxseat020status;
+	}
+
+	@Column(name = "name020", length = 50)
+	@Size(max = 50)
+	public String getDjxxxxxxbvxxxxxxxxxxname020() {
+		return this.djxxxxxxbvxxxxxxxxxxname020;
+	}
+
+	public void setDjxxxxxxbvxxxxxxxxxxname020(
+			String djxxxxxxbvxxxxxxxxxxname020) {
+		this.djxxxxxxbvxxxxxxxxxxname020 = djxxxxxxbvxxxxxxxxxxname020;
+	}
+
+	@Column(name = "ticket020", length = 50)
+	@Size(max = 50)
+	public String getDkxxxxxxbvxxxxxxxxxxticket020() {
+		return this.dkxxxxxxbvxxxxxxxxxxticket020;
+	}
+
+	public void setDkxxxxxxbvxxxxxxxxxxticket020(
+			String dkxxxxxxbvxxxxxxxxxxticket020) {
+		this.dkxxxxxxbvxxxxxxxxxxticket020 = dkxxxxxxbvxxxxxxxxxxticket020;
+	}
+
+	@Column(name = "po020", length = 32)
+	@Size(max = 32)
+	public String getDlxxxxxxbvxxxxxxxxxxpo020() {
+		return this.dlxxxxxxbvxxxxxxxxxxpo020;
+	}
+
+	public void setDlxxxxxxbvxxxxxxxxxxpo020(String dlxxxxxxbvxxxxxxxxxxpo020) {
+		this.dlxxxxxxbvxxxxxxxxxxpo020 = dlxxxxxxbvxxxxxxxxxxpo020;
+	}
+
+	@Column(name = "seat021status", length = 1)
+	@Size(max = 1)
+	public String getDmxxxxxxbvxxxxxxxxxxseat021status() {
+		return this.dmxxxxxxbvxxxxxxxxxxseat021status;
+	}
+
+	public void setDmxxxxxxbvxxxxxxxxxxseat021status(
+			String dmxxxxxxbvxxxxxxxxxxseat021status) {
+		this.dmxxxxxxbvxxxxxxxxxxseat021status = dmxxxxxxbvxxxxxxxxxxseat021status;
+	}
+
+	@Column(name = "name021", length = 50)
+	@Size(max = 50)
+	public String getDnxxxxxxbvxxxxxxxxxxname021() {
+		return this.dnxxxxxxbvxxxxxxxxxxname021;
+	}
+
+	public void setDnxxxxxxbvxxxxxxxxxxname021(
+			String dnxxxxxxbvxxxxxxxxxxname021) {
+		this.dnxxxxxxbvxxxxxxxxxxname021 = dnxxxxxxbvxxxxxxxxxxname021;
+	}
+
+	@Column(name = "ticket021", length = 50)
+	@Size(max = 50)
+	public String getDoxxxxxxbvxxxxxxxxxxticket021() {
+		return this.doxxxxxxbvxxxxxxxxxxticket021;
+	}
+
+	public void setDoxxxxxxbvxxxxxxxxxxticket021(
+			String doxxxxxxbvxxxxxxxxxxticket021) {
+		this.doxxxxxxbvxxxxxxxxxxticket021 = doxxxxxxbvxxxxxxxxxxticket021;
+	}
+
+	@Column(name = "po021", length = 32)
+	@Size(max = 32)
+	public String getDpxxxxxxbvxxxxxxxxxxpo021() {
+		return this.dpxxxxxxbvxxxxxxxxxxpo021;
+	}
+
+	public void setDpxxxxxxbvxxxxxxxxxxpo021(String dpxxxxxxbvxxxxxxxxxxpo021) {
+		this.dpxxxxxxbvxxxxxxxxxxpo021 = dpxxxxxxbvxxxxxxxxxxpo021;
+	}
+
+	@Column(name = "seat022status", length = 1)
+	@Size(max = 1)
+	public String getDqxxxxxxbvxxxxxxxxxxseat022status() {
+		return this.dqxxxxxxbvxxxxxxxxxxseat022status;
+	}
+
+	public void setDqxxxxxxbvxxxxxxxxxxseat022status(
+			String dqxxxxxxbvxxxxxxxxxxseat022status) {
+		this.dqxxxxxxbvxxxxxxxxxxseat022status = dqxxxxxxbvxxxxxxxxxxseat022status;
+	}
+
+	@Column(name = "name022", length = 50)
+	@Size(max = 50)
+	public String getDrxxxxxxbvxxxxxxxxxxname022() {
+		return this.drxxxxxxbvxxxxxxxxxxname022;
+	}
+
+	public void setDrxxxxxxbvxxxxxxxxxxname022(
+			String drxxxxxxbvxxxxxxxxxxname022) {
+		this.drxxxxxxbvxxxxxxxxxxname022 = drxxxxxxbvxxxxxxxxxxname022;
+	}
+
+	@Column(name = "ticket022", length = 50)
+	@Size(max = 50)
+	public String getDsxxxxxxbvxxxxxxxxxxticket022() {
+		return this.dsxxxxxxbvxxxxxxxxxxticket022;
+	}
+
+	public void setDsxxxxxxbvxxxxxxxxxxticket022(
+			String dsxxxxxxbvxxxxxxxxxxticket022) {
+		this.dsxxxxxxbvxxxxxxxxxxticket022 = dsxxxxxxbvxxxxxxxxxxticket022;
+	}
+
+	@Column(name = "po022", length = 32)
+	@Size(max = 32)
+	public String getDtxxxxxxbvxxxxxxxxxxpo022() {
+		return this.dtxxxxxxbvxxxxxxxxxxpo022;
+	}
+
+	public void setDtxxxxxxbvxxxxxxxxxxpo022(String dtxxxxxxbvxxxxxxxxxxpo022) {
+		this.dtxxxxxxbvxxxxxxxxxxpo022 = dtxxxxxxbvxxxxxxxxxxpo022;
+	}
+
+	@Column(name = "seat023status", length = 1)
+	@Size(max = 1)
+	public String getDuxxxxxxbvxxxxxxxxxxseat023status() {
+		return this.duxxxxxxbvxxxxxxxxxxseat023status;
+	}
+
+	public void setDuxxxxxxbvxxxxxxxxxxseat023status(
+			String duxxxxxxbvxxxxxxxxxxseat023status) {
+		this.duxxxxxxbvxxxxxxxxxxseat023status = duxxxxxxbvxxxxxxxxxxseat023status;
+	}
+
+	@Column(name = "name023", length = 50)
+	@Size(max = 50)
+	public String getDvxxxxxxbvxxxxxxxxxxname023() {
+		return this.dvxxxxxxbvxxxxxxxxxxname023;
+	}
+
+	public void setDvxxxxxxbvxxxxxxxxxxname023(
+			String dvxxxxxxbvxxxxxxxxxxname023) {
+		this.dvxxxxxxbvxxxxxxxxxxname023 = dvxxxxxxbvxxxxxxxxxxname023;
+	}
+
+	@Column(name = "ticket023", length = 50)
+	@Size(max = 50)
+	public String getDwxxxxxxbvxxxxxxxxxxticket023() {
+		return this.dwxxxxxxbvxxxxxxxxxxticket023;
+	}
+
+	public void setDwxxxxxxbvxxxxxxxxxxticket023(
+			String dwxxxxxxbvxxxxxxxxxxticket023) {
+		this.dwxxxxxxbvxxxxxxxxxxticket023 = dwxxxxxxbvxxxxxxxxxxticket023;
+	}
+
+	@Column(name = "po023", length = 32)
+	@Size(max = 32)
+	public String getDxxxxxxxbvxxxxxxxxxxpo023() {
+		return this.dxxxxxxxbvxxxxxxxxxxpo023;
+	}
+
+	public void setDxxxxxxxbvxxxxxxxxxxpo023(String dxxxxxxxbvxxxxxxxxxxpo023) {
+		this.dxxxxxxxbvxxxxxxxxxxpo023 = dxxxxxxxbvxxxxxxxxxxpo023;
+	}
+
+	@Column(name = "seat024status", length = 1)
+	@Size(max = 1)
+	public String getE1xxxxxxbvxxxxxxxxxxseat024status() {
+		return this.e1xxxxxxbvxxxxxxxxxxseat024status;
+	}
+
+	public void setE1xxxxxxbvxxxxxxxxxxseat024status(
+			String e1xxxxxxbvxxxxxxxxxxseat024status) {
+		this.e1xxxxxxbvxxxxxxxxxxseat024status = e1xxxxxxbvxxxxxxxxxxseat024status;
+	}
+
+	@Column(name = "name024", length = 50)
+	@Size(max = 50)
+	public String getE2xxxxxxbvxxxxxxxxxxname024() {
+		return this.e2xxxxxxbvxxxxxxxxxxname024;
+	}
+
+	public void setE2xxxxxxbvxxxxxxxxxxname024(
+			String e2xxxxxxbvxxxxxxxxxxname024) {
+		this.e2xxxxxxbvxxxxxxxxxxname024 = e2xxxxxxbvxxxxxxxxxxname024;
+	}
+
+	@Column(name = "ticket024", length = 50)
+	@Size(max = 50)
+	public String getE3xxxxxxbvxxxxxxxxxxticket024() {
+		return this.e3xxxxxxbvxxxxxxxxxxticket024;
+	}
+
+	public void setE3xxxxxxbvxxxxxxxxxxticket024(
+			String e3xxxxxxbvxxxxxxxxxxticket024) {
+		this.e3xxxxxxbvxxxxxxxxxxticket024 = e3xxxxxxbvxxxxxxxxxxticket024;
+	}
+
+	@Column(name = "po024", length = 32)
+	@Size(max = 32)
+	public String getE4xxxxxxbvxxxxxxxxxxpo024() {
+		return this.e4xxxxxxbvxxxxxxxxxxpo024;
+	}
+
+	public void setE4xxxxxxbvxxxxxxxxxxpo024(String e4xxxxxxbvxxxxxxxxxxpo024) {
+		this.e4xxxxxxbvxxxxxxxxxxpo024 = e4xxxxxxbvxxxxxxxxxxpo024;
+	}
+
+	@Column(name = "seat025status", length = 1)
+	@Size(max = 1)
+	public String getEaxxxxxxbvxxxxxxxxxxseat025status() {
+		return this.eaxxxxxxbvxxxxxxxxxxseat025status;
+	}
+
+	public void setEaxxxxxxbvxxxxxxxxxxseat025status(
+			String eaxxxxxxbvxxxxxxxxxxseat025status) {
+		this.eaxxxxxxbvxxxxxxxxxxseat025status = eaxxxxxxbvxxxxxxxxxxseat025status;
+	}
+
+	@Column(name = "name025", length = 50)
+	@Size(max = 50)
+	public String getEbxxxxxxbvxxxxxxxxxxname025() {
+		return this.ebxxxxxxbvxxxxxxxxxxname025;
+	}
+
+	public void setEbxxxxxxbvxxxxxxxxxxname025(
+			String ebxxxxxxbvxxxxxxxxxxname025) {
+		this.ebxxxxxxbvxxxxxxxxxxname025 = ebxxxxxxbvxxxxxxxxxxname025;
+	}
+
+	@Column(name = "ticket025", length = 50)
+	@Size(max = 50)
+	public String getEcxxxxxxbvxxxxxxxxxxticket025() {
+		return this.ecxxxxxxbvxxxxxxxxxxticket025;
+	}
+
+	public void setEcxxxxxxbvxxxxxxxxxxticket025(
+			String ecxxxxxxbvxxxxxxxxxxticket025) {
+		this.ecxxxxxxbvxxxxxxxxxxticket025 = ecxxxxxxbvxxxxxxxxxxticket025;
+	}
+
+	@Column(name = "po025", length = 32)
+	@Size(max = 32)
+	public String getEdxxxxxxbvxxxxxxxxxxpo025() {
+		return this.edxxxxxxbvxxxxxxxxxxpo025;
+	}
+
+	public void setEdxxxxxxbvxxxxxxxxxxpo025(String edxxxxxxbvxxxxxxxxxxpo025) {
+		this.edxxxxxxbvxxxxxxxxxxpo025 = edxxxxxxbvxxxxxxxxxxpo025;
+	}
+
+	@Column(name = "seat026status", length = 1)
+	@Size(max = 1)
+	public String getEfxxxxxxbvxxxxxxxxxxseat026status() {
+		return this.efxxxxxxbvxxxxxxxxxxseat026status;
+	}
+
+	public void setEfxxxxxxbvxxxxxxxxxxseat026status(
+			String efxxxxxxbvxxxxxxxxxxseat026status) {
+		this.efxxxxxxbvxxxxxxxxxxseat026status = efxxxxxxbvxxxxxxxxxxseat026status;
+	}
+
+	@Column(name = "name026", length = 50)
+	@Size(max = 50)
+	public String getEgxxxxxxbvxxxxxxxxxxname026() {
+		return this.egxxxxxxbvxxxxxxxxxxname026;
+	}
+
+	public void setEgxxxxxxbvxxxxxxxxxxname026(
+			String egxxxxxxbvxxxxxxxxxxname026) {
+		this.egxxxxxxbvxxxxxxxxxxname026 = egxxxxxxbvxxxxxxxxxxname026;
+	}
+
+	@Column(name = "ticket026", length = 50)
+	@Size(max = 50)
+	public String getEhxxxxxxbvxxxxxxxxxxticket026() {
+		return this.ehxxxxxxbvxxxxxxxxxxticket026;
+	}
+
+	public void setEhxxxxxxbvxxxxxxxxxxticket026(
+			String ehxxxxxxbvxxxxxxxxxxticket026) {
+		this.ehxxxxxxbvxxxxxxxxxxticket026 = ehxxxxxxbvxxxxxxxxxxticket026;
+	}
+
+	@Column(name = "po026", length = 32)
+	@Size(max = 32)
+	public String getEixxxxxxbvxxxxxxxxxxpo026() {
+		return this.eixxxxxxbvxxxxxxxxxxpo026;
+	}
+
+	public void setEixxxxxxbvxxxxxxxxxxpo026(String eixxxxxxbvxxxxxxxxxxpo026) {
+		this.eixxxxxxbvxxxxxxxxxxpo026 = eixxxxxxbvxxxxxxxxxxpo026;
+	}
+
+	@Column(name = "seat027status", length = 1)
+	@Size(max = 1)
+	public String getEjxxxxxxbvxxxxxxxxxxseat027status() {
+		return this.ejxxxxxxbvxxxxxxxxxxseat027status;
+	}
+
+	public void setEjxxxxxxbvxxxxxxxxxxseat027status(
+			String ejxxxxxxbvxxxxxxxxxxseat027status) {
+		this.ejxxxxxxbvxxxxxxxxxxseat027status = ejxxxxxxbvxxxxxxxxxxseat027status;
+	}
+
+	@Column(name = "name027", length = 50)
+	@Size(max = 50)
+	public String getEkxxxxxxbvxxxxxxxxxxname027() {
+		return this.ekxxxxxxbvxxxxxxxxxxname027;
+	}
+
+	public void setEkxxxxxxbvxxxxxxxxxxname027(
+			String ekxxxxxxbvxxxxxxxxxxname027) {
+		this.ekxxxxxxbvxxxxxxxxxxname027 = ekxxxxxxbvxxxxxxxxxxname027;
+	}
+
+	@Column(name = "ticket027", length = 50)
+	@Size(max = 50)
+	public String getElxxxxxxbvxxxxxxxxxxticket027() {
+		return this.elxxxxxxbvxxxxxxxxxxticket027;
+	}
+
+	public void setElxxxxxxbvxxxxxxxxxxticket027(
+			String elxxxxxxbvxxxxxxxxxxticket027) {
+		this.elxxxxxxbvxxxxxxxxxxticket027 = elxxxxxxbvxxxxxxxxxxticket027;
+	}
+
+	@Column(name = "po027", length = 32)
+	@Size(max = 32)
+	public String getEmxxxxxxbvxxxxxxxxxxpo027() {
+		return this.emxxxxxxbvxxxxxxxxxxpo027;
+	}
+
+	public void setEmxxxxxxbvxxxxxxxxxxpo027(String emxxxxxxbvxxxxxxxxxxpo027) {
+		this.emxxxxxxbvxxxxxxxxxxpo027 = emxxxxxxbvxxxxxxxxxxpo027;
+	}
+
+	@Column(name = "seat028status", length = 1)
+	@Size(max = 1)
+	public String getEnxxxxxxbvxxxxxxxxxxseat028status() {
+		return this.enxxxxxxbvxxxxxxxxxxseat028status;
+	}
+
+	public void setEnxxxxxxbvxxxxxxxxxxseat028status(
+			String enxxxxxxbvxxxxxxxxxxseat028status) {
+		this.enxxxxxxbvxxxxxxxxxxseat028status = enxxxxxxbvxxxxxxxxxxseat028status;
+	}
+
+	@Column(name = "name028", length = 50)
+	@Size(max = 50)
+	public String getEoxxxxxxbvxxxxxxxxxxname028() {
+		return this.eoxxxxxxbvxxxxxxxxxxname028;
+	}
+
+	public void setEoxxxxxxbvxxxxxxxxxxname028(
+			String eoxxxxxxbvxxxxxxxxxxname028) {
+		this.eoxxxxxxbvxxxxxxxxxxname028 = eoxxxxxxbvxxxxxxxxxxname028;
+	}
+
+	@Column(name = "ticket028", length = 50)
+	@Size(max = 50)
+	public String getEpxxxxxxbvxxxxxxxxxxticket028() {
+		return this.epxxxxxxbvxxxxxxxxxxticket028;
+	}
+
+	public void setEpxxxxxxbvxxxxxxxxxxticket028(
+			String epxxxxxxbvxxxxxxxxxxticket028) {
+		this.epxxxxxxbvxxxxxxxxxxticket028 = epxxxxxxbvxxxxxxxxxxticket028;
+	}
+
+	@Column(name = "po028", length = 32)
+	@Size(max = 32)
+	public String getEqxxxxxxbvxxxxxxxxxxpo028() {
+		return this.eqxxxxxxbvxxxxxxxxxxpo028;
+	}
+
+	public void setEqxxxxxxbvxxxxxxxxxxpo028(String eqxxxxxxbvxxxxxxxxxxpo028) {
+		this.eqxxxxxxbvxxxxxxxxxxpo028 = eqxxxxxxbvxxxxxxxxxxpo028;
+	}
+
+	@Column(name = "seat029status", length = 1)
+	@Size(max = 1)
+	public String getErxxxxxxbvxxxxxxxxxxseat029status() {
+		return this.erxxxxxxbvxxxxxxxxxxseat029status;
+	}
+
+	public void setErxxxxxxbvxxxxxxxxxxseat029status(
+			String erxxxxxxbvxxxxxxxxxxseat029status) {
+		this.erxxxxxxbvxxxxxxxxxxseat029status = erxxxxxxbvxxxxxxxxxxseat029status;
+	}
+
+	@Column(name = "name029", length = 50)
+	@Size(max = 50)
+	public String getEsxxxxxxbvxxxxxxxxxxname029() {
+		return this.esxxxxxxbvxxxxxxxxxxname029;
+	}
+
+	public void setEsxxxxxxbvxxxxxxxxxxname029(
+			String esxxxxxxbvxxxxxxxxxxname029) {
+		this.esxxxxxxbvxxxxxxxxxxname029 = esxxxxxxbvxxxxxxxxxxname029;
+	}
+
+	@Column(name = "ticket029", length = 50)
+	@Size(max = 50)
+	public String getEtxxxxxxbvxxxxxxxxxxticket029() {
+		return this.etxxxxxxbvxxxxxxxxxxticket029;
+	}
+
+	public void setEtxxxxxxbvxxxxxxxxxxticket029(
+			String etxxxxxxbvxxxxxxxxxxticket029) {
+		this.etxxxxxxbvxxxxxxxxxxticket029 = etxxxxxxbvxxxxxxxxxxticket029;
+	}
+
+	@Column(name = "po029", length = 32)
+	@Size(max = 32)
+	public String getEuxxxxxxbvxxxxxxxxxxpo029() {
+		return this.euxxxxxxbvxxxxxxxxxxpo029;
+	}
+
+	public void setEuxxxxxxbvxxxxxxxxxxpo029(String euxxxxxxbvxxxxxxxxxxpo029) {
+		this.euxxxxxxbvxxxxxxxxxxpo029 = euxxxxxxbvxxxxxxxxxxpo029;
+	}
+
+	@Column(name = "seat030status", length = 1)
+	@Size(max = 1)
+	public String getEvxxxxxxbvxxxxxxxxxxseat030status() {
+		return this.evxxxxxxbvxxxxxxxxxxseat030status;
+	}
+
+	public void setEvxxxxxxbvxxxxxxxxxxseat030status(
+			String evxxxxxxbvxxxxxxxxxxseat030status) {
+		this.evxxxxxxbvxxxxxxxxxxseat030status = evxxxxxxbvxxxxxxxxxxseat030status;
+	}
+
+	@Column(name = "name030", length = 50)
+	@Size(max = 50)
+	public String getEwxxxxxxbvxxxxxxxxxxname030() {
+		return this.ewxxxxxxbvxxxxxxxxxxname030;
+	}
+
+	public void setEwxxxxxxbvxxxxxxxxxxname030(
+			String ewxxxxxxbvxxxxxxxxxxname030) {
+		this.ewxxxxxxbvxxxxxxxxxxname030 = ewxxxxxxbvxxxxxxxxxxname030;
+	}
+
+	@Column(name = "ticket030", length = 50)
+	@Size(max = 50)
+	public String getExxxxxxxbvxxxxxxxxxxticket030() {
+		return this.exxxxxxxbvxxxxxxxxxxticket030;
+	}
+
+	public void setExxxxxxxbvxxxxxxxxxxticket030(
+			String exxxxxxxbvxxxxxxxxxxticket030) {
+		this.exxxxxxxbvxxxxxxxxxxticket030 = exxxxxxxbvxxxxxxxxxxticket030;
+	}
+
+	@Column(name = "po030", length = 32)
+	@Size(max = 32)
+	public String getEyxxxxxxbvxxxxxxxxxxpo030() {
+		return this.eyxxxxxxbvxxxxxxxxxxpo030;
+	}
+
+	public void setEyxxxxxxbvxxxxxxxxxxpo030(String eyxxxxxxbvxxxxxxxxxxpo030) {
+		this.eyxxxxxxbvxxxxxxxxxxpo030 = eyxxxxxxbvxxxxxxxxxxpo030;
+	}
+
+	@Column(name = "seat031status", length = 1)
+	@Size(max = 1)
+	public String getFaxxxxxxbvxxxxxxxxxxseat031status() {
+		return this.faxxxxxxbvxxxxxxxxxxseat031status;
+	}
+
+	public void setFaxxxxxxbvxxxxxxxxxxseat031status(
+			String faxxxxxxbvxxxxxxxxxxseat031status) {
+		this.faxxxxxxbvxxxxxxxxxxseat031status = faxxxxxxbvxxxxxxxxxxseat031status;
+	}
+
+	@Column(name = "name031", length = 50)
+	@Size(max = 50)
+	public String getFbxxxxxxbvxxxxxxxxxxname031() {
+		return this.fbxxxxxxbvxxxxxxxxxxname031;
+	}
+
+	public void setFbxxxxxxbvxxxxxxxxxxname031(
+			String fbxxxxxxbvxxxxxxxxxxname031) {
+		this.fbxxxxxxbvxxxxxxxxxxname031 = fbxxxxxxbvxxxxxxxxxxname031;
+	}
+
+	@Column(name = "ticket031", length = 50)
+	@Size(max = 50)
+	public String getFcxxxxxxbvxxxxxxxxxxticket031() {
+		return this.fcxxxxxxbvxxxxxxxxxxticket031;
+	}
+
+	public void setFcxxxxxxbvxxxxxxxxxxticket031(
+			String fcxxxxxxbvxxxxxxxxxxticket031) {
+		this.fcxxxxxxbvxxxxxxxxxxticket031 = fcxxxxxxbvxxxxxxxxxxticket031;
+	}
+
+	@Column(name = "po031", length = 32)
+	@Size(max = 32)
+	public String getFdxxxxxxbvxxxxxxxxxxpo031() {
+		return this.fdxxxxxxbvxxxxxxxxxxpo031;
+	}
+
+	public void setFdxxxxxxbvxxxxxxxxxxpo031(String fdxxxxxxbvxxxxxxxxxxpo031) {
+		this.fdxxxxxxbvxxxxxxxxxxpo031 = fdxxxxxxbvxxxxxxxxxxpo031;
+	}
+
+	@Column(name = "seat032status", length = 1)
+	@Size(max = 1)
+	public String getFexxxxxxbvxxxxxxxxxxseat032status() {
+		return this.fexxxxxxbvxxxxxxxxxxseat032status;
+	}
+
+	public void setFexxxxxxbvxxxxxxxxxxseat032status(
+			String fexxxxxxbvxxxxxxxxxxseat032status) {
+		this.fexxxxxxbvxxxxxxxxxxseat032status = fexxxxxxbvxxxxxxxxxxseat032status;
+	}
+
+	@Column(name = "name032", length = 50)
+	@Size(max = 50)
+	public String getFfxxxxxxbvxxxxxxxxxxname032() {
+		return this.ffxxxxxxbvxxxxxxxxxxname032;
+	}
+
+	public void setFfxxxxxxbvxxxxxxxxxxname032(
+			String ffxxxxxxbvxxxxxxxxxxname032) {
+		this.ffxxxxxxbvxxxxxxxxxxname032 = ffxxxxxxbvxxxxxxxxxxname032;
+	}
+
+	@Column(name = "ticket032", length = 50)
+	@Size(max = 50)
+	public String getFgxxxxxxbvxxxxxxxxxxticket032() {
+		return this.fgxxxxxxbvxxxxxxxxxxticket032;
+	}
+
+	public void setFgxxxxxxbvxxxxxxxxxxticket032(
+			String fgxxxxxxbvxxxxxxxxxxticket032) {
+		this.fgxxxxxxbvxxxxxxxxxxticket032 = fgxxxxxxbvxxxxxxxxxxticket032;
+	}
+
+	@Column(name = "po032", length = 32)
+	@Size(max = 32)
+	public String getFhxxxxxxbvxxxxxxxxxxpo032() {
+		return this.fhxxxxxxbvxxxxxxxxxxpo032;
+	}
+
+	public void setFhxxxxxxbvxxxxxxxxxxpo032(String fhxxxxxxbvxxxxxxxxxxpo032) {
+		this.fhxxxxxxbvxxxxxxxxxxpo032 = fhxxxxxxbvxxxxxxxxxxpo032;
+	}
+
+	@Column(name = "seat033status", length = 1)
+	@Size(max = 1)
+	public String getFixxxxxxbvxxxxxxxxxxseat033status() {
+		return this.fixxxxxxbvxxxxxxxxxxseat033status;
+	}
+
+	public void setFixxxxxxbvxxxxxxxxxxseat033status(
+			String fixxxxxxbvxxxxxxxxxxseat033status) {
+		this.fixxxxxxbvxxxxxxxxxxseat033status = fixxxxxxbvxxxxxxxxxxseat033status;
+	}
+
+	@Column(name = "name033", length = 50)
+	@Size(max = 50)
+	public String getFjxxxxxxbvxxxxxxxxxxname033() {
+		return this.fjxxxxxxbvxxxxxxxxxxname033;
+	}
+
+	public void setFjxxxxxxbvxxxxxxxxxxname033(
+			String fjxxxxxxbvxxxxxxxxxxname033) {
+		this.fjxxxxxxbvxxxxxxxxxxname033 = fjxxxxxxbvxxxxxxxxxxname033;
+	}
+
+	@Column(name = "ticket033", length = 50)
+	@Size(max = 50)
+	public String getFkxxxxxxbvxxxxxxxxxxticket033() {
+		return this.fkxxxxxxbvxxxxxxxxxxticket033;
+	}
+
+	public void setFkxxxxxxbvxxxxxxxxxxticket033(
+			String fkxxxxxxbvxxxxxxxxxxticket033) {
+		this.fkxxxxxxbvxxxxxxxxxxticket033 = fkxxxxxxbvxxxxxxxxxxticket033;
+	}
+
+	@Column(name = "po033", length = 32)
+	@Size(max = 32)
+	public String getFlxxxxxxbvxxxxxxxxxxpo033() {
+		return this.flxxxxxxbvxxxxxxxxxxpo033;
+	}
+
+	public void setFlxxxxxxbvxxxxxxxxxxpo033(String flxxxxxxbvxxxxxxxxxxpo033) {
+		this.flxxxxxxbvxxxxxxxxxxpo033 = flxxxxxxbvxxxxxxxxxxpo033;
+	}
+
+	@Column(name = "seat034status", length = 1)
+	@Size(max = 1)
+	public String getFmxxxxxxbvxxxxxxxxxxseat034status() {
+		return this.fmxxxxxxbvxxxxxxxxxxseat034status;
+	}
+
+	public void setFmxxxxxxbvxxxxxxxxxxseat034status(
+			String fmxxxxxxbvxxxxxxxxxxseat034status) {
+		this.fmxxxxxxbvxxxxxxxxxxseat034status = fmxxxxxxbvxxxxxxxxxxseat034status;
+	}
+
+	@Column(name = "name034", length = 50)
+	@Size(max = 50)
+	public String getFnxxxxxxbvxxxxxxxxxxname034() {
+		return this.fnxxxxxxbvxxxxxxxxxxname034;
+	}
+
+	public void setFnxxxxxxbvxxxxxxxxxxname034(
+			String fnxxxxxxbvxxxxxxxxxxname034) {
+		this.fnxxxxxxbvxxxxxxxxxxname034 = fnxxxxxxbvxxxxxxxxxxname034;
+	}
+
+	@Column(name = "ticket034", length = 50)
+	@Size(max = 50)
+	public String getFoxxxxxxbvxxxxxxxxxxticket034() {
+		return this.foxxxxxxbvxxxxxxxxxxticket034;
+	}
+
+	public void setFoxxxxxxbvxxxxxxxxxxticket034(
+			String foxxxxxxbvxxxxxxxxxxticket034) {
+		this.foxxxxxxbvxxxxxxxxxxticket034 = foxxxxxxbvxxxxxxxxxxticket034;
+	}
+
+	@Column(name = "po034", length = 32)
+	@Size(max = 32)
+	public String getFpxxxxxxbvxxxxxxxxxxpo034() {
+		return this.fpxxxxxxbvxxxxxxxxxxpo034;
+	}
+
+	public void setFpxxxxxxbvxxxxxxxxxxpo034(String fpxxxxxxbvxxxxxxxxxxpo034) {
+		this.fpxxxxxxbvxxxxxxxxxxpo034 = fpxxxxxxbvxxxxxxxxxxpo034;
+	}
+
+	@Column(name = "seat035status", length = 1)
+	@Size(max = 1)
+	public String getFqxxxxxxbvxxxxxxxxxxseat035status() {
+		return this.fqxxxxxxbvxxxxxxxxxxseat035status;
+	}
+
+	public void setFqxxxxxxbvxxxxxxxxxxseat035status(
+			String fqxxxxxxbvxxxxxxxxxxseat035status) {
+		this.fqxxxxxxbvxxxxxxxxxxseat035status = fqxxxxxxbvxxxxxxxxxxseat035status;
+	}
+
+	@Column(name = "name035", length = 50)
+	@Size(max = 50)
+	public String getFrxxxxxxbvxxxxxxxxxxname035() {
+		return this.frxxxxxxbvxxxxxxxxxxname035;
+	}
+
+	public void setFrxxxxxxbvxxxxxxxxxxname035(
+			String frxxxxxxbvxxxxxxxxxxname035) {
+		this.frxxxxxxbvxxxxxxxxxxname035 = frxxxxxxbvxxxxxxxxxxname035;
+	}
+
+	@Column(name = "ticket035", length = 50)
+	@Size(max = 50)
+	public String getFsxxxxxxbvxxxxxxxxxxticket035() {
+		return this.fsxxxxxxbvxxxxxxxxxxticket035;
+	}
+
+	public void setFsxxxxxxbvxxxxxxxxxxticket035(
+			String fsxxxxxxbvxxxxxxxxxxticket035) {
+		this.fsxxxxxxbvxxxxxxxxxxticket035 = fsxxxxxxbvxxxxxxxxxxticket035;
+	}
+
+	@Column(name = "po035", length = 32)
+	@Size(max = 32)
+	public String getFtxxxxxxbvxxxxxxxxxxpo035() {
+		return this.ftxxxxxxbvxxxxxxxxxxpo035;
+	}
+
+	public void setFtxxxxxxbvxxxxxxxxxxpo035(String ftxxxxxxbvxxxxxxxxxxpo035) {
+		this.ftxxxxxxbvxxxxxxxxxxpo035 = ftxxxxxxbvxxxxxxxxxxpo035;
+	}
+
+	@Column(name = "seat036status", length = 1)
+	@Size(max = 1)
+	public String getFuxxxxxxbvxxxxxxxxxxseat036status() {
+		return this.fuxxxxxxbvxxxxxxxxxxseat036status;
+	}
+
+	public void setFuxxxxxxbvxxxxxxxxxxseat036status(
+			String fuxxxxxxbvxxxxxxxxxxseat036status) {
+		this.fuxxxxxxbvxxxxxxxxxxseat036status = fuxxxxxxbvxxxxxxxxxxseat036status;
+	}
+
+	@Column(name = "name036", length = 50)
+	@Size(max = 50)
+	public String getFvxxxxxxbvxxxxxxxxxxname036() {
+		return this.fvxxxxxxbvxxxxxxxxxxname036;
+	}
+
+	public void setFvxxxxxxbvxxxxxxxxxxname036(
+			String fvxxxxxxbvxxxxxxxxxxname036) {
+		this.fvxxxxxxbvxxxxxxxxxxname036 = fvxxxxxxbvxxxxxxxxxxname036;
+	}
+
+	@Column(name = "ticket036", length = 50)
+	@Size(max = 50)
+	public String getFwxxxxxxbvxxxxxxxxxxticket036() {
+		return this.fwxxxxxxbvxxxxxxxxxxticket036;
+	}
+
+	public void setFwxxxxxxbvxxxxxxxxxxticket036(
+			String fwxxxxxxbvxxxxxxxxxxticket036) {
+		this.fwxxxxxxbvxxxxxxxxxxticket036 = fwxxxxxxbvxxxxxxxxxxticket036;
+	}
+
+	@Column(name = "po036", length = 32)
+	@Size(max = 32)
+	public String getFxxxxxxxbvxxxxxxxxxxpo036() {
+		return this.fxxxxxxxbvxxxxxxxxxxpo036;
+	}
+
+	public void setFxxxxxxxbvxxxxxxxxxxpo036(String fxxxxxxxbvxxxxxxxxxxpo036) {
+		this.fxxxxxxxbvxxxxxxxxxxpo036 = fxxxxxxxbvxxxxxxxxxxpo036;
+	}
+
+	@Column(name = "seat037status", length = 1)
+	@Size(max = 1)
+	public String getGaxxxxxxbvxxxxxxxxxxseat037status() {
+		return this.gaxxxxxxbvxxxxxxxxxxseat037status;
+	}
+
+	public void setGaxxxxxxbvxxxxxxxxxxseat037status(
+			String gaxxxxxxbvxxxxxxxxxxseat037status) {
+		this.gaxxxxxxbvxxxxxxxxxxseat037status = gaxxxxxxbvxxxxxxxxxxseat037status;
+	}
+
+	@Column(name = "name037", length = 50)
+	@Size(max = 50)
+	public String getGbxxxxxxbvxxxxxxxxxxname037() {
+		return this.gbxxxxxxbvxxxxxxxxxxname037;
+	}
+
+	public void setGbxxxxxxbvxxxxxxxxxxname037(
+			String gbxxxxxxbvxxxxxxxxxxname037) {
+		this.gbxxxxxxbvxxxxxxxxxxname037 = gbxxxxxxbvxxxxxxxxxxname037;
+	}
+
+	@Column(name = "ticket037", length = 50)
+	@Size(max = 50)
+	public String getGcxxxxxxbvxxxxxxxxxxticket037() {
+		return this.gcxxxxxxbvxxxxxxxxxxticket037;
+	}
+
+	public void setGcxxxxxxbvxxxxxxxxxxticket037(
+			String gcxxxxxxbvxxxxxxxxxxticket037) {
+		this.gcxxxxxxbvxxxxxxxxxxticket037 = gcxxxxxxbvxxxxxxxxxxticket037;
+	}
+
+	@Column(name = "po037", length = 32)
+	@Size(max = 32)
+	public String getGdxxxxxxbvxxxxxxxxxxpo037() {
+		return this.gdxxxxxxbvxxxxxxxxxxpo037;
+	}
+
+	public void setGdxxxxxxbvxxxxxxxxxxpo037(String gdxxxxxxbvxxxxxxxxxxpo037) {
+		this.gdxxxxxxbvxxxxxxxxxxpo037 = gdxxxxxxbvxxxxxxxxxxpo037;
+	}
+
+	@Column(name = "seat038status", length = 1)
+	@Size(max = 1)
+	public String getGexxxxxxbvxxxxxxxxxxseat038status() {
+		return this.gexxxxxxbvxxxxxxxxxxseat038status;
+	}
+
+	public void setGexxxxxxbvxxxxxxxxxxseat038status(
+			String gexxxxxxbvxxxxxxxxxxseat038status) {
+		this.gexxxxxxbvxxxxxxxxxxseat038status = gexxxxxxbvxxxxxxxxxxseat038status;
+	}
+
+	@Column(name = "name038", length = 50)
+	@Size(max = 50)
+	public String getGfxxxxxxbvxxxxxxxxxxname038() {
+		return this.gfxxxxxxbvxxxxxxxxxxname038;
+	}
+
+	public void setGfxxxxxxbvxxxxxxxxxxname038(
+			String gfxxxxxxbvxxxxxxxxxxname038) {
+		this.gfxxxxxxbvxxxxxxxxxxname038 = gfxxxxxxbvxxxxxxxxxxname038;
+	}
+
+	@Column(name = "ticket038", length = 50)
+	@Size(max = 50)
+	public String getGgxxxxxxbvxxxxxxxxxxticket038() {
+		return this.ggxxxxxxbvxxxxxxxxxxticket038;
+	}
+
+	public void setGgxxxxxxbvxxxxxxxxxxticket038(
+			String ggxxxxxxbvxxxxxxxxxxticket038) {
+		this.ggxxxxxxbvxxxxxxxxxxticket038 = ggxxxxxxbvxxxxxxxxxxticket038;
+	}
+
+	@Column(name = "po038", length = 32)
+	@Size(max = 32)
+	public String getGhxxxxxxbvxxxxxxxxxxpo038() {
+		return this.ghxxxxxxbvxxxxxxxxxxpo038;
+	}
+
+	public void setGhxxxxxxbvxxxxxxxxxxpo038(String ghxxxxxxbvxxxxxxxxxxpo038) {
+		this.ghxxxxxxbvxxxxxxxxxxpo038 = ghxxxxxxbvxxxxxxxxxxpo038;
+	}
+
+	@Column(name = "seat039status", length = 1)
+	@Size(max = 1)
+	public String getGixxxxxxbvxxxxxxxxxxseat039status() {
+		return this.gixxxxxxbvxxxxxxxxxxseat039status;
+	}
+
+	public void setGixxxxxxbvxxxxxxxxxxseat039status(
+			String gixxxxxxbvxxxxxxxxxxseat039status) {
+		this.gixxxxxxbvxxxxxxxxxxseat039status = gixxxxxxbvxxxxxxxxxxseat039status;
+	}
+
+	@Column(name = "name039", length = 50)
+	@Size(max = 50)
+	public String getGjxxxxxxbvxxxxxxxxxxname039() {
+		return this.gjxxxxxxbvxxxxxxxxxxname039;
+	}
+
+	public void setGjxxxxxxbvxxxxxxxxxxname039(
+			String gjxxxxxxbvxxxxxxxxxxname039) {
+		this.gjxxxxxxbvxxxxxxxxxxname039 = gjxxxxxxbvxxxxxxxxxxname039;
+	}
+
+	@Column(name = "ticket039", length = 50)
+	@Size(max = 50)
+	public String getGkxxxxxxbvxxxxxxxxxxticket039() {
+		return this.gkxxxxxxbvxxxxxxxxxxticket039;
+	}
+
+	public void setGkxxxxxxbvxxxxxxxxxxticket039(
+			String gkxxxxxxbvxxxxxxxxxxticket039) {
+		this.gkxxxxxxbvxxxxxxxxxxticket039 = gkxxxxxxbvxxxxxxxxxxticket039;
+	}
+
+	@Column(name = "po039", length = 32)
+	@Size(max = 32)
+	public String getGlxxxxxxbvxxxxxxxxxxpo039() {
+		return this.glxxxxxxbvxxxxxxxxxxpo039;
+	}
+
+	public void setGlxxxxxxbvxxxxxxxxxxpo039(String glxxxxxxbvxxxxxxxxxxpo039) {
+		this.glxxxxxxbvxxxxxxxxxxpo039 = glxxxxxxbvxxxxxxxxxxpo039;
+	}
+
+	@Column(name = "seat040status", length = 1)
+	@Size(max = 1)
+	public String getGmxxxxxxbvxxxxxxxxxxseat040status() {
+		return this.gmxxxxxxbvxxxxxxxxxxseat040status;
+	}
+
+	public void setGmxxxxxxbvxxxxxxxxxxseat040status(
+			String gmxxxxxxbvxxxxxxxxxxseat040status) {
+		this.gmxxxxxxbvxxxxxxxxxxseat040status = gmxxxxxxbvxxxxxxxxxxseat040status;
+	}
+
+	@Column(name = "name040", length = 50)
+	@Size(max = 50)
+	public String getGnxxxxxxbvxxxxxxxxxxname040() {
+		return this.gnxxxxxxbvxxxxxxxxxxname040;
+	}
+
+	public void setGnxxxxxxbvxxxxxxxxxxname040(
+			String gnxxxxxxbvxxxxxxxxxxname040) {
+		this.gnxxxxxxbvxxxxxxxxxxname040 = gnxxxxxxbvxxxxxxxxxxname040;
+	}
+
+	@Column(name = "ticket040", length = 50)
+	@Size(max = 50)
+	public String getGoxxxxxxbvxxxxxxxxxxticket040() {
+		return this.goxxxxxxbvxxxxxxxxxxticket040;
+	}
+
+	public void setGoxxxxxxbvxxxxxxxxxxticket040(
+			String goxxxxxxbvxxxxxxxxxxticket040) {
+		this.goxxxxxxbvxxxxxxxxxxticket040 = goxxxxxxbvxxxxxxxxxxticket040;
+	}
+
+	@Column(name = "po040", length = 32)
+	@Size(max = 32)
+	public String getGpxxxxxxbvxxxxxxxxxxpo040() {
+		return this.gpxxxxxxbvxxxxxxxxxxpo040;
+	}
+
+	public void setGpxxxxxxbvxxxxxxxxxxpo040(String gpxxxxxxbvxxxxxxxxxxpo040) {
+		this.gpxxxxxxbvxxxxxxxxxxpo040 = gpxxxxxxbvxxxxxxxxxxpo040;
+	}
+
+	@Column(name = "seat041status", length = 1)
+	@Size(max = 1)
+	public String getGqxxxxxxbvxxxxxxxxxxseat041status() {
+		return this.gqxxxxxxbvxxxxxxxxxxseat041status;
+	}
+
+	public void setGqxxxxxxbvxxxxxxxxxxseat041status(
+			String gqxxxxxxbvxxxxxxxxxxseat041status) {
+		this.gqxxxxxxbvxxxxxxxxxxseat041status = gqxxxxxxbvxxxxxxxxxxseat041status;
+	}
+
+	@Column(name = "name041", length = 50)
+	@Size(max = 50)
+	public String getGrxxxxxxbvxxxxxxxxxxname041() {
+		return this.grxxxxxxbvxxxxxxxxxxname041;
+	}
+
+	public void setGrxxxxxxbvxxxxxxxxxxname041(
+			String grxxxxxxbvxxxxxxxxxxname041) {
+		this.grxxxxxxbvxxxxxxxxxxname041 = grxxxxxxbvxxxxxxxxxxname041;
+	}
+
+	@Column(name = "ticket041", length = 50)
+	@Size(max = 50)
+	public String getGsxxxxxxbvxxxxxxxxxxticket041() {
+		return this.gsxxxxxxbvxxxxxxxxxxticket041;
+	}
+
+	public void setGsxxxxxxbvxxxxxxxxxxticket041(
+			String gsxxxxxxbvxxxxxxxxxxticket041) {
+		this.gsxxxxxxbvxxxxxxxxxxticket041 = gsxxxxxxbvxxxxxxxxxxticket041;
+	}
+
+	@Column(name = "po041", length = 32)
+	@Size(max = 32)
+	public String getGtxxxxxxbvxxxxxxxxxxpo041() {
+		return this.gtxxxxxxbvxxxxxxxxxxpo041;
+	}
+
+	public void setGtxxxxxxbvxxxxxxxxxxpo041(String gtxxxxxxbvxxxxxxxxxxpo041) {
+		this.gtxxxxxxbvxxxxxxxxxxpo041 = gtxxxxxxbvxxxxxxxxxxpo041;
+	}
+
+	@Column(name = "seat042status", length = 1)
+	@Size(max = 1)
+	public String getGuxxxxxxbvxxxxxxxxxxseat042status() {
+		return this.guxxxxxxbvxxxxxxxxxxseat042status;
+	}
+
+	public void setGuxxxxxxbvxxxxxxxxxxseat042status(
+			String guxxxxxxbvxxxxxxxxxxseat042status) {
+		this.guxxxxxxbvxxxxxxxxxxseat042status = guxxxxxxbvxxxxxxxxxxseat042status;
+	}
+
+	@Column(name = "name042", length = 50)
+	@Size(max = 50)
+	public String getGvxxxxxxbvxxxxxxxxxxname042() {
+		return this.gvxxxxxxbvxxxxxxxxxxname042;
+	}
+
+	public void setGvxxxxxxbvxxxxxxxxxxname042(
+			String gvxxxxxxbvxxxxxxxxxxname042) {
+		this.gvxxxxxxbvxxxxxxxxxxname042 = gvxxxxxxbvxxxxxxxxxxname042;
+	}
+
+	@Column(name = "ticket042", length = 50)
+	@Size(max = 50)
+	public String getGwxxxxxxbvxxxxxxxxxxticket042() {
+		return this.gwxxxxxxbvxxxxxxxxxxticket042;
+	}
+
+	public void setGwxxxxxxbvxxxxxxxxxxticket042(
+			String gwxxxxxxbvxxxxxxxxxxticket042) {
+		this.gwxxxxxxbvxxxxxxxxxxticket042 = gwxxxxxxbvxxxxxxxxxxticket042;
+	}
+
+	@Column(name = "po042", length = 32)
+	@Size(max = 32)
+	public String getGxxxxxxxbvxxxxxxxxxxpo042() {
+		return this.gxxxxxxxbvxxxxxxxxxxpo042;
+	}
+
+	public void setGxxxxxxxbvxxxxxxxxxxpo042(String gxxxxxxxbvxxxxxxxxxxpo042) {
+		this.gxxxxxxxbvxxxxxxxxxxpo042 = gxxxxxxxbvxxxxxxxxxxpo042;
+	}
+
+	@Column(name = "seat043status", length = 1)
+	@Size(max = 1)
+	public String getHaxxxxxxbvxxxxxxxxxxseat043status() {
+		return this.haxxxxxxbvxxxxxxxxxxseat043status;
+	}
+
+	public void setHaxxxxxxbvxxxxxxxxxxseat043status(
+			String haxxxxxxbvxxxxxxxxxxseat043status) {
+		this.haxxxxxxbvxxxxxxxxxxseat043status = haxxxxxxbvxxxxxxxxxxseat043status;
+	}
+
+	@Column(name = "name043", length = 50)
+	@Size(max = 50)
+	public String getHbxxxxxxbvxxxxxxxxxxname043() {
+		return this.hbxxxxxxbvxxxxxxxxxxname043;
+	}
+
+	public void setHbxxxxxxbvxxxxxxxxxxname043(
+			String hbxxxxxxbvxxxxxxxxxxname043) {
+		this.hbxxxxxxbvxxxxxxxxxxname043 = hbxxxxxxbvxxxxxxxxxxname043;
+	}
+
+	@Column(name = "ticket043", length = 50)
+	@Size(max = 50)
+	public String getHcxxxxxxbvxxxxxxxxxxticket043() {
+		return this.hcxxxxxxbvxxxxxxxxxxticket043;
+	}
+
+	public void setHcxxxxxxbvxxxxxxxxxxticket043(
+			String hcxxxxxxbvxxxxxxxxxxticket043) {
+		this.hcxxxxxxbvxxxxxxxxxxticket043 = hcxxxxxxbvxxxxxxxxxxticket043;
+	}
+
+	@Column(name = "po043", length = 32)
+	@Size(max = 32)
+	public String getHdxxxxxxbvxxxxxxxxxxpo043() {
+		return this.hdxxxxxxbvxxxxxxxxxxpo043;
+	}
+
+	public void setHdxxxxxxbvxxxxxxxxxxpo043(String hdxxxxxxbvxxxxxxxxxxpo043) {
+		this.hdxxxxxxbvxxxxxxxxxxpo043 = hdxxxxxxbvxxxxxxxxxxpo043;
+	}
+
+	@Column(name = "seat044status", length = 1)
+	@Size(max = 1)
+	public String getHexxxxxxbvxxxxxxxxxxseat044status() {
+		return this.hexxxxxxbvxxxxxxxxxxseat044status;
+	}
+
+	public void setHexxxxxxbvxxxxxxxxxxseat044status(
+			String hexxxxxxbvxxxxxxxxxxseat044status) {
+		this.hexxxxxxbvxxxxxxxxxxseat044status = hexxxxxxbvxxxxxxxxxxseat044status;
+	}
+
+	@Column(name = "name044", length = 50)
+	@Size(max = 50)
+	public String getHfxxxxxxbvxxxxxxxxxxname044() {
+		return this.hfxxxxxxbvxxxxxxxxxxname044;
+	}
+
+	public void setHfxxxxxxbvxxxxxxxxxxname044(
+			String hfxxxxxxbvxxxxxxxxxxname044) {
+		this.hfxxxxxxbvxxxxxxxxxxname044 = hfxxxxxxbvxxxxxxxxxxname044;
+	}
+
+	@Column(name = "ticket044", length = 50)
+	@Size(max = 50)
+	public String getHgxxxxxxbvxxxxxxxxxxticket044() {
+		return this.hgxxxxxxbvxxxxxxxxxxticket044;
+	}
+
+	public void setHgxxxxxxbvxxxxxxxxxxticket044(
+			String hgxxxxxxbvxxxxxxxxxxticket044) {
+		this.hgxxxxxxbvxxxxxxxxxxticket044 = hgxxxxxxbvxxxxxxxxxxticket044;
+	}
+
+	@Column(name = "po044", length = 32)
+	@Size(max = 32)
+	public String getHhxxxxxxbvxxxxxxxxxxpo044() {
+		return this.hhxxxxxxbvxxxxxxxxxxpo044;
+	}
+
+	public void setHhxxxxxxbvxxxxxxxxxxpo044(String hhxxxxxxbvxxxxxxxxxxpo044) {
+		this.hhxxxxxxbvxxxxxxxxxxpo044 = hhxxxxxxbvxxxxxxxxxxpo044;
+	}
+
+	@Column(name = "seat045status", length = 1)
+	@Size(max = 1)
+	public String getHixxxxxxbvxxxxxxxxxxseat045status() {
+		return this.hixxxxxxbvxxxxxxxxxxseat045status;
+	}
+
+	public void setHixxxxxxbvxxxxxxxxxxseat045status(
+			String hixxxxxxbvxxxxxxxxxxseat045status) {
+		this.hixxxxxxbvxxxxxxxxxxseat045status = hixxxxxxbvxxxxxxxxxxseat045status;
+	}
+
+	@Column(name = "name045", length = 50)
+	@Size(max = 50)
+	public String getHjxxxxxxbvxxxxxxxxxxname045() {
+		return this.hjxxxxxxbvxxxxxxxxxxname045;
+	}
+
+	public void setHjxxxxxxbvxxxxxxxxxxname045(
+			String hjxxxxxxbvxxxxxxxxxxname045) {
+		this.hjxxxxxxbvxxxxxxxxxxname045 = hjxxxxxxbvxxxxxxxxxxname045;
+	}
+
+	@Column(name = "ticket045", length = 50)
+	@Size(max = 50)
+	public String getHkxxxxxxbvxxxxxxxxxxticket045() {
+		return this.hkxxxxxxbvxxxxxxxxxxticket045;
+	}
+
+	public void setHkxxxxxxbvxxxxxxxxxxticket045(
+			String hkxxxxxxbvxxxxxxxxxxticket045) {
+		this.hkxxxxxxbvxxxxxxxxxxticket045 = hkxxxxxxbvxxxxxxxxxxticket045;
+	}
+
+	@Column(name = "po045", length = 32)
+	@Size(max = 32)
+	public String getHlxxxxxxbvxxxxxxxxxxpo045() {
+		return this.hlxxxxxxbvxxxxxxxxxxpo045;
+	}
+
+	public void setHlxxxxxxbvxxxxxxxxxxpo045(String hlxxxxxxbvxxxxxxxxxxpo045) {
+		this.hlxxxxxxbvxxxxxxxxxxpo045 = hlxxxxxxbvxxxxxxxxxxpo045;
+	}
+
+	@Column(name = "seat046status", length = 1)
+	@Size(max = 1)
+	public String getHmxxxxxxbvxxxxxxxxxxseat046status() {
+		return this.hmxxxxxxbvxxxxxxxxxxseat046status;
+	}
+
+	public void setHmxxxxxxbvxxxxxxxxxxseat046status(
+			String hmxxxxxxbvxxxxxxxxxxseat046status) {
+		this.hmxxxxxxbvxxxxxxxxxxseat046status = hmxxxxxxbvxxxxxxxxxxseat046status;
+	}
+
+	@Column(name = "name046", length = 50)
+	@Size(max = 50)
+	public String getHnxxxxxxbvxxxxxxxxxxname046() {
+		return this.hnxxxxxxbvxxxxxxxxxxname046;
+	}
+
+	public void setHnxxxxxxbvxxxxxxxxxxname046(
+			String hnxxxxxxbvxxxxxxxxxxname046) {
+		this.hnxxxxxxbvxxxxxxxxxxname046 = hnxxxxxxbvxxxxxxxxxxname046;
+	}
+
+	@Column(name = "ticket046", length = 50)
+	@Size(max = 50)
+	public String getHoxxxxxxbvxxxxxxxxxxticket046() {
+		return this.hoxxxxxxbvxxxxxxxxxxticket046;
+	}
+
+	public void setHoxxxxxxbvxxxxxxxxxxticket046(
+			String hoxxxxxxbvxxxxxxxxxxticket046) {
+		this.hoxxxxxxbvxxxxxxxxxxticket046 = hoxxxxxxbvxxxxxxxxxxticket046;
+	}
+
+	@Column(name = "po046", length = 32)
+	@Size(max = 32)
+	public String getHpxxxxxxbvxxxxxxxxxxpo046() {
+		return this.hpxxxxxxbvxxxxxxxxxxpo046;
+	}
+
+	public void setHpxxxxxxbvxxxxxxxxxxpo046(String hpxxxxxxbvxxxxxxxxxxpo046) {
+		this.hpxxxxxxbvxxxxxxxxxxpo046 = hpxxxxxxbvxxxxxxxxxxpo046;
+	}
+
+	@Column(name = "seat047status", length = 1)
+	@Size(max = 1)
+	public String getHqxxxxxxbvxxxxxxxxxxseat047status() {
+		return this.hqxxxxxxbvxxxxxxxxxxseat047status;
+	}
+
+	public void setHqxxxxxxbvxxxxxxxxxxseat047status(
+			String hqxxxxxxbvxxxxxxxxxxseat047status) {
+		this.hqxxxxxxbvxxxxxxxxxxseat047status = hqxxxxxxbvxxxxxxxxxxseat047status;
+	}
+
+	@Column(name = "name047", length = 50)
+	@Size(max = 50)
+	public String getHrxxxxxxbvxxxxxxxxxxname047() {
+		return this.hrxxxxxxbvxxxxxxxxxxname047;
+	}
+
+	public void setHrxxxxxxbvxxxxxxxxxxname047(
+			String hrxxxxxxbvxxxxxxxxxxname047) {
+		this.hrxxxxxxbvxxxxxxxxxxname047 = hrxxxxxxbvxxxxxxxxxxname047;
+	}
+
+	@Column(name = "ticket047", length = 50)
+	@Size(max = 50)
+	public String getHsxxxxxxbvxxxxxxxxxxticket047() {
+		return this.hsxxxxxxbvxxxxxxxxxxticket047;
+	}
+
+	public void setHsxxxxxxbvxxxxxxxxxxticket047(
+			String hsxxxxxxbvxxxxxxxxxxticket047) {
+		this.hsxxxxxxbvxxxxxxxxxxticket047 = hsxxxxxxbvxxxxxxxxxxticket047;
+	}
+
+	@Column(name = "po047", length = 32)
+	@Size(max = 32)
+	public String getHtxxxxxxbvxxxxxxxxxxpo047() {
+		return this.htxxxxxxbvxxxxxxxxxxpo047;
+	}
+
+	public void setHtxxxxxxbvxxxxxxxxxxpo047(String htxxxxxxbvxxxxxxxxxxpo047) {
+		this.htxxxxxxbvxxxxxxxxxxpo047 = htxxxxxxbvxxxxxxxxxxpo047;
+	}
+
+	@Column(name = "seat048status", length = 1)
+	@Size(max = 1)
+	public String getHuxxxxxxbvxxxxxxxxxxseat048status() {
+		return this.huxxxxxxbvxxxxxxxxxxseat048status;
+	}
+
+	public void setHuxxxxxxbvxxxxxxxxxxseat048status(
+			String huxxxxxxbvxxxxxxxxxxseat048status) {
+		this.huxxxxxxbvxxxxxxxxxxseat048status = huxxxxxxbvxxxxxxxxxxseat048status;
+	}
+
+	@Column(name = "name048", length = 50)
+	@Size(max = 50)
+	public String getHvxxxxxxbvxxxxxxxxxxname048() {
+		return this.hvxxxxxxbvxxxxxxxxxxname048;
+	}
+
+	public void setHvxxxxxxbvxxxxxxxxxxname048(
+			String hvxxxxxxbvxxxxxxxxxxname048) {
+		this.hvxxxxxxbvxxxxxxxxxxname048 = hvxxxxxxbvxxxxxxxxxxname048;
+	}
+
+	@Column(name = "ticket048", length = 50)
+	@Size(max = 50)
+	public String getHwxxxxxxbvxxxxxxxxxxticket048() {
+		return this.hwxxxxxxbvxxxxxxxxxxticket048;
+	}
+
+	public void setHwxxxxxxbvxxxxxxxxxxticket048(
+			String hwxxxxxxbvxxxxxxxxxxticket048) {
+		this.hwxxxxxxbvxxxxxxxxxxticket048 = hwxxxxxxbvxxxxxxxxxxticket048;
+	}
+
+	@Column(name = "po048", length = 32)
+	@Size(max = 32)
+	public String getHxxxxxxxbvxxxxxxxxxxpo048() {
+		return this.hxxxxxxxbvxxxxxxxxxxpo048;
+	}
+
+	public void setHxxxxxxxbvxxxxxxxxxxpo048(String hxxxxxxxbvxxxxxxxxxxpo048) {
+		this.hxxxxxxxbvxxxxxxxxxxpo048 = hxxxxxxxbvxxxxxxxxxxpo048;
+	}
+
+	@Column(name = "seat049status", length = 1)
+	@Size(max = 1)
+	public String getIaxxxxxxbvxxxxxxxxxxseat049status() {
+		return this.iaxxxxxxbvxxxxxxxxxxseat049status;
+	}
+
+	public void setIaxxxxxxbvxxxxxxxxxxseat049status(
+			String iaxxxxxxbvxxxxxxxxxxseat049status) {
+		this.iaxxxxxxbvxxxxxxxxxxseat049status = iaxxxxxxbvxxxxxxxxxxseat049status;
+	}
+
+	@Column(name = "name049", length = 50)
+	@Size(max = 50)
+	public String getIbxxxxxxbvxxxxxxxxxxname049() {
+		return this.ibxxxxxxbvxxxxxxxxxxname049;
+	}
+
+	public void setIbxxxxxxbvxxxxxxxxxxname049(
+			String ibxxxxxxbvxxxxxxxxxxname049) {
+		this.ibxxxxxxbvxxxxxxxxxxname049 = ibxxxxxxbvxxxxxxxxxxname049;
+	}
+
+	@Column(name = "ticket049", length = 50)
+	@Size(max = 50)
+	public String getIcxxxxxxbvxxxxxxxxxxticket049() {
+		return this.icxxxxxxbvxxxxxxxxxxticket049;
+	}
+
+	public void setIcxxxxxxbvxxxxxxxxxxticket049(
+			String icxxxxxxbvxxxxxxxxxxticket049) {
+		this.icxxxxxxbvxxxxxxxxxxticket049 = icxxxxxxbvxxxxxxxxxxticket049;
+	}
+
+	@Column(name = "po049", length = 32)
+	@Size(max = 32)
+	public String getIdxxxxxxbvxxxxxxxxxxpo049() {
+		return this.idxxxxxxbvxxxxxxxxxxpo049;
+	}
+
+	public void setIdxxxxxxbvxxxxxxxxxxpo049(String idxxxxxxbvxxxxxxxxxxpo049) {
+		this.idxxxxxxbvxxxxxxxxxxpo049 = idxxxxxxbvxxxxxxxxxxpo049;
+	}
+
+	@Column(name = "seat050status", length = 1)
+	@Size(max = 1)
+	public String getIexxxxxxbvxxxxxxxxxxseat050status() {
+		return this.iexxxxxxbvxxxxxxxxxxseat050status;
+	}
+
+	public void setIexxxxxxbvxxxxxxxxxxseat050status(
+			String iexxxxxxbvxxxxxxxxxxseat050status) {
+		this.iexxxxxxbvxxxxxxxxxxseat050status = iexxxxxxbvxxxxxxxxxxseat050status;
+	}
+
+	@Column(name = "name050", length = 50)
+	@Size(max = 50)
+	public String getIfxxxxxxbvxxxxxxxxxxname050() {
+		return this.ifxxxxxxbvxxxxxxxxxxname050;
+	}
+
+	public void setIfxxxxxxbvxxxxxxxxxxname050(
+			String ifxxxxxxbvxxxxxxxxxxname050) {
+		this.ifxxxxxxbvxxxxxxxxxxname050 = ifxxxxxxbvxxxxxxxxxxname050;
+	}
+
+	@Column(name = "ticket050", length = 50)
+	@Size(max = 50)
+	public String getIgxxxxxxbvxxxxxxxxxxticket050() {
+		return this.igxxxxxxbvxxxxxxxxxxticket050;
+	}
+
+	public void setIgxxxxxxbvxxxxxxxxxxticket050(
+			String igxxxxxxbvxxxxxxxxxxticket050) {
+		this.igxxxxxxbvxxxxxxxxxxticket050 = igxxxxxxbvxxxxxxxxxxticket050;
+	}
+
+	@Column(name = "po050", length = 32)
+	@Size(max = 32)
+	public String getIhxxxxxxbvxxxxxxxxxxpo050() {
+		return this.ihxxxxxxbvxxxxxxxxxxpo050;
+	}
+
+	public void setIhxxxxxxbvxxxxxxxxxxpo050(String ihxxxxxxbvxxxxxxxxxxpo050) {
+		this.ihxxxxxxbvxxxxxxxxxxpo050 = ihxxxxxxbvxxxxxxxxxxpo050;
+	}
+
 	@Column(name = "statusfl")
 	public Integer getZixxzzfxhhxxxxxxxxxxstatusfl() {
 		return this.zixxzzfxhhxxxxxxxxxxstatusfl;
@@ -1417,1468 +2895,6 @@ public class Fxxxuq1skxwwqqhxxxxxseat implements java.io.Serializable {
 
 	public void setZzxxu2oxxhxxxxxxxxxxowner2(String zzxxu2oxxhxxxxxxxxxxowner2) {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
-	}
-
-	@Column(name = "seat017status", length = 1)
-	@Size(max = 1)
-	public String getCuxxxxxxbvxxxxxxxxxxseat017status() {
-		return this.cuxxxxxxbvxxxxxxxxxxseat017status;
-	}
-
-	public void setCuxxxxxxbvxxxxxxxxxxseat017status(
-			String cuxxxxxxbvxxxxxxxxxxseat017status) {
-		this.cuxxxxxxbvxxxxxxxxxxseat017status = cuxxxxxxbvxxxxxxxxxxseat017status;
-	}
-
-	@Column(name = "seat018status", length = 1)
-	@Size(max = 1)
-	public String getDaxxxxxxbvxxxxxxxxxxseat018status() {
-		return this.daxxxxxxbvxxxxxxxxxxseat018status;
-	}
-
-	public void setDaxxxxxxbvxxxxxxxxxxseat018status(
-			String daxxxxxxbvxxxxxxxxxxseat018status) {
-		this.daxxxxxxbvxxxxxxxxxxseat018status = daxxxxxxbvxxxxxxxxxxseat018status;
-	}
-
-	@Column(name = "seat019status", length = 1)
-	@Size(max = 1)
-	public String getDexxxxxxbvxxxxxxxxxxseat019status() {
-		return this.dexxxxxxbvxxxxxxxxxxseat019status;
-	}
-
-	public void setDexxxxxxbvxxxxxxxxxxseat019status(
-			String dexxxxxxbvxxxxxxxxxxseat019status) {
-		this.dexxxxxxbvxxxxxxxxxxseat019status = dexxxxxxbvxxxxxxxxxxseat019status;
-	}
-
-	@Column(name = "seat020status", length = 1)
-	@Size(max = 1)
-	public String getDixxxxxxbvxxxxxxxxxxseat020status() {
-		return this.dixxxxxxbvxxxxxxxxxxseat020status;
-	}
-
-	public void setDixxxxxxbvxxxxxxxxxxseat020status(
-			String dixxxxxxbvxxxxxxxxxxseat020status) {
-		this.dixxxxxxbvxxxxxxxxxxseat020status = dixxxxxxbvxxxxxxxxxxseat020status;
-	}
-
-	@Column(name = "seat021status", length = 1)
-	@Size(max = 1)
-	public String getDmxxxxxxbvxxxxxxxxxxseat021status() {
-		return this.dmxxxxxxbvxxxxxxxxxxseat021status;
-	}
-
-	public void setDmxxxxxxbvxxxxxxxxxxseat021status(
-			String dmxxxxxxbvxxxxxxxxxxseat021status) {
-		this.dmxxxxxxbvxxxxxxxxxxseat021status = dmxxxxxxbvxxxxxxxxxxseat021status;
-	}
-
-	@Column(name = "seat022status", length = 1)
-	@Size(max = 1)
-	public String getDqxxxxxxbvxxxxxxxxxxseat022status() {
-		return this.dqxxxxxxbvxxxxxxxxxxseat022status;
-	}
-
-	public void setDqxxxxxxbvxxxxxxxxxxseat022status(
-			String dqxxxxxxbvxxxxxxxxxxseat022status) {
-		this.dqxxxxxxbvxxxxxxxxxxseat022status = dqxxxxxxbvxxxxxxxxxxseat022status;
-	}
-
-	@Column(name = "seat023status", length = 1)
-	@Size(max = 1)
-	public String getDuxxxxxxbvxxxxxxxxxxseat023status() {
-		return this.duxxxxxxbvxxxxxxxxxxseat023status;
-	}
-
-	public void setDuxxxxxxbvxxxxxxxxxxseat023status(
-			String duxxxxxxbvxxxxxxxxxxseat023status) {
-		this.duxxxxxxbvxxxxxxxxxxseat023status = duxxxxxxbvxxxxxxxxxxseat023status;
-	}
-
-	@Column(name = "seat024status", length = 1)
-	@Size(max = 1)
-	public String getE1xxxxxxbvxxxxxxxxxxseat024status() {
-		return this.e1xxxxxxbvxxxxxxxxxxseat024status;
-	}
-
-	public void setE1xxxxxxbvxxxxxxxxxxseat024status(
-			String e1xxxxxxbvxxxxxxxxxxseat024status) {
-		this.e1xxxxxxbvxxxxxxxxxxseat024status = e1xxxxxxbvxxxxxxxxxxseat024status;
-	}
-
-	@Column(name = "seat025status", length = 1)
-	@Size(max = 1)
-	public String getEaxxxxxxbvxxxxxxxxxxseat025status() {
-		return this.eaxxxxxxbvxxxxxxxxxxseat025status;
-	}
-
-	public void setEaxxxxxxbvxxxxxxxxxxseat025status(
-			String eaxxxxxxbvxxxxxxxxxxseat025status) {
-		this.eaxxxxxxbvxxxxxxxxxxseat025status = eaxxxxxxbvxxxxxxxxxxseat025status;
-	}
-
-	@Column(name = "seat026status", length = 1)
-	@Size(max = 1)
-	public String getEfxxxxxxbvxxxxxxxxxxseat026status() {
-		return this.efxxxxxxbvxxxxxxxxxxseat026status;
-	}
-
-	public void setEfxxxxxxbvxxxxxxxxxxseat026status(
-			String efxxxxxxbvxxxxxxxxxxseat026status) {
-		this.efxxxxxxbvxxxxxxxxxxseat026status = efxxxxxxbvxxxxxxxxxxseat026status;
-	}
-
-	@Column(name = "seat027status", length = 1)
-	@Size(max = 1)
-	public String getEjxxxxxxbvxxxxxxxxxxseat027status() {
-		return this.ejxxxxxxbvxxxxxxxxxxseat027status;
-	}
-
-	public void setEjxxxxxxbvxxxxxxxxxxseat027status(
-			String ejxxxxxxbvxxxxxxxxxxseat027status) {
-		this.ejxxxxxxbvxxxxxxxxxxseat027status = ejxxxxxxbvxxxxxxxxxxseat027status;
-	}
-
-	@Column(name = "seat028status", length = 1)
-	@Size(max = 1)
-	public String getEnxxxxxxbvxxxxxxxxxxseat028status() {
-		return this.enxxxxxxbvxxxxxxxxxxseat028status;
-	}
-
-	public void setEnxxxxxxbvxxxxxxxxxxseat028status(
-			String enxxxxxxbvxxxxxxxxxxseat028status) {
-		this.enxxxxxxbvxxxxxxxxxxseat028status = enxxxxxxbvxxxxxxxxxxseat028status;
-	}
-
-	@Column(name = "seat029status", length = 1)
-	@Size(max = 1)
-	public String getErxxxxxxbvxxxxxxxxxxseat029status() {
-		return this.erxxxxxxbvxxxxxxxxxxseat029status;
-	}
-
-	public void setErxxxxxxbvxxxxxxxxxxseat029status(
-			String erxxxxxxbvxxxxxxxxxxseat029status) {
-		this.erxxxxxxbvxxxxxxxxxxseat029status = erxxxxxxbvxxxxxxxxxxseat029status;
-	}
-
-	@Column(name = "seat030status", length = 1)
-	@Size(max = 1)
-	public String getEvxxxxxxbvxxxxxxxxxxseat030status() {
-		return this.evxxxxxxbvxxxxxxxxxxseat030status;
-	}
-
-	public void setEvxxxxxxbvxxxxxxxxxxseat030status(
-			String evxxxxxxbvxxxxxxxxxxseat030status) {
-		this.evxxxxxxbvxxxxxxxxxxseat030status = evxxxxxxbvxxxxxxxxxxseat030status;
-	}
-
-	@Column(name = "seat031status", length = 1)
-	@Size(max = 1)
-	public String getFaxxxxxxbvxxxxxxxxxxseat031status() {
-		return this.faxxxxxxbvxxxxxxxxxxseat031status;
-	}
-
-	public void setFaxxxxxxbvxxxxxxxxxxseat031status(
-			String faxxxxxxbvxxxxxxxxxxseat031status) {
-		this.faxxxxxxbvxxxxxxxxxxseat031status = faxxxxxxbvxxxxxxxxxxseat031status;
-	}
-
-	@Column(name = "seat032status", length = 1)
-	@Size(max = 1)
-	public String getFexxxxxxbvxxxxxxxxxxseat032status() {
-		return this.fexxxxxxbvxxxxxxxxxxseat032status;
-	}
-
-	public void setFexxxxxxbvxxxxxxxxxxseat032status(
-			String fexxxxxxbvxxxxxxxxxxseat032status) {
-		this.fexxxxxxbvxxxxxxxxxxseat032status = fexxxxxxbvxxxxxxxxxxseat032status;
-	}
-
-	@Column(name = "seat033status", length = 1)
-	@Size(max = 1)
-	public String getFixxxxxxbvxxxxxxxxxxseat033status() {
-		return this.fixxxxxxbvxxxxxxxxxxseat033status;
-	}
-
-	public void setFixxxxxxbvxxxxxxxxxxseat033status(
-			String fixxxxxxbvxxxxxxxxxxseat033status) {
-		this.fixxxxxxbvxxxxxxxxxxseat033status = fixxxxxxbvxxxxxxxxxxseat033status;
-	}
-
-	@Column(name = "seat034status", length = 1)
-	@Size(max = 1)
-	public String getFmxxxxxxbvxxxxxxxxxxseat034status() {
-		return this.fmxxxxxxbvxxxxxxxxxxseat034status;
-	}
-
-	public void setFmxxxxxxbvxxxxxxxxxxseat034status(
-			String fmxxxxxxbvxxxxxxxxxxseat034status) {
-		this.fmxxxxxxbvxxxxxxxxxxseat034status = fmxxxxxxbvxxxxxxxxxxseat034status;
-	}
-
-	@Column(name = "seat035status", length = 1)
-	@Size(max = 1)
-	public String getFqxxxxxxbvxxxxxxxxxxseat035status() {
-		return this.fqxxxxxxbvxxxxxxxxxxseat035status;
-	}
-
-	public void setFqxxxxxxbvxxxxxxxxxxseat035status(
-			String fqxxxxxxbvxxxxxxxxxxseat035status) {
-		this.fqxxxxxxbvxxxxxxxxxxseat035status = fqxxxxxxbvxxxxxxxxxxseat035status;
-	}
-
-	@Column(name = "seat036status", length = 1)
-	@Size(max = 1)
-	public String getFuxxxxxxbvxxxxxxxxxxseat036status() {
-		return this.fuxxxxxxbvxxxxxxxxxxseat036status;
-	}
-
-	public void setFuxxxxxxbvxxxxxxxxxxseat036status(
-			String fuxxxxxxbvxxxxxxxxxxseat036status) {
-		this.fuxxxxxxbvxxxxxxxxxxseat036status = fuxxxxxxbvxxxxxxxxxxseat036status;
-	}
-
-	@Column(name = "seat037status", length = 1)
-	@Size(max = 1)
-	public String getGaxxxxxxbvxxxxxxxxxxseat037status() {
-		return this.gaxxxxxxbvxxxxxxxxxxseat037status;
-	}
-
-	public void setGaxxxxxxbvxxxxxxxxxxseat037status(
-			String gaxxxxxxbvxxxxxxxxxxseat037status) {
-		this.gaxxxxxxbvxxxxxxxxxxseat037status = gaxxxxxxbvxxxxxxxxxxseat037status;
-	}
-
-	@Column(name = "seat038status", length = 1)
-	@Size(max = 1)
-	public String getGexxxxxxbvxxxxxxxxxxseat038status() {
-		return this.gexxxxxxbvxxxxxxxxxxseat038status;
-	}
-
-	public void setGexxxxxxbvxxxxxxxxxxseat038status(
-			String gexxxxxxbvxxxxxxxxxxseat038status) {
-		this.gexxxxxxbvxxxxxxxxxxseat038status = gexxxxxxbvxxxxxxxxxxseat038status;
-	}
-
-	@Column(name = "seat039status", length = 1)
-	@Size(max = 1)
-	public String getGixxxxxxbvxxxxxxxxxxseat039status() {
-		return this.gixxxxxxbvxxxxxxxxxxseat039status;
-	}
-
-	public void setGixxxxxxbvxxxxxxxxxxseat039status(
-			String gixxxxxxbvxxxxxxxxxxseat039status) {
-		this.gixxxxxxbvxxxxxxxxxxseat039status = gixxxxxxbvxxxxxxxxxxseat039status;
-	}
-
-	@Column(name = "seat040status", length = 1)
-	@Size(max = 1)
-	public String getGmxxxxxxbvxxxxxxxxxxseat040status() {
-		return this.gmxxxxxxbvxxxxxxxxxxseat040status;
-	}
-
-	public void setGmxxxxxxbvxxxxxxxxxxseat040status(
-			String gmxxxxxxbvxxxxxxxxxxseat040status) {
-		this.gmxxxxxxbvxxxxxxxxxxseat040status = gmxxxxxxbvxxxxxxxxxxseat040status;
-	}
-
-	@Column(name = "seat041status", length = 1)
-	@Size(max = 1)
-	public String getGqxxxxxxbvxxxxxxxxxxseat041status() {
-		return this.gqxxxxxxbvxxxxxxxxxxseat041status;
-	}
-
-	public void setGqxxxxxxbvxxxxxxxxxxseat041status(
-			String gqxxxxxxbvxxxxxxxxxxseat041status) {
-		this.gqxxxxxxbvxxxxxxxxxxseat041status = gqxxxxxxbvxxxxxxxxxxseat041status;
-	}
-
-	@Column(name = "seat042status", length = 1)
-	@Size(max = 1)
-	public String getGuxxxxxxbvxxxxxxxxxxseat042status() {
-		return this.guxxxxxxbvxxxxxxxxxxseat042status;
-	}
-
-	public void setGuxxxxxxbvxxxxxxxxxxseat042status(
-			String guxxxxxxbvxxxxxxxxxxseat042status) {
-		this.guxxxxxxbvxxxxxxxxxxseat042status = guxxxxxxbvxxxxxxxxxxseat042status;
-	}
-
-	@Column(name = "seat043status", length = 1)
-	@Size(max = 1)
-	public String getHaxxxxxxbvxxxxxxxxxxseat043status() {
-		return this.haxxxxxxbvxxxxxxxxxxseat043status;
-	}
-
-	public void setHaxxxxxxbvxxxxxxxxxxseat043status(
-			String haxxxxxxbvxxxxxxxxxxseat043status) {
-		this.haxxxxxxbvxxxxxxxxxxseat043status = haxxxxxxbvxxxxxxxxxxseat043status;
-	}
-
-	@Column(name = "seat044status", length = 1)
-	@Size(max = 1)
-	public String getHexxxxxxbvxxxxxxxxxxseat044status() {
-		return this.hexxxxxxbvxxxxxxxxxxseat044status;
-	}
-
-	public void setHexxxxxxbvxxxxxxxxxxseat044status(
-			String hexxxxxxbvxxxxxxxxxxseat044status) {
-		this.hexxxxxxbvxxxxxxxxxxseat044status = hexxxxxxbvxxxxxxxxxxseat044status;
-	}
-
-	@Column(name = "seat045status", length = 1)
-	@Size(max = 1)
-	public String getHixxxxxxbvxxxxxxxxxxseat045status() {
-		return this.hixxxxxxbvxxxxxxxxxxseat045status;
-	}
-
-	public void setHixxxxxxbvxxxxxxxxxxseat045status(
-			String hixxxxxxbvxxxxxxxxxxseat045status) {
-		this.hixxxxxxbvxxxxxxxxxxseat045status = hixxxxxxbvxxxxxxxxxxseat045status;
-	}
-
-	@Column(name = "seat046status", length = 1)
-	@Size(max = 1)
-	public String getHmxxxxxxbvxxxxxxxxxxseat046status() {
-		return this.hmxxxxxxbvxxxxxxxxxxseat046status;
-	}
-
-	public void setHmxxxxxxbvxxxxxxxxxxseat046status(
-			String hmxxxxxxbvxxxxxxxxxxseat046status) {
-		this.hmxxxxxxbvxxxxxxxxxxseat046status = hmxxxxxxbvxxxxxxxxxxseat046status;
-	}
-
-	@Column(name = "seat047status", length = 1)
-	@Size(max = 1)
-	public String getHqxxxxxxbvxxxxxxxxxxseat047status() {
-		return this.hqxxxxxxbvxxxxxxxxxxseat047status;
-	}
-
-	public void setHqxxxxxxbvxxxxxxxxxxseat047status(
-			String hqxxxxxxbvxxxxxxxxxxseat047status) {
-		this.hqxxxxxxbvxxxxxxxxxxseat047status = hqxxxxxxbvxxxxxxxxxxseat047status;
-	}
-
-	@Column(name = "seat048status", length = 1)
-	@Size(max = 1)
-	public String getHuxxxxxxbvxxxxxxxxxxseat048status() {
-		return this.huxxxxxxbvxxxxxxxxxxseat048status;
-	}
-
-	public void setHuxxxxxxbvxxxxxxxxxxseat048status(
-			String huxxxxxxbvxxxxxxxxxxseat048status) {
-		this.huxxxxxxbvxxxxxxxxxxseat048status = huxxxxxxbvxxxxxxxxxxseat048status;
-	}
-
-	@Column(name = "seat049status", length = 1)
-	@Size(max = 1)
-	public String getIaxxxxxxbvxxxxxxxxxxseat049status() {
-		return this.iaxxxxxxbvxxxxxxxxxxseat049status;
-	}
-
-	public void setIaxxxxxxbvxxxxxxxxxxseat049status(
-			String iaxxxxxxbvxxxxxxxxxxseat049status) {
-		this.iaxxxxxxbvxxxxxxxxxxseat049status = iaxxxxxxbvxxxxxxxxxxseat049status;
-	}
-
-	@Column(name = "seat050status", length = 1)
-	@Size(max = 1)
-	public String getIexxxxxxbvxxxxxxxxxxseat050status() {
-		return this.iexxxxxxbvxxxxxxxxxxseat050status;
-	}
-
-	public void setIexxxxxxbvxxxxxxxxxxseat050status(
-			String iexxxxxxbvxxxxxxxxxxseat050status) {
-		this.iexxxxxxbvxxxxxxxxxxseat050status = iexxxxxxbvxxxxxxxxxxseat050status;
-	}
-
-	@Column(name = "name017", length = 50)
-	@Size(max = 50)
-	public String getCvxxxxxxbvxxxxxxxxxxname017() {
-		return this.cvxxxxxxbvxxxxxxxxxxname017;
-	}
-
-	public void setCvxxxxxxbvxxxxxxxxxxname017(
-			String cvxxxxxxbvxxxxxxxxxxname017) {
-		this.cvxxxxxxbvxxxxxxxxxxname017 = cvxxxxxxbvxxxxxxxxxxname017;
-	}
-
-	@Column(name = "name018", length = 50)
-	@Size(max = 50)
-	public String getDbxxxxxxbvxxxxxxxxxxname018() {
-		return this.dbxxxxxxbvxxxxxxxxxxname018;
-	}
-
-	public void setDbxxxxxxbvxxxxxxxxxxname018(
-			String dbxxxxxxbvxxxxxxxxxxname018) {
-		this.dbxxxxxxbvxxxxxxxxxxname018 = dbxxxxxxbvxxxxxxxxxxname018;
-	}
-
-	@Column(name = "name019", length = 50)
-	@Size(max = 50)
-	public String getDfxxxxxxbvxxxxxxxxxxname019() {
-		return this.dfxxxxxxbvxxxxxxxxxxname019;
-	}
-
-	public void setDfxxxxxxbvxxxxxxxxxxname019(
-			String dfxxxxxxbvxxxxxxxxxxname019) {
-		this.dfxxxxxxbvxxxxxxxxxxname019 = dfxxxxxxbvxxxxxxxxxxname019;
-	}
-
-	@Column(name = "name020", length = 50)
-	@Size(max = 50)
-	public String getDjxxxxxxbvxxxxxxxxxxname020() {
-		return this.djxxxxxxbvxxxxxxxxxxname020;
-	}
-
-	public void setDjxxxxxxbvxxxxxxxxxxname020(
-			String djxxxxxxbvxxxxxxxxxxname020) {
-		this.djxxxxxxbvxxxxxxxxxxname020 = djxxxxxxbvxxxxxxxxxxname020;
-	}
-
-	@Column(name = "name021", length = 50)
-	@Size(max = 50)
-	public String getDnxxxxxxbvxxxxxxxxxxname021() {
-		return this.dnxxxxxxbvxxxxxxxxxxname021;
-	}
-
-	public void setDnxxxxxxbvxxxxxxxxxxname021(
-			String dnxxxxxxbvxxxxxxxxxxname021) {
-		this.dnxxxxxxbvxxxxxxxxxxname021 = dnxxxxxxbvxxxxxxxxxxname021;
-	}
-
-	@Column(name = "name022", length = 50)
-	@Size(max = 50)
-	public String getDrxxxxxxbvxxxxxxxxxxname022() {
-		return this.drxxxxxxbvxxxxxxxxxxname022;
-	}
-
-	public void setDrxxxxxxbvxxxxxxxxxxname022(
-			String drxxxxxxbvxxxxxxxxxxname022) {
-		this.drxxxxxxbvxxxxxxxxxxname022 = drxxxxxxbvxxxxxxxxxxname022;
-	}
-
-	@Column(name = "name023", length = 50)
-	@Size(max = 50)
-	public String getDvxxxxxxbvxxxxxxxxxxname023() {
-		return this.dvxxxxxxbvxxxxxxxxxxname023;
-	}
-
-	public void setDvxxxxxxbvxxxxxxxxxxname023(
-			String dvxxxxxxbvxxxxxxxxxxname023) {
-		this.dvxxxxxxbvxxxxxxxxxxname023 = dvxxxxxxbvxxxxxxxxxxname023;
-	}
-
-	@Column(name = "name024", length = 50)
-	@Size(max = 50)
-	public String getE2xxxxxxbvxxxxxxxxxxname024() {
-		return this.e2xxxxxxbvxxxxxxxxxxname024;
-	}
-
-	public void setE2xxxxxxbvxxxxxxxxxxname024(
-			String e2xxxxxxbvxxxxxxxxxxname024) {
-		this.e2xxxxxxbvxxxxxxxxxxname024 = e2xxxxxxbvxxxxxxxxxxname024;
-	}
-
-	@Column(name = "name025", length = 50)
-	@Size(max = 50)
-	public String getEbxxxxxxbvxxxxxxxxxxname025() {
-		return this.ebxxxxxxbvxxxxxxxxxxname025;
-	}
-
-	public void setEbxxxxxxbvxxxxxxxxxxname025(
-			String ebxxxxxxbvxxxxxxxxxxname025) {
-		this.ebxxxxxxbvxxxxxxxxxxname025 = ebxxxxxxbvxxxxxxxxxxname025;
-	}
-
-	@Column(name = "name026", length = 50)
-	@Size(max = 50)
-	public String getEgxxxxxxbvxxxxxxxxxxname026() {
-		return this.egxxxxxxbvxxxxxxxxxxname026;
-	}
-
-	public void setEgxxxxxxbvxxxxxxxxxxname026(
-			String egxxxxxxbvxxxxxxxxxxname026) {
-		this.egxxxxxxbvxxxxxxxxxxname026 = egxxxxxxbvxxxxxxxxxxname026;
-	}
-
-	@Column(name = "name027", length = 50)
-	@Size(max = 50)
-	public String getEkxxxxxxbvxxxxxxxxxxname027() {
-		return this.ekxxxxxxbvxxxxxxxxxxname027;
-	}
-
-	public void setEkxxxxxxbvxxxxxxxxxxname027(
-			String ekxxxxxxbvxxxxxxxxxxname027) {
-		this.ekxxxxxxbvxxxxxxxxxxname027 = ekxxxxxxbvxxxxxxxxxxname027;
-	}
-
-	@Column(name = "name028", length = 50)
-	@Size(max = 50)
-	public String getEoxxxxxxbvxxxxxxxxxxname028() {
-		return this.eoxxxxxxbvxxxxxxxxxxname028;
-	}
-
-	public void setEoxxxxxxbvxxxxxxxxxxname028(
-			String eoxxxxxxbvxxxxxxxxxxname028) {
-		this.eoxxxxxxbvxxxxxxxxxxname028 = eoxxxxxxbvxxxxxxxxxxname028;
-	}
-
-	@Column(name = "name029", length = 50)
-	@Size(max = 50)
-	public String getEsxxxxxxbvxxxxxxxxxxname029() {
-		return this.esxxxxxxbvxxxxxxxxxxname029;
-	}
-
-	public void setEsxxxxxxbvxxxxxxxxxxname029(
-			String esxxxxxxbvxxxxxxxxxxname029) {
-		this.esxxxxxxbvxxxxxxxxxxname029 = esxxxxxxbvxxxxxxxxxxname029;
-	}
-
-	@Column(name = "name030", length = 50)
-	@Size(max = 50)
-	public String getEwxxxxxxbvxxxxxxxxxxname030() {
-		return this.ewxxxxxxbvxxxxxxxxxxname030;
-	}
-
-	public void setEwxxxxxxbvxxxxxxxxxxname030(
-			String ewxxxxxxbvxxxxxxxxxxname030) {
-		this.ewxxxxxxbvxxxxxxxxxxname030 = ewxxxxxxbvxxxxxxxxxxname030;
-	}
-
-	@Column(name = "name031", length = 50)
-	@Size(max = 50)
-	public String getFbxxxxxxbvxxxxxxxxxxname031() {
-		return this.fbxxxxxxbvxxxxxxxxxxname031;
-	}
-
-	public void setFbxxxxxxbvxxxxxxxxxxname031(
-			String fbxxxxxxbvxxxxxxxxxxname031) {
-		this.fbxxxxxxbvxxxxxxxxxxname031 = fbxxxxxxbvxxxxxxxxxxname031;
-	}
-
-	@Column(name = "name032", length = 50)
-	@Size(max = 50)
-	public String getFfxxxxxxbvxxxxxxxxxxname032() {
-		return this.ffxxxxxxbvxxxxxxxxxxname032;
-	}
-
-	public void setFfxxxxxxbvxxxxxxxxxxname032(
-			String ffxxxxxxbvxxxxxxxxxxname032) {
-		this.ffxxxxxxbvxxxxxxxxxxname032 = ffxxxxxxbvxxxxxxxxxxname032;
-	}
-
-	@Column(name = "name033", length = 50)
-	@Size(max = 50)
-	public String getFjxxxxxxbvxxxxxxxxxxname033() {
-		return this.fjxxxxxxbvxxxxxxxxxxname033;
-	}
-
-	public void setFjxxxxxxbvxxxxxxxxxxname033(
-			String fjxxxxxxbvxxxxxxxxxxname033) {
-		this.fjxxxxxxbvxxxxxxxxxxname033 = fjxxxxxxbvxxxxxxxxxxname033;
-	}
-
-	@Column(name = "name034", length = 50)
-	@Size(max = 50)
-	public String getFnxxxxxxbvxxxxxxxxxxname034() {
-		return this.fnxxxxxxbvxxxxxxxxxxname034;
-	}
-
-	public void setFnxxxxxxbvxxxxxxxxxxname034(
-			String fnxxxxxxbvxxxxxxxxxxname034) {
-		this.fnxxxxxxbvxxxxxxxxxxname034 = fnxxxxxxbvxxxxxxxxxxname034;
-	}
-
-	@Column(name = "name035", length = 50)
-	@Size(max = 50)
-	public String getFrxxxxxxbvxxxxxxxxxxname035() {
-		return this.frxxxxxxbvxxxxxxxxxxname035;
-	}
-
-	public void setFrxxxxxxbvxxxxxxxxxxname035(
-			String frxxxxxxbvxxxxxxxxxxname035) {
-		this.frxxxxxxbvxxxxxxxxxxname035 = frxxxxxxbvxxxxxxxxxxname035;
-	}
-
-	@Column(name = "name036", length = 50)
-	@Size(max = 50)
-	public String getFvxxxxxxbvxxxxxxxxxxname036() {
-		return this.fvxxxxxxbvxxxxxxxxxxname036;
-	}
-
-	public void setFvxxxxxxbvxxxxxxxxxxname036(
-			String fvxxxxxxbvxxxxxxxxxxname036) {
-		this.fvxxxxxxbvxxxxxxxxxxname036 = fvxxxxxxbvxxxxxxxxxxname036;
-	}
-
-	@Column(name = "name037", length = 50)
-	@Size(max = 50)
-	public String getGbxxxxxxbvxxxxxxxxxxname037() {
-		return this.gbxxxxxxbvxxxxxxxxxxname037;
-	}
-
-	public void setGbxxxxxxbvxxxxxxxxxxname037(
-			String gbxxxxxxbvxxxxxxxxxxname037) {
-		this.gbxxxxxxbvxxxxxxxxxxname037 = gbxxxxxxbvxxxxxxxxxxname037;
-	}
-
-	@Column(name = "name038", length = 50)
-	@Size(max = 50)
-	public String getGfxxxxxxbvxxxxxxxxxxname038() {
-		return this.gfxxxxxxbvxxxxxxxxxxname038;
-	}
-
-	public void setGfxxxxxxbvxxxxxxxxxxname038(
-			String gfxxxxxxbvxxxxxxxxxxname038) {
-		this.gfxxxxxxbvxxxxxxxxxxname038 = gfxxxxxxbvxxxxxxxxxxname038;
-	}
-
-	@Column(name = "name039", length = 50)
-	@Size(max = 50)
-	public String getGjxxxxxxbvxxxxxxxxxxname039() {
-		return this.gjxxxxxxbvxxxxxxxxxxname039;
-	}
-
-	public void setGjxxxxxxbvxxxxxxxxxxname039(
-			String gjxxxxxxbvxxxxxxxxxxname039) {
-		this.gjxxxxxxbvxxxxxxxxxxname039 = gjxxxxxxbvxxxxxxxxxxname039;
-	}
-
-	@Column(name = "name040", length = 50)
-	@Size(max = 50)
-	public String getGnxxxxxxbvxxxxxxxxxxname040() {
-		return this.gnxxxxxxbvxxxxxxxxxxname040;
-	}
-
-	public void setGnxxxxxxbvxxxxxxxxxxname040(
-			String gnxxxxxxbvxxxxxxxxxxname040) {
-		this.gnxxxxxxbvxxxxxxxxxxname040 = gnxxxxxxbvxxxxxxxxxxname040;
-	}
-
-	@Column(name = "name041", length = 50)
-	@Size(max = 50)
-	public String getGrxxxxxxbvxxxxxxxxxxname041() {
-		return this.grxxxxxxbvxxxxxxxxxxname041;
-	}
-
-	public void setGrxxxxxxbvxxxxxxxxxxname041(
-			String grxxxxxxbvxxxxxxxxxxname041) {
-		this.grxxxxxxbvxxxxxxxxxxname041 = grxxxxxxbvxxxxxxxxxxname041;
-	}
-
-	@Column(name = "name042", length = 50)
-	@Size(max = 50)
-	public String getGvxxxxxxbvxxxxxxxxxxname042() {
-		return this.gvxxxxxxbvxxxxxxxxxxname042;
-	}
-
-	public void setGvxxxxxxbvxxxxxxxxxxname042(
-			String gvxxxxxxbvxxxxxxxxxxname042) {
-		this.gvxxxxxxbvxxxxxxxxxxname042 = gvxxxxxxbvxxxxxxxxxxname042;
-	}
-
-	@Column(name = "name043", length = 50)
-	@Size(max = 50)
-	public String getHbxxxxxxbvxxxxxxxxxxname043() {
-		return this.hbxxxxxxbvxxxxxxxxxxname043;
-	}
-
-	public void setHbxxxxxxbvxxxxxxxxxxname043(
-			String hbxxxxxxbvxxxxxxxxxxname043) {
-		this.hbxxxxxxbvxxxxxxxxxxname043 = hbxxxxxxbvxxxxxxxxxxname043;
-	}
-
-	@Column(name = "name044", length = 50)
-	@Size(max = 50)
-	public String getHfxxxxxxbvxxxxxxxxxxname044() {
-		return this.hfxxxxxxbvxxxxxxxxxxname044;
-	}
-
-	public void setHfxxxxxxbvxxxxxxxxxxname044(
-			String hfxxxxxxbvxxxxxxxxxxname044) {
-		this.hfxxxxxxbvxxxxxxxxxxname044 = hfxxxxxxbvxxxxxxxxxxname044;
-	}
-
-	@Column(name = "name045", length = 50)
-	@Size(max = 50)
-	public String getHjxxxxxxbvxxxxxxxxxxname045() {
-		return this.hjxxxxxxbvxxxxxxxxxxname045;
-	}
-
-	public void setHjxxxxxxbvxxxxxxxxxxname045(
-			String hjxxxxxxbvxxxxxxxxxxname045) {
-		this.hjxxxxxxbvxxxxxxxxxxname045 = hjxxxxxxbvxxxxxxxxxxname045;
-	}
-
-	@Column(name = "name046", length = 50)
-	@Size(max = 50)
-	public String getHnxxxxxxbvxxxxxxxxxxname046() {
-		return this.hnxxxxxxbvxxxxxxxxxxname046;
-	}
-
-	public void setHnxxxxxxbvxxxxxxxxxxname046(
-			String hnxxxxxxbvxxxxxxxxxxname046) {
-		this.hnxxxxxxbvxxxxxxxxxxname046 = hnxxxxxxbvxxxxxxxxxxname046;
-	}
-
-	@Column(name = "name047", length = 50)
-	@Size(max = 50)
-	public String getHrxxxxxxbvxxxxxxxxxxname047() {
-		return this.hrxxxxxxbvxxxxxxxxxxname047;
-	}
-
-	public void setHrxxxxxxbvxxxxxxxxxxname047(
-			String hrxxxxxxbvxxxxxxxxxxname047) {
-		this.hrxxxxxxbvxxxxxxxxxxname047 = hrxxxxxxbvxxxxxxxxxxname047;
-	}
-
-	@Column(name = "name048", length = 50)
-	@Size(max = 50)
-	public String getHvxxxxxxbvxxxxxxxxxxname048() {
-		return this.hvxxxxxxbvxxxxxxxxxxname048;
-	}
-
-	public void setHvxxxxxxbvxxxxxxxxxxname048(
-			String hvxxxxxxbvxxxxxxxxxxname048) {
-		this.hvxxxxxxbvxxxxxxxxxxname048 = hvxxxxxxbvxxxxxxxxxxname048;
-	}
-
-	@Column(name = "name049", length = 50)
-	@Size(max = 50)
-	public String getIbxxxxxxbvxxxxxxxxxxname049() {
-		return this.ibxxxxxxbvxxxxxxxxxxname049;
-	}
-
-	public void setIbxxxxxxbvxxxxxxxxxxname049(
-			String ibxxxxxxbvxxxxxxxxxxname049) {
-		this.ibxxxxxxbvxxxxxxxxxxname049 = ibxxxxxxbvxxxxxxxxxxname049;
-	}
-
-	@Column(name = "name050", length = 50)
-	@Size(max = 50)
-	public String getIfxxxxxxbvxxxxxxxxxxname050() {
-		return this.ifxxxxxxbvxxxxxxxxxxname050;
-	}
-
-	public void setIfxxxxxxbvxxxxxxxxxxname050(
-			String ifxxxxxxbvxxxxxxxxxxname050) {
-		this.ifxxxxxxbvxxxxxxxxxxname050 = ifxxxxxxbvxxxxxxxxxxname050;
-	}
-
-	@Column(name = "ticket017", length = 50)
-	@Size(max = 50)
-	public String getCxxxxxxxbvxxxxxxxxxxticket017() {
-		return this.cxxxxxxxbvxxxxxxxxxxticket017;
-	}
-
-	public void setCxxxxxxxbvxxxxxxxxxxticket017(
-			String cxxxxxxxbvxxxxxxxxxxticket017) {
-		this.cxxxxxxxbvxxxxxxxxxxticket017 = cxxxxxxxbvxxxxxxxxxxticket017;
-	}
-
-	@Column(name = "ticket018", length = 50)
-	@Size(max = 50)
-	public String getDcxxxxxxbvxxxxxxxxxxticket018() {
-		return this.dcxxxxxxbvxxxxxxxxxxticket018;
-	}
-
-	public void setDcxxxxxxbvxxxxxxxxxxticket018(
-			String dcxxxxxxbvxxxxxxxxxxticket018) {
-		this.dcxxxxxxbvxxxxxxxxxxticket018 = dcxxxxxxbvxxxxxxxxxxticket018;
-	}
-
-	@Column(name = "ticket019", length = 50)
-	@Size(max = 50)
-	public String getDgxxxxxxbvxxxxxxxxxxticket019() {
-		return this.dgxxxxxxbvxxxxxxxxxxticket019;
-	}
-
-	public void setDgxxxxxxbvxxxxxxxxxxticket019(
-			String dgxxxxxxbvxxxxxxxxxxticket019) {
-		this.dgxxxxxxbvxxxxxxxxxxticket019 = dgxxxxxxbvxxxxxxxxxxticket019;
-	}
-
-	@Column(name = "ticket020", length = 50)
-	@Size(max = 50)
-	public String getDkxxxxxxbvxxxxxxxxxxticket020() {
-		return this.dkxxxxxxbvxxxxxxxxxxticket020;
-	}
-
-	public void setDkxxxxxxbvxxxxxxxxxxticket020(
-			String dkxxxxxxbvxxxxxxxxxxticket020) {
-		this.dkxxxxxxbvxxxxxxxxxxticket020 = dkxxxxxxbvxxxxxxxxxxticket020;
-	}
-
-	@Column(name = "ticket021", length = 50)
-	@Size(max = 50)
-	public String getDoxxxxxxbvxxxxxxxxxxticket021() {
-		return this.doxxxxxxbvxxxxxxxxxxticket021;
-	}
-
-	public void setDoxxxxxxbvxxxxxxxxxxticket021(
-			String doxxxxxxbvxxxxxxxxxxticket021) {
-		this.doxxxxxxbvxxxxxxxxxxticket021 = doxxxxxxbvxxxxxxxxxxticket021;
-	}
-
-	@Column(name = "ticket022", length = 50)
-	@Size(max = 50)
-	public String getDsxxxxxxbvxxxxxxxxxxticket022() {
-		return this.dsxxxxxxbvxxxxxxxxxxticket022;
-	}
-
-	public void setDsxxxxxxbvxxxxxxxxxxticket022(
-			String dsxxxxxxbvxxxxxxxxxxticket022) {
-		this.dsxxxxxxbvxxxxxxxxxxticket022 = dsxxxxxxbvxxxxxxxxxxticket022;
-	}
-
-	@Column(name = "ticket023", length = 50)
-	@Size(max = 50)
-	public String getDwxxxxxxbvxxxxxxxxxxticket023() {
-		return this.dwxxxxxxbvxxxxxxxxxxticket023;
-	}
-
-	public void setDwxxxxxxbvxxxxxxxxxxticket023(
-			String dwxxxxxxbvxxxxxxxxxxticket023) {
-		this.dwxxxxxxbvxxxxxxxxxxticket023 = dwxxxxxxbvxxxxxxxxxxticket023;
-	}
-
-	@Column(name = "ticket024", length = 50)
-	@Size(max = 50)
-	public String getE3xxxxxxbvxxxxxxxxxxticket024() {
-		return this.e3xxxxxxbvxxxxxxxxxxticket024;
-	}
-
-	public void setE3xxxxxxbvxxxxxxxxxxticket024(
-			String e3xxxxxxbvxxxxxxxxxxticket024) {
-		this.e3xxxxxxbvxxxxxxxxxxticket024 = e3xxxxxxbvxxxxxxxxxxticket024;
-	}
-
-	@Column(name = "ticket025", length = 50)
-	@Size(max = 50)
-	public String getEcxxxxxxbvxxxxxxxxxxticket025() {
-		return this.ecxxxxxxbvxxxxxxxxxxticket025;
-	}
-
-	public void setEcxxxxxxbvxxxxxxxxxxticket025(
-			String ecxxxxxxbvxxxxxxxxxxticket025) {
-		this.ecxxxxxxbvxxxxxxxxxxticket025 = ecxxxxxxbvxxxxxxxxxxticket025;
-	}
-
-	@Column(name = "ticket026", length = 50)
-	@Size(max = 50)
-	public String getEhxxxxxxbvxxxxxxxxxxticket026() {
-		return this.ehxxxxxxbvxxxxxxxxxxticket026;
-	}
-
-	public void setEhxxxxxxbvxxxxxxxxxxticket026(
-			String ehxxxxxxbvxxxxxxxxxxticket026) {
-		this.ehxxxxxxbvxxxxxxxxxxticket026 = ehxxxxxxbvxxxxxxxxxxticket026;
-	}
-
-	@Column(name = "ticket027", length = 50)
-	@Size(max = 50)
-	public String getElxxxxxxbvxxxxxxxxxxticket027() {
-		return this.elxxxxxxbvxxxxxxxxxxticket027;
-	}
-
-	public void setElxxxxxxbvxxxxxxxxxxticket027(
-			String elxxxxxxbvxxxxxxxxxxticket027) {
-		this.elxxxxxxbvxxxxxxxxxxticket027 = elxxxxxxbvxxxxxxxxxxticket027;
-	}
-
-	@Column(name = "ticket028", length = 50)
-	@Size(max = 50)
-	public String getEpxxxxxxbvxxxxxxxxxxticket028() {
-		return this.epxxxxxxbvxxxxxxxxxxticket028;
-	}
-
-	public void setEpxxxxxxbvxxxxxxxxxxticket028(
-			String epxxxxxxbvxxxxxxxxxxticket028) {
-		this.epxxxxxxbvxxxxxxxxxxticket028 = epxxxxxxbvxxxxxxxxxxticket028;
-	}
-
-	@Column(name = "ticket029", length = 50)
-	@Size(max = 50)
-	public String getEtxxxxxxbvxxxxxxxxxxticket029() {
-		return this.etxxxxxxbvxxxxxxxxxxticket029;
-	}
-
-	public void setEtxxxxxxbvxxxxxxxxxxticket029(
-			String etxxxxxxbvxxxxxxxxxxticket029) {
-		this.etxxxxxxbvxxxxxxxxxxticket029 = etxxxxxxbvxxxxxxxxxxticket029;
-	}
-
-	@Column(name = "ticket030", length = 50)
-	@Size(max = 50)
-	public String getExxxxxxxbvxxxxxxxxxxticket030() {
-		return this.exxxxxxxbvxxxxxxxxxxticket030;
-	}
-
-	public void setExxxxxxxbvxxxxxxxxxxticket030(
-			String exxxxxxxbvxxxxxxxxxxticket030) {
-		this.exxxxxxxbvxxxxxxxxxxticket030 = exxxxxxxbvxxxxxxxxxxticket030;
-	}
-
-	@Column(name = "ticket031", length = 50)
-	@Size(max = 50)
-	public String getFcxxxxxxbvxxxxxxxxxxticket031() {
-		return this.fcxxxxxxbvxxxxxxxxxxticket031;
-	}
-
-	public void setFcxxxxxxbvxxxxxxxxxxticket031(
-			String fcxxxxxxbvxxxxxxxxxxticket031) {
-		this.fcxxxxxxbvxxxxxxxxxxticket031 = fcxxxxxxbvxxxxxxxxxxticket031;
-	}
-
-	@Column(name = "ticket032", length = 50)
-	@Size(max = 50)
-	public String getFgxxxxxxbvxxxxxxxxxxticket032() {
-		return this.fgxxxxxxbvxxxxxxxxxxticket032;
-	}
-
-	public void setFgxxxxxxbvxxxxxxxxxxticket032(
-			String fgxxxxxxbvxxxxxxxxxxticket032) {
-		this.fgxxxxxxbvxxxxxxxxxxticket032 = fgxxxxxxbvxxxxxxxxxxticket032;
-	}
-
-	@Column(name = "ticket033", length = 50)
-	@Size(max = 50)
-	public String getFkxxxxxxbvxxxxxxxxxxticket033() {
-		return this.fkxxxxxxbvxxxxxxxxxxticket033;
-	}
-
-	public void setFkxxxxxxbvxxxxxxxxxxticket033(
-			String fkxxxxxxbvxxxxxxxxxxticket033) {
-		this.fkxxxxxxbvxxxxxxxxxxticket033 = fkxxxxxxbvxxxxxxxxxxticket033;
-	}
-
-	@Column(name = "ticket034", length = 50)
-	@Size(max = 50)
-	public String getFoxxxxxxbvxxxxxxxxxxticket034() {
-		return this.foxxxxxxbvxxxxxxxxxxticket034;
-	}
-
-	public void setFoxxxxxxbvxxxxxxxxxxticket034(
-			String foxxxxxxbvxxxxxxxxxxticket034) {
-		this.foxxxxxxbvxxxxxxxxxxticket034 = foxxxxxxbvxxxxxxxxxxticket034;
-	}
-
-	@Column(name = "ticket035", length = 50)
-	@Size(max = 50)
-	public String getFsxxxxxxbvxxxxxxxxxxticket035() {
-		return this.fsxxxxxxbvxxxxxxxxxxticket035;
-	}
-
-	public void setFsxxxxxxbvxxxxxxxxxxticket035(
-			String fsxxxxxxbvxxxxxxxxxxticket035) {
-		this.fsxxxxxxbvxxxxxxxxxxticket035 = fsxxxxxxbvxxxxxxxxxxticket035;
-	}
-
-	@Column(name = "ticket036", length = 50)
-	@Size(max = 50)
-	public String getFwxxxxxxbvxxxxxxxxxxticket036() {
-		return this.fwxxxxxxbvxxxxxxxxxxticket036;
-	}
-
-	public void setFwxxxxxxbvxxxxxxxxxxticket036(
-			String fwxxxxxxbvxxxxxxxxxxticket036) {
-		this.fwxxxxxxbvxxxxxxxxxxticket036 = fwxxxxxxbvxxxxxxxxxxticket036;
-	}
-
-	@Column(name = "ticket037", length = 50)
-	@Size(max = 50)
-	public String getGcxxxxxxbvxxxxxxxxxxticket037() {
-		return this.gcxxxxxxbvxxxxxxxxxxticket037;
-	}
-
-	public void setGcxxxxxxbvxxxxxxxxxxticket037(
-			String gcxxxxxxbvxxxxxxxxxxticket037) {
-		this.gcxxxxxxbvxxxxxxxxxxticket037 = gcxxxxxxbvxxxxxxxxxxticket037;
-	}
-
-	@Column(name = "ticket038", length = 50)
-	@Size(max = 50)
-	public String getGgxxxxxxbvxxxxxxxxxxticket038() {
-		return this.ggxxxxxxbvxxxxxxxxxxticket038;
-	}
-
-	public void setGgxxxxxxbvxxxxxxxxxxticket038(
-			String ggxxxxxxbvxxxxxxxxxxticket038) {
-		this.ggxxxxxxbvxxxxxxxxxxticket038 = ggxxxxxxbvxxxxxxxxxxticket038;
-	}
-
-	@Column(name = "ticket039", length = 50)
-	@Size(max = 50)
-	public String getGkxxxxxxbvxxxxxxxxxxticket039() {
-		return this.gkxxxxxxbvxxxxxxxxxxticket039;
-	}
-
-	public void setGkxxxxxxbvxxxxxxxxxxticket039(
-			String gkxxxxxxbvxxxxxxxxxxticket039) {
-		this.gkxxxxxxbvxxxxxxxxxxticket039 = gkxxxxxxbvxxxxxxxxxxticket039;
-	}
-
-	@Column(name = "ticket040", length = 50)
-	@Size(max = 50)
-	public String getGoxxxxxxbvxxxxxxxxxxticket040() {
-		return this.goxxxxxxbvxxxxxxxxxxticket040;
-	}
-
-	public void setGoxxxxxxbvxxxxxxxxxxticket040(
-			String goxxxxxxbvxxxxxxxxxxticket040) {
-		this.goxxxxxxbvxxxxxxxxxxticket040 = goxxxxxxbvxxxxxxxxxxticket040;
-	}
-
-	@Column(name = "ticket041", length = 50)
-	@Size(max = 50)
-	public String getGsxxxxxxbvxxxxxxxxxxticket041() {
-		return this.gsxxxxxxbvxxxxxxxxxxticket041;
-	}
-
-	public void setGsxxxxxxbvxxxxxxxxxxticket041(
-			String gsxxxxxxbvxxxxxxxxxxticket041) {
-		this.gsxxxxxxbvxxxxxxxxxxticket041 = gsxxxxxxbvxxxxxxxxxxticket041;
-	}
-
-	@Column(name = "ticket042", length = 50)
-	@Size(max = 50)
-	public String getGwxxxxxxbvxxxxxxxxxxticket042() {
-		return this.gwxxxxxxbvxxxxxxxxxxticket042;
-	}
-
-	public void setGwxxxxxxbvxxxxxxxxxxticket042(
-			String gwxxxxxxbvxxxxxxxxxxticket042) {
-		this.gwxxxxxxbvxxxxxxxxxxticket042 = gwxxxxxxbvxxxxxxxxxxticket042;
-	}
-
-	@Column(name = "ticket043", length = 50)
-	@Size(max = 50)
-	public String getHcxxxxxxbvxxxxxxxxxxticket043() {
-		return this.hcxxxxxxbvxxxxxxxxxxticket043;
-	}
-
-	public void setHcxxxxxxbvxxxxxxxxxxticket043(
-			String hcxxxxxxbvxxxxxxxxxxticket043) {
-		this.hcxxxxxxbvxxxxxxxxxxticket043 = hcxxxxxxbvxxxxxxxxxxticket043;
-	}
-
-	@Column(name = "ticket044", length = 50)
-	@Size(max = 50)
-	public String getHgxxxxxxbvxxxxxxxxxxticket044() {
-		return this.hgxxxxxxbvxxxxxxxxxxticket044;
-	}
-
-	public void setHgxxxxxxbvxxxxxxxxxxticket044(
-			String hgxxxxxxbvxxxxxxxxxxticket044) {
-		this.hgxxxxxxbvxxxxxxxxxxticket044 = hgxxxxxxbvxxxxxxxxxxticket044;
-	}
-
-	@Column(name = "ticket045", length = 50)
-	@Size(max = 50)
-	public String getHkxxxxxxbvxxxxxxxxxxticket045() {
-		return this.hkxxxxxxbvxxxxxxxxxxticket045;
-	}
-
-	public void setHkxxxxxxbvxxxxxxxxxxticket045(
-			String hkxxxxxxbvxxxxxxxxxxticket045) {
-		this.hkxxxxxxbvxxxxxxxxxxticket045 = hkxxxxxxbvxxxxxxxxxxticket045;
-	}
-
-	@Column(name = "ticket046", length = 50)
-	@Size(max = 50)
-	public String getHoxxxxxxbvxxxxxxxxxxticket046() {
-		return this.hoxxxxxxbvxxxxxxxxxxticket046;
-	}
-
-	public void setHoxxxxxxbvxxxxxxxxxxticket046(
-			String hoxxxxxxbvxxxxxxxxxxticket046) {
-		this.hoxxxxxxbvxxxxxxxxxxticket046 = hoxxxxxxbvxxxxxxxxxxticket046;
-	}
-
-	@Column(name = "ticket047", length = 50)
-	@Size(max = 50)
-	public String getHsxxxxxxbvxxxxxxxxxxticket047() {
-		return this.hsxxxxxxbvxxxxxxxxxxticket047;
-	}
-
-	public void setHsxxxxxxbvxxxxxxxxxxticket047(
-			String hsxxxxxxbvxxxxxxxxxxticket047) {
-		this.hsxxxxxxbvxxxxxxxxxxticket047 = hsxxxxxxbvxxxxxxxxxxticket047;
-	}
-
-	@Column(name = "ticket048", length = 50)
-	@Size(max = 50)
-	public String getHwxxxxxxbvxxxxxxxxxxticket048() {
-		return this.hwxxxxxxbvxxxxxxxxxxticket048;
-	}
-
-	public void setHwxxxxxxbvxxxxxxxxxxticket048(
-			String hwxxxxxxbvxxxxxxxxxxticket048) {
-		this.hwxxxxxxbvxxxxxxxxxxticket048 = hwxxxxxxbvxxxxxxxxxxticket048;
-	}
-
-	@Column(name = "ticket049", length = 50)
-	@Size(max = 50)
-	public String getIcxxxxxxbvxxxxxxxxxxticket049() {
-		return this.icxxxxxxbvxxxxxxxxxxticket049;
-	}
-
-	public void setIcxxxxxxbvxxxxxxxxxxticket049(
-			String icxxxxxxbvxxxxxxxxxxticket049) {
-		this.icxxxxxxbvxxxxxxxxxxticket049 = icxxxxxxbvxxxxxxxxxxticket049;
-	}
-
-	@Column(name = "ticket050", length = 50)
-	@Size(max = 50)
-	public String getIgxxxxxxbvxxxxxxxxxxticket050() {
-		return this.igxxxxxxbvxxxxxxxxxxticket050;
-	}
-
-	public void setIgxxxxxxbvxxxxxxxxxxticket050(
-			String igxxxxxxbvxxxxxxxxxxticket050) {
-		this.igxxxxxxbvxxxxxxxxxxticket050 = igxxxxxxbvxxxxxxxxxxticket050;
-	}
-
-	@Column(name = "po017", length = 32)
-	@Size(max = 32)
-	public String getCyxxxxxxbvxxxxxxxxxxpo017() {
-		return this.cyxxxxxxbvxxxxxxxxxxpo017;
-	}
-
-	public void setCyxxxxxxbvxxxxxxxxxxpo017(String cyxxxxxxbvxxxxxxxxxxpo017) {
-		this.cyxxxxxxbvxxxxxxxxxxpo017 = cyxxxxxxbvxxxxxxxxxxpo017;
-	}
-
-	@Column(name = "po018", length = 32)
-	@Size(max = 32)
-	public String getDdxxxxxxbvxxxxxxxxxxpo018() {
-		return this.ddxxxxxxbvxxxxxxxxxxpo018;
-	}
-
-	public void setDdxxxxxxbvxxxxxxxxxxpo018(String ddxxxxxxbvxxxxxxxxxxpo018) {
-		this.ddxxxxxxbvxxxxxxxxxxpo018 = ddxxxxxxbvxxxxxxxxxxpo018;
-	}
-
-	@Column(name = "po019", length = 32)
-	@Size(max = 32)
-	public String getDhxxxxxxbvxxxxxxxxxxpo019() {
-		return this.dhxxxxxxbvxxxxxxxxxxpo019;
-	}
-
-	public void setDhxxxxxxbvxxxxxxxxxxpo019(String dhxxxxxxbvxxxxxxxxxxpo019) {
-		this.dhxxxxxxbvxxxxxxxxxxpo019 = dhxxxxxxbvxxxxxxxxxxpo019;
-	}
-
-	@Column(name = "po020", length = 32)
-	@Size(max = 32)
-	public String getDlxxxxxxbvxxxxxxxxxxpo020() {
-		return this.dlxxxxxxbvxxxxxxxxxxpo020;
-	}
-
-	public void setDlxxxxxxbvxxxxxxxxxxpo020(String dlxxxxxxbvxxxxxxxxxxpo020) {
-		this.dlxxxxxxbvxxxxxxxxxxpo020 = dlxxxxxxbvxxxxxxxxxxpo020;
-	}
-
-	@Column(name = "po021", length = 32)
-	@Size(max = 32)
-	public String getDpxxxxxxbvxxxxxxxxxxpo021() {
-		return this.dpxxxxxxbvxxxxxxxxxxpo021;
-	}
-
-	public void setDpxxxxxxbvxxxxxxxxxxpo021(String dpxxxxxxbvxxxxxxxxxxpo021) {
-		this.dpxxxxxxbvxxxxxxxxxxpo021 = dpxxxxxxbvxxxxxxxxxxpo021;
-	}
-
-	@Column(name = "po022", length = 32)
-	@Size(max = 32)
-	public String getDtxxxxxxbvxxxxxxxxxxpo022() {
-		return this.dtxxxxxxbvxxxxxxxxxxpo022;
-	}
-
-	public void setDtxxxxxxbvxxxxxxxxxxpo022(String dtxxxxxxbvxxxxxxxxxxpo022) {
-		this.dtxxxxxxbvxxxxxxxxxxpo022 = dtxxxxxxbvxxxxxxxxxxpo022;
-	}
-
-	@Column(name = "po023", length = 32)
-	@Size(max = 32)
-	public String getDxxxxxxxbvxxxxxxxxxxpo023() {
-		return this.dxxxxxxxbvxxxxxxxxxxpo023;
-	}
-
-	public void setDxxxxxxxbvxxxxxxxxxxpo023(String dxxxxxxxbvxxxxxxxxxxpo023) {
-		this.dxxxxxxxbvxxxxxxxxxxpo023 = dxxxxxxxbvxxxxxxxxxxpo023;
-	}
-
-	@Column(name = "po024", length = 32)
-	@Size(max = 32)
-	public String getE4xxxxxxbvxxxxxxxxxxpo024() {
-		return this.e4xxxxxxbvxxxxxxxxxxpo024;
-	}
-
-	public void setE4xxxxxxbvxxxxxxxxxxpo024(String e4xxxxxxbvxxxxxxxxxxpo024) {
-		this.e4xxxxxxbvxxxxxxxxxxpo024 = e4xxxxxxbvxxxxxxxxxxpo024;
-	}
-
-	@Column(name = "po025", length = 32)
-	@Size(max = 32)
-	public String getEdxxxxxxbvxxxxxxxxxxpo025() {
-		return this.edxxxxxxbvxxxxxxxxxxpo025;
-	}
-
-	public void setEdxxxxxxbvxxxxxxxxxxpo025(String edxxxxxxbvxxxxxxxxxxpo025) {
-		this.edxxxxxxbvxxxxxxxxxxpo025 = edxxxxxxbvxxxxxxxxxxpo025;
-	}
-
-	@Column(name = "po026", length = 32)
-	@Size(max = 32)
-	public String getEixxxxxxbvxxxxxxxxxxpo026() {
-		return this.eixxxxxxbvxxxxxxxxxxpo026;
-	}
-
-	public void setEixxxxxxbvxxxxxxxxxxpo026(String eixxxxxxbvxxxxxxxxxxpo026) {
-		this.eixxxxxxbvxxxxxxxxxxpo026 = eixxxxxxbvxxxxxxxxxxpo026;
-	}
-
-	@Column(name = "po027", length = 32)
-	@Size(max = 32)
-	public String getEmxxxxxxbvxxxxxxxxxxpo027() {
-		return this.emxxxxxxbvxxxxxxxxxxpo027;
-	}
-
-	public void setEmxxxxxxbvxxxxxxxxxxpo027(String emxxxxxxbvxxxxxxxxxxpo027) {
-		this.emxxxxxxbvxxxxxxxxxxpo027 = emxxxxxxbvxxxxxxxxxxpo027;
-	}
-
-	@Column(name = "po028", length = 32)
-	@Size(max = 32)
-	public String getEqxxxxxxbvxxxxxxxxxxpo028() {
-		return this.eqxxxxxxbvxxxxxxxxxxpo028;
-	}
-
-	public void setEqxxxxxxbvxxxxxxxxxxpo028(String eqxxxxxxbvxxxxxxxxxxpo028) {
-		this.eqxxxxxxbvxxxxxxxxxxpo028 = eqxxxxxxbvxxxxxxxxxxpo028;
-	}
-
-	@Column(name = "po029", length = 32)
-	@Size(max = 32)
-	public String getEuxxxxxxbvxxxxxxxxxxpo029() {
-		return this.euxxxxxxbvxxxxxxxxxxpo029;
-	}
-
-	public void setEuxxxxxxbvxxxxxxxxxxpo029(String euxxxxxxbvxxxxxxxxxxpo029) {
-		this.euxxxxxxbvxxxxxxxxxxpo029 = euxxxxxxbvxxxxxxxxxxpo029;
-	}
-
-	@Column(name = "po030", length = 32)
-	@Size(max = 32)
-	public String getEyxxxxxxbvxxxxxxxxxxpo030() {
-		return this.eyxxxxxxbvxxxxxxxxxxpo030;
-	}
-
-	public void setEyxxxxxxbvxxxxxxxxxxpo030(String eyxxxxxxbvxxxxxxxxxxpo030) {
-		this.eyxxxxxxbvxxxxxxxxxxpo030 = eyxxxxxxbvxxxxxxxxxxpo030;
-	}
-
-	@Column(name = "po031", length = 32)
-	@Size(max = 32)
-	public String getFdxxxxxxbvxxxxxxxxxxpo031() {
-		return this.fdxxxxxxbvxxxxxxxxxxpo031;
-	}
-
-	public void setFdxxxxxxbvxxxxxxxxxxpo031(String fdxxxxxxbvxxxxxxxxxxpo031) {
-		this.fdxxxxxxbvxxxxxxxxxxpo031 = fdxxxxxxbvxxxxxxxxxxpo031;
-	}
-
-	@Column(name = "po032", length = 32)
-	@Size(max = 32)
-	public String getFhxxxxxxbvxxxxxxxxxxpo032() {
-		return this.fhxxxxxxbvxxxxxxxxxxpo032;
-	}
-
-	public void setFhxxxxxxbvxxxxxxxxxxpo032(String fhxxxxxxbvxxxxxxxxxxpo032) {
-		this.fhxxxxxxbvxxxxxxxxxxpo032 = fhxxxxxxbvxxxxxxxxxxpo032;
-	}
-
-	@Column(name = "po033", length = 32)
-	@Size(max = 32)
-	public String getFlxxxxxxbvxxxxxxxxxxpo033() {
-		return this.flxxxxxxbvxxxxxxxxxxpo033;
-	}
-
-	public void setFlxxxxxxbvxxxxxxxxxxpo033(String flxxxxxxbvxxxxxxxxxxpo033) {
-		this.flxxxxxxbvxxxxxxxxxxpo033 = flxxxxxxbvxxxxxxxxxxpo033;
-	}
-
-	@Column(name = "po034", length = 32)
-	@Size(max = 32)
-	public String getFpxxxxxxbvxxxxxxxxxxpo034() {
-		return this.fpxxxxxxbvxxxxxxxxxxpo034;
-	}
-
-	public void setFpxxxxxxbvxxxxxxxxxxpo034(String fpxxxxxxbvxxxxxxxxxxpo034) {
-		this.fpxxxxxxbvxxxxxxxxxxpo034 = fpxxxxxxbvxxxxxxxxxxpo034;
-	}
-
-	@Column(name = "po035", length = 32)
-	@Size(max = 32)
-	public String getFtxxxxxxbvxxxxxxxxxxpo035() {
-		return this.ftxxxxxxbvxxxxxxxxxxpo035;
-	}
-
-	public void setFtxxxxxxbvxxxxxxxxxxpo035(String ftxxxxxxbvxxxxxxxxxxpo035) {
-		this.ftxxxxxxbvxxxxxxxxxxpo035 = ftxxxxxxbvxxxxxxxxxxpo035;
-	}
-
-	@Column(name = "po036", length = 32)
-	@Size(max = 32)
-	public String getFxxxxxxxbvxxxxxxxxxxpo036() {
-		return this.fxxxxxxxbvxxxxxxxxxxpo036;
-	}
-
-	public void setFxxxxxxxbvxxxxxxxxxxpo036(String fxxxxxxxbvxxxxxxxxxxpo036) {
-		this.fxxxxxxxbvxxxxxxxxxxpo036 = fxxxxxxxbvxxxxxxxxxxpo036;
-	}
-
-	@Column(name = "po037", length = 32)
-	@Size(max = 32)
-	public String getGdxxxxxxbvxxxxxxxxxxpo037() {
-		return this.gdxxxxxxbvxxxxxxxxxxpo037;
-	}
-
-	public void setGdxxxxxxbvxxxxxxxxxxpo037(String gdxxxxxxbvxxxxxxxxxxpo037) {
-		this.gdxxxxxxbvxxxxxxxxxxpo037 = gdxxxxxxbvxxxxxxxxxxpo037;
-	}
-
-	@Column(name = "po038", length = 32)
-	@Size(max = 32)
-	public String getGhxxxxxxbvxxxxxxxxxxpo038() {
-		return this.ghxxxxxxbvxxxxxxxxxxpo038;
-	}
-
-	public void setGhxxxxxxbvxxxxxxxxxxpo038(String ghxxxxxxbvxxxxxxxxxxpo038) {
-		this.ghxxxxxxbvxxxxxxxxxxpo038 = ghxxxxxxbvxxxxxxxxxxpo038;
-	}
-
-	@Column(name = "po039", length = 32)
-	@Size(max = 32)
-	public String getGlxxxxxxbvxxxxxxxxxxpo039() {
-		return this.glxxxxxxbvxxxxxxxxxxpo039;
-	}
-
-	public void setGlxxxxxxbvxxxxxxxxxxpo039(String glxxxxxxbvxxxxxxxxxxpo039) {
-		this.glxxxxxxbvxxxxxxxxxxpo039 = glxxxxxxbvxxxxxxxxxxpo039;
-	}
-
-	@Column(name = "po040", length = 32)
-	@Size(max = 32)
-	public String getGpxxxxxxbvxxxxxxxxxxpo040() {
-		return this.gpxxxxxxbvxxxxxxxxxxpo040;
-	}
-
-	public void setGpxxxxxxbvxxxxxxxxxxpo040(String gpxxxxxxbvxxxxxxxxxxpo040) {
-		this.gpxxxxxxbvxxxxxxxxxxpo040 = gpxxxxxxbvxxxxxxxxxxpo040;
-	}
-
-	@Column(name = "po041", length = 32)
-	@Size(max = 32)
-	public String getGtxxxxxxbvxxxxxxxxxxpo041() {
-		return this.gtxxxxxxbvxxxxxxxxxxpo041;
-	}
-
-	public void setGtxxxxxxbvxxxxxxxxxxpo041(String gtxxxxxxbvxxxxxxxxxxpo041) {
-		this.gtxxxxxxbvxxxxxxxxxxpo041 = gtxxxxxxbvxxxxxxxxxxpo041;
-	}
-
-	@Column(name = "po042", length = 32)
-	@Size(max = 32)
-	public String getGxxxxxxxbvxxxxxxxxxxpo042() {
-		return this.gxxxxxxxbvxxxxxxxxxxpo042;
-	}
-
-	public void setGxxxxxxxbvxxxxxxxxxxpo042(String gxxxxxxxbvxxxxxxxxxxpo042) {
-		this.gxxxxxxxbvxxxxxxxxxxpo042 = gxxxxxxxbvxxxxxxxxxxpo042;
-	}
-
-	@Column(name = "po043", length = 32)
-	@Size(max = 32)
-	public String getHdxxxxxxbvxxxxxxxxxxpo043() {
-		return this.hdxxxxxxbvxxxxxxxxxxpo043;
-	}
-
-	public void setHdxxxxxxbvxxxxxxxxxxpo043(String hdxxxxxxbvxxxxxxxxxxpo043) {
-		this.hdxxxxxxbvxxxxxxxxxxpo043 = hdxxxxxxbvxxxxxxxxxxpo043;
-	}
-
-	@Column(name = "po044", length = 32)
-	@Size(max = 32)
-	public String getHhxxxxxxbvxxxxxxxxxxpo044() {
-		return this.hhxxxxxxbvxxxxxxxxxxpo044;
-	}
-
-	public void setHhxxxxxxbvxxxxxxxxxxpo044(String hhxxxxxxbvxxxxxxxxxxpo044) {
-		this.hhxxxxxxbvxxxxxxxxxxpo044 = hhxxxxxxbvxxxxxxxxxxpo044;
-	}
-
-	@Column(name = "po045", length = 32)
-	@Size(max = 32)
-	public String getHlxxxxxxbvxxxxxxxxxxpo045() {
-		return this.hlxxxxxxbvxxxxxxxxxxpo045;
-	}
-
-	public void setHlxxxxxxbvxxxxxxxxxxpo045(String hlxxxxxxbvxxxxxxxxxxpo045) {
-		this.hlxxxxxxbvxxxxxxxxxxpo045 = hlxxxxxxbvxxxxxxxxxxpo045;
-	}
-
-	@Column(name = "po046", length = 32)
-	@Size(max = 32)
-	public String getHpxxxxxxbvxxxxxxxxxxpo046() {
-		return this.hpxxxxxxbvxxxxxxxxxxpo046;
-	}
-
-	public void setHpxxxxxxbvxxxxxxxxxxpo046(String hpxxxxxxbvxxxxxxxxxxpo046) {
-		this.hpxxxxxxbvxxxxxxxxxxpo046 = hpxxxxxxbvxxxxxxxxxxpo046;
-	}
-
-	@Column(name = "po047", length = 32)
-	@Size(max = 32)
-	public String getHtxxxxxxbvxxxxxxxxxxpo047() {
-		return this.htxxxxxxbvxxxxxxxxxxpo047;
-	}
-
-	public void setHtxxxxxxbvxxxxxxxxxxpo047(String htxxxxxxbvxxxxxxxxxxpo047) {
-		this.htxxxxxxbvxxxxxxxxxxpo047 = htxxxxxxbvxxxxxxxxxxpo047;
-	}
-
-	@Column(name = "po048", length = 32)
-	@Size(max = 32)
-	public String getHxxxxxxxbvxxxxxxxxxxpo048() {
-		return this.hxxxxxxxbvxxxxxxxxxxpo048;
-	}
-
-	public void setHxxxxxxxbvxxxxxxxxxxpo048(String hxxxxxxxbvxxxxxxxxxxpo048) {
-		this.hxxxxxxxbvxxxxxxxxxxpo048 = hxxxxxxxbvxxxxxxxxxxpo048;
-	}
-
-	@Column(name = "po049", length = 32)
-	@Size(max = 32)
-	public String getIdxxxxxxbvxxxxxxxxxxpo049() {
-		return this.idxxxxxxbvxxxxxxxxxxpo049;
-	}
-
-	public void setIdxxxxxxbvxxxxxxxxxxpo049(String idxxxxxxbvxxxxxxxxxxpo049) {
-		this.idxxxxxxbvxxxxxxxxxxpo049 = idxxxxxxbvxxxxxxxxxxpo049;
-	}
-
-	@Column(name = "po050", length = 32)
-	@Size(max = 32)
-	public String getIhxxxxxxbvxxxxxxxxxxpo050() {
-		return this.ihxxxxxxbvxxxxxxxxxxpo050;
-	}
-
-	public void setIhxxxxxxbvxxxxxxxxxxpo050(String ihxxxxxxbvxxxxxxxxxxpo050) {
-		this.ihxxxxxxbvxxxxxxxxxxpo050 = ihxxxxxxbvxxxxxxxxxxpo050;
 	}
 
 }

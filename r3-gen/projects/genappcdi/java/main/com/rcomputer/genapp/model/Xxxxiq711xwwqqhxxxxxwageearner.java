@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -83,8 +83,6 @@ public class Xxxxiq711xwwqqhxxxxxwageearner implements java.io.Serializable {
 	private String y5xxuzdrbvxxxxxxxxxxdocmnt;
 	private Set<Xxxxeh742xwwqqhxxxxxwageearneraux> xxxxeh742xwwqqhxxxxxwageearnerauxes = new HashSet<Xxxxeh742xwwqqhxxxxxwageearneraux>(
 			0);
-	private Set<Xxxxeh742xwwqqhxxxxxwageearneraux> xxxxeh742xwwqqhxxxxxwageearnerauxes_1 = new HashSet<Xxxxeh742xwwqqhxxxxxwageearneraux>(
-			0);
 
 	public Xxxxiq711xwwqqhxxxxxwageearner() {
 	}
@@ -142,8 +140,7 @@ public class Xxxxiq711xwwqqhxxxxxwageearner implements java.io.Serializable {
 			String zlxxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
 			String y5xxuzdrbvxxxxxxxxxxdocmnt,
-			Set<Xxxxeh742xwwqqhxxxxxwageearneraux> xxxxeh742xwwqqhxxxxxwageearnerauxes,
-			Set<Xxxxeh742xwwqqhxxxxxwageearneraux> xxxxeh742xwwqqhxxxxxwageearnerauxes_1) {
+			Set<Xxxxeh742xwwqqhxxxxxwageearneraux> xxxxeh742xwwqqhxxxxxwageearnerauxes) {
 		this.jxxxbh400xwwqqhxxxxxemployee = jxxxbh400xwwqqhxxxxxemployee;
 		this.a0xxukaxbvxxxxxxxxxxwageearnerid = a0xxukaxbvxxxxxxxxxxwageearnerid;
 		this.b2xxutsxbvxxxxxxxxxxsin = b2xxutsxbvxxxxxxxxxxsin;
@@ -193,7 +190,6 @@ public class Xxxxiq711xwwqqhxxxxxwageearner implements java.io.Serializable {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.y5xxuzdrbvxxxxxxxxxxdocmnt = y5xxuzdrbvxxxxxxxxxxdocmnt;
 		this.xxxxeh742xwwqqhxxxxxwageearnerauxes = xxxxeh742xwwqqhxxxxxwageearnerauxes;
-		this.xxxxeh742xwwqqhxxxxxwageearnerauxes_1 = xxxxeh742xwwqqhxxxxxwageearnerauxes_1;
 	}
 
 	@Id
@@ -699,16 +695,6 @@ public class Xxxxiq711xwwqqhxxxxxwageearner implements java.io.Serializable {
 	public void setXxxxeh742xwwqqhxxxxxwageearnerauxes(
 			Set<Xxxxeh742xwwqqhxxxxxwageearneraux> xxxxeh742xwwqqhxxxxxwageearnerauxes) {
 		this.xxxxeh742xwwqqhxxxxxwageearnerauxes = xxxxeh742xwwqqhxxxxxwageearnerauxes;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "xxxxiq711xwwqqhxxxxxwageearner")
-	public Set<Xxxxeh742xwwqqhxxxxxwageearneraux> getXxxxeh742xwwqqhxxxxxwageearnerauxes_1() {
-		return this.xxxxeh742xwwqqhxxxxxwageearnerauxes_1;
-	}
-
-	public void setXxxxeh742xwwqqhxxxxxwageearnerauxes_1(
-			Set<Xxxxeh742xwwqqhxxxxxwageearneraux> xxxxeh742xwwqqhxxxxxwageearnerauxes_1) {
-		this.xxxxeh742xwwqqhxxxxxwageearnerauxes_1 = xxxxeh742xwwqqhxxxxxwageearnerauxes_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

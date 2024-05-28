@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -70,15 +70,9 @@ public class Trexuq344xwwqqhxxxxxvendorders implements java.io.Serializable {
 	private String ybxxuzdrbvxxxxxxxxxxdocmnt;
 	private Set<Trexuq3a6xwwqqhxxxxxvinvoice> trexuq3a6xwwqqhxxxxxvinvoices = new HashSet<Trexuq3a6xwwqqhxxxxxvinvoice>(
 			0);
-	private Set<Trexuq3a6xwwqqhxxxxxvinvoice> trexuq3a6xwwqqhxxxxxvinvoices_1 = new HashSet<Trexuq3a6xwwqqhxxxxxvinvoice>(
-			0);
 	private Set<Xoxxuq3d4xwwqqhxxxxxvendodetails> xoxxuq3d4xwwqqhxxxxxvendodetailses = new HashSet<Xoxxuq3d4xwwqqhxxxxxvendodetails>(
 			0);
-	private Set<Xoxxuq3d4xwwqqhxxxxxvendodetails> xoxxuq3d4xwwqqhxxxxxvendodetailses_1 = new HashSet<Xoxxuq3d4xwwqqhxxxxxvendodetails>(
-			0);
 	private Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens = new HashSet<Trexuq377xwwqqhxxxxxvshipmen>(
-			0);
-	private Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens_1 = new HashSet<Trexuq377xwwqqhxxxxxvshipmen>(
 			0);
 
 	public Trexuq344xwwqqhxxxxxvendorders() {
@@ -124,11 +118,8 @@ public class Trexuq344xwwqqhxxxxxvendorders implements java.io.Serializable {
 			String zzxxu2oxxhxxxxxxxxxxowner2,
 			String ybxxuzdrbvxxxxxxxxxxdocmnt,
 			Set<Trexuq3a6xwwqqhxxxxxvinvoice> trexuq3a6xwwqqhxxxxxvinvoices,
-			Set<Trexuq3a6xwwqqhxxxxxvinvoice> trexuq3a6xwwqqhxxxxxvinvoices_1,
 			Set<Xoxxuq3d4xwwqqhxxxxxvendodetails> xoxxuq3d4xwwqqhxxxxxvendodetailses,
-			Set<Xoxxuq3d4xwwqqhxxxxxvendodetails> xoxxuq3d4xwwqqhxxxxxvendodetailses_1,
-			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens,
-			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens_1) {
+			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens) {
 		this.jxxxuq300xwwqqhxxxxxvendor = jxxxuq300xwwqqhxxxxxvendor;
 		this.jxxxbh400xwwqqhxxxxxemployee = jxxxbh400xwwqqhxxxxxemployee;
 		this.fpxxfq1a5xwwqqhxxxxxitem = fpxxfq1a5xwwqqhxxxxxitem;
@@ -165,11 +156,8 @@ public class Trexuq344xwwqqhxxxxxvendorders implements java.io.Serializable {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.ybxxuzdrbvxxxxxxxxxxdocmnt = ybxxuzdrbvxxxxxxxxxxdocmnt;
 		this.trexuq3a6xwwqqhxxxxxvinvoices = trexuq3a6xwwqqhxxxxxvinvoices;
-		this.trexuq3a6xwwqqhxxxxxvinvoices_1 = trexuq3a6xwwqqhxxxxxvinvoices_1;
 		this.xoxxuq3d4xwwqqhxxxxxvendodetailses = xoxxuq3d4xwwqqhxxxxxvendodetailses;
-		this.xoxxuq3d4xwwqqhxxxxxvendodetailses_1 = xoxxuq3d4xwwqqhxxxxxvendodetailses_1;
 		this.trexuq377xwwqqhxxxxxvshipmens = trexuq377xwwqqhxxxxxvshipmens;
-		this.trexuq377xwwqqhxxxxxvshipmens_1 = trexuq377xwwqqhxxxxxvshipmens_1;
 	}
 
 	@Id
@@ -556,16 +544,6 @@ public class Trexuq344xwwqqhxxxxxvendorders implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq344xwwqqhxxxxxvendorders")
-	public Set<Trexuq3a6xwwqqhxxxxxvinvoice> getTrexuq3a6xwwqqhxxxxxvinvoices_1() {
-		return this.trexuq3a6xwwqqhxxxxxvinvoices_1;
-	}
-
-	public void setTrexuq3a6xwwqqhxxxxxvinvoices_1(
-			Set<Trexuq3a6xwwqqhxxxxxvinvoice> trexuq3a6xwwqqhxxxxxvinvoices_1) {
-		this.trexuq3a6xwwqqhxxxxxvinvoices_1 = trexuq3a6xwwqqhxxxxxvinvoices_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq344xwwqqhxxxxxvendorders")
 	public Set<Xoxxuq3d4xwwqqhxxxxxvendodetails> getXoxxuq3d4xwwqqhxxxxxvendodetailses() {
 		return this.xoxxuq3d4xwwqqhxxxxxvendodetailses;
 	}
@@ -576,16 +554,6 @@ public class Trexuq344xwwqqhxxxxxvendorders implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq344xwwqqhxxxxxvendorders")
-	public Set<Xoxxuq3d4xwwqqhxxxxxvendodetails> getXoxxuq3d4xwwqqhxxxxxvendodetailses_1() {
-		return this.xoxxuq3d4xwwqqhxxxxxvendodetailses_1;
-	}
-
-	public void setXoxxuq3d4xwwqqhxxxxxvendodetailses_1(
-			Set<Xoxxuq3d4xwwqqhxxxxxvendodetails> xoxxuq3d4xwwqqhxxxxxvendodetailses_1) {
-		this.xoxxuq3d4xwwqqhxxxxxvendodetailses_1 = xoxxuq3d4xwwqqhxxxxxvendodetailses_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq344xwwqqhxxxxxvendorders")
 	public Set<Trexuq377xwwqqhxxxxxvshipmen> getTrexuq377xwwqqhxxxxxvshipmens() {
 		return this.trexuq377xwwqqhxxxxxvshipmens;
 	}
@@ -593,16 +561,6 @@ public class Trexuq344xwwqqhxxxxxvendorders implements java.io.Serializable {
 	public void setTrexuq377xwwqqhxxxxxvshipmens(
 			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens) {
 		this.trexuq377xwwqqhxxxxxvshipmens = trexuq377xwwqqhxxxxxvshipmens;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq344xwwqqhxxxxxvendorders")
-	public Set<Trexuq377xwwqqhxxxxxvshipmen> getTrexuq377xwwqqhxxxxxvshipmens_1() {
-		return this.trexuq377xwwqqhxxxxxvshipmens_1;
-	}
-
-	public void setTrexuq377xwwqqhxxxxxvshipmens_1(
-			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmens_1) {
-		this.trexuq377xwwqqhxxxxxvshipmens_1 = trexuq377xwwqqhxxxxxvshipmens_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

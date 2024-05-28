@@ -1374,6 +1374,9 @@ public  class ${entityName}Home implements Serializable
 	${userEntityName?cap_first}List ${userEntityName}List;
 	@Inject
 	${cuidetailsEntityName?cap_first}Home ${cuidetailsEntityName}Home;
+	@Inject
+	${shipmentEntityName?cap_first}Home ${shipmentEntityName}Home;
+	${shipmentEntityName?cap_first} ${shipmentEntityName};
         @Inject ShoppingCartBean r3Cart; 
 
 
@@ -5374,15 +5377,23 @@ List<${userproflEntityName?cap_first}> results =  entityManager
     </#if>
 
    <#if entityFunction == "cp">
+   /**
+    * handles both np and cd types as opposed to prepaid pp or pd which goes to addWithDetailsPos
+    * comes from checkoutInvoiced or checkoutPOS save or from  r3Cart(shoppingCartBean) takeAction-confirmPayment , so establish context like customer,user(owner),
+   * if from checkoutInvoiced then use invoice and its order ,if checkouPOS ie order is not r3cart then use the order key 
+   * calls addWithDetails() which if no invoice will create invoice from the order and if POS will create shipment, since later no manual step for pickup or delivery 
+   * at end will create payment record
+   *@param invoice key, order key
+   *@see "addPWithDeailsPOS for square POS payment"
+   */
+
     public void addWithDetailsCod(String invoiceKey,String orderKey) {
-    // handles both np and cd types as opposed to prepaid pp or pd which goes to addWithDetailsPos
-    // comes from checkoutInvoiced or checkoutPOS or from takeAction r3Cart , so establish context like customer,user(owner),
      if(this.instance.getZ5xxuxxrbvxxxxxxxxxxpaybyid() !=null && !this.instance.getZ5xxuxxrbvxxxxxxxxxxpaybyid().isEmpty()){
       this.instance.setB6xxuxxrbv10xxxxxxxxpaytype("cq");
      }else{
       this.instance.setB6xxuxxrbv10xxxxxxxxpaytype("cash");
      }
-     if(!invoiceKey.isEmpty() && !invoiceKey.equals("r3Cart") ){
+     if(!invoiceKey.isEmpty() && !invoiceKey.equals("r3Cart") ){ //from checkoutInvoiced
       ${cuinvoiceEntityName} = ${cuinvoiceEntityName}List.getKeyToEntity(invoiceKey);
       if(${cuinvoiceEntityName} ==null){
         FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -5400,7 +5411,7 @@ List<${userproflEntityName?cap_first}> results =  entityManager
       ${customerEntityName}=${cuordersEntityName}.get${customerEntityName?cap_first}();
       this.getInstance().setJxxxuq201xwwqqhxxxxxcustomer(jxxxuq201xwwqqhxxxxxcustomer);//needed in journal
      }//invoice key checking
-     if(!orderKey.isEmpty() && !orderKey.equals("r3Cart") ){
+     if(!orderKey.isEmpty() && !orderKey.equals("r3Cart") ){//checkoutPOS
       ${cuordersEntityName} = ${cuordersEntityName}List.getKeyToEntity(orderKey);
       if(${cuordersEntityName} ==null){
         FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -5413,7 +5424,7 @@ List<${userproflEntityName?cap_first}> results =  entityManager
       ${customerEntityName}=${cuordersEntityName}.get${customerEntityName?cap_first}();
       this.getInstance().setJxxxuq201xwwqqhxxxxxcustomer(jxxxuq201xwwqqhxxxxxcustomer);//needed in journal
      }//order key checking
-     addWithDetails();
+     addWithDetails();// for all check if r3Cart call comes here since no invoice or order#
     }
     public void addWithDetailsPos(String orderKey,String tranId, String clTranId,String oO2Code) {
     // comes from takeAction r3Cart , so establish context like customer,user(owner),
@@ -5600,6 +5611,20 @@ List<${userproflEntityName?cap_first}> results =  entityManager
     } 
    </#if>
      <#--eo same as below, 9C ie process further dowm-->
+    <#if menuAttributesp2 == "9A"  >
+      if(this.instance.get${itemEntityName?cap_first}()==null){
+       FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+        FacesMessage.SEVERITY_ERROR,bundle.getString("item")+" "+ bundle.getString("not")+" "+bundle.getString("selected")+" "+bundle.getString("yet"),""));
+       bcontinue = false;
+      }
+      if(this.instance.get${itemjobEntityName?cap_first}()==null){
+       FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+        FacesMessage.SEVERITY_ERROR,bundle.getString("item")+" "+ bundle.getString("job")+" "+ bundle.getString("not")+" "+bundle.getString("selected")+" "+bundle.getString("yet"),""));
+       bcontinue = false;
+       return;
+      }
+   </#if>
+
 
      nextShow=true;// reset so that detail totals are calculated at least once
      Integer currentCartedPOSID;
@@ -5668,6 +5693,28 @@ List<${userproflEntityName?cap_first}> results =  entityManager
 
       trexuq266xwwqqhxxxxxcuinvoiceHome.setInstance(trexuq266xwwqqhxxxxxcuinvoice);
       trexuq266xwwqqhxxxxxcuinvoiceHome.superUpdate();
+
+     if(trexuq266xwwqqhxxxxxcuinvoice !=null ){
+      if(${shipmentEntityName} == null){
+       try{
+        ${shipmentEntityName}=${shipmentEntityName}Home.cartExtended_persist(${cuinvoiceEntityName});   //in POS, shipment record needs to be created here
+        //cartExtended_persist > extended_persist(true) creates new shipment along with detail records using  invoice records content  
+        if(${shipmentEntityName} ==null){
+         return;
+        }
+        ${shipmentEntityName}Home.clearInstance();
+        ${shipmentEntityName}Home.setInstance(${shipmentEntityName});
+        ${shipmentEntityName}.setZ7xxzzfxhhxxxxxxxxxxstatusfl(mpaid);
+        ${shipmentEntityName}.setJxxxuq201xwwqqhxxxxxcustomer(this.instance.getJxxxuq201xwwqqhxxxxxcustomer());//override customer
+        ${shipmentEntityName}Home.setInstance(${shipmentEntityName});
+        ${shipmentEntityName}Home.superUpdate();
+       } catch (Exception ex) {
+          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+           FacesMessage.SEVERITY_ERROR,bundle.getString("error")+" "+ bundle.getString("creating")+" "+bundle.getString("shipment")+", "+bundle.getString("error")+" "+ex.getMessage(),""));
+        return;
+       }
+      }
+     }
 
       this.instance.setTrexuq266xwwqqhxxxxxcuinvoice(trexuq266xwwqqhxxxxxcuinvoice);//cpayment invoice
       this.superUpdate();
@@ -7026,6 +7073,11 @@ may need to put account update here check gUpdate
          }
          
          // look into using reflection as in importcsv logic for property names
+               if(this.getMailingText5() == null){
+                FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+                 FacesMessage.SEVERITY_INFO,bundle.getString("Seat")+" "+bundle.getString("number")+" "+bundle.getString("not")+" "+bundle.getString("selected"),""));
+                return "";
+               }
                switch(this.getMailingText5()){
                 case "001":
                  beforeSt=seatI.getB1xxxxxxbvxxxxxxxxxxseat001status();
@@ -9072,6 +9124,9 @@ may need to put account update here check gUpdate
         Map<String,String> params = 
         FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String ratingV=params.get("rating"); //not sure why param passing rating, used to be ratingVal
+        if(ratingV == null){
+         ratingV="";
+        }
         customIdentity.setHoldValue(ratingV);
 
      if(keyWPrefix.isEmpty()){
@@ -9144,8 +9199,17 @@ may need to put account update here check gUpdate
        return "deleted";
       }
 
-      this.instance.setB1xxuzaxbvxxxxxxxxxxdata(data);
       this.instance.setZ2xxcztxlxxxxxxxxxxxstatusfldt(Calendar.getInstance().getTime());
+      if(type.equals("pub")){
+       this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mprinted);
+      }else{
+       if(this.instance.getA2xxuxxxbv50xxxxxxxxqualifier().contains("TXT")){
+        this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mconsign);
+       }else{
+        this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mopen);
+       }
+       this.instance.setB1xxuzaxbvxxxxxxxxxxdata(data);
+      }
       this.superdotupdate();
       timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss z").format(new Date());
       FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -9158,6 +9222,11 @@ may need to put account update here check gUpdate
      this.instance.setB1xxuzaxbvxxxxxxxxxxdata(data);
      this.instance.setZ3xxutoxlhxxxxxxxxxxowner(owner);
      this.instance.setZzxxu2oxxhxxxxxxxxxxowner2(owner2);
+     if(this.instance.getA2xxuxxxbv50xxxxxxxxqualifier().contains("TXT")){
+        this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mconsign);
+     }else{
+        this.instance.setZ1xxzzfxhhxxxxxxxxxxstatusfl(mopen);
+     }
      this.instance.setZ2xxcztxlxxxxxxxxxxxstatusfldt(Calendar.getInstance().getTime());
      this.instance.setA4xxexxxbvxxxxxxxxxxtype(type);
      this.superdotpersist();
@@ -12778,18 +12847,18 @@ may need to put account update here check gUpdate
           List<${perioddatesEntityName?cap_first}> listofPeriods=null;
           Iterator<${perioddatesEntityName?cap_first}> itr = null;
           
-		try {
+          try {
                 ${acintegrEntityName?cap_first} acintegr =null;
                 accountn="";
-			List<${acintegrEntityName?cap_first}> results =  entityManager
-					.createQuery(
-							"select cc from ${acintegrEntityName?cap_first} cc where cc.a2xxukwmbvxxxxxxxxxxmoduleid=:accIntegrationModule  and cc.a3xxukw8bvxxxxxxxxxxusagecode=:accIntegrationUsage and cc.a4xxukw9bvxxxxxxxxxxsetsid=:accIntegrationSet and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by cc.a0xxuobxbxxxxxxxxxxxsid asc")
-					.setParameter("accIntegrationModule", "GL")
-					.setParameter("accIntegrationUsage", "EAC")
-					.setParameter("accIntegrationSet", getIntegrationAccountSet())
-                           .setParameter("owner2", owner2Code)
-					.getResultList();
-                           if(!results.isEmpty()){
+	List<${acintegrEntityName?cap_first}> results =  entityManager
+	.createQuery(
+	"select cc from ${acintegrEntityName?cap_first} cc where cc.a2xxukwmbvxxxxxxxxxxmoduleid=:accIntegrationModule  and cc.a3xxukw8bvxxxxxxxxxxusagecode=:accIntegrationUsage and cc.a4xxukw9bvxxxxxxxxxxsetsid=:accIntegrationSet and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 order by cc.a0xxuobxbxxxxxxxxxxxsid asc")
+	.setParameter("accIntegrationModule", "GL")
+	.setParameter("accIntegrationUsage", "EAC")
+	.setParameter("accIntegrationSet", getIntegrationAccountSet())
+                 .setParameter("owner2", owner2Code)
+	.getResultList();
+                  if(!results.isEmpty()){
                             acintegr = results.get(0);
 			            accountn = acintegr.get${accountEntityName?cap_first}().getA0xxukwxbvxxxxxxxxxxaccount();
                             cEarningAccount=accountn;
@@ -12799,13 +12868,13 @@ may need to put account update here check gUpdate
                                      FacesMessage.SEVERITY_INFO,bundle.getString("no")+" "+ bundle.getString("current")+" "+ bundle.getString("earning")+" "+ bundle.getString("account")+" "+ bundle.getString("found")+", "+ bundle.getString("setup")+" "+ bundle.getString("account")+" "+ bundle.getString("integration")+" "+ bundle.getString("set"),""));
 
 			            bcontinue= false;
-                           } 
+                 } 
 
-		} catch (NoResultException ex) {
-			bcontinue= false;
-		}
+        } catch (NoResultException ex) {
+          bcontinue= false;
+       }
 
-		try {
+      try {
                 ${acintegrEntityName?cap_first} acintegr =null;
                 accountn="";
 			List<${acintegrEntityName?cap_first}> results =  entityManager
@@ -12829,17 +12898,17 @@ may need to put account update here check gUpdate
  			            bcontinue= false;
                            } 
 
-		} catch (NoResultException ex) {
+     } catch (NoResultException ex) {
 			bcontinue= false;
-		}
+     }
 
-		try {
+     try {
                 
                 calendar.setTime(getAcperiodDateFieldValue("cbd"));
                 currbusdate=calendar.getTime();
                 //${perioddatesEntityName}List.setMaxResults(1200);
-                ${perioddatesEntityName}List.setSearchDate(new Date(0));//jan  01 1970
-                listofPeriods=${perioddatesEntityName}List.getResultListMaxSet(1200) ;
+                ${perioddatesEntityName}List.setSearchDate(new Date(0));//
+                listofPeriods=${perioddatesEntityName}List.getSortedResultList() ;
                 // ListofPeriods are in asc order ie P12(index 11)  reset searchDate and check size
                 if(listofPeriods.size() < 14){
                  FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
@@ -13010,7 +13079,7 @@ may need to put account update here check gUpdate
                  ${accountEntityName}Home.allowUpdate();
 
                  // end of step 1 a & b  success
-		      try {
+                try {
 
                   //${perioddatesEntityName}List.setMaxResults(1200);
                   ///List<${perioddatesEntityName?cap_first}> listofPerioddates=${perioddatesEntityName}List.getResultListMaxSet(1200) ;
@@ -13024,21 +13093,21 @@ may need to put account update here check gUpdate
                    ${perioddatesEntityName}Home.allowUpdate();
 
                   }
-		      } catch (Exception e) {
+             } catch (Exception e) {
 			  log.severe( e.getMessage());
  			            bcontinue= false;
-		      }
+            }
 
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 			log.severe("${'#'}{messages['account_totals_field_iterator/persist_error_']} " + e.getMessage());
 
  			            bcontinue= false;
-		}
+       }
            // start step 2
            // now time to reset ytd values for customer/vendor/employee/item/activity
            // at successful end of step 2, reset parioddates entries statusfl back to 0s, so that it is ready for next Fyearend
-		try {
+     try {
 
                 //${customerEntityName}List.setMaxResults(1200);
                 List<${customerEntityName?cap_first}> listofCustomers=${customerEntityName}List.getResultListMaxSet(1200) ;
@@ -13050,10 +13119,10 @@ may need to put account update here check gUpdate
                           ${customerEntityName}Home.setInstance(${customerEntityName});
                           ${customerEntityName}Home.allowUpdate();
                         }
-		} catch (Exception e) {
+   } catch (Exception e) {
 			log.severe("Reset Customer Ytd error " + e.getMessage());
  			            bcontinue= false;
-		}
+   }
                  FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                                      FacesMessage.SEVERITY_INFO,bundle.getString("ytd")+" "+ bundle.getString("values")+" "+ bundle.getString("reset")+" "+ bundle.getString("to")+" 0 "+ bundle.getString("for")+", "+ bundle.getString("next")+" "+ bundle.getString("year"),""));
                  bcontinue= true;
@@ -13128,12 +13197,12 @@ may need to put account update here check gUpdate
                       }
 
                   
-		} catch (Exception e) {
+      } catch (Exception e) {
 		  log.severe( e.getMessage());
                         FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
                           FacesMessage.SEVERITY_INFO,bundle.getString("Error")+" "+ bundle.getString("client")+" "+ bundle.getString("record")+" "+e.getMessage(),""));
  		  bcontinue= false;
-      	         }
+       }
 
       }
     /**
@@ -14789,6 +14858,24 @@ may need to put account update here check gUpdate
          }
        }
     </#if>
+    <#if entityFunction == "sh" >
+      public ${shipmentEntityName?cap_first} cartExtended_persist(${cuinvoiceEntityName?cap_first} invoice) {
+        if(invoice == null){
+         FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+          FacesMessage.SEVERITY_ERROR,bundle.getString("customer")+" "+ bundle.getString("invoice")+" "+bundle.getString("is")+" "+bundle.getString("empty"),""));
+                 bcontinue=false;
+                 return null;
+         }
+         if(this.getInstance()==null){
+          this.clearInstance();//
+         }
+         this.getInstance().set${cuinvoiceEntityName?cap_first}(invoice);
+         ${cuinvoiceEntityName}=invoice;
+         extended_persist(true);//
+         return this.getInstance();
+        }
+    </#if>
+
    <#if entityFunction == "vo">
     /**
     * generate orders (vendor) for all items where qty is -ve or below reorder qty qtylevel1 (0.0 is initial/default value)
@@ -14972,11 +15059,20 @@ may need to put account update here check gUpdate
 	${venquoteEntityName} = this.instance.get${venquoteEntityName?cap_first}();//
        }
       <#elseif entityFunction=="vi">
-       if(this.instance.get${vendordersEntityName?cap_first}() == null){
-          return "null";
-      }
-       if(${vendordersEntityName}==null){
-	${vendordersEntityName} = this.instance.get${vendordersEntityName?cap_first}();//
+       if(this.instance.get${vendordersEntityName?cap_first}() == null && this.instance.get${vshipmenEntityName?cap_first}() == null ){
+         return "null";
+       }
+       if(this.instance.get${vendordersEntityName?cap_first}() != null && ${vendordersEntityName}==null){
+	${vendordersEntityName} = this.instance.get${vendordersEntityName?cap_first}();// order if present will be used otherwise shipment
+       }
+       if(this.instance.get${vshipmenEntityName?cap_first}() != null){
+         FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+          FacesMessage.SEVERITY_WARN,bundle.getString("Shipment")+" "+bundle.getString("to")+" "+bundle.getString("Invoice")+" "+bundle.getString("not")+" "+bundle.getString("supported"),""));
+         return "null";//
+       }
+
+       if(this.instance.get${vshipmenEntityName?cap_first}() != null && ${vshipmenEntityName}==null){
+	${vshipmenEntityName} = this.instance.get${vshipmenEntityName?cap_first}();// needs more logic not supported now
        }
       <#elseif entityFunction=="sv">
        // do we need to add vinvoice as foreign field jay ??
@@ -15277,7 +15373,12 @@ may need to put account update here check gUpdate
           nextShow=true;// reset so that detail totals are calculated at least once
          //}
          newOrdPrice=itemOrderDetail.getZ5xxzpxravxxxxxxxxxxordprice();
-         this.instance.setC3xxuxxrbv09xxxxxxxxterms(${cuordersEntityName}.getC2xxcxxxbv09xxxxxxxxterms());//copy order term into invoice
+         String sInvTerms=""; 
+         String invTerms= ${cuordersEntityName}.getC2xxcxxxbv09xxxxxxxxterms();
+         if(invTerms.length() > 12){
+          sInvTerms=invTerms.substring(0,12);
+         }
+         this.instance.setC3xxuxxrbv09xxxxxxxxterms(sInvTerms);//copy order term into invoice as reference
          persist();//new invoice  along with detail, use ord price which may not be item price
          skipValidation=true;
          // persist calls showtemprunt which calls createcdetails and more intialise the instance to avoid not saving each instance
@@ -30471,10 +30572,15 @@ public void deleteAllHidden() {
 		}
 	}
     /***
-    * comes from ??.xhtml for 
-    * 2 parameters item code,couponCode and client sid
-    * for trial the coupon code must contain trial in it and for yearly it should contaib renew
-    * The logic below needs a little change to handle renew (tbd)  
+    * comes from login.xhtml > signUp() for type loginsignin or from signup for type signin or demosignup for type demosignin
+    * or register.xhtml > doregister() for type gettingActi
+    * In login page resendActivation is shown only if the site has any activation pending 
+    * In other pages involving sendActivation, resend is autmatically tried in case it completed except for sending email 
+    *@parameters 2 type (gettingActi or signin) and otherid (contains user email)
+    * id entered is stored as credentials.getUserId if login resendActivation or as user instance id if signup or if register (user manager and admin) or if useredit in backoffice create user
+    * if user otherid is not correct or empty, signupemail can be entered manually
+    *@return boolean true if activation pending and email resent or false if error
+     *
     */
 
     public boolean doResendActivationEmail(String type,String otherId) {
@@ -30495,8 +30601,7 @@ public void deleteAllHidden() {
       // used in activation email 
       this.instance.setZzxxu2oxxhxxxxxxxxxxowner2(owner2Code);
      }
-
-     if(activationPending(otherId,owner2Code)){
+     if(activationPending(otherId,owner2Code,type)){
             // send the activation email ... as part of this transaction, user is global variable
             String activationLink="";
             boolean smtpEnabled = true;
@@ -30542,7 +30647,7 @@ public void deleteAllHidden() {
             String newUserLink = activationLink + ((activationLink.indexOf("?") != -1) ? "&act=" : "?act=") + user.getC9xxuxxxbvxxxxxxxxxxactivationkey();
             setNewUserLink(newUserLink);
             this.setInstance(user);// later override if needed
-            if (type.equals("signIn")){
+            if (type.equals("signIn") || type.equals("loginsignIn")){
              this.setClientEmail(user.getC1xxuxxxbvxxxxxxxxxxotherid() );
              this.instance.setC6xxuxuoivxxxxxxxxxxoldpw(user.getC6xxuxuoivxxxxxxxxxxoldpw());
             }
@@ -30557,7 +30662,7 @@ public void deleteAllHidden() {
             }    
             if (smtpEnabled) {
                 try {
-                 if (type.equals("signIn")){
+                 if (type.equals("signIn") || type.equals("loginsignIn")){
                    Emailsend("/activationSignUp.xhtml");
                    return true;
                  }
@@ -30589,26 +30694,44 @@ public void deleteAllHidden() {
             }
       
      }
+      FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+         FacesMessage.SEVERITY_ERROR,"No "+bundle.getString("match") +" "+bundle.getString("found") +" "+bundle.getString("for")+" "+bundle.getString("pending")+" "+bundle.getString("activation") +" "+bundle.getString("for") +" "+credentials.getUserId()+" / "+otherId,""));
      return false;
     }
-    public boolean activationPending(String otherId,String owner2Code) {
+    public boolean activationPending(String otherId,String owner2Code,String type) {
     // add logic to check in user table if admin ids activation key is not null for owner2 same as this servername
-        List<${userEntityName?cap_first}> results  =  entityManager
+        List<${userEntityName?cap_first}> results  = null;
+        String enteredId=null;
+        if( type.equals("loginsignIn")){
+         enteredId=credentials.getUserId();
+        }else{
+         enteredId=this.instance.getA0xxukuxbvxxxxxxxxxxid();
+        }
+        results  =  entityManager
  	.createQuery(
- 	"select cc from ${userEntityName?cap_first} cc where cc.c1xxuxxxbvxxxxxxxxxxotherid = :useremail and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 ")
- 	.setParameter("useremail", otherId)
- 	.setParameter("owner2", owner2Code)
+ 	"select cc from ${userEntityName?cap_first} cc where cc.a0xxukuxbvxxxxxxxxxxid = :enteredid  and cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 ")
+ 	.setParameter("owner2", owner2Code).setParameter("enteredid", enteredId)
  	.getResultList();
           if(results.isEmpty()){
+           FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+            FacesMessage.SEVERITY_ERROR,bundle.getString("No") +" "+bundle.getString("record") +"(s) "+", "+bundle.getString("found")+" "+bundle.getString("for")+" "+bundle.getString("user")+" "+enteredId,""));
                    return false;
           }
           if (results.size()>1){
            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-            FacesMessage.SEVERITY_ERROR,bundle.getString("multiple") +" "+bundle.getString("record") +"(s) ",""));
-                            
+            FacesMessage.SEVERITY_ERROR,bundle.getString("Multiple") +" "+bundle.getString("record") +"(s) "+", "+bundle.getString("found")+" "+bundle.getString("for")+" "+bundle.getString("user")+" "+enteredId,""));
+                   return false;
           }           
-
           user=results.get(0);
+
+          if(type.equals("signin") && (user.getC1xxuxxxbvxxxxxxxxxxotherid() ==null || user.getC1xxuxxxbvxxxxxxxxxxotherid().isEmpty()) && (otherId == null || otherId.isEmpty()) ){
+           FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+           FacesMessage.SEVERITY_ERROR,bundle.getString("user") +" "+bundle.getString("otherid field containing email info ") +" "+bundle.getString("missing")+" / "+bundle.getString("not")+" "+bundle.getString("entered"),""));
+           return false;
+          }
+          if(type.equals("signin") && (user.getC1xxuxxxbvxxxxxxxxxxotherid() ==null || user.getC1xxuxxxbvxxxxxxxxxxotherid().isEmpty()) && otherId != null && !otherId.isEmpty() ){
+           user.setC1xxuxxxbvxxxxxxxxxxotherid(otherId);//update user record email with entered value
+          }
           if (user.getC9xxuxxxbvxxxxxxxxxxactivationkey() != null && user.getC7xxfxxxivxxxxxxxxxxtemporarypassword()){
            return true;
           }else{
@@ -30777,12 +30900,12 @@ public void deleteAllHidden() {
                  }else{
  		  this.instance.setC2xxuxuaiv38xxxxxxxxalevel("P");
                  }
-             //  allow visitor to change own user record, user entity has VH 
-             // manager can lower a vistor from H to Q if needed
+             //  allow visitor to change own user record, user entity has VW 
+             // manager can change  a vistor from W to H or Q if needed/trusted
              if(productCode.equals("f") ){
-		   this.instance.setC3xxuxubiv39xxxxxxxxblevel("H");
+		   this.instance.setC3xxuxubiv39xxxxxxxxblevel("W");
              }else{
-		   this.instance.setC3xxuxubiv39xxxxxxxxblevel("H");
+		   this.instance.setC3xxuxubiv39xxxxxxxxblevel("W");
              }
             }
             calendare.add(Calendar.HOUR, 24);
@@ -32843,7 +32966,7 @@ public void deleteAllHidden() {
          bcontinue=false;
          log.severe("Error in sending email"+ ex);//continue
          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-         FacesMessage.SEVERITY_ERROR,bundle.getString("Email") +" "+bundle.getString("send")+" "+bundle.getString("failed") ,""));
+         FacesMessage.SEVERITY_ERROR,bundle.getString("Email") +" "+bundle.getString("from")+" "+fromName+" "+bundle.getString("send")+" "+bundle.getString("failed") ,""));
           String cause="";
           if(ex.getCause() !=null && ex.getCause().getCause()!=null){
            cause=ex.getCause().getCause().getMessage();
@@ -34022,7 +34145,7 @@ public void deleteAllHidden() {
       yxxxuq1m1xwwqqqxxxxxclobdata.setA0xxukcdlvxxxxxxxxxxfromtable("clobdata"); 
       yxxxuq1m1xwwqqqxxxxxclobdata.setA1xxuxxxbv49xxxxxxxxfromkey("3R-siteMap");
       yxxxuq1m1xwwqqqxxxxxclobdata.setA2xxuxxxbv50xxxxxxxxqualifier("TXT");
-      String min="<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\"><url><loc>https://www."+owner2Code+".com/</loc></url>";
+      String min="<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\"><url><loc>https://www."+owner2Code+customIdentity.getTld()+"/</loc></url>";
 
       yxxxuq1m1xwwqqqxxxxxclobdata.setB1xxuzaxbvxxxxxxxxxxdata(min);
       yxxxuq1m1xwwqqqxxxxxclobdata.setA3xxexnsbvxxxxxxxxxxsequence(0);
@@ -34241,7 +34364,7 @@ public void deleteAllHidden() {
       ${clobdataEntityName}.setA0xxukcdlvxxxxxxxxxxfromtable("clobdata"); 
       ${clobdataEntityName}.setA1xxuxxxbv49xxxxxxxxfromkey("3R-siteMap");
       ${clobdataEntityName}.setA2xxuxxxbv50xxxxxxxxqualifier("TXT");
-      String min="<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\"><url><loc>https://www."+owner2Code+".com/</loc></url>";
+      String min="<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\"><url><loc>https://www."+owner2Code+customIdentity.getTld()+"/</loc></url>";
 
       ${clobdataEntityName}.setB1xxuzaxbvxxxxxxxxxxdata(min);
       ${clobdataEntityName}.setA3xxexnsbvxxxxxxxxxxsequence(0);
@@ -40170,8 +40293,8 @@ try   {
       this.persist("SYSTEM");
       this.clearInstance();
       ${resourceEntityName}li=this.getInstance();
-      ${resourceEntityName}li.setA1xxuxxxbvxxxxxxxxxxvalue("includes .com part of the xxx.com,use default value shown, or override with your own registered domain name");
-      ${resourceEntityName}li.setA0xxukrdbvxxxxxxxxxxkey("tld_tip");
+      ${resourceEntityName}li.setA1xxuxxxbvxxxxxxxxxxvalue("includes .com part (called tld) of the xxx.com,use default value shown, or override with your own registered domain name");
+      ${resourceEntityName}li.setA0xxukrdbvxxxxxxxxxxkey("tld_tip_M");
       ${resourceEntityName}li.set${resource_bundleEntityName?cap_first}(${resource_bundleEntityName});
       ${resourceEntityName}li.setZ3xxutoxlhxxxxxxxxxxowner(ownerCode);
       ${resourceEntityName}li.setZzxxu2oxxhxxxxxxxxxxowner2("SYSTEM");
@@ -44417,7 +44540,7 @@ try   {
       this.persist("SYSTEM");
       this.clearInstance();
       ${resourceEntityName}li=this.getInstance();
-      ${resourceEntityName}li.setA1xxuxxxbvxxxxxxxxxxvalue("includes .com part of the xxx.com,use default value shown, or override with your own registered domain name");
+      ${resourceEntityName}li.setA1xxuxxxbvxxxxxxxxxxvalue("includes .com part (called tld) of the xxx.com,use default value shown, or override with your own registered domain name");
       ${resourceEntityName}li.setA0xxukrdbvxxxxxxxxxxkey("tld_tip");
       ${resourceEntityName}li.set${resource_bundleEntityName?cap_first}(${resource_bundleEntityName});
       ${resourceEntityName}li.setZ3xxutoxlhxxxxxxxxxxowner(ownerCode);

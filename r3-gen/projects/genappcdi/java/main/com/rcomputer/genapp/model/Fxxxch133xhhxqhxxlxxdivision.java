@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -44,12 +44,6 @@ public class Fxxxch133xhhxqhxxlxxdivision implements java.io.Serializable {
 			0);
 	private Set<Yxxxch601xwwqqhxxxxxaccount> yxxxch601xwwqqhxxxxxaccounts = new HashSet<Yxxxch601xwwqqhxxxxxaccount>(
 			0);
-	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees_1 = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
-			0);
-	private Set<Fxxxuq8axxwwqqhxxxxxproject> fxxxuq8axxwwqqhxxxxxprojects_1 = new HashSet<Fxxxuq8axxwwqqhxxxxxproject>(
-			0);
-	private Set<Yxxxch601xwwqqhxxxxxaccount> yxxxch601xwwqqhxxxxxaccounts_1 = new HashSet<Yxxxch601xwwqqhxxxxxaccount>(
-			0);
 
 	public Fxxxch133xhhxqhxxlxxdivision() {
 	}
@@ -66,10 +60,7 @@ public class Fxxxch133xhhxqhxxlxxdivision implements java.io.Serializable {
 			String zzxxu2oxxhxxxxxxxxxxowner2,
 			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees,
 			Set<Fxxxuq8axxwwqqhxxxxxproject> fxxxuq8axxwwqqhxxxxxprojects,
-			Set<Yxxxch601xwwqqhxxxxxaccount> yxxxch601xwwqqhxxxxxaccounts,
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees_1,
-			Set<Fxxxuq8axxwwqqhxxxxxproject> fxxxuq8axxwwqqhxxxxxprojects_1,
-			Set<Yxxxch601xwwqqhxxxxxaccount> yxxxch601xwwqqhxxxxxaccounts_1) {
+			Set<Yxxxch601xwwqqhxxxxxaccount> yxxxch601xwwqqhxxxxxaccounts) {
 		this.a0xxukoxbvxxxxxxxxxxdivcode = a0xxukoxbvxxxxxxxxxxdivcode;
 		this.b1xxuszsbvxxxxxxxxxxdescript = b1xxuszsbvxxxxxxxxxxdescript;
 		this.b2xxuzsxbvxxxxxxxxxxglprefix = b2xxuzsxbvxxxxxxxxxxglprefix;
@@ -81,9 +72,6 @@ public class Fxxxch133xhhxqhxxlxxdivision implements java.io.Serializable {
 		this.jxxxbh400xwwqqhxxxxxemployees = jxxxbh400xwwqqhxxxxxemployees;
 		this.fxxxuq8axxwwqqhxxxxxprojects = fxxxuq8axxwwqqhxxxxxprojects;
 		this.yxxxch601xwwqqhxxxxxaccounts = yxxxch601xwwqqhxxxxxaccounts;
-		this.jxxxbh400xwwqqhxxxxxemployees_1 = jxxxbh400xwwqqhxxxxxemployees_1;
-		this.fxxxuq8axxwwqqhxxxxxprojects_1 = fxxxuq8axxwwqqhxxxxxprojects_1;
-		this.yxxxch601xwwqqhxxxxxaccounts_1 = yxxxch601xwwqqhxxxxxaccounts_1;
 	}
 
 	@Id
@@ -210,36 +198,6 @@ public class Fxxxch133xhhxqhxxlxxdivision implements java.io.Serializable {
 	public void setYxxxch601xwwqqhxxxxxaccounts(
 			Set<Yxxxch601xwwqqhxxxxxaccount> yxxxch601xwwqqhxxxxxaccounts) {
 		this.yxxxch601xwwqqhxxxxxaccounts = yxxxch601xwwqqhxxxxxaccounts;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxch133xhhxqhxxlxxdivision")
-	public Set<Jxxxbh400xwwqqhxxxxxemployee> getJxxxbh400xwwqqhxxxxxemployees_1() {
-		return this.jxxxbh400xwwqqhxxxxxemployees_1;
-	}
-
-	public void setJxxxbh400xwwqqhxxxxxemployees_1(
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployees_1) {
-		this.jxxxbh400xwwqqhxxxxxemployees_1 = jxxxbh400xwwqqhxxxxxemployees_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxch133xhhxqhxxlxxdivision")
-	public Set<Fxxxuq8axxwwqqhxxxxxproject> getFxxxuq8axxwwqqhxxxxxprojects_1() {
-		return this.fxxxuq8axxwwqqhxxxxxprojects_1;
-	}
-
-	public void setFxxxuq8axxwwqqhxxxxxprojects_1(
-			Set<Fxxxuq8axxwwqqhxxxxxproject> fxxxuq8axxwwqqhxxxxxprojects_1) {
-		this.fxxxuq8axxwwqqhxxxxxprojects_1 = fxxxuq8axxwwqqhxxxxxprojects_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxch133xhhxqhxxlxxdivision")
-	public Set<Yxxxch601xwwqqhxxxxxaccount> getYxxxch601xwwqqhxxxxxaccounts_1() {
-		return this.yxxxch601xwwqqhxxxxxaccounts_1;
-	}
-
-	public void setYxxxch601xwwqqhxxxxxaccounts_1(
-			Set<Yxxxch601xwwqqhxxxxxaccount> yxxxch601xwwqqhxxxxxaccounts_1) {
-		this.yxxxch601xwwqqhxxxxxaccounts_1 = yxxxch601xwwqqhxxxxxaccounts_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

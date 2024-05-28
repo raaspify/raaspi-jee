@@ -164,6 +164,7 @@
                <f:selectItem itemValue="050" itemLabel="050" />
              </h:selectOneMenu>
            </ui:decorate>
+           &nbsp;${'#'}{fxxxuq1skxwwqqhxxxxxseatHome.instance.a3xxuxxxbvxxxxxxxxxxrowlabel}&nbsp;&nbsp;
 
            <ui:decorate id="seatDecorationT" template="layout/edit.xhtml" >
             <ui:define name="label">${'#'}{messages['Seat']} ${'#'}{messages['number']} 

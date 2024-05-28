@@ -997,9 +997,11 @@ public class ${entityName}List implements Serializable
   <#assign search2="a1xxuxxxbvxxxxxxxxxxvalue">
 </#if>
 
-
 <#if (menuAttributes?contains("M") ) >
   <#assign search3="b1xxuzaxbvxxxxxxxxxxdata">
+  <#if menuAttributesp2 == "16" >  
+  <#assign search3="b1xxuszsbvxxxxxxxxxxdescript">
+  </#if>
 <#elseif (menuAttributes?contains("T") ) >
  <#if menuAttributes?substring(efS,efS2)?contains("2")>
   <#assign search2=customerEntityName+".a0xxukxxbvxxxxxxxxxxcustomer">
@@ -1016,6 +1018,7 @@ public class ${entityName}List implements Serializable
  </#if>
 
 </#if>
+
    <#if keyField !="">
     <#if menuAttributesp2 == "1M" >
      String lorderColumn = "a1xxuxxxbv49xxxxxxxxfromkey";
@@ -3090,8 +3093,8 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
                 Date searchDate= calendar.getTime();
 		Long count =  (Long)getEntityManager()
 		 .createQuery(
-		 "select count(cc) from ${entityName}  cc where cc.f6xxuxxxlvxxxxxxxxxxlicensetype = :type ")
-		 .setParameter("type", "TrialPending")
+		 "select count(cc) from ${entityName}  cc where cc.a0xxukxxbvxxxxxxxxxxclientversion = :nKeyName and cc.f6xxuxxxlvxxxxxxxxxxlicensetype = :type ")
+		 .setParameter("type", "TrialPending").setParameter("nKeyName","01")
 		 .getSingleResult();
                 return count;
        <#else>
@@ -3108,12 +3111,10 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
        <#if statusFlagField !="Not assigned">
                 calendar.add(Calendar.DATE, +30); //30 days in advance, can check further for 15 days/7 days/ expiry
                 Date searchDate= calendar.getTime();
-
-
 		Long count =  (Long)getEntityManager()
 		.createQuery(
-		"select count(cc) from ${entityName}  cc where cc.${statusFlagField} <> :flag AND cast(cc.f8xxcxxxlvxxxxxxxxxxlicenseend AS date) < cast(:searchDate AS date) AND (cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 or cc.zzxxu2oxxhxxxxxxxxxxowner2 = 'SYSTEM') ")
-		.setParameter("owner2", owner2Code).setParameter("searchDate", searchDate).setParameter("flag", mclosed)
+		"select count(cc) from ${entityName}  cc where cc.a0xxukxxbvxxxxxxxxxxclientversion = :nKeyName and cc.${statusFlagField} <> :flag AND cast(cc.f8xxcxxxlvxxxxxxxxxxlicenseend AS date) < cast(:searchDate AS date) ")
+		.setParameter("searchDate", searchDate).setParameter("flag", mclosed).setParameter("nKeyName","01")
 		.getSingleResult();
                 return count;
        <#else>
@@ -3132,11 +3133,10 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
                 calendar.add(Calendar.DATE, -3); //3 days in past, can check further for 15 days/7 days/ expiry
                 Date searchDate= calendar.getTime();
 
-
 		Long count =  (Long)getEntityManager()
 		.createQuery(
-		"select count(cc) from ${entityName}  cc where cc.${statusFlagField} = :flag AND cast(cc.zfxxcztxlxxxxxxxxxxxstatusfldt AS date) < cast(:searchDate AS date) AND (cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 or cc.zzxxu2oxxhxxxxxxxxxxowner2 = 'SYSTEM') ")
-		.setParameter("owner2", owner2Code).setParameter("searchDate", searchDate).setParameter("flag", mordered)
+		"select count(cc) from ${entityName}  cc where cc.a0xxukxxbvxxxxxxxxxxclientversion = :nKeyName and cc.${statusFlagField} = :flag AND cast(cc.zfxxcztxlxxxxxxxxxxxstatusfldt AS date) < cast(:searchDate AS date)  ")
+		.setParameter("searchDate", searchDate).setParameter("flag", mordered).setParameter("nKeyName","01")
 		.getSingleResult();
                 return count;
        <#else>
@@ -3158,8 +3158,8 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
 
 		Long count =  (Long)getEntityManager()
 					.createQuery(
-							"select count(cc) from ${entityName}  cc where cc.${statusFlagField} <> :flag AND cast(cc.zfxxcztxlxxxxxxxxxxxstatusfldt AS date) < cast(:searchDate AS date) AND (cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2 or cc.zzxxu2oxxhxxxxxxxxxxowner2 = 'SYSTEM') ")
-					.setParameter("owner2", owner2Code).setParameter("searchDate", searchDate).setParameter("flag", mclosed)
+							"select count(cc) from ${entityName}  cc where cc.a0xxukxxbvxxxxxxxxxxclientversion = :nKeyName and cc.${statusFlagField} <> :flag AND cast(cc.zfxxcztxlxxxxxxxxxxxstatusfldt AS date) < cast(:searchDate AS date)  ")
+					.setParameter("searchDate", searchDate).setParameter("flag", mclosed).setParameter("nKeyName","01")
 					.getSingleResult();
                 return count;
        <#else>
@@ -3582,6 +3582,31 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
       
      }
 
+       /**
+    * The following method added since hql seems to be dropping order by in some queries (perioddates getResultList() )and where order is important
+    * @param args -none
+    * @return List<Yxxxuq632xwwqqhxxxxxperioddates>
+    * @exception to be added
+    * @see getResultList()
+    */
+
+     public List<${entityName}> getSortedResultList(){
+            if(getOrderColumn()!=null){
+             lorderColumn=getOrderColumn();
+            }
+            if(getOrderDirection()!=null){
+            lorderDirection=getOrderDirection();
+            }
+            lorder=lorderColumn+" "+lorderDirection;
+            sresults=null;
+            sresults =  getEntityManager()
+             .createQuery(
+               "select cc from ${entityName?cap_first}  cc where (cc.zzxxu2oxxhxxxxxxxxxxowner2 = :owner2  ) order by "+ lorder)
+                 .setParameter("owner2", owner2Code)
+                  .getResultList();
+       return sresults;
+      }
+
 
        /**
     * The following method overrides seam method because setOrder did not work 
@@ -3608,7 +3633,7 @@ List<Yrxxch511xhhxxhxxxxxoptions> results=null;
       // maxResults may be set by caller or already set as 6
       // search1 ie key property may be empty , getFirst is a method in seam superclass and sets the first record
       // use seq not key seqs for numeric ordering //jayresultList
-
+ 
       <#if !search2?has_content>
        <#assign search2=search1>
       </#if>
@@ -6033,6 +6058,42 @@ if found return orderdetail list,can be maultiple match
 
      <#if menuAttributesp2?contains("1A")>
         /***
+        * used by mydashboard to show item needing publish review
+        * get fromkey from clobdata preadd prefix (assume B) and call this method
+        */
+
+     public ${itemEntityName?cap_first} getDocmntWPrefixToEntity(String docmnt){
+      if(docmnt == null || docmnt.isEmpty()){
+       return null;
+      }
+      ${itemEntityName?cap_first} entity=null;
+      List<${itemEntityName?cap_first}> results=null;
+      try{
+       results = getEntityManager()
+					.createQuery(
+							"select cc from ${itemEntityName?cap_first} cc where cc.w8xxuzdrbvxxxxxxxxxxdocmnt = :sDocmnt and zzxxu2oxxhxxxxxxxxxxowner2 = :owner2")
+					.setParameter("sDocmnt",docmnt)
+					.setParameter("owner2", owner2Code)
+					.getResultList();
+      }catch(Exception e){
+        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+         FacesMessage.SEVERITY_ERROR,bundle.getString("${itemEntityName?substring(eL)}")+" "+bundle.getString("error")+" "+e.getMessage(), ""));
+       return null;
+      }
+      if(results.isEmpty()){
+          return null;
+      }
+      if(results.size() >1){
+          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+           FacesMessage.SEVERITY_INFO,bundle.getString("${itemEntityName?substring(eL)}")+" "+bundle.getString("multiple")+" "+bundle.getString("entries")+", "+docmnt,""));
+          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+           FacesMessage.SEVERITY_ERROR,bundle.getString("first")+" "+bundle.getString("one")+" "+bundle.getString("used"), ""));
+      }
+      return results.get(0);
+
+     } 
+
+        /***
         * assumes aliascode in Item has ApplicationFunction (client prodcode) value like fsot or eege or ee
         * manually add code in items meant for raaspi subscription, better put a warning if raaspi,SI-D and 
         * alias code is empty
@@ -6444,8 +6505,8 @@ if found return orderdetail list,can be maultiple match
                 String owner2CodeS="SYSTEM";// test how it behaves
                  prefix="0";
                  if( customIdentity.hasRole("VW") || customIdentity.hasRole("VQ")||customIdentity.hasRole("VH")||customIdentity.hasRole("PH")){
-			return getEntityManager().createQuery(" select cc from ${entityName} cc where cc.${keyField} >=:keyOfEntity AND cc.${statusFlagField} != :flag AND cc.c6xxusxrbv16xxxxxxxxtype LIKE  :showTypePrefix1  AND (cc.zzxxu2oxxhxxxxxxxxxxowner2=:owner2S) AND cc.zexxutoxlhxxxxxxxxxxowner=:ownerCode order by cc.${keyField}")
-        				.setParameter("keyOfEntity", prefix).setParameter("flag", mclosed).setParameter("showTypePrefix1", "BI-L%").setParameter("owner2", owner2Code).setParameter("owner2S", owner2CodeS)
+			return getEntityManager().createQuery(" select cc from ${entityName} cc where cc.${keyField} >=:keyOfEntity AND cc.${statusFlagField} != :flag AND cc.c6xxusxrbv16xxxxxxxxtype LIKE  :showTypePrefix1  AND (cc.zzxxu2oxxhxxxxxxxxxxowner2=:owner2S)  order by cc.${keyField}")
+        				.setParameter("keyOfEntity", prefix).setParameter("flag", mclosed).setParameter("showTypePrefix1", "BI-L%").setParameter("owner2S", owner2CodeS)
 					.getResultList();
                  //NC will come here
                  }else{
@@ -12955,7 +13016,7 @@ if found return orderdetail list,can be maultiple match
 		return getEntityManager()
 		 .createQuery(
 		  "select cc from ${cuordersEntityName?cap_first} cc where (cc.zzxxu2oxxhxxxxxxxxxxowner2=:owner2 and (zcxxzzfxhhxxxxxxxxxxstatusfl < :s and zcxxzzfxhhxxxxxxxxxxstatusfl <> :sc)  AND cc.y9xxcxxxbv10xxxxxxxxtype=:type AND cc.${itemEntityName}.c6xxusxrbv16xxxxxxxxtype=:mtype) order by cc.a0xxuobxbxxxxxxxxxxxsid")
-		   .setParameter("s", mshipped).setParameter("owner2", owner2Code).setParameter("type", type).setParameter("mtype", "FI-D").getResultList();
+		   .setParameter("s", mshipped).setParameter("sc", mclosed).setParameter("owner2", owner2Code).setParameter("type", type).setParameter("mtype", "FI-D").getResultList();
           }
 	}
 
@@ -14948,6 +15009,12 @@ curl --request POST \
          // retry with refresh if failed on bad token or expired token then only get a new token using
          // existing refresh token(client site record 07 clientId)
          // send again using new token is there subcode for expired or check token expiry?
+         if(cause.contains("invalid")){
+          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+           FacesMessage.SEVERITY_INFO,bundle.getString("Invalid")+" "+ bundle.getString("email")+" "+bundle.getString("may")+" "+bundle.getString("mean")+" "+bundle.getString("space ")+" "+bundle.getString("at")+" "+bundle.getString("end")+", "+" "+bundle.getString("sender")+" "+bundle.getString("email")+" "+bundle.getString("not")+" "+bundle.getString("smtp")+" "+bundle.getString("user"),""));
+          FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+           FacesMessage.SEVERITY_INFO,bundle.getString("client")+" "+ bundle.getString("record")+" "+bundle.getString("05")+" "+bundle.getString("client")+" "+bundle.getString("email ")+" "+bundle.getString("field")+" "+bundle.getString("allows")+" "+bundle.getString("override"),""));
+         } 
          if(cause.contains("334")){
           
           password=r3RestClient.getAccessTokenGMail(client.getDaxxuzxdssxxxxxxxxxxapiclientid().trim(),"refresh_token",owner2Code );
@@ -15885,7 +15952,7 @@ curl --request POST \
 		.setParameter("owner2", owner2Code)
 		.getSingleResult();
 
-         setClientEMail("doNotReply@"+owner2Code+".com"); 
+         setClientEMail("doNotReply@"+owner2Code+customIdentity.getTld()); 
          //can come here as loggedIn or not loggedIn but eMail entered
          if(identity.isLoggedIn()){   
           //All loggedIn has customer record but may not have employee example self signedup 
@@ -15907,7 +15974,7 @@ curl --request POST \
 
          }else{
           if (client.get${clientImailaddr?cap_first}() == null || client.get${clientImailaddr?cap_first}().isEmpty()){
-           setClientEMail("doNotReply@"+owner2Code+".com"); 
+           setClientEMail("doNotReply@"+owner2Code+customIdentity.getTld()); 
            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
             FacesMessage.SEVERITY_WARN,bundle.getString("client")+" "+bundle.getString("email")+" "+bundle.getString("address")+" "+bundle.getString("is")+" "+bundle.getString("missing"),""));
 

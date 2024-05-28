@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -74,13 +74,7 @@ public class Trexuq333xwwqqhxxxxxvenquote implements java.io.Serializable {
 			0);
 	private Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes = new HashSet<Trexuq333xwwqqhxxxxxvenquote>(
 			0);
-	private Set<Trexuq344xwwqqhxxxxxvendorders> trexuq344xwwqqhxxxxxvendorderses_1 = new HashSet<Trexuq344xwwqqhxxxxxvendorders>(
-			0);
 	private Set<Xoxxuq3e4xwwqqhxxxxxvendqdetails> xoxxuq3e4xwwqqhxxxxxvendqdetailses = new HashSet<Xoxxuq3e4xwwqqhxxxxxvendqdetails>(
-			0);
-	private Set<Xoxxuq3e4xwwqqhxxxxxvendqdetails> xoxxuq3e4xwwqqhxxxxxvendqdetailses_1 = new HashSet<Xoxxuq3e4xwwqqhxxxxxvendqdetails>(
-			0);
-	private Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes_1 = new HashSet<Trexuq333xwwqqhxxxxxvenquote>(
 			0);
 
 	public Trexuq333xwwqqhxxxxxvenquote() {
@@ -129,10 +123,7 @@ public class Trexuq333xwwqqhxxxxxvenquote implements java.io.Serializable {
 			String ydxxuzdrbvxxxxxxxxxxdocmnt,
 			Set<Trexuq344xwwqqhxxxxxvendorders> trexuq344xwwqqhxxxxxvendorderses,
 			Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes,
-			Set<Trexuq344xwwqqhxxxxxvendorders> trexuq344xwwqqhxxxxxvendorderses_1,
-			Set<Xoxxuq3e4xwwqqhxxxxxvendqdetails> xoxxuq3e4xwwqqhxxxxxvendqdetailses,
-			Set<Xoxxuq3e4xwwqqhxxxxxvendqdetails> xoxxuq3e4xwwqqhxxxxxvendqdetailses_1,
-			Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes_1) {
+			Set<Xoxxuq3e4xwwqqhxxxxxvendqdetails> xoxxuq3e4xwwqqhxxxxxvendqdetailses) {
 		this.jxxxuq300xwwqqhxxxxxvendor = jxxxuq300xwwqqhxxxxxvendor;
 		this.jxxxbh400xwwqqhxxxxxemployee = jxxxbh400xwwqqhxxxxxemployee;
 		this.trexuq333xwwqqhxxxxxvenquote = trexuq333xwwqqhxxxxxvenquote;
@@ -172,10 +163,7 @@ public class Trexuq333xwwqqhxxxxxvenquote implements java.io.Serializable {
 		this.ydxxuzdrbvxxxxxxxxxxdocmnt = ydxxuzdrbvxxxxxxxxxxdocmnt;
 		this.trexuq344xwwqqhxxxxxvendorderses = trexuq344xwwqqhxxxxxvendorderses;
 		this.trexuq333xwwqqhxxxxxvenquotes = trexuq333xwwqqhxxxxxvenquotes;
-		this.trexuq344xwwqqhxxxxxvendorderses_1 = trexuq344xwwqqhxxxxxvendorderses_1;
 		this.xoxxuq3e4xwwqqhxxxxxvendqdetailses = xoxxuq3e4xwwqqhxxxxxvendqdetailses;
-		this.xoxxuq3e4xwwqqhxxxxxvendqdetailses_1 = xoxxuq3e4xwwqqhxxxxxvendqdetailses_1;
-		this.trexuq333xwwqqhxxxxxvenquotes_1 = trexuq333xwwqqhxxxxxvenquotes_1;
 	}
 
 	@Id
@@ -593,16 +581,6 @@ public class Trexuq333xwwqqhxxxxxvenquote implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq333xwwqqhxxxxxvenquote")
-	public Set<Trexuq344xwwqqhxxxxxvendorders> getTrexuq344xwwqqhxxxxxvendorderses_1() {
-		return this.trexuq344xwwqqhxxxxxvendorderses_1;
-	}
-
-	public void setTrexuq344xwwqqhxxxxxvendorderses_1(
-			Set<Trexuq344xwwqqhxxxxxvendorders> trexuq344xwwqqhxxxxxvendorderses_1) {
-		this.trexuq344xwwqqhxxxxxvendorderses_1 = trexuq344xwwqqhxxxxxvendorderses_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq333xwwqqhxxxxxvenquote")
 	public Set<Xoxxuq3e4xwwqqhxxxxxvendqdetails> getXoxxuq3e4xwwqqhxxxxxvendqdetailses() {
 		return this.xoxxuq3e4xwwqqhxxxxxvendqdetailses;
 	}
@@ -610,26 +588,6 @@ public class Trexuq333xwwqqhxxxxxvenquote implements java.io.Serializable {
 	public void setXoxxuq3e4xwwqqhxxxxxvendqdetailses(
 			Set<Xoxxuq3e4xwwqqhxxxxxvendqdetails> xoxxuq3e4xwwqqhxxxxxvendqdetailses) {
 		this.xoxxuq3e4xwwqqhxxxxxvendqdetailses = xoxxuq3e4xwwqqhxxxxxvendqdetailses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq333xwwqqhxxxxxvenquote")
-	public Set<Xoxxuq3e4xwwqqhxxxxxvendqdetails> getXoxxuq3e4xwwqqhxxxxxvendqdetailses_1() {
-		return this.xoxxuq3e4xwwqqhxxxxxvendqdetailses_1;
-	}
-
-	public void setXoxxuq3e4xwwqqhxxxxxvendqdetailses_1(
-			Set<Xoxxuq3e4xwwqqhxxxxxvendqdetails> xoxxuq3e4xwwqqhxxxxxvendqdetailses_1) {
-		this.xoxxuq3e4xwwqqhxxxxxvendqdetailses_1 = xoxxuq3e4xwwqqhxxxxxvendqdetailses_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq333xwwqqhxxxxxvenquote")
-	public Set<Trexuq333xwwqqhxxxxxvenquote> getTrexuq333xwwqqhxxxxxvenquotes_1() {
-		return this.trexuq333xwwqqhxxxxxvenquotes_1;
-	}
-
-	public void setTrexuq333xwwqqhxxxxxvenquotes_1(
-			Set<Trexuq333xwwqqhxxxxxvenquote> trexuq333xwwqqhxxxxxvenquotes_1) {
-		this.trexuq333xwwqqhxxxxxvenquotes_1 = trexuq333xwwqqhxxxxxvenquotes_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

@@ -40,6 +40,7 @@ import javax.persistence.*;
 * This is Action class
 * comes here from login page which call login() method
 * which in turn calls Authenticator authenticate() method()
+* it also comes from Authenticator, homepage >authenticator.setClientChosenSkin>customIdentity.getMasterSiteCode
 * increases session time out to 40mts from visitor 10mts, if loggedIn
 * @author 3r Computer Systems
 */
@@ -113,6 +114,7 @@ public class CustomIdentity implements Serializable{
   private boolean debug = false;
   private String[] holdArray=new String[200];
   String loggedTimeOut="40";
+  String tld="";
     //
     @PostConstruct
     public void initialize() {
@@ -120,8 +122,6 @@ public class CustomIdentity implements Serializable{
      String urlName="";
      try{
       FacesContext facesContext = FacesContext.getCurrentInstance();
-        //log.severe("jay customIdentity initialize facesContext: "+facesContext+" "+masterSiteEmail+" "+masterSiteCode+" "+masterSiteUrl);
-
       if(facesContext != null ){
        externalContext = facesContext.getExternalContext();
        urlName=((javax.servlet.http.HttpServletRequest) externalContext.getRequest()).getServerName();
@@ -134,7 +134,8 @@ public class CustomIdentity implements Serializable{
        }else{
         owner2=urlName.substring(0,urlIndex);
        }
-          //extract subdomain if used. if subdomain, masterSiteCode will have a value
+       //urlIndex is the last dot and include dot in top level domain, if present otherwise let it be empty
+       tld=urlName.substring(urlIndex);
          if(!this.getMasterSiteCode().isEmpty()){
           owner2=owner2.replace("."+this.getMasterSiteCode(),"");
          }
@@ -157,12 +158,8 @@ public class CustomIdentity implements Serializable{
 	.setParameter("masterYN", true)
 	.getResultList();
        }catch(Exception e){
-        //FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-        //FacesMessage.SEVERITY_ERROR,"customIdentity initialize() MasterSite Client record read error "+e.getMessage(), ""));
-        //FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
-        //FacesMessage.SEVERITY_ERROR,"This error happens until MasterSite is created and server is stopped and started ", ""));
-        log.severe("customIdentity initialize() MasterSite Client record read error "+e.getMessage());
-        log.info("This error happens until MasterSite is created and server is stopped and started ");
+        log.info("Client record read error happens until MasterSite is created and server is stopped and started ");
+       e.printStackTrace(System.out);
         return;
        }
        if(results.size() >1){
@@ -187,9 +184,14 @@ public class CustomIdentity implements Serializable{
         log.severe("Error loggedTimeOut from web.xml context: "+ loggedTimeOut);
         loggedTimeOut="40";
        }
-      }//end of facesContext check
+      }else{
+       //facesContext should not be null, 
+        log.severe("customIdentity initialize facesContext null value: "+facesContext+" "+masterSiteEmail+" "+masterSiteCode+" "+masterSiteUrl+ "forcing trace");
+      }
      } catch (Exception e) {
-        log.severe("Error at customIdentity initialize() "+"externalContext: "+externalContext+" url: "+urlName+" error: "+ e.getMessage());
+       //any null eaxeption will come here
+       log.severe("Exception at customIdentity initialize() externalContext value "+externalContext);
+       log.severe("Error at customIdentity initialize() "+"externalContext: "+externalContext+" url: "+urlName+" error: "+ e.getMessage());
      }
     }
 
@@ -396,6 +398,14 @@ public void setHoldArray(int index,String value)
 
     public void setMasterSiteCode(String masterSiteCode) {
      this.masterSiteCode = masterSiteCode;
+    }
+     public String getTld(){
+
+      return tld;
+    }
+
+    public void setTld(String tld) {
+     this.tld = tld;
     }
 
 

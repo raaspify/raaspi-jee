@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -46,12 +46,10 @@ public class Yxxxch65exwwqqhxxxxxglentries implements java.io.Serializable {
 	private BigDecimal c5xxzxxxbvxxxxxxxxxxtcreditamt;
 	private String y8xxuznxbvxxxxxxxxxxnotes;
 	private Integer z1xxzzfxhhxxxxxxxxxxstatusfl;
+	private Date z2xxcztxlxxxxxxxxxxxstatusfldt;
 	private String z2xxutoxlhxxxxxxxxxxowner;
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
-	private Date z2xxcztxlxxxxxxxxxxxstatusfldt;
 	private Set<Xorxeh66exwwqqhxxxxxgentriesdetails> xorxeh66exwwqqhxxxxxgentriesdetailses = new HashSet<Xorxeh66exwwqqhxxxxxgentriesdetails>(
-			0);
-	private Set<Xorxeh66exwwqqhxxxxxgentriesdetails> xorxeh66exwwqqhxxxxxgentriesdetailses_1 = new HashSet<Xorxeh66exwwqqhxxxxxgentriesdetails>(
 			0);
 
 	public Yxxxch65exwwqqhxxxxxglentries() {
@@ -74,11 +72,10 @@ public class Yxxxch65exwwqqhxxxxxglentries implements java.io.Serializable {
 			BigDecimal c5xxzxxxbvxxxxxxxxxxtcreditamt,
 			String y8xxuznxbvxxxxxxxxxxnotes,
 			Integer z1xxzzfxhhxxxxxxxxxxstatusfl,
+			Date z2xxcztxlxxxxxxxxxxxstatusfldt,
 			String z2xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Date z2xxcztxlxxxxxxxxxxxstatusfldt,
-			Set<Xorxeh66exwwqqhxxxxxgentriesdetails> xorxeh66exwwqqhxxxxxgentriesdetailses,
-			Set<Xorxeh66exwwqqhxxxxxgentriesdetails> xorxeh66exwwqqhxxxxxgentriesdetailses_1) {
+			Set<Xorxeh66exwwqqhxxxxxgentriesdetails> xorxeh66exwwqqhxxxxxgentriesdetailses) {
 		this.yxxxuq632xwwqqhxxxxxperioddates = yxxxuq632xwwqqhxxxxxperioddates;
 		this.yxxxch601xwwqqhxxxxxaccount = yxxxch601xwwqqhxxxxxaccount;
 		this.a0xxungjbvxxxxxxxxxxglentryno = a0xxungjbvxxxxxxxxxxglentryno;
@@ -92,11 +89,10 @@ public class Yxxxch65exwwqqhxxxxxglentries implements java.io.Serializable {
 		this.c5xxzxxxbvxxxxxxxxxxtcreditamt = c5xxzxxxbvxxxxxxxxxxtcreditamt;
 		this.y8xxuznxbvxxxxxxxxxxnotes = y8xxuznxbvxxxxxxxxxxnotes;
 		this.z1xxzzfxhhxxxxxxxxxxstatusfl = z1xxzzfxhhxxxxxxxxxxstatusfl;
+		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
 		this.z2xxutoxlhxxxxxxxxxxowner = z2xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
-		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
 		this.xorxeh66exwwqqhxxxxxgentriesdetailses = xorxeh66exwwqqhxxxxxgentriesdetailses;
-		this.xorxeh66exwwqqhxxxxxgentriesdetailses_1 = xorxeh66exwwqqhxxxxxgentriesdetailses_1;
 	}
 
 	@Id
@@ -248,6 +244,17 @@ public class Yxxxch65exwwqqhxxxxxglentries implements java.io.Serializable {
 		this.z1xxzzfxhhxxxxxxxxxxstatusfl = z1xxzzfxhhxxxxxxxxxxstatusfl;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "statusfldt", length = 29)
+	public Date getZ2xxcztxlxxxxxxxxxxxstatusfldt() {
+		return this.z2xxcztxlxxxxxxxxxxxstatusfldt;
+	}
+
+	public void setZ2xxcztxlxxxxxxxxxxxstatusfldt(
+			Date z2xxcztxlxxxxxxxxxxxstatusfldt) {
+		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
+	}
+
 	@Column(name = "owner", length = 40)
 	@Size(max = 40)
 	public String getZ2xxutoxlhxxxxxxxxxxowner() {
@@ -268,17 +275,6 @@ public class Yxxxch65exwwqqhxxxxxglentries implements java.io.Serializable {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "statusfldt", length = 29)
-	public Date getZ2xxcztxlxxxxxxxxxxxstatusfldt() {
-		return this.z2xxcztxlxxxxxxxxxxxstatusfldt;
-	}
-
-	public void setZ2xxcztxlxxxxxxxxxxxstatusfldt(
-			Date z2xxcztxlxxxxxxxxxxxstatusfldt) {
-		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch65exwwqqhxxxxxglentries")
 	public Set<Xorxeh66exwwqqhxxxxxgentriesdetails> getXorxeh66exwwqqhxxxxxgentriesdetailses() {
 		return this.xorxeh66exwwqqhxxxxxgentriesdetailses;
@@ -287,16 +283,6 @@ public class Yxxxch65exwwqqhxxxxxglentries implements java.io.Serializable {
 	public void setXorxeh66exwwqqhxxxxxgentriesdetailses(
 			Set<Xorxeh66exwwqqhxxxxxgentriesdetails> xorxeh66exwwqqhxxxxxgentriesdetailses) {
 		this.xorxeh66exwwqqhxxxxxgentriesdetailses = xorxeh66exwwqqhxxxxxgentriesdetailses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch65exwwqqhxxxxxglentries")
-	public Set<Xorxeh66exwwqqhxxxxxgentriesdetails> getXorxeh66exwwqqhxxxxxgentriesdetailses_1() {
-		return this.xorxeh66exwwqqhxxxxxgentriesdetailses_1;
-	}
-
-	public void setXorxeh66exwwqqhxxxxxgentriesdetailses_1(
-			Set<Xorxeh66exwwqqhxxxxxgentriesdetails> xorxeh66exwwqqhxxxxxgentriesdetailses_1) {
-		this.xorxeh66exwwqqhxxxxxgentriesdetailses_1 = xorxeh66exwwqqhxxxxxgentriesdetailses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

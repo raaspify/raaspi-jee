@@ -135,7 +135,7 @@
 
 FROM
        genapp.outline outline WHERE 
-       (outline.proj) >=  $P{Start_t} AND   (outline.proj <= $P{End_t}) AND (outline.owner2 = $P{owner2Code_t} and (outline.statusfl = $P{Status_t} or $P{Status_t} is null) ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
+        (outline.proj) >=  $P{Start_t} AND   (outline.proj <= $P{End_t}) AND (outline.owner2 = $P{owner2Code_t}  ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
         <field name="outline_sid" class="java.lang.Integer"/>
       <field name="outline_proj" class="java.lang.String"/>
       <field name="outline_userow" class="java.math.BigDecimal"/>
@@ -247,17 +247,24 @@ FROM
      	<queryString><![CDATA[SELECT
         outline.sid AS outline_sid,
 
+
         outline.proj AS outline_proj,
+
 
         outline.userow AS outline_userow,
 
+
         outline.usecol AS outline_usecol,
+
 
         outline.parentcode AS outline_parentcode,
 
+
         outline.owner AS outline_owner,
 
+
         outline.owner2 AS outline_owner2
+
 
 
 FROM

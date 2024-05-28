@@ -135,7 +135,7 @@
 
 FROM
        genapp.scandate scandate WHERE 
-       (scandate.sdsatetimeofscan) >=  $P{Start_t} AND   (scandate.sdsatetimeofscan <= $P{End_t}) AND (scandate.owner2 = $P{owner2Code_t} and (scandate.statusfl = $P{Status_t} or $P{Status_t} is null) ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
+        (scandate.sdsatetimeofscan) >=  $P{Start_t} AND   (scandate.sdsatetimeofscan <= $P{End_t}) AND (scandate.owner2 = $P{owner2Code_t}  ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
         <field name="scandate_sid" class="java.lang.Integer"/>
       <field name="scandate_sdsatetimeofscan" class="java.lang.String"/>
       <field name="scandate_datetimeofscan" class="java.sql.Timestamp"/>
@@ -216,17 +216,24 @@ FROM
      	<queryString><![CDATA[SELECT
         scandate.sid AS scandate_sid,
 
+
         scandate.sdsatetimeofscan AS scandate_sdsatetimeofscan,
+
 
         scandate.datetimeofscan AS scandate_datetimeofscan,
 
+
         scandate.lastdate AS scandate_lastdate,
+
 
         scandate.owner AS scandate_owner,
 
+
         scandate.bkupdate AS scandate_bkupdate,
 
+
         scandate.owner2 AS scandate_owner2
+
 
 
 FROM

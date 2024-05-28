@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -67,8 +67,6 @@ public class Trexuq277xwwqqhxxxxxcpayment implements java.io.Serializable {
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Xoxxuq284xwwqqhxxxxxcupdetails> xoxxuq284xwwqqhxxxxxcupdetailses = new HashSet<Xoxxuq284xwwqqhxxxxxcupdetails>(
 			0);
-	private Set<Xoxxuq284xwwqqhxxxxxcupdetails> xoxxuq284xwwqqhxxxxxcupdetailses_1 = new HashSet<Xoxxuq284xwwqqhxxxxxcupdetails>(
-			0);
 
 	public Trexuq277xwwqqhxxxxxcpayment() {
 	}
@@ -106,11 +104,9 @@ public class Trexuq277xwwqqhxxxxxcpayment implements java.io.Serializable {
 			BigDecimal z7xxzxxrlvxxxxxxxxxxlocamountt,
 			Integer z8xxzzfxhhxxxxxxxxxxstatusfl,
 			Date z9xxcztxlxxxxxxxxxxxstatusfldt,
-			String y2xxuxznbvxxxxxxxxxxnotes,
-			String zaxxutoxlhxxxxxxxxxxowner,
+			String y2xxuxznbvxxxxxxxxxxnotes, String zaxxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Xoxxuq284xwwqqhxxxxxcupdetails> xoxxuq284xwwqqhxxxxxcupdetailses,
-			Set<Xoxxuq284xwwqqhxxxxxcupdetails> xoxxuq284xwwqqhxxxxxcupdetailses_1) {
+			Set<Xoxxuq284xwwqqhxxxxxcupdetails> xoxxuq284xwwqqhxxxxxcupdetailses) {
 		this.jxxxuq201xwwqqhxxxxxcustomer = jxxxuq201xwwqqhxxxxxcustomer;
 		this.trexuq266xwwqqhxxxxxcuinvoice = trexuq266xwwqqhxxxxxcuinvoice;
 		this.yxxxch601xwwqqhxxxxxaccount = yxxxch601xwwqqhxxxxxaccount;
@@ -144,7 +140,6 @@ public class Trexuq277xwwqqhxxxxxcpayment implements java.io.Serializable {
 		this.zaxxutoxlhxxxxxxxxxxowner = zaxxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.xoxxuq284xwwqqhxxxxxcupdetailses = xoxxuq284xwwqqhxxxxxcupdetailses;
-		this.xoxxuq284xwwqqhxxxxxcupdetailses_1 = xoxxuq284xwwqqhxxxxxcupdetailses_1;
 	}
 
 	@Id
@@ -499,16 +494,6 @@ public class Trexuq277xwwqqhxxxxxcpayment implements java.io.Serializable {
 	public void setXoxxuq284xwwqqhxxxxxcupdetailses(
 			Set<Xoxxuq284xwwqqhxxxxxcupdetails> xoxxuq284xwwqqhxxxxxcupdetailses) {
 		this.xoxxuq284xwwqqhxxxxxcupdetailses = xoxxuq284xwwqqhxxxxxcupdetailses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trexuq277xwwqqhxxxxxcpayment")
-	public Set<Xoxxuq284xwwqqhxxxxxcupdetails> getXoxxuq284xwwqqhxxxxxcupdetailses_1() {
-		return this.xoxxuq284xwwqqhxxxxxcupdetailses_1;
-	}
-
-	public void setXoxxuq284xwwqqhxxxxxcupdetailses_1(
-			Set<Xoxxuq284xwwqqhxxxxxcupdetails> xoxxuq284xwwqqhxxxxxcupdetailses_1) {
-		this.xoxxuq284xwwqqhxxxxxcupdetailses_1 = xoxxuq284xwwqqhxxxxxcupdetailses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

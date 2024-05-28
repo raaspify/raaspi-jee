@@ -1,6 +1,8 @@
 
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
                              "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<#-- not used
+-->
 <#include "../view/assigns/PositionLength.properties" >
 <#assign entityName = pojo.shortName>
 <#assign componentName = util.lower(entityName)>

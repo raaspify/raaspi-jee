@@ -229,9 +229,9 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
       //or rest call will come each time they request since they dont use cookie with jsessionId or jsessionId in url
       //certain pages like login,register, issues browse comes to authenticate method for login or pseudo login
       //setClientChosenSkin method here is called by home page even if not logged in
+     ExternalContext externalContext =null;
      try{
       FacesContext facesContext = FacesContext.getCurrentInstance();
-      ExternalContext externalContext =null;
       contextS = (ServletContext)facesContext.getExternalContext().getContext(); 
       String urlName=null;
       if (facesContext !=null){
@@ -257,9 +257,10 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
          if(owner2Code.length() >40){
           log.severe("owner2Code "+owner2Code+" exceeds 40 chs, cannot continue");
           return;
-        } 
+         } 
       }else{
-       //log error 
+       //facesContext should not be null, 
+        log.severe("Authenticator initialize facesContext is null, value: "+facesContext );
       }
       // raaspi app session for each user comes here first, so check if db/schema/table exists, create if needed
       //but not sure why, createquery catch logic does not work here.
@@ -267,8 +268,9 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
       // put checkCreateTables here, will create schema and tables and master site ,if none 
       //tbd String return and navigate ???
       if (!checkCreateTables()){
-       return;
+       return; //checkCreateTables had exception
       }
+      //tables already exist or were created
          //String owner2CodeR="raaspi"; instead use master indicator
           client =(${clientEntityName?cap_first}) entityManager
 		.createQuery(
@@ -284,7 +286,7 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
             userIP = req.getRemoteAddr();  //get from socket connection
            }
            reqAgent=req.getHeader("user-agent");//if debug, check for bot, will skip if requestor impersonating as regular web request
-           if(reqAgent.contains("bot") || reqAgent.contains("Bot")){
+           if(contextS != null && (reqAgent.contains("bot") || reqAgent.contains("Bot"))){
             if(contextS.getAttribute("botcount") !=null && botCount < 5000){
              botCount=Integer.parseInt(contextS.getAttribute("botcount").toString());
              contextS.setAttribute("botcount",botCount+1);
@@ -325,9 +327,15 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
           // assume a request coming when sessions are at 300 is the cause
           // requests were coming at 500 ms
      }catch(Exception e){
-          String emsg=e.getMessage();
+       //any null exception can come here
+       //(HttpServletRequest) externalContext should not be null
+        String emsg=e.getMessage();
+         log.severe("Authenticator initialize exception externalContext  value: "+externalContext +" ,If needed try in another OS verstion");     
+         log.severe("Authenticator initialize externalContext req value: "+req );     
+         log.severe("Authenticator initialize externalContext req serverNamevalue: "+req.getServerName() );     
+         e.printStackTrace(System.out);
           Locale rbLocale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
- 	  log.severe("Used locale enUSo2 after DatabaseResourceLoader error "+rbLocale==null?"null":rbLocale.getLanguage()+","+rbLocale==null?"null":rbLocale.getCountry()+","
+          log.severe("Used locale enUSo2 after DatabaseResourceLoader error "+rbLocale==null?"null":rbLocale.getLanguage()+","+rbLocale==null?"null":rbLocale.getCountry()+","
             +rbLocale==null?"null":rbLocale.getVariant()+" "+emsg );
       //log error
      }
@@ -1495,6 +1503,13 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
     }
   }
 
+/**
+* method is used to check if database and tables already exist
+* if not they will be created
+* @param none
+* @return false if exception, otherwise true if exists or true after creating tables
+*/    
+
  public boolean checkCreateTables(){
       //using jdbc connection to get database metadata rather than entitymanager way to be ORM neutral
       DatabaseMetaData databaseMetaData=null;
@@ -1520,7 +1535,7 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
       }
       //at this point finally clause should have closed the connection
       if(productName==null || productName.isEmpty()){
-       log.severe("No datasouce setup yet, check tomee.xml or standalone.xml etc. Cannot continue");
+       log.severe("No datasource setup yet, check tomee.xml or standalone.xml etc. Cannot continue");
        if(conn != null){
         try{
          conn.close();
@@ -1571,17 +1586,41 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
         FacesMessage.SEVERITY_WARN,"Reset or change password commands will send passwords via email and you will not see it, if email id is invalid . ",""));
 
        sqlAdminSupport.createSchema("","","");//product hql,schema genapp,owner sa
-       sqlAdminSupport.createTables("","");//schema,owner
+       sqlAdminSupport.createTables("","");//dbproduct,schema
        sqlAdminSupport.createTables_b("","");
        sqlAdminSupport.createTables_c("","");
        //create system messages
        yxxxuq1r1xwwqqhxxxxxresourceHome.copyDefaultMessagesToSYSTEM();//default for master and future tenant sites 
-       String emailId="mail@"+owner2Code+".com";
+       String emailId="mail@"+owner2Code+customIdentity.getTld();
+       if(customIdentity.getTld() ==null || customIdentity.getTld().isEmpty()){
+        emailId="mail@"+owner2Code+".com";
+       }
        // create master site with 2 default users, log the password because email is valid but dummy
        yxxxuh566xwwqqwxxxxxuserHome.doMasterSite(owner2Code,emailId);
        file.preLoadThemes(); // loads  csv themes from root.war/WEB-INF/resources/csv dir 
        return true;
       }
+      if(productName.contains("SQLite")){
+       FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+        FacesMessage.SEVERITY_INFO,"After site create is done, please login using id manager and password manager or admin with password admin. ",""));
+       FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+        FacesMessage.SEVERITY_WARN,"Temporary passwords will EXPIRE in 48 hrs. Please change the employee and client email id if mail@"+owner2Code+".com is not a working one. ",""));
+       FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(
+        FacesMessage.SEVERITY_WARN,"Reset or change password commands will send passwords via email and you will not see it, if email id is invalid . ",""));
+
+       sqlAdminSupport.createSchema("lsql","","");//product lsql,schema genapp,owner none
+       sqlAdminSupport.createTables("lsql","");//dbproduct,schema
+       sqlAdminSupport.createTables_b("lsql","");
+       sqlAdminSupport.createTables_c("lsql","");
+       //create system messages
+       yxxxuq1r1xwwqqhxxxxxresourceHome.copyDefaultMessagesToSYSTEM();//default for master and future tenant sites 
+       String emailId="mail@"+owner2Code+customIdentity.getTld();
+       // create master site with 2 default users, log the password because email is valid but dummy
+       yxxxuh566xwwqqwxxxxxuserHome.doMasterSite(owner2Code,emailId);
+       file.preLoadThemes(); // loads  csv themes from root.war/WEB-INF/resources/csv dir 
+       return true;
+      }
+
       if(productName.contains("PostgreSQL")){
        sqlAdminSupport.createSchema("psql","","postgres");//product psql,schema genapp,owner postgres
        sqlAdminSupport.createTables("psql","");//product,schema
@@ -1589,7 +1628,10 @@ public class Authenticator extends BaseAuthenticator implements Serializable{
        sqlAdminSupport.createTables_c("psql","");
        //create system messages
        yxxxuq1r1xwwqqhxxxxxresourceHome.copyDefaultMessagesToSYSTEM();//default for master and future tenant sites 
-       String emailId="mail@"+owner2Code+".com";
+       String emailId="mail@"+owner2Code+customIdentity.getTld();
+       if(customIdentity.getTld() ==null || customIdentity.getTld().isEmpty()){
+        emailId="mail@"+owner2Code+".com";
+       }
        // create master site with 2 default users, log the password because email is valid but dummy
        yxxxuh566xwwqqwxxxxxuserHome.doMasterSite(owner2Code,emailId);
        file.preLoadThemes();

@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -53,8 +53,6 @@ public class Nxxxiha1rxwwqqhxxxxxgenapp implements java.io.Serializable {
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Nxxxiha2rxwwqqhxxxxxgendb> nxxxiha2rxwwqqhxxxxxgendbs = new HashSet<Nxxxiha2rxwwqqhxxxxxgendb>(
 			0);
-	private Set<Nxxxiha2rxwwqqhxxxxxgendb> nxxxiha2rxwwqqhxxxxxgendbs_1 = new HashSet<Nxxxiha2rxwwqqhxxxxxgendb>(
-			0);
 
 	public Nxxxiha1rxwwqqhxxxxxgenapp() {
 	}
@@ -82,8 +80,7 @@ public class Nxxxiha1rxwwqqhxxxxxgenapp implements java.io.Serializable {
 			Date zfxxcztxlxxxxxxxxxxxstatusfldt,
 			String zgxxuxznbvxxxxxxxxxxnotes, String zhxxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Nxxxiha2rxwwqqhxxxxxgendb> nxxxiha2rxwwqqhxxxxxgendbs,
-			Set<Nxxxiha2rxwwqqhxxxxxgendb> nxxxiha2rxwwqqhxxxxxgendbs_1) {
+			Set<Nxxxiha2rxwwqqhxxxxxgendb> nxxxiha2rxwwqqhxxxxxgendbs) {
 		this.a0xxukxxbvxxxxxxxxxxappname = a0xxukxxbvxxxxxxxxxxappname;
 		this.a1xxfxxxbvxxxxxxxxxxdescript = a1xxfxxxbvxxxxxxxxxxdescript;
 		this.a1xxfxxxbvxxxxxxxxxxapptype = a1xxfxxxbvxxxxxxxxxxapptype;
@@ -106,7 +103,6 @@ public class Nxxxiha1rxwwqqhxxxxxgenapp implements java.io.Serializable {
 		this.zhxxutoxlhxxxxxxxxxxowner = zhxxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.nxxxiha2rxwwqqhxxxxxgendbs = nxxxiha2rxwwqqhxxxxxgendbs;
-		this.nxxxiha2rxwwqqhxxxxxgendbs_1 = nxxxiha2rxwwqqhxxxxxgendbs_1;
 	}
 
 	@Id
@@ -353,16 +349,6 @@ public class Nxxxiha1rxwwqqhxxxxxgenapp implements java.io.Serializable {
 	public void setNxxxiha2rxwwqqhxxxxxgendbs(
 			Set<Nxxxiha2rxwwqqhxxxxxgendb> nxxxiha2rxwwqqhxxxxxgendbs) {
 		this.nxxxiha2rxwwqqhxxxxxgendbs = nxxxiha2rxwwqqhxxxxxgendbs;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nxxxiha1rxwwqqhxxxxxgenapp")
-	public Set<Nxxxiha2rxwwqqhxxxxxgendb> getNxxxiha2rxwwqqhxxxxxgendbs_1() {
-		return this.nxxxiha2rxwwqqhxxxxxgendbs_1;
-	}
-
-	public void setNxxxiha2rxwwqqhxxxxxgendbs_1(
-			Set<Nxxxiha2rxwwqqhxxxxxgendb> nxxxiha2rxwwqqhxxxxxgendbs_1) {
-		this.nxxxiha2rxwwqqhxxxxxgendbs_1 = nxxxiha2rxwwqqhxxxxxgendbs_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

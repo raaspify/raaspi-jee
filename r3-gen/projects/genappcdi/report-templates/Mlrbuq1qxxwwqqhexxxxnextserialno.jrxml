@@ -140,7 +140,7 @@
 
 FROM
        genapp.nextserialno nextserialno WHERE 
-       (nextserialno.nxtserno) >=  $P{Start_t} AND   (nextserialno.nxtserno <= $P{End_t}) AND (nextserialno.owner2 = $P{owner2Code_t} and (nextserialno.statusfl = $P{Status_t} or $P{Status_t} is null) ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
+        (nextserialno.nxtserno) >=  $P{Start_t} AND   (nextserialno.nxtserno <= $P{End_t}) AND (nextserialno.owner2 = $P{owner2Code_t}  ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
         <field name="nextserialno_sid" class="java.lang.Integer"/>
       <field name="nextserialno_nxtserno" class="java.lang.String"/>
       <field name="nextserialno_curserno" class="java.lang.String"/>
@@ -225,19 +225,27 @@ FROM
      	<queryString><![CDATA[SELECT
         nextserialno.sid AS nextserialno_sid,
 
+
         nextserialno.nxtserno AS nextserialno_nxtserno,
+
 
         nextserialno.curserno AS nextserialno_curserno,
 
+
         nextserialno.prevsern AS nextserialno_prevsern,
+
 
         nextserialno.is9999 AS nextserialno_is9999,
 
+
         nextserialno.refno AS nextserialno_refno,
+
 
         nextserialno.owner AS nextserialno_owner,
 
+
         nextserialno.owner2 AS nextserialno_owner2
+
 
 
 FROM

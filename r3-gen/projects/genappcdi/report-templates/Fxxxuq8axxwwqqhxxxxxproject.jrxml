@@ -160,7 +160,7 @@
 
 FROM
        genapp.project project WHERE 
-       (project.proj) >=  $P{Start_t} AND   (project.proj <= $P{End_t}) AND (project.owner2 = $P{owner2Code_t} and (project.statusfl = $P{Status_t} or $P{Status_t} is null) ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
+        (project.proj) >=  $P{Start_t} AND   (project.proj <= $P{End_t}) AND (project.owner2 = $P{owner2Code_t}  ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
         <field name="project_sid" class="java.lang.Integer"/>
       <field name="project_proj" class="java.lang.String"/>
       <field name="project_descript" class="java.lang.String"/>
@@ -411,27 +411,39 @@ FROM
      	<queryString><![CDATA[SELECT
         project.sid AS project_sid,
 
+
         project.proj AS project_proj,
+
 
         project.descript AS project_descript,
 
+
         project.location AS project_location,
+
 
         project.edatet AS project_edatet,
 
+
         project.sdatet AS project_sdatet,
+
 
         project.companycode AS project_companycode,
 
+
         project.depcode AS project_depcode,
+
 
         project.divcode AS project_divcode,
 
+
         project.parentcode AS project_parentcode,
+
 
         project.owner AS project_owner,
 
+
         project.owner2 AS project_owner2
+
 
 
 FROM

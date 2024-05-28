@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -54,8 +54,6 @@ public class Fxxxuq1kkxwwqqhfxxxxtask implements java.io.Serializable {
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses = new HashSet<Dxxxuq2drxwwqqhfxxxxresourcedetails>(
 			0);
-	private Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses_1 = new HashSet<Dxxxuq2drxwwqqhfxxxxresourcedetails>(
-			0);
 
 	public Fxxxuq1kkxwwqqhfxxxxtask() {
 	}
@@ -83,8 +81,7 @@ public class Fxxxuq1kkxwwqqhfxxxxtask implements java.io.Serializable {
 			Date zbxxcztxlxxxxxxxxxxxstatusfldt,
 			String zcxxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses,
-			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses_1) {
+			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses) {
 		this.fxxxuq188xwwqqhxxxxxactivity = fxxxuq188xwwqqhxxxxxactivity;
 		this.jxxxuq54exwwqqhxxxxxgroupmembers = jxxxuq54exwwqqhxxxxxgroupmembers;
 		this.fxxxuq1ggxwwqqhxxxxxmembersgroup = fxxxuq1ggxwwqqhxxxxxmembersgroup;
@@ -105,7 +102,6 @@ public class Fxxxuq1kkxwwqqhfxxxxtask implements java.io.Serializable {
 		this.zcxxutoxlhxxxxxxxxxxowner = zcxxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.dxxxuq2drxwwqqhfxxxxresourcedetailses = dxxxuq2drxwwqqhfxxxxresourcedetailses;
-		this.dxxxuq2drxwwqqhfxxxxresourcedetailses_1 = dxxxuq2drxwwqqhfxxxxresourcedetailses_1;
 	}
 
 	@Id
@@ -325,16 +321,6 @@ public class Fxxxuq1kkxwwqqhfxxxxtask implements java.io.Serializable {
 	public void setDxxxuq2drxwwqqhfxxxxresourcedetailses(
 			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses) {
 		this.dxxxuq2drxwwqqhfxxxxresourcedetailses = dxxxuq2drxwwqqhfxxxxresourcedetailses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq1kkxwwqqhfxxxxtask")
-	public Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> getDxxxuq2drxwwqqhfxxxxresourcedetailses_1() {
-		return this.dxxxuq2drxwwqqhfxxxxresourcedetailses_1;
-	}
-
-	public void setDxxxuq2drxwwqqhfxxxxresourcedetailses_1(
-			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses_1) {
-		this.dxxxuq2drxwwqqhfxxxxresourcedetailses_1 = dxxxuq2drxwwqqhfxxxxresourcedetailses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

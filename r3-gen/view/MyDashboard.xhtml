@@ -215,6 +215,20 @@ $(document).ready(function(){
   <br></br>use <h:link value="#{messages['Add']} #{messages['Items']}"  outcome="/itemEdit.xhtml" target="_blank" />
 		   &nbsp;<h:graphicImage  value="/img/product2xx.jpg" width="40px" styleClass="pic">
              </h:graphicImage>
+     &nbsp;<h:outputText style=";font-size:12px;" value="#{messages['Pending']} #{messages['review']}: [ #{yxxxuq1m1xwwqqqxxxxxclobdataList.getFlaggedAsList(64).size()}]"/> 
+     <ui:fragment rendered="#{yxxxuq1m1xwwqqqxxxxxclobdataList.getFlaggedAsList(64).size() gt 0}">
+     <br></br><h:outputText style=";font-size:12px;"  
+                         value="#{messages['Item']} #{messages['key']}:  #{fpxxfq1a5xwwqqhxxxxxitemList.getDocmntWPrefixToEntity('B'.concat(yxxxuq1m1xwwqqqxxxxxclobdataList.getFlaggedAsList(64).get(0).a1xxuxxxbv49xxxxxxxxfromkey)).b1xxuszsbvxxxxxxxxxxdescript}"/> 
+     <br></br><h:outputText style=";font-size:12px;"  
+                         value="#{messages['Text']} #{messages['fromkey']}:  #{yxxxuq1m1xwwqqqxxxxxclobdataList.getFlaggedAsList(64).get(0).a1xxuxxxbv49xxxxxxxxfromkey}"/> 
+     <br></br><h:link value="#{messages['Go']}"  outcome="/ItemDetailsBrowse.xhtml" target="_blank" />&nbsp;&nbsp;&nbsp;<h:link value="#{messages['Go']}"  outcome="/clobdataList.xhtml" target="_blank" /> 
+     </ui:fragment>
+     <br></br><h:outputText style=";font-size:12px;" value="#{messages['Pending']} #{messages['Case']}: [ #{fpxxfq1a5xwwqqhxxxxxitemList.getCustomerRequestedAndUpCartedListCI('basket').size()}]"/> 
+     <ui:fragment rendered="#{fpxxfq1a5xwwqqhxxxxxitemList.getCustomerRequestedAndUpCartedListCI('basket').size() gt 0}">
+     <br></br><h:outputText style=";font-size:12px;"  
+                         value="#{messages['Case']} #{messages['key']}:  #{fpxxfq1a5xwwqqhxxxxxitemList.getCustomerRequestedAndUpCartedListCI('basket').get(0).fpxxfq1a5xwwqqhxxxxxitem.b1xxuszsbvxxxxxxxxxxdescript}"/> 
+     <br></br><h:link value="#{messages['Go']}"  outcome="/itemList.xhtml" target="_blank" />&nbsp;&nbsp;&nbsp;<h:link value="#{messages['Go']}"  outcome="/ebasketin.xhtml" target="_blank" /> 
+     </ui:fragment>
  </p:panel>
 
  <p:panel id="soptionsC" style="padding:5px; height:75px;">
@@ -351,53 +365,7 @@ $(document).ready(function(){
    </p:panel>
  </h:panelGrid>  
 </p:panel>
-<br/>
-
- </h:panelGrid>  
-
- <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:6}" columnClasses="cell, cell, cell,cell, cell, cell">
-
-<p:panel id="vhomeCount" style="padding:5px; height:#{yxxxuh566xwwqqwxxxxxuserHome.mobile?300:250}px;">
- <p:panel>
- <f:facet name="header">Site visits </f:facet>
-              <h:outputText value="#{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].p6xxzxxrbvxxxxxxxxxxlocbaradj ? 0 : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].p6xxzxxrbvxxxxxxxxxxlocbaradj)}"/> 
-	      <h:graphicImage  value="/img/woman-using-computer.jpg" width="50px" styleClass="pic">
-              </h:graphicImage>
-              <br></br><h:outputText value="#{messages['Last']} #{messages['user']} : #{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].z1xxuxxxbvxxxxxxxxxxlastuser ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].z1xxuxxxbvxxxxxxxxxxlastuser)}"/> 
-              <br></br><h:outputText value="#{messages['user']} #{messages['Date']} : #{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w3xxuxxxbvxxxxxxxxxxinrpassw ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w3xxuxxxbvxxxxxxxxxxinrpassw)}"/> 
-              <br></br><h:outputText value="#{messages['visitor']} #{messages['IP']}/#{messages['Country']} : "/> 
-              <br></br><h:outputText value="#{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw)}"/> 
-              <br></br><iframe src="https://ip2c.org/#{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw)}"
-               width="180" height="60" frameborder="0" style="border:0" allowfullscreen="false"></iframe>
-              <h:outputText rendered="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw}"
-               value="#{r3RestClient.ip2C(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw)}" />
-              <br></br><h:outputText value="#{messages['Last']} #{messages['hour']} #{messages['users']} : #{yxxxuh566xwwqqwxxxxxuserList.getSuggestList('LH').size()==0 ? 'None' : yxxxuh566xwwqqwxxxxxuserList.getSuggestList('LH').size()}"/> 
-              <br></br> <h:link outcome="/userList.xhtml"
-                value="#{messages['Users']}">
-              </h:link>
-              &nbsp; <h:link outcome="/clientList.xhtml"
-                value="#{messages['Client']} #{messages['Settings']}">
-              </h:link>
-              <br></br><h:link outcome="/truefalseList.xhtml"
-                value="#{messages['Report']} #{messages['Settings']}">
-              </h:link>
-              &nbsp; <h:link outcome="/siteEditEasy.xhtml"
-                value="#{messages['Site']} #{messages['Edit']}">
-              </h:link>
- </p:panel>
-
-</p:panel>
-
-<p:panel  style="padding:5px; height:#{yxxxuh566xwwqqwxxxxxuserHome.mobile?300:250}px;">
- <f:facet name="header">Site Maintenance Status </f:facet>
-              <h:outputText value="#{messages['release']} #{messages['date']}:  Oct 16 2023 "/> 
-              <br></br><h:outputText value="#{messages['release']} #{messages['version']}:  2.00.02  "/> 
-              <h:graphicImage  value="/img/newsupdtxx.png" width="50px" styleClass="pic">
-             </h:graphicImage>
-
-</p:panel>
-
-<p:panel  style="padding:5px; height:#{yxxxuh566xwwqqwxxxxxuserHome.mobile?300:250}px;" rendered="#{!customIdentity.masterSite}">
+<p:panel  style="padding:5px; height:190px;" rendered="#{!customIdentity.masterSite}">
  <f:facet name="header">Subscription Actions </f:facet>
   <h:panelGrid>
    #{messages['Product']} #{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').b1xxuisxlvxxxxxxxxxxserialnum}
@@ -461,7 +429,7 @@ $(document).ready(function(){
 
    <p:panel>
    <h:outputText style=";font-size:14px;" value="#{messages['Subscription']} #{messages['cancel']}/#{messages['Remove']} #{messages['site']}:   "/> 
-   <h:outputLink style=";font-size:14px;" value="https://www.#{customIdentity.masterSiteCode}.com/ItemsReviewSelect.wflow" target="_blank" rendered="#{!fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['cancel']} 
+   <h:outputLink style=";font-size:14px;" value="https://www.#{customIdentity.masterSiteCode}#{customIdentity.tld}/ItemsReviewSelect.wflow" target="_blank" rendered="#{!fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['cancel']} 
    </h:outputLink>
    <h:outputLink style=";font-size:14px;" value="ItemsReviewSelect.wflow" target="_blank" rendered="#{fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['cancel']} 
    </h:outputLink>
@@ -472,7 +440,7 @@ $(document).ready(function(){
    <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype !=null
            and (yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype.contains('Trial') )}"  >
    <h:outputText style=";font-size:14px;" value="#{messages['Custom']} #{messages['domain']} #{messages['routing']} :   "/> 
-   <h:outputLink id="cd" style=";font-size:14px;" value="https://www.'+#{customIdentity.masterSiteCode}+'.com/ItemsReviewSelect.wflow" target="_blank" rendered="#{!fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['route']} #{messages['setup']} 
+   <h:outputLink id="cd" style=";font-size:14px;" value="https://www.#{customIdentity.masterSiteCode}#{customIdentity.tld}/ItemsReviewSelect.wflow" target="_blank" rendered="#{!fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['route']} #{messages['setup']} 
              <p:tooltip attached="true" for="cd">
               <h:outputText value="#{messages.Specify} #{messages.registered} #{messages.domain} #{messages.name}"/>
              </p:tooltip>
@@ -489,7 +457,7 @@ $(document).ready(function(){
    <p:panel rendered="#{yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype !=null
            and (yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').f6xxuxxxlvxxxxxxxxxxlicensetype.contains('Trial') )}"  >
    <h:outputText style=";font-size:14px;" value="#{messages['SSL']} #{messages['certificate']} #{messages['with']} #{messages['install']} :   "/> 
-   <h:outputLink id="cdS" style=";font-size:14px;" value="https://www.'+#{customIdentity.masterSiteCode}+'.com/ItemsReviewSelect.wflow" target="_blank" rendered="#{!fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['SSL']} #{messages['setup']} 
+   <h:outputLink id="cdS" style=";font-size:14px;" value="https://www.#{customIdentity.masterSiteCode}#{customIdentity.tld}/ItemsReviewSelect.wflow" target="_blank" rendered="#{!fn:contains(customIdentity.masterSiteCode,'localhost')}">#{messages['Request']} #{messages['SSL']} #{messages['setup']} 
              <p:tooltip attached="true" for="cdS">
               <h:outputText value="#{messages.Involves} #{messages.purchasing} #{messages.ssl} #{messages.with} #{messages.setup}"/>
              </p:tooltip>
@@ -507,6 +475,60 @@ $(document).ready(function(){
 
  </h:panelGrid>  
 </p:panel>
+
+<br/>
+
+ </h:panelGrid>  
+
+ <h:panelGrid columns="#{yxxxuh566xwwqqwxxxxxuserHome.mobile?1:6}" columnClasses="cell, cell, cell,cell, cell, cell">
+
+<p:panel id="vhomeCount" style="padding:5px; height:#{yxxxuh566xwwqqwxxxxxuserHome.mobile?300:250}px;">
+ <p:panel>
+ <f:facet name="header">Site visits </f:facet>
+              <h:outputText value="#{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].p6xxzxxrbvxxxxxxxxxxlocbaradj ? 0 : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].p6xxzxxrbvxxxxxxxxxxlocbaradj)}"/> 
+	      <h:graphicImage  value="/img/woman-using-computer.jpg" width="50px" styleClass="pic">
+              </h:graphicImage>
+              <br></br><h:outputText value="#{messages['Last']} #{messages['user']} : #{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].z1xxuxxxbvxxxxxxxxxxlastuser ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].z1xxuxxxbvxxxxxxxxxxlastuser)}"/> 
+              <br></br><h:outputText value="#{messages['user']} #{messages['Date']} : #{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w3xxuxxxbvxxxxxxxxxxinrpassw ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w3xxuxxxbvxxxxxxxxxxinrpassw)}"/> 
+              <br></br><h:outputText value="#{messages['visitor']} #{messages['IP']}/#{messages['Country']} : "/> 
+              <br></br><h:outputText value="#{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw)}"/> 
+              <br></br><iframe src="https://ip2c.org/#{empty yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw ? '' : (yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw)}"
+               width="180" height="60" frameborder="0" style="border:0" allowfullscreen="false"></iframe>
+              <h:outputText rendered="#{yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw}"
+               value="#{r3RestClient.ip2C(yxxxch522xhhxxhxxxxxclientList.getSuggestList('01')[0].w2xxuxxxbvxxxxxxxxxxintpassw)}" />
+              <br></br><h:outputText value="#{messages['Last']} #{messages['hour']} #{messages['users']} : #{yxxxuh566xwwqqwxxxxxuserList.getSuggestList('LH').size()==0 ? 'None' : yxxxuh566xwwqqwxxxxxuserList.getSuggestList('LH').size()}"/> 
+              <br></br> <h:link outcome="/userList.xhtml"
+                value="#{messages['Users']}">
+              </h:link>
+              &nbsp; <h:link outcome="/clientList.xhtml"
+                value="#{messages['Client']} #{messages['Settings']}">
+              </h:link>
+              <br></br><h:link outcome="/truefalseList.xhtml"
+                value="#{messages['Report']} #{messages['Settings']}">
+              </h:link>
+              &nbsp; <h:link outcome="/siteEditEasy.xhtml"
+                value="#{messages['Site']} #{messages['Edit']}">
+              </h:link>
+ </p:panel>
+
+</p:panel>
+
+
+<p:panel  style="padding:5px; height:#{yxxxuh566xwwqqwxxxxxuserHome.mobile?300:250}px;">
+ <f:facet name="header">Site Maintenance Status </f:facet>
+              <h:outputText value="#{messages['release']} #{messages['date']}:  May 10 2024 "/> 
+              <br></br><h:outputText value="#{messages['release']} #{messages['version']}:  2.00.01  "/> 
+              <h:graphicImage  value="/img/newsupdtxx.png" width="50px" styleClass="pic">
+             </h:graphicImage>
+             <br></br><h:outputText value="#{messages['Email']} #{messages['server']} #{messages['setup']} :   #{empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('01').z8xxuxxxbvxxxxxxxxxxsmtpserver? 'Pending':'Done'}"/>
+             <br></br><h:outputText value="#{messages['Marketing Email']} #{messages['setup']} :   #{empty yxxxch522xhhxxhxxxxxclientList.getKeyToEntity('05').d5xxuxxrbvxxxxxxxxxxrmailaddr? 'Pending':'Done'}"/>
+              <br></br><h:link value="#{messages['Go']}"  outcome="/clientList.xhtml" target="_blank" />
+		&nbsp;&nbsp;   <h:graphicImage  value="/img/email16.png" width="16px" styleClass="pic">
+             </h:graphicImage>
+
+
+</p:panel>
+
  <p:panel>
  <f:facet name="header">#{messages['Site']} #{messages['Analytics']} </f:facet>
               <h:graphicImage  value="/img/www.jpg" width="50px" styleClass="pic">

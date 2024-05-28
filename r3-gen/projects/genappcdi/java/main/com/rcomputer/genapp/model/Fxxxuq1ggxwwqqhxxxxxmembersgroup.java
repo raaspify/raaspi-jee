@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -39,21 +39,13 @@ public class Fxxxuq1ggxwwqqhxxxxxmembersgroup implements java.io.Serializable {
 	private Date z2xxcztxlxxxxxxxxxxxstatusfldt;
 	private String z3xxutoxlhxxxxxxxxxxowner;
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
-	private Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses = new HashSet<Jxxxuq54exwwqqhxxxxxgroupmembers>(
+	private Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks = new HashSet<Fxxxuq1kkxwwqqhfxxxxtask>(
 			0);
 	private Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules = new HashSet<Fxxxuq89bxwwqqhxxxxxschedule>(
 			0);
-	private Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks = new HashSet<Fxxxuq1kkxwwqqhfxxxxtask>(
-			0);
-	private Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks_1 = new HashSet<Fxxxuq1kkxwwqqhfxxxxtask>(
+	private Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses = new HashSet<Jxxxuq54exwwqqhxxxxxgroupmembers>(
 			0);
 	private Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses = new HashSet<Dxxxuq2drxwwqqhfxxxxresourcedetails>(
-			0);
-	private Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses_1 = new HashSet<Jxxxuq54exwwqqhxxxxxgroupmembers>(
-			0);
-	private Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules_1 = new HashSet<Fxxxuq89bxwwqqhxxxxxschedule>(
-			0);
-	private Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses_1 = new HashSet<Dxxxuq2drxwwqqhfxxxxresourcedetails>(
 			0);
 
 	public Fxxxuq1ggxwwqqhxxxxxmembersgroup() {
@@ -71,14 +63,10 @@ public class Fxxxuq1ggxwwqqhxxxxxmembersgroup implements java.io.Serializable {
 			Date z2xxcztxlxxxxxxxxxxxstatusfldt,
 			String z3xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses,
-			Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules,
 			Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks,
-			Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks_1,
-			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses,
-			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses_1,
-			Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules_1,
-			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses_1) {
+			Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules,
+			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses,
+			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses) {
 		this.a0xxukxxbvxxxxxxxxxxgroupid = a0xxukxxbvxxxxxxxxxxgroupid;
 		this.b1xxuszsbvxxxxxxxxxxdescript = b1xxuszsbvxxxxxxxxxxdescript;
 		this.z1xxziqxlvxxxxxxxxxxquantity = z1xxziqxlvxxxxxxxxxxquantity;
@@ -87,14 +75,10 @@ public class Fxxxuq1ggxwwqqhxxxxxmembersgroup implements java.io.Serializable {
 		this.z2xxcztxlxxxxxxxxxxxstatusfldt = z2xxcztxlxxxxxxxxxxxstatusfldt;
 		this.z3xxutoxlhxxxxxxxxxxowner = z3xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
-		this.jxxxuq54exwwqqhxxxxxgroupmemberses = jxxxuq54exwwqqhxxxxxgroupmemberses;
-		this.fxxxuq89bxwwqqhxxxxxschedules = fxxxuq89bxwwqqhxxxxxschedules;
 		this.fxxxuq1kkxwwqqhfxxxxtasks = fxxxuq1kkxwwqqhfxxxxtasks;
-		this.fxxxuq1kkxwwqqhfxxxxtasks_1 = fxxxuq1kkxwwqqhfxxxxtasks_1;
+		this.fxxxuq89bxwwqqhxxxxxschedules = fxxxuq89bxwwqqhxxxxxschedules;
+		this.jxxxuq54exwwqqhxxxxxgroupmemberses = jxxxuq54exwwqqhxxxxxgroupmemberses;
 		this.dxxxuq2drxwwqqhfxxxxresourcedetailses = dxxxuq2drxwwqqhfxxxxresourcedetailses;
-		this.jxxxuq54exwwqqhxxxxxgroupmemberses_1 = jxxxuq54exwwqqhxxxxxgroupmemberses_1;
-		this.fxxxuq89bxwwqqhxxxxxschedules_1 = fxxxuq89bxwwqqhxxxxxschedules_1;
-		this.dxxxuq2drxwwqqhfxxxxresourcedetailses_1 = dxxxuq2drxwwqqhfxxxxresourcedetailses_1;
 	}
 
 	@Id
@@ -192,13 +176,13 @@ public class Fxxxuq1ggxwwqqhxxxxxmembersgroup implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq1ggxwwqqhxxxxxmembersgroup")
-	public Set<Jxxxuq54exwwqqhxxxxxgroupmembers> getJxxxuq54exwwqqhxxxxxgroupmemberses() {
-		return this.jxxxuq54exwwqqhxxxxxgroupmemberses;
+	public Set<Fxxxuq1kkxwwqqhfxxxxtask> getFxxxuq1kkxwwqqhfxxxxtasks() {
+		return this.fxxxuq1kkxwwqqhfxxxxtasks;
 	}
 
-	public void setJxxxuq54exwwqqhxxxxxgroupmemberses(
-			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses) {
-		this.jxxxuq54exwwqqhxxxxxgroupmemberses = jxxxuq54exwwqqhxxxxxgroupmemberses;
+	public void setFxxxuq1kkxwwqqhfxxxxtasks(
+			Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks) {
+		this.fxxxuq1kkxwwqqhfxxxxtasks = fxxxuq1kkxwwqqhfxxxxtasks;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq1ggxwwqqhxxxxxmembersgroup")
@@ -212,23 +196,13 @@ public class Fxxxuq1ggxwwqqhxxxxxmembersgroup implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq1ggxwwqqhxxxxxmembersgroup")
-	public Set<Fxxxuq1kkxwwqqhfxxxxtask> getFxxxuq1kkxwwqqhfxxxxtasks() {
-		return this.fxxxuq1kkxwwqqhfxxxxtasks;
+	public Set<Jxxxuq54exwwqqhxxxxxgroupmembers> getJxxxuq54exwwqqhxxxxxgroupmemberses() {
+		return this.jxxxuq54exwwqqhxxxxxgroupmemberses;
 	}
 
-	public void setFxxxuq1kkxwwqqhfxxxxtasks(
-			Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks) {
-		this.fxxxuq1kkxwwqqhfxxxxtasks = fxxxuq1kkxwwqqhfxxxxtasks;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq1ggxwwqqhxxxxxmembersgroup")
-	public Set<Fxxxuq1kkxwwqqhfxxxxtask> getFxxxuq1kkxwwqqhfxxxxtasks_1() {
-		return this.fxxxuq1kkxwwqqhfxxxxtasks_1;
-	}
-
-	public void setFxxxuq1kkxwwqqhfxxxxtasks_1(
-			Set<Fxxxuq1kkxwwqqhfxxxxtask> fxxxuq1kkxwwqqhfxxxxtasks_1) {
-		this.fxxxuq1kkxwwqqhfxxxxtasks_1 = fxxxuq1kkxwwqqhfxxxxtasks_1;
+	public void setJxxxuq54exwwqqhxxxxxgroupmemberses(
+			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses) {
+		this.jxxxuq54exwwqqhxxxxxgroupmemberses = jxxxuq54exwwqqhxxxxxgroupmemberses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq1ggxwwqqhxxxxxmembersgroup")
@@ -239,36 +213,6 @@ public class Fxxxuq1ggxwwqqhxxxxxmembersgroup implements java.io.Serializable {
 	public void setDxxxuq2drxwwqqhfxxxxresourcedetailses(
 			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses) {
 		this.dxxxuq2drxwwqqhfxxxxresourcedetailses = dxxxuq2drxwwqqhfxxxxresourcedetailses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq1ggxwwqqhxxxxxmembersgroup")
-	public Set<Jxxxuq54exwwqqhxxxxxgroupmembers> getJxxxuq54exwwqqhxxxxxgroupmemberses_1() {
-		return this.jxxxuq54exwwqqhxxxxxgroupmemberses_1;
-	}
-
-	public void setJxxxuq54exwwqqhxxxxxgroupmemberses_1(
-			Set<Jxxxuq54exwwqqhxxxxxgroupmembers> jxxxuq54exwwqqhxxxxxgroupmemberses_1) {
-		this.jxxxuq54exwwqqhxxxxxgroupmemberses_1 = jxxxuq54exwwqqhxxxxxgroupmemberses_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq1ggxwwqqhxxxxxmembersgroup")
-	public Set<Fxxxuq89bxwwqqhxxxxxschedule> getFxxxuq89bxwwqqhxxxxxschedules_1() {
-		return this.fxxxuq89bxwwqqhxxxxxschedules_1;
-	}
-
-	public void setFxxxuq89bxwwqqhxxxxxschedules_1(
-			Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules_1) {
-		this.fxxxuq89bxwwqqhxxxxxschedules_1 = fxxxuq89bxwwqqhxxxxxschedules_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq1ggxwwqqhxxxxxmembersgroup")
-	public Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> getDxxxuq2drxwwqqhfxxxxresourcedetailses_1() {
-		return this.dxxxuq2drxwwqqhfxxxxresourcedetailses_1;
-	}
-
-	public void setDxxxuq2drxwwqqhfxxxxresourcedetailses_1(
-			Set<Dxxxuq2drxwwqqhfxxxxresourcedetails> dxxxuq2drxwwqqhfxxxxresourcedetailses_1) {
-		this.dxxxuq2drxwwqqhfxxxxresourcedetailses_1 = dxxxuq2drxwwqqhfxxxxresourcedetailses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

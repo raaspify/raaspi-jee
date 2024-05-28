@@ -27,6 +27,7 @@ its on the main menu
 <f:metadata>
     <f:viewParam name="id" value="${'#'}{loginCredentials.userId}"/>
     <f:viewParam name="pw" value="${'#'}{loginCredentials.password}"/>
+    <f:viewAction action="${'#'}{loginCredentials.setPassword('xxxxxx')}" />
     <f:viewAction action="${'#'}{${userEntityName}Home.takeAction()}" />
 </f:metadata>
 
@@ -138,7 +139,7 @@ its on the main menu
                     ${'#'}{messages.signup_email}
                     <h:inputText id="semail" class="form-control"  value="${'#'}{yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid}" size="30" 
                      pt:placeholder="email@xyz.com" maxlength="50"/>
-                   <h:commandButton id="resendAct" value="Resend Activation " action="${'#'}{yxxxuh566xwwqqwxxxxxuserHome.doResendActivationEmail('signIn',yxxxuh566xwwqqwxxxxxuserHome.instance.c1xxuxxxbvxxxxxxxxxxotherid)}"
+                   <h:commandButton id="resendAct" value="Resend Activation " action="${'#'}{yxxxuh566xwwqqwxxxxxuserHome.doResendActivationEmail('loginsignIn',null)}"
                     rendered = "${'#'}{yxxxuh566xwwqqwxxxxxuserList.userAuthNotMailedCount() gt 0}" />
                    </div>
                   </div>

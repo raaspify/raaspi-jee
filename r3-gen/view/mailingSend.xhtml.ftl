@@ -166,7 +166,7 @@ todo:
               </h:panelGroup>
               <h:outputText value="${'#'}{messages['Or']} "/> 
               <h:outputText value="${'#'}{messages['To']} "/> 
-                  <p:pickList value="${'#'}{${listName}.toDualSuggestList}" var="result" itemValue="${'#'}{result}" itemLabel="${'#'}{fn:substring(result.${keyField},0,10)},${'#'}{fn:substring(result.${emailField},0,15)}"
+                  <p:pickList value="${'#'}{${listName}.toDualSuggestList}" var="result" itemValue="${'#'}{result}"  itemLabel="${'#'}{fn:substring(result.${keyField},0,10)},${'#'}{fn:length(result.${emailField}) gt 15 ? fn:substring(result.${emailField},0,15):result.${emailField}}"
                    <#if menuAttributesp2 ="20">
                     converter="cEntityConverter">
                    </#if>
@@ -179,7 +179,7 @@ todo:
                   </p:pickList>
               <h:outputText value="${'#'}{messages['and']} "/> 
               <h:outputText value="${'#'}{messages['Cc']}"/> 
-                  <p:pickList value="${'#'}{${employeeEntityName}List.ccDualSuggestListE}" var="result" itemValue="${'#'}{result}" itemLabel="${'#'}{fn:substring(result.${employeeKeyField},0,10)},${'#'}{fn:substring(result.${eemailField},0,15)}"
+                  <p:pickList value="${'#'}{${employeeEntityName}List.ccDualSuggestListE}" var="result" itemValue="${'#'}{result}" itemLabel="${'#'}{fn:substring(result.${employeeKeyField},0,10)},${'#'}{fn:length(result.${eemailField}) gt 15 ? fn:substring(result.${eemailField},0,15):result.${eemailField}}"
                     converter="eEntityConverter">
                   </p:pickList>
 

@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -37,8 +37,6 @@ public class Fxxxuq8bxxwwqqhxxxxxoutline implements java.io.Serializable {
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Fxxxuq8bxxwwqqhxxxxxoutline> fxxxuq8bxxwwqqhxxxxxoutlines = new HashSet<Fxxxuq8bxxwwqqhxxxxxoutline>(
 			0);
-	private Set<Fxxxuq8bxxwwqqhxxxxxoutline> fxxxuq8bxxwwqqhxxxxxoutlines_1 = new HashSet<Fxxxuq8bxxwwqqhxxxxxoutline>(
-			0);
 
 	public Fxxxuq8bxxwwqqhxxxxxoutline() {
 	}
@@ -53,8 +51,7 @@ public class Fxxxuq8bxxwwqqhxxxxxoutline implements java.io.Serializable {
 			BigDecimal b3xxzxxrbvxxxxxxxxxxusecol,
 			String z1xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Fxxxuq8bxxwwqqhxxxxxoutline> fxxxuq8bxxwwqqhxxxxxoutlines,
-			Set<Fxxxuq8bxxwwqqhxxxxxoutline> fxxxuq8bxxwwqqhxxxxxoutlines_1) {
+			Set<Fxxxuq8bxxwwqqhxxxxxoutline> fxxxuq8bxxwwqqhxxxxxoutlines) {
 		this.fxxxuq8bxxwwqqhxxxxxoutline = fxxxuq8bxxwwqqhxxxxxoutline;
 		this.a0xxukxxbvxxxxxxxxxxproj = a0xxukxxbvxxxxxxxxxxproj;
 		this.b2xxzxxrbvxxxxxxxxxxuserow = b2xxzxxrbvxxxxxxxxxxuserow;
@@ -62,7 +59,6 @@ public class Fxxxuq8bxxwwqqhxxxxxoutline implements java.io.Serializable {
 		this.z1xxutoxlhxxxxxxxxxxowner = z1xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.fxxxuq8bxxwwqqhxxxxxoutlines = fxxxuq8bxxwwqqhxxxxxoutlines;
-		this.fxxxuq8bxxwwqqhxxxxxoutlines_1 = fxxxuq8bxxwwqqhxxxxxoutlines_1;
 	}
 
 	@Id
@@ -144,16 +140,6 @@ public class Fxxxuq8bxxwwqqhxxxxxoutline implements java.io.Serializable {
 	public void setFxxxuq8bxxwwqqhxxxxxoutlines(
 			Set<Fxxxuq8bxxwwqqhxxxxxoutline> fxxxuq8bxxwwqqhxxxxxoutlines) {
 		this.fxxxuq8bxxwwqqhxxxxxoutlines = fxxxuq8bxxwwqqhxxxxxoutlines;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq8bxxwwqqhxxxxxoutline")
-	public Set<Fxxxuq8bxxwwqqhxxxxxoutline> getFxxxuq8bxxwwqqhxxxxxoutlines_1() {
-		return this.fxxxuq8bxxwwqqhxxxxxoutlines_1;
-	}
-
-	public void setFxxxuq8bxxwwqqhxxxxxoutlines_1(
-			Set<Fxxxuq8bxxwwqqhxxxxxoutline> fxxxuq8bxxwwqqhxxxxxoutlines_1) {
-		this.fxxxuq8bxxwwqqhxxxxxoutlines_1 = fxxxuq8bxxwwqqhxxxxxoutlines_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

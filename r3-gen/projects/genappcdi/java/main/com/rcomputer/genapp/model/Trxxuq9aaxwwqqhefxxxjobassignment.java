@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -62,16 +62,12 @@ public class Trxxuq9aaxwwqqhefxxxjobassignment implements java.io.Serializable {
 	private String yaxxuxznbvxxxxxxxxxxnotes;
 	private Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses = new HashSet<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails>(
 			0);
-	private Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1 = new HashSet<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails>(
-			0);
 
 	public Trxxuq9aaxwwqqhefxxxjobassignment() {
 	}
 
 	public Trxxuq9aaxwwqqhefxxxjobassignment(
-			Fpxxuq9eexwwqqhefxxxmachine fpxxuq9eexwwqqhefxxxmachine,
 			String a0xxukxxbvxxxxxxxxxxjobassign) {
-		this.fpxxuq9eexwwqqhefxxxmachine = fpxxuq9eexwwqqhefxxxmachine;
 		this.a0xxukxxbvxxxxxxxxxxjobassign = a0xxukxxbvxxxxxxxxxxjobassign;
 	}
 	public Trxxuq9aaxwwqqhefxxxjobassignment(
@@ -102,8 +98,7 @@ public class Trxxuq9aaxwwqqhefxxxjobassignment implements java.io.Serializable {
 			String z4xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
 			String yaxxuxznbvxxxxxxxxxxnotes,
-			Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses,
-			Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1) {
+			Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses) {
 		this.fxxxcq144xwwqqhxxxxxlocation = fxxxcq144xwwqqhxxxxxlocation;
 		this.fpxxuq9eexwwqqhefxxxmachine = fpxxuq9eexwwqqhefxxxmachine;
 		this.dxxxuq92bxwwqqhefxxxitemjob = dxxxuq92bxwwqqhefxxxitemjob;
@@ -132,7 +127,6 @@ public class Trxxuq9aaxwwqqhefxxxjobassignment implements java.io.Serializable {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.yaxxuxznbvxxxxxxxxxxnotes = yaxxuxznbvxxxxxxxxxxnotes;
 		this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses = xoxxuq9bfxwwqqhexxxxjobassignmentdetailses;
-		this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1 = xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1;
 	}
 
 	@Id
@@ -158,8 +152,7 @@ public class Trxxuq9aaxwwqqhefxxxjobassignment implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "machine", nullable = false)
-	@NotNull
+	@JoinColumn(name = "machine")
 	public Fpxxuq9eexwwqqhefxxxmachine getFpxxuq9eexwwqqhefxxxmachine() {
 		return this.fpxxuq9eexwwqqhefxxxmachine;
 	}
@@ -432,16 +425,6 @@ public class Trxxuq9aaxwwqqhefxxxjobassignment implements java.io.Serializable {
 	public void setXoxxuq9bfxwwqqhexxxxjobassignmentdetailses(
 			Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses) {
 		this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses = xoxxuq9bfxwwqqhexxxxjobassignmentdetailses;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "trxxuq9aaxwwqqhefxxxjobassignment")
-	public Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> getXoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1() {
-		return this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1;
-	}
-
-	public void setXoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1(
-			Set<Xoxxuq9bfxwwqqhexxxxjobassignmentdetails> xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1) {
-		this.xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1 = xoxxuq9bfxwwqqhexxxxjobassignmentdetailses_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

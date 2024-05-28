@@ -59,7 +59,7 @@ public class DatabaseResourceLoader extends ResourceBundle {
         rbLocale=FacesContext.getCurrentInstance().getViewRoot().getLocale();
 
         setParent(ResourceBundle.getBundle(BUNDLE_NAME,
-            locale, DB_CONTROL));
+            rbLocale, DB_CONTROL));
        }catch(Exception e){
           String emsg=e.getMessage();
           locale=new Locale("en","US","o2");

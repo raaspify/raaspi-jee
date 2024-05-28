@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -45,8 +45,6 @@ public class Fxxxuq8axxwwqqhxxxxxproject implements java.io.Serializable {
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Set<Fxxxuq8axxwwqqhxxxxxproject> fxxxuq8axxwwqqhxxxxxprojects = new HashSet<Fxxxuq8axxwwqqhxxxxxproject>(
 			0);
-	private Set<Fxxxuq8axxwwqqhxxxxxproject> fxxxuq8axxwwqqhxxxxxprojects_1 = new HashSet<Fxxxuq8axxwwqqhxxxxxproject>(
-			0);
 
 	public Fxxxuq8axxwwqqhxxxxxproject() {
 	}
@@ -65,8 +63,7 @@ public class Fxxxuq8axxwwqqhxxxxxproject implements java.io.Serializable {
 			Date b5gxdxxdbvxxxxxxxxxxsdatet, Date b5exdxxdbvxxxxxxxxxxedatet,
 			String z1xxutoxlhxxxxxxxxxxowner,
 			String zzxxu2oxxhxxxxxxxxxxowner2,
-			Set<Fxxxuq8axxwwqqhxxxxxproject> fxxxuq8axxwwqqhxxxxxprojects,
-			Set<Fxxxuq8axxwwqqhxxxxxproject> fxxxuq8axxwwqqhxxxxxprojects_1) {
+			Set<Fxxxuq8axxwwqqhxxxxxproject> fxxxuq8axxwwqqhxxxxxprojects) {
 		this.fxxxuq8axxwwqqhxxxxxproject = fxxxuq8axxwwqqhxxxxxproject;
 		this.fxxxch133xhhxqhxxlxxdivision = fxxxch133xhhxqhxxlxxdivision;
 		this.fxxxch122xhhxqhxxlxxdepartment = fxxxch122xhhxqhxxlxxdepartment;
@@ -79,7 +76,6 @@ public class Fxxxuq8axxwwqqhxxxxxproject implements java.io.Serializable {
 		this.z1xxutoxlhxxxxxxxxxxowner = z1xxutoxlhxxxxxxxxxxowner;
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.fxxxuq8axxwwqqhxxxxxprojects = fxxxuq8axxwwqqhxxxxxprojects;
-		this.fxxxuq8axxwwqqhxxxxxprojects_1 = fxxxuq8axxwwqqhxxxxxprojects_1;
 	}
 
 	@Id
@@ -217,16 +213,6 @@ public class Fxxxuq8axxwwqqhxxxxxproject implements java.io.Serializable {
 	public void setFxxxuq8axxwwqqhxxxxxprojects(
 			Set<Fxxxuq8axxwwqqhxxxxxproject> fxxxuq8axxwwqqhxxxxxprojects) {
 		this.fxxxuq8axxwwqqhxxxxxprojects = fxxxuq8axxwwqqhxxxxxprojects;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq8axxwwqqhxxxxxproject")
-	public Set<Fxxxuq8axxwwqqhxxxxxproject> getFxxxuq8axxwwqqhxxxxxprojects_1() {
-		return this.fxxxuq8axxwwqqhxxxxxprojects_1;
-	}
-
-	public void setFxxxuq8axxwwqqhxxxxxprojects_1(
-			Set<Fxxxuq8axxwwqqhxxxxxproject> fxxxuq8axxwwqqhxxxxxprojects_1) {
-		this.fxxxuq8axxwwqqhxxxxxprojects_1 = fxxxuq8axxwwqqhxxxxxprojects_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

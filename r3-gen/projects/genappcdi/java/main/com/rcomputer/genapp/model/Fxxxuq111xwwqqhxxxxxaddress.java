@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -46,49 +46,9 @@ public class Fxxxuq111xwwqqhxxxxxaddress implements java.io.Serializable {
 	private String zzxxu2oxxhxxxxxxxxxxowner2;
 	private Integer z4xxzzprhexxxxxxxxxxprintmstat;
 	private Date z5xxczqxlhxxxxxxxxxxprinmtfldt;
-	private Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay = new HashSet<Trexuq244xwwqqhxxxxxcuorders>(
-			0);
-	private Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForShiptocode = new HashSet<Jxxxuq21bxwwqqhxxxxxccontact>(
-			0);
-	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForShiptocode = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
-			0);
-	private Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForShiptocode = new HashSet<Jxxxuq201xwwqqhxxxxxcustomer>(
-			0);
-	private Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForMailtocode = new HashSet<Jxxxuq21bxwwqqhxxxxxccontact>(
-			0);
-	private Set<Dxxxch1d3xwwqqhxxlxxcompany> dxxxch1d3xwwqqhxxlxxcompanies = new HashSet<Dxxxch1d3xwwqqhxxlxxcompany>(
-			0);
-	private Set<Fxxxcq144xwwqqhxxxxxlocation> fxxxcq144xwwqqhxxxxxlocations = new HashSet<Fxxxcq144xwwqqhxxxxxlocation>(
-			0);
-	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForMailtocode = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
-			0);
-	private Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForBilltocode = new HashSet<Trexuq255xwwqqhxxxxxshipment>(
-			0);
-	private Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode = new HashSet<Xoxxuq399xvwwqqhxxxxvshipmendetails>(
-			0);
-	private Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode = new HashSet<Xoxxuq399xvwwqqhxxxxvshipmendetails>(
-			0);
-	private Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForShiptocode_1 = new HashSet<Jxxxuq21bxwwqqhxxxxxccontact>(
-			0);
-	private Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcode = new HashSet<Trexuq244xwwqqhxxxxxcuorders>(
-			0);
-	private Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode = new HashSet<Jxxxuq31bxwwqqhxxxxxvcontact>(
-			0);
-	private Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_1 = new HashSet<Trexuq244xwwqqhxxxxxcuorders>(
-			0);
-	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForMailtocode_1 = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
-			0);
-	private Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForBilltocode_1 = new HashSet<Trexuq255xwwqqhxxxxxshipment>(
-			0);
 	private Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShiptocode = new HashSet<Trexuq255xwwqqhxxxxxshipment>(
 			0);
-	private Set<Fxxxcq144xwwqqhxxxxxlocation> fxxxcq144xwwqqhxxxxxlocations_1 = new HashSet<Fxxxcq144xwwqqhxxxxxlocation>(
-			0);
-	private Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode = new HashSet<Xoxxuq295xwwqqhxxxxxshipmentdetails>(
-			0);
-	private Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcode_1 = new HashSet<Trexuq244xwwqqhxxxxxcuorders>(
-			0);
-	private Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode_1 = new HashSet<Xoxxuq399xvwwqqhxxxxvshipmendetails>(
+	private Set<Fxxxcq144xwwqqhxxxxxlocation> fxxxcq144xwwqqhxxxxxlocations = new HashSet<Fxxxcq144xwwqqhxxxxxlocation>(
 			0);
 	private Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForMailtocode = new HashSet<Jxxxuq300xwwqqhxxxxxvendor>(
 			0);
@@ -96,49 +56,41 @@ public class Fxxxuq111xwwqqhxxxxxaddress implements java.io.Serializable {
 			0);
 	private Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmensForShiptocode = new HashSet<Trexuq377xwwqqhxxxxxvshipmen>(
 			0);
-	private Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForMailtocode_1 = new HashSet<Jxxxuq21bxwwqqhxxxxxccontact>(
+	private Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForMailtocode = new HashSet<Jxxxuq21bxwwqqhxxxxxccontact>(
+			0);
+	private Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcode = new HashSet<Trexuq244xwwqqhxxxxxcuorders>(
 			0);
 	private Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForMailtocode = new HashSet<Jxxxuq201xwwqqhxxxxxcustomer>(
 			0);
-	private Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForMailtocode_1 = new HashSet<Jxxxuq201xwwqqhxxxxxcustomer>(
+	private Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForShiptocode = new HashSet<Jxxxuq201xwwqqhxxxxxcustomer>(
 			0);
 	private Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode = new HashSet<Jxxxuq31bxwwqqhxxxxxvcontact>(
 			0);
-	private Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode_1 = new HashSet<Xoxxuq399xvwwqqhxxxxvshipmendetails>(
+	private Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode = new HashSet<Xoxxuq399xvwwqqhxxxxvshipmendetails>(
 			0);
-	private Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForShiptocode_1 = new HashSet<Jxxxuq201xwwqqhxxxxxcustomer>(
-			0);
-	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForShiptocode_1 = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
+	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForShiptocode = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
 			0);
 	private Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules = new HashSet<Fxxxuq89bxwwqqhxxxxxschedule>(
 			0);
 	private Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode = new HashSet<Xoxxuq295xwwqqhxxxxxshipmentdetails>(
 			0);
-	private Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode_1 = new HashSet<Xoxxuq295xwwqqhxxxxxshipmentdetails>(
+	private Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode = new HashSet<Xoxxuq295xwwqqhxxxxxshipmentdetails>(
 			0);
-	private Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmensForBilltocode_1 = new HashSet<Trexuq377xwwqqhxxxxxvshipmen>(
+	private Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode = new HashSet<Jxxxuq31bxwwqqhxxxxxvcontact>(
 			0);
-	private Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_2 = new HashSet<Trexuq244xwwqqhxxxxxcuorders>(
+	private Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForBilltocode = new HashSet<Trexuq255xwwqqhxxxxxshipment>(
 			0);
-	private Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules_1 = new HashSet<Fxxxuq89bxwwqqhxxxxxschedule>(
+	private Set<Dxxxch1d3xwwqqhxxlxxcompany> dxxxch1d3xwwqqhxxlxxcompanies = new HashSet<Dxxxch1d3xwwqqhxxlxxcompany>(
 			0);
-	private Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode_1 = new HashSet<Jxxxuq31bxwwqqhxxxxxvcontact>(
+	private Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode = new HashSet<Xoxxuq399xvwwqqhxxxxvshipmendetails>(
 			0);
-	private Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShiptocode_1 = new HashSet<Trexuq255xwwqqhxxxxxshipment>(
+	private Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForShiptocode = new HashSet<Jxxxuq21bxwwqqhxxxxxccontact>(
+			0);
+	private Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay = new HashSet<Trexuq244xwwqqhxxxxxcuorders>(
+			0);
+	private Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForMailtocode = new HashSet<Jxxxbh400xwwqqhxxxxxemployee>(
 			0);
 	private Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForShiptocode = new HashSet<Jxxxuq300xwwqqhxxxxxvendor>(
-			0);
-	private Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForMailtocode_1 = new HashSet<Jxxxuq300xwwqqhxxxxxvendor>(
-			0);
-	private Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmensForShiptocode_1 = new HashSet<Trexuq377xwwqqhxxxxxvshipmen>(
-			0);
-	private Set<Dxxxch1d3xwwqqhxxlxxcompany> dxxxch1d3xwwqqhxxlxxcompanies_1 = new HashSet<Dxxxch1d3xwwqqhxxlxxcompany>(
-			0);
-	private Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode_1 = new HashSet<Jxxxuq31bxwwqqhxxxxxvcontact>(
-			0);
-	private Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode_1 = new HashSet<Xoxxuq295xwwqqhxxxxxshipmentdetails>(
-			0);
-	private Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForShiptocode_1 = new HashSet<Jxxxuq300xwwqqhxxxxxvendor>(
 			0);
 
 	public Fxxxuq111xwwqqhxxxxxaddress() {
@@ -164,53 +116,29 @@ public class Fxxxuq111xwwqqhxxxxxaddress implements java.io.Serializable {
 			String zzxxu2oxxhxxxxxxxxxxowner2,
 			Integer z4xxzzprhexxxxxxxxxxprintmstat,
 			Date z5xxczqxlhxxxxxxxxxxprinmtfldt,
-			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay,
-			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForShiptocode,
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForShiptocode,
-			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForShiptocode,
-			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForMailtocode,
-			Set<Dxxxch1d3xwwqqhxxlxxcompany> dxxxch1d3xwwqqhxxlxxcompanies,
-			Set<Fxxxcq144xwwqqhxxxxxlocation> fxxxcq144xwwqqhxxxxxlocations,
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForMailtocode,
-			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForBilltocode,
-			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode,
-			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode,
-			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForShiptocode_1,
-			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcode,
-			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode,
-			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_1,
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForMailtocode_1,
-			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForBilltocode_1,
 			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShiptocode,
-			Set<Fxxxcq144xwwqqhxxxxxlocation> fxxxcq144xwwqqhxxxxxlocations_1,
-			Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode,
-			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcode_1,
-			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode_1,
+			Set<Fxxxcq144xwwqqhxxxxxlocation> fxxxcq144xwwqqhxxxxxlocations,
 			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForMailtocode,
 			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmensForBilltocode,
 			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmensForShiptocode,
-			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForMailtocode_1,
+			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForMailtocode,
+			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcode,
 			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForMailtocode,
-			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForMailtocode_1,
+			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForShiptocode,
 			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode,
-			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode_1,
-			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForShiptocode_1,
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForShiptocode_1,
+			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode,
+			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForShiptocode,
 			Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules,
 			Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode,
-			Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode_1,
-			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmensForBilltocode_1,
-			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_2,
-			Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules_1,
-			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode_1,
-			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShiptocode_1,
-			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForShiptocode,
-			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForMailtocode_1,
-			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmensForShiptocode_1,
-			Set<Dxxxch1d3xwwqqhxxlxxcompany> dxxxch1d3xwwqqhxxlxxcompanies_1,
-			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode_1,
-			Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode_1,
-			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForShiptocode_1) {
+			Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode,
+			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode,
+			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForBilltocode,
+			Set<Dxxxch1d3xwwqqhxxlxxcompany> dxxxch1d3xwwqqhxxlxxcompanies,
+			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode,
+			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForShiptocode,
+			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay,
+			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForMailtocode,
+			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForShiptocode) {
 		this.a0xxukbxbxxxxxxxxxxxaddrescode = a0xxukbxbxxxxxxxxxxxaddrescode;
 		this.b1pxusa1bvxxxxxxxxxxaddrl1 = b1pxusa1bvxxxxxxxxxxaddrl1;
 		this.b2xxub2xbvxxxxxxxxxxaddrl2 = b2xxub2xbvxxxxxxxxxxaddrl2;
@@ -227,53 +155,29 @@ public class Fxxxuq111xwwqqhxxxxxaddress implements java.io.Serializable {
 		this.zzxxu2oxxhxxxxxxxxxxowner2 = zzxxu2oxxhxxxxxxxxxxowner2;
 		this.z4xxzzprhexxxxxxxxxxprintmstat = z4xxzzprhexxxxxxxxxxprintmstat;
 		this.z5xxczqxlhxxxxxxxxxxprinmtfldt = z5xxczqxlhxxxxxxxxxxprinmtfldt;
-		this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay = trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay;
-		this.jxxxuq21bxwwqqhxxxxxccontactsForShiptocode = jxxxuq21bxwwqqhxxxxxccontactsForShiptocode;
-		this.jxxxbh400xwwqqhxxxxxemployeesForShiptocode = jxxxbh400xwwqqhxxxxxemployeesForShiptocode;
-		this.jxxxuq201xwwqqhxxxxxcustomersForShiptocode = jxxxuq201xwwqqhxxxxxcustomersForShiptocode;
-		this.jxxxuq21bxwwqqhxxxxxccontactsForMailtocode = jxxxuq21bxwwqqhxxxxxccontactsForMailtocode;
-		this.dxxxch1d3xwwqqhxxlxxcompanies = dxxxch1d3xwwqqhxxlxxcompanies;
-		this.fxxxcq144xwwqqhxxxxxlocations = fxxxcq144xwwqqhxxxxxlocations;
-		this.jxxxbh400xwwqqhxxxxxemployeesForMailtocode = jxxxbh400xwwqqhxxxxxemployeesForMailtocode;
-		this.trexuq255xwwqqhxxxxxshipmentsForBilltocode = trexuq255xwwqqhxxxxxshipmentsForBilltocode;
-		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode = xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode;
-		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode = xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode;
-		this.jxxxuq21bxwwqqhxxxxxccontactsForShiptocode_1 = jxxxuq21bxwwqqhxxxxxccontactsForShiptocode_1;
-		this.trexuq244xwwqqhxxxxxcuordersesForShipcode = trexuq244xwwqqhxxxxxcuordersesForShipcode;
-		this.jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode = jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode;
-		this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_1 = trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_1;
-		this.jxxxbh400xwwqqhxxxxxemployeesForMailtocode_1 = jxxxbh400xwwqqhxxxxxemployeesForMailtocode_1;
-		this.trexuq255xwwqqhxxxxxshipmentsForBilltocode_1 = trexuq255xwwqqhxxxxxshipmentsForBilltocode_1;
 		this.trexuq255xwwqqhxxxxxshipmentsForShiptocode = trexuq255xwwqqhxxxxxshipmentsForShiptocode;
-		this.fxxxcq144xwwqqhxxxxxlocations_1 = fxxxcq144xwwqqhxxxxxlocations_1;
-		this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode = xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode;
-		this.trexuq244xwwqqhxxxxxcuordersesForShipcode_1 = trexuq244xwwqqhxxxxxcuordersesForShipcode_1;
-		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode_1 = xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode_1;
+		this.fxxxcq144xwwqqhxxxxxlocations = fxxxcq144xwwqqhxxxxxlocations;
 		this.jxxxuq300xwwqqhxxxxxvendorsForMailtocode = jxxxuq300xwwqqhxxxxxvendorsForMailtocode;
 		this.trexuq377xwwqqhxxxxxvshipmensForBilltocode = trexuq377xwwqqhxxxxxvshipmensForBilltocode;
 		this.trexuq377xwwqqhxxxxxvshipmensForShiptocode = trexuq377xwwqqhxxxxxvshipmensForShiptocode;
-		this.jxxxuq21bxwwqqhxxxxxccontactsForMailtocode_1 = jxxxuq21bxwwqqhxxxxxccontactsForMailtocode_1;
+		this.jxxxuq21bxwwqqhxxxxxccontactsForMailtocode = jxxxuq21bxwwqqhxxxxxccontactsForMailtocode;
+		this.trexuq244xwwqqhxxxxxcuordersesForShipcode = trexuq244xwwqqhxxxxxcuordersesForShipcode;
 		this.jxxxuq201xwwqqhxxxxxcustomersForMailtocode = jxxxuq201xwwqqhxxxxxcustomersForMailtocode;
-		this.jxxxuq201xwwqqhxxxxxcustomersForMailtocode_1 = jxxxuq201xwwqqhxxxxxcustomersForMailtocode_1;
+		this.jxxxuq201xwwqqhxxxxxcustomersForShiptocode = jxxxuq201xwwqqhxxxxxcustomersForShiptocode;
 		this.jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode = jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode;
-		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode_1 = xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode_1;
-		this.jxxxuq201xwwqqhxxxxxcustomersForShiptocode_1 = jxxxuq201xwwqqhxxxxxcustomersForShiptocode_1;
-		this.jxxxbh400xwwqqhxxxxxemployeesForShiptocode_1 = jxxxbh400xwwqqhxxxxxemployeesForShiptocode_1;
+		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode = xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode;
+		this.jxxxbh400xwwqqhxxxxxemployeesForShiptocode = jxxxbh400xwwqqhxxxxxemployeesForShiptocode;
 		this.fxxxuq89bxwwqqhxxxxxschedules = fxxxuq89bxwwqqhxxxxxschedules;
 		this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode = xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode;
-		this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode_1 = xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode_1;
-		this.trexuq377xwwqqhxxxxxvshipmensForBilltocode_1 = trexuq377xwwqqhxxxxxvshipmensForBilltocode_1;
-		this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_2 = trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_2;
-		this.fxxxuq89bxwwqqhxxxxxschedules_1 = fxxxuq89bxwwqqhxxxxxschedules_1;
-		this.jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode_1 = jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode_1;
-		this.trexuq255xwwqqhxxxxxshipmentsForShiptocode_1 = trexuq255xwwqqhxxxxxshipmentsForShiptocode_1;
+		this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode = xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode;
+		this.jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode = jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode;
+		this.trexuq255xwwqqhxxxxxshipmentsForBilltocode = trexuq255xwwqqhxxxxxshipmentsForBilltocode;
+		this.dxxxch1d3xwwqqhxxlxxcompanies = dxxxch1d3xwwqqhxxlxxcompanies;
+		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode = xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode;
+		this.jxxxuq21bxwwqqhxxxxxccontactsForShiptocode = jxxxuq21bxwwqqhxxxxxccontactsForShiptocode;
+		this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay = trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay;
+		this.jxxxbh400xwwqqhxxxxxemployeesForMailtocode = jxxxbh400xwwqqhxxxxxemployeesForMailtocode;
 		this.jxxxuq300xwwqqhxxxxxvendorsForShiptocode = jxxxuq300xwwqqhxxxxxvendorsForShiptocode;
-		this.jxxxuq300xwwqqhxxxxxvendorsForMailtocode_1 = jxxxuq300xwwqqhxxxxxvendorsForMailtocode_1;
-		this.trexuq377xwwqqhxxxxxvshipmensForShiptocode_1 = trexuq377xwwqqhxxxxxvshipmensForShiptocode_1;
-		this.dxxxch1d3xwwqqhxxlxxcompanies_1 = dxxxch1d3xwwqqhxxlxxcompanies_1;
-		this.jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode_1 = jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode_1;
-		this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode_1 = xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode_1;
-		this.jxxxuq300xwwqqhxxxxxvendorsForShiptocode_1 = jxxxuq300xwwqqhxxxxxvendorsForShiptocode_1;
 	}
 
 	@Id
@@ -455,176 +359,6 @@ public class Fxxxuq111xwwqqhxxxxxaddress implements java.io.Serializable {
 		this.z5xxczqxlhxxxxxxxxxxprinmtfldt = z5xxczqxlhxxxxxxxxxxprinmtfldt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShipcodefrompay")
-	public Set<Trexuq244xwwqqhxxxxxcuorders> getTrexuq244xwwqqhxxxxxcuordersesForShipcodefrompay() {
-		return this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay;
-	}
-
-	public void setTrexuq244xwwqqhxxxxxcuordersesForShipcodefrompay(
-			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay) {
-		this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay = trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Jxxxuq21bxwwqqhxxxxxccontact> getJxxxuq21bxwwqqhxxxxxccontactsForShiptocode() {
-		return this.jxxxuq21bxwwqqhxxxxxccontactsForShiptocode;
-	}
-
-	public void setJxxxuq21bxwwqqhxxxxxccontactsForShiptocode(
-			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForShiptocode) {
-		this.jxxxuq21bxwwqqhxxxxxccontactsForShiptocode = jxxxuq21bxwwqqhxxxxxccontactsForShiptocode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Jxxxbh400xwwqqhxxxxxemployee> getJxxxbh400xwwqqhxxxxxemployeesForShiptocode() {
-		return this.jxxxbh400xwwqqhxxxxxemployeesForShiptocode;
-	}
-
-	public void setJxxxbh400xwwqqhxxxxxemployeesForShiptocode(
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForShiptocode) {
-		this.jxxxbh400xwwqqhxxxxxemployeesForShiptocode = jxxxbh400xwwqqhxxxxxemployeesForShiptocode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Jxxxuq201xwwqqhxxxxxcustomer> getJxxxuq201xwwqqhxxxxxcustomersForShiptocode() {
-		return this.jxxxuq201xwwqqhxxxxxcustomersForShiptocode;
-	}
-
-	public void setJxxxuq201xwwqqhxxxxxcustomersForShiptocode(
-			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForShiptocode) {
-		this.jxxxuq201xwwqqhxxxxxcustomersForShiptocode = jxxxuq201xwwqqhxxxxxcustomersForShiptocode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
-	public Set<Jxxxuq21bxwwqqhxxxxxccontact> getJxxxuq21bxwwqqhxxxxxccontactsForMailtocode() {
-		return this.jxxxuq21bxwwqqhxxxxxccontactsForMailtocode;
-	}
-
-	public void setJxxxuq21bxwwqqhxxxxxccontactsForMailtocode(
-			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForMailtocode) {
-		this.jxxxuq21bxwwqqhxxxxxccontactsForMailtocode = jxxxuq21bxwwqqhxxxxxccontactsForMailtocode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddress")
-	public Set<Dxxxch1d3xwwqqhxxlxxcompany> getDxxxch1d3xwwqqhxxlxxcompanies() {
-		return this.dxxxch1d3xwwqqhxxlxxcompanies;
-	}
-
-	public void setDxxxch1d3xwwqqhxxlxxcompanies(
-			Set<Dxxxch1d3xwwqqhxxlxxcompany> dxxxch1d3xwwqqhxxlxxcompanies) {
-		this.dxxxch1d3xwwqqhxxlxxcompanies = dxxxch1d3xwwqqhxxlxxcompanies;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddress")
-	public Set<Fxxxcq144xwwqqhxxxxxlocation> getFxxxcq144xwwqqhxxxxxlocations() {
-		return this.fxxxcq144xwwqqhxxxxxlocations;
-	}
-
-	public void setFxxxcq144xwwqqhxxxxxlocations(
-			Set<Fxxxcq144xwwqqhxxxxxlocation> fxxxcq144xwwqqhxxxxxlocations) {
-		this.fxxxcq144xwwqqhxxxxxlocations = fxxxcq144xwwqqhxxxxxlocations;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
-	public Set<Jxxxbh400xwwqqhxxxxxemployee> getJxxxbh400xwwqqhxxxxxemployeesForMailtocode() {
-		return this.jxxxbh400xwwqqhxxxxxemployeesForMailtocode;
-	}
-
-	public void setJxxxbh400xwwqqhxxxxxemployeesForMailtocode(
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForMailtocode) {
-		this.jxxxbh400xwwqqhxxxxxemployeesForMailtocode = jxxxbh400xwwqqhxxxxxemployeesForMailtocode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByBilltocode")
-	public Set<Trexuq255xwwqqhxxxxxshipment> getTrexuq255xwwqqhxxxxxshipmentsForBilltocode() {
-		return this.trexuq255xwwqqhxxxxxshipmentsForBilltocode;
-	}
-
-	public void setTrexuq255xwwqqhxxxxxshipmentsForBilltocode(
-			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForBilltocode) {
-		this.trexuq255xwwqqhxxxxxshipmentsForBilltocode = trexuq255xwwqqhxxxxxshipmentsForBilltocode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
-	public Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> getXoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode() {
-		return this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode;
-	}
-
-	public void setXoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode(
-			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode) {
-		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode = xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> getXoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode() {
-		return this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode;
-	}
-
-	public void setXoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode(
-			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode) {
-		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode = xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Jxxxuq21bxwwqqhxxxxxccontact> getJxxxuq21bxwwqqhxxxxxccontactsForShiptocode_1() {
-		return this.jxxxuq21bxwwqqhxxxxxccontactsForShiptocode_1;
-	}
-
-	public void setJxxxuq21bxwwqqhxxxxxccontactsForShiptocode_1(
-			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForShiptocode_1) {
-		this.jxxxuq21bxwwqqhxxxxxccontactsForShiptocode_1 = jxxxuq21bxwwqqhxxxxxccontactsForShiptocode_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShipcode")
-	public Set<Trexuq244xwwqqhxxxxxcuorders> getTrexuq244xwwqqhxxxxxcuordersesForShipcode() {
-		return this.trexuq244xwwqqhxxxxxcuordersesForShipcode;
-	}
-
-	public void setTrexuq244xwwqqhxxxxxcuordersesForShipcode(
-			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcode) {
-		this.trexuq244xwwqqhxxxxxcuordersesForShipcode = trexuq244xwwqqhxxxxxcuordersesForShipcode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Jxxxuq31bxwwqqhxxxxxvcontact> getJxxxuq31bxwwqqhxxxxxvcontactsForShiptocode() {
-		return this.jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode;
-	}
-
-	public void setJxxxuq31bxwwqqhxxxxxvcontactsForShiptocode(
-			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode) {
-		this.jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode = jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShipcodefrompay")
-	public Set<Trexuq244xwwqqhxxxxxcuorders> getTrexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_1() {
-		return this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_1;
-	}
-
-	public void setTrexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_1(
-			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_1) {
-		this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_1 = trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
-	public Set<Jxxxbh400xwwqqhxxxxxemployee> getJxxxbh400xwwqqhxxxxxemployeesForMailtocode_1() {
-		return this.jxxxbh400xwwqqhxxxxxemployeesForMailtocode_1;
-	}
-
-	public void setJxxxbh400xwwqqhxxxxxemployeesForMailtocode_1(
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForMailtocode_1) {
-		this.jxxxbh400xwwqqhxxxxxemployeesForMailtocode_1 = jxxxbh400xwwqqhxxxxxemployeesForMailtocode_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByBilltocode")
-	public Set<Trexuq255xwwqqhxxxxxshipment> getTrexuq255xwwqqhxxxxxshipmentsForBilltocode_1() {
-		return this.trexuq255xwwqqhxxxxxshipmentsForBilltocode_1;
-	}
-
-	public void setTrexuq255xwwqqhxxxxxshipmentsForBilltocode_1(
-			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForBilltocode_1) {
-		this.trexuq255xwwqqhxxxxxshipmentsForBilltocode_1 = trexuq255xwwqqhxxxxxshipmentsForBilltocode_1;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
 	public Set<Trexuq255xwwqqhxxxxxshipment> getTrexuq255xwwqqhxxxxxshipmentsForShiptocode() {
 		return this.trexuq255xwwqqhxxxxxshipmentsForShiptocode;
@@ -636,43 +370,13 @@ public class Fxxxuq111xwwqqhxxxxxaddress implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddress")
-	public Set<Fxxxcq144xwwqqhxxxxxlocation> getFxxxcq144xwwqqhxxxxxlocations_1() {
-		return this.fxxxcq144xwwqqhxxxxxlocations_1;
+	public Set<Fxxxcq144xwwqqhxxxxxlocation> getFxxxcq144xwwqqhxxxxxlocations() {
+		return this.fxxxcq144xwwqqhxxxxxlocations;
 	}
 
-	public void setFxxxcq144xwwqqhxxxxxlocations_1(
-			Set<Fxxxcq144xwwqqhxxxxxlocation> fxxxcq144xwwqqhxxxxxlocations_1) {
-		this.fxxxcq144xwwqqhxxxxxlocations_1 = fxxxcq144xwwqqhxxxxxlocations_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> getXoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode() {
-		return this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode;
-	}
-
-	public void setXoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode(
-			Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode) {
-		this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode = xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShipcode")
-	public Set<Trexuq244xwwqqhxxxxxcuorders> getTrexuq244xwwqqhxxxxxcuordersesForShipcode_1() {
-		return this.trexuq244xwwqqhxxxxxcuordersesForShipcode_1;
-	}
-
-	public void setTrexuq244xwwqqhxxxxxcuordersesForShipcode_1(
-			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcode_1) {
-		this.trexuq244xwwqqhxxxxxcuordersesForShipcode_1 = trexuq244xwwqqhxxxxxcuordersesForShipcode_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> getXoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode_1() {
-		return this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode_1;
-	}
-
-	public void setXoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode_1(
-			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode_1) {
-		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode_1 = xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode_1;
+	public void setFxxxcq144xwwqqhxxxxxlocations(
+			Set<Fxxxcq144xwwqqhxxxxxlocation> fxxxcq144xwwqqhxxxxxlocations) {
+		this.fxxxcq144xwwqqhxxxxxlocations = fxxxcq144xwwqqhxxxxxlocations;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
@@ -706,13 +410,23 @@ public class Fxxxuq111xwwqqhxxxxxaddress implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
-	public Set<Jxxxuq21bxwwqqhxxxxxccontact> getJxxxuq21bxwwqqhxxxxxccontactsForMailtocode_1() {
-		return this.jxxxuq21bxwwqqhxxxxxccontactsForMailtocode_1;
+	public Set<Jxxxuq21bxwwqqhxxxxxccontact> getJxxxuq21bxwwqqhxxxxxccontactsForMailtocode() {
+		return this.jxxxuq21bxwwqqhxxxxxccontactsForMailtocode;
 	}
 
-	public void setJxxxuq21bxwwqqhxxxxxccontactsForMailtocode_1(
-			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForMailtocode_1) {
-		this.jxxxuq21bxwwqqhxxxxxccontactsForMailtocode_1 = jxxxuq21bxwwqqhxxxxxccontactsForMailtocode_1;
+	public void setJxxxuq21bxwwqqhxxxxxccontactsForMailtocode(
+			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForMailtocode) {
+		this.jxxxuq21bxwwqqhxxxxxccontactsForMailtocode = jxxxuq21bxwwqqhxxxxxccontactsForMailtocode;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShipcode")
+	public Set<Trexuq244xwwqqhxxxxxcuorders> getTrexuq244xwwqqhxxxxxcuordersesForShipcode() {
+		return this.trexuq244xwwqqhxxxxxcuordersesForShipcode;
+	}
+
+	public void setTrexuq244xwwqqhxxxxxcuordersesForShipcode(
+			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcode) {
+		this.trexuq244xwwqqhxxxxxcuordersesForShipcode = trexuq244xwwqqhxxxxxcuordersesForShipcode;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
@@ -725,14 +439,14 @@ public class Fxxxuq111xwwqqhxxxxxaddress implements java.io.Serializable {
 		this.jxxxuq201xwwqqhxxxxxcustomersForMailtocode = jxxxuq201xwwqqhxxxxxcustomersForMailtocode;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
-	public Set<Jxxxuq201xwwqqhxxxxxcustomer> getJxxxuq201xwwqqhxxxxxcustomersForMailtocode_1() {
-		return this.jxxxuq201xwwqqhxxxxxcustomersForMailtocode_1;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
+	public Set<Jxxxuq201xwwqqhxxxxxcustomer> getJxxxuq201xwwqqhxxxxxcustomersForShiptocode() {
+		return this.jxxxuq201xwwqqhxxxxxcustomersForShiptocode;
 	}
 
-	public void setJxxxuq201xwwqqhxxxxxcustomersForMailtocode_1(
-			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForMailtocode_1) {
-		this.jxxxuq201xwwqqhxxxxxcustomersForMailtocode_1 = jxxxuq201xwwqqhxxxxxcustomersForMailtocode_1;
+	public void setJxxxuq201xwwqqhxxxxxcustomersForShiptocode(
+			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForShiptocode) {
+		this.jxxxuq201xwwqqhxxxxxcustomersForShiptocode = jxxxuq201xwwqqhxxxxxcustomersForShiptocode;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
@@ -746,33 +460,23 @@ public class Fxxxuq111xwwqqhxxxxxaddress implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
-	public Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> getXoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode_1() {
-		return this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode_1;
+	public Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> getXoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode() {
+		return this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode;
 	}
 
-	public void setXoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode_1(
-			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode_1) {
-		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode_1 = xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Jxxxuq201xwwqqhxxxxxcustomer> getJxxxuq201xwwqqhxxxxxcustomersForShiptocode_1() {
-		return this.jxxxuq201xwwqqhxxxxxcustomersForShiptocode_1;
-	}
-
-	public void setJxxxuq201xwwqqhxxxxxcustomersForShiptocode_1(
-			Set<Jxxxuq201xwwqqhxxxxxcustomer> jxxxuq201xwwqqhxxxxxcustomersForShiptocode_1) {
-		this.jxxxuq201xwwqqhxxxxxcustomersForShiptocode_1 = jxxxuq201xwwqqhxxxxxcustomersForShiptocode_1;
+	public void setXoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode(
+			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode) {
+		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode = xoxxuq399xvwwqqhxxxxvshipmendetailsesForMailtocode;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Jxxxbh400xwwqqhxxxxxemployee> getJxxxbh400xwwqqhxxxxxemployeesForShiptocode_1() {
-		return this.jxxxbh400xwwqqhxxxxxemployeesForShiptocode_1;
+	public Set<Jxxxbh400xwwqqhxxxxxemployee> getJxxxbh400xwwqqhxxxxxemployeesForShiptocode() {
+		return this.jxxxbh400xwwqqhxxxxxemployeesForShiptocode;
 	}
 
-	public void setJxxxbh400xwwqqhxxxxxemployeesForShiptocode_1(
-			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForShiptocode_1) {
-		this.jxxxbh400xwwqqhxxxxxemployeesForShiptocode_1 = jxxxbh400xwwqqhxxxxxemployeesForShiptocode_1;
+	public void setJxxxbh400xwwqqhxxxxxemployeesForShiptocode(
+			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForShiptocode) {
+		this.jxxxbh400xwwqqhxxxxxemployeesForShiptocode = jxxxbh400xwwqqhxxxxxemployeesForShiptocode;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddress")
@@ -796,63 +500,83 @@ public class Fxxxuq111xwwqqhxxxxxaddress implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> getXoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode_1() {
-		return this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode_1;
+	public Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> getXoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode() {
+		return this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode;
 	}
 
-	public void setXoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode_1(
-			Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode_1) {
-		this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode_1 = xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode_1;
+	public void setXoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode(
+			Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode) {
+		this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode = xoxxuq295xwwqqhxxxxxshipmentdetailsesForShiptocode;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
+	public Set<Jxxxuq31bxwwqqhxxxxxvcontact> getJxxxuq31bxwwqqhxxxxxvcontactsForShiptocode() {
+		return this.jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode;
+	}
+
+	public void setJxxxuq31bxwwqqhxxxxxvcontactsForShiptocode(
+			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode) {
+		this.jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode = jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByBilltocode")
-	public Set<Trexuq377xwwqqhxxxxxvshipmen> getTrexuq377xwwqqhxxxxxvshipmensForBilltocode_1() {
-		return this.trexuq377xwwqqhxxxxxvshipmensForBilltocode_1;
+	public Set<Trexuq255xwwqqhxxxxxshipment> getTrexuq255xwwqqhxxxxxshipmentsForBilltocode() {
+		return this.trexuq255xwwqqhxxxxxshipmentsForBilltocode;
 	}
 
-	public void setTrexuq377xwwqqhxxxxxvshipmensForBilltocode_1(
-			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmensForBilltocode_1) {
-		this.trexuq377xwwqqhxxxxxvshipmensForBilltocode_1 = trexuq377xwwqqhxxxxxvshipmensForBilltocode_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShipcodefrompay")
-	public Set<Trexuq244xwwqqhxxxxxcuorders> getTrexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_2() {
-		return this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_2;
-	}
-
-	public void setTrexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_2(
-			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_2) {
-		this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_2 = trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay_2;
+	public void setTrexuq255xwwqqhxxxxxshipmentsForBilltocode(
+			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForBilltocode) {
+		this.trexuq255xwwqqhxxxxxshipmentsForBilltocode = trexuq255xwwqqhxxxxxshipmentsForBilltocode;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddress")
-	public Set<Fxxxuq89bxwwqqhxxxxxschedule> getFxxxuq89bxwwqqhxxxxxschedules_1() {
-		return this.fxxxuq89bxwwqqhxxxxxschedules_1;
+	public Set<Dxxxch1d3xwwqqhxxlxxcompany> getDxxxch1d3xwwqqhxxlxxcompanies() {
+		return this.dxxxch1d3xwwqqhxxlxxcompanies;
 	}
 
-	public void setFxxxuq89bxwwqqhxxxxxschedules_1(
-			Set<Fxxxuq89bxwwqqhxxxxxschedule> fxxxuq89bxwwqqhxxxxxschedules_1) {
-		this.fxxxuq89bxwwqqhxxxxxschedules_1 = fxxxuq89bxwwqqhxxxxxschedules_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Jxxxuq31bxwwqqhxxxxxvcontact> getJxxxuq31bxwwqqhxxxxxvcontactsForShiptocode_1() {
-		return this.jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode_1;
-	}
-
-	public void setJxxxuq31bxwwqqhxxxxxvcontactsForShiptocode_1(
-			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode_1) {
-		this.jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode_1 = jxxxuq31bxwwqqhxxxxxvcontactsForShiptocode_1;
+	public void setDxxxch1d3xwwqqhxxlxxcompanies(
+			Set<Dxxxch1d3xwwqqhxxlxxcompany> dxxxch1d3xwwqqhxxlxxcompanies) {
+		this.dxxxch1d3xwwqqhxxlxxcompanies = dxxxch1d3xwwqqhxxlxxcompanies;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Trexuq255xwwqqhxxxxxshipment> getTrexuq255xwwqqhxxxxxshipmentsForShiptocode_1() {
-		return this.trexuq255xwwqqhxxxxxshipmentsForShiptocode_1;
+	public Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> getXoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode() {
+		return this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode;
 	}
 
-	public void setTrexuq255xwwqqhxxxxxshipmentsForShiptocode_1(
-			Set<Trexuq255xwwqqhxxxxxshipment> trexuq255xwwqqhxxxxxshipmentsForShiptocode_1) {
-		this.trexuq255xwwqqhxxxxxshipmentsForShiptocode_1 = trexuq255xwwqqhxxxxxshipmentsForShiptocode_1;
+	public void setXoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode(
+			Set<Xoxxuq399xvwwqqhxxxxvshipmendetails> xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode) {
+		this.xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode = xoxxuq399xvwwqqhxxxxvshipmendetailsesForShiptocode;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
+	public Set<Jxxxuq21bxwwqqhxxxxxccontact> getJxxxuq21bxwwqqhxxxxxccontactsForShiptocode() {
+		return this.jxxxuq21bxwwqqhxxxxxccontactsForShiptocode;
+	}
+
+	public void setJxxxuq21bxwwqqhxxxxxccontactsForShiptocode(
+			Set<Jxxxuq21bxwwqqhxxxxxccontact> jxxxuq21bxwwqqhxxxxxccontactsForShiptocode) {
+		this.jxxxuq21bxwwqqhxxxxxccontactsForShiptocode = jxxxuq21bxwwqqhxxxxxccontactsForShiptocode;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShipcodefrompay")
+	public Set<Trexuq244xwwqqhxxxxxcuorders> getTrexuq244xwwqqhxxxxxcuordersesForShipcodefrompay() {
+		return this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay;
+	}
+
+	public void setTrexuq244xwwqqhxxxxxcuordersesForShipcodefrompay(
+			Set<Trexuq244xwwqqhxxxxxcuorders> trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay) {
+		this.trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay = trexuq244xwwqqhxxxxxcuordersesForShipcodefrompay;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
+	public Set<Jxxxbh400xwwqqhxxxxxemployee> getJxxxbh400xwwqqhxxxxxemployeesForMailtocode() {
+		return this.jxxxbh400xwwqqhxxxxxemployeesForMailtocode;
+	}
+
+	public void setJxxxbh400xwwqqhxxxxxemployeesForMailtocode(
+			Set<Jxxxbh400xwwqqhxxxxxemployee> jxxxbh400xwwqqhxxxxxemployeesForMailtocode) {
+		this.jxxxbh400xwwqqhxxxxxemployeesForMailtocode = jxxxbh400xwwqqhxxxxxemployeesForMailtocode;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
@@ -863,66 +587,6 @@ public class Fxxxuq111xwwqqhxxxxxaddress implements java.io.Serializable {
 	public void setJxxxuq300xwwqqhxxxxxvendorsForShiptocode(
 			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForShiptocode) {
 		this.jxxxuq300xwwqqhxxxxxvendorsForShiptocode = jxxxuq300xwwqqhxxxxxvendorsForShiptocode;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
-	public Set<Jxxxuq300xwwqqhxxxxxvendor> getJxxxuq300xwwqqhxxxxxvendorsForMailtocode_1() {
-		return this.jxxxuq300xwwqqhxxxxxvendorsForMailtocode_1;
-	}
-
-	public void setJxxxuq300xwwqqhxxxxxvendorsForMailtocode_1(
-			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForMailtocode_1) {
-		this.jxxxuq300xwwqqhxxxxxvendorsForMailtocode_1 = jxxxuq300xwwqqhxxxxxvendorsForMailtocode_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Trexuq377xwwqqhxxxxxvshipmen> getTrexuq377xwwqqhxxxxxvshipmensForShiptocode_1() {
-		return this.trexuq377xwwqqhxxxxxvshipmensForShiptocode_1;
-	}
-
-	public void setTrexuq377xwwqqhxxxxxvshipmensForShiptocode_1(
-			Set<Trexuq377xwwqqhxxxxxvshipmen> trexuq377xwwqqhxxxxxvshipmensForShiptocode_1) {
-		this.trexuq377xwwqqhxxxxxvshipmensForShiptocode_1 = trexuq377xwwqqhxxxxxvshipmensForShiptocode_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddress")
-	public Set<Dxxxch1d3xwwqqhxxlxxcompany> getDxxxch1d3xwwqqhxxlxxcompanies_1() {
-		return this.dxxxch1d3xwwqqhxxlxxcompanies_1;
-	}
-
-	public void setDxxxch1d3xwwqqhxxlxxcompanies_1(
-			Set<Dxxxch1d3xwwqqhxxlxxcompany> dxxxch1d3xwwqqhxxlxxcompanies_1) {
-		this.dxxxch1d3xwwqqhxxlxxcompanies_1 = dxxxch1d3xwwqqhxxlxxcompanies_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
-	public Set<Jxxxuq31bxwwqqhxxxxxvcontact> getJxxxuq31bxwwqqhxxxxxvcontactsForMailtocode_1() {
-		return this.jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode_1;
-	}
-
-	public void setJxxxuq31bxwwqqhxxxxxvcontactsForMailtocode_1(
-			Set<Jxxxuq31bxwwqqhxxxxxvcontact> jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode_1) {
-		this.jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode_1 = jxxxuq31bxwwqqhxxxxxvcontactsForMailtocode_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByMailtocode")
-	public Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> getXoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode_1() {
-		return this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode_1;
-	}
-
-	public void setXoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode_1(
-			Set<Xoxxuq295xwwqqhxxxxxshipmentdetails> xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode_1) {
-		this.xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode_1 = xoxxuq295xwwqqhxxxxxshipmentdetailsesForMailtocode_1;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fxxxuq111xwwqqhxxxxxaddressByShiptocode")
-	public Set<Jxxxuq300xwwqqhxxxxxvendor> getJxxxuq300xwwqqhxxxxxvendorsForShiptocode_1() {
-		return this.jxxxuq300xwwqqhxxxxxvendorsForShiptocode_1;
-	}
-
-	public void setJxxxuq300xwwqqhxxxxxvendorsForShiptocode_1(
-			Set<Jxxxuq300xwwqqhxxxxxvendor> jxxxuq300xwwqqhxxxxxvendorsForShiptocode_1) {
-		this.jxxxuq300xwwqqhxxxxxvendorsForShiptocode_1 = jxxxuq300xwwqqhxxxxxvendorsForShiptocode_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files

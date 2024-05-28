@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:p="http://primefaces.org/ui"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:p="http://primefaces.org/ui"
      template="layout/rtemplate.xhtml">
 <ui:define name="body">
     <h:form id="plotsitems" styleClass="edit">
 	<p:toolbar height="26" itemSeparator="grid">
 	  <p:toolbarGroup>
               <h:button id="tdone" image="./img/home_24.png"  alt="Cancel" value="Cancel"  view="/home.xhtml" />
-               <h:outputText value=" Tips: click on a date to create event and click again to give details and save" style="font-weight: normal;" /> 
+               <h:outputText value=" Tips: Select Month, click on a date to create event and click again to give details and save" style="font-weight: normal;" /> 
 	  </p:toolbarGroup>
 	  <p:toolbarGroup location="right">
               <h:outputText value="#{customIdentity.username}" /> 
@@ -30,12 +30,12 @@
 <script>
 $(document).ready(function() {
  $('#calendar').fullCalendar({
-				header:
-				{
-					left: 'prev,next today',
-					center: 'title',
-					right: 'month,agendaWeek,agendaDay,listYear'
-				},
+  header:
+  {
+   left: 'prev,next today',
+   center: 'title',
+   right: 'month,agendaWeek,agendaDay,listYear'
+  },
      height:400,
     defaultView: 'listYear',
     navLinks: true, // can click day/week names to navigate views
@@ -49,19 +49,19 @@ $(document).ready(function() {
     var title = prompt('Title:');
     var eventData;
     if (title) {
-	 eventData = {
-			title: title,
+     eventData = {
+               title: title,
                 color:"red",
                 url: '/scheduleEdit.wflow?descriptionValue='+title+'&amp;startValue='+
-                 start.getFullYear()+'-'+(start.getMonth()+1)+'-'+start.getDate(),
+                 start.toDate().getFullYear()+'-'+(start.toDate().getMonth()+1)+'-'+end.toDate().getDate()+' 09',
                 allDay:false,
-			start: start,
-			end: end
-			};
-			$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                start: start,
+                end: end
+                };
+         $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
     }
-			$('#calendar').fullCalendar('unselect');
-	 },
+         $('#calendar').fullCalendar('unselect');
+  },
     events: function(start, end, timezone, callback) {
            // alert("Tip: click on a date " );xxxCalendarService.java has path rest/xxx/t
            // if 89 one parent one child use parent sid

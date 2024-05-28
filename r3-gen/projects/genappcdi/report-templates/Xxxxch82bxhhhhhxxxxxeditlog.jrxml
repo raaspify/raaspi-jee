@@ -185,7 +185,7 @@
 
 FROM
        genapp.editlog editlog WHERE 
-       (editlog.databasenm) >=  $P{Start_t} AND   (editlog.databasenm <= $P{End_t}) AND (editlog.owner2 = $P{owner2Code_t} and (editlog.statusfl = $P{Status_t} or $P{Status_t} is null) ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
+        (editlog.databasenm) >=  $P{Start_t} AND   (editlog.databasenm <= $P{End_t}) AND (editlog.owner2 = $P{owner2Code_t}  ) order by cast($P{SortKey_t} as varchar(32)) $P!{SortOrder_t}  ]]></queryString>
         <field name="editlog_sid" class="java.lang.Integer"/>
       <field name="editlog_databasenm" class="java.lang.String"/>
         <field name="editlog_recordno" class="java.lang.Integer"/>
@@ -306,37 +306,54 @@ FROM
      	<queryString><![CDATA[SELECT
         editlog.sid AS editlog_sid,
 
+
         editlog.databasenm AS editlog_databasenm,
+
 
         editlog.recordno AS editlog_recordno,
 
+
         editlog.field AS editlog_field,
+
 
         editlog.datet AS editlog_datet,
 
+
         editlog.username AS editlog_username,
+
 
         editlog.deleted AS editlog_deleted,
 
+
         editlog.prevchar AS editlog_prevchar,
+
 
         editlog.prevnum AS editlog_prevnum,
 
+
         editlog.prevlog AS editlog_prevlog,
+
 
         editlog.prevdate AS editlog_prevdate,
 
+
         editlog.newchar AS editlog_newchar,
+
 
         editlog.newnum AS editlog_newnum,
 
+
         editlog.newlog AS editlog_newlog,
+
 
         editlog.newdate AS editlog_newdate,
 
+
         editlog.owner AS editlog_owner,
 
+
         editlog.owner2 AS editlog_owner2
+
 
 
 FROM

@@ -1055,12 +1055,20 @@
                     || property.name?substring(5,7) == "a5" || property.name?substring(5,7) == "a6" || property.name?substring(5,7) == "a7"
                     || property.name?substring(5,7) == "a8"|| property.name?substring(5,7) == "a9"  || property.name?substring(5,7) == "aa"
                     || property.name?substring(5,7) == "ab"|| property.name?substring(5,7) == "ac">
+                 <#if menuAttributesFunction ="53">
+                  <p:ajax   listener="${'#'}{${homeName}.recalculateTotalThis()}" event="keyup" update="b4xxzatrbvxxxxxxxxxxperiodtotals" />
+                 <#else>
                   <p:ajax   listener="${'#'}{${homeName}.recalculateTotalThis()}" event="keyup" update="e4xxzatrbvxxxxxxxxxxperiodtotals" />
+                 </#if>
        <#elseif property.name?substring(5,7) == "b1" || property.name?substring(5,7) == "b2" || property.name?substring(5,7) == "b3" || property.name?substring(5,7) == "b4"
                     || property.name?substring(5,7) == "b5" || property.name?substring(5,7) == "b6" || property.name?substring(5,7) == "b7"
                     || property.name?substring(5,7) == "b8"|| property.name?substring(5,7) == "b9"  || property.name?substring(5,7) == "ba"
                     || property.name?substring(5,7) == "bb"|| property.name?substring(5,7) == "bc" >
+                 <#if menuAttributesFunction ="53">
+                  <p:ajax   listener="${'#'}{${homeName}.recalculateTotalThis()}" event="keyup" update="b4xxzbtrbvxxxxxxxxxxperiodtotalsb" />
+                 <#else>
                   <p:ajax   listener="${'#'}{${homeName}.recalculateTotalThis()}" event="keyup" update="e3xxzbtrbvxxxxxxxxxxperiodtotalsb" />
+                 </#if>
        <#else>
        </#if>
      </h:inputText>
@@ -1164,7 +1172,7 @@
                    </#if> 
                    <#if property.name?substring(6,8) == "sa">
                     <#-- jsf radio button event is click but does not seem to ajax -->
-                    <p:ajax   listener="${'#'}{${homeName}.validateAndSetseDates}"   event="click"  update="b5gxdxsdbvxxxxxxxxxxsdatetDecoration,b8xxceedbvxxxxxxxxxxedatetDecoration,b2xxuxsxbvxxxxxxxxxxssdatetDecoration" />
+                    <p:ajax   listener="${'#'}{${homeName}.validateAndSetseDates}"   event="click"  update="b5gxdxsdbvxxxxxxxxxxsdatetDecoration,b8xxceedbvxxxxxxxxxxedatetDecoration" />
                    </#if> 
                 </h:selectOneRadio> 
     <#else>
@@ -1178,7 +1186,7 @@
       </#if>
                                       value="${'#'}{${homeName}.instance.${property.name}}" >
                    <#if property.name?substring(6,8) == "sa">
-                    <p:ajax   listener="${'#'}{${homeName}.listenerValidateAndSetseDates}"   event="change"  update="b5gxdxsdbvxxxxxxxxxxsdatetDecoration,b8xxceedbvxxxxxxxxxxedatetDecoration,b2xxuxsxbvxxxxxxxxxxssdatetDecoration" />
+                    <p:ajax   listener="${'#'}{${homeName}.listenerValidateAndSetseDates}"   event="change"  update="b5gxdxsdbvxxxxxxxxxxsdatetDecoration,b8xxceedbvxxxxxxxxxxedatetDecoration" />
                    </#if> 
                    <#if property.name?substring(5,7) == "wn">
                     <p:ajax listener = "${'#'}{${homeName}.listenerShowtemprunt}"  event="change" update="matcodeDecorationtax2T" />
@@ -1437,7 +1445,7 @@
                           <p:tooltip>  <span style="white-space: nowrap"> <h:outputText value="${'#'}{messages['Select']} ${'#'}{messages['and']} ${'#'}{messages['use']} ${'#'}{messages['this']} ${'#'}{messages['or']} ${'#'}{messages['select']} ${'#'}{messages['this']} ${'#'}{messages['and']} ${'#'}{messages['then']} ${'#'}{messages['Enter']} ${'#'}{messages['override']} ${'#'}{messages['value']} ${'#'}{messages['in']} ${'#'}{messages['next']} ${'#'}{messages['box']}"/></span> </p:tooltip> 
                          </#if>
                          <#if OptionField?contains("49") && (menuAttributesFunction ="1m" || menuAttributesFunction ="1n")>
-                          <p:ajax  update="${property.name}" />
+                          <p:ajax  update="${property.name}I" />
                          </#if>
                   </h:selectOneMenu>
                 <#if (OptionField?contains("49") && (menuAttributesFunction ="1m" || menuAttributesFunction ="1n")) || (OptionField?contains("50") && (menuAttributesFunction ="1m" || menuAttributesFunction ="1n"))>
@@ -1769,7 +1777,11 @@
              <#else>
                <h:selectOneMenu style="width:250px;"  value="${'#'}{${homeName}.instance.${property.name}}" required="false" id="${property.name}">
              </#if>
+             <#if (OptionField?contains("49") && (menuAttributesFunction ="1m" || menuAttributesFunction ="1n")) || (OptionField?contains("50") && (menuAttributesFunction ="1m" || menuAttributesFunction ="1n"))>
+               <p:ajax  update="${property.name}I" />
+              <#else>
                <p:ajax  update="${property.name}" />
+              </#if>
                              <#if menuAttributesFunction ="62">
                                 <f:selectItem itemValue="01" itemLabel="01" />
                               <#else>
@@ -2519,6 +2531,10 @@
          <#if property.name?substring(6,8) == "n1" || property.name?substring(6,8) == "n2" || property.name?substring(6,8) == "n3" >
          <#else>
                       maxlength="${column.length}"
+         </#if>
+         <#if property.name?substring(pkS,pkE)=="k" &&  menuAttributesFunction ="1h">
+                  label="Sequence"
+                  required="true"
          </#if>
          <#if property.name?substring(5,7) == "xs">
                         rendered="false"

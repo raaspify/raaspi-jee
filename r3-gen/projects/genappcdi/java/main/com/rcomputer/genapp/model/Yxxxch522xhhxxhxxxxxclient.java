@@ -1,5 +1,5 @@
 package com.rcomputer.genapp.model;
-// Generated 1-Jan-2024 8:59:20 PM by Hibernate Tools 4.0.0
+// Generated 26-May-2024 9:51:06 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -260,8 +260,6 @@ public class Yxxxch522xhhxxhxxxxxclient implements java.io.Serializable {
 	private String j9xxuxxxbvxxxxxxxxxxcurrsymb;
 	private Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers = new HashSet<Yxxxuh566xwwqqwxxxxxuser>(
 			0);
-	private Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers_1 = new HashSet<Yxxxuh566xwwqqwxxxxxuser>(
-			0);
 
 	public Yxxxch522xhhxxhxxxxxclient() {
 	}
@@ -492,8 +490,7 @@ public class Yxxxch522xhhxxhxxxxxclient implements java.io.Serializable {
 			String daxxuzxdssxxxxxxxxxxapiclientid,
 			String dbxxuzxdssxxxxxxxxxxapiclientsecret,
 			String j9xxuxxxbvxxxxxxxxxxcurrsymb,
-			Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers,
-			Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers_1) {
+			Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers) {
 		this.a0xxukxxbvxxxxxxxxxxclientversion = a0xxukxxbvxxxxxxxxxxclientversion;
 		this.b1xxuisxlvxxxxxxxxxxserialnum = b1xxuisxlvxxxxxxxxxxserialnum;
 		this.b2xxuzcxbvxxxxxxxxxxenterprisecompanyna = b2xxuzcxbvxxxxxxxxxxenterprisecompanyna;
@@ -723,7 +720,6 @@ public class Yxxxch522xhhxxhxxxxxclient implements java.io.Serializable {
 		this.dbxxuzxdssxxxxxxxxxxapiclientsecret = dbxxuzxdssxxxxxxxxxxapiclientsecret;
 		this.j9xxuxxxbvxxxxxxxxxxcurrsymb = j9xxuxxxbvxxxxxxxxxxcurrsymb;
 		this.yxxxuh566xwwqqwxxxxxusers = yxxxuh566xwwqqwxxxxxusers;
-		this.yxxxuh566xwwqqwxxxxxusers_1 = yxxxuh566xwwqqwxxxxxusers_1;
 	}
 
 	@Id
@@ -749,8 +745,8 @@ public class Yxxxch522xhhxxhxxxxxclient implements java.io.Serializable {
 		this.a0xxukxxbvxxxxxxxxxxclientversion = a0xxukxxbvxxxxxxxxxxclientversion;
 	}
 
-	@Column(name = "serialnum", length = 60)
-	@Size(max = 60)
+	@Column(name = "serialnum", length = 15)
+	@Size(max = 15)
 	public String getB1xxuisxlvxxxxxxxxxxserialnum() {
 		return this.b1xxuisxlvxxxxxxxxxxserialnum;
 	}
@@ -979,8 +975,8 @@ public class Yxxxch522xhhxxhxxxxxclient implements java.io.Serializable {
 		this.d7xxuxxrbvxxxxxxxxxxinraddr = d7xxuxxrbvxxxxxxxxxxinraddr;
 	}
 
-	@Column(name = "enterprisecompcode", length = 35)
-	@Size(max = 35)
+	@Column(name = "enterprisecompcode", length = 40)
+	@Size(max = 40)
 	public String getD8xxuzxdbvxxxxxxxxxxenterprisecompcode() {
 		return this.d8xxuzxdbvxxxxxxxxxxenterprisecompcode;
 	}
@@ -1644,7 +1640,8 @@ public class Yxxxch522xhhxxhxxxxxclient implements java.io.Serializable {
 		this.m1xxuxxxbvxxxxxxxxxxshicsize = m1xxuxxxbvxxxxxxxxxxshicsize;
 	}
 
-	@Column(name = "repcsize")
+	@Column(name = "repcsize", length = 12)
+	@Size(max = 12)
 	public String getM2xxuxxxbvxxxxxxxxxxrepcsize() {
 		return this.m2xxuxxxbvxxxxxxxxxxrepcsize;
 	}
@@ -3148,16 +3145,6 @@ public class Yxxxch522xhhxxhxxxxxclient implements java.io.Serializable {
 	public void setYxxxuh566xwwqqwxxxxxusers(
 			Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers) {
 		this.yxxxuh566xwwqqwxxxxxusers = yxxxuh566xwwqqwxxxxxusers;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "yxxxch522xhhxxhxxxxxclient")
-	public Set<Yxxxuh566xwwqqwxxxxxuser> getYxxxuh566xwwqqwxxxxxusers_1() {
-		return this.yxxxuh566xwwqqwxxxxxusers_1;
-	}
-
-	public void setYxxxuh566xwwqqwxxxxxusers_1(
-			Set<Yxxxuh566xwwqqwxxxxxuser> yxxxuh566xwwqqwxxxxxusers_1) {
-		this.yxxxuh566xwwqqwxxxxxusers_1 = yxxxuh566xwwqqwxxxxxusers_1;
 	}
 
 	// The following is extra code specified in the hbm.xml files
